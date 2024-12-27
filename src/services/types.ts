@@ -2,6 +2,13 @@ export type ApiResult<T> =
   | { success: true; data: T }
   | { success: false; error: string; status: number };
 
+export type Position = {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
+};
+
 // Types for Regions
 export interface Region {
   code: string; // Identifiant de la région
