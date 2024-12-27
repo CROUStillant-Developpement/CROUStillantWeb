@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  
+:root  {
+  --background: 356 0% 95%;
+  --foreground: 356 0% 0%;
+  --card: 356 0% 90%;
+  --card-foreground: 356 0% 10%;
+  --popover: 356 0% 95%;
+  --popover-foreground: 356 95% 0%;
+  --primary: 356 95.7% 45.7%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 356 10% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 318 10% 85%;
+  --muted-foreground: 356 0% 35%;
+  --accent: 318 10% 80%;
+  --accent-foreground: 356 0% 10%;
+  --destructive: 0 50% 30%;
+  --destructive-foreground: 356 0% 90%;
+  --border: 356 20% 50%;
+  --input: 356 20% 18%;
+  --ring: 356 95.7% 45.7%;
+  --radius: 0.5rem;
+}
+.dark  {
+  --background: 356 10% 5%;
+  --foreground: 356 0% 90%;
+  --card: 356 0% 0%;
+  --card-foreground: 356 0% 90%;
+  --popover: 356 10% 5%;
+  --popover-foreground: 356 0% 90%;
+  --primary: 356 95.7% 45.7%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 356 10% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 318 10% 15%;
+  --muted-foreground: 356 0% 60%;
+  --accent: 318 10% 15%;
+  --accent-foreground: 356 0% 90%;
+  --destructive: 0 50% 30%;
+  --destructive-foreground: 356 0% 90%;
+  --border: 356 20% 18%;
+  --input: 356 20% 18%;
+  --ring: 356 95.7% 45.7%;
+  --radius: 0.5rem;
+
+    .leaflet-layer,
+    .leaflet-control-zoom-in,
+    .leaflet-control-zoom-out,
+    .leaflet-control-attribution {
+      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.snowy-button {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;
+  background-image: 
+    linear-gradient(to bottom, #f12828, #a00332, #9f0f31),
+    linear-gradient(to bottom, #ae0034, #6f094c);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  box-shadow: 
+    inset 0 1px rgb(255 255 255 / .25),
+    inset 0 -1px rgb(0 0 0 / .1),
+    0 2px 4px rgb(0 0 0 / .25);
+  transition-property: transform, filter;
+  transition-duration: .2s;
+  will-change: transform;
+  resize: both;
+  
+  &:active {
+    transform: scale(.92);
+    filter: brightness(.8);
+  }
+}
+
+.snowy-button::after {
+  --overflow-x: 4px;
+  --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: calc(var(--overflow-x) * -1);
+  border-image-source: var(--snow-image);
+  border-image-slice: calc(6 * 56 / 20) fill;
+  border-image-width: calc(28px / 3);
+  border-image-repeat: round;
+  width: calc(100% + var(--overflow-x) * 2);
+  height: 28px;
+  filter: drop-shadow(0 2px 1px rgb(0 0 0 / .25));
+  opacity: 1;
+  animation: fade-in 2s;
+}
+
+@keyframes fade-in {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
