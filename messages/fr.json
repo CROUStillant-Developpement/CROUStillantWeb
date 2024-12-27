@@ -22,6 +22,70 @@
     "creditCard": "Paiement par carte bancaire accepté",
     "accessibility": "Accessibilité PMR"
   },
+  "AboutPage": {
+    "presentation": {
+      "title": "Créé par des étudiants, pour des étudiants...",
+      "description": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer."
+    },
+    "updates": {
+      "title": "Plats toujours chauds.",
+      "description": "CROUStillant scan l'entièreté des menus des restaurants CROUS plusieurs fois par jour pour vous fournir des informations toujours à jour et fiables."
+    },
+    "open-source": {
+      "title": "Gratuit & 100% open-source !",
+      "description": "CROUStillant est un projet entièrement open-source et gratuit. Vous pouvez consulter le code source du projet sur GitHub et contribuer à son développement si vous le souhaitez.",
+      "features": {
+        "feature1": "Entièrement open-source",
+        "feature2": "Déploiements automatiques",
+        "feature3": "En constante amélioration",
+        "feature4": "Ne collecte pas vos données"
+      }
+    },
+    "product": {
+      "title": "Simple, intuitif et accessible",
+      "description": "Nos services sont conçus pour être facile à utiliser et accessible à tous. Que vous soyez étudiant, personnel universitaire ou simple curieux, vous trouverez toutes les informations dont vous avez besoin sur CROUStillant.",
+      "features": {
+        "feature1": "Accès à tous les restaurants",
+        "feature2": "Recherche par région, ville ou restaurant",
+        "feature3": "Horaires d'ouverture et de fermeture",
+        "feature4": "Contacts et moyens de paiement acceptés"
+      }
+    },
+    "team": {
+      "title": "L'équipe",
+      "description": "L'équipe de CROUStillant est composée de bénévoles passionnés. Nous travaillons ensemble pour rendre les informations des restaurants CROUS plus accessibles et plus lisibles.",
+      "members": {
+        "member1": {
+          "name": "Paul Bayfield",
+          "role": "Fondateur du projet et développeur principal"
+        },
+        "member2": {
+          "name": "Alden Cherif",
+          "role": "Concepteur de l'interface utilisateur et développeur web"
+        },
+        "member3": {
+          "name": "Lucas Debeve",
+          "role": "Concepteur de la base de données"
+        }
+      }
+    },
+    "discord": {
+      "title": "Présent sur Discord",
+      "description": "Vous pouvez retrouver tous les restaurants et menus directement sur Discord via le Bot officiel CROUStillant !"
+    },
+    "integrated": {
+      "title": "Intégration facile",
+      "description": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription."
+    },
+    "convinced": {
+      "title": "Convaincu ?",
+      "description": "Débutez votre utilisation de CROUStillant dès maintenant !"
+    },
+    "more-convinced": {
+      "title": "Encore plus convaincu ?",
+      "description": "Rejoignez notre communauté Discord pour discuter avec d'autres utilisateurs et les membres de l'équipe CROUStillant !"
+    }
+  },
   "Footer": {
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",

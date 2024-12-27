@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "CROUStillant",
   applicationName: "CROUStillant",
   appleWebApp: true,
-  description: "Le menu du RU, plus simplement.",
+  description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
   // icons: {
   //   icon: [
   //     { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -96,11 +96,6 @@ export default async function RootLayout({
             </main>
             <Footer />
             <Toaster />
-            {/* <Script
-            defer
-            src="#"
-            data-website-id="c778fc13-9451-48b1-946a-aef37fa91256"
-          /> */}
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

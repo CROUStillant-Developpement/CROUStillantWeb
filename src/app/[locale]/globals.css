@@ -92,6 +92,10 @@
   }
 }
 
+.snowy-button:hover {
+  color: #fff !important;
+}
+
 .snowy-button::after {
   --overflow-x: 4px;
   --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');

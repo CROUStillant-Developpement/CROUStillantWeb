@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/theme-switcher";
 import { Settings, Home, Info, Mail, Star } from "lucide-react";
@@ -36,10 +36,7 @@ export default function Header() {
               }`}
             >
               <Link
-                href={{
-                  pathname: "/",
-                  query: { referer: "me" },
-                }}
+                href="/"
               >
                 {isDesktop ? "Accueil" : <Home className="h-6 w-6" />}
               </Link>
