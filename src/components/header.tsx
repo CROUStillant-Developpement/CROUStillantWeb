@@ -74,16 +74,14 @@ export default function Header() {
         </ul>
       </nav>
       <div className="flex gap-2">
-        {isDesktop && (
-          <Button asChild variant="outline">
-            <Link href="https://github.com/CROUStillant-Developpement"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {stars} <Star className="h-4 w-4" />
-            </Link>
-          </Button>
-        )}
+        <Button asChild variant="outline">
+          <Link href="https://github.com/CROUStillant-Developpement"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {stars} <Star className="h-4 w-4" />
+          </Link>
+        </Button>
         <ModeToggle />
         <Button
           asChild
