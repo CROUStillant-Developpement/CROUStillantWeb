@@ -15,15 +15,7 @@ export async function apiRequest<T>({
   method = "GET",
   body,
   authRequired = false,
-  endpoint,
-  method = "GET",
-  body,
-  authRequired = false,
 }: {
-  endpoint: string;
-  method?: string;
-  body?: any;
-  authRequired?: boolean;
   endpoint: string;
   method?: string;
   body?: any;
@@ -44,27 +36,10 @@ export async function apiRequest<T>({
   //     }
   //     headers.Authorization = `Bearer ${session.user.token}`;
   // }
-  // Add Authorization header if authRequired is true
-  // if (authRequired) {
-  //     const session = await getServerSession(options);
-  //     if (!session) {
-  //         return {
-  //             success: false,
-  //             error: "Frontend - Unauthorized access: No session found",
-  //             status: 401,
-  //         };
-  //     }
-  //     headers.Authorization = `Bearer ${session.user.token}`;
-  // }
 
   try {
     let bodyContent = undefined;
-  try {
-    let bodyContent = undefined;
 
-    if (body) {
-      bodyContent = body instanceof FormData ? body : JSON.stringify(body);
-    }
     if (body) {
       bodyContent = body instanceof FormData ? body : JSON.stringify(body);
     }
@@ -72,11 +47,7 @@ export async function apiRequest<T>({
     if (!(body instanceof FormData) && body) {
       headers["Content-Type"] = "application/json";
     }
-    if (!(body instanceof FormData) && body) {
-      headers["Content-Type"] = "application/json";
-    }
 
-    console.log("Requesting", url, method, headers, bodyContent);
     console.log("Requesting", url, method, headers, bodyContent);
 
     const response = await fetch(url, {
@@ -84,22 +55,9 @@ export async function apiRequest<T>({
       headers: headers,
       body: bodyContent,
     });
-    const response = await fetch(url, {
-      method,
-      headers: headers,
-      body: bodyContent,
-    });
 
     console.log("Response", response);
-    console.log("Response", response);
 
-    // Handle the case of 204 No Content
-    if (response.status === 204) {
-      return {
-        success: true,
-        data: undefined as unknown as T, // No data returned, but marked as successful
-      };
-    }
     // Handle the case of 204 No Content
     if (response.status === 204) {
       return {
@@ -133,21 +91,4 @@ export async function apiRequest<T>({
       status: 500, // Generic status for network failures
     };
   }
-    // If the response is not OK, return an error
-    return {
-      success: false,
-      error: `Error ${method} ${endpoint}: ${response.statusText}`,
-      status: response.status,
-    };
-  } catch (err) {
-    // Handle network errors or unexpected issues
-    return {
-      success: false,
-      error: `Network or server error: ${
-        err instanceof Error ? err.message : String(err)
-      }`,
-      status: 500, // Generic status for network failures
-    };
-  }
 }
-
