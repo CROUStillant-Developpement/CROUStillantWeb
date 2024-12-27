@@ -32,7 +32,16 @@ export const getDates = (startDate: Date, stopDate: Date): Date[] => {
 };
 
 export const getGithubStarCount = async () => {
-  const response = await fetch("https://api.github.com/repos/cherifad/SmartRU");
+  const response = await fetch(
+    "https://github.com/CROUStillant-Developpement/CROUStillantWeb"
+  );
+
+  console.log(response);
+
+  if (!response.ok) {
+    return -1;
+  }
+
   const data = await response.json();
 
   return data.stargazers_count;

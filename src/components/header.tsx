@@ -91,7 +91,7 @@ export default function Header() {
         {isDesktop && (
           <Button asChild variant="outline">
             <a
-              href="https://github.com/cherifad/SmartRU"
+              href="https://github.com/CROUStillant-Developpement/CROUStillantWeb"
               target="_blank"
               rel="noreferrer"
             >
@@ -99,17 +99,6 @@ export default function Header() {
             </a>
           </Button>
         )}
-        <Button size="icon" variant="outline" asChild>
-          <a href="https://www.unrwa.org/" target="_blank" rel="noreferrer">
-            <Image
-              src="/img/Flag_of_Palestine_png.png"
-              alt="Next.js logo"
-              width={20}
-              height={20}
-              className="inline"
-            />
-          </a>
-        </Button>
         <ModeToggle />
       </div>
     </header>
