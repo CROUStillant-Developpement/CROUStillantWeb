@@ -119,3 +119,24 @@
     opacity: 1;
   }
 }
+
+.fading-border {
+  position: relative;
+}
+
+.fading-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40%; /* Only covers the top half */
+  border: 0.5px solid white;
+  border-bottom: none;
+  border-radius: 0.5rem;
+
+  /* Gradient mask to fade the border */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  pointer-events: none; /* So it doesn't interfere with content clicks */
+}

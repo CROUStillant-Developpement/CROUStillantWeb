@@ -27,3 +27,18 @@ export async function getRestaurant(
     method: "GET",
   });
 }
+
+/**
+ * Fetches a list of restaurants from a region.
+ *
+ * @param {string} region The region to fetch the restaurants from.
+ * @returns {Promise<ApiResult<Restaurant[]>>} A promise that resolves to an ApiResult containing an array of Restaurant objects.
+ */
+export async function getRestaurantsByRegion(
+  region: string
+): Promise<ApiResult<Restaurant[]>> {
+  return await apiRequest<Restaurant[]>({
+    endpoint: `regions/${region}/restaurants`,
+    method: "GET",
+  });
+}

@@ -1,17 +1,9 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { Accessibility, CreditCard, Heart, HeartOff } from "lucide-react";
 import { slugify } from "@/lib/utils";
-// import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Restaurant } from "@/services/types";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -20,28 +12,47 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslations } from "next-intl";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
 }
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
-  // const { isFavorite, addOrRemoveFromFavorites } = useUserPreferences();
+  const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
+  const t = useTranslations("RestaurantCard");
 
   return (
     <TooltipProvider>
-      <div>
+      <div className="relative group p-2 hover:p-0 fading-border hover:before:border-none hover:cursor-pointer before:border-primary transition-all duration-300 ease-in-out">
         <Image
-          src={restaurant.image_url ?? ""}
+          src={restaurant.image_url ?? "/default_ru.png"}
           alt={restaurant.nom}
           width={400}
           height={400}
           className="rounded-lg object-cover w-full h-56"
         />
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full absolute top-4 right-4 z-20"
+          onClick={() => addOrRemoveFromFavorites(restaurant.code)}
+        >
+          {favorites.includes(restaurant.code) ? (
+            <Heart size={20} />
+          ) : (
+            <HeartOff size={20} />
+          )}
+        </Button>
+        <div className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition">
+          <p className="text-lg font-bold text-primary-foreground">
+            {t("cta")}
+          </p>
+        </div>
         <div className="flex justify-between items-center mt-2">
           <h1 className="text-xl font-bold">{restaurant.nom}</h1>
           <Badge className={restaurant.ouvert ? "bg-green-500" : "bg-red-500"}>
-            {restaurant.ouvert ? "Ouvert" : "Fermé"}
+            {restaurant.ouvert ? t("open") : t("closed")}
           </Badge>
         </div>
         <p className="text-gray-500 mt-2">{restaurant.zone}</p>
@@ -56,7 +67,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} align="center">
-                    Paiement par CB
+                    {t("creditCard")}
                   </TooltipContent>
                 </Tooltip>
               </>
@@ -75,7 +86,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} align="center">
-                    Paiement par Izly
+                    {t("izly")}
                   </TooltipContent>
                 </Tooltip>
               </>
@@ -89,7 +100,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} align="center">
-                    Accessible aux PMR
+                    {t("accessibility")}
                   </TooltipContent>
                 </Tooltip>
               </>
@@ -97,7 +108,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           </div>
           <Button asChild>
             <Link href={`/restaurants/${slugify(restaurant.nom)}`}>
-              Voir le menu
+              {t("cta")}
             </Link>
           </Button>
         </div>

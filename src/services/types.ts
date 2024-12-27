@@ -9,14 +9,17 @@ export type Position = {
   };
 };
 
+export type DisplayType = "list" | "map";
+
 // Types for Regions
 export interface Region {
-  code: string; // Identifiant de la région
+  code: number; // Identifiant de la région
   libelle: string; // Libellé de la région
 }
 
 // Types for Restaurant
 export interface Restaurant {
+  isOpen: boolean;
   acces?: string; // Informations sur l'accès au restaurant
   adresse: string; // Adresse du restaurant
   code: number; // Identifiant du restaurant
