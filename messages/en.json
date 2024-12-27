@@ -14,6 +14,14 @@
       "second": "Find a restaurant"
     }
   },
+  "RestaurantCard": {
+    "cta": "View the menu",
+    "closed": "Closed",
+    "open": "Open",
+    "izly": "Izly payment accepted",
+    "creditCard": "Credit card payment accepted",
+    "accessibility": "Accessibility for people with reduced mobility"
+  },
   "Footer": {
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",

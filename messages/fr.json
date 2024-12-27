@@ -14,6 +14,14 @@
       "second": "Voir les restaurants"
     }
   },
+  "RestaurantCard": {
+    "cta": "Voir le menu",
+    "closed": "Fermé",
+    "open": "Ouvert",
+    "izly": "Paiement Izly accepté",
+    "creditCard": "Paiement par carte bancaire accepté",
+    "accessibility": "Accessibilité PMR"
+  },
   "Footer": {
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",

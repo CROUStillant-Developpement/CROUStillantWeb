@@ -6,77 +6,7 @@ export default function Footer() {
   const t = useTranslations("Footer");
 
   return (
-    // <footer className="absolute bottom-4 right-0 w-full flex flex-col md:flex-row h-9 items-center justify-between space-x-1 bg-background p-1 mb-2 shadow-sm rounded-none px-2 lg:px-4">
-    //   <div className="flex items-center flex-col lg:flex-row">
-    //     <p>
-    //       {new Date().getFullYear()} Made with ❤️ by{" "}
-    //       <a
-    //         href="https://cherifad.github.io"
-    //         className="hover:underline"
-    //         target="_blank"
-    //         rel="noreferrer"
-    //       >
-    //         Adlen Cherif
-    //       </a>
-    //     </p>
-    //     <span className="mx-2 hidden lg:block">&nbsp;&#8226;</span>
-    //     <p>
-    //       <a
-    //         href="https://www.unrwa.org/"
-    //         className="hover:underline flex items-center"
-    //         target="_blank"
-    //         rel="noreferrer"
-    //       >
-    //         <Image
-    //           src="/img/Flag_of_Palestine_png.png"
-    //           alt="Next.js logo"
-    //           width={20}
-    //           height={20}
-    //           className="inline"
-    //         />
-    //         &nbsp;Free Palestine
-    //       </a>
-    //     </p>
-    //   </div>
-    //   <div>
-    //     <ul className="flex gap-4 flex-wrap justify-center py-4">
-    //       <li>
-    //         <a
-    //           href="https://github.com/cherifad/CrousTillant"
-    //           className="hover:underline flex items-center"
-    //           target="_blank"
-    //           rel="noreferrer"
-    //         >
-    //           <Github className="h-4 w-4 mr-2" />
-    //           GitHub
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a
-    //           href="https://github.com/cherifad/CrousTillant/issues/new?title=Huston%2C+on+a+un+probl%C3%A8me&body=J%27ai+un+probl%C3%A8me+avec+le+site+et+voici+ce+que+c%27est%3A"
-    //           className="hover:underline flex items-center"
-    //           target="_blank"
-    //           rel="noreferrer"
-    //         >
-    //           <Bug className="h-4 w-4 mr-2" />
-    //           Signaler un bug
-    //         </a>
-    //       </li>
-    //       {/* <li>
-    //         <a
-    //           href="#"
-    //           className="hover:underline flex items-center"
-    //           target="_blank"
-    //           rel="noreferrer"
-    //         >
-    //           <BarChartBig className="h-4 w-4 mr-2" />
-    //           Statistiques
-    //         </a>
-    //       </li> */}
-    //     </ul>
-    //   </div>
-    // </footer>
-    <footer className="border-grey align-center mt-10 flex w-full flex-col border-t px-10 py-10 font-medium md:px-0">
+    <footer className="border-grey align-center flex w-full flex-col border-t px-10 py-10 font-medium md:px-0">
       <div className="mx-auto flex w-full justify-between gap-[20px] border-b px-10 pb-10 pt-10 lg:!w-2/3 lg:px-0">
         <div className="flex flex-col">
           <Logo />
