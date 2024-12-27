@@ -14,6 +14,70 @@
       "second": "Find a restaurant"
     }
   },
+  "AboutPage": {
+    "presentation": {
+      "title": "Made by students, for students...",
+      "description": "CROUStillant is a project that aims to provide information on the menus of university restaurants in France and overseas."
+    },
+    "updates": {
+      "title": "Hot dishes, always.",
+      "description": "CROUStillant scans the entire menus of CROUS restaurants several times a day to provide you with always up-to-date and reliable information."
+    },
+    "open-source": {
+      "title": "Free & 100% open-source!",
+      "description": "CROUStillant is an entirely open-source and free project. You can view the project's source code on GitHub and contribute to its development if you wish.",
+      "features": {
+        "feature1": "Entirely open-source",
+        "feature2": "Automatic deployments",
+        "feature3": "Constantly improving",
+        "feature4": "Does not collect your data"
+      }
+    },
+    "product": {
+      "title": "Simple, intuitive and accessible",
+      "description": "CROUStillant is a simple and intuitive platform that allows you to access the menus of CROUS restaurants in France and overseas. The platform is accessible to all and does not require any registration.",
+      "features": {
+        "feature1": "Access every single restaurant",
+        "feature2": "Search by region, city or establishment",
+        "feature3": "Opening and closing hours",
+        "feature4": "Contacts and accepted payment methods"
+      }
+    },
+    "team": {
+      "title": "The team",
+      "description": "The CROUStillant team is made up of passionate volunteers. We work together to make the information of CROUS restaurants more accessible and readable.",
+      "members": {
+        "member1": {
+          "name": "Paul Bayfield",
+          "role": "Project founder and lead developer"
+        },
+        "member2": {
+          "name": "Alden Cherif",
+          "role": "UI designer and web developer"
+        },
+        "member3": {
+          "name": "Lucas Debeve",
+          "role": "Database designer"
+        }
+      }
+    },
+    "discord": {
+      "title": "Join our Discord server!",
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
+    },
+    "integrated": {
+      "title": "Integrate CROUS data",
+      "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source."
+    },
+    "convinced": {
+      "title": "Convinced?",
+      "description": "Discover the menus of CROUS restaurants in France and overseas with CROUStillant!"
+    },
+    "more-convinced": {
+      "title": "Even more convinced?",
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!" 
+    }
+  },
   "Footer": {
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",
