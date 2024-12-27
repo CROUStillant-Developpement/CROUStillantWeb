@@ -1,7 +1,10 @@
-import { Github, Bug, BarChartBig } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Logo from "./logo";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     // <footer className="absolute bottom-4 right-0 w-full flex flex-col md:flex-row h-9 items-center justify-between space-x-1 bg-background p-1 mb-2 shadow-sm rounded-none px-2 lg:px-4">
     //   <div className="flex items-center flex-col lg:flex-row">
@@ -76,7 +79,7 @@ export default function Footer() {
     <footer className="border-grey align-center mt-10 flex w-full flex-col border-t px-10 py-10 font-medium md:px-0">
       <div className="mx-auto flex w-full justify-between gap-[20px] border-b px-10 pb-10 pt-10 lg:!w-2/3 lg:px-0">
         <div className="flex flex-col">
-          {/* <Logo /> */}
+          <Logo />
           <div className="mt-6">
             <h1 className="text-2xl font-bold opacity-80">CROUStillant</h1>
             <div className="flex flex-row mt-4 items-center gap-2">
@@ -86,7 +89,12 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   href="https://github.com/CROUStillant-Developpement"
                 >
-                  <Github className="h-5 w-5" />
+                  <Image
+                    src="/icons/github.svg"
+                    width={20}
+                    height={20}
+                    alt="GitHub"
+                  />
                 </a>
               </div>
               <div className="mt-4 flex opacity-70">
@@ -187,21 +195,12 @@ export default function Footer() {
                   Statut
                 </a>
               </li>
-              <li>
-                <a
-                  className="hover:underline"
-                  href="https://github.com/CROUStillant-Developpement"
-                  target="_blank"
-                >
-                  Dons
-                </a>
-              </li>
             </ul>
           </div>
         </div>
       </div>
       <div className="mx-auto w-full flex flex-col px-10 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
-        <p>Réalisé avec ❤️ par CROUStillant Développement.</p>
+        <p>{t("authors")}</p>
         <p className="mt-2 font-semibold">
           © {new Date().getFullYear()} CROUStillant Développement, tous droits
           réservés.
