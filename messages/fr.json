@@ -1,6 +1,17 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Aller à la page À propos"
+    "badge": {
+      "title": "Le projet est 100% open-source",
+      "link": "En savoir plus"
+    },
+    "title": {
+      "first": "Vos repas,",
+      "second": "simples et accessibles."
+    },
+    "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+    "cta": {
+      "first": "Découvrir votre menu",
+      "second": "Voir les restaurants"
+    }
   }
 }
