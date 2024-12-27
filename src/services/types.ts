@@ -33,6 +33,7 @@ export interface Restaurant {
   telephone?: string | null; // Numéro de téléphone du restaurant
   type_restaurant: TypeRestaurant; // Type de restauration
   zone: string; // Zone du restaurant
+  ouvert: boolean; // Le restaurant est-il ouvert ?
 }
 
 // Types for TypeRestaurant
