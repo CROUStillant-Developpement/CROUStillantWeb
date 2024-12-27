@@ -1,7 +1,7 @@
 {
   "HomePage": {
     "badge": {
-      "title": "Le projet est 100% open-source",
+      "title": "Le projet est 100% open-source !",
       "link": "En savoir plus"
     },
     "title": {
@@ -13,5 +13,10 @@
       "first": "Découvrir votre menu",
       "second": "Voir les restaurants"
     }
+  },
+  "Footer": {
+    "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
+    "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",
+    "legal": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif."
   }
 }
