@@ -1,6 +1,22 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "badge": {
+      "title": "This project is 100% open-source!",
+      "link": "Learn more"
+    },
+    "title": {
+      "first": "Your meals,",
+      "second": "simple and accessible."
+    },
+    "subtitle": "CROUStillant allows you to consult the menus of CROUS restaurants in France and overseas.",
+    "cta": {
+      "first": "Discover your menu",
+      "second": "Find a restaurant"
+    }
+  },
+  "Footer": {
+    "authors": "Made with ❤️ by the CROUStillant Développement team.",
+    "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",
+    "legal": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project."
   }
 }

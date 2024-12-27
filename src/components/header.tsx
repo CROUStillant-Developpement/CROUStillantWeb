@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/theme-switcher";
 import { Settings, Home, Info, Mail, Star } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
-import Image from "next/image";
 import { getGithubStarCount } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
@@ -23,7 +22,7 @@ export default function Header() {
     <header className="flex justify-between items-center">
       <nav>
         <ul
-          className={`flex h-9 items-center space-x-1 bg-background p-1 shadow-sm rounded-none border-none ${
+          className={`flex h-9 items-center space-x-1 bg-background p-1 rounded-none border-none ${
             isDesktop ? "border border-b" : "gap-2"
           }`}
         >
@@ -32,7 +31,7 @@ export default function Header() {
               size={isDesktop ? "default" : "icon"}
               asChild
               variant={pathname === "/" ? "default" : "outline"}
-              className={`select-none snowy-button h-fit rounded-sm text-sm ${
+              className={`select-none snowy-button h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
             >
@@ -50,7 +49,7 @@ export default function Header() {
             <Button
               asChild
               variant={pathname === "/about" ? "default" : "outline"}
-              className={`select-none h-fit rounded-sm text-sm ${
+              className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
             >
@@ -63,7 +62,7 @@ export default function Header() {
             <Button
               asChild
               variant={pathname === "/contact" ? "default" : "outline"}
-              className={`select-none h-fit rounded-sm text-sm ${
+              className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
             >
@@ -72,34 +71,27 @@ export default function Header() {
               </Link>
             </Button>
           </li>
-          <li>
-            <Button
-              asChild
-              variant={pathname === "/settings" ? "default" : "outline"}
-              className={`select-none h-fit rounded-sm text-sm ${
-                isDesktop ? "px-3 py-1" : "p-2"
-              }`}
-            >
-              <Link href="/settings">
-                {isDesktop ? "Paramètres" : <Settings className="h-6 w-6" />}
-              </Link>
-            </Button>
-          </li>
         </ul>
       </nav>
       <div className="flex gap-2">
-        {isDesktop && (
-          <Button asChild variant="outline">
-            <a
-              href="https://github.com/CROUStillant-Developpement/CROUStillantWeb"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Star className="mr-2 h-4 w-4" /> {stars} Stars
-            </a>
-          </Button>
-        )}
+        <Button asChild variant="outline">
+          <Link href="https://github.com/CROUStillant-Developpement"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {stars} <Star className="h-4 w-4" />
+          </Link>
+        </Button>
         <ModeToggle />
+        <Button
+          asChild
+          variant={pathname === "/settings" ? "default" : "outline"}
+          className={`select-none h-9 w-9 rounded-sm`}
+        >
+          <Link href="/settings">
+            <Settings className="h-6 w-6" />
+          </Link>
+        </Button>
       </div>
     </header>
   );

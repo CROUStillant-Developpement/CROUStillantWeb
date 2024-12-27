@@ -11,13 +11,15 @@ export default function HomePage() {
     <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div className="mx-auto flex max-w-container flex-col gap-12 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
-          <Badge variant="outline" className="animate-appear">
-            <span className="text-muted-foreground">{t("badge.title")}</span>
-            <a href="/" className="flex items-center gap-1 ml-1">
-              {t("badge.link")}
-              <ArrowRight className="h-3 w-3" />
-            </a>
-          </Badge>
+          <Link href="/" className="flex items-center">
+            <Badge variant="outline" className="animate-appear group">
+              <div className="flex items-center gap-1">
+                <span className="text-muted-foreground">{t("badge.title")}</span>
+                <span className="text-foreground">{t("badge.link")}</span>
+              </div>
+              <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
+            </Badge>
+          </Link>
           <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
             {t("title.first")} <br /> {t("title.second")}
           </h1>
