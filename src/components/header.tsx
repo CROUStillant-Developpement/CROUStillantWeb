@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/theme-switcher";
 import { Settings, Home, Info, Mail, Star } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
-import Image from "next/image";
 import { getGithubStarCount } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
