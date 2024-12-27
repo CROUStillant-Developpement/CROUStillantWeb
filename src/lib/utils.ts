@@ -32,19 +32,27 @@ export const getDates = (startDate: Date, stopDate: Date): Date[] => {
 };
 
 export const getGithubStarCount = async () => {
-  const response = await fetch(
-    "https://github.com/CROUStillant-Developpement/CROUStillantWeb"
-  );
+  let stars = 0;
+  const repos = [
+    "https://api.github.com/repos/CROUStillant-Developpement/CROUStillant",
+    "https://api.github.com/repos/CROUStillant-Developpement/CROUStillantWeb",
+    "https://api.github.com/repos/CROUStillant-Developpement/CROUStillantAPI"
+  ];
 
-  console.log(response);
+  for (const repo of repos) {
+    const response = await fetch(repo);
 
-  if (!response.ok) {
-    return -1;
+    if (!response.ok) {
+      console.error(`Failed to fetch for: ${repo}`);
+      continue;
+    }
+
+    const data = await response.json();
+
+    stars += data.stargazers_count;
   }
 
-  const data = await response.json();
-
-  return data.stargazers_count;
+  return stars;
 };
 
 export const getGeoLocation = async (): Promise<Position | null> => {
