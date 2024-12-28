@@ -36,7 +36,7 @@ export const getGithubStarCount = async () => {
   const repos = [
     "https://api.github.com/repos/CROUStillant-Developpement/CROUStillant",
     "https://api.github.com/repos/CROUStillant-Developpement/CROUStillantWeb",
-    "https://api.github.com/repos/CROUStillant-Developpement/CROUStillantAPI"
+    "https://api.github.com/repos/CROUStillant-Developpement/CROUStillantAPI",
   ];
 
   for (const repo of repos) {
@@ -125,3 +125,9 @@ export function findRestaurantsAroundPosition(
   });
   return nearbyRestaurants;
 }
+
+export const formatToISODate = (dateString: string): Date => {
+  const [day, month, year] = dateString.split("-");
+  const isoDateString = `${year}-${month}-${day}`; // Convert to "2024-12-30"
+  return new Date(isoDateString);
+};

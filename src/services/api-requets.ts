@@ -48,15 +48,11 @@ export async function apiRequest<T>({
       headers["Content-Type"] = "application/json";
     }
 
-    console.log("Requesting", url, method, headers, bodyContent);
-
     const response = await fetch(url, {
       method,
       headers: headers,
       body: bodyContent,
     });
-
-    console.log("Response", response);
 
     // Handle the case of 204 No Content
     if (response.status === 204) {
@@ -68,10 +64,19 @@ export async function apiRequest<T>({
 
     // If the response is OK, return the data
     if (response.ok) {
-      const data: T = (await response.json()).data;
+      const data = await response.json();
+
+      if (!data.success) {
+        return {
+          success: false,
+          error: data.message,
+          status: response.status,
+        };
+      }
+
       return {
         success: true,
-        data,
+        data: data.data as T,
       };
     }
 
