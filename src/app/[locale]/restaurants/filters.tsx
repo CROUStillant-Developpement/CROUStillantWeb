@@ -17,158 +17,30 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Image from "next/image";
-import { useDebounceCallback } from "usehooks-ts";
+import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
   restaurants: Restaurant[];
 }
 
-interface Filters {
-  search: string;
-  isPmr: boolean;
-  isOpen: boolean;
-  region: number;
-  izly: boolean;
-  card: boolean;
-}
-
 export default function RestaurantsFilters({
-  setFilteredRestaurants,
   restaurants,
+  setFilteredRestaurants,
 }: RestaurantsFiltersProps) {
-  const [regions, setRegions] = useState<Region[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [geoLocError, setGeoLocError] = useState<string | null>(null);
-  const [filters, setFilters] = useState<Filters>({
-    search: "",
-    isPmr: false,
-    isOpen: false,
-    region: -1,
-    izly: false,
-    card: false,
-  });
-
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const initializeFilters = useCallback(() => {
-    const tempFilters: Filters = {
-      search: searchParams.get("search") || "",
-      isPmr: searchParams.get("ispmr") === "true",
-      isOpen: searchParams.get("open") === "true",
-      region: parseInt(searchParams.get("region") || "-1", 10),
-      izly: searchParams.get("izly") === "true",
-      card: searchParams.get("card") === "true",
-    };
-    setFilters(tempFilters);
-  }, [searchParams]);
-
-  const handleLocationRequest = useCallback(async () => {
-    setLoading(true);
-    try {
-      const position = await getGeoLocation();
-      if (position) {
-        const nearbyRestaurants = findRestaurantsAroundPosition(
-          restaurants,
-          position,
-          10
-        );
-        if (nearbyRestaurants.length > 0) {
-          setFilteredRestaurants(nearbyRestaurants);
-        }
-      }
-    } catch (error: any) {
-      setGeoLocError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [restaurants, setFilteredRestaurants]);
-
-  useEffect(() => {
-    // Update the query string instantly when filters change
-    const queryString = new URLSearchParams();
-    if (filters.search) queryString.set("search", filters.search);
-    if (filters.isPmr) queryString.set("ispmr", "true");
-    if (filters.isOpen) queryString.set("open", "true");
-    if (filters.region !== -1)
-      queryString.set("region", filters.region.toString());
-    if (filters.izly) queryString.set("izly", "true");
-    if (filters.card) queryString.set("card", "true");
-
-    router.push(`${pathname}?${queryString.toString()}`);
-  }, [filters, router, pathname]);
-
-  const resetSearch = useCallback(() => {
-    setFilteredRestaurants(restaurants);
-    setFilters({
-      search: "",
-      isPmr: false,
-      isOpen: false,
-      region: -1,
-      izly: false,
-      card: false,
-    });
-  }, [restaurants, setFilteredRestaurants]);
-
-  const filterRestaurants = useCallback(() => {
-    const filtered = restaurants.filter((restaurant) => {
-      const matchesSearch =
-        !filters.search ||
-        restaurant.nom?.toLowerCase().includes(filters.search.toLowerCase());
-      const matchesPmr = !filters.isPmr || restaurant.ispmr;
-      const matchesOpen = !filters.isOpen || restaurant.ouvert;
-      const matchesRegion =
-        filters.region === -1 || restaurant.region.code === filters.region;
-      const matchesIzly =
-        !filters.izly || restaurant.paiement?.includes("IZLY");
-      const matchesCard =
-        !filters.card || restaurant.paiement?.includes("Carte bancaire");
-
-      return (
-        matchesSearch &&
-        matchesPmr &&
-        matchesOpen &&
-        matchesRegion &&
-        matchesIzly &&
-        matchesCard
-      );
-    });
-
-    setFilteredRestaurants(filtered);
-  }, [filters, restaurants, setFilteredRestaurants, router, pathname]);
-
-  const debouncedFilterRestaurants = useCallback(
-    useDebounceCallback(filterRestaurants, 300),
-    [filterRestaurants]
-  );
-
-  useEffect(() => {
-    setLoading(true);
-    initializeFilters();
-
-    getRegions()
-      .then((result) => {
-        if (result.success) {
-          const fetchedRegions = result.data;
-          fetchedRegions.unshift({ code: -1, libelle: "Toutes les régions" });
-          setRegions(fetchedRegions);
-        } else {
-          console.error(result.error);
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [initializeFilters]);
-
-  useEffect(() => {
-    debouncedFilterRestaurants();
-    return () => debouncedFilterRestaurants.cancel();
-  }, [filters, debouncedFilterRestaurants]);
+  const {
+    filters,
+    setFilters,
+    regions,
+    loading,
+    geoLocError,
+    handleLocationRequest,
+    resetFilters,
+  } = useRestaurantFilters(restaurants, setFilteredRestaurants);
 
   return (
     <div className="mt-4 w-full">
-      <div className="flex gap-2 w-full">
+      <div className="flex gap-2 w-full flex-wrap lg:flex-nowrap">
         <Input
           placeholder="Rechercher un restaurant"
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -239,11 +111,11 @@ export default function RestaurantsFilters({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <Button variant="outline" onClick={resetSearch}>
+        <Button variant="outline" onClick={resetFilters}>
           <RotateCcw className="mr-2 h-4 w-4" /> Réinitialiser
         </Button>
       </div>
-      <div className="mt-4 flex gap-2">
+      <div className="mt-4 flex gap-2 flex-wrap lg:flex-nowrap">
         <div className="flex items-center space-x-2">
           <Checkbox
             id="ispmr"

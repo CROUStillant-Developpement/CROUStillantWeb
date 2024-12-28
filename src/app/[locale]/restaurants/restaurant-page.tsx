@@ -39,24 +39,24 @@ export default function RestaurantsPage() {
 
   return (
     <div>
-      <div className="w-full justify-between md:flex mb-4">
-        <div className="w-3/4">
+      <div className="w-full justify-between lg:flex mb-4">
+        <div className="lg:w-3/4">
           <span className="flex items-center flex-wrap gap-2">
             <h1 className="font-bold text-3xl">Restaurants</h1>
           </span>
-          <p className="opacity-50">
+          <div className="opacity-50">
             {loading ? (
               <Loading />
             ) : (
               `Il y a ${filteredRestaurants.length} restaurants`
             )}
-          </p>
+          </div>
           <RestaurantsFilters
             setFilteredRestaurants={setFilteredRestaurants}
             restaurants={restaurants}
           />
         </div>
-        <div className="flex items-center gap-3 mt-4 md:mt-0 w-fit">
+        <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
           <p>Choisir l'affichage</p>
           <div>
             <Button
