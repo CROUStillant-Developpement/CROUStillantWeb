@@ -9,7 +9,7 @@ export default function NotFound() {
         Errance dans les méandres du cyberespace : La page égarée
       </h1>
       <div className="flex gap-4 items-center justify-center flex-wrap-reverse md:flex-nowrap">
-        <Image src="/img/logo.png" width={400} height={400} alt="Logo" />
+        <Image src="/logo.png" width={400} height={400} alt="Logo" />
         <section>
           <p className="mb-4">
             Par ma foi ! Voici la lande obscure où vos pas vous ont fourvoyé. La
