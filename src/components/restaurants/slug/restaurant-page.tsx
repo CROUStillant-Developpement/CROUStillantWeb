@@ -9,6 +9,9 @@ import {
 import { useEffect, useState } from "react";
 import { formatToISODate } from "@/lib/utils";
 import MealsDisplay from "./meals-display";
+import RestaurantCalendar from "./calendar";
+import DatePicker from "./date-picker";
+import RestaurantInfo from "./restaurant-info";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -41,7 +44,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     getFutureDatesMenuAvailable(restaurant.code)
       .then((result) => {
         if (result.success) {
-          setDates(result.data);
+          // remove duplicates
+          const uniqueDates = result.data.filter(
+            (date, index, self) =>
+              index === self.findIndex((t) => t.date === date.date)
+          );
+          setDates(uniqueDates);
           setSelectedDate(formatToISODate(result.data[0].date));
         } else {
           console.error(result.error);
@@ -54,11 +62,16 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">{restaurant.nom}</h1>
       <div>
+        <div className="sm:flex items-center">
+          <h1 className="font-bold text-3xl">{restaurant?.nom}</h1>
+        </div>
+        <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
+      </div>
+      {/* <div>
         {JSON.stringify(menu)} <br />
         {JSON.stringify(dates)}
-      </div>
+      </div> */}
       {selectedDate && (
         <div className="grid gap-4 md:grid-cols-3 mt-8">
           <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
@@ -88,12 +101,16 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             <legend className="-ml-1 px-1 text-sm font-medium">
               Menu des jours suivants
             </legend>
-            {/* <RestaurantCalendar
-              availableDates={availableDates}
-              meals={meals}
+            <DatePicker
+              onDateChange={setSelectedDate}
+              maxDate={formatToISODate(dates[dates.length - 1].date)}
+              current={selectedDate}
+            />
+            <RestaurantCalendar
+              availableDates={dates}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
-            /> */}
+            />
           </fieldset>
         </div>
       )}
