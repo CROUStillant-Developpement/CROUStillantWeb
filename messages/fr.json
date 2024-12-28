@@ -14,6 +14,34 @@
       "second": "Voir les restaurants"
     }
   },
+  "RestaurantsPage": {
+    "noResults": "Aucun restaurant trouvé pour cette recherche 😢",
+    "results": "Il y a {count, plural, =0 {aucun restaurant trouvé} =1 {# restaurant trouvé} other {# restaurants trouvés}}",
+    "display": {
+      "title": "Choisir l'affichage",
+      "list": "Liste",
+      "map": "Carte"
+    }
+  },
+  "Filters": {
+    "search": "Rechercher un restaurant...",
+    "accessibility": "Accessible aux personnes à mobilité réduite",
+    "open": "Ouvert maintenant",
+    "reset": "Réinitialiser",
+    "izly": "Paiement Izly accepté",
+    "creditCard": "Paiement par carte bancaire accepté",
+    "geolocated": {
+      "title": "Restaurants à proximité",
+      "loading": "Recherche des restaurants à proximité..."
+    },
+    "region": {
+      "title": "Région",
+      "placeholder": "Rechercher une région...",
+      "loading": "Chargement des régions...",
+      "all": "Toutes les régions",
+      "noResults": "Aucune région trouvée pour cette recherche 😢"
+    }
+  },
   "RestaurantCard": {
     "cta": "Voir le menu",
     "closed": "Fermé",

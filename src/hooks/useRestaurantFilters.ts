@@ -8,7 +8,8 @@ import { getRegions } from "@/services/region-service";
 
 export function useRestaurantFilters(
   restaurants: Restaurant[],
-  setFilteredRestaurants: (restaurants: Restaurant[]) => void
+  setFilteredRestaurants: (restaurants: Restaurant[]) => void,
+  allRegionText = "Toutes les régions"
 ) {
   const [filters, setFilters] = useState<Filters>({
     search: "",
@@ -102,7 +103,7 @@ export function useRestaurantFilters(
       .then((result) => {
         if (result.success) {
           const fetchedRegions = result.data;
-          fetchedRegions.unshift({ code: -1, libelle: "Toutes les régions" });
+          fetchedRegions.unshift({ code: -1, libelle: allRegionText });
           setRegions(fetchedRegions);
         } else {
           console.error(result.error);

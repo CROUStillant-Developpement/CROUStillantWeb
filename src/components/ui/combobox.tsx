@@ -32,6 +32,7 @@ interface ComboBoxProps {
   placeholder?: string;
   loading?: boolean;
   loadingText?: string;
+  noResultsText?: string;
 }
 
 export function ComboBoxResponsive({
@@ -42,6 +43,7 @@ export function ComboBoxResponsive({
   placeholder = "Search value",
   loading = false,
   loadingText = "Loading...",
+  noResultsText = "No results found.",
 }: ComboBoxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -77,6 +79,7 @@ export function ComboBoxResponsive({
             setSelectedValue={setSelectedValue}
             values={values}
             placeholder={placeholder}
+            noResultsText={noResultsText}
           />
         </PopoverContent>
       </Popover>
@@ -104,6 +107,7 @@ export function ComboBoxResponsive({
             setSelectedValue={setSelectedValue}
             values={values}
             placeholder={placeholder}
+            noResultsText={noResultsText}
           />
         </div>
       </DrawerContent>
@@ -116,17 +120,19 @@ function StatusList({
   setSelectedValue,
   values,
   placeholder,
+  noResultsText = "No results found.",
 }: {
   setOpen: (open: boolean) => void;
   setSelectedValue: (value: string | null) => void;
   values: Value[];
   placeholder: string;
+  noResultsText?: string;
 }) {
   return (
     <Command>
       <CommandInput placeholder={placeholder} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{noResultsText}</CommandEmpty>
         <CommandGroup>
           {values.map((value) => (
             <CommandItem

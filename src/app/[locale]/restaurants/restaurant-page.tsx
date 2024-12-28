@@ -13,6 +13,7 @@ import Loading from "../loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useTranslations } from "next-intl";
 
 export default function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,8 @@ export default function RestaurantsPage() {
     []
   );
   const { display, toggleDisplay } = useUserPreferences();
+
+  const t = useTranslations("RestaurantsPage");
 
   useEffect(() => {
     getRestaurantsByRegion("1")
@@ -48,16 +51,17 @@ export default function RestaurantsPage() {
             {loading ? (
               <Loading />
             ) : (
-              `Il y a ${filteredRestaurants.length} restaurants`
+              t("results", { count: filteredRestaurants.length })
             )}
           </div>
           <RestaurantsFilters
             setFilteredRestaurants={setFilteredRestaurants}
             restaurants={restaurants}
+            setLoading={setLoading}
           />
         </div>
         <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
-          <p>Choisir l'affichage</p>
+          <p>{t("display.title")}</p>
           <div>
             <Button
               size="icon"
@@ -91,7 +95,7 @@ export default function RestaurantsPage() {
             ))
         ) : (
           <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
-            Aucun restaurant trouvé pour cette recherche 😢
+            {t("noResults")}
           </p>
         )}
       </div>

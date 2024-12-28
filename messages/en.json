@@ -14,6 +14,34 @@
       "second": "Find a restaurant"
     }
   },
+  "RestaurantsPage": {
+    "noResults": "No restaurant found for this search 😢",
+    "results": "There {count, plural, =0 {is no restaurant found} =1 {is # restaurant found} other {are # restaurants found}}",
+    "display": {
+      "title": "Choose the display",
+      "list": "List",
+      "map": "Map"
+    }
+  },
+  "Filters": {
+    "search": "Search for a restaurant...",
+    "accessibility": "Accessibility for people with reduced mobility",
+    "open": "Open now",
+    "reset": "Reset",
+    "izly": "Izly payment accepted",
+    "creditCard": "Credit card payment accepted",
+    "geolocated": {
+      "title": "Restaurants nearby",
+      "loading": "Searching for restaurants nearby..."
+    },
+    "region": {
+      "title": "Region",
+      "placeholder": "Search for a region...",
+      "loading": "Loading regions...",
+      "all": "All regions",
+      "noResults": "No region found for this search 😢"
+    }
+  },
   "RestaurantCard": {
     "cta": "View the menu",
     "closed": "Closed",
@@ -83,7 +111,7 @@
     },
     "more-convinced": {
       "title": "Even more convinced?",
-      "description": "Join our Discord server to chat with other users and the CROUStillant team!" 
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
     }
   },
   "Footer": {

@@ -2,14 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
-import { Region, Restaurant } from "@/services/types";
-import { CreditCard, Filter, Locate, RotateCcw } from "lucide-react";
-import { use, useCallback, useEffect, useState } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { Restaurant } from "@/services/types";
+import { CreditCard, Locate, RotateCcw } from "lucide-react";
 import { ComboBoxResponsive } from "@/components/ui/combobox";
 import { Checkbox } from "@/components/ui/checkbox";
-import { getRegions } from "@/services/region-service";
 import {
   Tooltip,
   TooltipContent,
@@ -18,16 +14,22 @@ import {
 } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
   restaurants: Restaurant[];
+  setLoading: (loading: boolean) => void;
 }
 
 export default function RestaurantsFilters({
   restaurants,
   setFilteredRestaurants,
+  setLoading,
 }: RestaurantsFiltersProps) {
+  const t = useTranslations("Filters");
+
   const {
     filters,
     setFilters,
@@ -36,13 +38,21 @@ export default function RestaurantsFilters({
     geoLocError,
     handleLocationRequest,
     resetFilters,
-  } = useRestaurantFilters(restaurants, setFilteredRestaurants);
+  } = useRestaurantFilters(
+    restaurants,
+    setFilteredRestaurants,
+    t("region.all")
+  );
+
+  useEffect(() => {
+    setLoading(loading);
+  }, [loading]);
 
   return (
     <div className="mt-4 w-full">
       <div className="flex gap-2 w-full flex-wrap lg:flex-nowrap">
         <Input
-          placeholder="Rechercher un restaurant"
+          placeholder={t("search")}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFilters({ ...filters, search: e.target.value })
           }
@@ -55,10 +65,10 @@ export default function RestaurantsFilters({
         >
           <Locate className="mr-2 h-4 w-4" />
           {loading
-            ? "Recherche en cours"
+            ? t("geolocated.loading")
             : geoLocError
             ? geoLocError
-            : "Autour de moi"}
+            : t("geolocated.title")}
         </Button>
         <ComboBoxResponsive
           values={regions.map((region) => ({
@@ -69,7 +79,10 @@ export default function RestaurantsFilters({
           setSelectedValue={(value) =>
             setFilters({ ...filters, region: value ? parseInt(value) : -1 })
           }
-          buttonTitle="Crous"
+          buttonTitle={t("region.title")}
+          placeholder={t("region.placeholder")}
+          loadingText={t("region.loading")}
+          noResultsText={t("region.noResults")}
           loading={loading}
         />
         <TooltipProvider>
@@ -86,7 +99,7 @@ export default function RestaurantsFilters({
               </Button>
             </TooltipTrigger>
             <TooltipContent sideOffset={8} align="center">
-              Paiement par carte bancaire
+              {t("creditCard")}
             </TooltipContent>
           </Tooltip>
           <Tooltip>
@@ -107,12 +120,12 @@ export default function RestaurantsFilters({
               </Button>
             </TooltipTrigger>
             <TooltipContent sideOffset={8} align="center">
-              Paiement par Izly
+              {t("izly")}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <Button variant="outline" onClick={resetFilters}>
-          <RotateCcw className="mr-2 h-4 w-4" /> Réinitialiser
+          <RotateCcw className="mr-2 h-4 w-4" /> {t("reset")}
         </Button>
       </div>
       <div className="mt-4 flex gap-2 flex-wrap lg:flex-nowrap">
@@ -128,7 +141,7 @@ export default function RestaurantsFilters({
             htmlFor="ispmr"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Accessible aux personnes à mobilité réduite
+            {t("accessibility")}
           </label>
         </div>
         <div className="flex items-center space-x-2">
@@ -143,7 +156,7 @@ export default function RestaurantsFilters({
             htmlFor="open"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Ouvert maintenant
+            {t("open")}
           </label>
         </div>
       </div>
