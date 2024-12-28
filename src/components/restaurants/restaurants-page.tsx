@@ -21,7 +21,7 @@ export default function RestaurantsPage() {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
   );
-  const { display, toggleDisplay } = useUserPreferences();
+  const { display, toggleDisplay, favorites } = useUserPreferences();
 
   const t = useTranslations("RestaurantsPage");
 
@@ -82,6 +82,20 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </div>
+      {favorites.length > 0 && (
+        <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
+          <legend className="-ml-1 px-1 text-sm font-medium">
+            {t("favorites", { count: favorites.length })}
+          </legend>
+          <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+            {filteredRestaurants
+              .filter((restaurant) => favorites.includes(restaurant.code))
+              .map((restaurant) => (
+                <RestaurantCard key={restaurant.code} restaurant={restaurant} />
+              ))}
+          </div>
+        </fieldset>
+      )}
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {loading ? (
           Array.from({ length: 20 }).map((_, index) => (

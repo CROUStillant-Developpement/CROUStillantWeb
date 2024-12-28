@@ -21,7 +21,8 @@
       "title": "Choose the display",
       "list": "List",
       "map": "Map"
-    }
+    },
+    "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}"
   },
   "Filters": {
     "search": "Search for a restaurant...",

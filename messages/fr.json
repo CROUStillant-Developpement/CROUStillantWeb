@@ -21,7 +21,8 @@
       "title": "Choisir l'affichage",
       "list": "Liste",
       "map": "Carte"
-    }
+    },
+    "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}"
   },
   "Filters": {
     "search": "Rechercher un restaurant...",
