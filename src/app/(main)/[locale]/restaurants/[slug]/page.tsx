@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import RestaurantPage from "../../../../components/restaurants/slug/restaurant-page";
+import RestaurantPage from "../../../../../components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
 

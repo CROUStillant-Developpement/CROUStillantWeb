@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../../globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { ThemeProvider } from "@/app/[locale]/theme-provider";
+import { ThemeProvider } from "@/app/(main)/[locale]/theme-provider";
 import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   title: "CROUStillant",
   applicationName: "CROUStillant",
   appleWebApp: true,
-  description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+  description:
+    "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
   // icons: {
   //   icon: [
   //     { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },

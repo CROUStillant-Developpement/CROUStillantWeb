@@ -9,7 +9,7 @@ import { Restaurant } from "@/services/types";
 import { useEffect, useState } from "react";
 import RestaurantCardSkeleton from "@/components/restaurants/restaurant-card-skeleton";
 import { Button } from "@/components/ui/button";
-import Loading from "../../app/[locale]/loading";
+import Loading from "../../app/(main)/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
