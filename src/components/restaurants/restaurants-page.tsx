@@ -1,15 +1,15 @@
 "use client";
 
-import RestaurantCard from "@/components/restaurant-card";
+import RestaurantCard from "@/components/restaurants/restaurant-card";
 import {
   getRestaurants,
   getRestaurantsByRegion,
 } from "@/services/restaurant-service";
 import { Restaurant } from "@/services/types";
 import { useEffect, useState } from "react";
-import RestaurantCardSkeleton from "@/components/restaurant-card-skeleton";
+import RestaurantCardSkeleton from "@/components/restaurants/restaurant-card-skeleton";
 import { Button } from "@/components/ui/button";
-import Loading from "../loading";
+import Loading from "../../app/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";

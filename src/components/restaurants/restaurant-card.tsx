@@ -44,11 +44,14 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
             <HeartOff size={20} />
           )}
         </Button>
-        <div className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition">
+        <Link
+          href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
+          className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
+        >
           <p className="text-lg font-bold text-primary-foreground">
             {t("cta")}
           </p>
-        </div>
+        </Link>
         <div className="flex justify-between items-center mt-2">
           <h1 className="text-xl font-bold">{restaurant.nom}</h1>
           <Badge className={restaurant.ouvert ? "bg-green-500" : "bg-red-500"}>
@@ -107,7 +110,11 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
             )}
           </div>
           <Button asChild>
-            <Link href={`/restaurants/${slugify(restaurant.nom)}`}>
+            <Link
+              href={`/restaurants/${slugify(restaurant.nom)}-r${
+                restaurant.code
+              }`}
+            >
               {t("cta")}
             </Link>
           </Button>

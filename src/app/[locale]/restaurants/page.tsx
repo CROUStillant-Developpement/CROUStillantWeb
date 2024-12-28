@@ -1,4 +1,4 @@
-import RestaurantsPage from "./restaurant-page";
+import RestaurantsPage from "@/components/restaurants/restaurants-page";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
