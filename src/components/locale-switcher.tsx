@@ -10,11 +10,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from 'next/navigation';
+import { useTransition } from "react";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { useLocale } from "next-intl";
 
 export default function LocaleToggle() {
+  const pathname = usePathname();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
+  function handleChange(locale: string) {
+    startTransition(() => {
+      router.replace({ pathname }, { locale: locale });
+    });
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,10 +33,22 @@ export default function LocaleToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => {router.push('/fr' )}}>
+        <DropdownMenuItem
+          disabled={useLocale() === "fr" || isPending}
+          className={useLocale() === "fr" ? "bg-accent" : ""}
+          onClick={() => {
+            handleChange("fr");
+          }}
+        >
           🇫🇷
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => {router.push('/en' )}}>
+        <DropdownMenuItem
+          disabled={useLocale() === "en" || isPending}
+          className={useLocale() === "en" ? "bg-accent" : ""}
+          onClick={() => {
+            handleChange("en");
+          }}
+        >
           🇬🇧
         </DropdownMenuItem>
       </DropdownMenuContent>
