@@ -73,7 +73,7 @@ export default function QrCodeDialog({
   };
 
   useEffect(() => {
-    generateQrCode(url);
+    if (url.length > 0) generateQrCode(url);
   }, [url]);
 
   return (
