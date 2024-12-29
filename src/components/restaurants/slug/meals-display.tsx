@@ -3,9 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Repas } from "@/services/types";
 
 interface MealsDisplayProps {
-  selectedDateBreakfast: Repas[];
-  selectedDateLunch: Repas[];
-  selectedDateDinner: Repas[];
+  selectedDateBreakfast: Repas | null;
+  selectedDateLunch: Repas | null;
+  selectedDateDinner: Repas | null;
 }
 
 export default function MealsDisplay({
@@ -15,46 +15,46 @@ export default function MealsDisplay({
 }: MealsDisplayProps) {
   return (
     <>
-      {selectedDateBreakfast.length > 0 && (
+      {selectedDateBreakfast && (
         <Card>
           <CardHeader>
             <CardTitle>🥞 Petit-déjeuner</CardTitle>
           </CardHeader>
           <CardContent>
-            {selectedDateBreakfast.map((meal) => (
+            {selectedDateBreakfast.categories.map((meal) => (
               <MealCard
                 key={meal.code}
-                meal={meal.categories.length > 0 ? meal.categories[0] : null}
+                meal={meal}
               />
             ))}
           </CardContent>
         </Card>
       )}
-      {selectedDateLunch.length > 0 && (
+      {selectedDateLunch && (
         <Card>
           <CardHeader>
             <CardTitle>🍽 Déjeuner</CardTitle>
           </CardHeader>
           <CardContent>
-            {selectedDateLunch.map((meal) => (
+            {selectedDateLunch.categories.map((meal) => (
               <MealCard
                 key={meal.code}
-                meal={meal.categories.length > 0 ? meal.categories[0] : null}
+                meal={meal}
               />
             ))}
           </CardContent>
         </Card>
       )}
-      {selectedDateDinner.length > 0 && (
+      {selectedDateDinner && (
         <Card>
           <CardHeader>
             <CardTitle>🍲 Dîner</CardTitle>
           </CardHeader>
           <CardContent>
-            {selectedDateDinner.map((meal) => (
+            {selectedDateDinner.categories.map((meal) => (
               <MealCard
                 key={meal.code}
-                meal={meal.categories.length > 0 ? meal.categories[0] : null}
+                meal={meal}
               />
             ))}
           </CardContent>

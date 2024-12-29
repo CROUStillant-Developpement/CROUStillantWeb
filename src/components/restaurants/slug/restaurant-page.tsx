@@ -30,6 +30,14 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
   const [noMeal, setNoMeal] = useState(false);
   const [pageUrl, setPageUrl] = useState("");
+  const [selectedDateBreakfast, setSelectedDateBreakfast] =
+    useState<Repas | null>(null);
+  const [selectedDateLunch, setSelectedDateLunch] = useState<Repas | null>(
+    null
+  );
+  const [selectedDateDinner, setSelectedDateDinner] = useState<Repas | null>(
+    null
+  );
 
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
@@ -66,6 +74,30 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       });
   }, [restaurant]);
 
+  useEffect(() => {
+    const selectedDateMenu = menu.find(
+      (menu) => formatToISODate(menu.date).getTime() === selectedDate.getTime()
+    );
+
+    if (selectedDateMenu) {
+      setSelectedDateMeals(selectedDateMenu.repas);
+      setSelectedDateBreakfast(
+        selectedDateMenu.repas.find((repas) => repas.type === "matin") ?? null
+      );
+      setSelectedDateLunch(
+        selectedDateMenu.repas.find((repas) => repas.type === "midi") ?? null
+      );
+      setSelectedDateDinner(
+        selectedDateMenu.repas.find((repas) => repas.type === "soir") ?? null
+      );
+    } else {
+      setSelectedDateMeals([]);
+      setSelectedDateBreakfast(null);
+      setSelectedDateLunch(null);
+      setSelectedDateDinner(null);
+    }
+  }, [selectedDate, menu]);
+
   return (
     <div>
       <div>
@@ -84,10 +116,6 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         </div>
         <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
       </div>
-      {/* <div>
-        {JSON.stringify(menu)} <br />
-        {JSON.stringify(dates)}
-      </div> */}
       {noMeal ? (
         <div className="w-full flex items-center justify-center h-56 border mt-4 rounded-lg shadow-sm text-xl font-bold p-2">
           <p className="text-center">{t("noMealAvailable")}</p>
@@ -111,9 +139,9 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 <p className="text-center">{t("noMenuAvailable")}</p>
               ) : (
                 <MealsDisplay
-                  selectedDateBreakfast={selectedDateMeals}
-                  selectedDateLunch={selectedDateMeals}
-                  selectedDateDinner={selectedDateMeals}
+                  selectedDateBreakfast={selectedDateBreakfast}
+                  selectedDateLunch={selectedDateLunch}
+                  selectedDateDinner={selectedDateDinner}
                 />
               )}
             </div>
