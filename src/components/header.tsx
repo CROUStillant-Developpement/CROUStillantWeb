@@ -8,6 +8,7 @@ import { Settings, Home, Info, Mail, Star } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 import { getGithubStarCount } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import LocaleToggle from "./locale-switcher";
 
 export default function Header() {
   const [stars, setStars] = useState<number>(0); // [1
@@ -80,6 +81,7 @@ export default function Header() {
           </Link>
         </Button>
         <ModeToggle />
+        <LocaleToggle />
         <Button
           asChild
           variant={pathname === "/settings" ? "default" : "outline"}
