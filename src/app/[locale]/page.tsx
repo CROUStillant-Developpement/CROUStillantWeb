@@ -8,7 +8,7 @@ export default function HomePage() {
   const t = useTranslations("HomePage");
   
   return (
-    <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh">
+    <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh mt-9 md:mt-0">
       <div className="mx-auto flex max-w-container flex-col gap-12 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Link href="/" className="flex items-center">
@@ -27,7 +27,7 @@ export default function HomePage() {
             {t("subtitle")}
           </p>
           <div className="relative z-10 flex animate-appear justify-center gap-4 delay-300">
-            <div className="relative z-10 flex animate-appear justify-center gap-4 delay-300">
+            <div className="relative z-10 flex animate-appear justify-center gap-4 delay-300 flex-wrap">
               <Button variant="default" size="lg" asChild className="group">
                 <Link href="/restaurants">
                   {t("cta.first")}
