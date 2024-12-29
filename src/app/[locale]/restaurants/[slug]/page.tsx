@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
+import { getTranslations } from "next-intl/server";
 
 // Server-side fetch for this route
 async function fetchRestaurantDetailsServer(slug: string) {
@@ -35,25 +36,38 @@ export async function generateMetadata({
   const { slug } = await params;
   const restaurant = await fetchRestaurantDetailsServer(slug);
 
+  const t = await getTranslations("RestaurantPage");
+
   if (!restaurant) {
     return {
-      title: "Restaurant Not Found - CROUStillant",
-      description: "The restaurant details could not be found.",
+      title: t("seo.notFound.title"),
+      description: t("seo.notFound.description"),
       openGraph: {
-        title: "Restaurant Not Found - CROUStillant",
-        description: "The restaurant details could not be found.",
+        title: t("seo.notFound.title"),
+        description: t("seo.notFound.description"),
         images: [{ url: "/default-ru.png" }],
       },
     };
   }
 
   return {
-    title: `Menu of ${restaurant.nom} - CROUStillant`,
-    description: `Discover the details of ${restaurant.nom}, located in ${restaurant.region.libelle}. Perfect for your next meal!`,
+    title: t("seo.title", { name: restaurant.nom }),
+    description: t("seo.description", {
+      name: restaurant.nom,
+      area: restaurant.region.libelle,
+    }),
+    keywords: t("seo.keywords", {
+      name: restaurant.nom,
+      area: restaurant.region.libelle,
+    }),
     openGraph: {
-      title: `Menu of ${restaurant.nom} - CROUStillant`,
-      description: `Discover the details of ${restaurant.nom}, located in ${restaurant.region.libelle}. Perfect for your next meal!`,
+      title: t("seo.title", { name: restaurant.nom }),
+      description: t("seo.description", {
+        name: restaurant.nom,
+        area: restaurant.region.libelle,
+      }),
       images: [{ url: restaurant.image_url ?? "/default-ru.png" }],
+      siteName: "CROUSStillant",
     },
   };
 }

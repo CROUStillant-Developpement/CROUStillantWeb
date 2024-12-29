@@ -31,7 +31,16 @@
     "noMenuAvailable": "Aucun menu disponible pour cette date 😢",
     "nextDaysMenu": "Menu des prochains suivants",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
-    "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢"
+    "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
+    "seo": {
+      "title": "Menu de {name} - CROUStillant",
+      "description": "Découvrez les détails de {name}, situé à ${area}. Parfait pour votre prochain repas !",
+      "keywords": "CROUS, restaurant, menu, {name}, {area}",
+      "notFound": {
+        "title": "Restaurant introuvable - CROUStillant",
+        "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."
+      }
+    }
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
