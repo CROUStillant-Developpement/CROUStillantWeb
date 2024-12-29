@@ -9,7 +9,7 @@ import { Restaurant } from "@/services/types";
 import { useEffect, useState } from "react";
 import RestaurantCardSkeleton from "@/components/restaurants/restaurant-card-skeleton";
 import { Button } from "@/components/ui/button";
-import Loading from "../../app/(main)/[locale]/loading";
+import Loading from "@/app/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
@@ -21,12 +21,17 @@ export default function RestaurantsPage() {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
   );
+  const [favoritesRestaurants, setFavoritesRestaurants] = useState<
+    Restaurant[]
+  >([]);
+  const [collapsedFavorites, setCollapsedFavorites] = useState(false);
+
   const { display, toggleDisplay, favorites } = useUserPreferences();
 
   const t = useTranslations("RestaurantsPage");
 
   useEffect(() => {
-    getRestaurantsByRegion("1")
+    getRestaurants()
       .then((result) => {
         if (result.success) {
           setRestaurants(result.data);
@@ -39,6 +44,21 @@ export default function RestaurantsPage() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    const favRestaurants = filteredRestaurants.filter((restaurant) =>
+      favorites.includes(restaurant.code)
+    );
+
+    // Collapse favorites if there are more than 3, and expand if there are less than 3
+    if (favorites.length > 3 && !collapsedFavorites) {
+      setCollapsedFavorites(true);
+    } else if (favorites.length <= 3 && collapsedFavorites) {
+      setCollapsedFavorites(false);
+    }
+
+    setFavoritesRestaurants(favRestaurants);
+  }, [favorites, filteredRestaurants]);
 
   return (
     <div>
@@ -82,17 +102,25 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </div>
-      {favorites.length > 0 && (
+      {favoritesRestaurants.length > 0 && (
         <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
           <legend className="-ml-1 px-1 text-sm font-medium">
-            {t("favorites", { count: favorites.length })}
+            {t("favorites", { count: favoritesRestaurants.length })} -{" "}
+            <span
+              className="underline select-none cursor-pointer"
+              onClick={() => setCollapsedFavorites(!collapsedFavorites)}
+            >
+              {collapsedFavorites ? t("clickToSeeAll") : t("clickToSeeLess")}
+            </span>
           </legend>
-          <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-            {filteredRestaurants
-              .filter((restaurant) => favorites.includes(restaurant.code))
-              .map((restaurant) => (
-                <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-              ))}
+          <div
+            className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
+              collapsedFavorites ? "hidden" : "grid"
+            }`}
+          >
+            {favoritesRestaurants.map((restaurant) => (
+              <RestaurantCard key={restaurant.code} restaurant={restaurant} />
+            ))}
           </div>
         </fieldset>
       )}
@@ -103,7 +131,6 @@ export default function RestaurantsPage() {
           ))
         ) : filteredRestaurants.length ? (
           filteredRestaurants
-            .slice(0, 20)
             .map((restaurant) => (
               <RestaurantCard key={restaurant.code} restaurant={restaurant} />
             ))
