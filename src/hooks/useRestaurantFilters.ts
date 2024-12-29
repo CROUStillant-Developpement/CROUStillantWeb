@@ -92,7 +92,7 @@ export function useRestaurantFilters(
   useEffect(() => {
     debouncedFilterRestaurants();
     return () => debouncedFilterRestaurants.cancel();
-  }, [filters, debouncedFilterRestaurants]);
+  }, [filters]);
 
   // Fetch regions and initialize filters on mount
   useEffect(() => {

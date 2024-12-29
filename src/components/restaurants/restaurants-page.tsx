@@ -1,9 +1,7 @@
 "use client";
 
 import RestaurantCard from "@/components/restaurants/restaurant-card";
-import {
-  getRestaurants,
-} from "@/services/restaurant-service";
+import { getRestaurants } from "@/services/restaurant-service";
 import { Restaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -23,12 +21,10 @@ export default function RestaurantsPage() {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
   );
-  const [previousFilteredRestaurants, setPreviousFilteredRestaurants] =
-    useState<Restaurant[]>([]); // Store previous filtered restaurants to avoid re-fetching data
+  useState<Restaurant[]>([]); // Store previous filtered restaurants to avoid re-fetching data
   const [favoritesRestaurants, setFavoritesRestaurants] = useState<
     Restaurant[]
   >([]);
-  const [collapsedFavorites, setCollapsedFavorites] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20); // Default records per page
 
@@ -56,13 +52,6 @@ export default function RestaurantsPage() {
       favorites.includes(restaurant.code)
     );
 
-    // Collapse favorites if there are more than 3, and expand if there are less than 3
-    if (favorites.length > 3 && !collapsedFavorites) {
-      setCollapsedFavorites(true);
-    } else if (favorites.length <= 3 && collapsedFavorites) {
-      setCollapsedFavorites(false);
-    }
-
     setFavoritesRestaurants(favRestaurants);
   }, [favorites, filteredRestaurants]);
 
@@ -73,11 +62,6 @@ export default function RestaurantsPage() {
   }, [filteredRestaurants, currentPage, pageSize]);
 
   useEffect(() => {
-    if (filteredRestaurants !== previousFilteredRestaurants) {
-      setPreviousFilteredRestaurants(filteredRestaurants);
-    } else {
-      return;
-    }
     clearMarkers();
     filteredRestaurants.forEach((restaurant) => {
       if (restaurant.latitude && restaurant.longitude) {
@@ -91,7 +75,7 @@ export default function RestaurantsPage() {
         );
       }
     });
-  }, [loading, filteredRestaurants]);
+  }, [filteredRestaurants]);
 
   return (
     <div>
@@ -147,34 +131,12 @@ export default function RestaurantsPage() {
           onPageChange={setCurrentPage}
         />
       )}
-      {/* Favorites */}
-      {favoritesRestaurants.length > 0 && (
-        <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
-          <legend className="-ml-1 px-1 text-sm font-medium">
-            {t("favorites", { count: favoritesRestaurants.length })} -{" "}
-            <span
-              className="underline select-none cursor-pointer"
-              onClick={() => setCollapsedFavorites(!collapsedFavorites)}
-            >
-              {collapsedFavorites ? t("clickToSeeAll") : t("clickToSeeLess")}
-            </span>
-          </legend>
-          <div
-            className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
-              collapsedFavorites ? "hidden" : "grid"
-            }`}
-          >
-            {favoritesRestaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-            ))}
-          </div>
-        </fieldset>
-      )}
       {/* Filtered restaurants or skeleton or no results or map */}
       <Content
         display={display}
         filteredRestaurants={filteredRestaurants}
         paginatedRestaurants={paginatedRestaurants}
+        favoritesRestaurants={favoritesRestaurants}
         loading={loading}
       />
       {display === "list" && (
