@@ -11,7 +11,7 @@ interface StoreState {
 
 export const useUserPreferences = create<StoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       display: "list",
       favorites: [],
 

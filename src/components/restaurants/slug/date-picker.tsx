@@ -36,7 +36,7 @@ export default function DatePicker({
   current,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [, setDate] = React.useState<Date | undefined>(new Date());
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleDateChange = (date: Date) => {

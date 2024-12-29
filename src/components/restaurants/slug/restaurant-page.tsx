@@ -3,7 +3,6 @@
 import { Menu, Restaurant, DateMenu, Repas } from "@/services/types";
 import {
   getMenuByRestaurantId,
-  getDatesMenuAvailable,
   getFutureDatesMenuAvailable,
 } from "@/services/menu-service";
 import { useEffect, useState } from "react";

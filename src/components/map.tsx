@@ -3,10 +3,9 @@
 
 import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L, { LatLngExpression, LatLngBounds, Icon } from "leaflet";
+import { LatLngExpression, LatLngBounds, Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import useMarkerStore from "@/store/markerStore";
-import { Skeleton } from "./ui/skeleton";
 
 const defaultIcon = new Icon({
   iconUrl: "/marker-icon.png",

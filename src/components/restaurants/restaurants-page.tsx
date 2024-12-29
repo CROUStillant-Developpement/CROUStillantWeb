@@ -3,11 +3,9 @@
 import RestaurantCard from "@/components/restaurants/restaurant-card";
 import {
   getRestaurants,
-  getRestaurantsByRegion,
 } from "@/services/restaurant-service";
 import { Restaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
-import RestaurantCardSkeleton from "@/components/restaurants/restaurant-card-skeleton";
 import { Button } from "@/components/ui/button";
 import Loading from "@/app/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";

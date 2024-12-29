@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { FishOff } from "lucide-react";

@@ -6,8 +6,6 @@ import {
   Bar,
   LineChart,
   Line,
-  AreaChart,
-  Area,
   PieChart,
   Pie,
   RadarChart,
@@ -18,7 +16,6 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
@@ -38,7 +35,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 export default function StatsPage() {
   const [taches, setTaches] = useState<Tache[]>([]);

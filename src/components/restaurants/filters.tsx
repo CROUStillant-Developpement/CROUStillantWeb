@@ -15,7 +15,6 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
