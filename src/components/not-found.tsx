@@ -1,40 +1,28 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { FishOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function NotFound() {
+  const t = useTranslations("NotFoundPage");
   return (
-    <>
-      <h1 className="font-bold text-3xl">
-        Errance dans les méandres du cyberespace : La page égarée
+    <div className="flex flex-col items-center justify-center gap-6 px-4 md:px-6">
+      <FishOff className="h-20 w-20 text-gray-500 dark:text-gray-400" />
+      <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+        {t("title")}
       </h1>
-      <div className="flex gap-4 items-center justify-center flex-wrap-reverse md:flex-nowrap">
-        <Image src="/logo.png" width={400} height={400} alt="Logo" />
-        <section>
-          <p className="mb-4">
-            Par ma foi ! Voici la lande obscure où vos pas vous ont fourvoyé. La
-            page convoitée, telle la brume, s'est évanouie. Rebattez vos cartes,
-            prenez un autre sentier, car celui-ci se perd dans les méandres du
-            cyberespace. Ensemble, quêteurs d'aventure, cherchons la lumière
-            dans les ténèbres numériques. Adieu, et que la fortune vous sourie
-            en vos pérégrinations futures !
-          </p>
-          <Button asChild className="mr-4">
-            <Link href="/">Retourner au foyer de la toile</Link>
-          </Button>
-          <Button asChild variant="outline" className="mt-4">
-            <Link
-              href={
-                typeof window !== "undefined" && window.history.length > 1
-                  ? "javascript:history.back()"
-                  : "/"
-              }
-            >
-              Reculer comme l'écho du cor
-            </Link>
-          </Button>
-        </section>
+      <p className="text-gray-500 dark:text-gray-400 max-w-md text-center">
+        {t("description")}
+      </p>
+      <div className="flex gap-4">
+        <Button asChild>
+          <Link href="/">{t("cta")}</Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link href="/contact">{t("report")}</Link>
+        </Button>
       </div>
-    </>
+    </div>
   );
 }

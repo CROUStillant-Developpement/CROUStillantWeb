@@ -147,5 +147,11 @@
   "Pagination": {
     "previous": "Précédent",
     "next": "Suivant"
+  },
+  "NotFoundPage": {
+    "title": "404 - La pêche n'est pas bonne ici !",
+    "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
+    "cta": "Retourner à l'accueil",
+    "report": "Signaler un problème"
   }
 }
