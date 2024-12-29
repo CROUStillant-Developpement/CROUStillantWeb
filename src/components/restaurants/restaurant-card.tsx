@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { Accessibility, CreditCard, Heart, HeartOff } from "lucide-react";
+import { Accessibility, CreditCard, Heart } from "lucide-react";
 import { slugify } from "@/lib/utils";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Restaurant } from "@/services/types";
@@ -39,9 +39,9 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           onClick={() => addOrRemoveFromFavorites(restaurant.code)}
         >
           {favorites.includes(restaurant.code) ? (
-            <Heart size={20} />
+            <Heart className="text-red-500 fill-red-500"/>
           ) : (
-            <HeartOff size={20} />
+            <Heart />
           )}
         </Button>
         <Link

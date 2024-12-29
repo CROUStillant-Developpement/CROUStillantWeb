@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLocale } from "next-intl";
+
 
 type DateCardProps = {
   date: Date;
@@ -12,6 +14,8 @@ export default function DateCard({
   onSelectedDateChange,
   selectedDate,
 }: DateCardProps) {
+  const locale = useLocale();
+
   return (
     <Card
       key={date.toISOString()}
@@ -25,20 +29,20 @@ export default function DateCard({
       <CardHeader>
         <CardContent>
           <p className="capitalize">
-            {date.toLocaleDateString("fr-FR", {
+            {date.toLocaleDateString(locale, {
               weekday: "long",
             })}
           </p>
         </CardContent>
         <CardTitle>
-          {date.toLocaleDateString("fr-FR", {
+          {date.toLocaleDateString(locale, {
             day: "numeric",
           })}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <p className="capitalize">
-          {date.toLocaleDateString("fr-FR", {
+          {date.toLocaleDateString(locale, {
             month: "long",
           })}
         </p>

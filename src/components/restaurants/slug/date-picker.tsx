@@ -22,6 +22,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Calendar } from "@/components/ui/calendar";
+import { useLocale, useTranslations } from "next-intl";
 
 type DatePickerProps = {
   onDateChange?: (date: Date) => void;
@@ -43,22 +44,23 @@ export default function DatePicker({
     onDateChange?.(date);
   };
 
+  const locale = useLocale();
+  const t = useTranslations("DatePickers");
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">
             {current
-              ? `Date actuelle : ${current?.toLocaleDateString()}`
-              : "Choisir une date"}
+              ? t("currentDate", { date: current?.toLocaleDateString(locale) })
+              : t("chooseDate")}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Choisissez une date</DialogTitle>
-            <DialogDescription>
-              Vous pouvez choisir une date pour voir les menus disponibles
-            </DialogDescription>
+            <DialogTitle>{t("chooseDate")}</DialogTitle>
+            <DialogDescription>{t("chooseDateDescription")}</DialogDescription>
           </DialogHeader>
           <DatePickerSection
             onDateChange={handleDateChange}
@@ -75,16 +77,14 @@ export default function DatePicker({
       <DrawerTrigger asChild className="mt-4 md:mt-8">
         <Button variant="outline">
           {current
-            ? `Date actuelle : ${current?.toLocaleDateString()}`
-            : "Choisir une date"}
+            ? t("currentDate", { date: current?.toLocaleDateString(locale) })
+            : t("chooseDate")}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Choisissez une date</DrawerTitle>
-          <DrawerDescription>
-            Vous pouvez choisir une date pour voir les menus disponibles
-          </DrawerDescription>
+          <DrawerTitle>{t("chooseDate")}</DrawerTitle>
+          <DrawerDescription>{t("chooseDateDescription")}</DrawerDescription>
         </DrawerHeader>
         <DatePickerSection
           className="px-4"
@@ -94,7 +94,7 @@ export default function DatePicker({
         />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button variant="outline">Annuler</Button>
+            <Button variant="outline">{t("cancel")}</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -123,6 +123,9 @@ function DatePickerSection({
     onClose?.();
   };
 
+  const locale = useLocale();
+  const t = useTranslations("DatePickers");
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -137,10 +140,10 @@ function DatePickerSection({
         toDate={
           maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
         }
-        lang="fr"
+        lang={locale}
       />
       <Button type="submit" className="w-full" disabled={!date}>
-        Choisir le {date?.toLocaleDateString()}
+        {t("ctaChoose", { date: date?.toLocaleDateString(locale) })}
       </Button>
     </form>
   );
