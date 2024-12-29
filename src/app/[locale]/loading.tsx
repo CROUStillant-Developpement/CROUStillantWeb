@@ -4,7 +4,7 @@ interface LoadingProps {
 
 export default function Loading({ message = "Chargement..." }: LoadingProps) {
   return (
-    <div className="flex items-center justify-center w-full h-full">
+    <div className="flex items-center justify-center w-full h-full flex-1">
       <div className="flex justify-center items-center space-x-1 text-sm">
         <svg
           fill="none"
