@@ -2,21 +2,22 @@
 import { create } from 'zustand';
 import { LatLngExpression } from 'leaflet';
 
-interface Marker {
+export interface Marker {
+    id: number;
     position: LatLngExpression;
-    popUpTitle?: string;
-    popUpContent?: string;
+    title?: string;
+    description?: string;
 }
 
 interface MarkerStore {
     markers: Marker[];
-    addMarker: (position: LatLngExpression, popUpTitle?: string, popUpContent?: string) => void;
+    addMarker: (id: number, position: LatLngExpression, title?: string, description?: string) => void;
     clearMarkers: () => void;
 }
 
 const useMarkerStore = create<MarkerStore>((set) => ({
     markers: [],
-    addMarker: (position, popUpTitle, popUpContent) => set((state) => ({ markers: [...state.markers, { position, popUpTitle, popUpContent }] })),
+    addMarker: (id, position, title, description) => set((state) => ({ markers: [...state.markers, { id, position, title, description }] })),
     clearMarkers: () => set({ markers: [] }),
 }));
 

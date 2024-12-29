@@ -15,18 +15,20 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
   restaurants: Restaurant[];
   setLoading: (loading: boolean) => void;
+  loading: boolean;
 }
 
 export default function RestaurantsFilters({
   restaurants,
   setFilteredRestaurants,
   setLoading,
+  loading,
 }: RestaurantsFiltersProps) {
   const t = useTranslations("Filters");
 
@@ -34,19 +36,15 @@ export default function RestaurantsFilters({
     filters,
     setFilters,
     regions,
-    loading,
     geoLocError,
     handleLocationRequest,
     resetFilters,
   } = useRestaurantFilters(
     restaurants,
     setFilteredRestaurants,
-    t("region.all")
+    t("region.all"),
+    setLoading
   );
-
-  useEffect(() => {
-    setLoading(loading);
-  }, [loading]);
 
   return (
     <div className="mt-4 w-full">

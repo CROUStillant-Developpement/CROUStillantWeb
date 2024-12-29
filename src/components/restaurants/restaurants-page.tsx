@@ -13,8 +13,11 @@ import Loading from "@/app/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pagination from "@/components/pagination";
+import useMarkerStore from "@/store/markerStore";
+import { slugify } from "@/lib/utils";
+import Content from "./content";
 
 export default function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
@@ -22,6 +25,8 @@ export default function RestaurantsPage() {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
   );
+  const [previousFilteredRestaurants, setPreviousFilteredRestaurants] =
+    useState<Restaurant[]>([]); // Store previous filtered restaurants to avoid re-fetching data
   const [favoritesRestaurants, setFavoritesRestaurants] = useState<
     Restaurant[]
   >([]);
@@ -30,8 +35,10 @@ export default function RestaurantsPage() {
   const [pageSize, setPageSize] = useState(20); // Default records per page
 
   const { display, toggleDisplay, favorites } = useUserPreferences();
+  const { addMarker, clearMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");
+  const locale = useLocale();
 
   useEffect(() => {
     getRestaurants()
@@ -67,10 +74,31 @@ export default function RestaurantsPage() {
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
+  useEffect(() => {
+    if (filteredRestaurants !== previousFilteredRestaurants) {
+      setPreviousFilteredRestaurants(filteredRestaurants);
+    } else {
+      return;
+    }
+    clearMarkers();
+    filteredRestaurants.forEach((restaurant) => {
+      if (restaurant.latitude && restaurant.longitude) {
+        addMarker(
+          restaurant.code,
+          [restaurant.latitude, restaurant.longitude],
+          restaurant.nom,
+          `Voir la fiche de <a href="/${locale}/restaurants/${slugify(
+            restaurant.nom
+          )}-r${restaurant.code}">${restaurant.nom}</a>`
+        );
+      }
+    });
+  }, [loading, filteredRestaurants]);
+
   return (
     <div>
       {/* Page title and filters */}
-      <div className="w-full justify-between lg:flex mb-4">
+      <div className="w-full justify-between lg:flex mb-4 z-10">
         <div className="lg:w-3/4">
           <span className="flex items-center flex-wrap gap-2">
             <h1 className="font-bold text-3xl">Restaurants</h1>
@@ -86,6 +114,7 @@ export default function RestaurantsPage() {
             setFilteredRestaurants={setFilteredRestaurants}
             restaurants={restaurants}
             setLoading={setLoading}
+            loading={loading}
           />
         </div>
         <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
@@ -110,14 +139,16 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </div>
-      {/* Pagination */}
-      <Pagination
-        loading={loading}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        totalRecords={filteredRestaurants.length}
-        onPageChange={setCurrentPage}
-      />
+      {display === "list" && (
+        // Pagination
+        <Pagination
+          loading={loading}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalRecords={filteredRestaurants.length}
+          onPageChange={setCurrentPage}
+        />
+      )}
       {/* Favorites */}
       {favoritesRestaurants.length > 0 && (
         <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
@@ -141,30 +172,23 @@ export default function RestaurantsPage() {
           </div>
         </fieldset>
       )}
-      {/* Filtered restaurants or skeleton or no results */}
-      <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-        {loading ? (
-          Array.from({ length: 20 }).map((_, index) => (
-            <RestaurantCardSkeleton key={index} />
-          ))
-        ) : filteredRestaurants.length > 0 ? (
-          paginatedRestaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-          ))
-        ) : (
-          <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
-            {t("noResults")}
-          </p>
-        )}
-      </div>
-      {/* Pagination */}
-      <Pagination
+      {/* Filtered restaurants or skeleton or no results or map */}
+      <Content
+        display={display}
+        filteredRestaurants={filteredRestaurants}
+        paginatedRestaurants={paginatedRestaurants}
         loading={loading}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        totalRecords={filteredRestaurants.length}
-        onPageChange={setCurrentPage}
       />
+      {display === "list" && (
+        // Pagination
+        <Pagination
+          loading={loading}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalRecords={filteredRestaurants.length}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   );
 }

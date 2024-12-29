@@ -9,7 +9,8 @@ import { getRegions } from "@/services/region-service";
 export function useRestaurantFilters(
   restaurants: Restaurant[],
   setFilteredRestaurants: (restaurants: Restaurant[]) => void,
-  allRegionText = "Toutes les régions"
+  allRegionText = "Toutes les régions",
+  setLoading: (loading: boolean) => void
 ) {
   const [filters, setFilters] = useState<Filters>({
     search: "",
@@ -21,7 +22,6 @@ export function useRestaurantFilters(
   });
 
   const [regions, setRegions] = useState<Region[]>([]);
-  const [loading, setLoading] = useState(false);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
@@ -116,7 +116,7 @@ export function useRestaurantFilters(
     filters,
     setFilters,
     regions,
-    loading,
+    setLoading,
     geoLocError,
     handleLocationRequest,
     resetFilters,
