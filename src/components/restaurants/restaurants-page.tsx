@@ -28,7 +28,6 @@ export default function RestaurantsPage() {
   const [collapsedFavorites, setCollapsedFavorites] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20); // Default records per page
-  const [totalRecords, setTotalRecords] = useState(0);
 
   const { display, toggleDisplay, favorites } = useUserPreferences();
 

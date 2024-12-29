@@ -147,5 +147,11 @@
   "Pagination": {
     "previous": "Previous",
     "next": "Next"
+  },
+  "NotFoundPage": {
+    "title": "404 - No fish here!",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "cta": "Go back to the homepage",
+    "report": "Report an issue"
   }
 }
