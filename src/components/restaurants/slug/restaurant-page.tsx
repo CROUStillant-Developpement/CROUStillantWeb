@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { QrCode } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import { useTranslations, useLocale } from "next-intl";
+import RestaurantPageSkeleton from "./restaurant-page-skeleton";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -28,6 +29,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
   const [noMeal, setNoMeal] = useState(false);
+  const [pageUrl, setPageUrl] = useState("");
 
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
@@ -39,6 +41,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       .then((result) => {
         if (result.success) {
           setMenu(result.data);
+          setSelectedDate(formatToISODate(result.data[0].date));
+          setSelectedDateMeals(result.data[0].repas);
         } else {
           setNoMeal(true);
         }
@@ -53,10 +57,10 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                   index === self.findIndex((t) => t.date === date.date)
               );
               setDates(uniqueDates);
-              setSelectedDate(formatToISODate(result.data[0].date));
             }
           })
           .finally(() => {
+            setPageUrl(window.location.href);
             setLoading(false);
           });
       });
@@ -75,7 +79,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             }
             title={restaurant.nom + " - CROUSStillant"}
             description={t("qrCodeDescription")}
-            url={window.location.href}
+            url={pageUrl}
           />
         </div>
         <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
@@ -84,10 +88,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         {JSON.stringify(menu)} <br />
         {JSON.stringify(dates)}
       </div> */}
-      {noMeal || loading ? (
+      {noMeal ? (
         <div className="w-full flex items-center justify-center h-56 border mt-4 rounded-lg shadow-sm text-xl font-bold p-2">
           <p className="text-center">{t("noMealAvailable")}</p>
         </div>
+      ) : loading ? (
+        <RestaurantPageSkeleton />
       ) : (
         <div className="grid gap-4 md:grid-cols-3 mt-8">
           <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
