@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="border-grey align-center flex w-full flex-col border-t px-10 py-10 font-medium md:px-0">
-      <div className="mx-auto flex w-full justify-between gap-[20px] border-b px-10 pb-10 pt-10 lg:!w-2/3 lg:px-0">
+      <div className="mx-auto md:flex w-full justify-between gap-[20px] border-b px-10 pb-10 pt-10 lg:!w-2/3 lg:px-0">
         <div className="flex flex-col">
           <Logo />
           <div className="mt-6">
@@ -50,8 +50,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row">
-          <div>
+        <div className="flex flex-wrap gap-10 mt-4 md:mt-0">
+          <div className="flex-1">
             <h2 className="text-md font-bold opacity-80">Découvrir</h2>
             <ul className="mt-4 font-normal opacity-70">
               <li>
@@ -76,7 +76,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="mt-10 md:ml-12 md:mt-0 lg:ml-24">
+          <div className="flex-1 md:ml-12 md:mt-0 lg:ml-24">
             <h2 className="text-md font-bold opacity-80">À propos</h2>
             <ul className="mt-4 font-normal opacity-70">
               <li>
@@ -101,7 +101,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="mt-10 md:ml-12 md:mt-0 lg:ml-24">
+          <div className="md:ml-12 md:mt-0 lg:ml-24">
             <h2 className="text-md font-bold opacity-80">Liens utiles</h2>
             <ul className="mt-4 font-normal opacity-70">
               <li>

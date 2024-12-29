@@ -100,7 +100,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   return (
     <div>
       <div>
-        <div className="sm:flex items-center">
+        <div className="flex items-center flex-wrap">
           <h1 className="font-bold text-3xl">{restaurant?.nom}</h1>
           <QrCodeDialog
             dialogTrigger={

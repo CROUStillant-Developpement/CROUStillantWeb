@@ -100,7 +100,7 @@ export default function QrCodeDialog({
           <Button
             type="submit"
             disabled={!qrCodeData}
-            className="w-full"
+            className="w-full mt-2"
             asChild
           >
             <a href={qrCodeData ?? "#"} download={title + ".png"}>
@@ -112,7 +112,7 @@ export default function QrCodeDialog({
             type="button"
             onClick={handleCopyImage}
             disabled={!qrCodeData}
-            className="w-full"
+            className="w-full mt-2"
           >
             <Copy className="mr-2" />
             {t("copy.button")}
