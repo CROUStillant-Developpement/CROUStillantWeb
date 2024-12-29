@@ -49,7 +49,7 @@ export default function RestaurantsPage() {
 
   useEffect(() => {
     const favRestaurants = filteredRestaurants.filter((restaurant) =>
-      favorites.includes(restaurant.code)
+      favorites.some((f) => f.code === restaurant.code)
     );
 
     setFavoritesRestaurants(favRestaurants);

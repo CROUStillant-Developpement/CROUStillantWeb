@@ -11,7 +11,8 @@
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
     "cta": {
       "first": "Découvrir votre menu",
-      "second": "Voir les restaurants"
+      "second": "Voir les restaurants",
+      "starred": "Voir le menu du {name}"
     }
   },
   "RestaurantsPage": {

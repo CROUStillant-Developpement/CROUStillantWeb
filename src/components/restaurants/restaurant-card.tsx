@@ -36,10 +36,12 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           variant="outline"
           size="icon"
           className="rounded-full absolute top-4 right-4 z-20"
-          onClick={() => addOrRemoveFromFavorites(restaurant.code)}
+          onClick={() =>
+            addOrRemoveFromFavorites(restaurant.code, restaurant.nom)
+          }
         >
-          {favorites.includes(restaurant.code) ? (
-            <Heart className="text-red-500 fill-red-500"/>
+          {favorites.some((f) => f.code === restaurant.code) ? (
+            <Heart className="text-red-500 fill-red-500" />
           ) : (
             <Heart />
           )}

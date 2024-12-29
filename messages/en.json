@@ -11,7 +11,8 @@
     "subtitle": "CROUStillant allows you to consult the menus of CROUS restaurants in France and overseas.",
     "cta": {
       "first": "Discover your menu",
-      "second": "Find a restaurant"
+      "second": "Find a restaurant",
+      "starred": "View menu of {name}"
     }
   },
   "RestaurantsPage": {
