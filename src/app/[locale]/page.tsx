@@ -8,7 +8,7 @@ export default function HomePage() {
   const t = useTranslations("HomePage");
   
   return (
-    <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
+    <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh">
       <div className="mx-auto flex max-w-container flex-col gap-12 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Link href="/" className="flex items-center">
