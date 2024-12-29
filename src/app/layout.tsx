@@ -68,7 +68,7 @@ export default async function RootLayout({
           inter.className
         )}
       >
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -80,7 +80,8 @@ export default async function RootLayout({
           </main>
           <Footer />
           <Toaster />
-        </ThemeProvider>
+        </ThemeProvider> */}
+        {children}
       </body>
     </html>
   );
