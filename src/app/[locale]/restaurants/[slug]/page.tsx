@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import RestaurantPage from "../../../../../components/restaurants/slug/restaurant-page";
+import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
 
@@ -48,10 +48,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${restaurant.nom} - CROUStillant`,
+    title: `Menu of ${restaurant.nom} - CROUStillant`,
     description: `Discover the details of ${restaurant.nom}, located in ${restaurant.region.libelle}. Perfect for your next meal!`,
     openGraph: {
-      title: `${restaurant.nom} - CROUStillant`,
+      title: `Menu of ${restaurant.nom} - CROUStillant`,
       description: `Discover the details of ${restaurant.nom}, located in ${restaurant.region.libelle}. Perfect for your next meal!`,
       images: [{ url: restaurant.image_url ?? "/default-ru.png" }],
     },
