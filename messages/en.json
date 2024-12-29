@@ -143,5 +143,9 @@
       "toastDescription": "You can now paste the image wherever you want."
     },
     "download": "Download the image"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }

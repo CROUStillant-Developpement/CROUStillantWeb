@@ -16,13 +16,13 @@
   },
   "RestaurantsPage": {
     "noResults": "Aucun restaurant trouvé pour cette recherche 😢",
-    "results": "Il y a {count, plural, =0 {aucun restaurant trouvé} =1 {# restaurant trouvé} other {# restaurants trouvés}}",
+    "results": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "display": {
       "title": "Choisir l'affichage",
       "list": "Liste",
       "map": "Carte"
     },
-    "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}",
+    "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "clickToSeeAll": "Voir tout",
     "clickToSeeLess": "Voir moins"
   },
@@ -143,5 +143,9 @@
       "toastDescription": "L'image du QR Code a été copiée dans votre presse-papiers."
     },
     "download": "Télécharger l'image"
+  },
+  "Pagination": {
+    "previous": "Précédent",
+    "next": "Suivant"
   }
 }
