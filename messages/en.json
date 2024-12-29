@@ -22,7 +22,23 @@
       "list": "List",
       "map": "Map"
     },
-    "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}"
+    "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}",
+    "clickToSeeAll": "See all",
+    "clickToSeeLess": "See less"
+  },
+  "RestaurantPage": {
+    "menuOfTheDay": "Menu of {date}",
+    "noMenuAvailable": "No menu available for this date 😢",
+    "nextDaysMenu": "Menu of the next days",
+    "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
+    "noMealAvailable": "No meal available for this restaurant 😢"
+  },
+  "DatePickers": {
+    "currentDate": "Current date: {date}",
+    "chooseDate": "Choose a date",
+    "chooseDateDescription": "Select a date to display the restaurant's menu for that day.",
+    "cancel": "Cancel",
+    "ctaChoose": "Choose {date}"
   },
   "Filters": {
     "search": "Search for a restaurant...",
@@ -119,5 +135,13 @@
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",
     "legal": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project."
+  },
+  "QrCodeDialog": {
+    "copy": {
+      "button": "Copy the image",
+      "toastTitle": "Image copied!",
+      "toastDescription": "You can now paste the image wherever you want."
+    },
+    "download": "Download the image"
   }
 }
