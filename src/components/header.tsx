@@ -9,6 +9,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { getGithubStarCount } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import LocaleToggle from "./locale-switcher";
+import Logo from "./logo";
 
 export default function Header() {
   const [stars, setStars] = useState<number>(0); // [1
@@ -20,8 +21,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center">
-      <nav>
+    <header className="flex justify-between items-center w-full">
+      <nav className="md:w-64">
         <ul
           className={`flex h-9 items-center space-x-1 bg-background p-1 rounded-none border-none ${
             isDesktop ? "border border-b" : "gap-2"
@@ -71,15 +72,23 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <div className="flex gap-2">
-        <Button asChild variant="outline">
-          <Link href="https://github.com/CROUStillant-Developpement"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {stars} <Star className="h-4 w-4" />
-          </Link>
-        </Button>
+      <div className="flex items-center justify-center">
+        <Link href="/" className="flex items-center gap-1">
+          <Logo />
+          {isDesktop && <span className="font-bold text-lg">CROUStillant</span>}
+        </Link>
+      </div>
+      <div className="flex gap-2 md:w-64">
+        { isDesktop && (
+          <Button asChild variant="outline">
+            <Link href="https://github.com/CROUStillant-Developpement"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {stars} <Star className="h-4 w-4" />
+            </Link>
+          </Button>
+        )}
         <ModeToggle />
         <LocaleToggle />
         <Button
