@@ -17,7 +17,7 @@
   },
   "RestaurantsPage": {
     "noResults": "Aucun restaurant trouvé pour cette recherche 😢",
-    "results": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
+    "results": "Il y a {count, plural, =0 {aucun restaurant disponible} =1 {# restaurant disponible} other {# restaurants disponibles}}",
     "display": {
       "title": "Choisir l'affichage",
       "list": "Liste",
