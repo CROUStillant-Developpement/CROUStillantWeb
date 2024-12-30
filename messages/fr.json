@@ -197,5 +197,25 @@
     "Vendredi": "Vendredi",
     "Samedi": "Samedi",
     "Dimanche": "Dimanche"
+  },
+  "Common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue lors du chargement des données 😢",
+    "back": "Retour",
+    "close": "Fermer",
+    "search": "Rechercher...",
+    "noResults": "Aucun résultat trouvé pour cette recherche 😢",
+    "yes": "Oui",
+    "no": "Non",
+    "copy": "Copier",
+    "download": "Télécharger",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "report": "Signaler",
+    "reportIssue": "Signaler un problème",
+    "reportIssueDescription": "Si vous rencontrez un problème ou une erreur sur le site, vous pouvez nous le signaler en remplissant le formulaire ci-dessous. Nous ferons de notre mieux pour résoudre le problème dans les plus brefs délais.",
+    "reportIssueButton": "Signaler le problème",
+    "reportIssueSuccess": "Le problème a bien été signalé. Merci pour votre aide !",
+    "reportIssueError": "Une erreur est survenue lors de la transmission du problème. Veuillez réessayer plus tard."
   }
 }
