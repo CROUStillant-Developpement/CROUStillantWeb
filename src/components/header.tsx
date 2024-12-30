@@ -78,7 +78,7 @@ export default function Header() {
           {isDesktop && <span className="font-bold text-lg">CROUStillant</span>}
         </Link>
       </div>
-      <div className="flex gap-2 md:w-64">
+      <div className="flex gap-2 md:w-64 justify-end">
         { isDesktop && (
           <Button asChild variant="outline">
             <Link href="https://github.com/CROUStillant-Developpement"
