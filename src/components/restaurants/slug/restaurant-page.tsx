@@ -126,7 +126,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 <QrCode />
               </Button>
             }
-            title={restaurant.nom + " - CROUSStillant"}
+            title={restaurant.nom + " - CROUStillant"}
             description={t("qrCodeDescription")}
             url={pageUrl}
           />

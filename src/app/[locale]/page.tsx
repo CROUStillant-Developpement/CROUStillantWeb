@@ -17,13 +17,14 @@ export default function HomePage() {
       <div className="mx-auto flex max-w-container flex-col gap-12 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Link href="/" className="flex items-center">
-            {starredFav?.code}
             <Badge variant="outline" className="animate-appear group">
               <div className="flex items-center gap-1">
                 <span className="text-muted-foreground">
                   {t("badge.title")}
                 </span>
-                <span className="text-foreground">{t("badge.link")}</span>
+                <span className="text-foreground">
+                  {t("badge.link")}
+                </span>
               </div>
               <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </Badge>
