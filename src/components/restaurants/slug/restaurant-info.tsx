@@ -46,7 +46,7 @@ export default function RestaurantInfo({
             {restaurant?.horaires?.join(", ")}
           </p>
           <div className="border rounded-lg overflow-hidden">
-            <table className="table-auto w-full">
+            <table className={`table-auto w-full ${isMobile ? "text-sm" : ""}`}>
               <thead className="">
                 <tr className="rounded-lg">
                   <th className="text-center border px-4 py-2">{t("day")}</th>
@@ -104,7 +104,7 @@ export default function RestaurantInfo({
             </table>
           </div>
         </li>
-        <li className="flex-1 flex justify-between items-center gap-4">
+        <li className="flex-1 flex flex-wrap justify-between items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
               <MapPinHouse className="w-6 h-6" />

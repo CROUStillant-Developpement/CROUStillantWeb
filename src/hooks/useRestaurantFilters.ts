@@ -5,7 +5,6 @@ import { filterRestaurants, buildQueryString, Filters } from "@/lib/filters";
 import { Region, Restaurant } from "@/services/types";
 import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
 import { getRegions } from "@/services/region-service";
-import { useUserPreferences } from "@/store/userPreferencesStore";
 
 export function useRestaurantFilters(
   restaurants: Restaurant[],
@@ -25,8 +24,6 @@ export function useRestaurantFilters(
   const [regions, setRegions] = useState<Region[]>([]);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
 
-  const { favoriteRegion } = useUserPreferences();
-
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -37,9 +34,7 @@ export function useRestaurantFilters(
       search: searchParams.get("search") || "",
       isPmr: searchParams.get("ispmr") === "true",
       isOpen: searchParams.get("open") === "true",
-      region: favoriteRegion
-        ? favoriteRegion.code
-        : parseInt(searchParams.get("region") || "-1", 10),
+      region: parseInt(searchParams.get("region") || "-1", 10),
       izly: searchParams.get("izly") === "true",
       card: searchParams.get("card") === "true",
     };

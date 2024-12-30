@@ -133,7 +133,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         </div>
       </div>
       {noMeal ? (
-        <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold p-2">
+        <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold md:p-2">
           <p className="text-center text-2xl mt-4 underline">
             {t("noMealAvailable")}
           </p>

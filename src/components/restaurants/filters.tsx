@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
@@ -30,6 +31,8 @@ export default function RestaurantsFilters({
   loading,
 }: RestaurantsFiltersProps) {
   const t = useTranslations("Filters");
+
+  const { favoriteRegion } = useUserPreferences();
 
   const {
     filters,
