@@ -18,32 +18,33 @@ import {
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
-import { usePathname, redirect } from "next/navigation";
-import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { TriangleAlert } from "lucide-react";
-import {
-  useUserPreferences,
-  LocalStorageFavorite,
-} from "@/store/userPreferencesStore";
+import { useUserPreferences } from "@/store/userPreferencesStore";
+import { getRegions } from "@/services/region-service";
+import { Region } from "@/services/types";
 
 export default function Settings() {
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const [localStarredFav, setLocalStarredFav] =
-    useState<LocalStorageFavorite | null>(null);
-  const [localFavAsHomePage, setLocalFavAsHomePage] = useState<boolean>(false);
+  const [regions, setRegions] = useState<Region[]>([]);
 
   const { toast } = useToast();
   const { setTheme, theme, systemTheme } = useTheme();
   const pathname = usePathname();
-  const { favorites, clearUserPreferences, setStarredFav } =
-    useUserPreferences();
+  const {
+    favorites,
+    clearUserPreferences,
+    setStarredFav,
+    starredFav,
+    setFavoriteRegion,
+    favoriteRegion,
+  } = useUserPreferences();
 
   const handleClearFavorites = () => {
     clearUserPreferences();
     setPopoverOpen(false);
-    setLocalStarredFav(null);
-    setLocalFavAsHomePage(false);
     toast({
       title: "Données supprimées",
       description: "Vos favoris ont été supprimés avec succès.",
@@ -60,48 +61,12 @@ export default function Settings() {
     });
   };
 
-  // const handleStarredFavChange = (value: string) => {
-  //   const favorite = getFavorites().find((f) => f.id === value);
-  //   if (favorite && localStarredFav?.id === favorite.id) {
-  //     return;
-  //   }
-  //   if (favorite) {
-  //     setStarredFav(favorite);
-  //     setLocalStarredFav(favorite);
-  //     toast({
-  //       title: "Favori modifié",
-  //       description: `Le favori a été changé avec succès.`,
-  //     });
-  //   }
-  // };
-
-  const handleFavAsHomePageChange = (checked: boolean) => {
-    if (checked) {
-      //   setFavAsHomePage(true);
-      toast({
-        title: "Favori comme page d'accueil",
-        description: `Le favori a été défini comme page d'accueil avec succès.`,
-      });
-    } else {
-      //   setFavAsHomePage(false);
-      toast({
-        title: "Favori comme page d'accueil",
-        description: `Le favori n'est plus défini comme page d'accueil.`,
-      });
-    }
-    setLocalFavAsHomePage(checked);
-  };
-
   useEffect(() => {
-    // if (!selectedCrous) {
-    //   redirect("/crous?clbk=" + pathname);
-    // }
-    // try {
-    //   setLocalStarredFav(getStarredFav() ?? null);
-    //   setLocalFavAsHomePage(favAsHomePage);
-    // } catch {
-    //   clearUserPreferences();
-    // }
+    getRegions().then((res) => {
+      if (res.success) {
+        setRegions(res.data);
+      }
+    });
   }, []);
 
   return (
@@ -132,14 +97,14 @@ export default function Settings() {
               Vous n'avez pas de favoris pour le moment, les paramètres suivants
               sont désactivés. Ajoutez votre premier favori maintenant en se
               rendant sur la page{" "}
-              <Link href="/" className="underline font-bold">
-                d'accueil
+              <Link href="/restaurants" className="underline font-bold">
+                des restaurants
               </Link>
               .
             </AlertDescription>
           </Alert>
         )}
-        <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
+        {/* <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">Favori comme page d'accueil</p>
             <p className="text-[0.8rem] text-muted-foreground">
@@ -152,7 +117,7 @@ export default function Settings() {
             checked={localFavAsHomePage}
             onCheckedChange={handleFavAsHomePageChange}
           />
-        </div>
+        </div> */}
         <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">Changer le favori ultime</p>
@@ -163,12 +128,11 @@ export default function Settings() {
           <Select
             onValueChange={(value) => {
               const favorite = favorites.find((f) => f.code === +value);
-              if (favorite && localStarredFav?.code === favorite.code) {
+              if (favorite && starredFav?.code === favorite.code) {
                 return;
               }
               if (favorite) {
                 setStarredFav(favorite);
-                setLocalStarredFav(favorite);
                 toast({
                   title: "Favori modifié",
                   description: `Le favori a été changé avec succès.`,
@@ -176,11 +140,10 @@ export default function Settings() {
               }
             }}
             disabled={favorites.length === 0}
+            defaultValue={starredFav?.code.toString()}
           >
             <SelectTrigger className="min-w-[180px] w-fit">
-              <SelectValue
-                placeholder={localStarredFav?.name || "Sélectionner"}
-              />
+              <SelectValue placeholder={starredFav?.name || "Sélectionner"} />
             </SelectTrigger>
             <SelectContent>
               {favorites.map((favorite) => (
@@ -196,18 +159,44 @@ export default function Settings() {
         </div>
         <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
-            <p className="font-medium text-base">Changer de Crous</p>
+            <p className="font-medium text-base">
+              Changer votre region préférée
+            </p>
             <p className="text-[0.8rem] text-muted-foreground">
-              Changer de Crous pour afficher les restaurants.
+              La page des restaurants affichera les restaurants de la région par
+              défaut.
             </p>
           </div>
-          <div className="space-y-2">
-            <div className="flex justify-end gap-2">
-              <Button asChild>
-                <Link href="/crous">Changer</Link>
-              </Button>
-            </div>
-          </div>
+          <Select
+            onValueChange={(value) => {
+              const region = regions.find((r) => r.code === +value);
+              if (region && favoriteRegion?.code === region.code) {
+                return;
+              }
+              if (region) {
+                setFavoriteRegion(region);
+                toast({
+                  title: "Region modifiée",
+                  description: `La région a été changée avec succès.`,
+                });
+              }
+            }}
+            disabled={regions.length === 0}
+            defaultValue={favoriteRegion?.code.toString()}
+          >
+            <SelectTrigger className="min-w-[180px] w-fit">
+              <SelectValue
+                placeholder={favoriteRegion?.libelle || "Sélectionner"}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {regions.map((region) => (
+                <SelectItem key={region.code} value={region.code.toString()}>
+                  {region.libelle.trim()}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </SettingCard>
       <SettingCard title="Personnel">
@@ -217,7 +206,7 @@ export default function Settings() {
             <p className="text-[0.8rem] text-muted-foreground">Vous perdrez</p>
           </div>
           <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-            <PopoverTrigger>
+            <PopoverTrigger asChild>
               <Button variant="destructive">Supprimer</Button>
             </PopoverTrigger>
             <PopoverContent>
