@@ -1,4 +1,4 @@
-import { DisplayType } from "@/services/types";
+import { DisplayType, Region } from "@/services/types";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
@@ -11,9 +11,11 @@ interface StoreState {
   favorites: LocalStorageFavorite[];
   starredFav: LocalStorageFavorite | null;
   display: DisplayType;
+  favoriteRegion: Region | null;
   toggleDisplay: () => void;
   addOrRemoveFromFavorites: (code: number, name?: string) => void;
   setStarredFav: (favorite: LocalStorageFavorite) => void;
+  setFavoriteRegion: (region: Region) => void;
   clearUserPreferences: () => void;
 }
 
@@ -53,6 +55,7 @@ export const useUserPreferences = create<StoreState>()(
       display: "list",
       favorites: [],
       starredFav: null,
+      favoriteRegion: null,
 
       toggleDisplay: () =>
         set((state) => ({
@@ -83,7 +86,6 @@ export const useUserPreferences = create<StoreState>()(
           const newFavorites = [...state.favorites];
           newFavorites.splice(index, 1);
 
-          
           if (!state.starredFav && newFavorites.length > 0) {
             return { starredFav: newFavorites[0], favorites: newFavorites };
           } else if (state.starredFav?.code === code) {
@@ -96,6 +98,11 @@ export const useUserPreferences = create<StoreState>()(
       setStarredFav: (favorite: LocalStorageFavorite) =>
         set(() => ({
           starredFav: favorite,
+        })),
+
+      setFavoriteRegion: (region: Region) =>
+        set(() => ({
+          favoriteRegion: region,
         })),
 
       clearUserPreferences: () =>
