@@ -8,12 +8,15 @@ import "leaflet/dist/leaflet.css";
 import useMarkerStore from "@/store/markerStore";
 
 const defaultIcon = new Icon({
-  iconUrl: "/marker-icon.png",
-  shadowUrl: "/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
+  iconUrl: `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="16" fill="white" fill-opacity="1"/>
+        <path d="M11 26V16.85C10.15 16.6167 9.43767 16.15 8.863 15.45C8.28833 14.75 8.00067 13.9333 8 13V6H10V13H11V6H13V13H14V6H16V13C16 13.9333 15.7127 14.75 15.138 15.45C14.5633 16.15 13.8507 16.6167 13 16.85V26H11ZM21 26V18H18V11C18 9.61667 18.4877 8.43767 19.463 7.463C20.4383 6.48833 21.6173 6.00067 23 6V26H21Z" fill="#B52606"/>
+      </svg>
+    `)}`,
+  iconSize: [25, 25],
+  iconAnchor: [25 / 2, 25],
+  popupAnchor: [0, -25],
 });
 
 interface MapProps {

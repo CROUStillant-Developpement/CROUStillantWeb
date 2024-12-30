@@ -92,7 +92,7 @@ export default function AboutPage() {
         </div>
       </div>
       <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex flex-col justify-center p-16 lg:w-1/2">
+        <div className="flex flex-col justify-center p-16 xl:w-1/2">
           <h2 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
             {t("product.title")}
           </h2>
@@ -126,15 +126,17 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-        <Image
-          width={1350}
-          height={900}
-          src="/previews/homepage.png"
-          alt="Menu Preview"
-          className="rounded-md object-cover xl:w-1/2 xl:object-right"
-        />
+        <div className="flex items-center justify-center xl:w-1/2 xl:object-right">
+          <Image
+            width={1350}
+            height={900}
+            src="/previews/homepage.png"
+            alt="Menu Preview"
+            className="rounded-md object-contain"
+          />
+        </div>
       </div>
-      <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-16 lg:w-1/2">
           <h2 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
             {t("team.title")}
@@ -183,14 +185,16 @@ export default function AboutPage() {
         </div>
       </div>
       <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
-        <Image
-          width={1350}
-          height={900}
-          src="/previews/menu.png"
-          alt="Menu Preview"
-          className="rounded-md object-cover object-left xl:w-1/2"
-        />
-        <div className="flex flex-col justify-center p-16 lg:w-1/2">
+        <div className="flex items-center justify-center object-left xl:w-1/2">
+          <Image
+            width={1350}
+            height={900}
+            src="/previews/menu.png"
+            alt="Menu Preview"
+            className="rounded-md object-contain"
+          />
+        </div>
+        <div className="flex flex-col justify-center p-16 xl:w-1/2">
           <h2 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
             {t("discord.title")}
           </h2>
@@ -204,14 +208,14 @@ export default function AboutPage() {
             >
               <Button className="mt-8">
                 <Bot className="inline mr-1"></Bot>
-                Ajouter le bot dès maintenant
+                {t("discord.button")}
               </Button>
             </Link>
           </div>
         </div>
       </div>
       <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex flex-col justify-center p-16 lg:w-1/2">
+        <div className="flex flex-col justify-center p-16 xl:w-1/2">
           <h2 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
             {t("integrated.title")}
           </h2>
@@ -222,18 +226,20 @@ export default function AboutPage() {
             <Link href="https://api-croustillant.bayfield.dev" target="_blank">
               <Button className="mt-8">
                 <Globe className="inline mr-1"></Globe>
-                Découvrir l'API
+                {t("integrated.button")}
               </Button>
             </Link>
           </div>
         </div>
-        <Image
-          width={1350}
-          height={900}
-          src="/previews/api.png"
-          alt="Menu Preview"
-          className="rounded-md object-cover xl:w-1/2 xl:object-left"
-        />
+        <div className="xl:w-1/2 xl:object-left flex items-center justify-center">
+          <Image
+            width={1350}
+            height={900}
+            src="/previews/api.png"
+            alt="Menu Preview"
+            className="rounded-md object-cover "
+          />
+        </div>
       </div>
       <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-16 lg:w-1/2">
@@ -243,19 +249,19 @@ export default function AboutPage() {
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             {t("convinced.description")}
           </p>
-          <div className="relative">
-            <Link href="/restaurants" prefetch={true}>
-              <Button className="mt-8">
+          <div className="flex flex-wrap gap-2 mt-8">
+            <Button asChild>
+              <Link href="/restaurants" prefetch={true}>
                 <CookingPot className="inline mr-1"></CookingPot>
-                Découvrir votre menus
-              </Button>
-            </Link>
-            <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867">
-              <Button className="mt-8">
+                {t("convinced.button")}
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867">
                 <Bot className="inline mr-1"></Bot>
-                Ajouter notre Bot Discord
-              </Button>
-            </Link>
+                {t("convinced.button2")}
+              </Link>
+            </Button>
           </div>
         </div>
         <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
@@ -273,8 +279,8 @@ export default function AboutPage() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Button variant="ghost">
-                Notre serveur Discord{" "}
+              <Button variant="outline">
+                {t("more-convinced.button")}
                 <ExternalLinkIcon className="ml-4 h-4 w-4 opacity-50" />
               </Button>
             </a>
