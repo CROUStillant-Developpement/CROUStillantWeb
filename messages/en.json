@@ -60,8 +60,8 @@
     "izly": "Izly payment accepted",
     "creditCard": "Credit card payment accepted",
     "geolocated": {
-      "title": "Restaurants nearby",
-      "loading": "Searching for restaurants nearby..."
+      "title": "Nearby restaurants",
+      "loading": "Searching for nearby restaurants..."
     },
     "region": {
       "title": "Region",
