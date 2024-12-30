@@ -13,6 +13,7 @@ import {
 import { useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
+import ReactCountryFlag from "react-country-flag"
 
 export default function LocaleToggle() {
   const pathname = usePathname();
@@ -40,7 +41,11 @@ export default function LocaleToggle() {
             handleChange("fr");
           }}
         >
-          🇫🇷
+          <ReactCountryFlag 
+            countryCode="FR"
+            title="Français"
+            aria-label="Français" 
+          />
         </DropdownMenuItem>
         <DropdownMenuItem
           disabled={useLocale() === "en" || isPending}
@@ -49,7 +54,11 @@ export default function LocaleToggle() {
             handleChange("en");
           }}
         >
-          🇬🇧
+          <ReactCountryFlag 
+            countryCode="GB"
+            title="English"
+            aria-label="English"
+          />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
