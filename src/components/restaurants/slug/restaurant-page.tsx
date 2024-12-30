@@ -142,8 +142,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       ) : loading ? (
         <RestaurantPageSkeleton />
       ) : (
-        <div className="grid gap-4 md:grid-cols-3 mt-8">
-          <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
+        <div className="grid gap-4 lg:grid-cols-3 mt-8">
+          <fieldset className="grid gap-6 lg:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
             <legend className="-ml-1 px-1 text-sm font-medium">
               {t("menuOfTheDay", {
                 date: selectedDate.toLocaleDateString(locale, {
@@ -165,7 +165,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               )}
             </div>
           </fieldset>
-          <Tabs defaultValue="calendar" className="w-full md:mt-2">
+          <Tabs defaultValue="calendar" className="w-full lg:mt-2">
             <TabsList className="w-full">
               <TabsTrigger className="flex-1" value="calendar">
                 {t("calendar")}

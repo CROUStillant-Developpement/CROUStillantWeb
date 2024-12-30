@@ -19,6 +19,7 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { useMediaQuery } from "usehooks-ts";
 
 type RestaurantInfoProps = {
   restaurant: Restaurant;
@@ -30,6 +31,8 @@ export default function RestaurantInfo({
   numberOfMeals,
 }: RestaurantInfoProps) {
   const t = useTranslations("RestaurantInformation");
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div>
@@ -47,16 +50,20 @@ export default function RestaurantInfo({
               <thead className="">
                 <tr className="rounded-lg">
                   <th className="text-center border px-4 py-2">{t("day")}</th>
-                  <th className="text-center border px-4 py-2">{t("breakfast")}</th>
+                  <th className="text-center border px-4 py-2">
+                    {t("breakfast")}
+                  </th>
                   <th className="text-center border px-4 py-2">{t("lunch")}</th>
-                  <th className="text-center border px-4 py-2">{t("dinner")}</th>
+                  <th className="text-center border px-4 py-2">
+                    {t("dinner")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {restaurant?.jours_ouvert?.map((jour, index) => (
                   <tr key={index} className="text-center">
                     <td className="border px-4 py-2 font-medium">
-                      {t(jour.jour)}
+                      {isMobile ? t(jour.jour).slice(0, 3) : t(jour.jour)}
                     </td>
                     <td className="border px-4 py-2">
                       {jour.ouverture.matin ? (
