@@ -26,7 +26,7 @@ export default function RestaurantsPage() {
     Restaurant[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20); // Default records per page
+  const [pageSize, setPageSize] = useState(21); // Default records per page
 
   const { display, toggleDisplay, favorites } = useUserPreferences();
   const { addMarker, clearMarkers } = useMarkerStore();
