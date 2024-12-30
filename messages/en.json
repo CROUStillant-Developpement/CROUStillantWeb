@@ -41,7 +41,9 @@
         "title": "Restaurant not found - CROUStillant",
         "description": "The restaurant you are looking for does not exist or has been moved."
       }
-    }
+    },
+    "information": "Information",
+    "calendar": "Calendar"
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
@@ -75,7 +77,8 @@
     "open": "Open",
     "izly": "Izly payment accepted",
     "creditCard": "Credit card payment accepted",
-    "accessibility": "Accessibility for people with reduced mobility"
+    "accessibility": "Accessibility for people with reduced mobility",
+    "active": "Active"
   },
   "AboutPage": {
     "presentation": {
@@ -168,5 +171,31 @@
     "description": "The page you are looking for does not exist or has been moved.",
     "cta": "Go back to the homepage",
     "report": "Report an issue"
+  },
+  "RestaurantInformation": {
+    "openingHours": "Opening hours",
+    "open": "Open now",
+    "closed": "Closed",
+    "day": "Day",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "contact": "Contact",
+    "accessibility": "Accessibility for people with reduced mobility",
+    "izly": "Izly payment accepted",
+    "creditCard": "Credit card payment accepted",
+    "phone": "Phone",
+    "email": "Email",
+    "active": "Active",
+    "otherInformation": "Other information",
+    "type": "Type",
+    "crous": "CROUS",
+    "Lundi": "Monday",
+    "Mardi": "Tuesday",
+    "Mercredi": "Wednesday",
+    "Jeudi": "Thursday",
+    "Vendredi": "Friday",
+    "Samedi": "Saturday",
+    "Dimanche": "Sunday"
   }
 }

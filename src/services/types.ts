@@ -20,7 +20,7 @@ export interface Region {
 // Types for Restaurant
 export interface Restaurant {
   isOpen: boolean;
-  acces?: string; // Informations sur l'accès au restaurant
+  acces?: string[]; // Informations sur l'accès au restaurant
   adresse: string; // Adresse du restaurant
   code: number; // Identifiant du restaurant
   email?: string | null; // Adresse email du restaurant
@@ -37,6 +37,8 @@ export interface Restaurant {
   type_restaurant: TypeRestaurant; // Type de restauration
   zone: string; // Zone du restaurant
   ouvert: boolean; // Le restaurant est-il ouvert ?
+  type?: TypeRestaurant; // Type de restauration
+  actif: boolean; // Le restaurant est-il actif ?
 }
 
 // Types for TypeRestaurant

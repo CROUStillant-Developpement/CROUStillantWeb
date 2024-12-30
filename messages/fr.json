@@ -41,7 +41,9 @@
         "title": "Restaurant introuvable - CROUStillant",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."
       }
-    }
+    },
+    "information": "Informations",
+    "calendar": "Calendrier"
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
@@ -75,7 +77,8 @@
     "open": "Ouvert",
     "izly": "Paiement Izly accepté",
     "creditCard": "Paiement par carte bancaire accepté",
-    "accessibility": "Accessibilité PMR"
+    "accessibility": "Accessibilité PMR",
+    "active": "Actif"
   },
   "AboutPage": {
     "presentation": {
@@ -168,5 +171,31 @@
     "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
     "cta": "Retourner à l'accueil",
     "report": "Signaler un problème"
+  },
+  "RestaurantInformation": {
+    "openingHours": "Horaires d'ouverture",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "day": "Jour",
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "dinner": "Dîner",
+    "contact": "Contact",
+    "accessibility": "Accessible aux personnes à mobilité réduite",
+    "izly": "Paiement Izly accepté",
+    "creditCard": "Paiement par carte bancaire accepté",
+    "phone": "Téléphone",
+    "email": "Email",
+    "active": "Actif",
+    "otherInformation": "Autres informations",
+    "type": "Type",
+    "crous": "CROUS",
+    "Lundi": "Lundi",
+    "Mardi": "Mardi",
+    "Mercredi": "Mercredi",
+    "Jeudi": "Jeudi",
+    "Vendredi": "Vendredi",
+    "Samedi": "Samedi",
+    "Dimanche": "Dimanche"
   }
 }
