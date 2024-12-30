@@ -45,6 +45,7 @@ export default function LocaleToggle() {
             countryCode="FR"
             title="Français"
             aria-label="Français" 
+            svg
           />
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -58,6 +59,7 @@ export default function LocaleToggle() {
             countryCode="GB"
             title="English"
             aria-label="English"
+            svg
           />
         </DropdownMenuItem>
       </DropdownMenuContent>
