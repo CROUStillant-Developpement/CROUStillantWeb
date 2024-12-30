@@ -80,6 +80,7 @@ export function useRestaurantFilters(
   const debouncedFilterRestaurants = useDebounceCallback(() => {
     const filtered = filterRestaurants(restaurants, filters);
     setFilteredRestaurants(filtered);
+    setLoading(false);
   }, 300);
 
   // Update query string whenever filters change
@@ -90,6 +91,7 @@ export function useRestaurantFilters(
 
   // Trigger debounced filtering when filters change
   useEffect(() => {
+    setLoading(true);
     debouncedFilterRestaurants();
     return () => debouncedFilterRestaurants.cancel();
   }, [filters]);
@@ -109,7 +111,9 @@ export function useRestaurantFilters(
           console.error(result.error);
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, [initializeFilters]);
 
   return {
