@@ -94,7 +94,7 @@ export default function RestaurantsFilters({
                 onClick={() => {
                   setFilters({ ...filters, card: !filters.card });
                 }}
-                className="w-32"
+                className="lg:w-32"
               >
                 <CreditCard size={20} />
               </Button>
@@ -111,7 +111,7 @@ export default function RestaurantsFilters({
                 onClick={() => {
                   setFilters({ ...filters, izly: !filters.izly });
                 }}
-                className="w-32"
+                className="lg:w-32"
               >
                 <Image
                   src="/icons/izly.png"
