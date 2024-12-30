@@ -125,20 +125,25 @@
       }
     },
     "discord": {
-      "title": "Join our Discord server!",
-      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
+      "title": "Available on Discord",
+      "description": "Add our official Discord bot to your server to check the menus of CROUS restaurants directly on Discord!",
+      "button": "Add the bot now"
     },
     "integrated": {
       "title": "Integrate CROUS data",
-      "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source."
+      "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source.",
+      "button": "View the API documentation"
     },
     "convinced": {
       "title": "Convinced?",
-      "description": "Discover the menus of CROUS restaurants in France and overseas with CROUStillant!"
+      "description": "Discover the menus of CROUS restaurants in France and overseas with CROUStillant!",
+      "button": "Discover the menus",
+      "button2": "Add our Discord bot"
     },
     "more-convinced": {
       "title": "Even more convinced?",
-      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!",
+      "button": "Join our Discord server"
     }
   },
   "Footer": {

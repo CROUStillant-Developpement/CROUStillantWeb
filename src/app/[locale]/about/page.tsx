@@ -208,7 +208,7 @@ export default function AboutPage() {
             >
               <Button className="mt-8">
                 <Bot className="inline mr-1"></Bot>
-                Ajouter le bot dès maintenant
+                {t("discord.button")}
               </Button>
             </Link>
           </div>
@@ -226,7 +226,7 @@ export default function AboutPage() {
             <Link href="https://api-croustillant.bayfield.dev" target="_blank">
               <Button className="mt-8">
                 <Globe className="inline mr-1"></Globe>
-                Découvrir l'API
+                {t("integrated.button")}
               </Button>
             </Link>
           </div>
@@ -249,17 +249,17 @@ export default function AboutPage() {
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             {t("convinced.description")}
           </p>
-          <div className="flex flex-wrap lg:flex-nowrap gap-2 mt-8">
+          <div className="flex flex-wrap gap-2 mt-8">
             <Button asChild>
               <Link href="/restaurants" prefetch={true}>
                 <CookingPot className="inline mr-1"></CookingPot>
-                Découvrir votre menus
+                {t("convinced.button")}
               </Link>
             </Button>
             <Button asChild>
               <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867">
                 <Bot className="inline mr-1"></Bot>
-                Ajouter notre Bot Discord
+                {t("convinced.button2")}
               </Link>
             </Button>
           </div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
               target="_blank"
             >
               <Button variant="outline">
-                Notre serveur Discord{" "}
+                {t("more-convinced.button")}
                 <ExternalLinkIcon className="ml-4 h-4 w-4 opacity-50" />
               </Button>
             </a>
