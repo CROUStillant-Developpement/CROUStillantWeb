@@ -2,14 +2,24 @@ export type ApiResult<T> =
   | { success: true; data: T }
   | { success: false; error: string; status: number };
 
+export type Position = {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
+};
+
+export type DisplayType = "list" | "map";
+
 // Types for Regions
 export interface Region {
-  code: string; // Identifiant de la région
+  code: number; // Identifiant de la région
   libelle: string; // Libellé de la région
 }
 
 // Types for Restaurant
 export interface Restaurant {
+  isOpen: boolean;
   acces?: string; // Informations sur l'accès au restaurant
   adresse: string; // Adresse du restaurant
   code: number; // Identifiant du restaurant
@@ -26,6 +36,7 @@ export interface Restaurant {
   telephone?: string | null; // Numéro de téléphone du restaurant
   type_restaurant: TypeRestaurant; // Type de restauration
   zone: string; // Zone du restaurant
+  ouvert: boolean; // Le restaurant est-il ouvert ?
 }
 
 // Types for TypeRestaurant

@@ -1,0 +1,167 @@
+{
+  "HomePage": {
+    "badge": {
+      "title": "This project is 100% open-source!",
+      "link": "Learn more"
+    },
+    "title": {
+      "first": "Your meals,",
+      "second": "simple and accessible."
+    },
+    "subtitle": "CROUStillant allows you to consult the menus of CROUS restaurants in France and overseas.",
+    "cta": {
+      "first": "Discover your menu",
+      "second": "Find a restaurant",
+      "starred": "View menu of {name}"
+    }
+  },
+  "RestaurantsPage": {
+    "noResults": "No restaurant found for this search 😢",
+    "results": "There {count, plural, =0 {is no restaurant found} =1 {is # restaurant found} other {are # restaurants found}}",
+    "display": {
+      "title": "Choose the display",
+      "list": "List",
+      "map": "Map"
+    },
+    "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}",
+    "clickToSeeAll": "See all",
+    "clickToSeeLess": "See less"
+  },
+  "RestaurantPage": {
+    "menuOfTheDay": "Menu of {date}",
+    "noMenuAvailable": "No menu available for this date 😢",
+    "nextDaysMenu": "Menu of the next days",
+    "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
+    "noMealAvailable": "No meal available for this restaurant 😢",
+    "seo": {
+      "title": "Menu of {name} - CROUStillant",
+      "description": "Discover the details of {name}, located in ${area}. Perfect for your next meal!",
+      "keywords": "CROUS, restaurant, menu, {name}, {area}",
+      "notFound": {
+        "title": "Restaurant not found - CROUStillant",
+        "description": "The restaurant you are looking for does not exist or has been moved."
+      }
+    }
+  },
+  "DatePickers": {
+    "currentDate": "Current date: {date}",
+    "chooseDate": "Choose a date",
+    "chooseDateDescription": "Select a date to display the restaurant's menu for that day.",
+    "cancel": "Cancel",
+    "ctaChoose": "Choose {date}"
+  },
+  "Filters": {
+    "search": "Search for a restaurant...",
+    "accessibility": "Accessibility for people with reduced mobility",
+    "open": "Open now",
+    "reset": "Reset",
+    "izly": "Izly payment accepted",
+    "creditCard": "Credit card payment accepted",
+    "geolocated": {
+      "title": "Restaurants nearby",
+      "loading": "Searching for restaurants nearby..."
+    },
+    "region": {
+      "title": "Region",
+      "placeholder": "Search for a region...",
+      "loading": "Loading regions...",
+      "all": "All regions",
+      "noResults": "No region found for this search 😢"
+    }
+  },
+  "RestaurantCard": {
+    "cta": "View the menu",
+    "closed": "Closed",
+    "open": "Open",
+    "izly": "Izly payment accepted",
+    "creditCard": "Credit card payment accepted",
+    "accessibility": "Accessibility for people with reduced mobility"
+  },
+  "AboutPage": {
+    "presentation": {
+      "title": "Made by students, for students...",
+      "description": "CROUStillant is a project that aims to provide information on the menus of university restaurants in France and overseas."
+    },
+    "updates": {
+      "title": "Hot dishes, always.",
+      "description": "CROUStillant scans the entire menus of CROUS restaurants several times a day to provide you with always up-to-date and reliable information."
+    },
+    "open-source": {
+      "title": "Free & 100% open-source!",
+      "description": "CROUStillant is an entirely open-source and free project. You can view the project's source code on GitHub and contribute to its development if you wish.",
+      "features": {
+        "feature1": "Entirely open-source",
+        "feature2": "Automatic deployments",
+        "feature3": "Constantly improving",
+        "feature4": "Does not collect your data"
+      }
+    },
+    "product": {
+      "title": "Simple, intuitive and accessible",
+      "description": "CROUStillant is a simple and intuitive platform that allows you to access the menus of CROUS restaurants in France and overseas. The platform is accessible to all and does not require any registration.",
+      "features": {
+        "feature1": "Access every single restaurant",
+        "feature2": "Search by region, city or establishment",
+        "feature3": "Opening and closing hours",
+        "feature4": "Contacts and accepted payment methods"
+      }
+    },
+    "team": {
+      "title": "The team",
+      "description": "The CROUStillant team is made up of passionate volunteers. We work together to make the information of CROUS restaurants more accessible and readable.",
+      "members": {
+        "member1": {
+          "name": "Paul Bayfield",
+          "role": "Project founder and lead developer"
+        },
+        "member2": {
+          "name": "Alden Cherif",
+          "role": "UI designer and web developer"
+        },
+        "member3": {
+          "name": "Lucas Debeve",
+          "role": "Database designer"
+        }
+      }
+    },
+    "discord": {
+      "title": "Join our Discord server!",
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
+    },
+    "integrated": {
+      "title": "Integrate CROUS data",
+      "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source."
+    },
+    "convinced": {
+      "title": "Convinced?",
+      "description": "Discover the menus of CROUS restaurants in France and overseas with CROUStillant!"
+    },
+    "more-convinced": {
+      "title": "Even more convinced?",
+      "description": "Join our Discord server to chat with other users and the CROUStillant team!"
+    }
+  },
+  "Footer": {
+    "authors": "Made with ❤️ by the CROUStillant Développement team.",
+    "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",
+    "legal": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project."
+  },
+  "QrCodeDialog": {
+    "copy": {
+      "button": "Copy the image",
+      "toastTitle": "Image copied!",
+      "toastDescription": "You can now paste the image wherever you want."
+    },
+    "download": "Download the image"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "NotFoundPage": {
+    "title": "404 - No fish here!",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "cta": "Go back to the homepage",
+    "report": "Report an issue"
+  }
+}
