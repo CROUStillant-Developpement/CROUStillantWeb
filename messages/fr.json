@@ -41,7 +41,9 @@
         "title": "Restaurant introuvable - CROUStillant",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."
       }
-    }
+    },
+    "information": "Informations",
+    "calendar": "Calendrier"
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
@@ -75,7 +77,8 @@
     "open": "Ouvert",
     "izly": "Paiement Izly accepté",
     "creditCard": "Paiement par carte bancaire accepté",
-    "accessibility": "Accessibilité PMR"
+    "accessibility": "Accessibilité PMR",
+    "active": "Actif"
   },
   "AboutPage": {
     "presentation": {
@@ -168,5 +171,51 @@
     "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
     "cta": "Retourner à l'accueil",
     "report": "Signaler un problème"
+  },
+  "RestaurantInformation": {
+    "openingHours": "Horaires d'ouverture",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "day": "Jour",
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "dinner": "Dîner",
+    "contact": "Contact",
+    "accessibility": "Accessible aux personnes à mobilité réduite",
+    "izly": "Paiement Izly accepté",
+    "creditCard": "Paiement par carte bancaire accepté",
+    "phone": "Téléphone",
+    "email": "Email",
+    "active": "Actif",
+    "otherInformation": "Autres informations",
+    "type": "Type",
+    "crous": "CROUS",
+    "Lundi": "Lundi",
+    "Mardi": "Mardi",
+    "Mercredi": "Mercredi",
+    "Jeudi": "Jeudi",
+    "Vendredi": "Vendredi",
+    "Samedi": "Samedi",
+    "Dimanche": "Dimanche"
+  },
+  "Common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue lors du chargement des données 😢",
+    "back": "Retour",
+    "close": "Fermer",
+    "search": "Rechercher...",
+    "noResults": "Aucun résultat trouvé pour cette recherche 😢",
+    "yes": "Oui",
+    "no": "Non",
+    "copy": "Copier",
+    "download": "Télécharger",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "report": "Signaler",
+    "reportIssue": "Signaler un problème",
+    "reportIssueDescription": "Si vous rencontrez un problème ou une erreur sur le site, vous pouvez nous le signaler en remplissant le formulaire ci-dessous. Nous ferons de notre mieux pour résoudre le problème dans les plus brefs délais.",
+    "reportIssueButton": "Signaler le problème",
+    "reportIssueSuccess": "Le problème a bien été signalé. Merci pour votre aide !",
+    "reportIssueError": "Une erreur est survenue lors de la transmission du problème. Veuillez réessayer plus tard."
   }
 }

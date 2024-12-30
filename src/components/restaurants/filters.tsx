@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
@@ -30,6 +31,8 @@ export default function RestaurantsFilters({
   loading,
 }: RestaurantsFiltersProps) {
   const t = useTranslations("Filters");
+
+  const { favoriteRegion } = useUserPreferences();
 
   const {
     filters,
@@ -91,7 +94,7 @@ export default function RestaurantsFilters({
                 onClick={() => {
                   setFilters({ ...filters, card: !filters.card });
                 }}
-                className="w-32"
+                className="lg:w-32"
               >
                 <CreditCard size={20} />
               </Button>
@@ -108,7 +111,7 @@ export default function RestaurantsFilters({
                 onClick={() => {
                   setFilters({ ...filters, izly: !filters.izly });
                 }}
-                className="w-32"
+                className="lg:w-32"
               >
                 <Image
                   src="/icons/izly.png"

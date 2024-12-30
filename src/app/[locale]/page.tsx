@@ -7,10 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Utensils } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { slugify } from "@/lib/utils";
+import { useMediaQuery } from "usehooks-ts";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
   const { starredFav } = useUserPreferences();
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh mt-9 md:mt-0">
@@ -22,9 +25,7 @@ export default function HomePage() {
                 <span className="text-muted-foreground">
                   {t("badge.title")}
                 </span>
-                <span className="text-foreground">
-                  {t("badge.link")}
-                </span>
+                <span className="text-foreground">{t("badge.link")}</span>
               </div>
               <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </Badge>
@@ -46,6 +47,7 @@ export default function HomePage() {
                         }`
                       : "/restaurants"
                   }
+                  className="text-wrap"
                 >
                   {starredFav
                     ? t("cta.starred", { name: starredFav.name })

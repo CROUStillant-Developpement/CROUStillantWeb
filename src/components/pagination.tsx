@@ -39,12 +39,12 @@ export default function PaginationComponent({
       if (window.innerWidth < 640) {
         // Small screens
         setVisibleDelta(1);
-      } else if (window.innerWidth < 1024) {
-        // Medium screens
-        setVisibleDelta(2);
+      // } else if (window.innerWidth < 1024) {
+      //   // Medium screens
+      //   setVisibleDelta(2);
       } else {
         // Large screens
-        setVisibleDelta(3);
+        setVisibleDelta(2);
       }
     };
 
@@ -85,6 +85,16 @@ export default function PaginationComponent({
 
     return range;
   };
+
+  useEffect(() => {
+    if (totalPages <= 0) return;
+    
+    if (currentPage > totalPages) {
+      onPageChange(totalPages);
+    } else if (currentPage < 1) {
+      onPageChange(1);
+    }
+  }, [currentPage, totalPages]);
 
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
