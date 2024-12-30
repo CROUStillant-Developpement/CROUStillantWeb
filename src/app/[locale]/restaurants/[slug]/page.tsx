@@ -67,7 +67,7 @@ export async function generateMetadata({
         area: restaurant.region.libelle,
       }),
       images: [{ url: restaurant.image_url ?? "/default-ru.png" }],
-      siteName: "CROUSStillant",
+      siteName: "CROUStillant",
     },
   };
 }
