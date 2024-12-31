@@ -173,23 +173,6 @@ export default function RestaurantInfo({
                   </TooltipContent>
                 </Tooltip>
               )}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    size="icon"
-                    className={
-                      restaurant.actif
-                        ? "bg-green-500 hover:bg-green-600"
-                        : "bg-red-500 hover:bg-red-600"
-                    }
-                  >
-                    {restaurant.actif ? <Check /> : <X />}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent sideOffset={8} align="center">
-                  {t("active")}
-                </TooltipContent>
-              </Tooltip>
             </div>
           </TooltipProvider>
         </li>
