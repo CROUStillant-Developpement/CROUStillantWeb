@@ -179,6 +179,11 @@
       }
     }
   },
+  "Header": {
+    "home": "Home",
+    "restaurants": "Restaurants",
+    "about": "About"
+  },
   "QrCodeDialog": {
     "copy": {
       "button": "Copy the image",
@@ -307,5 +312,97 @@
     },
     "title": "Statistics",
     "description": "Discover the statistics of CROUStillant and its use by users."
+  },
+  "LegalPage": {
+    "title": "Legal notices",
+    "subtitle": "Updated the 31st of December 2024",
+    "description": "Find all the legal information about CROUStillant and its operation.",
+    "legal": {
+      "title": "Legal information",
+      "part1": {
+        "title": "Site identification",
+        "content1": "The site: https://croustillant.bayfield.dev is the official site of CROUStillant.",
+        "content2": "CROUStillant is an open-source project that aims to provide information on the menus of university restaurants in France and overseas."
+      },
+      "part2": {
+        "title": "Editor",
+        "content1": "The site is edited by CROUStillant Développement.",
+        "content2": "CROUStillant is a non profit project and is not affiliated with the \"CROUS\" or any other similar organization."
+      },
+      "part3": {
+        "title": "Property",
+        "content1": "The site is the property of CROUStillant Développement.",
+        "content2": "However, the data displayed on the site belongs to the \"CROUS\" and the respective restaurants."
+      },
+      "part4": {
+        "title": "Development",
+        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Alden Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
+        "content2": "The site was designed to be simple, intuitive and accessible to all. It is entirely open-source and free."
+      },
+      "part5": {
+        "title": "Hosting",
+        "content1": "The site is hosted by the CROUStillant Développement team, on Paul Bayfield's personal server.",
+        "content2": "The site is hosted in France, on a secure and reliable server. No personal data is collected or stored on the server."
+      }
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "part1": {
+        "title": "Personal data",
+        "content1": "This site does not collect any personal data about users.",
+        "content2": "CROUStillant Développement does not collect any personal data about users of the site. No data is stored or shared with third parties."
+      },
+      "part2": {
+        "title": "Data processed",
+        "content1": "This site processes only the data necessary for the proper functioning of the service.",
+        "content2": "The personal data that may be collected on the site, if any, by: the forms, the connection to the site (IP address, browser, operating system). When certain information is mandatory to access specific features of the site, this mandatory nature is indicated at the time of data entry. If you refuse to provide mandatory information, you may not have access to certain services or features of the site."
+      },
+      "part3": {
+        "title": "Data retention",
+        "content1": "CROUStillant Développement does not transfer data outside the European Union.",
+        "content2": "All data is stored in France, on a secure and reliable server."
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "part1": {
+        "title": "Cookie usage",
+        "content1": "The site uses only cookies necessary for the proper functioning of the service.",
+        "content2": "The site uses cookies to improve the user experience and ensure the proper functioning of the service. No advertising or tracking cookies are used on the site."
+      },
+      "part2": {
+        "title": "Cookie management",
+        "content1": "You can manage cookies by changing your browser settings.",
+        "content2": "You can also delete cookies at any time using the site settings."
+      }
+    },
+    "terms": {
+      "title": "Terms of use",
+      "part1": {
+        "title": "Acceptance of the terms",
+        "content1": "By accessing the site, you agree to the terms of use.",
+        "content2": "If you do not agree to these terms, please do not use the site."
+      },
+      "part2": {
+        "title": "Modification of the terms",
+        "content1": "The terms of use may be modified at any time.",
+        "content2": "Users will be informed of any changes to the terms of use."
+      },
+      "part3": {
+        "title": "Intellectual property",
+        "content1": "The content of this site may not be reproduced or used for commercial or advertising purposes.",
+        "content2": "The information used should only be used for personal, associative or professional purposes. Any dissemination or use for commercial or advertising purposes is excluded."
+      },
+      "part4": {
+        "title": "Provenance",
+        "content1": "No page may be presented as originating from this site if transformations have been made to change its meaning.",
+        "content2": "The photos from the housing offers from the owners are not contractual and in no way engage the responsibility of CROUStillant Développement."
+      },
+      "part5": {
+        "title": "Links",
+        "content1": "The site may contain links to other sites.",
+        "content2": "CROUStillant Développement is not responsible for the content of external sites. CROUStillant Développement cannot be held responsible for any damage caused by the use of these sites."
+      }
+    }
   }
 }

@@ -54,7 +54,8 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      className
+      className,
+      isActive ? "" : "opacity-30"
     )}
     {...props}
   />
