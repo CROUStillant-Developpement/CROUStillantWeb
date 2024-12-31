@@ -197,10 +197,20 @@
     "next": "Suivant"
   },
   "NotFoundPage": {
-    "title": "404 - La pêche n'est pas bonne ici !",
     "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
     "cta": "Retourner à l'accueil",
-    "report": "Signaler un problème"
+    "report": "Signaler un problème",
+    "titlesCount": 8,
+    "titles": {
+      "0": "Pâtes bol !",
+      "1": "Le chef a tout mangé !",
+      "2": "Le plat était froid !",
+      "3": "Le serveur ne trouve plus votre table !",
+      "4": "La commande s'est perdue en cuisine !",
+      "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+      "6": "La table est vide... où est votre assiette ?",
+      "7": "Êtes vous sûr d'avoir une réservation ?"
+    }
   },
   "RestaurantInformation": {
     "openingHours": "Horaires d'ouverture",
