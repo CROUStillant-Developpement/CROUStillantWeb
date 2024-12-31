@@ -39,12 +39,12 @@ export default function PaginationComponent({
       if (window.innerWidth < 640) {
         // Small screens
         setVisibleDelta(1);
-      // } else if (window.innerWidth < 1024) {
-      //   // Medium screens
-      //   setVisibleDelta(2);
+      } else if (window.innerWidth < 1024) {
+        // Medium screens
+        setVisibleDelta(2);
       } else {
         // Large screens
-        setVisibleDelta(2);
+        setVisibleDelta(3);
       }
     };
 
