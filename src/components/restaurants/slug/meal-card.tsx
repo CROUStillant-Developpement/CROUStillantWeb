@@ -17,6 +17,9 @@ export default function MealCard({ meal }: MealCardProps) {
 
   if (!meal) return;
 
+  // sort meal by order
+  meal?.plats.sort((a, b) => (a.ordre ?? 0) - (b.ordre ?? 0));
+
   return (
     <Accordion
       type="single"

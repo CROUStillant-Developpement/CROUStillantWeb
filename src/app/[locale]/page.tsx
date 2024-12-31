@@ -7,13 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Utensils } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { slugify } from "@/lib/utils";
-import { useMediaQuery } from "usehooks-ts";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
   const { starredFav } = useUserPreferences();
-
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh mt-9 md:mt-0">

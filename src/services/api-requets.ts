@@ -2,6 +2,29 @@
 
 import { ApiResult } from "@/services/types";
 
+let cachedApiUrl: string | null = null;
+
+async function getApiUrl(): Promise<string> {
+  if (cachedApiUrl) return cachedApiUrl;
+
+  try {
+    const response = await fetch("/api/env");
+    if (response.ok) {
+      const data = await response.json();
+      if (!data.apiUrl) {
+        throw new Error("API URL not found in response");
+      }
+      cachedApiUrl = data.apiUrl;
+      return cachedApiUrl || "";
+    } else {
+      throw new Error("Failed to fetch API URL");
+    }
+  } catch (error) {
+    console.error("Error fetching API URL:", error);
+    return ""; // Fallback or handle error as needed
+  }
+}
+
 /**
  * Makes an API request
  * @param endpoint - API endpoint (relative URL)
@@ -21,7 +44,15 @@ export async function apiRequest<T>({
   body?: any;
   authRequired?: boolean;
 }): Promise<ApiResult<T>> {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`;
+  const apiUrl = await getApiUrl();
+  if (!apiUrl || apiUrl === "") {
+    return {
+      success: false,
+      error: "Frontend - API URL not found",
+      status: 500,
+    };
+  }
+  const url = `${apiUrl}/${endpoint}`;
   const headers: HeadersInit = {};
 
   // Add Authorization header if authRequired is true

@@ -64,6 +64,7 @@ export interface Ouverture {
 export interface Plat {
   code: string; // Identifiant du plat
   libelle: string; // Libellé du plat
+  ordre?: number; // Ordre du plat dans la catégorie
 }
 
 // Types for Categorie

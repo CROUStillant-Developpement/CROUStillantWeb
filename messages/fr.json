@@ -34,10 +34,10 @@
     "nextDaysMenu": "Menu des prochains suivants",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
-    "noMealAvailableDescription": "Le restaurant ne propose aucun plat pour cette date. Veuillez réessayer plus tard.",
+    "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
     "seo": {
       "title": "Menu de {name} - CROUStillant",
-      "description": "Découvrez les détails de {name}, situé à ${area}. Parfait pour votre prochain repas !",
+      "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, {name}, {area}",
       "notFound": {
         "title": "Restaurant introuvable - CROUStillant",
@@ -52,7 +52,7 @@
     "chooseDate": "Choisir une date",
     "chooseDateDescription": "Sélectionnez une date pour afficher le menu du restaurant pour ce jour-là.",
     "cancel": "Annuler",
-    "ctaChoose": "Choisir le {date}"
+    "closeAndChoose": "Fermer et choisir {date}"
   },
   "Filters": {
     "search": "Rechercher un restaurant...",
@@ -154,7 +154,29 @@
   "Footer": {
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",
-    "legal": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif."
+    "disclaimer": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif.",
+    "links": {
+      "discover": {
+        "title": "Découvrir",
+        "meals": "Repas",
+        "restaurants": "Restaurants",
+        "dishes": "Plats",
+        "stats": "Statistiques"
+      },
+      "about": {
+        "title": "À propos",
+        "project": "Le projet",
+        "team": "L'équipe",
+        "contact": "Contact",
+        "legal": "Mentions légales"
+      },
+      "resources": {
+        "title": "Lien utiles",
+        "api": "API",
+        "documentation": "Documentation",
+        "discord": "Bot Discord",
+        "status": "Status"
+      }
   },
   "QrCodeDialog": {
     "copy": {
@@ -235,8 +257,8 @@
       "successDescription": "La langue du site a été changée avec succès."
     },
     "theme": {
-      "title": "Thème",
-      "description": "Choisissez le thème que vous souhaitez utiliser sur le site.",
+      "title": "Thème sombre",
+      "description": "Activez le thème sombre pour une expérience plus agréable en faible luminosité.",
       "successTitle": "Thème modifié !",
       "successLight": "Thème clair activé !",
       "successDark": "Thème sombre activé !"
@@ -247,7 +269,7 @@
       "description": "Gérez vos restaurants favoris et accédez à leur menu en un clic.",
       "noFavoritesTitle": "Attention - Aucun restaurant favori",
       "noFavoritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
-      "starredTitle": "Restaurant favori...favori",
+      "starredTitle": "Votre restaurant favori",
       "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
       "starredEditSuccessTitle": "Restaurant favori modifié !",
       "starredEditSuccessDescription": "Le favori a été changé avec succès.",

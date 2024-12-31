@@ -6,7 +6,7 @@ import {
   getFutureDatesMenuAvailable,
 } from "@/services/menu-service";
 import { useEffect, useState } from "react";
-import { formatToISODate } from "@/lib/utils";
+import { formatToISODate, normalizeToDate } from "@/lib/utils";
 import MealsDisplay from "./meals-display";
 import RestaurantCalendar from "./calendar";
 import DatePicker from "./date-picker";
@@ -79,7 +79,9 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   useEffect(() => {
     const selectedDateMenu = menu.find(
-      (menu) => formatToISODate(menu.date).getTime() === selectedDate.getTime()
+      (menu) =>
+        normalizeToDate(formatToISODate(menu.date)).getTime() ===
+        normalizeToDate(selectedDate).getTime()
     );
 
     if (selectedDateMenu) {
@@ -136,10 +138,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       </div>
       {noMeal ? (
         <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold md:p-2 p-1">
-          <Alert>
-            <MessageSquareWarning className="h-4 w-4" />
+          <Alert className="md:text-3xl">
+            <MessageSquareWarning />
             <AlertTitle>{t("noMealAvailable")}</AlertTitle>
-            <AlertDescription>{t("noMealAvailableDescription")}</AlertDescription>
+            <AlertDescription>
+              {t("noMealAvailableDescription")}
+            </AlertDescription>
           </Alert>
           <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
         </div>
