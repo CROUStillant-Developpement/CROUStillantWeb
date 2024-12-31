@@ -415,5 +415,20 @@
         "content2": "CROUStillant Développement n'est pas responsable du contenu des sites externes. CROUStillant Développement ne peut être tenu responsable des dommages causés par l'utilisation de ces sites."
       }
     }
+  },
+  "ContactPage": {
+    "title": "Contactez-nous - À votre service !",
+    "description": "Nous ne servons pas de formulaires. À la place, contactez-nous via ces liens. C'est plus rapide et tout aussi savoureux !",
+    "methods": {
+      "email": "Envoyez-nous un email ! 📧",
+      "github": "Un bug repéré ? Signalez-le sur GitHub ! 🐛",
+      "discord": "Discutez avec nous sur Discord ! 🎙️"
+    },
+    "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
+    "seo": {
+      "title": "Contact - CROUStillant",
+      "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
+      "keywords": "CROUS, restaurant, menu, contact"
+    }
   }
 }
