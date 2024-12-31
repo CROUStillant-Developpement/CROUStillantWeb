@@ -168,7 +168,7 @@
         "project": "Le projet",
         "team": "L'équipe",
         "contact": "Contact",
-        "legal": "Mentions légales"
+        "legal": "Notice légale"
       },
       "resources": {
         "title": "Lien utiles",
@@ -313,5 +313,97 @@
     },
     "title": "Statistiques",
     "description": "Découvrez les statistiques de CROUStillant et de ses utilisateurs."
+  },
+  "LegalPage": {
+    "title": "Notice légale",
+    "subtitle": "Mis à jour le 31 décembre 2024",
+    "description": "Vous trouverez ci-dessous les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant.",
+    "legal": {
+      "title": "Mentions légales",
+      "part1": {
+        "title": "Identité du site",
+        "content1": "Le site : https://croustillant.bayfield.dev/ est le site officiel de CROUstillant.",
+        "content2": "CROUStillant est un projet open-source développé qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer."
+      },
+      "part2": {
+        "title": "Éditeur du site",
+        "content1": "Le site est édité par CROUStillant Développement.",
+        "content2": "CROUStillant Développement est une association à but non lucratif qui n'est pas affiliée au \"CROUS\" ou à une autre entité similaire."
+      },
+      "part3": {
+        "title": "Propriété intellectuelle",
+        "content1": "Le site est la propriété exclusive de CROUStillant Développement.",
+        "content2": "Cependant, tout le contenu du site est la propriété du \"CROUS\" et des restaurants universitaires en France et en Outre-Mer."
+      },
+      "part4": {
+        "title": "Conception",
+        "content1": "Le site a été conçu et développé par l'équipe de CROUStillant Développement. L'équipe est composée de bénévoles passionnés : Paul Bayfield (fondateur et développeur principal), Alden Cherif (développeur web) et Lucas Debeve (concepteur de la base de données).",
+        "content2": "Le site a été conçu pour être simple, intuitif et accessible à tous. Il est entièrement open-source et gratuit."
+      },
+      "part5": {
+        "title": "Hébergement",
+        "content1": "Le site est hébergé par l'équipe de CROUStillant Développement, sur le serveur personnel de Paul Bayfield.",
+        "content2": "Le site est hébergé en France, sur un serveur sécurisé et fiable. Aucune donnée personnelle n'est collectée ou stockée sur le serveur."
+      }
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "part1": {
+        "title": "Données personnelles",
+        "content1": "Le site ne collecte aucune donnée personnelle.",
+        "content2": "CROUStillant Développement ne collecte pas de données personnelles sur les utilisateurs du site. Aucune donnée n'est stockée ou partagée avec des tiers."
+      },
+      "part2": {
+        "title": "Données traitées",
+        "content1": "Le site traite uniquement les données nécessaires au bon fonctionnement du service.",
+        "content2": "Les données personnelles pouvant être collectés sur le site le cas échéant par : les formulaires, la connexion au site (adresse IP, navigateur, système d'exploitation). Lorsque certaines informations sont obligatoires pour accéder à des fonctionnalités spécifiques du site, ce caractère obligatoire est indiqué au moment de la saisie des données. En cas de refus de votre part de fournir des informations obligatoires, vous pourriez ne pas avoir accès à certains services, fonctionnalités de site."
+      },
+      "part3": {
+        "title": "Transfert des données hors Union Européenne",
+        "content1": "CROUStillant Développement ne transfère pas de données en dehors de l'Union Européenne.",
+        "content2": "Toutes les données sont stockées en France, sur un serveur sécurisé et fiable."
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "part1": {
+        "title": "Utilisation des cookies",
+        "content1": "Le site utilise des uniquement des cookies nécessaires au bon fonctionnement du service.",
+        "content2": "Le site utilise des cookies pour améliorer l'expérience utilisateur et garantir le bon fonctionnement du service. Aucun cookie publicitaire ou de suivi n'est utilisé sur le site."
+      },
+      "part2": {
+        "title": "Gestion des cookies",
+        "content1": "Vous pouvez gérer les cookies en modifiant les paramètres de votre navigateur.",
+        "content2": "Vous pouvez également supprimer les cookies à tout moment en utilisant les paramètres du site."
+      }
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "part1": {
+        "title": "Acceptation des conditions",
+        "content1": "En accédant au site, vous acceptez les conditions d'utilisation.",
+        "content2": "Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser le site."
+      },
+      "part2": {
+        "title": "Modification des conditions",
+        "content1": "Les conditions d'utilisation peuvent être modifiées à tout moment.",
+        "content2": "Les utilisateurs seront informés des modifications apportées aux conditions d'utilisation."
+      },
+      "part3": {
+        "title": "Propriété intellectuelle",
+        "content1": "Le contenu de ce site ne peut être reproduit ou utilisé à des fins commerciales ou publicitaires.",
+        "content2": "Les informations utilisées ne doivent l’être qu’à des fins personnelles, associatives ou professionnelles. Toute diffusion ou utilisation à des fins commerciales ou publicitaires est exclue."
+      },
+      "part4": {
+        "title": "Provenance",
+        "content1": "Aucune page ne peut être présentée comme provenant de ce site si des transformations en modifiant le sens y ont été apportées.",
+        "content2": "Les photos provenant des offres de logement émanant des propriétaires ne sont pas contractuelles et n’engagent en aucune façon la responsabilité de CROUStillant Développement."
+      },
+      "part5": {
+        "title": "Liens",
+        "content1": "Le site peut contenir des liens vers d'autres sites.",
+        "content2": "CROUStillant Développement n'est pas responsable du contenu des sites externes. CROUStillant Développement ne peut être tenu responsable des dommages causés par l'utilisation de ces sites."
+      }
+    }
   }
 }
