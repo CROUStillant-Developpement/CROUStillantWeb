@@ -218,5 +218,60 @@
     "reportIssueButton": "Signaler le problème",
     "reportIssueSuccess": "Le problème a bien été signalé. Merci pour votre aide !",
     "reportIssueError": "Une erreur est survenue lors de la transmission du problème. Veuillez réessayer plus tard."
+  },
+  "SettingsPage": {
+    "title": "Paramètres",
+    "appearanceTitle": "Apparence",
+    "behaviorTitle": "Comportement",
+    "personalTitle": "Informations personnelles",
+    "language": {
+      "title": "Langue",
+      "description": "Choisissez la langue que vous souhaitez utiliser sur le site.",
+      "fr": "Français ({locale})",
+      "en": "English ({locale})",
+      "selectPlaceholder": "Sélectionner",
+      "successTitle": "Langue modifiée !",
+      "successDescription": "La langue du site a été changée avec succès."
+    },
+    "theme": {
+      "title": "Thème",
+      "description": "Choisissez le thème que vous souhaitez utiliser sur le site.",
+      "successTitle": "Thème modifié !",
+      "successLight": "Thème clair activé !",
+      "successDark": "Thème sombre activé !"
+    },
+    "favorites": {
+      "title": "Favoris",
+      "selectPlaceholder": "Sélectionner",
+      "description": "Gérez vos restaurants favoris et accédez à leur menu en un clic.",
+      "noFavoritesTitle": "Attention - Aucun restaurant favori",
+      "noFavoritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
+      "starredTitle": "Restaurant favori...favori",
+      "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
+      "starredEditSuccessTitle": "Restaurant favori modifié !",
+      "starredEditSuccessDescription": "Le favori a été changé avec succès.",
+      "starredSelectPlaceholder": "Sélectionner",
+      "regionTitle": "Région favorite",
+      "regionDescription": "Choisissez une région pour afficher les restaurants de cette région en premier.",
+      "regionSelectPlaceholder": "Sélectionner",
+      "regionSelectAll": "Toutes les régions",
+      "regionEditSuccessTitle": "Région favorite modifiée !",
+      "regionEditSuccessDescription": "La région favorite a été changée avec succès"
+    },
+    "personal": {
+      "deleteDataTitle": "Supprimer les données",
+      "deleteDataDescription": "Supprimez <strong>toutes les données</strong> stockées localement sur votre appareil. Cette action est irréversible.",
+      "deleteDataButton": "Supprimer les données",
+      "deleteDataConfirmTitle": "Êtes-vous sûr ?",
+      "deleteDataConfirmYes": "Oui, supprimer",
+      "deleteDataConfirmNo": "Non, annuler",
+      "deleteDataSuccessTitle": "Données supprimées !",
+      "deleteDataSuccessDescription": "Toutes les données ont été supprimées avec succès."
+    },
+    "seo": {
+      "title": "Paramètres - CROUStillant",
+      "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
+      "keywords": "CROUS, restaurant, menu, paramètres"
+    }
   }
 }
