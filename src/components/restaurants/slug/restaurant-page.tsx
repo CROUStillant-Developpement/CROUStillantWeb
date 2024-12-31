@@ -79,9 +79,9 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             setPageUrl(url.toString());
             const qr = searchParams.get("qr");
             if (qr === "true") {
-              favorites.some((f) => f.code === restaurant.code)
-                ? null
-                : addToFavorites(restaurant.code, restaurant.nom);
+              if (favorites.some((f) => f.code === restaurant.code)) {
+                addToFavorites(restaurant.code, restaurant.nom);
+              }
             }
             setLoading(false);
           });
