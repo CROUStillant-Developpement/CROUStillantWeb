@@ -76,6 +76,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .snowy-button {
   position: relative;
   border: 1px solid transparent;
