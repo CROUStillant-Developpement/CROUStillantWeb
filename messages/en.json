@@ -179,6 +179,11 @@
       }
     }
   },
+  "Header": {
+    "home": "Home",
+    "restaurants": "Restaurants",
+    "about": "About"
+  },
   "QrCodeDialog": {
     "copy": {
       "button": "Copy the image",
