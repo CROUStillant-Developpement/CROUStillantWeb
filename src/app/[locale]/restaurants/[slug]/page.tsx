@@ -15,7 +15,7 @@ async function fetchRestaurantDetailsServer(slug: string) {
     }
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || process.env.API_URL}/restaurants/${restaurantId}`,
+      `${process.env.API_URL}/restaurants/${restaurantId}`,
       { method: "GET" }
     );
     if (!response.ok) {
@@ -66,7 +66,11 @@ export async function generateMetadata({
         name: restaurant.nom,
         area: restaurant.region.libelle,
       }),
-      images: [{ url: restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png" }],
+      images: [
+        {
+          url: restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png",
+        },
+      ],
       siteName: "CROUStillant",
     },
   };

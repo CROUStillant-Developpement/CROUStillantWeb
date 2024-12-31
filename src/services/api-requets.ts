@@ -1,72 +1,44 @@
-"use client";
+"use server";
 
 import { ApiResult } from "@/services/types";
 
-let cachedApiUrl: string | null = null;
-
-async function getApiUrl(): Promise<string> {
-  if (cachedApiUrl) return cachedApiUrl;
-
-  try {
-    const response = await fetch("/api/env");
-    if (response.ok) {
-      const data = await response.json();
-      if (!data.apiUrl) {
-        throw new Error("API URL not found in response");
-      }
-      cachedApiUrl = data.apiUrl;
-      return cachedApiUrl || "";
-    } else {
-      throw new Error("Failed to fetch API URL");
-    }
-  } catch (error) {
-    console.error("Error fetching API URL:", error);
-    return ""; // Fallback or handle error as needed
-  }
-}
-
 /**
- * Makes an API request
- * @param endpoint - API endpoint (relative URL)
- * @param method - HTTP method (GET, POST, PUT, DELETE, etc.)
- * @param body - Request body (optional)
- * @param authRequired - Whether authentication is required
- * @returns A promise that resolves to ApiResult containing either data or error
+ * Makes an API request to the specified endpoint with the given method and body.
+ *
+ * @template T - The expected type of the response data.
+ * @param {Object} params - The parameters for the API request.
+ * @param {string} params.endpoint - The endpoint to which the request is made.
+ * @param {string} [params.method="GET"] - The HTTP method to use for the request.
+ * @param {any} [params.body] - The body of the request, if any.
+ * @returns {Promise<ApiResult<T>>} A promise that resolves to the result of the API request.
+ *
+ * @example
+ * ```typescript
+ * const result = await apiRequest<{ user: User }>({
+ *   endpoint: 'users/123',
+ *   method: 'GET',
+ * });
+ * if (result.success) {
+ *   console.log(result.data.user);
+ * } else {
+ *   console.error(result.error);
+ * }
+ * ```
  */
 export async function apiRequest<T>({
   endpoint,
   method = "GET",
   body,
-  authRequired = false,
 }: {
   endpoint: string;
   method?: string;
   body?: any;
-  authRequired?: boolean;
 }): Promise<ApiResult<T>> {
-  const apiUrl = await getApiUrl();
-  if (!apiUrl || apiUrl === "") {
-    return {
-      success: false,
-      error: "Frontend - API URL not found",
-      status: 500,
-    };
-  }
-  const url = `${apiUrl}/${endpoint}`;
-  const headers: HeadersInit = {};
-
-  // Add Authorization header if authRequired is true
-  // if (authRequired) {
-  //     const session = await getServerSession(options);
-  //     if (!session) {
-  //         return {
-  //             success: false,
-  //             error: "Frontend - Unauthorized access: No session found",
-  //             status: 401,
-  //         };
-  //     }
-  //     headers.Authorization = `Bearer ${session.user.token}`;
-  // }
+  console.log(`Making ${method} request to ${endpoint}`);
+  const url = `${process.env.API_URL}/${endpoint}`;
+  const headers: HeadersInit = {
+    "X-Api-Key": process.env.API_KEY as string,
+  };
 
   try {
     let bodyContent = undefined;
