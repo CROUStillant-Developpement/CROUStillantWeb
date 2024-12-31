@@ -1,5 +1,6 @@
 "use client";
 
+import RestaurantCard from "@/components/restaurants/restaurant-card";
 import { getRestaurants } from "@/services/restaurant-service";
 import { Restaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
@@ -13,8 +14,7 @@ import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
-import { filterRestaurants, Filters } from "@/lib/filters";
-import { useSearchParams } from "next/navigation";
+import { Link } from "@/i18n/routing";
 
 export default function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ export default function RestaurantsPage() {
     Restaurant[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(15); // Default records per page
+  const [pageSize, setPageSize] = useState(21); // Default records per page
 
   const { display, toggleDisplay, favorites } = useUserPreferences();
   const { addMarker, clearMarkers } = useMarkerStore();
@@ -35,33 +35,12 @@ export default function RestaurantsPage() {
   const t = useTranslations("RestaurantsPage");
   const locale = useLocale();
 
-  const [filters, setFilters] = useState<Filters>({
-    search: "",
-    isPmr: false,
-    isOpen: false,
-    region: -1,
-    izly: false,
-    card: false,
-  });
-
-  const searchParams = useSearchParams();
-
   useEffect(() => {
     getRestaurants()
       .then((result) => {
         if (result.success) {
           setRestaurants(result.data);
           setFilteredRestaurants(result.data);
-
-          setFilters(
-            { ...filters, region: parseInt(searchParams.get("region") || "-1", 10) }
-          );
-
-          const filtered = filterRestaurants(
-            result.data, 
-            { ...filters, region: parseInt(searchParams.get("region") || "-1", 10) }
-          );
-          setFilteredRestaurants(filtered);
         }
       })
       .finally(() => {
@@ -80,6 +59,7 @@ export default function RestaurantsPage() {
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
+    console.log("filteredRestaurants changed");
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
@@ -91,9 +71,18 @@ export default function RestaurantsPage() {
           restaurant.code,
           [restaurant.latitude, restaurant.longitude],
           restaurant.nom,
-          `Voir la fiche de <a href="/${locale}/restaurants/${slugify(
-            restaurant.nom
-          )}-r${restaurant.code}">${restaurant.nom}</a>`
+          t.rich("markerDescription", {
+            link: (chunks) => (
+              <Link
+                href={`/restaurants/${slugify(restaurant.nom)}-r${
+                  restaurant.code
+                }`}
+              >
+                {chunks}
+              </Link>
+            ),
+            name: restaurant.nom,
+          })
         );
       }
     });
@@ -109,7 +98,7 @@ export default function RestaurantsPage() {
           </span>
           <div className="opacity-50">
             {loading ? (
-              <Loading />
+              <Loading className="!justify-start" />
             ) : (
               t("results", { count: filteredRestaurants.length })
             )}

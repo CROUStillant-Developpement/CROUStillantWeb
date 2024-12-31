@@ -46,7 +46,7 @@ export default function RestaurantInfo({
             {restaurant?.horaires?.join(", ")}
           </p>
           <div className="border rounded-lg overflow-hidden">
-            <table className={`table-auto w-full ${isMobile ? "text-sm" : ""}`}>
+            <table className={`table-auto w-full ${isMobile ? "text-xs" : ""}`}>
               <thead className="">
                 <tr className="rounded-lg">
                   <th className="text-center border px-4 py-2">{t("day")}</th>
@@ -202,13 +202,23 @@ export default function RestaurantInfo({
               {restaurant.email && (
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-bold">{t("email")}:</span>{" "}
-                  {restaurant.email}
+                  <Link
+                    className="underline"
+                    href={`mailto:${restaurant.email}`}
+                  >
+                    {restaurant.email}
+                  </Link>
                 </div>
               )}
               {restaurant.telephone && (
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-bold">{t("phone")}:</span>{" "}
-                  {restaurant.telephone}
+                  <Link
+                    className="underline"
+                    href={`tel:${restaurant.telephone}`}
+                  >
+                    {restaurant.telephone}
+                  </Link>
                 </div>
               )}
             </li>

@@ -25,7 +25,8 @@
     },
     "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}",
     "clickToSeeAll": "See all",
-    "clickToSeeLess": "See less"
+    "clickToSeeLess": "See less",
+    "markerDescription": "View the menu of the restaurant <link>{name}</link>."
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
@@ -33,6 +34,7 @@
     "nextDaysMenu": "Menu of the next days",
     "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
     "noMealAvailable": "No meal available for this restaurant 😢",
+    "noMealAvailableDescription": "The restaurant does not offer any meal for this date. Please try again later.",
     "seo": {
       "title": "Menu of {name} - CROUStillant",
       "description": "Discover the details of {name}, located in ${area}. Perfect for your next meal!",
@@ -217,5 +219,70 @@
     "reportIssueButton": "Report the issue",
     "reportIssueSuccess": "The issue has been successfully reported. Thank you for your feedback!",
     "reportIssueError": "An error occurred while reporting the issue. Please try again later."
+  },
+  "SettingsPage": {
+    "title": "Settings",
+    "appearanceTitle": "Appearance",
+    "behaviorTitle": "Behavior",
+    "personalTitle": "Personal data",
+    "language": {
+      "title": "Language",
+      "description": "Choose the language in which you want to use the website.",
+      "fr": "Français ({locale})",
+      "en": "English ({locale})",
+      "successTitle": "Language changed!",
+      "successDescription": "The language of the website has been successfully changed."
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Choose the theme you want to use on the website.",
+      "successTitle": "Theme changed!",
+      "successLight": "Light theme activated!",
+      "successDark": "Dark theme activated!"
+    },
+    "favorites": {
+      "title": "Favorites",
+      "selectPlaceholder": "Select",
+      "description": "Manage your favorite restaurants and access their menus at the click of a button.",
+      "noFavoritesTitle": "Warning - No favorite restaurant",
+      "noFavoritesDescription": "You have not added any restaurant to your favorites yet. To add a restaurant to your favorites, go to the <restaurant>restaurant page</restaurant> and click on the heart icon next to the restaurant name.",
+      "starredTitle": "Fave restaurant...truly fave!",
+      "starredDescription": "The button on the home page takes you directly to the menu of your favorite restaurant.",
+      "starredEditSuccessTitle": "Favorite changed!",
+      "starredEditSuccessDescription": "The favorite restaurant has been successfully changed.",
+      "starredSelectPlaceholder": "Select",
+      "regionTitle": "Favorite region",
+      "regionDescription": "Choose your favorite region to display the restaurants of this region by default.",
+      "regionSelectPlaceholder": "Select a region",
+      "regionSelectAll": "All regions",
+      "regionEditSuccessTitle": "Favorite region changed!",
+      "regionEditSuccessDescription": "The favorite region has been successfully changed."
+    },
+    "personal": {
+      "deleteDataTitle": "Delete data",
+      "deleteDataDescription": "Delete <strong>all your favorites and settings</strong>. This action is irreversible.",
+      "deleteDataButton": "Delete data",
+      "deleteDataConfirmTitle": "Are you sure?",
+      "deleteDataConfirmYes": "Yes, delete",
+      "deleteDataConfirmNo": "No, cancel",
+      "deleteDataSuccessTitle": "Data deleted!",
+      "deleteDataSuccessDescription": "All your data has been successfully deleted."
+    },
+    "seo": {
+      "title": "Settings - CROUStillant",
+      "description": "Configure your settings on CROUStillant to personalize your experience.",
+      "keywords": "CROUS, restaurant, menu, settings"
+    }
+  },
+  "StatsPage": {
+    "buildInProgress": "The build is in progress...",
+    "buildInProgressDescription": "This page is currently being built. It may have some display issues.",
+    "ideas": {
+      "title": "You have a cool statistic idea?",
+      "description": "You have a cool idea for a statistic that you would like to see on CROUStillant? Let us know on our Discord server!",
+      "button": "Join our Discord server"
+    },
+    "title": "Statistics",
+    "description": "Discover the statistics of CROUStillant and its use by users."
   }
 }

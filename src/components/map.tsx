@@ -74,7 +74,7 @@ const Map = ({
         className="flex-1 w-full h-full rounded-lg z-10"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors - Powered by <a href="https://www.leafletjs.com">Leaflet</a>'
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FitBoundsToMarkers />
@@ -84,9 +84,7 @@ const Map = ({
               <Popup>
                 <span className="text-lg font-bold">{marker.title}</span>
                 <br />
-                <div
-                  dangerouslySetInnerHTML={{ __html: marker.description || "" }}
-                />
+                {marker.description}
               </Popup>
             )}
           </Marker>

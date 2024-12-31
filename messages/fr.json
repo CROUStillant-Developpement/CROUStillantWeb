@@ -25,7 +25,8 @@
     },
     "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "clickToSeeAll": "Voir tout",
-    "clickToSeeLess": "Voir moins"
+    "clickToSeeLess": "Voir moins",
+    "markerDescription": "Voir le menu du restaurant <link>{name}</link>."
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",
@@ -33,6 +34,7 @@
     "nextDaysMenu": "Menu des prochains suivants",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
+    "noMealAvailableDescription": "Le restaurant ne propose aucun plat pour cette date. Veuillez réessayer plus tard.",
     "seo": {
       "title": "Menu de {name} - CROUStillant",
       "description": "Découvrez les détails de {name}, situé à ${area}. Parfait pour votre prochain repas !",
@@ -217,5 +219,71 @@
     "reportIssueButton": "Signaler le problème",
     "reportIssueSuccess": "Le problème a bien été signalé. Merci pour votre aide !",
     "reportIssueError": "Une erreur est survenue lors de la transmission du problème. Veuillez réessayer plus tard."
+  },
+  "SettingsPage": {
+    "title": "Paramètres",
+    "appearanceTitle": "Apparence",
+    "behaviorTitle": "Comportement",
+    "personalTitle": "Informations personnelles",
+    "language": {
+      "title": "Langue",
+      "description": "Choisissez la langue que vous souhaitez utiliser sur le site.",
+      "fr": "Français ({locale})",
+      "en": "English ({locale})",
+      "selectPlaceholder": "Sélectionner",
+      "successTitle": "Langue modifiée !",
+      "successDescription": "La langue du site a été changée avec succès."
+    },
+    "theme": {
+      "title": "Thème",
+      "description": "Choisissez le thème que vous souhaitez utiliser sur le site.",
+      "successTitle": "Thème modifié !",
+      "successLight": "Thème clair activé !",
+      "successDark": "Thème sombre activé !"
+    },
+    "favorites": {
+      "title": "Favoris",
+      "selectPlaceholder": "Sélectionner",
+      "description": "Gérez vos restaurants favoris et accédez à leur menu en un clic.",
+      "noFavoritesTitle": "Attention - Aucun restaurant favori",
+      "noFavoritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
+      "starredTitle": "Restaurant favori...favori",
+      "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
+      "starredEditSuccessTitle": "Restaurant favori modifié !",
+      "starredEditSuccessDescription": "Le favori a été changé avec succès.",
+      "starredSelectPlaceholder": "Sélectionner",
+      "regionTitle": "Région favorite",
+      "regionDescription": "Choisissez une région pour afficher les restaurants de cette région en premier.",
+      "regionSelectPlaceholder": "Sélectionner",
+      "regionSelectAll": "Toutes les régions",
+      "regionEditSuccessTitle": "Région favorite modifiée !",
+      "regionEditSuccessDescription": "La région favorite a été changée avec succès"
+    },
+    "personal": {
+      "deleteDataTitle": "Supprimer les données",
+      "deleteDataDescription": "Supprimez <strong>toutes les données</strong> stockées localement sur votre appareil. Cette action est irréversible.",
+      "deleteDataButton": "Supprimer les données",
+      "deleteDataConfirmTitle": "Êtes-vous sûr ?",
+      "deleteDataConfirmYes": "Oui, supprimer",
+      "deleteDataConfirmNo": "Non, annuler",
+      "deleteDataSuccessTitle": "Données supprimées !",
+      "deleteDataSuccessDescription": "Toutes les données ont été supprimées avec succès."
+    },
+    "seo": {
+      "title": "Paramètres - CROUStillant",
+      "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
+      "keywords": "CROUS, restaurant, menu, paramètres"
+    }
+  },
+  "StatsPage": {
+    "buildInProgress": "Construction en cours...",
+    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
+    "ideas": {
+      "title": "Vous avez une idée de statistique ?",
+      "description": "Vous avez une idée de statistique que vous aimeriez voir sur cette page ? N'hésitez pas à nous la partager sur notre serveur Discord !",
+      "button": "Rejoindre le serveur Discord"
+    },
+    "title": "Statistiques",
+    "description": "Découvrez les statistiques de CROUStillant et de ses utilisateurs."
   }
 }

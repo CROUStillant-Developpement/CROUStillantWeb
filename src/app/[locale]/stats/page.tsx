@@ -35,10 +35,16 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Bot, Drill, Lightbulb } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/routing";
 
 export default function StatsPage() {
   const [taches, setTaches] = useState<Tache[]>([]);
+
+  const t = useTranslations("StatsPage");
 
   useEffect(() => {
     getTaches().then((result) => {
@@ -50,6 +56,24 @@ export default function StatsPage() {
 
   return (
     <div className="space-y-6">
+      <Alert>
+        <Drill className="h-4 w-4" />
+        <AlertTitle>{t("buildInProgress")} 🚧</AlertTitle>
+        <AlertDescription>{t("buildInProgressDescription")}</AlertDescription>
+      </Alert>
+      <Alert>
+        <Lightbulb className="h-4 w-4" />
+        <AlertTitle>{t("ideas.title")}</AlertTitle>
+        <AlertDescription className="flex flex-col gap-2">
+          {t("ideas.description")}
+          <Button asChild className="w-fit">
+            <Link href="https://discord.gg/yG6FjqbWtk" target="_blank">
+              <Bot className="h-4 w-4" />
+              {t("ideas.button")}
+            </Link>
+          </Button>
+        </AlertDescription>
+      </Alert>
       <TacheCharts data={taches} />
     </div>
   );
