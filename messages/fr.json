@@ -25,7 +25,8 @@
     },
     "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "clickToSeeAll": "Voir tout",
-    "clickToSeeLess": "Voir moins"
+    "clickToSeeLess": "Voir moins",
+    "markerDescription": "Voir le menu du restaurant <link>{name}</link>."
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",

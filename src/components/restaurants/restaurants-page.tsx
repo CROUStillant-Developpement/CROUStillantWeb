@@ -14,6 +14,7 @@ import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
+import { Link } from "@/i18n/routing";
 
 export default function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
@@ -69,9 +70,18 @@ export default function RestaurantsPage() {
           restaurant.code,
           [restaurant.latitude, restaurant.longitude],
           restaurant.nom,
-          `Voir la fiche de <a href="/${locale}/restaurants/${slugify(
-            restaurant.nom
-          )}-r${restaurant.code}">${restaurant.nom}</a>`
+          t.rich("markerDescription", {
+            link: (chunks) => (
+              <Link
+                href={`/restaurants/${slugify(restaurant.nom)}-r${
+                  restaurant.code
+                }`}
+              >
+                {chunks}
+              </Link>
+            ),
+            name: restaurant.nom,
+          })
         );
       }
     });
