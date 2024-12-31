@@ -33,6 +33,7 @@
     "nextDaysMenu": "Menu of the next days",
     "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
     "noMealAvailable": "No meal available for this restaurant 😢",
+    "noMealAvailableDescription": "The restaurant does not offer any meal for this date. Please try again later.",
     "seo": {
       "title": "Menu of {name} - CROUStillant",
       "description": "Discover the details of {name}, located in ${area}. Perfect for your next meal!",

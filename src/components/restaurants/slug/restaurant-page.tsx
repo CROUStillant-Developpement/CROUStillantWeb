@@ -12,12 +12,13 @@ import RestaurantCalendar from "./calendar";
 import DatePicker from "./date-picker";
 import RestaurantInfo from "./restaurant-info";
 import { Button } from "@/components/ui/button";
-import { Heart, QrCode } from "lucide-react";
+import { Heart, MessageSquareWarning, QrCode } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import { useTranslations, useLocale } from "next-intl";
 import RestaurantPageSkeleton from "./restaurant-page-skeleton";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -46,6 +47,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   useEffect(() => {
     setLoading(true);
 
+    // Fetch menu and future dates available
     getMenuByRestaurantId(restaurant.code)
       .then((result) => {
         if (result.success) {
@@ -133,10 +135,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         </div>
       </div>
       {noMeal ? (
-        <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold md:p-2">
-          <p className="text-center text-2xl mt-4 underline">
-            {t("noMealAvailable")}
-          </p>
+        <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold md:p-2 p-1">
+          <Alert>
+            <MessageSquareWarning className="h-4 w-4" />
+            <AlertTitle>{t("noMealAvailable")}</AlertTitle>
+            <AlertDescription>{t("noMealAvailableDescription")}</AlertDescription>
+          </Alert>
           <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
         </div>
       ) : loading ? (
