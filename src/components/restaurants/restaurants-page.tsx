@@ -132,7 +132,7 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </div>
-      {display === "list" && (
+      {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
           loading={loading}
@@ -150,7 +150,7 @@ export default function RestaurantsPage() {
         favoritesRestaurants={favoritesRestaurants}
         loading={loading}
       />
-      {display === "list" && (
+      {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
           loading={loading}
