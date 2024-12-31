@@ -177,6 +177,7 @@
         "discord": "Bot Discord",
         "status": "Status"
       }
+    }
   },
   "QrCodeDialog": {
     "copy": {
