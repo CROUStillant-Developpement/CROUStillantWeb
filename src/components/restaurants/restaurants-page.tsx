@@ -1,6 +1,5 @@
 "use client";
 
-import RestaurantCard from "@/components/restaurants/restaurant-card";
 import { getRestaurants } from "@/services/restaurant-service";
 import { Restaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
@@ -18,6 +17,7 @@ import { Link } from "@/i18n/routing";
 
 export default function RestaurantsPage() {
   const [loading, setLoading] = useState(true);
+  const [fetchingData, setFetchingData] = useState(true);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
@@ -33,7 +33,6 @@ export default function RestaurantsPage() {
   const { addMarker, clearMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");
-  const locale = useLocale();
 
   useEffect(() => {
     getRestaurants()
@@ -44,7 +43,7 @@ export default function RestaurantsPage() {
         }
       })
       .finally(() => {
-        setLoading(false);
+        setFetchingData(false);
       });
   }, []);
 
@@ -97,7 +96,7 @@ export default function RestaurantsPage() {
             <h1 className="font-bold text-3xl">Restaurants</h1>
           </span>
           <div className="opacity-50">
-            {loading ? (
+            {loading || fetchingData ? (
               <Loading className="!justify-start" />
             ) : (
               t("results", { count: filteredRestaurants.length })
@@ -107,7 +106,7 @@ export default function RestaurantsPage() {
             setFilteredRestaurants={setFilteredRestaurants}
             restaurants={restaurants}
             setLoading={setLoading}
-            loading={loading}
+            loading={loading || fetchingData}
           />
         </div>
         <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
@@ -135,7 +134,7 @@ export default function RestaurantsPage() {
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
-          loading={loading}
+          loading={loading || fetchingData}
           currentPage={currentPage}
           pageSize={pageSize}
           totalRecords={filteredRestaurants.length}
@@ -148,12 +147,12 @@ export default function RestaurantsPage() {
         filteredRestaurants={filteredRestaurants}
         paginatedRestaurants={paginatedRestaurants}
         favoritesRestaurants={favoritesRestaurants}
-        loading={loading}
+        loading={loading || fetchingData}
       />
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
-          loading={loading}
+          loading={loading || fetchingData}
           currentPage={currentPage}
           pageSize={pageSize}
           totalRecords={filteredRestaurants.length}
