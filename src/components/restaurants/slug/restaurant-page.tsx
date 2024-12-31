@@ -19,6 +19,7 @@ import RestaurantPageSkeleton from "./restaurant-page-skeleton";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useSearchParams } from "next/navigation";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -43,6 +44,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
+
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setLoading(true);
@@ -71,7 +74,15 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             }
           })
           .finally(() => {
-            setPageUrl(window.location.href);
+            const url = new URL(window.location.href);
+            url.search = "";
+            setPageUrl(url.toString());
+            const qr = searchParams.get("qr");
+            if (qr === "true") {
+              favorites.some((f) => f.code === restaurant.code)
+                ? null
+                : addToFavorites(restaurant.code, restaurant.nom);
+            }
             setLoading(false);
           });
       });
@@ -103,7 +114,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     }
   }, [selectedDate, menu]);
 
-  const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
+  const { addOrRemoveFromFavorites, addToFavorites, favorites } =
+    useUserPreferences();
 
   return (
     <div>
@@ -126,13 +138,17 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
           </Button>
           <QrCodeDialog
             dialogTrigger={
-              <Button size="icon" className="ml-4 mt-2 md:mt-0">
+              <Button
+                size="icon"
+                className="ml-4 mt-2 md:mt-0"
+                disabled={pageUrl === ""}
+              >
                 <QrCode />
               </Button>
             }
             title={restaurant.nom + " - CROUStillant"}
             description={t("qrCodeDescription")}
-            url={pageUrl}
+            url={pageUrl + "?qr=true"}
           />
         </div>
       </div>
