@@ -272,5 +272,16 @@
       "description": "Configure your settings on CROUStillant to personalize your experience.",
       "keywords": "CROUS, restaurant, menu, settings"
     }
+  },
+  "StatsPage": {
+    "buildInProgress": "The build is in progress...",
+    "buildInProgressDescription": "This page is currently being built. It may have some display issues.",
+    "ideas": {
+      "title": "You have a cool statistic idea?",
+      "description": "You have a cool idea for a statistic that you would like to see on CROUStillant? Let us know on our Discord server!",
+      "button": "Join our Discord server"
+    },
+    "title": "Statistics",
+    "description": "Discover the statistics of CROUStillant and its use by users."
   }
 }

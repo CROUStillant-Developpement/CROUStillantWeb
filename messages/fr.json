@@ -273,5 +273,16 @@
       "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
       "keywords": "CROUS, restaurant, menu, paramètres"
     }
+  },
+  "StatsPage": {
+    "buildInProgress": "Construction en cours...",
+    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
+    "ideas": {
+      "title": "Vous avez une idée de statistique ?",
+      "description": "Vous avez une idée de statistique que vous aimeriez voir sur cette page ? N'hésitez pas à nous la partager sur notre serveur Discord !",
+      "button": "Rejoindre le serveur Discord"
+    },
+    "title": "Statistiques",
+    "description": "Découvrez les statistiques de CROUStillant et de ses utilisateurs."
   }
 }
