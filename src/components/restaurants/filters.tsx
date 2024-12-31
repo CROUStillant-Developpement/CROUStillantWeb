@@ -32,8 +32,6 @@ export default function RestaurantsFilters({
 }: RestaurantsFiltersProps) {
   const t = useTranslations("Filters");
 
-  const { favoriteRegion } = useUserPreferences();
-
   const {
     filters,
     setFilters,

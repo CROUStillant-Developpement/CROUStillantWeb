@@ -38,8 +38,8 @@ export default function RestaurantsPage() {
     getRestaurants()
       .then((result) => {
         if (result.success) {
-          setRestaurants(result.data);
           setFilteredRestaurants(result.data);
+          setRestaurants(result.data);
         }
       })
       .finally(() => {
@@ -58,7 +58,7 @@ export default function RestaurantsPage() {
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    console.log("filteredRestaurants changed");
+    console.log("filteredRestaurants changed", filteredRestaurants.length);
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
