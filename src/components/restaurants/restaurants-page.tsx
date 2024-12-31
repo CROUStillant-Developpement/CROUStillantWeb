@@ -59,6 +59,7 @@ export default function RestaurantsPage() {
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
+    console.log("filteredRestaurants changed");
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
@@ -97,7 +98,7 @@ export default function RestaurantsPage() {
           </span>
           <div className="opacity-50">
             {loading ? (
-              <Loading />
+              <Loading className="!justify-start" />
             ) : (
               t("results", { count: filteredRestaurants.length })
             )}

@@ -1,10 +1,18 @@
 import { useTranslations } from "next-intl";
 
-export default function Loading() {
+interface LoadingProps {
+  className?: string;
+}
+
+export default function Loading({ className = "" }: LoadingProps) {
   const t = useTranslations("Common");
 
   return (
-    <div className="flex items-center justify-center w-full h-full flex-1">
+    <div
+      className={`${
+        className.length > 0 ? className + " " : className
+      }flex items-center justify-center w-full h-full flex-1`}
+    >
       <div className="flex justify-center items-center space-x-1 text-sm">
         <svg
           fill="none"
