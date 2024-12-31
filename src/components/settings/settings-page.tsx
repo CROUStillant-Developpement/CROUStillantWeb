@@ -80,7 +80,7 @@ export default function SettingsPage() {
   useEffect(() => {
     getRegions().then((res) => {
       if (res.success) {
-        res.data.unshift({ code: 0, libelle: t("favorites.regionSelectAll") });
+        res.data.unshift({ code: -1, libelle: t("favorites.regionSelectAll") });
         setRegions(res.data);
       }
     });
