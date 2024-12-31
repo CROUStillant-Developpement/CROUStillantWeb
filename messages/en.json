@@ -154,7 +154,35 @@
   "Footer": {
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - 2024 CROUStillant Développement, all rights reserved.",
-    "legal": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project."
+    "legal": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project.",
+    "links": {
+      "discover": {
+        "title": "Discover",
+        "menus": "Menus",
+        "restaurants": "Restaurants",
+        "stats": "Statistics"
+      },
+      "about": {
+        "title": "About",
+        "about": "About",
+        "team": "The team",
+        "contact": "Contact",
+        "legal": "Legal notices"
+      },
+      "resources": {
+        "title": "Resources",
+        "discord": "Discord",
+        "github": "Documentation",
+        "status": "Status"
+      }
+    }
+  },
+  "Header": {
+    "home": "Home",
+    "restaurants": "Restaurants",
+    "about": "About",
+    "contact": "Contact",
+    "settings": "Settings"
   },
   "QrCodeDialog": {
     "copy": {

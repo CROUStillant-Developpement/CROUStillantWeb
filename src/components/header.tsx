@@ -4,20 +4,32 @@ import { Button } from "./ui/button";
 import { Link } from "@/i18n/routing";
 import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/theme-switcher";
-import { Settings, Home, Info, Mail, Star } from "lucide-react";
+import {
+  Settings,
+  Home,
+  Info,
+  Mail,
+  Star,
+  UtensilsCrossed,
+} from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 import { getGithubStarCount } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const [stars, setStars] = useState<number>(0); // [1
   const pathname = usePathname();
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const t = useTranslations("Header");
+
   useEffect(() => {
-    getGithubStarCount().then((count) => setStars(count));
+    getGithubStarCount()
+      .then((count) => setStars(count))
+      .catch(() => setStars(0));
   }, []);
 
   return (
@@ -37,10 +49,26 @@ export default function Header() {
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
             >
-              <Link
-                href="/"
-              >
-                {isDesktop ? "Accueil" : <Home className="h-6 w-6" />}
+              <Link href="/">
+                {isDesktop ? t("home") : <Home className="h-6 w-6" />}
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button
+              size={isDesktop ? "default" : "icon"}
+              asChild
+              variant={pathname === "/" ? "default" : "outline"}
+              className={`select-none h-9 rounded-sm text-sm ${
+                isDesktop ? "px-3 py-1" : "p-2"
+              }`}
+            >
+              <Link href="/restaurants">
+                {isDesktop ? (
+                  t("restaurants")
+                ) : (
+                  <UtensilsCrossed className="h-6 w-6" />
+                )}
               </Link>
             </Button>
           </li>
@@ -53,20 +81,7 @@ export default function Header() {
               }`}
             >
               <Link href="/about">
-                {isDesktop ? "À propos" : <Info className="h-6 w-6" />}
-              </Link>
-            </Button>
-          </li>
-          <li>
-            <Button
-              asChild
-              variant={pathname === "/contact" ? "default" : "outline"}
-              className={`select-none h-9 rounded-sm text-sm ${
-                isDesktop ? "px-3 py-1" : "p-2"
-              }`}
-            >
-              <Link href="/contact">
-                {isDesktop ? "Contact" : <Mail className="h-6 w-6" />}
+                {isDesktop ? t("about") : <Info className="h-6 w-6" />}
               </Link>
             </Button>
           </li>
@@ -79,9 +94,10 @@ export default function Header() {
         </Link>
       </div>
       <div className="flex gap-2 md:w-64 justify-end">
-        { isDesktop && (
+        {isDesktop && (
           <Button asChild variant="outline">
-            <Link href="https://github.com/CROUStillant-Developpement"
+            <Link
+              href="https://github.com/CROUStillant-Developpement"
               target="_blank"
               rel="noreferrer"
             >
