@@ -45,7 +45,7 @@ export async function generateMetadata({
       openGraph: {
         title: t("seo.notFound.title"),
         description: t("seo.notFound.description"),
-        images: [{ url: "/default-ru.png" }],
+        images: [{ url: process.env.WEB_URL + "/default-ru.png" }],
       },
     };
   }
@@ -66,7 +66,7 @@ export async function generateMetadata({
         name: restaurant.nom,
         area: restaurant.region.libelle,
       }),
-      images: [{ url: restaurant.image_url ?? "/default-ru.png" }],
+      images: [{ url: restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png" }],
       siteName: "CROUStillant",
     },
   };
