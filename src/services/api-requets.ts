@@ -11,6 +11,9 @@ async function getApiUrl(): Promise<string> {
     const response = await fetch("/api/env");
     if (response.ok) {
       const data = await response.json();
+      if (!data.apiUrl) {
+        throw new Error("API URL not found in response");
+      }
       cachedApiUrl = data.apiUrl;
       return cachedApiUrl || "";
     } else {
@@ -42,6 +45,13 @@ export async function apiRequest<T>({
   authRequired?: boolean;
 }): Promise<ApiResult<T>> {
   const apiUrl = await getApiUrl();
+  if (!apiUrl || apiUrl === "") {
+    return {
+      success: false,
+      error: "Frontend - API URL not found",
+      status: 500,
+    };
+  }
   const url = `${apiUrl}/${endpoint}`;
   const headers: HeadersInit = {};
 
