@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/drawer";
 import { Calendar } from "@/components/ui/calendar";
 import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 
 type DatePickerProps = {
   onDateChange?: (date: Date) => void;
@@ -40,7 +41,7 @@ export default function DatePicker({
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleDateChange = (date: Date) => {
-    setDate(date);
+    setDate((date)); // to trigger re-render
     onDateChange?.(date);
   };
 
@@ -63,9 +64,10 @@ export default function DatePicker({
             <DialogDescription>{t("chooseDateDescription")}</DialogDescription>
           </DialogHeader>
           <DatePickerSection
-            onDateChange={handleDateChange}
+            setDate={handleDateChange}
             onClose={() => setOpen(false)}
             maxDate={maxDate}
+            currentDate={current}
           />
         </DialogContent>
       </Dialog>
@@ -88,7 +90,7 @@ export default function DatePicker({
         </DrawerHeader>
         <DatePickerSection
           className="px-4"
-          onDateChange={handleDateChange}
+          setDate={handleDateChange}
           onClose={() => setOpen(false)}
           maxDate={maxDate}
         />
@@ -105,26 +107,32 @@ export default function DatePicker({
 type DatePickerSectionProps = {
   className?: React.ComponentProps<"form">["className"];
   maxDate?: Date;
-  onDateChange?: (date: Date) => void;
+  currentDate?: Date;
+  setDate: (date: Date) => void;
   onClose?: () => void;
 };
 
 function DatePickerSection({
   className,
   maxDate,
-  onDateChange,
+  currentDate = new Date(),
+  setDate,
   onClose,
 }: DatePickerSectionProps) {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onDateChange?.(date!);
-    onClose?.();
   };
 
   const locale = useLocale();
   const t = useTranslations("DatePickers");
+
+  const [localDate, setLocalDate] = useState<Date | undefined>(currentDate);
+
+  const handleDateChange = (date: Date) => {
+    setLocalDate(date);
+    onClose?.();
+    setDate(date);
+  };
 
   return (
     <form
@@ -134,16 +142,25 @@ function DatePickerSection({
       <Calendar
         className="mb-4 rounded-md border"
         mode="single"
-        selected={date}
-        onSelect={setDate}
+        defaultMonth={currentDate}
+        selected={currentDate}
+        onSelect={(date) => date && handleDateChange(date)}
         fromDate={new Date()}
         toDate={
           maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
-        }
+        } // 3 weeks if no maxDate
         lang={locale}
       />
-      <Button type="submit" className="w-full" disabled={!date}>
-        {t("ctaChoose", { date: date?.toLocaleDateString(locale) })}
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={!localDate || !currentDate}
+      >
+        {t("closeAndChoose", {
+          date: localDate
+            ? localDate.toLocaleDateString(locale)
+            : currentDate.toLocaleDateString(locale),
+        })}
       </Button>
     </form>
   );

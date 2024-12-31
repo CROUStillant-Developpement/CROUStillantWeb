@@ -37,7 +37,7 @@
     "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
     "seo": {
       "title": "Menu de {name} - CROUStillant",
-      "description": "Découvrez les détails de {name}, situé à ${area}. Parfait pour votre prochain repas !",
+      "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, {name}, {area}",
       "notFound": {
         "title": "Restaurant introuvable - CROUStillant",
@@ -52,7 +52,7 @@
     "chooseDate": "Choisir une date",
     "chooseDateDescription": "Sélectionnez une date pour afficher le menu du restaurant pour ce jour-là.",
     "cancel": "Annuler",
-    "ctaChoose": "Choisir le {date}"
+    "closeAndChoose": "Fermer et choisir {date}"
   },
   "Filters": {
     "search": "Rechercher un restaurant...",

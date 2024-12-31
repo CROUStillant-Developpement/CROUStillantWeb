@@ -6,7 +6,7 @@ import {
   getFutureDatesMenuAvailable,
 } from "@/services/menu-service";
 import { useEffect, useState } from "react";
-import { formatToISODate } from "@/lib/utils";
+import { formatToISODate, normalizeToDate } from "@/lib/utils";
 import MealsDisplay from "./meals-display";
 import RestaurantCalendar from "./calendar";
 import DatePicker from "./date-picker";
@@ -79,7 +79,9 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   useEffect(() => {
     const selectedDateMenu = menu.find(
-      (menu) => formatToISODate(menu.date).getTime() === selectedDate.getTime()
+      (menu) =>
+        normalizeToDate(formatToISODate(menu.date)).getTime() ===
+        normalizeToDate(selectedDate).getTime()
     );
 
     if (selectedDateMenu) {

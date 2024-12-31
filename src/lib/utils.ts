@@ -128,6 +128,10 @@ export function findRestaurantsAroundPosition(
 
 export const formatToISODate = (dateString: string): Date => {
   const [day, month, year] = dateString.split("-");
-  const isoDateString = `${year}-${month}-${day}`; // Convert to "2024-12-30"
+  const isoDateString = `${year}-${month}-${day}T00:00:00Z`; // Convert to "2024-12-30"
   return new Date(isoDateString);
+};
+
+export const normalizeToDate = (date: Date): Date => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };

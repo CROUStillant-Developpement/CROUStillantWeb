@@ -37,7 +37,7 @@
     "noMealAvailableDescription": "The restaurant does not offer any meal. Please try again later.",
     "seo": {
       "title": "Menu of {name} - CROUStillant",
-      "description": "Discover the details of {name}, located in ${area}. Perfect for your next meal!",
+      "description": "Discover the details of {name}, located in {area}. Perfect for your next meal!",
       "keywords": "CROUS, restaurant, menu, {name}, {area}",
       "notFound": {
         "title": "Restaurant not found - CROUStillant",
@@ -52,7 +52,7 @@
     "chooseDate": "Choose a date",
     "chooseDateDescription": "Select a date to display the restaurant's menu for that day.",
     "cancel": "Cancel",
-    "ctaChoose": "Choose {date}"
+    "closeAndChoose": "Close and choose {date}"
   },
   "Filters": {
     "search": "Search for a restaurant...",
