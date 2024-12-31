@@ -15,7 +15,7 @@ async function fetchRestaurantDetailsServer(slug: string) {
     }
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/restaurants/${restaurantId}`,
+      `${process.env.NEXT_PUBLIC_API_URL || process.env.API_URL}/restaurants/${restaurantId}`,
       { method: "GET" }
     );
     if (!response.ok) {
