@@ -139,7 +139,9 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
           <Alert>
             <MessageSquareWarning className="h-4 w-4" />
             <AlertTitle>{t("noMealAvailable")}</AlertTitle>
-            <AlertDescription>{t("noMealAvailableDescription")}</AlertDescription>
+            <AlertDescription>
+              {t("noMealAvailableDescription")}
+            </AlertDescription>
           </Alert>
           <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
         </div>

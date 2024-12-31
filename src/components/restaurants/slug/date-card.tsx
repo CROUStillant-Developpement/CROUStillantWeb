@@ -47,7 +47,6 @@ export default function DateCard({
           })}
         </p>
       </CardContent>
-      <Badge className="absolute top-1 right-1">{25}</Badge>
     </Card>
   );
 }

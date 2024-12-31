@@ -13,6 +13,9 @@ export default function MealsDisplay({
   selectedDateLunch,
   selectedDateDinner,
 }: MealsDisplayProps) {
+  selectedDateBreakfast?.categories.sort((a, b) => a.ordre - b.ordre);
+  selectedDateLunch?.categories.sort((a, b) => a.ordre - b.ordre);
+  selectedDateDinner?.categories.sort((a, b) => a.ordre - b.ordre);
   return (
     <>
       {selectedDateBreakfast && (
@@ -22,10 +25,7 @@ export default function MealsDisplay({
           </CardHeader>
           <CardContent>
             {selectedDateBreakfast.categories.map((meal) => (
-              <MealCard
-                key={meal.code}
-                meal={meal}
-              />
+              <MealCard key={meal.code} meal={meal} />
             ))}
           </CardContent>
         </Card>
@@ -37,10 +37,7 @@ export default function MealsDisplay({
           </CardHeader>
           <CardContent>
             {selectedDateLunch.categories.map((meal) => (
-              <MealCard
-                key={meal.code}
-                meal={meal}
-              />
+              <MealCard key={meal.code} meal={meal} />
             ))}
           </CardContent>
         </Card>
@@ -52,10 +49,7 @@ export default function MealsDisplay({
           </CardHeader>
           <CardContent>
             {selectedDateDinner.categories.map((meal) => (
-              <MealCard
-                key={meal.code}
-                meal={meal}
-              />
+              <MealCard key={meal.code} meal={meal} />
             ))}
           </CardContent>
         </Card>
