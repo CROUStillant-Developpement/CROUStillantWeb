@@ -193,13 +193,12 @@ export default function RestaurantInfo({
             </div>
           </TooltipProvider>
         </li>
-        {restaurant.email ||
-          (restaurant.telephone && (
-            <li>
-              <p className="text-sm font-semibold mb-2 italic opacity-50">
-                {t("contact")}
-              </p>
-              {restaurant.email && (
+        {(restaurant.email || restaurant.telephone) && (
+          <li>
+            <p className="text-sm font-semibold mb-2 italic opacity-50">
+              {t("contact")}
+            </p>
+            {restaurant.email && (
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-bold">{t("email")}:</span>{" "}
                   <Link
@@ -210,19 +209,19 @@ export default function RestaurantInfo({
                   </Link>
                 </div>
               )}
-              {restaurant.telephone && (
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-bold">{t("phone")}:</span>{" "}
-                  <Link
-                    className="underline"
-                    href={`tel:${restaurant.telephone}`}
-                  >
-                    {restaurant.telephone}
-                  </Link>
-                </div>
-              )}
-            </li>
-          ))}
+            {restaurant.telephone && (
+              <div className="flex items-center gap-2 text-sm">
+                <span className="font-bold">{t("phone")}:</span>{" "}
+                <Link
+                  className="underline"
+                  href={`tel:${restaurant.telephone}`}
+                >
+                  {restaurant.telephone}
+                </Link>
+              </div>
+            )}
+          </li>
+        )}
         {(restaurant.type_restaurant || restaurant.region) && (
           <li>
             <p className="text-sm font-semibold mb-2 italic opacity-50">
