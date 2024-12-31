@@ -207,7 +207,7 @@ export default function AboutPage() {
               target="_blank"
             >
               <Button className="mt-8">
-                <Bot className="inline mr-1"></Bot>
+                <Bot className="inline mr-1" />
                 {t("discord.button")}
               </Button>
             </Link>
@@ -274,7 +274,7 @@ export default function AboutPage() {
             {t("more-convinced.description")}
           </p>
           <div className="relative mt-8 flex">
-            <a
+            <Link
               href="https://discord.gg/yG6FjqbWtk"
               rel="noopener noreferrer"
               target="_blank"
@@ -283,7 +283,7 @@ export default function AboutPage() {
                 {t("more-convinced.button")}
                 <ExternalLinkIcon className="ml-4 h-4 w-4 opacity-50" />
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
