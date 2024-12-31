@@ -44,7 +44,7 @@ export default function AboutPage() {
           <hr />
           <div className="flex flex-col justify-center p-12">
             <h3 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
-              <Soup className="inline h-10 w-10 mr-3"></Soup>
+              <Soup className="inline h-10 w-10 mr-3" />
               {t("updates.title")}
             </h3>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
@@ -56,7 +56,7 @@ export default function AboutPage() {
         <div className="flex-1 p-5 lg:p-12">
           <div className="flex flex-col justify-center p-12">
             <h3 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
-              <FileCode2 className="inline h-10 w-10 mr-3"></FileCode2>
+              <FileCode2 className="inline h-10 w-10 mr-3" />
               {t("open-source.title")}
             </h3>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
@@ -136,7 +136,10 @@ export default function AboutPage() {
           />
         </div>
       </div>
-      <div className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div
+        className="mx-auto mt-36 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800 scroll-mt-32"
+        id="team"
+      >
         <div className="flex flex-col justify-center p-16 lg:w-1/2">
           <h2 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
             {t("team.title")}
@@ -225,7 +228,7 @@ export default function AboutPage() {
           <div className="relative">
             <Link href="https://api-croustillant.bayfield.dev" target="_blank">
               <Button className="mt-8">
-                <Globe className="inline mr-1"></Globe>
+                <Globe className="inline mr-1" />
                 {t("integrated.button")}
               </Button>
             </Link>
@@ -252,13 +255,13 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-2 mt-8">
             <Button asChild>
               <Link href="/restaurants" prefetch={true}>
-                <CookingPot className="inline mr-1"></CookingPot>
+                <CookingPot className="inline mr-1" />
                 {t("convinced.button")}
               </Link>
             </Button>
             <Button asChild>
               <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867">
-                <Bot className="inline mr-1"></Bot>
+                <Bot className="inline mr-1" />
                 {t("convinced.button2")}
               </Link>
             </Button>
@@ -267,7 +270,7 @@ export default function AboutPage() {
         <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
         <div className="flex flex-col justify-center p-16 lg:w-1/2">
           <h3 className="text-4xl font-medium text-gray-800 dark:text-gray-100">
-            <HeartHandshake className="inline h-10 w-10 mr-3"></HeartHandshake>
+            <HeartHandshake className="inline h-10 w-10 mr-3" />
             {t("more-convinced.title")}
           </h3>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
