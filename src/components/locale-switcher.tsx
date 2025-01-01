@@ -25,6 +25,7 @@ export default function LocaleToggle() {
       router.replace({ pathname }, { locale: locale });
     });
   }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
