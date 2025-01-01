@@ -1,13 +1,5 @@
-"use client";
+import NotFound from "@/components/not-found";
 
-import Error from "next/error";
-
-export default function NotFound() {
-  return (
-    <html lang="en">
-      <body>
-        <Error statusCode={404} />
-      </body>
-    </html>
-  );
+export default function NotFoundPage() {
+  return <NotFound />;
 }

@@ -59,9 +59,12 @@ export async function apiRequest<T>({
 
   console.log(`Making ${method} request to ${endpoint}`);
   const url = `${process.env.API_URL}/${endpoint}`;
-  const headers: HeadersInit = {
-    "X-Api-Key": process.env.API_KEY as string,
-  };
+
+  const headers: HeadersInit = {};
+
+  if (process.env.API_KEY) {
+    headers["X-Api-Key"] = process.env.API_KEY as string
+  }
 
   try {
     let bodyContent = undefined;

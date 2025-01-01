@@ -36,7 +36,7 @@ export default async function ContactPage() {
           <p className="text-center text-gray-600 mb-6">{t("description")}</p>
           <div className="space-y-4">
             <Button asChild variant="default" className="w-full">
-              <Link href="mailto:support@example.com">
+              <Link href="mailto:croustillant@bayfield.dev">
                 {t("methods.email")}
               </Link>
             </Button>
