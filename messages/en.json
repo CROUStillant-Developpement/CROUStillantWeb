@@ -281,7 +281,7 @@
       "selectPlaceholder": "Select",
       "description": "Manage your favorite restaurants and access their menus at the click of a button.",
       "noFavoritesTitle": "Warning - No favorite restaurant",
-      "noFavoritesDescription": "You have not added any restaurant to your favorites yet. To add a restaurant to your favorites, go to the <restaurant>restaurant page</restaurant> and click on the heart icon next to the restaurant name.",
+      "noFavoritesDescription": "You have not added any restaurant to your favorites yet. To add a restaurant to your favorites, go to the <restaurants>restaurant page</restaurants> and click on the heart icon next to the restaurant name.",
       "starredTitle": "Your favorite restaurant",
       "starredDescription": "The button on the home page takes you directly to the menu of your favorite restaurant.",
       "starredEditSuccessTitle": "Favorite changed!",
