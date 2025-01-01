@@ -13,6 +13,7 @@ export async function getMenuByRestaurantId(
   return apiRequest<Menu[]>({
     endpoint: `restaurants/${restaurantId}/menu`,
     method: "GET",
+    cacheDuration: 300000, // 5 minutes in milliseconds
   });
 }
 
