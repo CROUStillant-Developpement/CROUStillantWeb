@@ -104,7 +104,7 @@ export default function SettingsPage() {
             onCheckedChange={handleThemeChange}
           />
         </div>
-        <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
+        <div className="space-y-2 flex md:flex-row flex-col md:items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">{t("language.title")}</p>
             <p className="text-[0.8rem] text-muted-foreground">
@@ -141,7 +141,7 @@ export default function SettingsPage() {
             </AlertDescription>
           </Alert>
         )}
-        <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
+        <div className="space-y-2 flex md:flex-row flex-col md:items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">
               {t("favorites.starredTitle")}
@@ -167,8 +167,9 @@ export default function SettingsPage() {
             disabled={favorites.length === 0}
             defaultValue={starredFav?.code.toString()}
           >
-            <SelectTrigger className="min-w-[180px] w-fit">
+            <SelectTrigger className="min-w-[180px] truncate max-w-[250px] w-fit">
               <SelectValue
+                className=""
                 placeholder={
                   starredFav?.name || t("favorites.starredSelectPlaceholder")
                 }
@@ -186,7 +187,7 @@ export default function SettingsPage() {
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
+        <div className="space-y-2 flex md:flex-row flex-col md:items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">
               {t("favorites.regionTitle")}
