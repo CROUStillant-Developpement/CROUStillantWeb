@@ -13,7 +13,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
-import { getGithubStarCount } from "@/lib/utils";
+import { getGithubStarCount } from "@/services/stats-services";
 import { useEffect, useState } from "react";
 import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
