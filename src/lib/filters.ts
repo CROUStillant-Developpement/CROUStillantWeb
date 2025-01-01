@@ -7,8 +7,8 @@ export interface Filters {
   crous: number;
   izly: boolean;
   card: boolean;
-  restaurantTypeAsc: boolean;
-  restaurantTypeDesc: boolean;
+  restaurantCityAsc: boolean;
+  restaurantCityDesc: boolean;
   restaurantNameAsc: boolean;
   restaurantNameDesc: boolean;
   restaurantType: number;
@@ -53,8 +53,8 @@ export const buildQueryString = (filters: Filters): string => {
   if (filters.crous !== -1) queryString.set("region", filters.crous.toString());
   if (filters.izly) queryString.set("izly", "true");
   if (filters.card) queryString.set("card", "true");
-  if (filters.restaurantTypeAsc) queryString.set("restaurantTypeAsc", "true");
-  if (filters.restaurantTypeDesc) queryString.set("restaurantTypeDesc", "true");
+  if (filters.restaurantCityAsc) queryString.set("restaurantCityAsc", "true");
+  if (filters.restaurantCityDesc) queryString.set("restaurantCityDesc", "true");
   if (filters.restaurantNameAsc) queryString.set("restaurantNameAsc", "true");
   if (filters.restaurantNameDesc) queryString.set("restaurantNameDesc", "true");
   if (filters.restaurantType !== -1)
@@ -64,22 +64,26 @@ export const buildQueryString = (filters: Filters): string => {
 
 export const sortRestaurants = (
   restaurants: Restaurant[],
-  filters: Filters
+  filters: Filters,
+  locale: string
 ): Restaurant[] => {
+  console.log(restaurants);
+
   return restaurants.slice().sort((a, b) => {
-    if (filters.restaurantTypeAsc) {
-      return a.type!.libelle.localeCompare(b.type!.libelle);
+    if (filters.restaurantCityAsc) {
+      return a.zone.localeCompare(b.zone, locale);
     }
-    if (filters.restaurantTypeDesc) {
-      return b.type!.libelle.localeCompare(a.type!.libelle);
+    if (filters.restaurantCityDesc) {
+      return b.zone.localeCompare(a.zone, locale);
     }
     if (filters.restaurantNameAsc) {
-      return a.nom.localeCompare(b.nom);
+      return a.nom.localeCompare(b.nom, locale);
     }
     if (filters.restaurantNameDesc) {
-      return b.nom.localeCompare(a.nom);
+      return b.nom.localeCompare(a.nom, locale);
     }
+
     // if no sort is applied, sort by restaurant's area
-    return a.zone.localeCompare(b.nom);
+    return a.zone.localeCompare(b.nom, locale);
   });
 };

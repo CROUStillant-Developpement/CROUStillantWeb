@@ -56,7 +56,6 @@
   },
   "Filters": {
     "title": "Filtres",
-    "description": "Filtrez les restaurants par région, type, nom ou moyens de paiement acceptés.",
     "search": "Rechercher un restaurant...",
     "searchTitle": "Recherche : {query}",
     "activeFilters": "Filtres actifs: ",
@@ -86,14 +85,17 @@
       "title": "Type de restaurant",
       "placeholder": "Rechercher un type de restaurant...",
       "all": "Tous les types",
-      "noResults": "Aucun type de restaurant trouvé pour cette recherche 😢",
+      "noResults": "Aucun type de restaurant trouvé pour cette recherche 😢"
+    },
+    "restaurantCity": {
+      "title": "Ville du restaurant",
       "sortAsc": "Ordre alphabétique (A-Z)",
-      "sortDesc": "Ordre alphabétique (Z-A)"
+      "sortDesc": "Ordre alphabétique inverse (Z-A)"
     },
     "restaurantName": {
       "title": "Nom du restaurant",
       "sortAsc": "Ordre alphabétique (A-Z)",
-      "sortDesc": "Ordre alphabétique (Z-A)"
+      "sortDesc": "Ordre alphabétique inverse (Z-A)"
     }
   },
   "RestaurantCard": {
