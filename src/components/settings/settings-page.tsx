@@ -211,6 +211,7 @@ export default function SettingsPage() {
             }}
             disabled={regions.length === 0}
             defaultValue={favoriteRegion?.code.toString()}
+            value={favoriteRegion?.code.toString()}
           >
             <SelectTrigger className="min-w-[180px] w-fit">
               <SelectValue

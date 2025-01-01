@@ -1,28 +1,29 @@
 "use client";
 
-import { getRestaurants } from "@/services/restaurant-service";
-import { Restaurant } from "@/services/types";
+import { Restaurant, Region } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Loading from "@/app/[locale]/loading";
 import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
 import { Link } from "@/i18n/routing";
 
-export default function RestaurantsPage() {
+export default function RestaurantsPage({
+  restaurants,
+  regions,
+}: {
+  restaurants: Restaurant[];
+  regions: Region[];
+}) {
   const [loading, setLoading] = useState(true);
-  const [fetchingData, setFetchingData] = useState(true);
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
-    []
-  );
-  useState<Restaurant[]>([]); // Store previous filtered restaurants to avoid re-fetching data
+  const [filteredRestaurants, setFilteredRestaurants] =
+    useState<Restaurant[]>(restaurants);
   const [favoritesRestaurants, setFavoritesRestaurants] = useState<
     Restaurant[]
   >([]);
@@ -35,19 +36,6 @@ export default function RestaurantsPage() {
   const t = useTranslations("RestaurantsPage");
 
   useEffect(() => {
-    getRestaurants()
-      .then((result) => {
-        if (result.success) {
-          setFilteredRestaurants(result.data);
-          setRestaurants(result.data);
-        }
-      })
-      .finally(() => {
-        setFetchingData(false);
-      });
-  }, []);
-
-  useEffect(() => {
     const favRestaurants = filteredRestaurants.filter((restaurant) =>
       favorites.some((f) => f.code === restaurant.code)
     );
@@ -58,7 +46,8 @@ export default function RestaurantsPage() {
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    console.log("filteredRestaurants changed", filteredRestaurants.length);
+    if (process.env.NODE_ENV === "development")
+      console.info("filteredRestaurants changed", filteredRestaurants.length);
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
@@ -96,7 +85,7 @@ export default function RestaurantsPage() {
             <h1 className="font-bold text-3xl">Restaurants</h1>
           </span>
           <div className="opacity-50">
-            {loading || fetchingData ? (
+            {loading ? (
               <Loading className="!justify-start" />
             ) : (
               t("results", { count: filteredRestaurants.length })
@@ -106,7 +95,8 @@ export default function RestaurantsPage() {
             setFilteredRestaurants={setFilteredRestaurants}
             restaurants={restaurants}
             setLoading={setLoading}
-            loading={loading || fetchingData}
+            loading={loading}
+            regions={regions}
           />
         </div>
         <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
@@ -134,7 +124,7 @@ export default function RestaurantsPage() {
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
-          loading={loading || fetchingData}
+          loading={loading}
           currentPage={currentPage}
           pageSize={pageSize}
           totalRecords={filteredRestaurants.length}
@@ -147,12 +137,12 @@ export default function RestaurantsPage() {
         filteredRestaurants={filteredRestaurants}
         paginatedRestaurants={paginatedRestaurants}
         favoritesRestaurants={favoritesRestaurants}
-        loading={loading || fetchingData}
+        loading={loading}
       />
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
         <Pagination
-          loading={loading || fetchingData}
+          loading={loading}
           currentPage={currentPage}
           pageSize={pageSize}
           totalRecords={filteredRestaurants.length}

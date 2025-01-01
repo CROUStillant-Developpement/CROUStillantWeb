@@ -122,3 +122,15 @@ export interface Tache {
   id: string; // Identifiant de la tâche
   requetes: number; // Nombre de requêtes effectuées
 }
+
+// Types for GlobalStats
+export interface GlobalStats {
+  categories: number; // Nombre de catégories
+  compositions: number; // Nombre de compositions
+  menus: number; // Nombre de menus
+  plats: number; // Nombre de plats
+  regions: number; // Nombre de régions
+  repas: number; // Nombre de repas
+  restaurants: number; // Nombre de restaurants
+  types_restaurants: number; // Nombre de types de restaurants
+}

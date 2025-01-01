@@ -61,14 +61,13 @@
     "reset": "Reset",
     "izly": "Izly payment accepted",
     "creditCard": "Credit card payment accepted",
+    "loading": "Loading...",
     "geolocated": {
-      "title": "Nearby restaurants",
-      "loading": "Searching for nearby restaurants..."
+      "title": "Nearby restaurants"
     },
     "region": {
       "title": "Region",
       "placeholder": "Search for a region...",
-      "loading": "Loading regions...",
       "all": "All regions",
       "noResults": "No region found for this search 😢"
     }
@@ -197,10 +196,20 @@
     "next": "Next"
   },
   "NotFoundPage": {
-    "title": "404 - No fish here!",
     "description": "The page you are looking for does not exist or has been moved.",
     "cta": "Go back to the homepage",
-    "report": "Report an issue"
+    "report": "Report an issue",
+    "titlesCount": 8,
+    "titles": {
+      "0": "Spaghetti spill!",
+      "1": "The chef ate it all!",
+      "2": "The dish was served cold!",
+      "3": "The waiter lost your table!",
+      "4": "The order got lost in the kitchen!",
+      "5": "The chef didn’t make this dish today!",
+      "6": "The table’s empty… where’s your plate?",
+      "7": "Are you sure you booked a table?"
+    }
   },
   "RestaurantInformation": {
     "openingHours": "Opening hours",
@@ -216,7 +225,6 @@
     "creditCard": "Credit card payment accepted",
     "phone": "Phone",
     "email": "Email",
-    "active": "Active",
     "otherInformation": "Other information",
     "type": "Type",
     "crous": "CROUS",
@@ -403,6 +411,21 @@
         "content1": "The site may contain links to other sites.",
         "content2": "CROUStillant Développement is not responsible for the content of external sites. CROUStillant Développement cannot be held responsible for any damage caused by the use of these sites."
       }
+    }
+  },
+  "ContactPage": {
+    "title": "Contact Us - Serving Connections!",
+    "description": "We don't serve forms. Instead, get in touch with us through one of these links. It's faster and tastier!",
+    "methods": {
+      "email": "Send us an email! 📧",
+      "github": "Spotted a bug? Open an issue on GitHub! 🐛",
+      "discord": "Chat with us on Discord! 🎙️"
+    },
+    "footer": "We love to hear from you, just not through forms. 🍴",
+    "seo": {
+      "title": "Contact Us - CROUStillant",
+      "description": "Get in touch with the CROUStillant team to report a bug, suggest an improvement or just chat with us!",
+      "keywords": "CROUS, restaurant, menu, contact"
     }
   }
 }

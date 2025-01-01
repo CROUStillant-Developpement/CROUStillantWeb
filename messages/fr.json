@@ -61,14 +61,13 @@
     "reset": "Réinitialiser",
     "izly": "Paiement Izly accepté",
     "creditCard": "Paiement par carte bancaire accepté",
+    "loading": "Chargement",
     "geolocated": {
-      "title": "Restaurants à proximité",
-      "loading": "Recherche des restaurants à proximité..."
+      "title": "Restaurants à proximité"
     },
     "region": {
       "title": "Région",
       "placeholder": "Rechercher une région...",
-      "loading": "Chargement des régions...",
       "all": "Toutes les régions",
       "noResults": "Aucune région trouvée pour cette recherche 😢"
     }
@@ -153,7 +152,7 @@
   },
   "Footer": {
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
-    "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",
+    "copyright": "© 2022 - {year} CROUStillant Développement, tous droits réservés.",
     "disclaimer": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif.",
     "links": {
       "discover": {
@@ -197,10 +196,20 @@
     "next": "Suivant"
   },
   "NotFoundPage": {
-    "title": "404 - La pêche n'est pas bonne ici !",
     "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
     "cta": "Retourner à l'accueil",
-    "report": "Signaler un problème"
+    "report": "Signaler un problème",
+    "titlesCount": 8,
+    "titles": {
+      "0": "Pâtes bol !",
+      "1": "Le chef a tout mangé !",
+      "2": "Le plat était froid !",
+      "3": "Le serveur ne trouve plus votre table !",
+      "4": "La commande s'est perdue en cuisine !",
+      "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+      "6": "La table est vide... où est votre assiette ?",
+      "7": "Êtes vous sûr d'avoir une réservation ?"
+    }
   },
   "RestaurantInformation": {
     "openingHours": "Horaires d'ouverture",
@@ -216,7 +225,6 @@
     "creditCard": "Paiement par carte bancaire accepté",
     "phone": "Téléphone",
     "email": "Email",
-    "active": "Actif",
     "otherInformation": "Autres informations",
     "type": "Type",
     "crous": "CROUS",
@@ -404,6 +412,21 @@
         "content1": "Le site peut contenir des liens vers d'autres sites.",
         "content2": "CROUStillant Développement n'est pas responsable du contenu des sites externes. CROUStillant Développement ne peut être tenu responsable des dommages causés par l'utilisation de ces sites."
       }
+    }
+  },
+  "ContactPage": {
+    "title": "Contactez-nous - À votre service !",
+    "description": "Nous ne servons pas de formulaires. À la place, contactez-nous via ces liens. C'est plus rapide et tout aussi savoureux !",
+    "methods": {
+      "email": "Envoyez-nous un email ! 📧",
+      "github": "Un bug repéré ? Signalez-le sur GitHub ! 🐛",
+      "discord": "Discutez avec nous sur Discord ! 🎙️"
+    },
+    "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
+    "seo": {
+      "title": "Contact - CROUStillant",
+      "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
+      "keywords": "CROUS, restaurant, menu, contact"
     }
   }
 }

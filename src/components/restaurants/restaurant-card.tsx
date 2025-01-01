@@ -13,24 +13,34 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
 }
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
+  const [imageSrc, setImageSrc] = useState(
+    restaurant.image_url ?? "/default_ru.png"
+  );
+
   const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
   const t = useTranslations("RestaurantCard");
+
+  const handleImageError = () => {
+    setImageSrc("/default_ru.png");
+  };
 
   return (
     <TooltipProvider>
       <div className="relative group p-2 hover:p-0 fading-border hover:before:border-none hover:cursor-pointer before:border-primary transition-all duration-300 ease-in-out">
         <Image
-          src={restaurant.image_url ?? "/default_ru.png"}
+          src={imageSrc}
           alt={restaurant.nom}
           width={400}
           height={400}
           className="rounded-lg object-cover w-full h-56"
+          onError={handleImageError}
         />
         <Button
           variant="outline"

@@ -16,7 +16,7 @@ export default function HomePage() {
     <div className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0 h-80svh mt-9 md:mt-0">
       <div className="mx-auto flex max-w-container flex-col gap-12 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
-          <Link href="/" className="flex items-center">
+          <Link href="/about" className="flex items-center">
             <Badge variant="outline" className="animate-appear group">
               <div className="flex items-center gap-1">
                 <span className="text-muted-foreground">

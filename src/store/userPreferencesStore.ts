@@ -14,6 +14,7 @@ interface StoreState {
   favoriteRegion: Region | null;
   toggleDisplay: () => void;
   addOrRemoveFromFavorites: (code: number, name?: string) => void;
+  addToFavorites: (code: number, name: string) => void;
   setStarredFav: (favorite: LocalStorageFavorite) => void;
   setFavoriteRegion: (region: Region) => void;
   clearUserPreferences: () => void;
@@ -55,7 +56,7 @@ export const useUserPreferences = create<StoreState>()(
       display: "list",
       favorites: [],
       starredFav: null,
-      favoriteRegion: null,
+      favoriteRegion: { code: -1, libelle: "All Regions" },
 
       toggleDisplay: () =>
         set((state) => ({
@@ -95,6 +96,17 @@ export const useUserPreferences = create<StoreState>()(
           }
         }),
 
+      addToFavorites: (code: number, name: string) =>
+        set((state) => {
+          const index = state.favorites.findIndex((f) => f.code === code);
+          if (index === -1) {
+            return {
+              favorites: [...state.favorites, { code, name }],
+            };
+          }
+          return { favorites: state.favorites };
+        }),
+
       setStarredFav: (favorite: LocalStorageFavorite) =>
         set(() => ({
           starredFav: favorite,
@@ -108,6 +120,9 @@ export const useUserPreferences = create<StoreState>()(
       clearUserPreferences: () =>
         set(() => ({
           favorites: [],
+          starredFav: null,
+          display: "list",
+          favoriteRegion: { code: -1, libelle: "All Regions" },
         })),
     }),
     {

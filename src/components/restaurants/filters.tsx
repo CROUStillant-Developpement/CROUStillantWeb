@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Restaurant } from "@/services/types";
+import { Region, Restaurant } from "@/services/types";
 import { CreditCard, Locate, RotateCcw } from "lucide-react";
 import { ComboBoxResponsive } from "@/components/ui/combobox";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,13 +15,14 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useMemo } from "react";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
   restaurants: Restaurant[];
   setLoading: (loading: boolean) => void;
   loading: boolean;
+  regions: Region[];
 }
 
 export default function RestaurantsFilters({
@@ -29,22 +30,33 @@ export default function RestaurantsFilters({
   setFilteredRestaurants,
   setLoading,
   loading,
+  regions,
 }: RestaurantsFiltersProps) {
   const t = useTranslations("Filters");
+
+  /**
+   * Sort the regions alphabetically and add an "all regions" option at the beginning.
+   * useMemo is used to avoid sorting the regions array on every render.
+   *
+   * @returns The sorted regions array with an "all regions" option at the beginning.
+   */
+  const sortedRegions = useMemo(() => {
+    // Copy the regions array to avoid mutating the original prop
+    const sorted = [...regions].sort((a, b) =>
+      a.libelle.localeCompare(b.libelle)
+    );
+    // Add the "all regions" option to the beginning
+    sorted.unshift({ code: -1, libelle: t("region.all") });
+    return sorted;
+  }, [regions, t]);
 
   const {
     filters,
     setFilters,
-    regions,
     geoLocError,
     handleLocationRequest,
     resetFilters,
-  } = useRestaurantFilters(
-    restaurants,
-    setFilteredRestaurants,
-    t("region.all"),
-    setLoading
-  );
+  } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
 
   return (
     <div className="mt-4 w-full">
@@ -55,6 +67,7 @@ export default function RestaurantsFilters({
             setFilters({ ...filters, search: e.target.value })
           }
           value={filters.search}
+          disabled={loading}
         />
         <Button
           variant="outline"
@@ -63,13 +76,13 @@ export default function RestaurantsFilters({
         >
           <Locate className="mr-2 h-4 w-4" />
           {loading
-            ? t("geolocated.loading")
+            ? t("loading")
             : geoLocError
             ? geoLocError
             : t("geolocated.title")}
         </Button>
         <ComboBoxResponsive
-          values={regions.map((region) => ({
+          values={sortedRegions.map((region) => ({
             label: region.libelle,
             value: region.code.toString(),
           }))}
@@ -79,7 +92,7 @@ export default function RestaurantsFilters({
           }
           buttonTitle={t("region.title")}
           placeholder={t("region.placeholder")}
-          loadingText={t("region.loading")}
+          loadingText={t("loading")}
           noResultsText={t("region.noResults")}
           loading={loading}
         />
@@ -87,6 +100,7 @@ export default function RestaurantsFilters({
           <Tooltip>
             <TooltipTrigger asChild className="w-14">
               <Button
+                disabled={loading}
                 variant={filters.card ? "default" : "outline"}
                 size="icon"
                 onClick={() => {
@@ -106,6 +120,7 @@ export default function RestaurantsFilters({
               <Button
                 variant={filters.izly ? "default" : "outline"}
                 size="icon"
+                disabled={loading}
                 onClick={() => {
                   setFilters({ ...filters, izly: !filters.izly });
                 }}
@@ -124,13 +139,14 @@ export default function RestaurantsFilters({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <Button variant="outline" onClick={resetFilters}>
+        <Button variant="outline" disabled={loading} onClick={resetFilters}>
           <RotateCcw className="mr-2 h-4 w-4" /> {t("reset")}
         </Button>
       </div>
       <div className="mt-4 flex gap-2 flex-wrap lg:flex-nowrap">
         <div className="flex items-center space-x-2">
           <Checkbox
+            disabled={loading}
             id="ispmr"
             onCheckedChange={(checked) =>
               setFilters({ ...filters, isPmr: checked === true })
@@ -146,6 +162,7 @@ export default function RestaurantsFilters({
         </div>
         <div className="flex items-center space-x-2">
           <Checkbox
+            disabled={loading}
             id="open"
             onCheckedChange={(checked) =>
               setFilters({ ...filters, isOpen: checked === true })
