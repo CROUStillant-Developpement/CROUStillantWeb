@@ -19,9 +19,6 @@ export const filterRestaurants = (
   filters: Filters
 ): Restaurant[] => {
   return restaurants.filter((restaurant) => {
-    const matchesSearch =
-      !filters.search ||
-      restaurant.nom?.toLowerCase().includes(filters.search.toLowerCase());
     const matchesPmr = !filters.isPmr || restaurant.ispmr;
     const matchesOpen = !filters.isOpen || restaurant.ouvert;
     const matchesRegion =
@@ -32,6 +29,13 @@ export const filterRestaurants = (
     const matchesRestaurantType =
       filters.restaurantType === -1 ||
       restaurant.type?.code === filters.restaurantType;
+
+    // Search by restaurant name or city
+    const search = filters.search.toLowerCase();
+    const matchesSearch =
+      !search ||
+      restaurant.nom.toLowerCase().includes(search) ||
+      restaurant.zone.toLowerCase().includes(search);
 
     return (
       matchesSearch &&
