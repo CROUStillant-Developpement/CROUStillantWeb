@@ -4,13 +4,11 @@ import { useDebounceCallback } from "usehooks-ts";
 import { filterRestaurants, buildQueryString, Filters } from "@/lib/filters";
 import { Region, Restaurant } from "@/services/types";
 import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
-import { getRegions } from "@/services/region-service";
 
 export function useRestaurantFilters(
   restaurants: Restaurant[],
   setFilteredRestaurants: (restaurants: Restaurant[]) => void,
-  allRegionText = "Toutes les régions",
-  setLoading: (loading: boolean) => void
+  setLoading: (loading: boolean) => void,
 ) {
   const [filters, setFilters] = useState<Filters>({
     search: "",
@@ -21,7 +19,6 @@ export function useRestaurantFilters(
     card: false,
   });
 
-  const [regions, setRegions] = useState<Region[]>([]);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
@@ -47,7 +44,9 @@ export function useRestaurantFilters(
    * @returns void
    */
   const initializeFilters = useCallback(() => {
-    console.log("initializeFilters");
+    if (process.env.NODE_ENV === "development")
+      console.info("initializeFilters");
+    setLoading(true);
     const tempFilters: Filters = {
       search: searchParams.get("search") || "",
       isPmr: searchParams.get("ispmr") === "true",
@@ -57,7 +56,7 @@ export function useRestaurantFilters(
       card: searchParams.get("card") === "true",
     };
     setFilters(tempFilters);
-  }, [restaurants]);
+  }, []);
 
   /**
    * Handles the request to get the user's current geolocation and find nearby restaurants.
@@ -74,7 +73,8 @@ export function useRestaurantFilters(
    * @returns {Promise<void>} A promise that resolves when the location request is complete.
    */
   const handleLocationRequest = useCallback(async () => {
-    console.log("handleLocationRequest");
+    if (process.env.NODE_ENV === "development")
+      console.info("handleLocationRequest");
     setLoading(true);
     try {
       const position = await getGeoLocation();
@@ -93,7 +93,7 @@ export function useRestaurantFilters(
     } finally {
       setLoading(false);
     }
-  }, [restaurants, setFilteredRestaurants]);
+  }, [setFilteredRestaurants]);
 
   /**
    * Resets the restaurant filters to their default values and updates the filtered restaurants list.
@@ -104,7 +104,7 @@ export function useRestaurantFilters(
    * @returns {void}
    */
   const resetFilters = useCallback(() => {
-    console.log("resetFilters");
+    if (process.env.NODE_ENV === "development") console.info("resetFilters");
     setFilters({
       search: "",
       isPmr: false,
@@ -114,13 +114,13 @@ export function useRestaurantFilters(
       card: false,
     });
     setFilteredRestaurants(restaurants);
-  }, [restaurants, setFilteredRestaurants]);
+  }, [setFilteredRestaurants]);
 
   /**
    * Debounced function to filter restaurants based on the provided filters.
    * This function uses a debounce mechanism to limit the rate at which the filtering
    * operation is performed, reducing the number of times the filtering logic is executed.
-   * 
+   *
    *
    * @constant
    * @function
@@ -128,8 +128,9 @@ export function useRestaurantFilters(
    * @returns {void}
    */
   const debouncedFilterRestaurants = useDebounceCallback(() => {
-    console.log("debouncedFilterRestaurants", filters, restaurants.length);
     const filtered = filterRestaurants(restaurants, filters);
+    if (process.env.NODE_ENV === "development")
+      console.info("debouncedFilterRestaurants", filters, filtered.length);
     // sort restaurants by area name
     filtered.sort((a, b) => a.zone.localeCompare(b.zone));
     setFilteredRestaurants(filtered);
@@ -138,14 +139,16 @@ export function useRestaurantFilters(
 
   // Update query string whenever filters change
   useEffect(() => {
-    console.log("useEffect change query string");
+    if (process.env.NODE_ENV === "development")
+      console.info("useEffect change query string");
     const queryString = buildQueryString(filters);
     router.push(`${pathname}?${queryString}`);
   }, [filters, router, pathname]);
 
   // Trigger debounced filtering when filters change
   useEffect(() => {
-    console.log("useEffect debouncedFilterRestaurants");
+    if (process.env.NODE_ENV === "development")
+      console.info("useEffect debouncedFilterRestaurants");
     setLoading(true);
     debouncedFilterRestaurants();
     return () => debouncedFilterRestaurants.cancel();
@@ -153,31 +156,12 @@ export function useRestaurantFilters(
 
   // Fetch regions and initialize filters on mount
   useEffect(() => {
-    console.log("useEffect fetch regions");
-    setLoading(true);
     initializeFilters();
-
-    getRegions()
-      .then((result) => {
-        if (result.success) {
-          const fetchedRegions = result.data;
-          // sort regions by name
-          fetchedRegions.sort((a, b) => a.libelle.localeCompare(b.libelle));
-          fetchedRegions.unshift({ code: -1, libelle: allRegionText });
-          setRegions(fetchedRegions);
-        } else {
-          console.error(result.error);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   }, [initializeFilters]);
 
   return {
     filters,
     setFilters,
-    regions,
     setLoading,
     geoLocError,
     handleLocationRequest,
