@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounceCallback } from "usehooks-ts";
 import {
@@ -7,33 +7,38 @@ import {
   Filters,
   sortRestaurants,
 } from "@/lib/filters";
-import { Region, Restaurant } from "@/services/types";
+import { Restaurant } from "@/services/types";
 import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
+import { useLocale } from "next-intl";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 
 export function useRestaurantFilters(
   restaurants: Restaurant[],
   setFilteredRestaurants: (restaurants: Restaurant[]) => void,
   setLoading: (loading: boolean) => void
 ) {
-  const [filters, setFilters] = useState<Filters>({
+  const initialFilters: Filters = {
     search: "",
     isPmr: false,
     isOpen: false,
     crous: -1,
     izly: false,
     card: false,
-    restaurantTypeAsc: false,
-    restaurantTypeDesc: false,
+    restaurantCityAsc: false,
+    restaurantCityDesc: false,
     restaurantNameAsc: false,
     restaurantNameDesc: false,
     restaurantType: -1,
-  });
+  };
 
+  const [filters, setFilters] = useState<Filters>(initialFilters);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
+  const { favoriteRegion } = useUserPreferences();
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
 
   /**
    * Initializes the filters for the restaurant search based on URL search parameters.
@@ -61,11 +66,13 @@ export function useRestaurantFilters(
       search: searchParams.get("search") || "",
       isPmr: searchParams.get("ispmr") === "true",
       isOpen: searchParams.get("open") === "true",
-      crous: parseInt(searchParams.get("region") || "-1", 10),
+      crous: favoriteRegion
+        ? favoriteRegion.code
+        : parseInt(searchParams.get("region") || "-1", 10),
       izly: searchParams.get("izly") === "true",
       card: searchParams.get("card") === "true",
-      restaurantTypeAsc: searchParams.get("restaurantTypeAsc") === "true",
-      restaurantTypeDesc: searchParams.get("restaurantTypeDesc") === "true",
+      restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",
+      restaurantCityDesc: searchParams.get("restaurantCityDesc") === "true",
       restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
       restaurantNameDesc: searchParams.get("restaurantNameDesc") === "true",
       restaurantType: parseInt(searchParams.get("restaurantType") || "-1", 10),
@@ -127,8 +134,8 @@ export function useRestaurantFilters(
       crous: -1,
       izly: false,
       card: false,
-      restaurantTypeAsc: false,
-      restaurantTypeDesc: false,
+      restaurantCityAsc: false,
+      restaurantCityDesc: false,
       restaurantNameAsc: false,
       restaurantNameDesc: false,
       restaurantType: -1,
@@ -155,7 +162,7 @@ export function useRestaurantFilters(
       console.info("debouncedFilterRestaurants", filters, filtered.length);
 
     // pass 2: sort restaurants based on filters
-    const sorted = sortRestaurants(filtered, filters);
+    const sorted = sortRestaurants(filtered, filters, locale);
 
     setFilteredRestaurants(sorted);
     setLoading(false);
@@ -174,6 +181,7 @@ export function useRestaurantFilters(
     if (process.env.NODE_ENV === "development")
       console.info("useEffect debouncedFilterRestaurants");
     setLoading(true);
+
     debouncedFilterRestaurants();
     return () => debouncedFilterRestaurants.cancel();
   }, [filters]);
@@ -183,6 +191,16 @@ export function useRestaurantFilters(
     initializeFilters();
   }, [initializeFilters]);
 
+  const activeFilterCount = useMemo(() => {
+    return Object.keys(filters).reduce((count, key) => {
+      const currentValue = filters[key as keyof Filters];
+      const initialValue = initialFilters[key as keyof Filters];
+
+      // Increment count if the current value differs from the initial value
+      return currentValue !== initialValue ? count + 1 : count;
+    }, 0);
+  }, [filters]);
+
   return {
     filters,
     setFilters,
@@ -190,5 +208,6 @@ export function useRestaurantFilters(
     geoLocError,
     handleLocationRequest,
     resetFilters,
+    activeFilterCount,
   };
 }

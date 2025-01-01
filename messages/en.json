@@ -56,7 +56,6 @@
   },
   "Filters": {
     "title": "Filters",
-    "description": "Filter the list of restaurants to find the one that suits you best.",
     "search": "Search for a restaurant...",
     "searchTitle": "Search for: <italic>{query}</italic>",
     "activeFilters": "Active filters:",
@@ -86,7 +85,10 @@
       "title": "Restaurant type",
       "placeholder": "Search for a type of restaurant...",
       "all": "All types",
-      "noResults": "No type of restaurant found for this search 😢",
+      "noResults": "No type of restaurant found for this search 😢"
+    },
+    "restaurantCity": {
+      "title": "City",
       "sortAsc": "Alphabetical order (A-Z)",
       "sortDesc": "Reverse alphabetical order (Z-A)"
     },

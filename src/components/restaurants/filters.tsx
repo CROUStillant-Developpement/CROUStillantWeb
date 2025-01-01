@@ -61,7 +61,6 @@ export default function RestaurantsFilters({
   typesRestaurants,
 }: RestaurantsFiltersProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
   const t = useTranslations("Filters");
 
@@ -100,32 +99,8 @@ export default function RestaurantsFilters({
     geoLocError,
     handleLocationRequest,
     resetFilters,
+    activeFilterCount,
   } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
-
-  useEffect(() => {
-    const activeFilters = Object.keys(filters).filter((key) => {
-      if (key === "crous" && filters[key] === -1) return false;
-      if (key === "restaurantType" && filters[key] === -1) return false;
-      return (
-        key === "search" ||
-        key === "restaurantNameAsc" ||
-        key === "restaurantNameDesc" ||
-        key === "restaurantTypeAsc" ||
-        key === "restaurantTypeDesc" ||
-        key === "card" ||
-        key === "izly" ||
-        key === "isPmr" ||
-        key === "isOpen"
-      );
-    });
-
-    const count = activeFilters.reduce(
-      (acc, key) => (filters[key as keyof typeof filters] ? acc + 1 : acc),
-      0
-    );
-
-    setActiveFiltersCount(count);
-  }, [filters]);
 
   return (
     <div className="mt-4 w-full">
@@ -140,21 +115,20 @@ export default function RestaurantsFilters({
         />
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
-            <Button variant={activeFiltersCount > 0 ? "default" : "outline"}>
+            <Button variant={activeFilterCount > 0 ? "default" : "outline"}>
               <Settings2 className="mr-2 h-4 w-4" />
               {t("title")}{" "}
-              {activeFiltersCount > 0 && (
-                <Badge className="bg-muted">{activeFiltersCount}</Badge>
+              {activeFilterCount > 0 && (
+                <Badge className="bg-muted">{activeFilterCount}</Badge>
               )}
             </Button>
           </SheetTrigger>
           <SheetContent>
-            <ScrollArea className="h-[calc(100vh-4rem)]">
+            <ScrollArea className="h-[calc(100vh-10rem)]">
               <SheetHeader>
                 <SheetTitle>{t("title")}</SheetTitle>
-                <SheetDescription>{t("description")}</SheetDescription>
               </SheetHeader>
-              <div className="mt-8">
+              <div className="mt-4">
                 <div className="flex flex-col gap-4 flex-wrap lg:flex-nowrap">
                   <h1 className="text-lg">{t("region.title")}</h1>
                   <ComboBoxResponsive
@@ -187,8 +161,8 @@ export default function RestaurantsFilters({
                             ...filters,
                             restaurantNameAsc: checked === true,
                             restaurantNameDesc: false,
-                            restaurantTypeAsc: false,
-                            restaurantTypeDesc: false,
+                            restaurantCityAsc: false,
+                            restaurantCityDesc: false,
                           })
                         }
                         checked={filters.restaurantNameAsc}
@@ -210,8 +184,8 @@ export default function RestaurantsFilters({
                             ...filters,
                             restaurantNameDesc: checked === true,
                             restaurantNameAsc: false,
-                            restaurantTypeAsc: false,
-                            restaurantTypeDesc: false,
+                            restaurantCityAsc: false,
+                            restaurantCityDesc: false,
                           })
                         }
                         checked={filters.restaurantNameDesc}
@@ -227,6 +201,56 @@ export default function RestaurantsFilters({
                   </div>
                   <Separator />
                   <div className="mb-4">
+                    <h1 className="text-lg">{t("restaurantCity.title")}</h1>
+                    <div className="flex items-center space-x-2 mt-4">
+                      <Checkbox
+                        disabled={loading}
+                        id="restaurantCitySortAsc"
+                        onCheckedChange={(checked) =>
+                          setFilters({
+                            ...filters,
+                            restaurantCityAsc: checked === true,
+                            restaurantCityDesc: false,
+                            restaurantNameAsc: false,
+                            restaurantNameDesc: false,
+                          })
+                        }
+                        checked={filters.restaurantCityAsc}
+                      />
+                      <label
+                        htmlFor="restaurantCitySortAsc"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
+                      >
+                        <ArrowDownAZ className="h-4 w-4 mr-2" />
+                        {t("restaurantCity.sortAsc")}
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2 mt-2">
+                      <Checkbox
+                        disabled={loading}
+                        id="restaurantCitySortDesc"
+                        onCheckedChange={(checked) =>
+                          setFilters({
+                            ...filters,
+                            restaurantCityDesc: checked === true,
+                            restaurantCityAsc: false,
+                            restaurantNameAsc: false,
+                            restaurantNameDesc: false,
+                          })
+                        }
+                        checked={filters.restaurantCityDesc}
+                      />
+                      <label
+                        htmlFor="restaurantCitySortDesc"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
+                      >
+                        <ArrowUpAZ className="h-4 w-4 mr-2" />
+                        {t("restaurantCity.sortDesc")}
+                      </label>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div>
                     <h1 className="text-lg mb-2">
                       {t("restaurantType.title")}
                     </h1>
@@ -248,52 +272,6 @@ export default function RestaurantsFilters({
                       noResultsText={t("restaurantType.noResults")}
                       loading={loading}
                     />
-                    <div className="flex items-center space-x-2 mt-4">
-                      <Checkbox
-                        disabled={loading}
-                        id="restaurantTypeSortAsc"
-                        onCheckedChange={(checked) =>
-                          setFilters({
-                            ...filters,
-                            restaurantTypeAsc: checked === true,
-                            restaurantTypeDesc: false,
-                            restaurantNameAsc: false,
-                            restaurantNameDesc: false,
-                          })
-                        }
-                        checked={filters.restaurantTypeAsc}
-                      />
-                      <label
-                        htmlFor="restaurantTypeSortAsc"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
-                      >
-                        <ArrowDownAZ className="h-4 w-4 mr-2" />
-                        {t("restaurantType.sortAsc")}
-                      </label>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-2">
-                      <Checkbox
-                        disabled={loading}
-                        id="restaurantTypeSortDesc"
-                        onCheckedChange={(checked) =>
-                          setFilters({
-                            ...filters,
-                            restaurantTypeDesc: checked === true,
-                            restaurantTypeAsc: false,
-                            restaurantNameAsc: false,
-                            restaurantNameDesc: false,
-                          })
-                        }
-                        checked={filters.restaurantTypeDesc}
-                      />
-                      <label
-                        htmlFor="restaurantTypeSortDesc"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
-                      >
-                        <ArrowUpAZ className="h-4 w-4 mr-2" />
-                        {t("restaurantType.sortDesc")}
-                      </label>
-                    </div>
                   </div>
                   <Separator />
                   <div className="mb-4">
@@ -418,17 +396,7 @@ export default function RestaurantsFilters({
           <RotateCcw className="mr-2 h-4 w-4" /> {t("reset")}
         </Button>
       </div>
-      {(filters.search.length > 0 ||
-        filters.crous !== -1 ||
-        filters.card ||
-        filters.izly ||
-        filters.isPmr ||
-        filters.isOpen ||
-        filters.restaurantNameAsc ||
-        filters.restaurantNameDesc ||
-        filters.restaurantTypeAsc ||
-        filters.restaurantTypeDesc ||
-        filters.restaurantType !== -1) && (
+      {activeFilterCount > 0 && (
         <div className="mt-4">
           <ul className="flex gap-2 flex-wrap items-center">
             <li>{t("activeFilters")}</li>
@@ -511,23 +479,23 @@ export default function RestaurantsFilters({
                 </Badge>
               </li>
             )}
-            {filters.restaurantTypeAsc && (
+            {filters.restaurantCityAsc && (
               <li>
                 <Badge
                   className="cursor-pointer"
                   onClick={() => setSheetOpen(true)}
                 >
-                  {t("restaurantType.title")} : {t("restaurantType.sortAsc")}
+                  {t("restaurantCity.title")} : {t("restaurantCity.sortAsc")}
                 </Badge>
               </li>
             )}
-            {filters.restaurantTypeDesc && (
+            {filters.restaurantCityDesc && (
               <li>
                 <Badge
                   className="cursor-pointer"
                   onClick={() => setSheetOpen(true)}
                 >
-                  {t("restaurantType.title")} : {t("restaurantType.sortDesc")}
+                  {t("restaurantCity.title")} : {t("restaurantCity.sortDesc")}
                 </Badge>
               </li>
             )}
