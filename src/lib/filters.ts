@@ -4,9 +4,14 @@ export interface Filters {
   search: string;
   isPmr: boolean;
   isOpen: boolean;
-  region: number;
+  crous: number;
   izly: boolean;
   card: boolean;
+  restaurantTypeAsc: boolean;
+  restaurantTypeDesc: boolean;
+  restaurantNameAsc: boolean;
+  restaurantNameDesc: boolean;
+  restaurantType: number;
 }
 
 export const filterRestaurants = (
@@ -20,10 +25,13 @@ export const filterRestaurants = (
     const matchesPmr = !filters.isPmr || restaurant.ispmr;
     const matchesOpen = !filters.isOpen || restaurant.ouvert;
     const matchesRegion =
-      filters.region === -1 || restaurant.region.code === filters.region;
+      filters.crous === -1 || restaurant.region.code === filters.crous;
     const matchesIzly = !filters.izly || restaurant.paiement?.includes("IZLY");
     const matchesCard =
       !filters.card || restaurant.paiement?.includes("Carte bancaire");
+    const matchesRestaurantType =
+      filters.restaurantType === -1 ||
+      restaurant.type?.code === filters.restaurantType;
 
     return (
       matchesSearch &&
@@ -31,7 +39,8 @@ export const filterRestaurants = (
       matchesOpen &&
       matchesRegion &&
       matchesIzly &&
-      matchesCard
+      matchesCard &&
+      matchesRestaurantType
     );
   });
 };
@@ -41,9 +50,36 @@ export const buildQueryString = (filters: Filters): string => {
   if (filters.search) queryString.set("search", filters.search);
   if (filters.isPmr) queryString.set("ispmr", "true");
   if (filters.isOpen) queryString.set("open", "true");
-  if (filters.region !== -1)
-    queryString.set("region", filters.region.toString());
+  if (filters.crous !== -1) queryString.set("region", filters.crous.toString());
   if (filters.izly) queryString.set("izly", "true");
   if (filters.card) queryString.set("card", "true");
+  if (filters.restaurantTypeAsc) queryString.set("restaurantTypeAsc", "true");
+  if (filters.restaurantTypeDesc) queryString.set("restaurantTypeDesc", "true");
+  if (filters.restaurantNameAsc) queryString.set("restaurantNameAsc", "true");
+  if (filters.restaurantNameDesc) queryString.set("restaurantNameDesc", "true");
+  if (filters.restaurantType !== -1)
+    queryString.set("restaurantType", filters.restaurantType.toString());
   return queryString.toString();
+};
+
+export const sortRestaurants = (
+  restaurants: Restaurant[],
+  filters: Filters
+): Restaurant[] => {
+  return restaurants.slice().sort((a, b) => {
+    if (filters.restaurantTypeAsc) {
+      return a.type!.libelle.localeCompare(b.type!.libelle);
+    }
+    if (filters.restaurantTypeDesc) {
+      return b.type!.libelle.localeCompare(a.type!.libelle);
+    }
+    if (filters.restaurantNameAsc) {
+      return a.nom.localeCompare(b.nom);
+    }
+    if (filters.restaurantNameDesc) {
+      return b.nom.localeCompare(a.nom);
+    }
+    // if no sort is applied, sort by restaurant's area
+    return a.zone.localeCompare(b.nom);
+  });
 };

@@ -17,7 +17,21 @@ export default async function Restaurants() {
     return <div>Erreur lors de la récupération des données</div>;
   }
 
+  // Collect unique restaurant types based on `code`
+  const typesRestaurants = Array.from(
+    new Map(
+      restaurants.data.map((restaurant) => [
+        restaurant.type!.code,
+        restaurant.type!,
+      ])
+    ).values()
+  );
+
   return (
-    <RestaurantsPage restaurants={restaurants.data} regions={regions.data} />
+    <RestaurantsPage
+      restaurants={restaurants.data}
+      regions={regions.data}
+      typesRestaurants={typesRestaurants}
+    />
   );
 }

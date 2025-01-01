@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ChevronRight } from "lucide-react";
 
 type Value = {
   value: string;
@@ -53,8 +54,8 @@ export function ComboBoxResponsive({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
-            className="justify-start"
+            variant="ghost"
+            className="w-full items-center justify-between"
             disabled={loading}
           >
             {loading ? (
@@ -71,9 +72,10 @@ export function ComboBoxResponsive({
                 )}
               </>
             )}
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0" align="start">
+        <PopoverContent className="w-full p-0" align="start">
           <StatusList
             setOpen={setOpen}
             setSelectedValue={setSelectedValue}
@@ -89,7 +91,10 @@ export function ComboBoxResponsive({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="justify-start">
+        <Button
+          variant="outline"
+          className="w-full items-center justify-between"
+        >
           {selectedValue ? (
             <>
               {values.find((value) => value.value === selectedValue)?.label ||
@@ -98,6 +103,7 @@ export function ComboBoxResponsive({
           ) : (
             <>{buttonTitle}</>
           )}
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </DrawerTrigger>
       <DrawerContent>

@@ -1,22 +1,32 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounceCallback } from "usehooks-ts";
-import { filterRestaurants, buildQueryString, Filters } from "@/lib/filters";
+import {
+  filterRestaurants,
+  buildQueryString,
+  Filters,
+  sortRestaurants,
+} from "@/lib/filters";
 import { Region, Restaurant } from "@/services/types";
 import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
 
 export function useRestaurantFilters(
   restaurants: Restaurant[],
   setFilteredRestaurants: (restaurants: Restaurant[]) => void,
-  setLoading: (loading: boolean) => void,
+  setLoading: (loading: boolean) => void
 ) {
   const [filters, setFilters] = useState<Filters>({
     search: "",
     isPmr: false,
     isOpen: false,
-    region: -1,
+    crous: -1,
     izly: false,
     card: false,
+    restaurantTypeAsc: false,
+    restaurantTypeDesc: false,
+    restaurantNameAsc: false,
+    restaurantNameDesc: false,
+    restaurantType: -1,
   });
 
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
@@ -51,9 +61,14 @@ export function useRestaurantFilters(
       search: searchParams.get("search") || "",
       isPmr: searchParams.get("ispmr") === "true",
       isOpen: searchParams.get("open") === "true",
-      region: parseInt(searchParams.get("region") || "-1", 10),
+      crous: parseInt(searchParams.get("region") || "-1", 10),
       izly: searchParams.get("izly") === "true",
       card: searchParams.get("card") === "true",
+      restaurantTypeAsc: searchParams.get("restaurantTypeAsc") === "true",
+      restaurantTypeDesc: searchParams.get("restaurantTypeDesc") === "true",
+      restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
+      restaurantNameDesc: searchParams.get("restaurantNameDesc") === "true",
+      restaurantType: parseInt(searchParams.get("restaurantType") || "-1", 10),
     };
     setFilters(tempFilters);
   }, []);
@@ -109,9 +124,14 @@ export function useRestaurantFilters(
       search: "",
       isPmr: false,
       isOpen: false,
-      region: -1,
+      crous: -1,
       izly: false,
       card: false,
+      restaurantTypeAsc: false,
+      restaurantTypeDesc: false,
+      restaurantNameAsc: false,
+      restaurantNameDesc: false,
+      restaurantType: -1,
     });
     setFilteredRestaurants(restaurants);
   }, [setFilteredRestaurants]);
@@ -128,12 +148,16 @@ export function useRestaurantFilters(
    * @returns {void}
    */
   const debouncedFilterRestaurants = useDebounceCallback(() => {
+    // pass 1: filter restaurants based on filters
     const filtered = filterRestaurants(restaurants, filters);
+
     if (process.env.NODE_ENV === "development")
       console.info("debouncedFilterRestaurants", filters, filtered.length);
-    // sort restaurants by area name
-    filtered.sort((a, b) => a.zone.localeCompare(b.zone));
-    setFilteredRestaurants(filtered);
+
+    // pass 2: sort restaurants based on filters
+    const sorted = sortRestaurants(filtered, filters);
+
+    setFilteredRestaurants(sorted);
     setLoading(false);
   }, 300);
 
