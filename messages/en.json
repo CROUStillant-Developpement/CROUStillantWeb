@@ -61,14 +61,13 @@
     "reset": "Reset",
     "izly": "Izly payment accepted",
     "creditCard": "Credit card payment accepted",
+    "loading": "Loading...",
     "geolocated": {
-      "title": "Nearby restaurants",
-      "loading": "Searching for nearby restaurants..."
+      "title": "Nearby restaurants"
     },
     "region": {
       "title": "Region",
       "placeholder": "Search for a region...",
-      "loading": "Loading regions...",
       "all": "All regions",
       "noResults": "No region found for this search 😢"
     }
@@ -226,7 +225,6 @@
     "creditCard": "Credit card payment accepted",
     "phone": "Phone",
     "email": "Email",
-    "active": "Active",
     "otherInformation": "Other information",
     "type": "Type",
     "crous": "CROUS",

@@ -61,14 +61,13 @@
     "reset": "Réinitialiser",
     "izly": "Paiement Izly accepté",
     "creditCard": "Paiement par carte bancaire accepté",
+    "loading": "Chargement",
     "geolocated": {
-      "title": "Restaurants à proximité",
-      "loading": "Recherche des restaurants à proximité..."
+      "title": "Restaurants à proximité"
     },
     "region": {
       "title": "Région",
       "placeholder": "Rechercher une région...",
-      "loading": "Chargement des régions...",
       "all": "Toutes les régions",
       "noResults": "Aucune région trouvée pour cette recherche 😢"
     }
@@ -226,7 +225,6 @@
     "creditCard": "Paiement par carte bancaire accepté",
     "phone": "Téléphone",
     "email": "Email",
-    "active": "Actif",
     "otherInformation": "Autres informations",
     "type": "Type",
     "crous": "CROUS",
