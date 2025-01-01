@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
+import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/app/[locale]/theme-provider";
-import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   //     { rel: "shortcut icon", url: "/favicon.ico" },
   //   ],
   // },
-  manifest: "/manifest.json",
+  // manifest: "/manifest.json",
   // twitter: {
   //   card: "summary",
   //   title: "CROUStillant",
@@ -64,7 +64,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
@@ -73,7 +73,6 @@ export default async function RootLayout({
     notFound();
   }
 
-  // Providing all messages to the client side (just to get started)
   const messages = await getMessages();
 
   return (

@@ -1,5 +1,5 @@
 export default async function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

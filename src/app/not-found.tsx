@@ -1,13 +1,5 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import Error from "next/error";
-
-export default function NotFound() {
-  return (
-    <html lang="en">
-      <body>
-        <Error statusCode={404} />
-      </body>
-    </html>
-  );
+export default function NotFoundPage() {
+  redirect("/fr/404");
 }

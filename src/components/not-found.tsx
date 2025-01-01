@@ -11,7 +11,7 @@ export default function NotFound() {
   const titles = Object.values(t.raw("titles")) as string[];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 px-4 md:px-6">
+    <div className="flex flex-col items-center justify-center gap-6 px-4 md:px-6 h-80svh">
       <FishOff className="h-20 w-20 text-gray-500 dark:text-gray-400" />
       <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
         {titles[Math.floor(Math.random() * titles.length)].toString()}

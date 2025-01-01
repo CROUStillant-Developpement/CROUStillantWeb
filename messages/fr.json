@@ -176,7 +176,7 @@
   },
   "Footer": {
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
-    "copyright": "© 2022 - 2024 CROUStillant Développement, tous droits réservés.",
+    "copyright": "© 2022 - {year} CROUStillant Développement, tous droits réservés.",
     "disclaimer": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif.",
     "links": {
       "discover": {
