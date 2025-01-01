@@ -1,10 +1,8 @@
 "use client";
 
-import { Restaurant, Region } from "@/services/types";
+import { Restaurant, Region, TypeRestaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
 import Loading from "@/app/[locale]/loading";
-import { AlignLeft, Map } from "lucide-react";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useTranslations } from "next-intl";
@@ -17,9 +15,11 @@ import { Link } from "@/i18n/routing";
 export default function RestaurantsPage({
   restaurants,
   regions,
+  typesRestaurants,
 }: {
   restaurants: Restaurant[];
   regions: Region[];
+  typesRestaurants: TypeRestaurant[];
 }) {
   const [loading, setLoading] = useState(true);
   const [filteredRestaurants, setFilteredRestaurants] =
@@ -80,7 +80,7 @@ export default function RestaurantsPage({
     <div>
       {/* Page title and filters */}
       <div className="w-full justify-between lg:flex mb-4 z-10">
-        <div className="lg:w-3/4">
+        <div className="">
           <span className="flex items-center flex-wrap gap-2">
             <h1 className="font-bold text-3xl">Restaurants</h1>
           </span>
@@ -97,9 +97,10 @@ export default function RestaurantsPage({
             setLoading={setLoading}
             loading={loading}
             regions={regions}
+            typesRestaurants={typesRestaurants}
           />
         </div>
-        <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
+        {/* <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
           <p>{t("display.title")}</p>
           <div>
             <Button
@@ -119,7 +120,7 @@ export default function RestaurantsPage({
               <Map className="h-4 w-4" />
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination

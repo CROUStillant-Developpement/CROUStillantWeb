@@ -55,21 +55,45 @@
     "closeAndChoose": "Fermer et choisir {date}"
   },
   "Filters": {
+    "title": "Filtres",
+    "description": "Filtrez les restaurants par région, type, nom ou moyens de paiement acceptés.",
     "search": "Rechercher un restaurant...",
-    "accessibility": "Accessible aux personnes à mobilité réduite",
-    "open": "Ouvert maintenant",
+    "searchTitle": "Recherche : {query}",
+    "activeFilters": "Filtres actifs: ",
+    "close": "Fermer",
+    "additionnal": {
+      "title": "Filtres additionnels",
+      "open": "Ouvert maintenant",
+      "accessibility": "Accessible aux personnes à mobilité réduite"
+    },
     "reset": "Réinitialiser",
-    "izly": "Paiement Izly accepté",
-    "creditCard": "Paiement par carte bancaire accepté",
+    "payment": {
+      "title": "Moyens de paiement",
+      "izly": "Paiement Izly accepté",
+      "creditCard": "Paiement par carte bancaire accepté"
+    },
     "loading": "Chargement",
     "geolocated": {
       "title": "Restaurants à proximité"
     },
     "region": {
-      "title": "Région",
-      "placeholder": "Rechercher une région...",
-      "all": "Toutes les régions",
-      "noResults": "Aucune région trouvée pour cette recherche 😢"
+      "title": "CROUS",
+      "placeholder": "Rechercher un CROUS...",
+      "all": "Tous les CROUS",
+      "noResults": "Aucune CROUS trouvé pour cette recherche 😢"
+    },
+    "restaurantType": {
+      "title": "Type de restaurant",
+      "placeholder": "Rechercher un type de restaurant...",
+      "all": "Tous les types",
+      "noResults": "Aucun type de restaurant trouvé pour cette recherche 😢",
+      "sortAsc": "Ordre alphabétique (A-Z)",
+      "sortDesc": "Ordre alphabétique (Z-A)"
+    },
+    "restaurantName": {
+      "title": "Nom du restaurant",
+      "sortAsc": "Ordre alphabétique (A-Z)",
+      "sortDesc": "Ordre alphabétique (Z-A)"
     }
   },
   "RestaurantCard": {

@@ -55,21 +55,45 @@
     "closeAndChoose": "Close and choose {date}"
   },
   "Filters": {
+    "title": "Filters",
+    "description": "Filter the list of restaurants to find the one that suits you best.",
     "search": "Search for a restaurant...",
-    "accessibility": "Accessibility for people with reduced mobility",
-    "open": "Open now",
-    "reset": "Reset",
-    "izly": "Izly payment accepted",
-    "creditCard": "Credit card payment accepted",
+    "searchTitle": "Search for: <italic>{query}</italic>",
+    "activeFilters": "Active filters:",
+    "close": "Close",
+    "additionnal": {
+      "title": "Additional filters",
+      "open": "Open now",
+      "accessibility": "Accessibility for people with reduced mobility"
+    },
+    "reset": "Reset filters",
+    "payment": {
+      "title": "Payment methods",
+      "izly": "Izly payment accepted",
+      "creditCard": "Credit card payment accepted"
+    },
     "loading": "Loading...",
     "geolocated": {
       "title": "Nearby restaurants"
     },
     "region": {
-      "title": "Region",
-      "placeholder": "Search for a region...",
-      "all": "All regions",
-      "noResults": "No region found for this search 😢"
+      "title": "CROUS",
+      "placeholder": "Search for a CROUS...",
+      "all": "All CROUS",
+      "noResults": "No CROUS found for this search 😢"
+    },
+    "restaurantType": {
+      "title": "Restaurant type",
+      "placeholder": "Search for a type of restaurant...",
+      "all": "All types",
+      "noResults": "No type of restaurant found for this search 😢",
+      "sortAsc": "Alphabetical order (A-Z)",
+      "sortDesc": "Reverse alphabetical order (Z-A)"
+    },
+    "restaurantName": {
+      "title": "Restaurant name",
+      "sortAsc": "Alphabetical order (A-Z)",
+      "sortDesc": "Reverse alphabetical order (Z-A)"
     }
   },
   "RestaurantCard": {

@@ -43,7 +43,7 @@ export interface Restaurant {
 
 // Types for TypeRestaurant
 export interface TypeRestaurant {
-  code: string; // Identifiant du type de restauration
+  code: number; // Identifiant du type de restauration
   libelle: string; // Libellé du type de restauration
 }
 
