@@ -27,7 +27,7 @@ import {
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Sheet,
   SheetClose,
@@ -61,6 +61,7 @@ export default function RestaurantsFilters({
   typesRestaurants,
 }: RestaurantsFiltersProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
   const t = useTranslations("Filters");
 
@@ -101,6 +102,31 @@ export default function RestaurantsFilters({
     resetFilters,
   } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
 
+  useEffect(() => {
+    const activeFilters = Object.keys(filters).filter((key) => {
+      if (key === "crous" && filters[key] === -1) return false;
+      if (key === "restaurantType" && filters[key] === -1) return false;
+      return (
+        key === "search" ||
+        key === "restaurantNameAsc" ||
+        key === "restaurantNameDesc" ||
+        key === "restaurantTypeAsc" ||
+        key === "restaurantTypeDesc" ||
+        key === "card" ||
+        key === "izly" ||
+        key === "isPmr" ||
+        key === "isOpen"
+      );
+    });
+
+    const count = activeFilters.reduce(
+      (acc, key) => (filters[key as keyof typeof filters] ? acc + 1 : acc),
+      0
+    );
+
+    setActiveFiltersCount(count);
+  }, [filters]);
+
   return (
     <div className="mt-4 w-full">
       <div className="flex md:gap-4 gap-2 flex-wrap items-center">
@@ -114,9 +140,12 @@ export default function RestaurantsFilters({
         />
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline">
+            <Button variant={activeFiltersCount > 0 ? "default" : "outline"}>
               <Settings2 className="mr-2 h-4 w-4" />
-              {t("title")}
+              {t("title")}{" "}
+              {activeFiltersCount > 0 && (
+                <Badge className="bg-muted">{activeFiltersCount}</Badge>
+              )}
             </Button>
           </SheetTrigger>
           <SheetContent>

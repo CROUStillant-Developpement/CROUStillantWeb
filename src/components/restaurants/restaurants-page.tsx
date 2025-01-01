@@ -80,7 +80,7 @@ export default function RestaurantsPage({
     <div>
       {/* Page title and filters */}
       <div className="w-full justify-between lg:flex mb-4 z-10">
-        <div className="">
+        <div className="w-full">
           <span className="flex items-center flex-wrap gap-2">
             <h1 className="font-bold text-3xl">Restaurants</h1>
           </span>
