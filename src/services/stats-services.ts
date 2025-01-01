@@ -25,12 +25,6 @@ export async function getGlobalStats(): Promise<ApiResult<GlobalStats>> {
   });
 }
 
-// Cache object
-let githubStarsCache: {
-  stars: number;
-  timestamp: number;
-} | null = null;
-
 export const getGithubStarCount = async (): Promise<number> => {
   // Cache expiration time (2 hours in milliseconds)
   const cacheExpirationTime = 2 * 60 * 60 * 1000;
