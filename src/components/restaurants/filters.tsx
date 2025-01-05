@@ -124,7 +124,7 @@ export default function RestaurantsFilters({
             </Button>
           </SheetTrigger>
           <SheetContent>
-            <ScrollArea className="h-[calc(100vh-10rem)]">
+            <ScrollArea className="h-full pr-4 mt-4 mb-4 pb-4">
               <SheetHeader>
                 <SheetTitle>{t("title")}</SheetTitle>
               </SheetHeader>

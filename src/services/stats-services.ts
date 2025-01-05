@@ -1,4 +1,4 @@
-import { Tache, GlobalStats, ApiResult } from "./types";
+import { Tache, GlobalStats, ApiResult, GithubRepo } from "./types";
 import { apiRequest } from "./api-requets";
 
 /**
@@ -32,21 +32,25 @@ export const getGithubStarCount = async (): Promise<number> => {
   let stars = 0;
   const repos = [
     "CROUStillant-Developpement/CROUStillant",
-    "CROUStillant-Developpement/CROUStillantWeb",
     "CROUStillant-Developpement/CROUStillantAPI",
+    "CROUStillant-Developpement/CROUStillantWeb",
   ];
 
   for (const repo of repos) {
-    const response = await apiRequest<any>({
-      endpoint: `https://api.github.com/repos/${repo}`,
+    const response = await apiRequest<GithubRepo>({
+      endpoint: `repos/${repo}`,
       method: "GET",
       cacheDuration: cacheExpirationTime,
+      api_url: "https://api.github.com",
+      check_success: false,
     });
 
     if (!response.success) {
       console.error(`Failed to fetch for: ${repo}`);
       continue;
     }
+
+    console.log(`Fetched ${repo} with ${response.data.stargazers_count} stars`);
 
     stars += response.data.stargazers_count;
   }

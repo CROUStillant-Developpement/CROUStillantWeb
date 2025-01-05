@@ -66,9 +66,10 @@ export function useRestaurantFilters(
       search: searchParams.get("search") || "",
       isPmr: searchParams.get("ispmr") === "true",
       isOpen: searchParams.get("open") === "true",
-      crous: favoriteRegion
-        ? favoriteRegion.code
-        : parseInt(searchParams.get("region") || "-1", 10),
+      crous: parseInt(
+        searchParams.get("region") || favoriteRegion?.code.toString() || "-1",
+        10
+      ),
       izly: searchParams.get("izly") === "true",
       card: searchParams.get("card") === "true",
       restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",
