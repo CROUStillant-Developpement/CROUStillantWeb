@@ -10,6 +10,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import UmamiProvider from 'next-umami';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -77,6 +78,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <UmamiProvider websiteId="727eceb7-824d-4cac-b24b-789188b2480c" src="https://analytics.bayfield.dev/script.js" />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background antialiased relative",
