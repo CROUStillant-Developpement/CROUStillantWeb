@@ -32,6 +32,8 @@ export const getGithubStarCount = async (): Promise<number> => {
   let stars = 0;
   const repos = [
     "CROUStillant-Developpement/CROUStillant",
+    "CROUStillant-Developpement/CROUStillantAPI",
+    "CROUStillant-Developpement/CROUStillantWeb",
   ];
 
   for (const repo of repos) {
@@ -42,8 +44,6 @@ export const getGithubStarCount = async (): Promise<number> => {
       api_url: "https://api.github.com",
       check_success: false,
     });
-
-    console.log("response", response);
 
     if (!response.success) {
       console.error(`Failed to fetch for: ${repo}`);

@@ -46,15 +46,11 @@ export async function apiRequest<T>({
 }): Promise<ApiResult<T>> {
   const cacheKey = `${method}:${api_url}/${endpoint}:${JSON.stringify(body)}`;
 
-  console.log("Cache key", cacheKey);
-
   // Check if response exists in cache and is valid
   if (cache.has(cacheKey)) {
     const cached = cache.get(cacheKey)!;
     if (Date.now() < cached.expiry) {
       console.log(`Cache hit for ${method} ${endpoint}`);
-
-      console.log(`Cached data for ${method} ${endpoint}:`, cached.data);
 
       return {
         success: true,
@@ -66,7 +62,7 @@ export async function apiRequest<T>({
     }
   }
 
-  console.log(`Making ${method} request to ${api_url}${endpoint}`);
+  console.log(`Making ${method} request to ${api_url}/${endpoint}`);
   const url = `${api_url}/${endpoint}`;
 
   const headers: HeadersInit = {};
@@ -86,15 +82,11 @@ export async function apiRequest<T>({
       headers["Content-Type"] = "application/json";
     }
 
-    console.log(`Requesting ${method} ${url}`, headers, bodyContent);
-
     const response = await fetch(url, {
       method,
       headers: headers,
       body: bodyContent,
     });
-
-    console.log(`Status for ${method} ${endpoint}:`, response.status);
 
     // Handle the case of 204 No Content
     if (response.status === 204) {
@@ -108,9 +100,6 @@ export async function apiRequest<T>({
     if (response.ok) {
       const data = await response.json();
 
-      // console.log(`Data for ${method} ${endpoint}:`, data);
-      console.log(`Success for ${method} ${endpoint}:`, data.success, check_success);
-
       if (check_success && !data.success) {
         return {
           success: false,
@@ -119,14 +108,19 @@ export async function apiRequest<T>({
         };
       }
 
-      console.log("Cache duration", cacheDuration);
-
       // Cache the response if caching is enabled
-      if (cacheDuration > 0) {
-        cache.set(cacheKey, {
-          data: data.data,
-          expiry: Date.now() + cacheDuration,
-        });
+      if (cacheDuration > 0) { 
+        if (check_success) {
+          cache.set(cacheKey, {
+            data: data.data,
+            expiry: Date.now() + cacheDuration,
+          });
+        } else {
+          cache.set(cacheKey, {
+            data: data,
+            expiry: Date.now() + cacheDuration,
+          });
+        }
 
         console.log(`Cached response for ${method} ${endpoint}`);
       }
