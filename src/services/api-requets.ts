@@ -34,19 +34,28 @@ export async function apiRequest<T>({
   method = "GET",
   body,
   cacheDuration = 0,
+  api_url = process.env.API_URL,
+  check_success = true,
 }: {
   endpoint: string;
   method?: string;
   body?: any;
   cacheDuration?: number;
+  api_url?: string;
+  check_success?: boolean;
 }): Promise<ApiResult<T>> {
-  const cacheKey = `${method}:${endpoint}:${JSON.stringify(body)}`;
+  const cacheKey = `${method}:${api_url}/${endpoint}:${JSON.stringify(body)}`;
+
+  console.log("Cache key", cacheKey);
 
   // Check if response exists in cache and is valid
   if (cache.has(cacheKey)) {
     const cached = cache.get(cacheKey)!;
     if (Date.now() < cached.expiry) {
       console.log(`Cache hit for ${method} ${endpoint}`);
+
+      console.log(`Cached data for ${method} ${endpoint}:`, cached.data);
+
       return {
         success: true,
         data: cached.data as T,
@@ -57,12 +66,12 @@ export async function apiRequest<T>({
     }
   }
 
-  console.log(`Making ${method} request to ${endpoint}`);
-  const url = `${process.env.API_URL}/${endpoint}`;
+  console.log(`Making ${method} request to ${api_url}${endpoint}`);
+  const url = `${api_url}/${endpoint}`;
 
   const headers: HeadersInit = {};
 
-  if (process.env.API_KEY) {
+  if (process.env.API_KEY && api_url === process.env.API_URL) {
     headers["X-Api-Key"] = process.env.API_KEY as string
   }
 
@@ -77,11 +86,15 @@ export async function apiRequest<T>({
       headers["Content-Type"] = "application/json";
     }
 
+    console.log(`Requesting ${method} ${url}`, headers, bodyContent);
+
     const response = await fetch(url, {
       method,
       headers: headers,
       body: bodyContent,
     });
+
+    console.log(`Status for ${method} ${endpoint}:`, response.status);
 
     // Handle the case of 204 No Content
     if (response.status === 204) {
@@ -95,7 +108,10 @@ export async function apiRequest<T>({
     if (response.ok) {
       const data = await response.json();
 
-      if (!data.success) {
+      // console.log(`Data for ${method} ${endpoint}:`, data);
+      console.log(`Success for ${method} ${endpoint}:`, data.success, check_success);
+
+      if (check_success && !data.success) {
         return {
           success: false,
           error: data.message,
@@ -103,19 +119,29 @@ export async function apiRequest<T>({
         };
       }
 
+      console.log("Cache duration", cacheDuration);
+
       // Cache the response if caching is enabled
       if (cacheDuration > 0) {
         cache.set(cacheKey, {
           data: data.data,
           expiry: Date.now() + cacheDuration,
         });
+
         console.log(`Cached response for ${method} ${endpoint}`);
       }
 
-      return {
-        success: true,
-        data: data.data as T,
-      };
+      if (check_success) {
+        return {
+          success: true,
+          data: data.data as T,
+        };
+      } else {
+        return {
+          success: true,
+          data: data as T,
+        };
+      }
     }
 
     // If the response is not OK, return an error
@@ -125,6 +151,8 @@ export async function apiRequest<T>({
       status: response.status,
     };
   } catch (err) {
+    console.error(`Failed to ${method} ${endpoint}:`, err);
+
     // Handle network errors or unexpected issues
     return {
       success: false,
