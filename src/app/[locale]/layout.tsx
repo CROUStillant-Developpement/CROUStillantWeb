@@ -10,7 +10,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import UmamiProvider from 'next-umami';
+import UmamiProvider from "next-umami";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,6 +70,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
@@ -79,7 +80,10 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <UmamiProvider websiteId="727eceb7-824d-4cac-b24b-789188b2480c" src="https://analytics.bayfield.dev/script.js" />
+        <UmamiProvider
+          websiteId="727eceb7-824d-4cac-b24b-789188b2480c"
+          src="https://analytics.bayfield.dev/script.js"
+        />
       </head>
       <body
         className={cn(

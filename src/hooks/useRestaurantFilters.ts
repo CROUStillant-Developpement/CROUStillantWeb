@@ -111,6 +111,7 @@ export function useRestaurantFilters(
           setFilteredRestaurants(nearbyRestaurants);
         }
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setGeoLocError(error.message);
     } finally {
