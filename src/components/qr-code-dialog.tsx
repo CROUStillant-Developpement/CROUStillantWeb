@@ -57,10 +57,10 @@ export default function QrCodeDialog({
       canvas.height = SIZE;
       // @ts-expect-error - TS doesn't know about the drawImage method
       canvas.getContext("2d").drawImage(imageRef.current, 0, 0, SIZE, SIZE);
-      canvas.toBlob((blob: any) => {
+      canvas.toBlob((blob: Blob | null) => {
         navigator.clipboard.write([
           new ClipboardItem({
-            "image/png": blob,
+            "image/png": blob ?? new Blob(),
           }),
         ]);
       }, "image/png");

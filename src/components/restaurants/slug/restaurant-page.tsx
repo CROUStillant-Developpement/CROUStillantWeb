@@ -161,7 +161,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               {t("noMealAvailableDescription")}
             </AlertDescription>
           </Alert>
-          <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
+          <RestaurantInfo restaurant={restaurant} />
         </div>
       ) : loading ? (
         <RestaurantPageSkeleton />
@@ -216,7 +216,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               </fieldset>
             </TabsContent>
             <TabsContent value="info">
-              <RestaurantInfo restaurant={restaurant} numberOfMeals={12} />
+              <RestaurantInfo restaurant={restaurant} />
             </TabsContent>
           </Tabs>
         </div>

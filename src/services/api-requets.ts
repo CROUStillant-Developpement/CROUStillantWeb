@@ -2,6 +2,7 @@
 
 import { ApiResult } from "@/services/types";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const cache = new Map<string, { data: any; expiry: number }>();
 
 /**
@@ -39,6 +40,7 @@ export async function apiRequest<T>({
 }: {
   endpoint: string;
   method?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any;
   cacheDuration?: number;
   api_url?: string;
@@ -68,7 +70,7 @@ export async function apiRequest<T>({
   const headers: HeadersInit = {};
 
   if (process.env.API_KEY && api_url === process.env.API_URL) {
-    headers["X-Api-Key"] = process.env.API_KEY as string
+    headers["X-Api-Key"] = process.env.API_KEY as string;
   }
 
   try {
@@ -109,7 +111,7 @@ export async function apiRequest<T>({
       }
 
       // Cache the response if caching is enabled
-      if (cacheDuration > 0) { 
+      if (cacheDuration > 0) {
         if (check_success) {
           cache.set(cacheKey, {
             data: data.data,
