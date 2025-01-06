@@ -14,25 +14,17 @@ import {
   Map,
   RotateCcw,
   Settings2,
-  Trash2,
 } from "lucide-react";
 import { ComboBoxResponsive } from "@/components/ui/combobox";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import Image from "next/image";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,

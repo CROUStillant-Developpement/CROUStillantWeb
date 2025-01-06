@@ -8,7 +8,6 @@ import {
   Settings,
   Home,
   Info,
-  Mail,
   Star,
   UtensilsCrossed,
 } from "lucide-react";

@@ -23,13 +23,9 @@ import { useMediaQuery } from "usehooks-ts";
 
 type RestaurantInfoProps = {
   restaurant: Restaurant;
-  numberOfMeals: number;
 };
 
-export default function RestaurantInfo({
-  restaurant,
-  numberOfMeals,
-}: RestaurantInfoProps) {
+export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   const t = useTranslations("RestaurantInformation");
 
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -182,16 +178,13 @@ export default function RestaurantInfo({
               {t("contact")}
             </p>
             {restaurant.email && (
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-bold">{t("email")}:</span>{" "}
-                  <Link
-                    className="underline"
-                    href={`mailto:${restaurant.email}`}
-                  >
-                    {restaurant.email}
-                  </Link>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-sm">
+                <span className="font-bold">{t("email")}:</span>{" "}
+                <Link className="underline" href={`mailto:${restaurant.email}`}>
+                  {restaurant.email}
+                </Link>
+              </div>
+            )}
             {restaurant.telephone && (
               <div className="flex items-center gap-2 text-sm">
                 <span className="font-bold">{t("phone")}:</span>{" "}
