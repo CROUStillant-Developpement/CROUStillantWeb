@@ -375,12 +375,12 @@ export default function RestaurantsFilters({
           {display == "list" ? (
             <>
               <Map className="mr-2 h-4 w-4" />
-              Afficher la carte
+              {t("map")}
             </>
           ) : (
             <>
               <AlignLeft className="mr-2 h-4 w-4" />
-              Afficher la liste
+              {t("list")}
             </>
           )}
         </Button>

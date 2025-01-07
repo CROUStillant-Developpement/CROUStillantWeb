@@ -96,7 +96,9 @@
       "title": "Nom du restaurant",
       "sortAsc": "Ordre alphabétique (A-Z)",
       "sortDesc": "Ordre alphabétique inverse (Z-A)"
-    }
+    },
+    "map": "Afficher sur la carte",
+    "list": "Afficher en liste"
   },
   "RestaurantCard": {
     "cta": "Voir le menu",
@@ -454,5 +456,11 @@
       "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
       "keywords": "CROUS, restaurant, menu, contact"
     }
+  },
+  "ModeToggle": {
+    "title": "Changer de thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
   }
 }

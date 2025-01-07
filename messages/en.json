@@ -96,7 +96,9 @@
       "title": "Restaurant name",
       "sortAsc": "Alphabetical order (A-Z)",
       "sortDesc": "Reverse alphabetical order (Z-A)"
-    }
+    },
+    "map": "Display on map",
+    "list": "Display in list"
   },
   "RestaurantCard": {
     "cta": "View the menu",
@@ -453,5 +455,11 @@
       "description": "Get in touch with the CROUStillant team to report a bug, suggest an improvement or just chat with us!",
       "keywords": "CROUS, restaurant, menu, contact"
     }
+  },
+  "ModeToggle": {
+    "title": "Change theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }
