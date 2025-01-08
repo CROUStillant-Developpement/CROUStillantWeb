@@ -5,6 +5,7 @@ import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { slugify } from "@/lib/utils";
+import { Badge } from "./ui/badge";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -17,6 +18,11 @@ export default function Footer() {
           <Link href="/" className="flex items-center gap-2">
             <Logo />
             <h1 className="text-2xl font-bold opacity-80">CROUStillant</h1>
+            <Link href="/changelog" className="flex items-center">
+              <Badge variant="version" className="animate-appear text-xs">
+                Version {process.env.NEXT_PUBLIC_VERSION}
+              </Badge>
+            </Link>
           </Link>
           <div className="flex flex-row mt-4 gap-2 h-full items-start">
             <div className="mt-4 flex opacity-90">
@@ -115,6 +121,11 @@ export default function Footer() {
               <li>
                 <Link href="/legal" className="hover:underline">
                   {t("links.about.legal")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/changelog" className="hover:underline">
+                  {t("links.about.changelog")}
                 </Link>
               </li>
             </ul>
