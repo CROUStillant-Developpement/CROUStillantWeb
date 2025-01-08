@@ -188,6 +188,37 @@ export default function AboutPage() {
         </div>
       </div>
       <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+        <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
+          <h2 className="lg:text-4xl text-xl font-medium">
+            {t("job.title")}
+          </h2>
+          <p className="mt-4 lg:text-lg">
+            {t("job.description")}
+          </p>
+          <div className="relative mt-8 flex">
+            <Link
+              href="https://discord.gg/yG6FjqbWtk"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Button variant="outline">
+                {t("job.button")}
+                <ExternalLinkIcon className="ml-4 h-4 w-4 opacity-50" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+        <div className="flex items-center justify-center xl:w-1/2 xl:object-right">
+          <Image
+            width={1350}
+            height={900}
+            src="/previews/structure.png"
+            alt="Structure Preview"
+            className="rounded-md object-contain"
+          />
+        </div>
+      </div>
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-center object-left xl:w-1/2">
           <Image
             width={1350}

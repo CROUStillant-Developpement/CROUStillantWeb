@@ -128,6 +128,11 @@
         "feature4": "Ne collecte pas vos données"
       }
     },
+    "job": {
+      "title": "Rejoignez l'équipe !",
+      "description": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+      "button": "Nous contacter via Discord"
+    },
     "product": {
       "title": "Simple, intuitif et accessible",
       "description": "Nos services sont conçus pour être facile à utiliser et accessible à tous. Que vous soyez étudiant, personnel universitaire ou simple curieux, vous trouverez toutes les informations dont vous avez besoin sur CROUStillant.",
@@ -195,7 +200,8 @@
         "project": "Le projet",
         "team": "L'équipe",
         "contact": "Contact",
-        "legal": "Notice légale"
+        "legal": "Notice légale",
+        "changelog": "Mises à jour"
       },
       "resources": {
         "title": "Lien utiles",

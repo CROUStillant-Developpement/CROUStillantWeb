@@ -128,6 +128,11 @@
         "feature4": "Does not collect your data"
       }
     },
+    "job": {
+      "title": "Join the team!",
+      "description": "CROUStillant is a constantly evolving project. We are always looking for new talents to join the team and help us improve the service.",
+      "button": "Contact us via Discord"
+    },
     "product": {
       "title": "Simple, intuitive and accessible",
       "description": "CROUStillant is a simple and intuitive platform that allows you to access the menus of CROUS restaurants in France and overseas. The platform is accessible to all and does not require any registration.",
@@ -195,7 +200,8 @@
         "project": "The project",
         "team": "The team",
         "contact": "Contact",
-        "legal": "Legal notices"
+        "legal": "Legal notices",
+        "changelog": "Changelog"
       },
       "resources": {
         "title": "Useful links",
