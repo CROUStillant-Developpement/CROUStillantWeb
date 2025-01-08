@@ -96,7 +96,9 @@
       "title": "Nom du restaurant",
       "sortAsc": "Ordre alphabétique (A-Z)",
       "sortDesc": "Ordre alphabétique inverse (Z-A)"
-    }
+    },
+    "map": "Afficher sur la carte",
+    "list": "Afficher en liste"
   },
   "RestaurantCard": {
     "cta": "Voir le menu",
@@ -125,6 +127,11 @@
         "feature3": "En constante amélioration",
         "feature4": "Ne collecte pas vos données"
       }
+    },
+    "job": {
+      "title": "Rejoignez l'équipe !",
+      "description": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+      "button": "Nous contacter via Discord"
     },
     "product": {
       "title": "Simple, intuitif et accessible",
@@ -193,7 +200,8 @@
         "project": "Le projet",
         "team": "L'équipe",
         "contact": "Contact",
-        "legal": "Notice légale"
+        "legal": "Notice légale",
+        "changelog": "Mises à jour"
       },
       "resources": {
         "title": "Lien utiles",
@@ -454,5 +462,11 @@
       "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
       "keywords": "CROUS, restaurant, menu, contact"
     }
+  },
+  "ModeToggle": {
+    "title": "Changer de thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
   }
 }
