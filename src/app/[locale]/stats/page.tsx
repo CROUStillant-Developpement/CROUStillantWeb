@@ -18,7 +18,6 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -87,16 +86,24 @@ const chartConfig = {
 
 const TacheCharts = ({ data }: { data: Tache[] }) => {
   const processedData = useMemo(() => {
-    return data.map((tache) => ({
-      id: tache.id,
-      date: formatToISODate(tache.debut.split(" ")[0]), // Extract date
-      deltaMenus: tache.fin_menus - tache.debut_menus,
-      deltaRepas: tache.fin_repas - tache.debut_repas,
-      deltaCategories: tache.fin_categories - tache.debut_categories,
-      deltaPlats: tache.fin_plats - tache.debut_plats,
-      requetes: tache.requetes,
-    }));
-  }, [data]);
+    return data
+      .filter((tache) => 
+        tache.fin_plats !== null || 
+        tache.fin_categories !== null || 
+        tache.fin_repas !== null || 
+        tache.fin_menus !== null
+      )
+      .map((tache) => ({
+        id: tache.id,
+        date: formatToISODate(tache.debut.split(" ")[0]),
+        deltaMenus: tache.fin_menus - tache.debut_menus,
+        deltaRepas: tache.fin_repas - tache.debut_repas,
+        deltaCategories: tache.fin_categories - tache.debut_categories,
+        deltaPlats: tache.fin_plats - tache.debut_plats,
+        requetes: tache.requetes,
+      }))
+      .reverse();
+  }, [data]);  
 
   const locale = useLocale();
 
@@ -163,16 +170,8 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
               <ChartTooltip
                 content={
                   <ChartTooltipContent
-                    className="w-[150px]"
+                    className="w-[200px]"
                     nameKey="menuAdded"
-                    labelFormatter={(value) => {
-                      const date = new Date(value);
-                      return date.toLocaleDateString(locale, {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      });
-                    }}
                   />
                 }
               />
