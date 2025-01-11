@@ -80,6 +80,7 @@ export default {
       },
       spacing: {
         "80svh": "80svh",
+        "65svh": "65svh",
       },
     },
   },

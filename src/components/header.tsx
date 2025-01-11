@@ -2,21 +2,15 @@
 
 import { Button } from "./ui/button";
 import { Link } from "@/i18n/routing";
-import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/theme-switcher";
-import {
-  Settings,
-  Home,
-  Info,
-  Star,
-  UtensilsCrossed,
-} from "lucide-react";
+import { Settings, Home, Info, Star, UtensilsCrossed } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 import { getGithubStarCount } from "@/services/stats-services";
 import { useEffect, useState } from "react";
 import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
 import { useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/routing";
 
 export default function Header() {
   const [stars, setStars] = useState<number>(0); // [1
@@ -57,7 +51,7 @@ export default function Header() {
             <Button
               size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/" ? "default" : "outline"}
+              variant={pathname === "/restaurants" ? "default" : "outline"}
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}

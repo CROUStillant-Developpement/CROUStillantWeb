@@ -73,7 +73,8 @@
     },
     "loading": "Chargement",
     "geolocated": {
-      "title": "Restaurants à proximité"
+      "title": "Restaurants à proximité",
+      "error": "Impossible de récupérer votre position actuelle"
     },
     "region": {
       "title": "CROUS",
@@ -468,5 +469,12 @@
     "light": "Clair",
     "dark": "Sombre",
     "system": "Système"
+  },
+  "ChangelogPage": {
+    "title": "Mises à jour",
+    "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées.",
+    "noUpdates": "Aucune mise à jour n'a été publiée pour le moment. Revenez plus tard pour découvrir les dernières fonctionnalités ajoutées à CROUStillant !",
+    "buildInProgress": "Construction en cours...",
+    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage."
   }
 }

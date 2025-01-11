@@ -73,7 +73,8 @@
     },
     "loading": "Loading...",
     "geolocated": {
-      "title": "Nearby restaurants"
+      "title": "Nearby restaurants",
+      "error": "An error occurred while geolocating you"
     },
     "region": {
       "title": "CROUS",
@@ -467,5 +468,12 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "ChangelogPage": {
+    "title": "Changelog",
+    "description": "Discover the latest changes and updates made to CROUStillant.",
+    "noChanges": "No changes have been made to the platform yet.",
+    "buildInProgress": "The build is in progress...",
+    "buildInProgressDescription": "This page is currently being built. It may have some display issues."
   }
 }

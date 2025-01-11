@@ -15,15 +15,17 @@ export default function Footer() {
     <footer className="border-grey align-center flex w-full flex-col border-t py-10 font-medium md:px-0 overflow-hidden">
       <div className="mx-auto md:flex w-full justify-between gap-5 border-b px-5 pb-10 lg:!w-2/3 lg:px-0">
         <div className="flex flex-col">
-          <Link href="/" className="flex items-center gap-2">
-            <Logo />
-            <h1 className="text-2xl font-bold opacity-80">CROUStillant</h1>
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
+              <Logo />
+              <h1 className="text-2xl font-bold opacity-80">CROUStillant</h1>
+            </Link>
             <Link href="/changelog" className="flex items-center">
               <Badge variant="version" className="animate-appear text-xs">
                 Version {process.env.NEXT_PUBLIC_VERSION}
               </Badge>
             </Link>
-          </Link>
+          </div>
           <div className="flex flex-row mt-4 gap-2 h-full items-start">
             <div className="mt-4 flex opacity-90">
               <Link
@@ -178,11 +180,9 @@ export default function Footer() {
       <div className="mx-auto w-full flex flex-col px-5 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
         <p>{t("authors")}</p>
         <p className="mt-2 font-semibold">
-          {t("copyright", {year: new Date().getFullYear()})}
+          {t("copyright", { year: new Date().getFullYear() })}
         </p>
-        <p className="mt-2 italic">
-          {t("disclaimer")}
-        </p>
+        <p className="mt-2 italic">{t("disclaimer")}</p>
       </div>
     </footer>
   );
