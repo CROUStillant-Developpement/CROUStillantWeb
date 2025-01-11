@@ -73,7 +73,8 @@
     },
     "loading": "Loading...",
     "geolocated": {
-      "title": "Nearby restaurants"
+      "title": "Nearby restaurants",
+      "error": "An error occurred while geolocating you"
     },
     "region": {
       "title": "CROUS",

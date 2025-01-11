@@ -101,6 +101,7 @@ export function useRestaurantFilters(
     setLoading(true);
     try {
       const position = await getGeoLocation();
+
       if (position) {
         const nearbyRestaurants = findRestaurantsAroundPosition(
           restaurants,
@@ -110,6 +111,8 @@ export function useRestaurantFilters(
         if (nearbyRestaurants.length > 0) {
           setFilteredRestaurants(nearbyRestaurants);
         }
+      } else {
+        throw new Error();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
