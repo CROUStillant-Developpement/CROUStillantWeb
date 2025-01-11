@@ -73,7 +73,8 @@
     },
     "loading": "Chargement",
     "geolocated": {
-      "title": "Restaurants à proximité"
+      "title": "Restaurants à proximité",
+      "error": "Impossible de récupérer votre position actuelle"
     },
     "region": {
       "title": "CROUS",

@@ -368,7 +368,7 @@ export default function RestaurantsFilters({
           {loading
             ? t("loading")
             : geoLocError
-            ? geoLocError
+            ? t("geolocated.error")
             : t("geolocated.title")}
         </Button>
         <Button variant="outline" disabled={loading} onClick={toggleDisplay}>
