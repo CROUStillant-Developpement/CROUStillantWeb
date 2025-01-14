@@ -155,7 +155,7 @@ export interface ChangelogItem {
 }
 
 export interface Contributor {
-  name: String;
+  name: string;
   role: {
     fr: string;
     en: string;
