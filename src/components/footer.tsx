@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { slugify } from "@/lib/utils";
 import { Badge } from "./ui/badge";
+import VersionBadge from "./version-badge";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -20,11 +21,7 @@ export default function Footer() {
               <Logo />
               <h1 className="text-2xl font-bold opacity-80">CROUStillant</h1>
             </Link>
-            <Link href="/changelog" className="flex items-center">
-              <Badge variant="version" className="animate-appear text-xs">
-                Version {process.env.NEXT_PUBLIC_VERSION}
-              </Badge>
-            </Link>
+            <VersionBadge />
           </div>
           <div className="flex flex-row mt-4 gap-2 h-full items-start">
             <div className="mt-4 flex opacity-90">
