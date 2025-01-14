@@ -141,3 +141,29 @@ export interface GithubRepo {
   name: string; // Nom du dépôt
   stargazers_count: number; // Nombre d'étoiles du dépôt
 }
+
+export interface Changelog {
+  [key: string]: ChangelogItem[];
+}
+
+export interface ChangelogItem {
+  contributors: Contributor[];
+  date: string;
+  en: ChangelogItemLanguage;
+  fr: ChangelogItemLanguage;
+  version: string;
+}
+
+export interface Contributor {
+  name: String;
+  role: {
+    fr: string;
+    en: string;
+  };
+}
+
+export interface ChangelogItemLanguage {
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+}

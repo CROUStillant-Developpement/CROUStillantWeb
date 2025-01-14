@@ -475,6 +475,11 @@
     "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées.",
     "noUpdates": "Aucune mise à jour n'a été publiée pour le moment. Revenez plus tard pour découvrir les dernières fonctionnalités ajoutées à CROUStillant !",
     "buildInProgress": "Construction en cours...",
-    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage."
+    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
+    "seo": {
+      "title": "Mises à jour - CROUStillant",
+      "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées. Restez informé des nouveautés !",
+      "keywords": "CROUS, restaurant, menu, mises à jour"
+    }
   }
 }
