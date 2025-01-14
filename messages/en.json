@@ -474,6 +474,11 @@
     "description": "Discover the latest changes and updates made to CROUStillant.",
     "noChanges": "No changes have been made to the platform yet.",
     "buildInProgress": "The build is in progress...",
-    "buildInProgressDescription": "This page is currently being built. It may have some display issues."
+    "buildInProgressDescription": "This page is currently being built. It may have some display issues.",
+    "seo": {
+      "title": "Changelog - CROUStillant",
+      "description": "Discover the latest changes and updates made to CROUStillant. Stay informed of the latest features and improvements.",
+      "keywords": "CROUS, restaurant, menu, changelog"
+    }
   }
 }

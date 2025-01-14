@@ -1,15 +1,10 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Logo from "./logo";
 import { Link } from "@/i18n/routing";
-import { useUserPreferences } from "@/store/userPreferencesStore";
-import { slugify } from "@/lib/utils";
 import { Badge } from "./ui/badge";
 
-export default function Footer() {
-  const t = useTranslations("Footer");
-  const { starredFav } = useUserPreferences();
+export default async function Footer() {
+  const t = await getTranslations("Footer");
 
   return (
     <footer className="border-grey align-center flex w-full flex-col border-t py-10 font-medium md:px-0 overflow-hidden">
@@ -22,7 +17,7 @@ export default function Footer() {
             </Link>
             <Link href="/changelog" className="flex items-center">
               <Badge variant="version" className="animate-appear text-xs">
-                Version {process.env.NEXT_PUBLIC_VERSION}
+                Version {process.env.VERSION}
               </Badge>
             </Link>
           </div>
@@ -70,16 +65,7 @@ export default function Footer() {
             </h2>
             <ul className="mt-4 font-normal opacity-70">
               <li>
-                <Link
-                  href={
-                    starredFav
-                      ? `/restaurants/${slugify(starredFav.name)}-r${
-                          starredFav.code
-                        }`
-                      : "/restaurants"
-                  }
-                  className="hover:underline"
-                >
+                <Link href="/restaurants" className="hover:underline">
                   {t("links.discover.meals")}
                 </Link>
               </li>
