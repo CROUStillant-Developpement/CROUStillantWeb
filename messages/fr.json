@@ -211,6 +211,10 @@
         "discord": "Bot Discord",
         "status": "Status"
       }
+    },
+    "accessibility": {
+      "normal": "Police normale",
+      "dislexic": "Police dyslexique"
     }
   },
   "Header": {
@@ -347,15 +351,39 @@
     }
   },
   "StatsPage": {
-    "buildInProgress": "Construction en cours...",
-    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
-    "ideas": {
-      "title": "Vous avez une idée de statistique ?",
-      "description": "Vous avez une idée de statistique que vous aimeriez voir sur cette page ? N'hésitez pas à nous la partager sur notre serveur Discord !",
-      "button": "Rejoindre le serveur Discord"
-    },
     "title": "Statistiques",
-    "description": "Découvrez les statistiques de CROUStillant et de ses utilisateurs."
+    "description": "CROUStillant met à jour les menus des restaurants CROUS plusieurs fois par jour. Découvrez les statistiques de ces mises à jour.",
+    "stats": {
+      "menus": "Menus",
+      "compositions": "Compositions",
+      "categories": "Catégories",
+      "repas": "Repas",
+      "plats": "Plats",
+      "restaurants": "Restaurants",
+      "regions": "Régions"
+    },
+    "charts": {
+      "menuAdded": {
+        "title": "Menus ajoutés",
+        "description": "Nombre de menus ajoutés par jour."
+      },
+      "overTime": {
+        "title": "Évolution des données",
+        "description": "Évolution du nombre de compositions, catégories, repas et plats ajoutés par jour."
+      },
+      "requests": {
+        "title": "Requêtes",
+        "description": "Nombre de requêtes effectuées par jour."
+      },
+      "labels": {
+        "menus": "Menus",
+        "compositions": "Compositions",
+        "categories": "Catégories",
+        "repas": "Repas",
+        "plats": "Plats",
+        "requetes": "Requêtes"
+      }
+    }
   },
   "LegalPage": {
     "title": "Notice légale",
