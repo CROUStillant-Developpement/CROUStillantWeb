@@ -1,6 +1,6 @@
 "use client";
 
-import SettingCard from "@/components/setting-card";
+import SettingCard from "@/components/settings/setting-card";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -80,6 +80,7 @@ export default function SettingsPage() {
   useEffect(() => {
     getRegions().then((res) => {
       if (res.success) {
+        res.data.sort((a, b) => a.libelle.localeCompare(b.libelle));
         res.data.unshift({ code: -1, libelle: t("favorites.regionSelectAll") });
         setRegions(res.data);
       }
