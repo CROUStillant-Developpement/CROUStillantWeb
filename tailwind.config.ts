@@ -82,6 +82,9 @@ export default {
         "80svh": "80svh",
         "65svh": "65svh",
       },
+      fontFamily: {
+        dyslexic: ["OpenDyslexic", "sans-serif"], // https://opendyslexic.org/
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

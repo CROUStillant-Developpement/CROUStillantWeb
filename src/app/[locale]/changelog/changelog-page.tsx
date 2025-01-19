@@ -28,7 +28,7 @@ export default function ChangelogPage({ changelogs }: ChangelogPageProps) {
         <AlertDescription>{t("buildInProgressDescription")}</AlertDescription>
       </Alert>
       <div className="my-6">
-        <div className="flex justify-evenly mb-6">
+        <div className="flex justify-evenly mb-6 flex-wrap gap-2">
           {Object.keys(changelogs).map((key) => (
             <Button asChild variant="outline" key={key}>
               <Link key={key} href={`#${key}`}>
