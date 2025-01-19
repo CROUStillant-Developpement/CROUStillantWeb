@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
+import AccessibilityButton from "./accessibility-button";
 
 export default async function Footer() {
   const t = await getTranslations("Footer");
@@ -163,12 +164,17 @@ export default async function Footer() {
           </div>
         </div>
       </div>
-      <div className="mx-auto w-full flex flex-col px-5 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
-        <p>{t("authors")}</p>
-        <p className="mt-2 font-semibold">
-          {t("copyright", { year: new Date().getFullYear() })}
-        </p>
-        <p className="mt-2 italic">{t("disclaimer")}</p>
+      <div className="flex items-center flex-wrap">
+        <div className="mx-auto w-full flex flex-col px-5 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
+          <p>{t("authors")}</p>
+          <p className="mt-2 font-semibold">
+            {t("copyright", { year: new Date().getFullYear() })}
+          </p>
+          <p className="mt-2 italic">{t("disclaimer")}</p>
+        </div>
+        <div className="mx-auto flex flex-col px-5 pt-10 lg:px-0 text-xs">
+          <AccessibilityButton />
+        </div>
       </div>
     </footer>
   );

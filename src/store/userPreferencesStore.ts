@@ -7,48 +7,106 @@ export interface LocalStorageFavorite {
   name: string;
 }
 
+/**
+ * Represents the state of the user preferences store.
+ */
 interface StoreState {
+  /**
+   * List of favorite items stored in local storage.
+   */
   favorites: LocalStorageFavorite[];
+
+  /**
+   * The favorite item that is starred.
+   */
   starredFav: LocalStorageFavorite | null;
+
+  /**
+   * The display type setting.
+   */
   display: DisplayType;
+
+  /**
+   * The region selected as favorite.
+   */
   favoriteRegion: Region | null;
+
+  /**
+   * Indicates whether the dyslexic font is enabled.
+   */
+  dislexicFont: boolean;
+
+  /**
+   * Toggles the display type.
+   */
   toggleDisplay: () => void;
+
+  /**
+   * Toggles the dyslexic font setting.
+   */
+  toggleDislexicFont: () => void;
+
+  /**
+   * Adds or removes an item from the favorites list.
+   * 
+   * @param code - The code of the item.
+   * @param name - The name of the item (optional).
+   */
   addOrRemoveFromFavorites: (code: number, name?: string) => void;
+
+  /**
+   * Adds an item to the favorites list.
+   * 
+   * @param code - The code of the item.
+   * @param name - The name of the item.
+   */
   addToFavorites: (code: number, name: string) => void;
+
+  /**
+   * Sets the starred favorite item.
+   * 
+   * @param favorite - The favorite item to be starred.
+   */
   setStarredFav: (favorite: LocalStorageFavorite) => void;
+
+  /**
+   * Sets the favorite region.
+   * 
+   * @param region - The region to be set as favorite.
+   */
   setFavoriteRegion: (region: Region) => void;
+
+  /**
+   * Clears all user preferences.
+   */
   clearUserPreferences: () => void;
 }
 
+
 /**
- * Custom hook to manage user preferences using Zustand and localStorage.
+ * Custom hook to manage user preferences using Zustand for state management and localStorage for persistence.
  *
- * @returns {StoreState} The state and actions for user preferences.
+ * @returns {StoreState} The state and actions to manage user preferences.
  *
  * @property {string} display - The current display mode, either "list" or "map".
  * @property {Array<{code: number, name: string}>} favorites - The list of favorite items.
  * @property {null | {code: number, name: string}} starredFav - The starred favorite item.
+ * @property {{code: number, libelle: string}} favoriteRegion - The user's favorite region.
+ * @property {boolean} dislexicFont - Whether the dyslexic font is enabled.
  *
  * @method toggleDisplay - Toggles the display mode between "list" and "map".
+ * @method toggleDislexicFont - Toggles the dyslexic font setting.
  * @method addOrRemoveFromFavorites - Adds or removes an item from the favorites list.
  * @param {number} code - The code of the item to add or remove.
  * @param {string} [name] - The name of the item to add (optional).
- *
+ * @method addToFavorites - Adds an item to the favorites list.
+ * @param {number} code - The code of the item to add.
+ * @param {string} name - The name of the item to add.
  * @method setStarredFav - Sets the starred favorite item.
  * @param {LocalStorageFavorite} favorite - The favorite item to set as starred.
- *
- * @method clearUserPreferences - Clears all user preferences.
- *
- * @example
- * const {
- *   display,
- *   favorites,
- *   starredFav,
- *   toggleDisplay,
- *   addOrRemoveFromFavorites,
- *   setStarredFav,
- *   clearUserPreferences
- * } = useUserPreferences();
+ * @method setFavoriteRegion - Sets the user's favorite region.
+ * @param {Region} region - The region to set as favorite.
+ * @method clearUserPreferences - Clears all user preferences, resetting to default values.
  */
 export const useUserPreferences = create<StoreState>()(
   persist(
@@ -57,10 +115,16 @@ export const useUserPreferences = create<StoreState>()(
       favorites: [],
       starredFav: null,
       favoriteRegion: { code: -1, libelle: "All Regions" },
+      dislexicFont: false,
 
       toggleDisplay: () =>
         set((state) => ({
           display: state.display === "list" ? "map" : "list",
+        })),
+
+      toggleDislexicFont: () =>
+        set((state) => ({
+          dislexicFont: !state.dislexicFont,
         })),
 
       addOrRemoveFromFavorites: (code: number, name?: string) =>
