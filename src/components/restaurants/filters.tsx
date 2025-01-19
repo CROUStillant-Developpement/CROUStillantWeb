@@ -31,7 +31,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useUserPreferences } from "@/store/userPreferencesStore";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ActiveFilterBadge from "./active-filter-badge";
