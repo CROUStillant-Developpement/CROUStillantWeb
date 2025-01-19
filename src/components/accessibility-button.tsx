@@ -2,10 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
 export default function AccessibilityButton() {
   const { dislexicFont, toggleDislexicFont } = useUserPreferences();
+  const t = useTranslations("Footer");
 
   // Update body class and save preference when font state changes
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function AccessibilityButton() {
       variant="outline"
       className=""
     >
-      {dislexicFont ? "Police normale" : "Police dyslexique"}
+      {dislexicFont ? t("accessibility.normal") : t("accessibility.dislexic")}
     </Button>
   );
 }

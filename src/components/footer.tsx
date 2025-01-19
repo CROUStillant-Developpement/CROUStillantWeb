@@ -58,6 +58,9 @@ export default async function Footer() {
               </Link>
             </div>
           </div>
+          <div className="flex flex-row mt-4 gap-2 h-full items-start">
+            <AccessibilityButton />
+          </div>
         </div>
         <div className="flex flex-wrap gap-10 mt-4 md:mt-0">
           <div>
@@ -171,9 +174,6 @@ export default async function Footer() {
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <p className="mt-2 italic">{t("disclaimer")}</p>
-        </div>
-        <div className="mx-auto flex flex-col px-5 pt-10 lg:px-0 text-xs">
-          <AccessibilityButton />
         </div>
       </div>
     </footer>
