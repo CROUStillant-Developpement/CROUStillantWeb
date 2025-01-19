@@ -33,7 +33,7 @@ export default function Content({
   }, [favoritesRestaurants]);
 
   if (display === "map") {
-    return <MapComponent />;
+    return <MapComponent loading={loading} />;
   } else {
     return (
       <>

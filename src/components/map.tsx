@@ -63,15 +63,15 @@ const Map = ({
   return (
     <div className="col-span-3 flex-1 h-65svh relative">
       {loading && (
-        <div className="absolute top-0 left-0 inset-0 flex items-center justify-center rounded-lg bg-white opacity-75">
+        <div className="absolute top-0 left-0 inset-0 flex flex-col items-center justify-center rounded-lg bg-transparent z-20 backdrop-blur-sm">
           <div className="rounded-full h-20 w-20 bg-primary animate-ping"></div>
-          HELLO WORLD
         </div>
       )}
       <MapContainer
         center={center}
         zoom={zoom}
         className="flex-1 w-full h-full rounded-lg z-10"
+        minZoom={2}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
