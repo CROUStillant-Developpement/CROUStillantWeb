@@ -34,6 +34,7 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ActiveFilterBadge from "./active-filter-badge";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
@@ -111,7 +112,9 @@ export default function RestaurantsFilters({
               <Settings2 className="mr-2 h-4 w-4" />
               {t("title")}{" "}
               {activeFilterCount > 0 && (
-                <Badge className="bg-muted">{activeFilterCount}</Badge>
+                <span className="bg-black rounded-full py-1 px-3">
+                  {activeFilterCount}
+                </span>
               )}
             </Button>
           </SheetTrigger>
@@ -393,117 +396,128 @@ export default function RestaurantsFilters({
           <ul className="flex gap-2 flex-wrap items-center">
             <li>{t("activeFilters")}</li>
             {filters.search && (
-              <Badge className="cursor-pointer">
-                {t.rich("searchTitle", {
+              <ActiveFilterBadge
+                text={t.rich("searchTitle", {
                   italic: (chunks) => <span className="italic">{chunks}</span>,
                   query: filters.search,
                 })}
-              </Badge>
+                onRemove={() => setFilters({ ...filters, search: "" })}
+              />
             )}
             {filters.crous !== -1 && (
               <li>
-                <Badge
-                  className="cursor-pointer transition-all ease-in-out duration-300"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("region.title")}:{" "}
-                  {sortedRegions.find((r) => r.code === filters.crous)?.libelle}
-                </Badge>
+                <ActiveFilterBadge
+                  setSheetOpen={setSheetOpen}
+                  text={
+                    t("region.title") +
+                    ": " +
+                    sortedRegions.find((r) => r.code === filters.crous)?.libelle
+                  }
+                  onRemove={() => setFilters({ ...filters, crous: -1 })}
+                />
               </li>
             )}
             {filters.card && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("payment.creditCard")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={t("payment.creditCard")}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() => setFilters({ ...filters, card: false })}
+                />
               </li>
             )}
             {filters.izly && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("payment.izly")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={t("payment.izly")}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() => setFilters({ ...filters, izly: false })}
+                />
               </li>
             )}
             {filters.isPmr && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("additionnal.accessibility")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={t("additionnal.accessibility")}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() => setFilters({ ...filters, isPmr: false })}
+                />
               </li>
             )}
             {filters.isOpen && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("additionnal.open")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={t("additionnal.open")}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() => setFilters({ ...filters, isOpen: false })}
+                />
               </li>
             )}
             {filters.restaurantNameAsc && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("restaurantName.title")} : {t("restaurantName.sortAsc")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={`${t("restaurantName.title")} : ${t(
+                    "restaurantName.sortAsc"
+                  )}`}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() =>
+                    setFilters({ ...filters, restaurantNameAsc: false })
+                  }
+                />
               </li>
             )}
             {filters.restaurantNameDesc && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("restaurantName.title")} : {t("restaurantName.sortDesc")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={`${t("restaurantName.title")} : ${t(
+                    "restaurantName.sortDesc"
+                  )}`}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() =>
+                    setFilters({ ...filters, restaurantNameDesc: false })
+                  }
+                />
               </li>
             )}
             {filters.restaurantCityAsc && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("restaurantCity.title")} : {t("restaurantCity.sortAsc")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={`${t("restaurantCity.title")} : ${t(
+                    "restaurantCity.sortAsc"
+                  )}`}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() =>
+                    setFilters({ ...filters, restaurantCityAsc: false })
+                  }
+                />
               </li>
             )}
             {filters.restaurantCityDesc && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("restaurantCity.title")} : {t("restaurantCity.sortDesc")}
-                </Badge>
+                <ActiveFilterBadge
+                  text={`${t("restaurantCity.title")} : ${t(
+                    "restaurantCity.sortDesc"
+                  )}`}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() =>
+                    setFilters({ ...filters, restaurantCityDesc: false })
+                  }
+                />
               </li>
             )}
             {filters.restaurantType !== -1 && (
               <li>
-                <Badge
-                  className="cursor-pointer"
-                  onClick={() => setSheetOpen(true)}
-                >
-                  {t("restaurantType.title")}:{" "}
-                  {
+                <ActiveFilterBadge
+                  text={`${t("restaurantType.title")}: ${
                     typesRestaurants.find(
                       (r) => r.code === filters.restaurantType
                     )?.libelle
+                  }`}
+                  setSheetOpen={setSheetOpen}
+                  onRemove={() =>
+                    setFilters({ ...filters, restaurantType: -1 })
                   }
-                </Badge>
+                />
               </li>
             )}
           </ul>
