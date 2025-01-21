@@ -244,20 +244,38 @@
     "previous": "Précédent",
     "next": "Suivant"
   },
-  "NotFoundPage": {
-    "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
-    "cta": "Retourner à l'accueil",
-    "report": "Signaler un problème",
-    "titlesCount": 8,
-    "titles": {
-      "0": "Pâtes bol !",
-      "1": "Le chef a tout mangé !",
-      "2": "Le plat était froid !",
-      "3": "Le serveur ne trouve plus votre table !",
-      "4": "La commande s'est perdue en cuisine !",
-      "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
-      "6": "La table est vide... où est votre assiette ?",
-      "7": "Êtes vous sûr d'avoir une réservation ?"
+  "ErrorPage": {
+    "400": {
+      "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
+      "cta": "Retourner à l'accueil",
+      "report": "Signaler un problème",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Pâtes bol !",
+        "1": "Le chef a tout mangé !",
+        "2": "Le plat était froid !",
+        "3": "Le serveur ne trouve plus votre table !",
+        "4": "La commande s'est perdue en cuisine !",
+        "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+        "6": "La table est vide... où est votre assiette ?",
+        "7": "Êtes vous sûr d'avoir une réservation ?"
+      }
+    },
+    "500": {
+      "description": "Une erreur est survenue lors du chargement de la page. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
+      "cta": "Retourner à l'accueil",
+      "report": "Signaler un problème",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Le serveur a brûlé !",
+        "1": "Le chef a tout mangé !",
+        "2": "Le plat était froid !",
+        "3": "Le serveur ne trouve plus votre table !",
+        "4": "La commande s'est perdue en cuisine !",
+        "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+        "6": "La table est vide... où est votre assiette ?",
+        "7": "Êtes vous sûr d'avoir une réservation ?"
+      }
     }
   },
   "RestaurantInformation": {

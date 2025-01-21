@@ -1,7 +1,8 @@
 import { getChangelog } from "@/services/changelog-service";
 import { Metadata } from "next";
-import ChangelogPage from "./changelog-page";
+import ChangelogPage from "@/components/changelog/changelog-page";
 import { getTranslations } from "next-intl/server";
+import ErrorPage from "@/components/error";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ChangelogPage");
@@ -21,5 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Changelog() {
   const logs = await getChangelog();
-  return <ChangelogPage changelogs={logs.success ? logs.data : {}} />;
+
+  if (!logs.success) {
+    return <ErrorPage statusCode={500} />;
+  }
+
+  return <ChangelogPage changelogs={logs.data} />;
 }

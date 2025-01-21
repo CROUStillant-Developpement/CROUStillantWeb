@@ -1,3 +1,4 @@
+import ErrorPage from "@/components/error";
 import StatsPage from "@/components/stats/stats-page";
 import { getTaches, getGlobalStats } from "@/services/stats-services";
 import type { Metadata } from "next";
@@ -24,7 +25,7 @@ export default async function Restaurants() {
   const stats = await getGlobalStats();
 
   if (!taches.success || !stats.success) {
-    return null;
+    return <ErrorPage statusCode={500} />;
   }
 
   return <StatsPage taches={taches.data} stats={stats.data} />;
