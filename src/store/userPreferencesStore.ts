@@ -52,15 +52,7 @@ interface StoreState {
    * @param code - The code of the item.
    * @param name - The name of the item (optional).
    */
-  addOrRemoveFromFavorites: (code: number, name?: string) => void;
-
-  /**
-   * Adds an item to the favorites list.
-   * 
-   * @param code - The code of the item.
-   * @param name - The name of the item.
-   */
-  addToFavorites: (code: number, name: string) => void;
+  addOrRemoveFromFavorites: (code: number, name?: string, qr?: boolean) => void;
 
   /**
    * Sets the starred favorite item.
@@ -99,7 +91,6 @@ interface StoreState {
  * @method addOrRemoveFromFavorites - Adds or removes an item from the favorites list.
  * @param {number} code - The code of the item to add or remove.
  * @param {string} [name] - The name of the item to add (optional).
- * @method addToFavorites - Adds an item to the favorites list.
  * @param {number} code - The code of the item to add.
  * @param {string} name - The name of the item to add.
  * @method setStarredFav - Sets the starred favorite item.
@@ -127,9 +118,11 @@ export const useUserPreferences = create<StoreState>()(
           dislexicFont: !state.dislexicFont,
         })),
 
-      addOrRemoveFromFavorites: (code: number, name?: string) =>
+      addOrRemoveFromFavorites: (code: number, name?: string, qr: boolean = false) =>
         set((state) => {
           const index = state.favorites.findIndex((f) => f.code === code);
+
+          // if index is -1, the item is not in the favorites list
           if (index === -1) {
             if (!state.starredFav) {
               return {
@@ -148,6 +141,13 @@ export const useUserPreferences = create<StoreState>()(
             };
           }
 
+          // if qr is true, we don't want to remove the item from the list (if called 2 times in a row)
+          if (qr) {
+            return {
+              favorites: state.favorites,
+            };
+          }
+
           const newFavorites = [...state.favorites];
           newFavorites.splice(index, 1);
 
@@ -158,17 +158,6 @@ export const useUserPreferences = create<StoreState>()(
           } else {
             return { favorites: newFavorites };
           }
-        }),
-
-      addToFavorites: (code: number, name: string) =>
-        set((state) => {
-          const index = state.favorites.findIndex((f) => f.code === code);
-          if (index === -1) {
-            return {
-              favorites: [...state.favorites, { code, name }],
-            };
-          }
-          return { favorites: state.favorites };
         }),
 
       setStarredFav: (favorite: LocalStorageFavorite) =>

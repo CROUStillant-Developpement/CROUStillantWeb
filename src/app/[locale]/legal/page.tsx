@@ -1,10 +1,25 @@
-"use client";
-
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export default function LegalPage() {
-  const t = useTranslations("LegalPage");
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("LegalPage");
+
+  return {
+    title: t("seo.title"),
+    description: t("seo.description"),
+    keywords: t("seo.keywords"),
+    openGraph: {
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: "/banner.png" },
+      siteName: "CROUStillant",
+    },
+  };
+}
+
+export default async function LegalPage() {
+  const t = await getTranslations("LegalPage");
 
   return (
     <>
@@ -14,16 +29,28 @@ export default function LegalPage() {
           <h2 className="text-lg font-semibold mt-4">{t("subtitle")}</h2>
           <span>{t("description")}</span>
           <div className="mt-4 flex flex-col gap-2">
-            <Link href="#legal" className="text-blue-500 dark:text-blue-400 hover:underline">
+            <Link
+              href="#legal"
+              className="text-blue-500 dark:text-blue-400 hover:underline"
+            >
               {t("legal.title")}
             </Link>
-            <Link href="#privacy" className="text-blue-500 dark:text-blue-400 hover:underline">
+            <Link
+              href="#privacy"
+              className="text-blue-500 dark:text-blue-400 hover:underline"
+            >
               {t("privacy.title")}
             </Link>
-            <Link href="#cookies" className="text-blue-500 dark:text-blue-400 hover:underline">
+            <Link
+              href="#cookies"
+              className="text-blue-500 dark:text-blue-400 hover:underline"
+            >
               {t("cookies.title")}
             </Link>
-            <Link href="#terms" className="text-blue-500 dark:text-blue-400 hover:underline">
+            <Link
+              href="#terms"
+              className="text-blue-500 dark:text-blue-400 hover:underline"
+            >
               {t("terms.title")}
             </Link>
           </div>
@@ -36,7 +63,9 @@ export default function LegalPage() {
             <>
               <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">{t(`legal.${key}.title`)}</h2>
+                <h2 className="text-lg font-semibold">
+                  {t(`legal.${key}.title`)}
+                </h2>
                 <div className="flex flex-col mt-2 gap-2">
                   <span>{t(`legal.${key}.content1`)}</span>
                   <span>{t(`legal.${key}.content2`)}</span>
@@ -53,7 +82,9 @@ export default function LegalPage() {
             <>
               <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">{t(`privacy.${key}.title`)}</h2>
+                <h2 className="text-lg font-semibold">
+                  {t(`privacy.${key}.title`)}
+                </h2>
                 <div className="flex flex-col mt-2 gap-2">
                   <span>{t(`privacy.${key}.content1`)}</span>
                   <span>{t(`privacy.${key}.content2`)}</span>
@@ -70,7 +101,9 @@ export default function LegalPage() {
             <>
               <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">{t(`cookies.${key}.title`)}</h2>
+                <h2 className="text-lg font-semibold">
+                  {t(`cookies.${key}.title`)}
+                </h2>
                 <div className="flex flex-col mt-2 gap-2">
                   <span>{t(`cookies.${key}.content1`)}</span>
                   <span>{t(`cookies.${key}.content2`)}</span>
@@ -87,7 +120,9 @@ export default function LegalPage() {
             <>
               <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">{t(`terms.${key}.title`)}</h2>
+                <h2 className="text-lg font-semibold">
+                  {t(`terms.${key}.title`)}
+                </h2>
                 <div className="flex flex-col mt-2 gap-2">
                   <span>{t(`terms.${key}.content1`)}</span>
                   <span>{t(`terms.${key}.content2`)}</span>

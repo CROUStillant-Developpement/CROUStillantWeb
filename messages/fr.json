@@ -26,7 +26,12 @@
     "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "clickToSeeAll": "Voir tout",
     "clickToSeeLess": "Voir moins",
-    "markerDescription": "Voir le menu du restaurant <link>{name}</link>."
+    "markerDescription": "Voir le menu du restaurant <link>{name}</link>.",
+    "seo": {
+      "title": "Restaurants - CROUStillant",
+      "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
+      "keywords": "CROUS, restaurant, menu"
+    }
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",
@@ -182,6 +187,11 @@
       "title": "Encore plus convaincu ?",
       "description": "Rejoignez notre communauté Discord pour discuter avec d'autres utilisateurs et les membres de l'équipe CROUStillant !",
       "button": "Notre serveur Discord"
+    },
+    "seo": {
+      "title": "À propos - CROUStillant",
+      "description": "Découvrez l'équipe de CROUStillant, le projet et les fonctionnalités du service. Nous sommes là pour vous aider !",
+      "keywords": "CROUS, restaurant, menu, équipe, projet"
     }
   },
   "Footer": {
@@ -234,20 +244,38 @@
     "previous": "Précédent",
     "next": "Suivant"
   },
-  "NotFoundPage": {
-    "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
-    "cta": "Retourner à l'accueil",
-    "report": "Signaler un problème",
-    "titlesCount": 8,
-    "titles": {
-      "0": "Pâtes bol !",
-      "1": "Le chef a tout mangé !",
-      "2": "Le plat était froid !",
-      "3": "Le serveur ne trouve plus votre table !",
-      "4": "La commande s'est perdue en cuisine !",
-      "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
-      "6": "La table est vide... où est votre assiette ?",
-      "7": "Êtes vous sûr d'avoir une réservation ?"
+  "ErrorPage": {
+    "400": {
+      "description": "La page que vous cherchez n'existe pas. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
+      "cta": "Retourner à l'accueil",
+      "report": "Signaler un problème",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Pâtes bol !",
+        "1": "Le chef a tout mangé !",
+        "2": "Le plat était froid !",
+        "3": "Le serveur ne trouve plus votre table !",
+        "4": "La commande s'est perdue en cuisine !",
+        "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+        "6": "La table est vide... où est votre assiette ?",
+        "7": "Êtes vous sûr d'avoir une réservation ?"
+      }
+    },
+    "500": {
+      "description": "Une erreur est survenue lors du chargement de la page. Vous pouvez retourner à l'accueil ou nous signaler le problème.",
+      "cta": "Retourner à l'accueil",
+      "report": "Signaler un problème",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Le serveur a brûlé !",
+        "1": "Le chef a tout mangé !",
+        "2": "Le plat était froid !",
+        "3": "Le serveur ne trouve plus votre table !",
+        "4": "La commande s'est perdue en cuisine !",
+        "5": "Le chef n'a pas préparé ce plat aujourd'hui !",
+        "6": "La table est vide... où est votre assiette ?",
+        "7": "Êtes vous sûr d'avoir une réservation ?"
+      }
     }
   },
   "RestaurantInformation": {
@@ -383,6 +411,11 @@
         "plats": "Plats",
         "requetes": "Requêtes"
       }
+    },
+    "seo": {
+      "title": "Statistiques - CROUStillant",
+      "description": "Découvrez les statistiques de CROUStillant. Nombre de menus, compositions, catégories, repas et plats ajoutés par jour.",
+      "keywords": "CROUS, restaurant, menu, statistiques"
     }
   },
   "LegalPage": {
@@ -475,6 +508,11 @@
         "content1": "Le site peut contenir des liens vers d'autres sites.",
         "content2": "CROUStillant Développement n'est pas responsable du contenu des sites externes. CROUStillant Développement ne peut être tenu responsable des dommages causés par l'utilisation de ces sites."
       }
+    },
+    "seo": {
+      "title": "Notice légale - CROUStillant",
+      "description": "Consultez les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant. Nous sommes là pour vous aider !",
+      "keywords": "CROUS, restaurant, menu, mentions légales, politique de confidentialité"
     }
   },
   "ContactPage": {
