@@ -26,7 +26,12 @@
     "favorites": "There {count, plural, =0 {is no favorite restaurant} =1 {is # favorite restaurant} other {are # favorite restaurants}}",
     "clickToSeeAll": "See all",
     "clickToSeeLess": "See less",
-    "markerDescription": "View the menu of the restaurant <link>{name}</link>."
+    "markerDescription": "View the menu of the restaurant <link>{name}</link>.",
+    "seo": {
+      "title": "Restaurants - CROUStillant",
+      "description": "Discover the list of CROUS restaurants in France and overseas. Find the perfect restaurant for your next meal!",
+      "keywords": "CROUS, restaurant, menu"
+    }
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
@@ -182,6 +187,11 @@
       "title": "Even more convinced?",
       "description": "Join our Discord server to chat with other users and the CROUStillant team!",
       "button": "Join our Discord server"
+    },
+    "seo": {
+      "title": "About - CROUStillant",
+      "description": "Discover the CROUStillant project, its team and its operation. Learn more about the platform and its features.",
+      "keywords": "CROUS, restaurant, menu, about"
     }
   },
   "Footer": {
@@ -234,20 +244,38 @@
     "previous": "Previous",
     "next": "Next"
   },
-  "NotFoundPage": {
-    "description": "The page you are looking for does not exist or has been moved.",
-    "cta": "Go back to the homepage",
-    "report": "Report an issue",
-    "titlesCount": 8,
-    "titles": {
-      "0": "Spaghetti spill!",
-      "1": "The chef ate it all!",
-      "2": "The dish was served cold!",
-      "3": "The waiter lost your table!",
-      "4": "The order got lost in the kitchen!",
-      "5": "The chef didn’t make this dish today!",
-      "6": "The table’s empty… where’s your plate?",
-      "7": "Are you sure you booked a table?"
+  "ErrorPage": {
+    "400": {
+      "description": "The page you are looking for does not exist or has been moved.",
+      "cta": "Go back to the homepage",
+      "report": "Report an issue",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Spaghetti spill!",
+        "1": "The chef ate it all!",
+        "2": "The dish was served cold!",
+        "3": "The waiter lost your table!",
+        "4": "The order got lost in the kitchen!",
+        "5": "The chef didn’t make this dish today!",
+        "6": "The table’s empty… where’s your plate?",
+        "7": "Are you sure you booked a table?"
+      }
+    },
+    "500": {
+      "description": "An error occurred while loading the page. Please try again later.",
+      "cta": "Go back to the homepage",
+      "report": "Report an issue",
+      "titlesCount": 8,
+      "titles": {
+        "0": "The chef burned the dish!",
+        "1": "The waiter tripped over the table!",
+        "2": "The dish was served too hot!",
+        "3": "The order was too big for the kitchen!",
+        "4": "The chef made too many dishes!",
+        "5": "The table’s too full… where’s your plate?",
+        "6": "The chef’s on a break…",
+        "7": "Are you sure you booked a table?"
+      }
     }
   },
   "RestaurantInformation": {
@@ -382,6 +410,11 @@
         "plats": "Dishes",
         "requetes": "Requests"
       }
+    },
+    "seo": {
+      "title": "Statistics - CROUStillant",
+      "description": "Discover the statistics of CROUStillant. Stay informed of the number of menus, compositions, categories, meals and dishes added per day.",
+      "keywords": "CROUS, restaurant, menu, statistics"
     }
   },
   "LegalPage": {
@@ -474,6 +507,11 @@
         "content1": "The site may contain links to other sites.",
         "content2": "CROUStillant Développement is not responsible for the content of external sites. CROUStillant Développement cannot be held responsible for any damage caused by the use of these sites."
       }
+    },
+    "seo": {
+      "title": "Legal notices - CROUStillant",
+      "description": "Find all the legal information about CROUStillant and its operation. Discover the terms of use, privacy policy and cookie policy.",
+      "keywords": "CROUS, restaurant, menu, legal"
     }
   },
   "ContactPage": {

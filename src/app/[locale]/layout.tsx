@@ -18,46 +18,15 @@ export const metadata: Metadata = {
   title: "CROUStillant",
   applicationName: "CROUStillant",
   appleWebApp: true,
-  description:
-    "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
-  // icons: {
-  //   icon: [
-  //     { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-  //     { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-  //   ],
-  //   apple: [
-  //     { url: "/icons/apple-touch-icon.png" },
-  //     { url: "/icons/apple-touch-icon.png", sizes: "152x152" },
-  //     { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
-  //     { url: "/icons/apple-touch-icon.png", sizes: "167x167" },
-  //   ],
-  //   other: [
-  //     {
-  //       rel: "mask-icon",
-  //       url: "/icons/apple-touch-icon.png",
-  //       color: "#5bbad5",
-  //     },
-  //     { rel: "shortcut icon", url: "/favicon.ico" },
-  //   ],
-  // },
-  // manifest: "/manifest.json",
-  // twitter: {
-  //   card: "summary",
-  //   title: "CROUStillant",
-  //   description: "Le menu du RU, plus simplement.",
-  //   images: "https://croustillant.vercel.app/icons/android-chrome-192x192.png",
-  //   creator: "@cherifad",
-  // },
-  // openGraph: {
-  //   type: "website",
-  //   title: "CROUStillant",
-  //   description: "Le menu du RU, plus simplement.",
-  //   siteName: "CROUStillant",
-  //   url: "https://croustillant.vercel.app/",
-  //   images: [
-  //     { url: "https://croustillant.vercel.app/icons/apple-touch-icon.png" },
-  //   ],
-  // },
+  description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+  openGraph: {
+    title: "CROUStillant",
+    description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+    type: "website",
+    locale: "fr_FR",
+    images: { url: process.env.WEB_URL + "/banner.png" },
+    url: process.env.WEB_URL,
+  },
 };
 
 export default async function RootLayout({

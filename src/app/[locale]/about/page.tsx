@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import {
   CheckIcon,
@@ -18,6 +16,23 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("AboutPage");
+
+  return {
+    title: t("seo.title"),
+    description: t("seo.description"),
+    keywords: t("seo.keywords"),
+    openGraph: {
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: "/banner.png" },
+      siteName: "CROUStillant",
+    },
+  };
+}
 
 function Checkmark() {
   return (
@@ -25,8 +40,8 @@ function Checkmark() {
   );
 }
 
-export default function AboutPage() {
-  const t = useTranslations("AboutPage");
+export default async function AboutPage() {
+  const t = await getTranslations("AboutPage");
 
   return (
     <>
@@ -37,9 +52,7 @@ export default function AboutPage() {
               <GraduationCap className="inline h-10 w-10 mr-3"></GraduationCap>
               {t("presentation.title")}
             </h3>
-            <p className="mt-4 lg:text-lg">
-              {t("presentation.description")}
-            </p>
+            <p className="mt-4 lg:text-lg">{t("presentation.description")}</p>
           </div>
           <hr />
           <div className="flex flex-col justify-center lg:p-12 p-2">
@@ -47,9 +60,7 @@ export default function AboutPage() {
               <Soup className="inline h-10 w-10 mr-3" />
               {t("updates.title")}
             </h3>
-            <p className="mt-4 lg:text-lg">
-              {t("updates.description")}
-            </p>
+            <p className="mt-4 lg:text-lg">{t("updates.description")}</p>
           </div>
         </div>
         <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
@@ -59,33 +70,23 @@ export default function AboutPage() {
               <FileCode2 className="inline h-10 w-10 mr-3" />
               {t("open-source.title")}
             </h3>
-            <p className="mt-4 lg:text-lg">
-              {t("open-source.description")}
-            </p>
+            <p className="mt-4 lg:text-lg">{t("open-source.description")}</p>
             <div className="mt-14 w-full">
               <div className="flex items-center">
                 <Checkmark />
-                <p className="ml-2">
-                  {t("open-source.features.feature1")}
-                </p>
+                <p className="ml-2">{t("open-source.features.feature1")}</p>
               </div>
               <div className="mt-5 flex items-center">
                 <Checkmark />
-                <p className="ml-2">
-                  {t("open-source.features.feature2")}
-                </p>
+                <p className="ml-2">{t("open-source.features.feature2")}</p>
               </div>
               <div className="mt-5 flex items-center">
                 <Checkmark />
-                <p className="ml-2">
-                  {t("open-source.features.feature3")}
-                </p>
+                <p className="ml-2">{t("open-source.features.feature3")}</p>
               </div>
               <div className="mt-5 flex items-center">
                 <Checkmark />
-                <p className="ml-2">
-                  {t("open-source.features.feature4")}
-                </p>
+                <p className="ml-2">{t("open-source.features.feature4")}</p>
               </div>
             </div>
           </div>
@@ -96,33 +97,23 @@ export default function AboutPage() {
           <h2 className="lg:text-4xl text-xl font-medium">
             {t("product.title")}
           </h2>
-          <p className="mt-4 lg:text-lg">
-            {t("product.description")}
-          </p>
+          <p className="mt-4 lg:text-lg">{t("product.description")}</p>
           <div className="mt-8 w-full">
             <div className="flex items-center">
               <Checkmark />
-              <p className="ml-2">
-                {t("product.features.feature1")}
-              </p>
+              <p className="ml-2">{t("product.features.feature1")}</p>
             </div>
             <div className="mt-4 flex items-center">
               <Checkmark />
-              <p className="ml-2">
-                {t("product.features.feature2")}
-              </p>
+              <p className="ml-2">{t("product.features.feature2")}</p>
             </div>
             <div className="mt-4 flex items-center">
               <Checkmark />
-              <p className="ml-2">
-                {t("product.features.feature3")}
-              </p>
+              <p className="ml-2">{t("product.features.feature3")}</p>
             </div>
             <div className="mt-4 flex items-center">
               <Checkmark />
-              <p className="ml-2">
-                {t("product.features.feature4")}
-              </p>
+              <p className="ml-2">{t("product.features.feature4")}</p>
             </div>
           </div>
         </div>
@@ -141,12 +132,8 @@ export default function AboutPage() {
         id="team"
       >
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
-          <h2 className="lg:text-4xl text-xl font-medium">
-            {t("team.title")}
-          </h2>
-          <p className="mt-4 lg:text-lg">
-            {t("team.description")}
-          </p>
+          <h2 className="lg:text-4xl text-xl font-medium">{t("team.title")}</h2>
+          <p className="mt-4 lg:text-lg">{t("team.description")}</p>
         </div>
         <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
@@ -157,9 +144,7 @@ export default function AboutPage() {
                 <p className="ml-2 font-semibold">
                   {t("team.members.member1.name")}
                 </p>
-                <p className="ml-2">
-                  {t("team.members.member1.role")}
-                </p>
+                <p className="ml-2">{t("team.members.member1.role")}</p>
               </div>
             </div>
             <div className="mt-4 flex items-center">
@@ -168,9 +153,7 @@ export default function AboutPage() {
                 <p className="ml-2 font-semibold">
                   {t("team.members.member2.name")}
                 </p>
-                <p className="ml-2">
-                  {t("team.members.member2.role")}
-                </p>
+                <p className="ml-2">{t("team.members.member2.role")}</p>
               </div>
             </div>
             <div className="mt-4 flex items-center">
@@ -179,9 +162,7 @@ export default function AboutPage() {
                 <p className="ml-2 font-semibold">
                   {t("team.members.member3.name")}
                 </p>
-                <p className="ml-2">
-                  {t("team.members.member3.role")}
-                </p>
+                <p className="ml-2">{t("team.members.member3.role")}</p>
               </div>
             </div>
           </div>
@@ -189,12 +170,8 @@ export default function AboutPage() {
       </div>
       <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
-          <h2 className="lg:text-4xl text-xl font-medium">
-            {t("job.title")}
-          </h2>
-          <p className="mt-4 lg:text-lg">
-            {t("job.description")}
-          </p>
+          <h2 className="lg:text-4xl text-xl font-medium">{t("job.title")}</h2>
+          <p className="mt-4 lg:text-lg">{t("job.description")}</p>
           <div className="relative mt-8 flex">
             <Link
               href="https://discord.gg/yG6FjqbWtk"
@@ -232,9 +209,7 @@ export default function AboutPage() {
           <h2 className="lg:text-4xl text-xl font-medium">
             {t("discord.title")}
           </h2>
-          <p className="mt-4 lg:text-lg">
-            {t("discord.description")}
-          </p>
+          <p className="mt-4 lg:text-lg">{t("discord.description")}</p>
           <div className="relative">
             <Link
               href="https://discord.com/oauth2/authorize?client_id=1024564077068025867"
@@ -253,9 +228,7 @@ export default function AboutPage() {
           <h2 className="lg:text-4xl text-xl font-medium">
             {t("integrated.title")}
           </h2>
-          <p className="mt-4 lg:text-lg">
-            {t("integrated.description")}
-          </p>
+          <p className="mt-4 lg:text-lg">{t("integrated.description")}</p>
           <div className="relative">
             <Link href="https://api-croustillant.bayfield.dev" target="_blank">
               <Button className="mt-8">
@@ -280,9 +253,7 @@ export default function AboutPage() {
           <h3 className="lg:text-4xl text-xl font-medium">
             {t("convinced.title")}
           </h3>
-          <p className="mt-4 lg:text-lg">
-            {t("convinced.description")}
-          </p>
+          <p className="mt-4 lg:text-lg">{t("convinced.description")}</p>
           <div className="flex flex-wrap gap-2 mt-8">
             <Button asChild>
               <Link href="/restaurants" prefetch={true}>
@@ -304,9 +275,7 @@ export default function AboutPage() {
             <HeartHandshake className="inline h-10 w-10 mr-3" />
             {t("more-convinced.title")}
           </h3>
-          <p className="mt-4 lg:text-lg">
-            {t("more-convinced.description")}
-          </p>
+          <p className="mt-4 lg:text-lg">{t("more-convinced.description")}</p>
           <div className="relative mt-8 flex">
             <Link
               href="https://discord.gg/yG6FjqbWtk"
