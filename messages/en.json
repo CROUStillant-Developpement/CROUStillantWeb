@@ -261,6 +261,21 @@
         "7": "Are you sure you booked a table?"
       }
     },
+    "404": {
+      "description": "The page you are looking for does not exist or has been moved.",
+      "cta": "Go back to the homepage",
+      "report": "Report an issue",
+      "titlesCount": 8,
+      "titles": {
+        "0": "Spaghetti spill!",
+        "1": "The chef ate it all!",
+        "2": "The dish was served cold!",
+        "3": "The waiter lost your table!",
+        "4": "The order got lost in the kitchen!",
+        "5": "The chef didn’t make this dish today!",
+        "6": "The table’s empty… where’s your plate?",
+        "7": "Are you sure you booked a table?"
+    },
     "500": {
       "description": "An error occurred while loading the page. Please try again later.",
       "cta": "Go back to the homepage",
