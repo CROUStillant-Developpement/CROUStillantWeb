@@ -275,6 +275,7 @@
         "5": "The chef didn’t make this dish today!",
         "6": "The table’s empty… where’s your plate?",
         "7": "Are you sure you booked a table?"
+      }
     },
     "500": {
       "description": "An error occurred while loading the page. Please try again later.",
