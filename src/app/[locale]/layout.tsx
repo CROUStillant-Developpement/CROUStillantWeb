@@ -18,10 +18,14 @@ export const metadata: Metadata = {
   title: "CROUStillant",
   applicationName: "CROUStillant",
   appleWebApp: true,
-  description:
-    "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+  description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
   openGraph: {
-    images: { url: "/banner.png" },
+    title: "CROUStillant",
+    description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+    type: "website",
+    locale: "fr_FR",
+    images: { url: process.env.WEB_URL + "/banner.png" },
+    url: process.env.WEB_URL,
   },
 };
 
