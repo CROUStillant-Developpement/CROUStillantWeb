@@ -3,7 +3,7 @@ name: Development Deployment
 on:
   push:
     branches:
-      - dev
+      - develop
     tags: ["v*.*.*"]
 
 env:
