@@ -47,6 +47,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   const searchParams = useSearchParams();
 
+  const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
+
   useEffect(() => {
     setLoading(true);
 
@@ -76,13 +78,13 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
           .finally(() => {
             const url = new URL(window.location.href);
             url.search = "";
-            setPageUrl(url.toString());
             const qr = searchParams.get("qr");
             if (qr === "true") {
-              if (favorites.some((f) => f.code === restaurant.code)) {
-                addToFavorites(restaurant.code, restaurant.nom);
+              if (!favorites.some((f) => f.code === restaurant.code)) {
+                addOrRemoveFromFavorites(restaurant.code, restaurant.nom, true);
               }
             }
+            setPageUrl(url.toString());
             setLoading(false);
           });
       });
@@ -113,9 +115,6 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       setSelectedDateDinner(null);
     }
   }, [selectedDate, menu]);
-
-  const { addOrRemoveFromFavorites, addToFavorites, favorites } =
-    useUserPreferences();
 
   return (
     <div>
