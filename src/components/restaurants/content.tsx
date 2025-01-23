@@ -65,7 +65,7 @@ export default function Content({
             </div>
           </fieldset>
         )}
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+        <ul className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {loading ? (
             Array.from({ length: 20 }).map((_, index) => (
               <RestaurantCardSkeleton key={index} />
@@ -75,11 +75,11 @@ export default function Content({
               <RestaurantCard key={restaurant.code} restaurant={restaurant} />
             ))
           ) : (
-            <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
+            <li className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
               {t("noResults")}
-            </p>
+            </li>
           )}
-        </div>
+        </ul>
       </>
     );
   }

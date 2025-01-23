@@ -100,27 +100,6 @@ export default function RestaurantsPage({
             typesRestaurants={typesRestaurants}
           />
         </div>
-        {/* <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
-          <p>{t("display.title")}</p>
-          <div>
-            <Button
-              size="icon"
-              className="rounded-r-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "list" ? "default" : "outline"}
-            >
-              <AlignLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              size="icon"
-              className="rounded-l-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "map" ? "default" : "outline"}
-            >
-              <Map className="h-4 w-4" />
-            </Button>
-          </div>
-        </div> */}
       </div>
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination

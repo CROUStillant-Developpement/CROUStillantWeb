@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function RestaurantCardSkeleton() {
   return (
-    <div>
+    <li>
       <Skeleton className="w-full h-56" />
       <div className="flex justify-between items-center mt-2">
         <Skeleton className="w-40 h-6" />
@@ -17,6 +17,6 @@ export default function RestaurantCardSkeleton() {
         </div>
         <Skeleton className="w-32 h-8" />
       </div>
-    </div>
+    </li>
   );
 }

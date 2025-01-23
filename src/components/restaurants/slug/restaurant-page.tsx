@@ -20,6 +20,8 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useSearchParams } from "next/navigation";
+import { AnimatePresence } from "motion/react";
+import * as motion from "motion/react-client";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -198,21 +200,30 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="calendar">
-              <fieldset className="grid gap-6 rounded-lg border p-4 mb-4 md:mb-8 h-fit">
-                <legend className="-ml-1 px-1 text-sm font-medium">
-                  {t("nextDaysMenu")}
-                </legend>
-                <DatePicker
-                  onDateChange={setSelectedDate}
-                  maxDate={formatToISODate(dates[dates.length - 1].date)}
-                  current={selectedDate}
-                />
-                <RestaurantCalendar
-                  availableDates={dates}
-                  selectedDate={selectedDate}
-                  setSelectedDate={setSelectedDate}
-                />
-              </fieldset>
+              <AnimatePresence initial={true}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  key="box"
+                >
+                  <fieldset className="grid gap-6 rounded-lg border p-4 mb-4 md:mb-8 h-fit">
+                    <legend className="-ml-1 px-1 text-sm font-medium">
+                      {t("nextDaysMenu")}
+                    </legend>
+                    <DatePicker
+                      onDateChange={setSelectedDate}
+                      maxDate={formatToISODate(dates[dates.length - 1].date)}
+                      current={selectedDate}
+                    />
+                    <RestaurantCalendar
+                      availableDates={dates}
+                      selectedDate={selectedDate}
+                      setSelectedDate={setSelectedDate}
+                    />
+                  </fieldset>
+                </motion.div>
+              </AnimatePresence>
             </TabsContent>
             <TabsContent value="info">
               <RestaurantInfo restaurant={restaurant} />
