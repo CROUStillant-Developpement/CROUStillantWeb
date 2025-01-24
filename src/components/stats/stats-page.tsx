@@ -46,11 +46,9 @@ interface CustomTooltipProps {
 }
 
 interface DotProps {
-  cx: any;
-  cy: any;
-  stroke: any;
-  payload: any;
-  value: any;
+  cx: number;
+  cy: number;
+  stroke: string;
 }
 
 const CustomTooltip: React.FC<CustomTooltipProps> = ({
@@ -96,8 +94,8 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
   return null;
 };
 
-const CustomDot = (props: { cx: any; cy: any; stroke: any; payload: any; value: any; }) => {
-  const { cx, cy, stroke, payload, value } = props;
+const CustomDot = (props: DotProps) => {
+  const { cx, cy, stroke } = props;
 
   return (
     <svg
