@@ -23,7 +23,7 @@
       "list": "Liste",
       "map": "Carte"
     },
-    "favorites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
+    "favourites": "Il y a {count, plural, =0 {aucun restaurant favori} =1 {# restaurant favori} other {# restaurants favoris}}",
     "clickToSeeAll": "Voir tout",
     "clickToSeeLess": "Voir moins",
     "markerDescription": "Voir le menu du restaurant <link>{name}</link>.",
@@ -360,23 +360,23 @@
       "successLight": "Thème clair activé !",
       "successDark": "Thème sombre activé !"
     },
-    "favorites": {
+    "favourites": {
       "title": "Favoris",
       "selectPlaceholder": "Sélectionner",
       "description": "Gérez vos restaurants favoris et accédez à leur menu en un clic.",
-      "noFavoritesTitle": "Attention - Aucun restaurant favori",
-      "noFavoritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
+      "nofavouritesTitle": "Attention - Aucun restaurant favori",
+      "nofavouritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
       "starredTitle": "Votre restaurant favori",
       "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
       "starredEditSuccessTitle": "Restaurant favori modifié !",
       "starredEditSuccessDescription": "Le favori a été changé avec succès.",
       "starredSelectPlaceholder": "Sélectionner",
-      "regionTitle": "Région favorite",
+      "regionTitle": "Région favourite",
       "regionDescription": "Choisissez une région pour afficher les restaurants de cette région en premier.",
       "regionSelectPlaceholder": "Sélectionner",
       "regionSelectAll": "Toutes les régions",
-      "regionEditSuccessTitle": "Région favorite modifiée !",
-      "regionEditSuccessDescription": "La région favorite a été changée avec succès"
+      "regionEditSuccessTitle": "Région favourite modifiée !",
+      "regionEditSuccessDescription": "La région favourite a été changée avec succès"
     },
     "personal": {
       "deleteDataTitle": "Supprimer les données",
