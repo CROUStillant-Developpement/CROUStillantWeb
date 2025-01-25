@@ -47,7 +47,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   const searchParams = useSearchParams();
 
-  const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
+  const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
 
   useEffect(() => {
     setLoading(true);
@@ -80,8 +80,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             url.search = "";
             const qr = searchParams.get("qr");
             if (qr === "true") {
-              if (!favorites.some((f) => f.code === restaurant.code)) {
-                addOrRemoveFromFavorites(restaurant.code, restaurant.nom, true);
+              if (!favourites.some((f) => f.code === restaurant.code)) {
+                addOrRemoveFromfavourites(restaurant.code, restaurant.nom, true);
               }
             }
             setPageUrl(url.toString());
@@ -126,10 +126,10 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             size="icon"
             className="rounded-full ml-4 mt-2 md:mt-0"
             onClick={() =>
-              addOrRemoveFromFavorites(restaurant.code, restaurant.nom)
+              addOrRemoveFromfavourites(restaurant.code, restaurant.nom)
             }
           >
-            {favorites.some((f) => f.code === restaurant.code) ? (
+            {favourites.some((f) => f.code === restaurant.code) ? (
               <Heart className="text-red-500 fill-red-500" />
             ) : (
               <Heart />

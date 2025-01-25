@@ -24,10 +24,10 @@ export default async function ContactPage() {
   const t = await getTranslations("ContactPage"); // Access the ContactPage translations
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 py-10">
+    <div className="flex flex-col items-center justify-center md:px-4 py-10">
       <Card className="max-w-lg w-full">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold">
+          <CardTitle className="text-center md:text-2xl text-xl font-bold text-wrap">
             {t("title")}
           </CardTitle>
         </CardHeader>
@@ -39,11 +39,12 @@ export default async function ContactPage() {
                 {t("methods.email")}
               </Link>
             </Button>
-            <Button asChild variant="outline" className="w-full">
+            <Button asChild variant="outline" className="w-full" size="fit">
               <Link
                 href="https://github.com/CROUStillant-Developpement/CROUStillantWeb/issues/new"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-wrap text-center"
               >
                 {t("methods.github")}
               </Link>

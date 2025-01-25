@@ -33,7 +33,7 @@ export function useRestaurantFilters(
 
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
-  const { favoriteRegion } = useUserPreferences();
+  const { favouriteRegion } = useUserPreferences();
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -67,7 +67,7 @@ export function useRestaurantFilters(
       isPmr: searchParams.get("ispmr") === "true",
       isOpen: searchParams.get("open") === "true",
       crous: parseInt(
-        searchParams.get("region") || favoriteRegion?.code.toString() || "-1",
+        searchParams.get("region") || favouriteRegion?.code.toString() || "-1",
         10
       ),
       izly: searchParams.get("izly") === "true",

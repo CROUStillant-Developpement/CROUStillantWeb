@@ -31,8 +31,96 @@ interface StatsPageProps {
   stats: GlobalStats;
 }
 
+interface TooltipPayload {
+  color: string;
+  value: number | string;
+  dataKey: string;
+}
+
+interface CustomTooltipProps {
+  locale: "en" | "fr";
+  tooltipMapping: Record<string, string>;
+  active: boolean;
+  payload?: TooltipPayload[];
+  label: string | number;
+}
+
+interface DotProps {
+  cx: number;
+  cy: number;
+  stroke: string;
+}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({
+  locale,
+  tooltipMapping,
+  active,
+  payload,
+  label,
+}) => {
+  const formattedLabel =
+    locale === "fr"
+      ? new Date(label).toLocaleDateString("fr-FR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        })
+      : new Date(label).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        });
+
+  let localeString = "fr-FR";
+  if (locale === "en") {
+    localeString = "en-GB";
+  }
+
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{formattedLabel}</p>
+        <ul>
+          {payload.map((entry, index) => (
+            <li key={`item-${index}`} style={{ color: entry.color }}>
+              {`${(entry.value).toLocaleString(localeString)} ${tooltipMapping[entry.dataKey] || entry.dataKey}`}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+const CustomDot = (props: DotProps) => {
+  const { cx, cy, stroke } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="8"
+      fill={stroke}
+      className="recharts-dot"
+      viewBox="0 0 8 8"
+      x={cx - 4}
+      y={cy - 4}
+    >
+      <circle cx="4" cy="4" r="4" />
+    </svg>
+  );
+};
+
 export default function StatsPage({ taches, stats }: StatsPageProps) {
   const t = useTranslations("StatsPage");
+
+  const locale = useLocale();
+  let localeString = "fr-FR";
+  if (locale === "en") {
+    localeString = "en-GB";
+  }
 
   return (
     <div className="space-y-6 mt-6 lg:mt-12">
@@ -44,43 +132,43 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
         <Stat variant="default">
           <StatTitle>{t("stats.menus")}</StatTitle>
           <StatDescription>
-            {(stats?.menus ?? 0).toLocaleString("fr")}
+            {(stats?.menus ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.compositions")}</StatTitle>
           <StatDescription>
-            {(stats?.compositions ?? 0).toLocaleString("fr")}
+            {(stats?.compositions ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.categories")}</StatTitle>
           <StatDescription>
-            {(stats?.categories ?? 0).toLocaleString("fr")}
+            {(stats?.categories ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.repas")}</StatTitle>
           <StatDescription>
-            {(stats?.repas ?? 0).toLocaleString("fr")}
+            {(stats?.repas ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.plats")}</StatTitle>
           <StatDescription>
-            {(stats?.plats ?? 0).toLocaleString("fr")}
+            {(stats?.plats ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.restaurants")}</StatTitle>
           <StatDescription>
-            {(stats?.restaurants ?? 0).toLocaleString("fr")}
+            {(stats?.restaurants_actifs ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
           <StatTitle>{t("stats.regions")}</StatTitle>
           <StatDescription>
-            {(stats?.regions ?? 0).toLocaleString("fr")}
+            {(stats?.regions ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
       </div>
@@ -89,26 +177,7 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
   );
 }
 
-const chartConfig = {
-  menuAdded: {
-    label: "Menus Added",
-  },
-  compositionAdded: {
-    label: "Compositions Added",
-  },
-  categoryAdded: {
-    label: "Categories Added",
-  },
-  repasAdded: {
-    label: "Repas Added",
-  },
-  platAdded: {
-    label: "Plats Added",
-  },
-  requests: {
-    label: "Requests",
-  },
-} satisfies ChartConfig;
+const chartConfig = {} satisfies ChartConfig;
 
 const TacheCharts = ({ data }: { data: Tache[] }) => {
   const processedData = useMemo(() => {
@@ -137,6 +206,15 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
   const locale = useLocale();
 
   const t = useTranslations("StatsPage");
+
+  const tooltipMapping = {
+    deltaMenus: t("charts.labels.menus"),
+    deltaRepas: t("charts.labels.repas"),
+    deltaCategories: t("charts.labels.categories"),
+    deltaPlats: t("charts.labels.plats"),
+    deltaCompositions: t("charts.labels.compositions"),
+    requetes: t("charts.labels.requetes"),
+  };
 
   return (
     <div className="space-y-6">
@@ -180,7 +258,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
                 <Legend />
                 <Bar
                   dataKey="deltaMenus"
@@ -233,31 +311,35 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
                 <Legend />
                 <Line
                   type="monotone"
                   dataKey="deltaCompositions"
                   stroke="#82ca9d"
                   name={t("charts.labels.compositions")}
+                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaCategories"
                   stroke="#ffc658"
                   name={t("charts.labels.categories")}
+                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaRepas"
                   stroke="#ff0000"
                   name={t("charts.labels.repas")}
+                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaPlats"
                   stroke="#8884d8"
                   name={t("charts.labels.plats")}
+                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -305,13 +387,14 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
                 <Legend />
                 <Line
                   type="monotone"
                   dataKey="requetes"
                   stroke="#ee82ee"
                   name={t("charts.labels.requetes")}
+                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
               </ComposedChart>
             </ResponsiveContainer>

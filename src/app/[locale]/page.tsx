@@ -35,7 +35,12 @@ export default function HomePage() {
           </p>
           <div className="relative z-10 flex animate-appear justify-center gap-4 delay-300">
             <div className="relative z-10 flex animate-appear justify-center gap-4 delay-300 flex-wrap">
-              <Button variant="default" size="lg" asChild className="group">
+              <Button
+                variant="default"
+                size={starredFav ? "fit" : "lg"}
+                asChild
+                className="group"
+              >
                 <Link
                   href={
                     starredFav

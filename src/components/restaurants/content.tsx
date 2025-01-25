@@ -11,7 +11,7 @@ interface ContentProps {
   display: DisplayType;
   filteredRestaurants: Restaurant[];
   paginatedRestaurants: Restaurant[];
-  favoritesRestaurants: Restaurant[];
+  favouritesRestaurants: Restaurant[];
   loading: boolean;
 }
 
@@ -19,47 +19,47 @@ export default function Content({
   display,
   filteredRestaurants,
   paginatedRestaurants,
-  favoritesRestaurants,
+  favouritesRestaurants,
   loading,
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
-  const [autoCollapsedFavorites, setAutoCollapsedFavorites] = useState(true);
-  const [userCollapsedFavorites, setUserCollapsedFavorites] = useState(false);
+  const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
+  const [userCollapsedfavourites, setUserCollapsedfavourites] = useState(false);
 
   useEffect(() => {
-    if (autoCollapsedFavorites && favoritesRestaurants.length > 3) {
-      setUserCollapsedFavorites(true);
+    if (autoCollapsedfavourites && favouritesRestaurants.length > 3) {
+      setUserCollapsedfavourites(true);
     }
-  }, [favoritesRestaurants]);
+  }, [favouritesRestaurants]);
 
   if (display === "map") {
     return <MapComponent loading={loading} />;
   } else {
     return (
       <>
-        {/* Favorites */}
-        {favoritesRestaurants.length > 0 && (
+        {/* favourites */}
+        {favouritesRestaurants.length > 0 && (
           <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
             <legend className="-ml-1 px-1 text-sm font-medium">
-              {t("favorites", { count: favoritesRestaurants.length })} -{" "}
+              {t("favourites", { count: favouritesRestaurants.length })} -{" "}
               <span
                 className="underline select-none cursor-pointer"
                 onClick={() => {
-                  setAutoCollapsedFavorites(false);
-                  setUserCollapsedFavorites(!userCollapsedFavorites);
+                  setAutoCollapsedfavourites(false);
+                  setUserCollapsedfavourites(!userCollapsedfavourites);
                 }}
               >
-                {userCollapsedFavorites
+                {userCollapsedfavourites
                   ? t("clickToSeeAll")
                   : t("clickToSeeLess")}
               </span>
             </legend>
             <div
               className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
-                userCollapsedFavorites ? "hidden" : "grid"
+                userCollapsedfavourites ? "hidden" : "grid"
               }`}
             >
-              {favoritesRestaurants.map((restaurant) => (
+              {favouritesRestaurants.map((restaurant) => (
                 <RestaurantCard key={restaurant.code} restaurant={restaurant} />
               ))}
             </div>

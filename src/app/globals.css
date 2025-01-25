@@ -125,6 +125,30 @@ html {
   animation: fade-in 2s;
 }
 
+.custom-tooltip {
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  animation: fade-in 0.5s;
+}
+
+.dark .custom-tooltip {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.1);
+}
+
+.custom-tooltip > .label {
+  font-weight: bold;
+}
+
+.recharts-dot {
+  opacity: 0.3;
+}
+
 @keyframes fade-in {
   0%,
   50% {

@@ -132,6 +132,7 @@ export interface GlobalStats {
   regions: number; // Nombre de régions
   repas: number; // Nombre de repas
   restaurants: number; // Nombre de restaurants
+  restaurants_actifs: number; // Nombre de restaurants actifs
   types_restaurants: number; // Nombre de types de restaurants
 }
 

@@ -41,15 +41,15 @@ export default function SettingsPage() {
   const router = useRouter();
 
   const {
-    favorites,
+    favourites,
     clearUserPreferences,
     setStarredFav,
     starredFav,
-    setFavoriteRegion,
-    favoriteRegion,
+    setfavouriteRegion,
+    favouriteRegion,
   } = useUserPreferences();
 
-  const handleClearFavorites = () => {
+  const handleClearfavourites = () => {
     clearUserPreferences();
     setPopoverOpen(false);
     toast({
@@ -81,7 +81,7 @@ export default function SettingsPage() {
     getRegions().then((res) => {
       if (res.success) {
         res.data.sort((a, b) => a.libelle.localeCompare(b.libelle));
-        res.data.unshift({ code: -1, libelle: t("favorites.regionSelectAll") });
+        res.data.unshift({ code: -1, libelle: t("favourites.regionSelectAll") });
         setRegions(res.data);
       }
     });
@@ -114,7 +114,7 @@ export default function SettingsPage() {
           </div>
           <Select defaultValue={locale} onValueChange={handleLocaleChange}>
             <SelectTrigger className="min-w-[180px] w-fit">
-              <SelectValue placeholder={t("favorites.selectPlaceholder")} />
+              <SelectValue placeholder={t("favourites.selectPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
               {routing.locales.map((cur) => (
@@ -127,12 +127,12 @@ export default function SettingsPage() {
         </div>
       </SettingCard>
       <SettingCard title={t("behaviorTitle")}>
-        {favorites.length === 0 && (
+        {favourites.length === 0 && (
           <Alert variant="destructive">
             <TriangleAlert className="h-4 w-4" />
-            <AlertTitle>{t("favorites.noFavoritesTitle")}</AlertTitle>
+            <AlertTitle>{t("favourites.nofavouritesTitle")}</AlertTitle>
             <AlertDescription>
-              {t.rich("favorites.noFavoritesDescription", {
+              {t.rich("favourites.nofavouritesDescription", {
                 restaurants: (chunks) => (
                   <Link href="/restaurants" className="underline font-bold">
                     {chunks}
@@ -145,44 +145,44 @@ export default function SettingsPage() {
         <div className="space-y-2 flex md:flex-row flex-col md:items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">
-              {t("favorites.starredTitle")}
+              {t("favourites.starredTitle")}
             </p>
             <p className="text-[0.8rem] text-muted-foreground">
-              {t("favorites.starredDescription")}
+              {t("favourites.starredDescription")}
             </p>
           </div>
           <Select
             onValueChange={(value) => {
-              const favorite = favorites.find((f) => f.code === +value);
-              if (favorite && starredFav?.code === favorite.code) {
+              const favourite = favourites.find((f) => f.code === +value);
+              if (favourite && starredFav?.code === favourite.code) {
                 return;
               }
-              if (favorite) {
-                setStarredFav(favorite);
+              if (favourite) {
+                setStarredFav(favourite);
                 toast({
-                  title: t("favorites.starredSuccessTitle"),
-                  description: t("favorites.starredSuccessDescription"),
+                  title: t("favourites.starredSuccessTitle"),
+                  description: t("favourites.starredSuccessDescription"),
                 });
               }
             }}
-            disabled={favorites.length === 0}
+            disabled={favourites.length === 0}
             defaultValue={starredFav?.code.toString()}
           >
             <SelectTrigger className="min-w-[180px] truncate max-w-[250px] w-fit">
               <SelectValue
                 className=""
                 placeholder={
-                  starredFav?.name || t("favorites.starredSelectPlaceholder")
+                  starredFav?.name || t("favourites.starredSelectPlaceholder")
                 }
               />
             </SelectTrigger>
             <SelectContent>
-              {favorites.map((favorite) => (
+              {favourites.map((favourite) => (
                 <SelectItem
-                  key={favorite.code}
-                  value={favorite.code.toString()}
+                  key={favourite.code}
+                  value={favourite.code.toString()}
                 >
-                  {favorite.name.trim()}
+                  {favourite.name.trim()}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -191,35 +191,35 @@ export default function SettingsPage() {
         <div className="space-y-2 flex md:flex-row flex-col md:items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <p className="font-medium text-base">
-              {t("favorites.regionTitle")}
+              {t("favourites.regionTitle")}
             </p>
             <p className="text-[0.8rem] text-muted-foreground">
-              {t("favorites.regionDescription")}
+              {t("favourites.regionDescription")}
             </p>
           </div>
           <Select
             onValueChange={(value) => {
               const region = regions.find((r) => r.code === +value);
-              if (region && favoriteRegion?.code === region.code) {
+              if (region && favouriteRegion?.code === region.code) {
                 return;
               }
               if (region) {
-                setFavoriteRegion(region);
+                setfavouriteRegion(region);
                 toast({
-                  title: t("favorites.regionEditSuccessTitle"),
-                  description: t("favorites.regionEditSuccessDescription"),
+                  title: t("favourites.regionEditSuccessTitle"),
+                  description: t("favourites.regionEditSuccessDescription"),
                 });
               }
             }}
             disabled={regions.length === 0}
-            defaultValue={favoriteRegion?.code.toString()}
-            value={favoriteRegion?.code.toString()}
+            defaultValue={favouriteRegion?.code.toString()}
+            value={favouriteRegion?.code.toString()}
           >
             <SelectTrigger className="min-w-[180px] w-fit">
               <SelectValue
                 placeholder={
-                  favoriteRegion?.libelle ||
-                  t("favorites.regionSelectPlaceholder")
+                  favouriteRegion?.libelle ||
+                  t("favourites.regionSelectPlaceholder")
                 }
               />
             </SelectTrigger>
@@ -261,7 +261,7 @@ export default function SettingsPage() {
                   >
                     {t("personal.deleteDataConfirmNo")}
                   </Button>
-                  <Button variant="destructive" onClick={handleClearFavorites}>
+                  <Button variant="destructive" onClick={handleClearfavourites}>
                     {t("personal.deleteDataConfirmYes")}
                   </Button>
                 </div>

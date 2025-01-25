@@ -24,7 +24,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
     restaurant.image_url ?? "/default_ru.png"
   );
 
-  const { addOrRemoveFromFavorites, favorites } = useUserPreferences();
+  const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const t = useTranslations("RestaurantCard");
 
   const handleImageError = () => {
@@ -47,10 +47,10 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           size="icon"
           className="rounded-full absolute top-4 right-4 z-20"
           onClick={() =>
-            addOrRemoveFromFavorites(restaurant.code, restaurant.nom)
+            addOrRemoveFromfavourites(restaurant.code, restaurant.nom)
           }
         >
-          {favorites.some((f) => f.code === restaurant.code) ? (
+          {favourites.some((f) => f.code === restaurant.code) ? (
             <Heart className="text-red-500 fill-red-500" />
           ) : (
             <Heart />
