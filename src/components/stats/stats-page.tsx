@@ -162,7 +162,7 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
         <Stat variant="default">
           <StatTitle>{t("stats.restaurants")}</StatTitle>
           <StatDescription>
-            {(stats?.restaurants ?? 0).toLocaleString(localeString)}
+            {(stats?.restaurants_actifs ?? 0).toLocaleString(localeString)}
           </StatDescription>
         </Stat>
         <Stat variant="default">
