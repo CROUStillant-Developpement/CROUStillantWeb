@@ -36,7 +36,7 @@
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",
     "noMenuAvailable": "Aucun menu disponible pour cette date 😢",
-    "nextDaysMenu": "Menu des prochains suivants",
+    "nextDaysMenu": "Menu des prochains jours",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
     "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
