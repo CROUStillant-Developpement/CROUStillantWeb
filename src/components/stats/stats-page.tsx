@@ -203,6 +203,35 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
       .reverse();
   }, [data]);
 
+  const groupedData = useMemo(() => {
+    return processedData.reduce((acc: Record<string, any>, item) => {
+      const dateKey = item.date.toDateString();
+
+      if (!acc[dateKey]) {
+        acc[dateKey] = {
+          date: item.date,
+          deltaMenus: 0,
+          deltaRepas: 0,
+          deltaCategories: 0,
+          deltaPlats: 0,
+          deltaCompositions: 0,
+          requetes: 0,
+        };
+      }
+  
+      acc[dateKey].deltaMenus += item.deltaMenus;
+      acc[dateKey].deltaRepas += item.deltaRepas;
+      acc[dateKey].deltaCategories += item.deltaCategories;
+      acc[dateKey].deltaPlats += item.deltaPlats;
+      acc[dateKey].deltaCompositions += item.deltaCompositions;
+      acc[dateKey].requetes += item.requetes;
+  
+      return acc;
+    }, {});
+  }, [processedData]);
+
+  const groupedDataArray = Object.values(groupedData);
+
   const locale = useLocale();
 
   const t = useTranslations("StatsPage");
@@ -236,7 +265,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
             <ResponsiveContainer width="100%" height={300}>
               <ComposedChart
                 accessibilityLayer
-                data={processedData}
+                data={groupedDataArray}
                 margin={{
                   left: 12,
                   right: 12,
@@ -289,7 +318,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
             <ResponsiveContainer width="100%" height={300}>
               <ComposedChart
                 accessibilityLayer
-                data={processedData}
+                data={groupedDataArray}
                 margin={{
                   left: 12,
                   right: 12,
@@ -365,7 +394,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
             <ResponsiveContainer width="100%" height={300}>
               <ComposedChart
                 accessibilityLayer
-                data={processedData}
+                data={groupedDataArray}
                 margin={{
                   left: 12,
                   right: 12,
