@@ -416,7 +416,7 @@
       },
       "requests": {
         "title": "Requests",
-        "description": "Number of requests made per day."
+        "description": "Number of requests made per day in order to retrieve the data of CROUS restaurants." 
       },
       "labels": {
         "menus": "Menus",
