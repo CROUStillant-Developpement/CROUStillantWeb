@@ -31,6 +31,16 @@ interface StatsPageProps {
   stats: GlobalStats;
 }
 
+interface ProcessedTache {
+  date: Date;
+  deltaMenus: number;
+  deltaRepas: number;
+  deltaCategories: number;
+  deltaPlats: number;
+  deltaCompositions: number;
+  requetes: number;
+}
+
 interface TooltipPayload {
   color: string;
   value: number | string;
@@ -204,7 +214,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
   }, [data]);
 
   const groupedData = useMemo(() => {
-    return processedData.reduce((acc: Record<string, any>, item) => {
+    return processedData.reduce((acc: Record<string, ProcessedTache>, item) => {
       const dateKey = item.date.toDateString();
 
       if (!acc[dateKey]) {
