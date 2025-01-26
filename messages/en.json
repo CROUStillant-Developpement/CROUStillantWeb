@@ -433,6 +433,19 @@
       "keywords": "CROUS, restaurant, menu, statistics"
     }
   },
+  "DishesPage": {
+    "buildInProgress": "The build is in progress...",
+    "buildInProgressDescription": "This page is currently being built. Check back later to see the dishes offered by the CROUS restaurants.",
+    "helpUs": "You want to help us complete this page?",
+    "helpUsDescription": "You can contribute to CROUStillant and this page! Join our Discord server and contact us if you want to help us 😎",
+    "title": "Dishes",
+    "description": "Discover the dishes offered by the restaurants CROUS of France and overseas.",
+    "seo": {
+      "title": "Dishes - CROUStillant",
+      "description": "Discover the dishes offered by the CROUS restaurants of France and overseas. Find the perfect dish for your next meal!",
+      "keywords": "CROUS, restaurant, menu, dishes"
+    }
+  },
   "LegalPage": {
     "title": "Legal notices",
     "subtitle": "Updated the 31st of December 2024",

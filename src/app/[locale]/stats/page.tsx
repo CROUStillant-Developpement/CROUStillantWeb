@@ -14,13 +14,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
-      images: { url: "/banner.png" },
+      images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
     },
   };
 }
 
-export default async function Restaurants() {
+export default async function Stats() {
   const taches = await getTaches();
   const stats = await getGlobalStats();
 
