@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
-      images: { url: "/banner.png" },
+      images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
     },
   };

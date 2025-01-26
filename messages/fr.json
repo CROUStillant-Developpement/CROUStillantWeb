@@ -434,6 +434,19 @@
       "keywords": "CROUS, restaurant, menu, statistiques"
     }
   },
+  "DishesPage": {
+    "buildInProgress": "Construction en cours...",
+    "buildInProgressDescription": "Cette page est en cours de construction. Revenez plus tard pour découvrir les plats proposés par les restaurants CROUS de France et d'outre-mer.",
+    "helpUs": "Vous souhaitez nous aider à compléter cette page ?",
+    "helpUsDescription": "Vous pouvez contribuer à CROUStillant et cette page ! Rejoignez notre serveur Discord et contactez nous si vous souhaitez nous aider 😎",
+    "title": "Plats",
+    "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer.",
+    "seo": {
+      "title": "Plats - CROUStillant",
+      "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer. Trouvez le plat parfait pour votre prochain repas !",
+      "keywords": "CROUS, restaurant, menu, plat, plats"
+    }
+  },
   "LegalPage": {
     "title": "Notice légale",
     "subtitle": "Mis à jour le 31 décembre 2024",
