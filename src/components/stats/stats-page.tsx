@@ -24,7 +24,6 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface StatsPageProps {
   taches: Tache[];
