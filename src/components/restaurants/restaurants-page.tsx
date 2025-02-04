@@ -81,9 +81,7 @@ export default function RestaurantsPage({
       {/* Page title and filters */}
       <div className="w-full justify-between lg:flex mb-4 z-10">
         <div className="w-full">
-          <span className="flex items-center flex-wrap gap-2">
-            <h1 className="font-bold text-3xl">Restaurants</h1>
-          </span>
+          <h1 className="font-bold text-3xl">Restaurants</h1>
           <div className="opacity-50">
             {loading ? (
               <Loading className="!justify-start" />
