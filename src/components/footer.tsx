@@ -3,6 +3,8 @@ import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
 import AccessibilityButton from "./accessibility-button";
+import BreadcrumbComponent from "./breadcrumb";
+import FavQuickAccess from "./fav-quick-access";
 
 export default async function Footer() {
   const t = await getTranslations("Footer");
@@ -58,8 +60,9 @@ export default async function Footer() {
               </Link>
             </div>
           </div>
-          <div className="flex flex-row mt-4 gap-2 h-full items-start">
+          <div className="flex flex-col mt-4 gap-4 h-full items-start">
             <AccessibilityButton />
+            <BreadcrumbComponent />
           </div>
         </div>
         <div className="flex flex-wrap gap-10 mt-4 md:mt-0">
@@ -69,9 +72,7 @@ export default async function Footer() {
             </h2>
             <ul className="mt-4 font-normal opacity-70">
               <li>
-                <Link href="/restaurants" className="hover:underline">
-                  {t("links.discover.meals")}
-                </Link>
+                <FavQuickAccess text={t("links.discover.meals")} />
               </li>
               <li>
                 <Link href="/restaurants" className="hover:underline">
