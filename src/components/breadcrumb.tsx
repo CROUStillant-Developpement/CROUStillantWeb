@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
+import { Home } from "lucide-react";
 
 export default function BreadcrumbComponent() {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export default function BreadcrumbComponent() {
           return (
             <BreadcrumbItem key={path}>
               <BreadcrumbLink href={path == "" ? "/" : href}>
-                <BreadcrumbPage>{path == "" ? "Home" : path}</BreadcrumbPage>
+                <BreadcrumbPage>{path == "" ? <Home /> : path}</BreadcrumbPage>
               </BreadcrumbLink>
               {index < array.length - 1 && <BreadcrumbSeparator />}
             </BreadcrumbItem>
