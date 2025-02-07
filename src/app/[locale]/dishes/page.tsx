@@ -1,5 +1,3 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Drill } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getLast100Dishes, getTop100Dishes } from "@/services/stats-services";
