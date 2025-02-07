@@ -38,11 +38,6 @@ export default async function Dishes() {
         <h1 className="font-bold text-3xl">{t("title")}</h1>
         <p className="opacity-50">{t("description")}</p>
       </div>
-      <Alert>
-        <Drill className="h-4 w-4" />
-        <AlertTitle>{t("buildInProgress")} 🚧</AlertTitle>
-        <AlertDescription>{t("buildInProgressDescription")}</AlertDescription>
-      </Alert>
       <DishesPage
         top100Dishes={top100Dishes.data}
         last100Dishes={last100Dishes.data}

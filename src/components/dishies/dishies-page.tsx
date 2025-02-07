@@ -62,7 +62,7 @@ export default function DishesPage({
           </CardHeader>
           <CardContent className="space-y-4">
             <Input
-              placeholder="Search food items..."
+              placeholder={t("search")}
               value={searchTop100}
               onChange={(e) => setSearchTop100(e.target.value)}
             />
@@ -105,7 +105,7 @@ export default function DishesPage({
           </CardHeader>
           <CardContent className="space-y-4">
             <Input
-              placeholder="Search food items..."
+              placeholder={t("search")}
               value={searchLast100}
               onChange={(e) => setSearchLast100(e.target.value)}
             />
