@@ -416,7 +416,7 @@
       },
       "requests": {
         "title": "Requests",
-        "description": "Number of requests made per day in order to retrieve the data of CROUS restaurants." 
+        "description": "Number of requests made per day in order to retrieve the data of CROUS restaurants."
       },
       "labels": {
         "menus": "Menus",
@@ -444,7 +444,16 @@
       "title": "Dishes - CROUStillant",
       "description": "Discover the dishes offered by the CROUS restaurants of France and overseas. Find the perfect dish for your next meal!",
       "keywords": "CROUS, restaurant, menu, dishes"
-    }
+    },
+    "noResults": "No dish found for this search 😢",
+    "top100": "Top dishes",
+    "top100Description": "Discover the top 100 dishes added to the platform.",
+    "last100": "Last dishes added",
+    "last100Description": "Discover the last 100 dishes added to the platform.",
+    "ranking": "Ranking",
+    "code": "Code",
+    "label": "Label",
+    "occurrences": "Occurrences"
   },
   "LegalPage": {
     "title": "Legal notices",

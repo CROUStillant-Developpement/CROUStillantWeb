@@ -445,7 +445,16 @@
       "title": "Plats - CROUStillant",
       "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer. Trouvez le plat parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, plat, plats"
-    }
+    },
+    "noResults": "Aucun plat trouvé pour cette recherche 😢",
+    "top100": "Top des plats ajoutés",
+    "top100Description": "Découvrez les 100 plats les plus ajoutés à la plateforme.",
+    "last100": "Derniers plats ajoutés",
+    "last100Description": "Découvrez les 100 derniers plats ajoutés à la plateforme.",
+    "ranking": "Classement",
+    "code": "Code",
+    "label": "Libellé",
+    "occurrences": "Occurrences"
   },
   "LegalPage": {
     "title": "Notice légale",
