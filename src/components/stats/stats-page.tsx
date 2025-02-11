@@ -24,7 +24,6 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface StatsPageProps {
   taches: Tache[];
@@ -93,7 +92,9 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         <ul>
           {payload.map((entry, index) => (
             <li key={`item-${index}`} style={{ color: entry.color }}>
-              {`${(entry.value).toLocaleString(localeString)} ${tooltipMapping[entry.dataKey] || entry.dataKey}`}
+              {`${entry.value.toLocaleString(localeString)} ${
+                tooltipMapping[entry.dataKey] || entry.dataKey
+              }`}
             </li>
           ))}
         </ul>
@@ -133,11 +134,11 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
   }
 
   return (
-    <div className="space-y-6 mt-6 lg:mt-12">
-      <Alert>
-        <AlertTitle>{t("title")}</AlertTitle>
-        <AlertDescription>{t("description")}</AlertDescription>
-      </Alert>
+    <div className="space-y-6">
+      <div>
+        <h1 className="font-bold text-3xl">{t("title")}</h1>
+        <p className="opacity-50">{t("description")}</p>
+      </div>
       <div className="flex gap-6 w-full justify-center flex-wrap flex-row items-center">
         <Stat variant="default">
           <StatTitle>{t("stats.menus")}</StatTitle>
@@ -228,14 +229,14 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
           requetes: 0,
         };
       }
-  
+
       acc[dateKey].deltaMenus += item.deltaMenus;
       acc[dateKey].deltaRepas += item.deltaRepas;
       acc[dateKey].deltaCategories += item.deltaCategories;
       acc[dateKey].deltaPlats += item.deltaPlats;
       acc[dateKey].deltaCompositions += item.deltaCompositions;
       acc[dateKey].requetes += item.requetes;
-  
+
       return acc;
     }, {});
   }, [processedData]);
@@ -297,7 +298,17 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
+                <Tooltip
+                  content={
+                    <CustomTooltip
+                      locale={locale as "en" | "fr"}
+                      tooltipMapping={tooltipMapping}
+                      active={false}
+                      payload={undefined}
+                      label=""
+                    />
+                  }
+                />
                 <Legend />
                 <Bar
                   dataKey="deltaMenus"
@@ -350,7 +361,17 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
+                <Tooltip
+                  content={
+                    <CustomTooltip
+                      locale={locale as "en" | "fr"}
+                      tooltipMapping={tooltipMapping}
+                      active={false}
+                      payload={undefined}
+                      label=""
+                    />
+                  }
+                />
                 <Legend />
                 <Line
                   type="monotone"
@@ -426,7 +447,17 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                   }}
                 />
                 <YAxis />
-                <Tooltip content={<CustomTooltip locale={locale as "en" | "fr"} tooltipMapping={tooltipMapping} active={false} payload={undefined} label="" />} />
+                <Tooltip
+                  content={
+                    <CustomTooltip
+                      locale={locale as "en" | "fr"}
+                      tooltipMapping={tooltipMapping}
+                      active={false}
+                      payload={undefined}
+                      label=""
+                    />
+                  }
+                />
                 <Legend />
                 <Line
                   type="monotone"

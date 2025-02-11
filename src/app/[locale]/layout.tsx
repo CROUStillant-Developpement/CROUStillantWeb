@@ -14,18 +14,47 @@ import UmamiProvider from "next-umami";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const APP_NAME = "CROUStillant";
+const APP_DEFAULT_TITLE = "CROUStillant";
+const APP_TITLE_TEMPLATE = "%s - CROUStillant";
+const APP_DESCRIPTION =
+  "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.";
+
 export const metadata: Metadata = {
-  title: "CROUStillant",
-  applicationName: "CROUStillant",
-  appleWebApp: true,
-  description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_DEFAULT_TITLE,
+    // startUpImage: [],
+  },
+  formatDetection: {
+    telephone: false,
+  },
   openGraph: {
-    title: "CROUStillant",
-    description: "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
     type: "website",
-    locale: "fr_FR",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
     images: { url: process.env.WEB_URL + "/banner.png" },
     url: process.env.WEB_URL,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+    images: { url: process.env.WEB_URL + "/banner.png" },
   },
 };
 

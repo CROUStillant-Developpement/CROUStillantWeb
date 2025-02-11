@@ -1,4 +1,4 @@
-import { Tache, GlobalStats, ApiResult, GithubRepo } from "./types";
+import { Tache, GlobalStats, ApiResult, GithubRepo, Plat } from "./types";
 import { apiRequest } from "./api-requets";
 
 /**
@@ -25,6 +25,25 @@ export async function getGlobalStats(): Promise<ApiResult<GlobalStats>> {
   });
 }
 
+/**
+ * Fetches the total star count from multiple GitHub repositories.
+ *
+ * @returns {Promise<number>} A promise that resolves to the total number of stars across the specified repositories.
+ *
+ * @remarks
+ * This function fetches the star count for the following repositories:
+ * - CROUStillant-Developpement/CROUStillant
+ * - CROUStillant-Developpement/CROUStillantAPI
+ * - CROUStillant-Developpement/CROUStillantWeb
+ *
+ * The results are cached for 2 hours to reduce the number of API requests.
+ *
+ * @example
+ * ```typescript
+ * const totalStars = await getGithubStarCount();
+ * console.log(`Total stars: ${totalStars}`);
+ * ```
+ */
 export const getGithubStarCount = async (): Promise<number> => {
   // Cache expiration time (2 hours in milliseconds)
   const cacheExpirationTime = 2 * 60 * 60 * 1000;
@@ -56,4 +75,28 @@ export const getGithubStarCount = async (): Promise<number> => {
   }
 
   return stars;
+};
+
+/**
+ * Fetches the top 100 dishes from the API.
+ *
+ * @returns {Promise<ApiResult<Plat[]>>} A promise that resolves to an ApiResult containing an array of Plat objects.
+ */
+export const getTop100Dishes = async (): Promise<ApiResult<Plat[]>> => {
+  return await apiRequest<Plat[]>({
+    endpoint: "plats/top",
+    method: "GET",
+  });
+};
+
+/**
+ * Fetches the last 100 dishes from the API.
+ *
+ * @returns {Promise<ApiResult<Plat[]>>} A promise that resolves to an ApiResult containing an array of Plat objects.
+ */
+export const getLast100Dishes = async (): Promise<ApiResult<Plat[]>> => {
+  return await apiRequest<Plat[]>({
+    endpoint: "plats",
+    method: "GET",
+  });
 };

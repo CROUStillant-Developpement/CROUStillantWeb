@@ -65,6 +65,7 @@ export interface Plat {
   code: string; // Identifiant du plat
   libelle: string; // Libellé du plat
   ordre?: number; // Ordre du plat dans la catégorie
+  total?: number; // Nombre total d'occurrences du plat
 }
 
 // Types for Categorie
