@@ -1,19 +1,70 @@
 {
   "HomePage": {
     "badge": {
-      "title": "Le projet est 100% open-source !",
-      "link": "En savoir plus"
+      "title": "Le projet est 100% open-source !"
     },
     "title": {
-      "first": "Vos repas,",
-      "second": "simples et accessibles."
+      "first": "Le menu du CROUS en un clic"
     },
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
-    "cta": {
-      "first": "Découvrir votre menu",
-      "second": "Voir les restaurants",
-      "starred": "Voir le menu du {name}"
+    "CTA": "Découvrir votre menu",
+    "seo": {
+      "title": "Croustillant",
+      "description": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer"
     }
+  },
+  "InfoCard": {
+    "title": "Toutes les informations sur votre restaurant",
+    "card1": {
+      "title": "Recherche par région, ville ou restaurant",
+      "description": "Accédez facilement à votre restaurant grâce à notre fonction de recherche",
+      "CTA": "en savoir plus"
+    },
+    "card2": {
+      "title": "Horaires d'ouverture et de fermeture",
+      "description": "Consultez rapidement les horaires de votre restaurant universitaire du CROUS.",
+      "CTA": "en savoir plus"
+    },
+    "card3": {
+      "title": "Contacts et moyens de paiement acceptés",
+      "description": "Découvrez les moyens de paiement acceptés dans votre restaurant universitaire.",
+      "CTA": "en savoir plus"
+    },
+    "card4": {
+      "title": "Accès à tous les restaurants",
+      "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
+      "CTA": "en savoir plus"
+    }
+  },
+  "JoinTeam": {
+    "title": "Faites partie de l’équipe"
+  },
+  "RadarsCard": {
+    "title": "Créé par des étudiants, pour des étudiants",
+    "subtitle": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer.",
+    "CTA": "Participer au projet"
+  },
+  "GitCard": {
+    "title": "Rejoignez l'équipe !",
+    "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+    "CTA": "Nous rejoindre",
+    "Card": {
+      "name": "Activité",
+      "seeMore": "Voir plus"
+    }
+  },
+  "ApiCard": {
+    "title": "Intégration facile",
+    "subtitle": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.",
+    "CTA": "Commencer à l’utiliser",
+    "Card": {
+      "title": "Server",
+      "subtitle": "Serveur de production"
+    }
+  },
+  "FooterCtaCard": {
+    "title": "Convaincu ?",
+    "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
   },
   "RestaurantsPage": {
     "noResults": "Aucun restaurant trouvé pour cette recherche 😢",
@@ -28,7 +79,7 @@
     "clickToSeeLess": "Voir moins",
     "markerDescription": "Voir le menu du restaurant <link>{name}</link>.",
     "seo": {
-      "title": "Restaurants - CROUStillant",
+      "title": "Restaurants",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu"
     }
@@ -41,11 +92,11 @@
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
     "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
     "seo": {
-      "title": "Menu de {name} - CROUStillant",
+      "title": "Menu de {name}",
       "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, {name}, {area}",
       "notFound": {
-        "title": "Restaurant introuvable - CROUStillant",
+        "title": "Restaurant introuvable",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."
       }
     },
@@ -189,7 +240,7 @@
       "button": "Notre serveur Discord"
     },
     "seo": {
-      "title": "À propos - CROUStillant",
+      "title": "À propos",
       "description": "Découvrez l'équipe de CROUStillant, le projet et les fonctionnalités du service. Nous sommes là pour vous aider !",
       "keywords": "CROUS, restaurant, menu, équipe, projet"
     }
@@ -389,7 +440,7 @@
       "deleteDataSuccessDescription": "Toutes les données ont été supprimées avec succès."
     },
     "seo": {
-      "title": "Paramètres - CROUStillant",
+      "title": "Paramètres",
       "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
       "keywords": "CROUS, restaurant, menu, paramètres"
     }
@@ -429,7 +480,7 @@
       }
     },
     "seo": {
-      "title": "Statistiques - CROUStillant",
+      "title": "Statistiques",
       "description": "Découvrez les statistiques de CROUStillant. Nombre de menus, compositions, catégories, repas et plats ajoutés par jour.",
       "keywords": "CROUS, restaurant, menu, statistiques"
     }
@@ -438,7 +489,7 @@
     "title": "Plats",
     "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer.",
     "seo": {
-      "title": "Plats - CROUStillant",
+      "title": "Plats",
       "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer. Trouvez le plat parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, plat, plats"
     },
@@ -545,7 +596,7 @@
       }
     },
     "seo": {
-      "title": "Notice légale - CROUStillant",
+      "title": "Notice légale",
       "description": "Consultez les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant. Nous sommes là pour vous aider !",
       "keywords": "CROUS, restaurant, menu, mentions légales, politique de confidentialité"
     }
@@ -560,7 +611,7 @@
     },
     "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
     "seo": {
-      "title": "Contact - CROUStillant",
+      "title": "Contact",
       "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
       "keywords": "CROUS, restaurant, menu, contact"
     }
@@ -578,7 +629,7 @@
     "buildInProgress": "Construction en cours...",
     "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
     "seo": {
-      "title": "Mises à jour - CROUStillant",
+      "title": "Mises à jour",
       "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées. Restez informé des nouveautés !",
       "keywords": "CROUS, restaurant, menu, mises à jour"
     }
