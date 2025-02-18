@@ -11,6 +11,8 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import UmamiProvider from "next-umami";
+import InfoCards from "@/components/infoCards";
+import JoinTeam from "@/components/joinTeam";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -100,6 +102,8 @@ export default async function RootLayout({
               <Header />
               {children}
             </main>
+            <InfoCards />
+            <JoinTeam />
             <Footer />
             <Toaster />
           </ThemeProvider>
