@@ -28,7 +28,7 @@
     "clickToSeeLess": "Voir moins",
     "markerDescription": "Voir le menu du restaurant <link>{name}</link>.",
     "seo": {
-      "title": "Restaurants - CROUStillant",
+      "title": "Restaurants",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu"
     }
@@ -41,11 +41,11 @@
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
     "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
     "seo": {
-      "title": "Menu de {name} - CROUStillant",
+      "title": "Menu de {name}",
       "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, {name}, {area}",
       "notFound": {
-        "title": "Restaurant introuvable - CROUStillant",
+        "title": "Restaurant introuvable",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."
       }
     },
@@ -189,7 +189,7 @@
       "button": "Notre serveur Discord"
     },
     "seo": {
-      "title": "À propos - CROUStillant",
+      "title": "À propos",
       "description": "Découvrez l'équipe de CROUStillant, le projet et les fonctionnalités du service. Nous sommes là pour vous aider !",
       "keywords": "CROUS, restaurant, menu, équipe, projet"
     }
@@ -389,7 +389,7 @@
       "deleteDataSuccessDescription": "Toutes les données ont été supprimées avec succès."
     },
     "seo": {
-      "title": "Paramètres - CROUStillant",
+      "title": "Paramètres",
       "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
       "keywords": "CROUS, restaurant, menu, paramètres"
     }
@@ -429,7 +429,7 @@
       }
     },
     "seo": {
-      "title": "Statistiques - CROUStillant",
+      "title": "Statistiques",
       "description": "Découvrez les statistiques de CROUStillant. Nombre de menus, compositions, catégories, repas et plats ajoutés par jour.",
       "keywords": "CROUS, restaurant, menu, statistiques"
     }
@@ -438,7 +438,7 @@
     "title": "Plats",
     "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer.",
     "seo": {
-      "title": "Plats - CROUStillant",
+      "title": "Plats",
       "description": "Découvrez les plats proposés par les restaurants CROUS de France et d'outre-mer. Trouvez le plat parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant, menu, plat, plats"
     },
@@ -545,7 +545,7 @@
       }
     },
     "seo": {
-      "title": "Notice légale - CROUStillant",
+      "title": "Notice légale",
       "description": "Consultez les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant. Nous sommes là pour vous aider !",
       "keywords": "CROUS, restaurant, menu, mentions légales, politique de confidentialité"
     }
@@ -560,7 +560,7 @@
     },
     "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
     "seo": {
-      "title": "Contact - CROUStillant",
+      "title": "Contact",
       "description": "Contactez l'équipe de CROUStillant pour toute question, suggestion ou problème. Nous sommes à votre service !",
       "keywords": "CROUS, restaurant, menu, contact"
     }
@@ -578,7 +578,7 @@
     "buildInProgress": "Construction en cours...",
     "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
     "seo": {
-      "title": "Mises à jour - CROUStillant",
+      "title": "Mises à jour",
       "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées. Restez informé des nouveautés !",
       "keywords": "CROUS, restaurant, menu, mises à jour"
     }
