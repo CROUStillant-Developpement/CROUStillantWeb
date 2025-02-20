@@ -11,6 +11,7 @@ import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
 import { Link } from "@/i18n/routing";
+import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 
 export default function RestaurantsPage({
   restaurants,
@@ -43,6 +44,21 @@ export default function RestaurantsPage({
     setfavouritesRestaurants(favRestaurants);
   }, [favourites, filteredRestaurants]);
 
+  /**
+   * Computes a paginated subset of the filtered restaurants based on the current page and page size.
+   *
+   * @constant
+   * @type {Array}
+   * @returns {Array} A slice of the filtered restaurants array corresponding to the current page.
+   *
+   * @dependencies
+   * - `filteredRestaurants`: The array of restaurants filtered by some criteria.
+   * - `currentPage`: The current page number.
+   * - `pageSize`: The number of restaurants to display per page.
+   *
+   * @remarks
+   * - In development mode, logs the length of the filtered restaurants array whenever it changes.
+   */
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
@@ -76,6 +92,15 @@ export default function RestaurantsPage({
     });
   }, [filteredRestaurants]);
 
+  const {
+    filters,
+    setFilters,
+    geoLocError,
+    handleLocationRequest,
+    resetFilters,
+    activeFilterCount,
+  } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
+
   return (
     <div>
       {/* Page title and filters */}
@@ -90,35 +115,17 @@ export default function RestaurantsPage({
             )}
           </div>
           <RestaurantsFilters
-            setFilteredRestaurants={setFilteredRestaurants}
-            restaurants={restaurants}
-            setLoading={setLoading}
+            filters={filters}
+            setFilters={setFilters}
+            geoLocError={geoLocError}
+            handleLocationRequest={handleLocationRequest}
+            resetFilters={resetFilters}
+            activeFilterCount={activeFilterCount}
             loading={loading}
             regions={regions}
             typesRestaurants={typesRestaurants}
           />
         </div>
-        {/* <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
-          <p>{t("display.title")}</p>
-          <div>
-            <Button
-              size="icon"
-              className="rounded-r-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "list" ? "default" : "outline"}
-            >
-              <AlignLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              size="icon"
-              className="rounded-l-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "map" ? "default" : "outline"}
-            >
-              <Map className="h-4 w-4" />
-            </Button>
-          </div>
-        </div> */}
       </div>
       {display === "list" && filteredRestaurants.length > 0 && (
         // Pagination
@@ -132,6 +139,7 @@ export default function RestaurantsPage({
       )}
       {/* Filtered restaurants or skeleton or no results or map */}
       <Content
+        filters={filters}
         display={display}
         filteredRestaurants={filteredRestaurants}
         paginatedRestaurants={paginatedRestaurants}

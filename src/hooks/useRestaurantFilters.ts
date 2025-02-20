@@ -69,7 +69,7 @@ export function useRestaurantFilters(
       crous: parseInt(
         searchParams.get("region") || favouriteRegion?.code.toString() || "-1",
         10
-      ),
+      ), // if no region is set, use the user's favourite region otherwise use -1
       izly: searchParams.get("izly") === "true",
       card: searchParams.get("card") === "true",
       restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",

@@ -34,20 +34,27 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ActiveFilterBadge from "./active-filter-badge";
+import { Filters } from "@/lib/filters";
 
 interface RestaurantsFiltersProps {
-  setFilteredRestaurants: (restaurants: Restaurant[]) => void;
-  restaurants: Restaurant[];
-  setLoading: (loading: boolean) => void;
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
+  geoLocError: string | null;
+  handleLocationRequest: () => Promise<void>;
+  resetFilters: () => void;
+  activeFilterCount: number;
   loading: boolean;
   regions: Region[];
   typesRestaurants: TypeRestaurant[];
 }
 
 export default function RestaurantsFilters({
-  restaurants,
-  setFilteredRestaurants,
-  setLoading,
+  filters,
+  setFilters,
+  geoLocError,
+  handleLocationRequest,
+  resetFilters,
+  activeFilterCount,
   loading,
   regions,
   typesRestaurants,
@@ -84,15 +91,6 @@ export default function RestaurantsFilters({
     sorted.unshift({ code: -1, libelle: t("restaurantType.all") });
     return sorted;
   }, [typesRestaurants, t]);
-
-  const {
-    filters,
-    setFilters,
-    geoLocError,
-    handleLocationRequest,
-    resetFilters,
-    activeFilterCount,
-  } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
 
   return (
     <div className="mt-4 w-full">
@@ -373,19 +371,21 @@ export default function RestaurantsFilters({
             ? t("geolocated.error")
             : t("geolocated.title")}
         </Button>
-        <Button variant="outline" disabled={loading} onClick={toggleDisplay}>
-          {display == "list" ? (
-            <>
-              <Map className="mr-2 h-4 w-4" />
-              {t("map")}
-            </>
-          ) : (
-            <>
-              <AlignLeft className="mr-2 h-4 w-4" />
-              {t("list")}
-            </>
-          )}
-        </Button>
+        {filters.crous === -1 && (
+          <Button variant="outline" disabled={loading} onClick={toggleDisplay}>
+            {display == "list" ? (
+              <>
+                <Map className="mr-2 h-4 w-4" />
+                {t("map")}
+              </>
+            ) : (
+              <>
+                <AlignLeft className="mr-2 h-4 w-4" />
+                {t("list")}
+              </>
+            )}
+          </Button>
+        )}
         <Button variant="outline" disabled={loading} onClick={resetFilters}>
           <RotateCcw className="mr-2 h-4 w-4" /> {t("reset")}
         </Button>
