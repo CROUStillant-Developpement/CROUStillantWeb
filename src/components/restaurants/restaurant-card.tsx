@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import useMarkerStore from "@/store/markerStore";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;

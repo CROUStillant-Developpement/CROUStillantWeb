@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Region, Restaurant, TypeRestaurant } from "@/services/types";
+import { Region, TypeRestaurant } from "@/services/types";
 import {
   Accessibility,
   AlignLeft,
@@ -18,7 +18,6 @@ import {
 import { ComboBoxResponsive } from "@/components/ui/combobox";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
-import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import {
