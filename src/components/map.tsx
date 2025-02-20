@@ -11,13 +11,22 @@ import useMarkerStore, {
 import { Button } from "./ui/button";
 import { LocateFixed, ZoomIn, ZoomOut } from "lucide-react";
 
-const defaultIcon = new Icon({
-  iconUrl: `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="16" fill="white" fill-opacity="1"/>
+const unselectedIcon = `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
+      <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="30" height="30" rx="15" fill="white" fill-opacity="1"/>
         <path d="M11 26V16.85C10.15 16.6167 9.43767 16.15 8.863 15.45C8.28833 14.75 8.00067 13.9333 8 13V6H10V13H11V6H13V13H14V6H16V13C16 13.9333 15.7127 14.75 15.138 15.45C14.5633 16.15 13.8507 16.6167 13 16.85V26H11ZM21 26V18H18V11C18 9.61667 18.4877 8.43767 19.463 7.463C20.4383 6.48833 21.6173 6.00067 23 6V26H21Z" fill="#B52606"/>
       </svg>
-    `)}`,
+    `)}`;
+
+const selectedIcon = `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
+      <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="30" height="30" rx="15" fill="black" fill-opacity="1"/>
+          <path d="M11 26V16.85C10.15 16.6167 9.43767 16.15 8.863 15.45C8.28833 14.75 8.00067 13.9333 8 13V6H10V13H11V6H13V13H14V6H16V13C16 13.9333 15.7127 14.75 15.138 15.45C14.5633 16.15 13.8507 16.6167 13 16.85V26H11ZM21 26V18H18V11C18 9.61667 18.4877 8.43767 19.463 7.463C20.4383 6.48833 21.6173 6.00067 23 6V26H21Z" fill="white"/>
+      </svg>
+    `)}`;
+
+const defaultIcon = new Icon({
+  iconUrl: unselectedIcon,
   iconAnchor: [25 / 2, 25],
   popupAnchor: [0, -25],
 });
@@ -65,6 +74,18 @@ const FitBoundsToMarkersComponent = () => {
   return null;
 };
 
+/**
+ * Adjusts the map view to fit all provided markers within the visible area.
+ *
+ * @param markers - An array of custom marker objects, each containing a position property.
+ *                  The position can be either a LatLng object or a tuple of [latitude, longitude].
+ * @param map - The map instance to adjust the view on. If null, the function will return without doing anything.
+ *
+ * @remarks
+ * - If the markers array is empty or the map is null, the function will return immediately without making any changes.
+ * - The function converts marker positions to LatLng tuples if they are not already in that format.
+ * - The map view is adjusted with a padding of 50 pixels on all sides.
+ */
 const fitBoundsToMarkers = (
   markers: CustomMarkerType[],
   map: MapType | null
@@ -128,22 +149,29 @@ const Map = ({
         <div className="absolute top-4 right-4 z-50 flex flex-col gap-2">
           <Button
             size="icon"
+            variant="outline"
             onClick={() => fitBoundsToMarkers(markers, mapRef.current)}
           >
             <LocateFixed />
           </Button>
-          <Button
-            size="icon"
-            onClick={() => mapRef.current?.zoomIn()}
-          >
-            <ZoomIn />
-          </Button>
-          <Button
-            size="icon"
-            onClick={() => mapRef.current?.zoomOut()}
-          >
-            <ZoomOut />
-          </Button>
+          <div className="flex flex-col">
+            <Button
+              size="icon"
+              variant="outline"
+              className="rounded-b-none"
+              onClick={() => mapRef.current?.zoomIn()}
+            >
+              <ZoomIn />
+            </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              className="rounded-t-none"
+              onClick={() => mapRef.current?.zoomOut()}
+            >
+              <ZoomOut />
+            </Button>
+          </div>
         </div>
       )}
       <MapContainer
@@ -166,7 +194,10 @@ const Map = ({
             position={marker.position}
             icon={
               new Icon({
-                iconUrl: defaultIcon.options.iconUrl,
+                iconUrl:
+                  highlightedMarker === marker.id
+                    ? selectedIcon
+                    : unselectedIcon,
                 iconSize: highlightedMarker === marker.id ? [50, 50] : [25, 25],
                 iconAnchor:
                   highlightedMarker === marker.id

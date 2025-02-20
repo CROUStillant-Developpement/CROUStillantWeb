@@ -6,7 +6,6 @@ import Loading from "@/app/[locale]/loading";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useTranslations } from "next-intl";
-import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
@@ -127,16 +126,6 @@ export default function RestaurantsPage({
           />
         </div>
       </div>
-      {display === "list" && filteredRestaurants.length > 0 && (
-        // Pagination
-        <Pagination
-          loading={loading}
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalRecords={filteredRestaurants.length}
-          onPageChange={setCurrentPage}
-        />
-      )}
       {/* Filtered restaurants or skeleton or no results or map */}
       <Content
         filters={filters}
@@ -145,17 +134,10 @@ export default function RestaurantsPage({
         paginatedRestaurants={paginatedRestaurants}
         favouritesRestaurants={favouritesRestaurants}
         loading={loading}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChange={setCurrentPage}
       />
-      {display === "list" && filteredRestaurants.length > 0 && (
-        // Pagination
-        <Pagination
-          loading={loading}
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalRecords={filteredRestaurants.length}
-          onPageChange={setCurrentPage}
-        />
-      )}
     </div>
   );
 }

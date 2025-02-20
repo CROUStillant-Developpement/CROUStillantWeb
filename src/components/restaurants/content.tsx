@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Filters } from "@/lib/filters";
 import useMarkerStore from "@/store/markerStore";
+import Pagination from "../pagination";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -16,6 +17,9 @@ interface ContentProps {
   favouritesRestaurants: Restaurant[];
   loading: boolean;
   filters: Filters;
+  currentPage: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
 }
 
 export default function Content({
@@ -25,6 +29,9 @@ export default function Content({
   favouritesRestaurants,
   loading,
   filters,
+  currentPage,
+  pageSize,
+  onPageChange: setCurrentPage,
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
   const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
@@ -48,6 +55,16 @@ export default function Content({
     return (
       <div className="flex gap-4 md:gap-8">
         <div className="flex-1">
+          {display === "list" && filteredRestaurants.length > 0 && (
+            // Pagination
+            <Pagination
+              loading={loading}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalRecords={filteredRestaurants.length}
+              onPageChange={setCurrentPage}
+            />
+          )}
           {/* favourites */}
           {favouritesRestaurants.length > 0 && (
             <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
@@ -103,9 +120,19 @@ export default function Content({
               </p>
             )}
           </div>
+          {display === "list" && filteredRestaurants.length > 0 && (
+            // Pagination
+            <Pagination
+              loading={loading}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalRecords={filteredRestaurants.length}
+              onPageChange={setCurrentPage}
+            />
+          )}
         </div>
         {filters.crous !== -1 && (
-          <div className="w-1/3 h-[90vh] sticky top-4">
+          <div className="w-1/3 h-[100vh] sticky top-0 py-4">
             <MapComponent loading={loading} />
           </div>
         )}

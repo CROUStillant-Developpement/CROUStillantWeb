@@ -68,6 +68,7 @@ export default function RestaurantCard({
           )}
         </Button>
         <Link
+          onClick={onLeave}
           href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
           className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
         >
