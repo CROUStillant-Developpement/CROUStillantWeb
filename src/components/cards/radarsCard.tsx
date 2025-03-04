@@ -95,9 +95,7 @@ const RadarsCard = ({ style }: Props) => {
                     <div className="z-[4] absolute animate-scan bg-[#ff46466a] rounded-full size-[500px]" />
                 </aside>
             </aside>
-
         </section>
-
     );
 };
 export default RadarsCard;
