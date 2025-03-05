@@ -28,10 +28,10 @@ const ApiCard = ({ style }: Props) => {
                             </div>
                         </div>
                         <div className="flex items-center w-fullborder border border-r-0 rounded-l-none border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
-                            <p className="text-lg font-medium ">https://api-croustillant.bayfield.dev</p>
+                            <p className="text-sm md:text-lg font-medium ">https://api-croustillant.bayfield.dev</p>
                         </div>
                         <div className="flex items-center w-fullborder border border-r-0 border-t-0 rounded-tl-none border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2">
-                            <p className="text-base font-medium opacity-60">Serveur de production</p>
+                            <p className="text-xs md:text-base font-medium opacity-60">Serveur de production</p>
                         </div>
                     </aside>
                 </section>

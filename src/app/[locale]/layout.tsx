@@ -13,6 +13,7 @@ import { routing } from "@/i18n/routing";
 import UmamiProvider from "next-umami";
 import InfoCards from "@/components/infoCards";
 import JoinTeam from "@/components/joinTeam";
+import FooterCtaCard from "@/components/cards/FooterCtaCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -104,8 +105,10 @@ export default async function RootLayout({
             </main>
             <InfoCards />
             <JoinTeam />
+            <FooterCtaCard />
             <Footer />
             <Toaster />
+            
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

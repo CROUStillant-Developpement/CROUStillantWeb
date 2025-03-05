@@ -61,9 +61,9 @@ interface GitActivityProps {
 
 export const GitActivity = ({ activity }: GitActivityProps) => {
     return (
-        <article className="flex flex-col gap-1">
+        <article className="flex flex-col gap-2 md:gap-1">
             <div className="flex items-start justify-between w-full">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col md:flew-row md:items-center gap-1.5 md:gap-3">
                     <div className="px-2 py-1 rounded-[8px] bg-gray-300 text-sm font-medium">{activity.role}</div>
                     <p className="font-medium text-lg">{activity.name}</p>
                 </div>
