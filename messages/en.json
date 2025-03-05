@@ -195,6 +195,7 @@
     }
   },
   "Footer": {
+    "visits": "{count, plural, =0 {No one has enjoyed themselves} =1 {<strong>#</strong> person has enjoyed themselves} other {<strong>#</strong> people have enjoyed themselves}} with CROUStillant",
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - {year} CROUStillant Développement, all rights reserved.",
     "disclaimer": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project.",
@@ -403,7 +404,8 @@
       "repas": "Meals",
       "plats": "Dishes",
       "restaurants": "Restaurants",
-      "regions": "Regions"
+      "regions": "Regions",
+      "visits": "Visits"
     },
     "charts": {
       "menuAdded": {

@@ -6,29 +6,18 @@ import { ApiResult } from "@/services/types";
 const cache = new Map<string, { data: any; expiry: number }>();
 
 /**
- * Makes an API request to the specified endpoint with caching support.
+ * Makes an API request with caching and error handling.
  *
- * @template T - The expected type of the response data.
+ * @template T - The expected response data type.
  * @param {Object} params - The parameters for the API request.
- * @param {string} params.endpoint - The endpoint to which the request is made.
+ * @param {string} params.endpoint - The API endpoint to request.
  * @param {string} [params.method="GET"] - The HTTP method to use for the request.
- * @param {any} [params.body] - The body of the request, if any.
- * @param {number} [cacheDuration=0] - The duration (in ms) for which the response should be cached.
- * @returns {Promise<ApiResult<T>>} A promise that resolves to the result of the API request.
- *
- * @example
- * ```typescript
- * const result = await apiRequest<{ user: User }>({
- *   endpoint: 'users/123',
- *   method: 'GET',
- *   cacheDuration: 60000, // Cache for 1 minute
- * });
- * if (result.success) {
- *   console.log(result.data.user);
- * } else {
- *   console.error(result.error);
- * }
- * ```
+ * @param {any} [params.body] - The request body, if any.
+ * @param {number} [params.cacheDuration=0] - The duration (in milliseconds) to cache the response.
+ * @param {string} [params.api_url=process.env.API_URL] - The base URL for the API.
+ * @param {boolean} [params.check_success=true] - Whether to check for a success flag in the response data.
+ * @returns {Promise<ApiResult<T>>} A promise that resolves to the API result.
+ * @throws {Error} Throws an error if the request fails due to network issues or server errors.
  */
 export async function apiRequest<T>({
   endpoint,
@@ -37,6 +26,7 @@ export async function apiRequest<T>({
   cacheDuration = 0,
   api_url = process.env.API_URL,
   check_success = true,
+  token = null,
 }: {
   endpoint: string;
   method?: string;
@@ -45,6 +35,7 @@ export async function apiRequest<T>({
   cacheDuration?: number;
   api_url?: string;
   check_success?: boolean;
+  token?: string | null;
 }): Promise<ApiResult<T>> {
   const cacheKey = `${method}:${api_url}/${endpoint}:${JSON.stringify(body)}`;
 
@@ -71,6 +62,10 @@ export async function apiRequest<T>({
 
   if (process.env.API_KEY && api_url === process.env.API_URL) {
     headers["X-Api-Key"] = process.env.API_KEY as string;
+  }
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   try {
@@ -152,9 +147,8 @@ export async function apiRequest<T>({
     // Handle network errors or unexpected issues
     return {
       success: false,
-      error: `Network or server error: ${
-        err instanceof Error ? err.message : String(err)
-      }`,
+      error: `Network or server error: ${err instanceof Error ? err.message : String(err)
+        }`,
       status: 500, // Generic status for network failures
     };
   }
