@@ -100,3 +100,6 @@ export const getLast100Dishes = async (): Promise<ApiResult<Plat[]>> => {
     method: "GET",
   });
 };
+
+
+

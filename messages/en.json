@@ -158,7 +158,7 @@
           "role": "Project founder and lead developer"
         },
         "member2": {
-          "name": "Alden Cherif",
+          "name": "Adlen Cherif",
           "role": "UI designer and web developer"
         },
         "member3": {
@@ -195,6 +195,7 @@
     }
   },
   "Footer": {
+    "visits": "{count, plural, =0 {No one has enjoyed themselves} =1 {<strong>#</strong> person has enjoyed themselves} other {<strong>#</strong> people have enjoyed themselves}} with CROUStillant",
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - {year} CROUStillant Développement, all rights reserved.",
     "disclaimer": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project.",
@@ -403,7 +404,8 @@
       "repas": "Meals",
       "plats": "Dishes",
       "restaurants": "Restaurants",
-      "regions": "Regions"
+      "regions": "Regions",
+      "visits": "Visits"
     },
     "charts": {
       "menuAdded": {
@@ -475,7 +477,7 @@
       },
       "part4": {
         "title": "Development",
-        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Alden Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
+        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Adlen Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
         "content2": "The site was designed to be simple, intuitive and accessible to all. It is entirely open-source and free."
       },
       "part5": {
