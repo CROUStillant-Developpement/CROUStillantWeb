@@ -53,10 +53,10 @@ export default function Content({
     );
   } else {
     return (
-      <div className="flex gap-4 md:gap-8">
+      <div className="flex gap-4 md:gap-8 flex-wrap-reverse md:flex-nowrap">
         <div className="flex-1">
+          {/* Pagination */}
           {display === "list" && filteredRestaurants.length > 0 && (
-            // Pagination
             <Pagination
               loading={loading}
               currentPage={currentPage}
@@ -65,7 +65,7 @@ export default function Content({
               onPageChange={setCurrentPage}
             />
           )}
-          {/* favourites */}
+          {/* Favourites */}
           {favouritesRestaurants.length > 0 && (
             <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
               <legend className="-ml-1 px-1 text-sm font-medium">
@@ -83,9 +83,9 @@ export default function Content({
                 </span>
               </legend>
               <div
-                className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
+                className={`gap-4 md:grid-cols-2 md:gap-8 ${
                   userCollapsedfavourites ? "hidden" : "grid"
-                }`}
+                } ${filters.crous !== -1 ? "" : "lg:grid-cols-3"}`}
               >
                 {favouritesRestaurants.map((restaurant) => (
                   <RestaurantCard
@@ -96,6 +96,7 @@ export default function Content({
               </div>
             </fieldset>
           )}
+          {/* Restaurants */}
           <div
             className={`grid gap-4 md:gap-8 md:grid-cols-2 ${
               filters.crous !== -1 ? "" : "lg:grid-cols-3"
@@ -120,8 +121,8 @@ export default function Content({
               </p>
             )}
           </div>
+          {/* Pagination */}
           {display === "list" && filteredRestaurants.length > 0 && (
-            // Pagination
             <Pagination
               loading={loading}
               currentPage={currentPage}
@@ -131,9 +132,10 @@ export default function Content({
             />
           )}
         </div>
+        {/* Map */}
         {filters.crous !== -1 && (
-          <div className="w-1/3 h-[100vh] sticky top-0 py-4">
-            <MapComponent loading={loading} />
+          <div className="md:w-1/3 w-full md:h-[100vh] h-[30vh] sticky top-4">
+            <MapComponent loading={loading} className="pb-4" />
           </div>
         )}
       </div>

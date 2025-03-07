@@ -213,3 +213,12 @@ html {
   font-family: "OpenDyslexic", sans-serif !important;
 }
 
+.animated-marker {
+  transition: transform 0.3s ease-in-out;
+}
+
+.marker-animate {
+  transform: scale(1.3);
+}
+
+
