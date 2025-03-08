@@ -14,7 +14,7 @@ const ApiCard = ({ style }: Props) => {
                     </p>
                     <p className="text-base">
                         Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.</p>
-                    <Link href="/" className="underline text-base font-bold">
+                    <Link href="/https://api-croustillant.bayfield.dev/" className="underline text-base font-bold">
                         Commencer à l’utiliser
                     </Link>
                 </div>

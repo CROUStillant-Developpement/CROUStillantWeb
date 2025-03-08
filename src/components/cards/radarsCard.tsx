@@ -20,7 +20,7 @@ const RadarsCard = ({ style }: Props) => {
                         informations sur les menus des restaurants universitaires en
                         France et en Outre-Mer.
                     </p>
-                    <Link href="/" className="underline text-base font-bold">
+                    <Link href="/https://github.com/CROUStillant-Developpement" className="underline text-base font-bold">
                         Participer au projet
                     </Link>
                 </div>

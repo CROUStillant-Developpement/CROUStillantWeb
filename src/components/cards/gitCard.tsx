@@ -13,7 +13,7 @@ const GitCard = ({ style }: Props) => {
 
     return (
         <section className={`${style}`}>
-            <aside className="flex flex-col w-full h-full gap-6 py-4 px-3.5 bg-[#FAFAFA] rounded-[8px] border border-[#555555] border-opacity-[7%]">
+            <aside className="flex flex-col w-full h-full max-h-[30rem] gap-6 py-4 px-3.5 bg-[#FAFAFA] rounded-[8px] border border-[#555555] border-opacity-[7%]">
                 <div className="flex flex-col gap-2">
                     <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] bg-clip-text text-transparent font-bold text-2xl">
                         Rejoignez l'équipe !
@@ -21,11 +21,11 @@ const GitCard = ({ style }: Props) => {
                     <p className="text-base">
                         CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.
                     </p>
-                    <Link href="/" className="underline text-base font-bold">
+                    <Link href="/https://github.com/CROUStillant-Developpement" className="underline text-base font-bold">
                         Nous rejoindre
                     </Link>
                 </div>
-                <section className="relative flex items-center justify-center w-full h-full bg-[#F8E9E9] bg-opacity-40 rounded-xl p-2">
+                <section className="relative flex items-center justify-center w-full h-full bg-[#F8E9E9] bg-opacity-40 rounded-xl p-2 overflow-hidden">
                     <aside className="overflow-hidden flex flex-col gap-6 md:gap-4 px-3 py-1 border border-[#FFCACA] border-opacity-40 w-full h-full rounded-[8px]">
                         <div className="flex justify-between items-center w-full">
                             <p className="text-lg font-medium opacity-80">Activité</p>

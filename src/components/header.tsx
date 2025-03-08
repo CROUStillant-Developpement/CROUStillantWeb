@@ -26,7 +26,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center w-full">
+    <header className="flex justify-between items-center w-full mt-4 px-4">
       <nav className="md:w-64">
         <ul
           className={`flex h-9 items-center space-x-1 bg-background p-1 rounded-none border-none ${

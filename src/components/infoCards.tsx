@@ -3,8 +3,8 @@ import BasicCard from "./cards/basicCard"
 
 const InfoCards = () => {
     return(
-        <section className="container">
-            <h2 className="lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] bg-clip-text text-transparent">Toutes les informations sur votre restaurant</h2>
+        <section id="#info" className="container ">
+            <h2 className="2xl:mt-28 lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] bg-clip-text text-transparent">Toutes les informations sur votre restaurant</h2>
             <aside className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 lg:mt-10">
                 <BasicCard
                     title="Recherche par région, ville ou restaurant"
