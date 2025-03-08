@@ -136,6 +136,7 @@ export interface GlobalStats {
   restaurants_actifs: number; // Nombre de restaurants actifs
   types_restaurants: number; // Nombre de types de restaurants
   visites?: number; // Nombre de visites sur le site
+  pagesVues?: number; // Nombre de pages vues sur le site
 }
 
 // Types for GithubRepo Stats

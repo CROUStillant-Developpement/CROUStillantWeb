@@ -32,6 +32,7 @@ export default async function Stats() {
 
   if (umamiStats.success) {
     stats.data.visites = umamiStats.data.visitors.value;
+    stats.data.pagesVues = umamiStats.data.pageviews.value;
   }
 
   return <StatsPage taches={taches.data} stats={stats.data} />;

@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
@@ -10,7 +10,13 @@ import { getStats } from "@/services/umami-service";
 export default async function Footer() {
   const t = await getTranslations("Footer");
 
-  const visitors = await getStats();
+  const stats = await getStats();
+
+  const locale = await getLocale();
+  let localeString = "fr-FR";
+  if (locale === "en") {
+    localeString = "en-GB";
+  }
 
   return (
     <footer className="border-grey align-center flex w-full flex-col border-t py-10 font-medium md:px-0 overflow-hidden">
@@ -174,11 +180,12 @@ export default async function Footer() {
       <div className="flex items-center flex-wrap">
         <div className="mx-auto w-full flex flex-col px-5 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
           <p>{t("authors")}</p>
-          {visitors.success && (
+          {stats.success && (
             <p className="mt-2">
               {t.rich("visits", {
                 strong: (chunks) => <strong>{chunks}</strong>,
-                count: visitors.data.visitors.value,
+                visitors: (stats.data.visitors.value ?? 0).toLocaleString(localeString),
+                pageviews: (stats.data.pageviews.value ?? 0).toLocaleString(localeString),
               })}
             </p>
           )}
