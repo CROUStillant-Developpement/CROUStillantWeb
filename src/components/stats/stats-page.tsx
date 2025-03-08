@@ -190,6 +190,14 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
             </StatDescription>
           </Stat>
         )}
+        {stats?.pagesVues && (
+          <Stat variant="default">
+            <StatTitle>{t("stats.views")}</StatTitle>
+            <StatDescription>
+              {(stats?.pagesVues ?? 0).toLocaleString(localeString)}
+            </StatDescription>
+          </Stat>
+        )}
       </div>
       <TacheCharts data={taches} />
     </div>
