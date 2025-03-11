@@ -103,9 +103,6 @@ export default async function RootLayout({
               <Header />
               {children}
             </main>
-            <InfoCards />
-            <JoinTeam />
-            <FooterCtaCard />
             <Footer />
             <Toaster />
             

@@ -1,27 +1,28 @@
-"use client";
+
 import { School, UtensilsCrossed } from "lucide-react";
 import RadarsIcons from "../ui/radarsIcon";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
     style?: string;
 }
 
-const RadarsCard = ({ style }: Props) => {
+const RadarsCard = async ({ style }: Props) => {
+    const t = await getTranslations("RadarsCard");
     return (
         <section className={`${style}`}>
             <aside className=" flex flex-col w-full h-full gap-6 py-4 px-3.5 bg-[#FAFAFA] rounded-[8px] border border-[#555555] border-opacity-[7%] ">
                 <div className="flex flex-col gap-2">
                     <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] bg-clip-text text-transparent font-bold text-2xl">
-                        Créé par des étudiants, pour des étudiants
+                    {t("title")}
                     </p>
                     <p className="text-base">
-                        CROUStillant est un projet qui a pour but de fournir des
-                        informations sur les menus des restaurants universitaires en
-                        France et en Outre-Mer.
+                    {t("subtitle")}
                     </p>
                     <Link href="/https://github.com/CROUStillant-Developpement" className="underline text-base font-bold">
-                        Participer au projet
+                    {t("CTA")}
                     </Link>
                 </div>
                 <aside className="overflow-hidden relative flex items-center justify-center w-full h-60 bg-[#F8E9E9] bg-opacity-40 rounded-xl">
