@@ -9,29 +9,30 @@
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
     "CTA": "Découvrir votre menu",
     "seo": {
-      "title": "Croustillant"
+      "title": "Croustillant",
+      "description": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer"
     }
   },
   "InfoCard": {
     "title": "Toutes les informations sur votre restaurant",
     "card1": {
       "title": "Recherche par région, ville ou restaurant",
-      "description": "Lorem ipsum dolor sit amet. Eos voluptate molestiae aut maiores expedita et quae galisum. Vel nemo ipsa est magni",
+      "description": "Accédez facilement à votre restaurant grâce à notre fonction de recherche",
       "CTA": "en savoir plus"
     },
     "card2": {
       "title": "Horaires d'ouverture et de fermeture",
-      "description": "Lorem ipsum dolor sit amet. Eos voluptate molestiae aut maiores expedita et quae galisum. Vel nemo ipsa est magni",
+      "description": "Consultez rapidement les horaires de votre restaurant universitaire du CROUS.",
       "CTA": "en savoir plus"
     },
     "card3": {
       "title": "Contacts et moyens de paiement acceptés",
-      "description": "Lorem ipsum dolor sit amet. Eos voluptate molestiae aut maiores expedita et quae galisum. Vel nemo ipsa est magni ",
+      "description": "Découvrez les moyens de paiement acceptés dans votre restaurant universitaire.",
       "CTA": "en savoir plus"
     },
     "card4": {
       "title": "Accès à tous les restaurants",
-      "description": "Lorem ipsum dolor sit amet. Eos voluptate molestiae aut maiores expedita et quae galisum. Vel nemo ipsa est magni ",
+      "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
       "CTA": "en savoir plus"
     }
   },
