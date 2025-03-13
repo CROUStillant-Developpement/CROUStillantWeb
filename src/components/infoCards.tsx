@@ -5,19 +5,19 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations("HomePage");
-  
+    
     return {
-      title: t("seo.title"),
-      description: t("seo.description"),
-      keywords: t("seo.keywords"),
-      openGraph: {
         title: t("seo.title"),
         description: t("seo.description"),
-        images: { url: process.env.WEB_URL + "/banner.png" },
-        siteName: "CROUStillant",
-      },
+        keywords: t("seo.keywords"),
+        openGraph: {
+            title: t("seo.title"),
+            description: t("seo.description"),
+            images: { url: process.env.WEB_URL + "/banner.png" },
+            siteName: "CROUStillant",
+        },
     };
-  }
+}
   
 
 const InfoCards = async () => {
@@ -33,7 +33,7 @@ const InfoCards = async () => {
                     CTA={t("card1.CTA")}
                     CTALink="about"
                 >
-                    <MapPin height={200} width={125} color="#555555" opacity={0.1} />
+                    <MapPin height={200} width={125} color="#555555" opacity={0.1} className="dark:opacity-30"/>
                 </BasicCard>
                 <BasicCard
                     title={t("card2.title")}
@@ -41,7 +41,7 @@ const InfoCards = async () => {
                     CTA={t("card2.CTA")}
                     CTALink="about"
                 >
-                    <Clock height={200} width={125} color="#555555" opacity={0.1} />
+                    <Clock height={200} width={125} color="#555555" opacity={0.1} className="dark:opacity-30" />
                 </BasicCard>
                 <BasicCard
                     title={t("card3.title")}
@@ -49,7 +49,7 @@ const InfoCards = async () => {
                     CTA={t("card3.CTA")}
                     CTALink="about"
                 >
-                    <CreditCard height={200} width={125} color="#555555" opacity={0.1} />
+                    <CreditCard height={200} width={125} color="#555555" opacity={0.1} className="dark:opacity-30" />
                 </BasicCard>
                 <BasicCard
                     title={t("card4.title")}
@@ -58,7 +58,7 @@ const InfoCards = async () => {
                     CTALink="fr/about"
                     style={" md:bg-[#DAD6D6] md:bg-opacity-15 dark:bg-[rgba(218,214,214,0.08)]"}
                 >
-                    <ForkKnifeCrossed height={200} width={125} color="#555555" opacity={0.1} />
+                    <ForkKnifeCrossed height={200} width={125} color="#555555" opacity={0.1} className="dark:opacity-30" />
                 </BasicCard>
             </aside>
         </section>
