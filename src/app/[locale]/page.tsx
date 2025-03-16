@@ -42,11 +42,13 @@ export default function HomePage() {
           <h1 className="text-4xl md:text-8xl text-center font-bold max-w-[80%] leading-none bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent">{t("title.first")}</h1>
           <p className="text-base md:text-xl md:max-w-[70%] text-center font-medium leading-normal">{t("subtitle")}</p>
           <Link href={"/restaurants"} className=" hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-[16px] bg-[#E40514] shadow-[inset_0px_1px_3px_0px_#E40514,_inset_0px_2px_2px_2px_rgba(255,255,255,0.25)] py-3 px-6 text-white">{t("CTA")}</Link>
-
         </div>
-
       </aside>
-      <div className="mt-14 w-full bg-black h-[31rem] rounded-xl"/>
+      <div className="mt-14 w-full h-full ">
+      <video className="rounded-xl" controls muted>
+        <source src="/croustillantLandingPresentation.mp4" type="video/mp4" />
+      </video>
+      </div>
         <InfoCards />
         <JoinTeam />
         <FooterCtaCard />
