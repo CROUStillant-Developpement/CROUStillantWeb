@@ -63,6 +63,7 @@ export default function Content({
               pageSize={pageSize}
               totalRecords={filteredRestaurants.length}
               onPageChange={setCurrentPage}
+              className="mb-8"
             />
           )}
           {/* Favourites */}
@@ -129,13 +130,14 @@ export default function Content({
               pageSize={pageSize}
               totalRecords={filteredRestaurants.length}
               onPageChange={setCurrentPage}
+              className="mt-8"
             />
           )}
         </div>
         {/* Map */}
         {filters.crous !== -1 && (
-          <div className="md:w-1/3 w-full md:h-[100vh] h-[30vh] sticky top-4">
-            <MapComponent loading={loading} className="pb-4" />
+          <div className="md:w-1/3 w-full md:h-[100vh] h-[30vh] sticky top-0 py-4">
+            <MapComponent loading={loading} />
           </div>
         )}
       </div>
