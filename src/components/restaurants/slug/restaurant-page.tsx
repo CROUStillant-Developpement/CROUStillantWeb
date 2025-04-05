@@ -152,15 +152,42 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         </div>
       </div>
       {noMeal ? (
-        <div className="w-full flex flex-wrap items-center justify-center min-h-56 border mt-4 rounded-lg shadow-sm font-bold md:p-2 p-1">
-          <Alert className="md:text-3xl">
-            <MessageSquareWarning />
-            <AlertTitle>{t("noMealAvailable")}</AlertTitle>
-            <AlertDescription>
-              {t("noMealAvailableDescription")}
-            </AlertDescription>
-          </Alert>
-          <RestaurantInfo restaurant={restaurant} />
+        <div className="grid gap-4 lg:grid-cols-3 mt-8">
+          <fieldset className="grid gap-6 lg:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
+            <legend className="-ml-1 px-1 text-sm font-medium">
+              {t("menuOfTheDay", {
+                date: selectedDate.toLocaleDateString(locale, {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                }),
+              })}
+            </legend>
+            <div className="flex flex-col gap-4">
+              <Alert className="md:text-3xl" variant={"warning"}>
+                <AlertTitle>{t("noMealAvailable")}</AlertTitle>
+                <AlertDescription>
+                  {t("noMealAvailableDescription")}
+                  <p className="text-sm text-muted-foreground mt-2 italic">
+                    {t("noMealAvailableDescription2")}
+                  </p>
+                </AlertDescription>
+              </Alert>
+            </div>
+          </fieldset>
+          <Tabs defaultValue="info" className="w-full lg:mt-2">
+            <TabsList className="w-full">
+              <TabsTrigger className="flex-1" value="calendar" disabled>
+                {t("calendar")}
+              </TabsTrigger>
+              <TabsTrigger className="flex-1" value="info">
+                {t("information")}
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="info">
+              <RestaurantInfo restaurant={restaurant} />
+            </TabsContent>
+          </Tabs>
         </div>
       ) : loading ? (
         <RestaurantPageSkeleton />

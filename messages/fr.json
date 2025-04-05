@@ -39,7 +39,8 @@
     "nextDaysMenu": "Menu des prochains jours",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
-    "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
+    "noMealAvailableDescription": "Le restaurant ne propose actuellement aucun plat. Veuillez réessayer plus tard.",
+    "noMealAvailableDescription2": "Le menu doit être manuellement mis à jour par le restaurant. Si le menu n'est jamais disponible, vous pouvez contacter le restaurant pour leur faire part de votre problème.",
     "seo": {
       "title": "Menu de {name}",
       "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
