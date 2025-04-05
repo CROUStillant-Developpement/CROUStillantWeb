@@ -266,11 +266,12 @@ export default async function AboutPage() {
           <div className="relative">
             <Link
               href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/"
+              rel="noopener noreferrer"
               target="_blank"
             >
-              <Button className="mt-8">
-                <Bot className="inline mr-1" />
+              <Button variant="outline" className="mt-8">
                 {t("sources.button")}
+                <ExternalLinkIcon className="ml-4 h-4 w-4 opacity-50" />
               </Button>
             </Link>
           </div>
