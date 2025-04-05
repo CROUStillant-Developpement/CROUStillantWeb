@@ -248,6 +248,34 @@ export default async function AboutPage() {
           />
         </div>
       </div>
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+        <div className="flex items-center justify-center object-left xl:w-1/2">
+          <Image
+            width={1350}
+            height={900}
+            src="/previews/data.gouv.fr.png"
+            alt="data.gouv.fr Preview"
+            className="rounded-md object-contain"
+          />
+        </div>
+        <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
+          <h2 className="lg:text-4xl text-xl font-medium">
+            {t("sources.title")}
+          </h2>
+          <p className="mt-4 lg:text-lg">{t("sources.description")}</p>
+          <div className="relative">
+            <Link
+              href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/"
+              target="_blank"
+            >
+              <Button className="mt-8">
+                <Bot className="inline mr-1" />
+                {t("sources.button")}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
       <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h3 className="lg:text-4xl text-xl font-medium">
