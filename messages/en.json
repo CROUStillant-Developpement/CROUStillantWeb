@@ -177,6 +177,11 @@
       "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source.",
       "button": "View the API documentation"
     },
+    "sources": {
+      "title": "Sources",
+      "description": "CROUStillant uses data provided by the official CROUS website, which is aggregated and updated several times a day, then made accessible via our API. The CROUStillant API is available on the official French government data site.",
+      "button": "Learn more about the sources"
+    },
     "convinced": {
       "title": "Convinced?",
       "description": "Discover the menus of CROUS restaurants in France and overseas with CROUStillant!",
