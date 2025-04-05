@@ -12,7 +12,7 @@ import RestaurantCalendar from "./calendar";
 import DatePicker from "./date-picker";
 import RestaurantInfo from "./restaurant-info";
 import { Button } from "@/components/ui/button";
-import { Heart, MessageSquareWarning, QrCode } from "lucide-react";
+import { Heart, QrCode } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import { useTranslations, useLocale } from "next-intl";
 import RestaurantPageSkeleton from "./restaurant-page-skeleton";
