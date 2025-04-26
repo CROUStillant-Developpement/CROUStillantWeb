@@ -47,7 +47,7 @@ export default function GitCard({ style }: Props) {
               <p className="text-lg font-medium opacity-80">{t("Card.name")}</p>
             </div>
             {members.map((member) => (
-              <div className="flex items-start justify-between w-full">
+              <div className="flex items-start justify-between w-full" key={member.id}>
                 <div className="flex items-center gap-2">
                   <div className="relative flex items-center justify-center pl-1.5 mr-2">
                     <div className="absolute size-2 rounded-full bg-blue-500" />
