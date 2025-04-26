@@ -4,67 +4,67 @@
       "title": "Le projet est 100% open-source !"
     },
     "title": {
-      "first": "Le menu du CROUS en un clic"
+      "first": "Le menu du CROUS en un clic",
+      "second": "Toutes les informations sur votre restaurant",
+      "third": "Faites partie de l’équipe",
+      "fourth": "Créé par des étudiants, pour des étudiants"
     },
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
-    "CTA": "Découvrir votre menu",
-    "seo": {
-      "title": "Croustillant",
-      "description": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer"
-    }
-  },
-  "InfoCard": {
-    "title": "Toutes les informations sur votre restaurant",
+    "cta": {
+      "first": "Découvrir votre menu",
+      "second": "Voir les restaurants",
+      "starred": "{name}",
+      "join": "Nous rejoindre"
+    },
     "card1": {
       "title": "Recherche par région, ville ou restaurant",
       "description": "Accédez facilement à votre restaurant grâce à notre fonction de recherche",
-      "CTA": "en savoir plus"
+      "cta": "En savoir plus"
     },
     "card2": {
       "title": "Horaires d'ouverture et de fermeture",
       "description": "Consultez rapidement les horaires de votre restaurant universitaire du CROUS.",
-      "CTA": "en savoir plus"
+      "cta": "En savoir plus"
     },
     "card3": {
       "title": "Contacts et moyens de paiement acceptés",
       "description": "Découvrez les moyens de paiement acceptés dans votre restaurant universitaire.",
-      "CTA": "en savoir plus"
+      "cta": "En savoir plus"
     },
     "card4": {
       "title": "Accès à tous les restaurants",
       "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
-      "CTA": "en savoir plus"
+      "cta": "En savoir plus"
+    },
+    "footer":  {
+      "title": "Convaincu ?",
+      "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
     }
   },
-  "JoinTeam": {
-    "title": "Faites partie de l’équipe"
-  },
-  "RadarsCard": {
-    "title": "Créé par des étudiants, pour des étudiants",
-    "subtitle": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer.",
-    "CTA": "Participer au projet"
-  },
-  "GitCard": {
-    "title": "Rejoignez l'équipe !",
-    "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
-    "CTA": "Nous rejoindre",
-    "Card": {
-      "name": "Activité",
-      "seeMore": "Voir plus"
+  "HomeCard": {
+    "RadarsCard": {
+      "title": "Créé par des étudiants, pour des étudiants",
+      "subtitle": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer.",
+      "cta": "Participer au projet"
+    },
+    "GitCard": {
+      "title": "Rejoignez l'équipe !",
+      "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+      "cta": "Nous rejoindre",
+      "Card": {
+        "name": "Activité",
+        "seeMore": "Voir plus"
+      }
+    },
+    "ApiCard": {
+      "title": "Intégration facile",
+      "subtitle": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.",
+      "cta": "Commencer à l’utiliser",
+      "Card": {
+        "title": "Server",
+        "subtitle": "Serveur de production"
+      }
     }
-  },
-  "ApiCard": {
-    "title": "Intégration facile",
-    "subtitle": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.",
-    "CTA": "Commencer à l’utiliser",
-    "Card": {
-      "title": "Server",
-      "subtitle": "Serveur de production"
-    }
-  },
-  "FooterCtaCard": {
-    "title": "Convaincu ?",
-    "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
   },
   "RestaurantsPage": {
     "noResults": "Aucun restaurant trouvé pour cette recherche 😢",

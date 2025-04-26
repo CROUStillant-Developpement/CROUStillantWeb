@@ -11,9 +11,6 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import UmamiProvider from "next-umami";
-import InfoCards from "@/components/infoCards";
-import JoinTeam from "@/components/joinTeam";
-import FooterCtaCard from "@/components/cards/FooterCtaCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -99,13 +96,12 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className=" pb-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+            <main className="p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
               <Header />
               {children}
             </main>
             <Footer />
             <Toaster />
-            
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

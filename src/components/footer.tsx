@@ -66,7 +66,7 @@ export default async function Footer() {
             <BreadcrumbComponent />
           </div>
         </div>
-        <div className="flex  gap-10 mt-8 md:mt-0">
+        <div className="flex flex-wrap gap-10 mt-4 md:mt-0">
           <div>
             <h2 className="text-md font-bold opacity-80">
               {t("links.discover.title")}
