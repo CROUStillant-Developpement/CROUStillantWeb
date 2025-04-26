@@ -52,14 +52,13 @@
       "subtitle": "CROUStillant is a constantly evolving project. We are always looking for new talents to join the team and help us improve the service.",
       "cta": "Join us",
       "Card": {
-        "name": "Activity",
-        "seeMore": "See more"
+        "name": "Team members"
       }
     },
     "ApiCard": {
       "title": "Easy integration",
-      "subtitle": "You can integrate Crous restaurant information on your website or application using our API. The API is free and does not require registration.",
-      "cta": "Commencer à l’utiliser",
+      "subtile": "Integrate CROUStillant information into your own application for free using our API.",
+      "cta": "Start using it now",
       "Card": {
         "title": "Server",
         "subtitle": "Production server"

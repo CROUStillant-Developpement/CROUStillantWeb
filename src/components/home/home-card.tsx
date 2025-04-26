@@ -24,9 +24,9 @@ export default function HomeCard() {
               {t("ApiCard.cta")}
             </Link>
           </div>
-          <section className="relative flex items-center justify-center w-full h-fit bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] bg-opacity-40 rounded-xl overflow-hidden py-2.5">
-            <aside className="overflow-hidden translate-x-4 flex flex-col justify-between  px-3 py-1 w-full h-full ">
-              <div className="flex gap-2 items-center w-fullborder border border-r-0 border-b-0 rounded-bl-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
+          <section className="flex items-center justify-center w-full h-fit bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] bg-opacity-40 rounded-xl py-2.5 min-w-[350px]">
+            <aside className="flex flex-col justify-between mx-3 py-1 w-full h-full ">
+              <div className="flex gap-2 items-center w-fullborder border border-b-0 rounded-bl-none rounded-br-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
                 <p className="text-lg font-medium opacity-80 ">
                   {t("ApiCard.Card.title")}
                 </p>
@@ -35,12 +35,12 @@ export default function HomeCard() {
                   <div className=" absolute size-3 rounded-full bg-green-500 animate-scan" />
                 </div>
               </div>
-              <div className="flex items-center w-fullborder border border-r-0 rounded-l-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
+              <div className="flex items-center w-fullborder border rounded-l-none rounded-r-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
                 <p className="text-sm md:text-lg font-medium ">
                   https://api-croustillant.bayfield.dev
                 </p>
               </div>
-              <div className="flex items-center w-fullborder border border-r-0 border-t-0 rounded-tl-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2">
+              <div className="flex items-center w-fullborder border border-t-0 rounded-tl-none rounded-tr-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2">
                 <p className="text-xs md:text-base font-medium opacity-60">
                   {t("ApiCard.Card.subtitle")}
                 </p>
