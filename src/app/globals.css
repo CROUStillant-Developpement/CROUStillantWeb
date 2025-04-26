@@ -61,7 +61,8 @@
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out,
     .leaflet-control-attribution,
-    .leaflet-marker-icon {
+    .leaflet-marker-icon,
+    .leaflet-popup {
       filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
     }
   }

@@ -5,7 +5,9 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { LatLngExpression, LatLngBounds, Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import 'react-leaflet-markercluster/styles'
 import useMarkerStore from "@/store/markerStore";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
 const defaultIcon = new Icon({
   iconUrl: `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
@@ -78,17 +80,19 @@ const Map = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FitBoundsToMarkers />
-        {markers.map((marker, idx) => (
-          <Marker key={idx} position={marker.position} icon={defaultIcon}>
-            {marker.title && (
-              <Popup>
-                <span className="text-lg font-bold">{marker.title}</span>
-                <br />
-                {marker.description}
-              </Popup>
-            )}
-          </Marker>
-        ))}
+        <MarkerClusterGroup showCoverageOnHover={false}>
+          {markers.map((marker, idx) => (
+            <Marker key={idx} position={marker.position} icon={defaultIcon}>
+              {marker.title && (
+                <Popup>
+                  <span className="text-lg font-bold">{marker.title}</span>
+                  <br />
+                  {marker.description}
+                </Popup>
+              )}
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
       </MapContainer>
     </div>
   );
