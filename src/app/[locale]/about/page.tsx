@@ -13,6 +13,7 @@ import {
   Code,
   Database,
   FileTerminal,
+  ChevronsLeftRightEllipsis,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
@@ -49,7 +50,7 @@ export default async function AboutPage() {
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
-              <GraduationCap className="inline h-10 w-10 mr-3"></GraduationCap>
+              <GraduationCap className="inline h-10 w-10 mr-3" />
               {t("presentation.title")}
             </h3>
             <p className="mt-4 lg:text-lg">{t("presentation.description")}</p>
@@ -63,7 +64,7 @@ export default async function AboutPage() {
             <p className="mt-4 lg:text-lg">{t("updates.description")}</p>
           </div>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
@@ -135,34 +136,43 @@ export default async function AboutPage() {
           <h2 className="lg:text-4xl text-xl font-medium">{t("team.title")}</h2>
           <p className="mt-4 lg:text-lg">{t("team.description")}</p>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <div className="mt-8 w-full">
             <div className="flex items-center">
               <FileTerminal className="h-7 w-7 flex-none rounded-full bg-gray-300 p-1 text-black dark:bg-gray-400" />
               <div className="flex flex-col ml-2">
-                <p className="ml-2 font-semibold">
+                <a href={t("team.members.member1.github")} className="ml-2 font-semibold hover:underline">
                   {t("team.members.member1.name")}
-                </p>
+                </a>
                 <p className="ml-2">{t("team.members.member1.role")}</p>
               </div>
             </div>
             <div className="mt-4 flex items-center">
               <Code className="h-7 w-7 flex-none rounded-full bg-gray-300 p-1 text-black dark:bg-gray-400" />
               <div className="flex flex-col ml-2">
-                <p className="ml-2 font-semibold">
+                <a href={t("team.members.member2.github")} className="ml-2 font-semibold hover:underline">
                   {t("team.members.member2.name")}
-                </p>
+                </a>
                 <p className="ml-2">{t("team.members.member2.role")}</p>
               </div>
             </div>
             <div className="mt-4 flex items-center">
               <Database className="h-7 w-7 flex-none rounded-full bg-gray-300 p-1 text-black dark:bg-gray-400" />
               <div className="flex flex-col ml-2">
-                <p className="ml-2 font-semibold">
+                <a href={t("team.members.member3.github")} className="ml-2 font-semibold hover:underline">
                   {t("team.members.member3.name")}
-                </p>
+                </a>
                 <p className="ml-2">{t("team.members.member3.role")}</p>
+              </div>
+            </div>
+            <div className="mt-4 flex items-center">
+              <ChevronsLeftRightEllipsis className="h-7 w-7 flex-none rounded-full bg-gray-300 p-1 text-black dark:bg-gray-400" />
+              <div className="flex flex-col ml-2">
+                <a href={t("team.members.member4.github")} className="ml-2 font-semibold hover:underline">
+                  {t("team.members.member4.name")}
+                </a>
+                <p className="ml-2">{t("team.members.member4.role")}</p>
               </div>
             </div>
           </div>
@@ -298,7 +308,7 @@ export default async function AboutPage() {
             </Button>
           </div>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h3 className="lg:text-4xl text-xl font-medium">
             <HeartHandshake className="inline h-10 w-10 mr-3" />

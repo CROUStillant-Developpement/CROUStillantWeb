@@ -19,8 +19,9 @@ export default async function Footer() {
   }
 
   return (
-    <footer className="border-grey align-center flex w-full flex-col border-t py-10 font-medium md:px-0 overflow-hidden">
-      <div className="mx-auto md:flex w-full justify-between gap-5 border-b px-5 pb-10 lg:!w-2/3 lg:px-0">
+    <footer className="border-grey align-center flex w-full flex-col mt-24 py-10 font-medium md:px-0 relative">
+      <div className="bg-[linear-gradient(180deg,_rgba(251,153,153,0.40)_0%,_rgba(242,242,242,0.40)_100%)] dark:bg-[linear-gradient(180deg,rgba(255,68,68,0.4)_0%,rgba(21,20,20,0.4)_100%)] rotate-180 h-[30rem] -translate-y-24 w-full absolute -bottom-24 -z-10" />
+      <div className="mx-auto md:flex w-full justify-between gap-5 border-b px-5 pb-10 lg:!w-2/3 lg:px-0 dark:border-b-[#ffffff] dark:border-opacity-30">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
