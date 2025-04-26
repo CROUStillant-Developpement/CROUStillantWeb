@@ -156,15 +156,23 @@
       "members": {
         "member1": {
           "name": "Paul Bayfield",
-          "role": "Fondateur du projet et développeur principal"
+          "role": "Fondateur du projet et développeur principal",
+          "github": "https://github.com/PaulBayfield"
         },
         "member2": {
           "name": "Adlen Cherif",
-          "role": "Concepteur de l'interface utilisateur et développeur web"
+          "role": "Concepteur de l'interface utilisateur et développeur web",
+          "github": "https://github.com/cherifad"
         },
         "member3": {
           "name": "Lucas Debeve",
-          "role": "Concepteur de la base de données"
+          "role": "Concepteur de la base de données",
+          "github": "https://github.com/LucasDebeve"
+        },
+        "member4": {
+          "name": "Louis Descotes",
+          "role": "Développeur web",
+          "github": "https://github.com/louisdescotes"
         }
       }
     },
