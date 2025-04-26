@@ -21,7 +21,7 @@ export default function Home() {
       <aside className="pt-10">
         <Link
           href="#info"
-          className="group cursor-pointer flex items-center gap-2 py-1.5 px-6 rounded-[20px] border border-[#FED7DA] bg-[#FED7DA] dark:bg-[#581313] shadow-[0px_2px_4px_0px_rgba(244,64,64,0.25),_0px_1px_1px_0px_rgba(162,10,21,0.25)_inset] w-fit mx-auto"
+          className="group cursor-pointer flex items-center gap-2 py-1.5 px-6 rounded-[20px] border border-[#FED7DA] bg-[#FED7DA] dark:bg-[#e4041566] shadow-[0px_2px_4px_0px_rgba(244,64,64,0.25),_0px_1px_1px_0px_rgba(162,10,21,0.25)_inset] w-fit mx-auto"
         >
           <p className="text-sm md:text-base">{t("badge.title")}</p>
           <ArrowRight

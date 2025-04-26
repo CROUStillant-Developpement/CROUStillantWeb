@@ -40,7 +40,7 @@ export default function RadarsCard({ style }: Props) {
             style={{
               position: "absolute",
               bottom: "80px",
-              left: "60px",
+              right: "76%",
               zIndex: "5",
             }}
           >
@@ -70,7 +70,7 @@ export default function RadarsCard({ style }: Props) {
             style={{
               position: "absolute",
               top: "15px",
-              right: "120px",
+              right: "85px",
               zIndex: "5",
             }}
           >
