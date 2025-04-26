@@ -50,7 +50,7 @@ export default async function AboutPage() {
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
-              <GraduationCap className="inline h-10 w-10 mr-3"></GraduationCap>
+              <GraduationCap className="inline h-10 w-10 mr-3" />
               {t("presentation.title")}
             </h3>
             <p className="mt-4 lg:text-lg">{t("presentation.description")}</p>
@@ -64,7 +64,7 @@ export default async function AboutPage() {
             <p className="mt-4 lg:text-lg">{t("updates.description")}</p>
           </div>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
@@ -136,7 +136,7 @@ export default async function AboutPage() {
           <h2 className="lg:text-4xl text-xl font-medium">{t("team.title")}</h2>
           <p className="mt-4 lg:text-lg">{t("team.description")}</p>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <div className="mt-8 w-full">
             <div className="flex items-center">
@@ -308,7 +308,7 @@ export default async function AboutPage() {
             </Button>
           </div>
         </div>
-        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0"></div>
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h3 className="lg:text-4xl text-xl font-medium">
             <HeartHandshake className="inline h-10 w-10 mr-3" />

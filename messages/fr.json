@@ -1,18 +1,68 @@
 {
   "HomePage": {
     "badge": {
-      "title": "Le projet est 100% open-source !",
-      "link": "En savoir plus"
+      "title": "Le projet est 100% open-source !"
     },
     "title": {
-      "first": "Vos repas,",
-      "second": "simples et accessibles."
+      "first": "Le menu du CROUS en un clic",
+      "second": "Toutes les informations sur votre restaurant",
+      "third": "Faites partie de l’équipe",
+      "fourth": "Créé par des étudiants, pour des étudiants"
     },
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
     "cta": {
       "first": "Découvrir votre menu",
       "second": "Voir les restaurants",
-      "starred": "Voir le menu du {name}"
+      "starred": "{name}",
+      "join": "Nous rejoindre"
+    },
+    "card1": {
+      "title": "Recherche par région, ville ou restaurant",
+      "description": "Accédez facilement à votre restaurant grâce à notre fonction de recherche",
+      "cta": "En savoir plus"
+    },
+    "card2": {
+      "title": "Horaires d'ouverture et de fermeture",
+      "description": "Consultez rapidement les horaires de votre restaurant universitaire du CROUS.",
+      "cta": "En savoir plus"
+    },
+    "card3": {
+      "title": "Contacts et moyens de paiement acceptés",
+      "description": "Découvrez les moyens de paiement acceptés dans votre restaurant universitaire.",
+      "cta": "En savoir plus"
+    },
+    "card4": {
+      "title": "Accès à tous les restaurants",
+      "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
+      "cta": "En savoir plus"
+    },
+    "footer":  {
+      "title": "Convaincu ?",
+      "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
+    }
+  },
+  "HomeCard": {
+    "RadarsCard": {
+      "title": "Créé par des étudiants, pour des étudiants",
+      "subtitle": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer.",
+      "cta": "Participer au projet"
+    },
+    "GitCard": {
+      "title": "Rejoignez l'équipe !",
+      "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+      "cta": "Nous rejoindre",
+      "Card": {
+        "name": "Membres de l'équipe"
+      }
+    },
+    "ApiCard": {
+      "title": "Intégration facile",
+      "subtitle": "Intégrer les informations de CROUStillant sur votre propre application gratuitement en utilisant notre API.",
+      "cta": "Commencer à l’utiliser",
+      "Card": {
+        "title": "Serveur",
+        "subtitle": "Serveur de production"
+      }
     }
   },
   "RestaurantsPage": {
