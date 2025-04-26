@@ -53,7 +53,7 @@ export default function HomePage() {
 
   return (
     <>
-      <section id="#info" className="mt-32">
+      <section id="info" className="mt-32">
         <h2 className="2xl:mt-28 lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent">
           {t("title.second")}
         </h2>
