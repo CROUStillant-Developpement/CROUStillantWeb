@@ -129,12 +129,13 @@ export default function RestaurantsFilters({
                     values={sortedRegions.map((region) => ({
                       label: region.libelle,
                       value: region.code.toString(),
+                      key: region.code.toString(),
                     }))}
                     selectedValue={filters.crous.toString()}
                     setSelectedValue={(value) =>
                       setFilters({
                         ...filters,
-                        crous: value ? parseInt(value) : -1,
+                        crous: value ? Number.parseInt(value) : -1,
                       })
                     }
                     buttonTitle={t("region.title")}
@@ -252,12 +253,13 @@ export default function RestaurantsFilters({
                       values={sortedTypesRestaurants.map((type) => ({
                         label: type.libelle,
                         value: type.code.toString(),
+                        key: type.code.toString(),
                       }))}
                       selectedValue={filters.restaurantType.toString()}
                       setSelectedValue={(value) =>
                         setFilters({
                           ...filters,
-                          restaurantType: value ? parseInt(value) : -1,
+                          restaurantType: value ? Number.parseInt(value) : -1,
                         })
                       }
                       buttonTitle={t("restaurantType.title")}

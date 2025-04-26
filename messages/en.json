@@ -1,19 +1,70 @@
 {
   "HomePage": {
     "badge": {
-      "title": "This project is 100% open-source!",
-      "link": "Learn more"
+      "title": "The project is 100% open-source!"
     },
     "title": {
-      "first": "Your meals,",
-      "second": "simple and accessible."
+      "first": "The Crous menu in one click"
     },
-    "subtitle": "CROUStillant allows you to consult the menus of CROUS restaurants in France and overseas.",
-    "cta": {
-      "first": "Discover your menu",
-      "second": "Find a restaurant",
-      "starred": "View menu of {name}"
+    "subtitle": "Croustillant allows you to consult the menus of CROUS de France and overseas restaurants.",
+    "CTA": "Discover your menu",
+    "seo": {
+      "title": "Croustillant",
+      "description": "Croustillant allows you to consult the menus of CROUS de France and overseas restaurants"
     }
+  },
+  "InfoCard": {
+    "title": "All information about your restaurant",
+    "card1": {
+      "title": "Search by region, city or restaurant",
+      "description": "Easily access your restaurant thanks to our search function",
+      "CTA": "learn more"
+    },
+    "card2": {
+      "title": "Opening and closing hours",
+      "description": "Consult your CROUS university restaurant schedules quickly.",
+      "CTA": "learn more"
+    },
+    "card3": {
+      "title": "Contacts and accepted payer",
+      "description": "Discover the means of payment accepted in your university restaurant.",
+      "CTA": "learn more"
+    },
+    "card4": {
+      "title": "Access to all restaurants",
+      "description": "CROUStillant offers you a complete selection of Crous restaurants.",
+      "CTA": "learn more"
+    }
+  },
+  "JoinTeam": {
+    "title": "Be part of the team"
+  },
+  "RadarsCard": {
+    "title": "Created by students, for students",
+    "subtitle": "Croustillant is a project which aims to provide information on the menus of university restaurants in France and overseas.",
+    "CTA": "Participate in the project"
+  },
+  "GitCard": {
+    "title": "Join the team!",
+    "subtitle": "Croustillant is a constantly evolving project. We are always looking for new talents to join the team and help us improve the service.",
+    "CTA": "Join us",
+    "Card": {
+      "name": "Activity",
+      "seeMore": "See more"
+    }
+  },
+  "ApiCard": {
+    "title": "Easy integration",
+    "subtitle": "You can integrate Crous restaurant information on your website or application using our API. The API is free and does not require registration.",
+    "CTA": "Commencer à l’utiliser",
+    "Card": {
+      "title": "Server",
+      "subtitle": "Production server"
+    }
+  },
+  "FooterCtaCard": {
+    "title": "Convinced ?",
+    "subtitle": "Start your use of Croustillant now!"
   },
   "RestaurantsPage": {
     "noResults": "No restaurant found for this search 😢",
