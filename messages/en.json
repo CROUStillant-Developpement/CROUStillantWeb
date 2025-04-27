@@ -57,7 +57,7 @@
     },
     "ApiCard": {
       "title": "Easy integration",
-      "subtile": "Integrate CROUStillant information into your own application for free using our API.",
+      "subtitle": "Integrate CROUStillant information into your own application for free using our API.",
       "cta": "Start using it now",
       "Card": {
         "title": "Server",
