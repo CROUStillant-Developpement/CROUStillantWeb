@@ -57,7 +57,7 @@
     },
     "ApiCard": {
       "title": "Easy integration",
-      "subtile": "Integrate CROUStillant information into your own application for free using our API.",
+      "subtitle": "Integrate CROUStillant information into your own application for free using our API.",
       "cta": "Start using it now",
       "Card": {
         "title": "Server",
@@ -527,7 +527,7 @@
       "title": "Legal information",
       "part1": {
         "title": "Site identification",
-        "content1": "The site: https://croustillant.bayfield.dev is the official site of CROUStillant.",
+        "content1": "The site: https://croustillant.menu is the official site of CROUStillant.",
         "content2": "CROUStillant is an open-source project that aims to provide information on the menus of university restaurants in France and overseas."
       },
       "part2": {

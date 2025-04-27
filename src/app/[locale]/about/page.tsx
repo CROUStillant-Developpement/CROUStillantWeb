@@ -240,7 +240,7 @@ export default async function AboutPage() {
           </h2>
           <p className="mt-4 lg:text-lg">{t("integrated.description")}</p>
           <div className="relative">
-            <Link href="https://api-croustillant.bayfield.dev" target="_blank">
+            <Link href="https://api.croustillant.menu" target="_blank">
               <Button className="mt-8">
                 <Globe className="inline mr-1" />
                 {t("integrated.button")}

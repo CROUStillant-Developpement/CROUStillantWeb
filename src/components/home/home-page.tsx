@@ -104,7 +104,7 @@ export default function HomePage() {
             title={t("card4.title")}
             description={t("card4.description")}
             cta={t("card4.cta")}
-            ctaLink="fr/about"
+            ctaLink="about"
             style={
               " md:bg-[#DAD6D6] md:bg-opacity-15 dark:bg-[rgba(218,214,214,0.08)]"
             }
