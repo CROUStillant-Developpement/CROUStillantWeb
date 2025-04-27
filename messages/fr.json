@@ -259,7 +259,7 @@
     }
   },
   "Footer": {
-    "visits": "{visitors, plural, =0 {Aucune personne ne s'est régalée pour le moment} =1 {Déjà <strong>#</strong> personne s'est régalée} other {Déjà <strong>#</strong> personnes se sont régalées}} avec CROUStillant ! Plus de <strong>{pageviews}</strong> pages vues 👀",
+    "visits": "Déjà <strong>{visitors}</strong> personnes se sont régalées avec CROUStillant ! Plus de <strong>{pageviews}</strong> pages vues 👀",
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
     "copyright": "© 2022 - {year} CROUStillant Développement, tous droits réservés.",
     "disclaimer": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif.",
