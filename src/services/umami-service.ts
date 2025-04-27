@@ -98,7 +98,7 @@ export const getStats = async (minDate: Date | null = null, maxDate: Date | null
   }
 
   return requestHandler<UmamiStats>(
-    `api/websites/${process.env.UMAMI_WEBSITE_ID}/stats?startAt=${minDate.getTime()}&endAt=${maxDate.getTime()}&unit=day&timezone=Europe%2FParis&compare=false&host=${process.env.UMAMI_HOSTNAME}`,
+    `api/websites/${process.env.UMAMI_WEBSITE_ID}/stats?startAt=${minDate.getTime()}&endAt=${maxDate.getTime()}&unit=day&timezone=Europe%2FParis&compare=false`, // &host=${process.env.UMAMI_HOSTNAME}
     "GET",
     1000 * 60 * 60 * 24, // cache for 24 hours
   );
