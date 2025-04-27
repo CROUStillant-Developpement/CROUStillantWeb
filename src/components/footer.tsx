@@ -140,7 +140,7 @@ export default async function Footer() {
             <ul className="mt-4 font-normal opacity-70">
               <li>
                 <Link
-                  href="https://api-croustillant.bayfield.dev"
+                  href="https://api.croustillant.menu"
                   className="hover:underline"
                   target="_blank"
                 >

@@ -18,7 +18,7 @@ export default function HomeCard() {
             </p>
             <p className="text-base">{t("ApiCard.subtitle")}</p>
             <Link
-              href="https://api-croustillant.bayfield.dev/"
+              href="https://api.croustillant.menu/"
               className="underline text-base font-bold"
             >
               {t("ApiCard.cta")}
@@ -37,7 +37,7 @@ export default function HomeCard() {
               </div>
               <div className="flex items-center w-fullborder border rounded-l-none rounded-r-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2 ">
                 <p className="text-sm md:text-lg font-medium ">
-                  https://api-croustillant.bayfield.dev
+                  https://api.croustillant.menu
                 </p>
               </div>
               <div className="flex items-center w-fullborder border border-t-0 rounded-tl-none rounded-tr-none dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] border-[#FFCACA] border-opacity-40 rounded-[8px] pt-2 pl-2 pb-2">
