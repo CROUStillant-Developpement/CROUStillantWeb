@@ -17,9 +17,15 @@ import { useState } from "react";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
+  onHover?: () => void;
+  onLeave?: () => void;
 }
 
-export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export default function RestaurantCard({
+  restaurant,
+  onHover,
+  onLeave,
+}: RestaurantCardProps) {
   const [imageSrc, setImageSrc] = useState(
     restaurant.image_url ?? "/default_ru.png"
   );
@@ -33,7 +39,11 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   return (
     <TooltipProvider>
-      <div className="relative group p-2 hover:p-0 fading-border hover:before:border-none hover:cursor-pointer before:border-primary transition-all duration-300 ease-in-out">
+      <div
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+        className="relative group p-2 hover:p-0 fading-border hover:before:border-none hover:cursor-pointer before:border-primary transition-all duration-300 ease-in-out"
+      >
         <Image
           src={imageSrc}
           alt={restaurant.nom}
@@ -57,6 +67,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           )}
         </Button>
         <Link
+          onClick={onLeave}
           href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
           className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
         >

@@ -4,6 +4,10 @@ import RestaurantCard from "./restaurant-card";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { Filters } from "@/lib/filters";
+import useMarkerStore from "@/store/markerStore";
+import Pagination from "../pagination";
+import { useMediaQuery } from "usehooks-ts";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -13,6 +17,11 @@ interface ContentProps {
   paginatedRestaurants: Restaurant[];
   favouritesRestaurants: Restaurant[];
   loading: boolean;
+  filters: Filters;
+  currentPage: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
+  className?: string;
 }
 
 export default function Content({
@@ -21,10 +30,19 @@ export default function Content({
   paginatedRestaurants,
   favouritesRestaurants,
   loading,
+  filters,
+  currentPage,
+  pageSize,
+  onPageChange: setCurrentPage,
+  className = "",
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
   const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
   const [userCollapsedfavourites, setUserCollapsedfavourites] = useState(false);
+
+  const { setHighlightedMarker } = useMarkerStore();
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     if (autoCollapsedfavourites && favouritesRestaurants.length > 3) {
@@ -32,55 +50,101 @@ export default function Content({
     }
   }, [favouritesRestaurants]);
 
-  if (display === "map") {
-    return <MapComponent loading={loading} />;
+
+  if (display === "map" && filters.crous === -1) {
+    return (
+      <div className={"h-[90vh] py-8 " + className}>
+        <MapComponent loading={loading} />
+      </div>
+    );
   } else {
     return (
-      <>
-        {/* favourites */}
-        {favouritesRestaurants.length > 0 && (
-          <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
-            <legend className="-ml-1 px-1 text-sm font-medium">
-              {t("favourites", { count: favouritesRestaurants.length })} -{" "}
-              <span
-                className="underline select-none cursor-pointer"
-                onClick={() => {
-                  setAutoCollapsedfavourites(false);
-                  setUserCollapsedfavourites(!userCollapsedfavourites);
-                }}
+      <div className={"flex gap-4 md:gap-8 flex-wrap-reverse md:flex-nowrap " + className}>
+        <div className="flex-1">
+          {/* Pagination */}
+          {display === "list" && filteredRestaurants.length > 0 && (
+            <Pagination
+              loading={loading}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalRecords={filteredRestaurants.length}
+              onPageChange={setCurrentPage}
+              className="mb-8"
+            />
+          )}
+          {/* Favourites */}
+          {favouritesRestaurants.length > 0 && (
+            <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
+              <legend className="-ml-1 px-1 text-sm font-medium">
+                {t("favourites", { count: favouritesRestaurants.length })} -{" "}
+                <span
+                  className="underline select-none cursor-pointer"
+                  onClick={() => {
+                    setAutoCollapsedfavourites(false);
+                    setUserCollapsedfavourites(!userCollapsedfavourites);
+                  }}
+                >
+                  {userCollapsedfavourites
+                    ? t("clickToSeeAll")
+                    : t("clickToSeeLess")}
+                </span>
+              </legend>
+              <div
+                className={`gap-4 md:grid-cols-2 md:gap-8 ${userCollapsedfavourites ? "hidden" : "grid"
+                  } ${filters.crous !== -1 ? "" : "lg:grid-cols-3"}`}
               >
-                {userCollapsedfavourites
-                  ? t("clickToSeeAll")
-                  : t("clickToSeeLess")}
-              </span>
-            </legend>
-            <div
-              className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
-                userCollapsedfavourites ? "hidden" : "grid"
+                {favouritesRestaurants.map((restaurant) => (
+                  <RestaurantCard
+                    key={restaurant.code}
+                    restaurant={restaurant}
+                  />
+                ))}
+              </div>
+            </fieldset>
+          )}
+          {/* Restaurants */}
+          <div
+            className={`grid gap-4 md:gap-8 md:grid-cols-2 ${filters.crous !== -1 ? "" : "lg:grid-cols-3"
               }`}
-            >
-              {favouritesRestaurants.map((restaurant) => (
-                <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-              ))}
-            </div>
-          </fieldset>
-        )}
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-          {loading ? (
-            Array.from({ length: 20 }).map((_, index) => (
-              <RestaurantCardSkeleton key={index} />
-            ))
-          ) : filteredRestaurants.length > 0 ? (
-            paginatedRestaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-            ))
-          ) : (
-            <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
-              {t("noResults")}
-            </p>
+          >
+            {loading ? (
+              Array.from({ length: 20 }).map((_, index) => (
+                <RestaurantCardSkeleton key={index} />
+              ))
+            ) : filteredRestaurants.length > 0 ? (
+              paginatedRestaurants.map((restaurant) => (
+                <RestaurantCard
+                  key={restaurant.code}
+                  restaurant={restaurant}
+                  onHover={() => setHighlightedMarker(restaurant.code)}
+                  onLeave={() => setHighlightedMarker(undefined)}
+                />
+              ))
+            ) : (
+              <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
+                {t("noResults")}
+              </p>
+            )}
+          </div>
+          {/* Pagination */}
+          {display === "list" && filteredRestaurants.length > 0 && (
+            <Pagination
+              loading={loading}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalRecords={filteredRestaurants.length}
+              onPageChange={setCurrentPage}
+              className="mt-8"
+            />
           )}
         </div>
-      </>
+        {/* Map */}
+        {filters.crous !== -1 && !isMobile && (
+          <div className="md:w-1/3 w-full md:h-[100vh] h-[30vh] sticky top-0 py-4">
+            <MapComponent loading={loading} />
+          </div>
+        )}
+      </div>
     );
   }
 }

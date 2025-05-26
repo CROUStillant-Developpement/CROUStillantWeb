@@ -17,6 +17,7 @@ type PaginationProps = {
   pageSize: number;
   loading: boolean;
   onPageChange: (page: number) => void;
+  className?: string;
 };
 
 export default function PaginationComponent({
@@ -25,6 +26,7 @@ export default function PaginationComponent({
   pageSize,
   loading,
   onPageChange,
+  className = "",
 }: PaginationProps) {
   const t = useTranslations("Pagination");
   const totalPages = Math.ceil(totalRecords / pageSize);
@@ -88,7 +90,7 @@ export default function PaginationComponent({
 
   useEffect(() => {
     if (totalPages <= 0) return;
-    
+
     if (currentPage > totalPages) {
       onPageChange(totalPages);
     } else if (currentPage < 1) {
@@ -99,7 +101,11 @@ export default function PaginationComponent({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <Pagination className="flex justify-center my-8">
+    <Pagination
+      className={
+        "flex justify-center" + className !== "" ? " " + className : ""
+      }
+    >
       <PaginationPrevious
         isActive={hasPrevious && !loading}
         text={t("previous")}

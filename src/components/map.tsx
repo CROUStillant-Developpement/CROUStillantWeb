@@ -63,7 +63,7 @@ const Map = ({
   const { markers } = useMarkerStore();
 
   return (
-    <div className="col-span-3 flex-1 h-65svh relative">
+    <div className="col-span-3 flex-1 h-full relative">
       {loading && (
         <div className="absolute top-0 left-0 inset-0 flex flex-col items-center justify-center rounded-lg bg-transparent z-20 backdrop-blur-sm">
           <div className="rounded-full h-20 w-20 bg-primary animate-ping"></div>
