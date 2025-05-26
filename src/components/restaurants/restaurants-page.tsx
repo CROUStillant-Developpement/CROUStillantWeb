@@ -11,6 +11,16 @@ import { slugify } from "@/lib/utils";
 import Content from "./content";
 import { Link } from "@/i18n/routing";
 import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
+import { useMediaQuery } from "usehooks-ts";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area"
+import Map from "../map";
+import { Button } from "../ui/button";
+import { MapIcon } from "lucide-react";
 
 export default function RestaurantsPage({
   restaurants,
@@ -34,6 +44,8 @@ export default function RestaurantsPage({
   const { addMarker, clearMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const favRestaurants = filteredRestaurants.filter((restaurant) =>
@@ -77,9 +89,8 @@ export default function RestaurantsPage({
           t.rich("markerDescription", {
             link: (chunks) => (
               <Link
-                href={`/restaurants/${slugify(restaurant.nom)}-r${
-                  restaurant.code
-                }`}
+                href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code
+                  }`}
               >
                 {chunks}
               </Link>
@@ -100,44 +111,102 @@ export default function RestaurantsPage({
     activeFilterCount,
   } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
 
-  return (
-    <div>
-      {/* Page title and filters */}
-      <div className="w-full justify-between lg:flex mb-4 z-10">
-        <div className="w-full">
-          <h1 className="font-bold text-3xl">Restaurants</h1>
-          <div className="opacity-50">
-            {loading ? (
-              <Loading className="!justify-start" />
-            ) : (
-              t("results", { count: filteredRestaurants.length })
-            )}
+  if (!isMobile || filters.crous === -1) {
+    return (
+      <div>
+        {/* Page title and filters */}
+        <div className="w-full justify-between lg:flex mb-4 z-10">
+          <div className="w-full">
+            <h1 className="font-bold text-3xl">Restaurants</h1>
+            <div className="opacity-50">
+              {loading ? (
+                <Loading className="!justify-start" />
+              ) : (
+                t("results", { count: filteredRestaurants.length })
+              )}
+            </div>
+            <RestaurantsFilters
+              filters={filters}
+              setFilters={setFilters}
+              geoLocError={geoLocError}
+              handleLocationRequest={handleLocationRequest}
+              resetFilters={resetFilters}
+              activeFilterCount={activeFilterCount}
+              loading={loading}
+              regions={regions}
+              typesRestaurants={typesRestaurants}
+            />
           </div>
-          <RestaurantsFilters
-            filters={filters}
-            setFilters={setFilters}
-            geoLocError={geoLocError}
-            handleLocationRequest={handleLocationRequest}
-            resetFilters={resetFilters}
-            activeFilterCount={activeFilterCount}
-            loading={loading}
-            regions={regions}
-            typesRestaurants={typesRestaurants}
-          />
         </div>
+        {/* Filtered restaurants or skeleton or no results or map */}
+        <Content
+          filters={filters}
+          display={display}
+          filteredRestaurants={filteredRestaurants}
+          paginatedRestaurants={paginatedRestaurants}
+          favouritesRestaurants={favouritesRestaurants}
+          loading={loading}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+        />
       </div>
-      {/* Filtered restaurants or skeleton or no results or map */}
-      <Content
-        filters={filters}
-        display={display}
-        filteredRestaurants={filteredRestaurants}
-        paginatedRestaurants={paginatedRestaurants}
-        favouritesRestaurants={favouritesRestaurants}
-        loading={loading}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        onPageChange={setCurrentPage}
-      />
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="h-[90vh] relative">
+        <Sheet>
+          <SheetTrigger className="absolute bottom-4 z-50 flex items-center justify-center w-full">
+            <Button className="w-fit">
+              OPEN <MapIcon className="ml-2 h-4 w-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="bottom" className="h-[90vh]">
+            <ScrollArea className="h-[90vh]">
+              <div>
+                {/* Page title and filters */}
+                <div className="w-full justify-between lg:flex mb-4 z-10">
+                  <div className="w-full">
+                    <div className="opacity-50">
+                      {loading ? (
+                        <Loading className="!justify-start" />
+                      ) : (
+                        t("results", { count: filteredRestaurants.length })
+                      )}
+                    </div>
+                    <RestaurantsFilters
+                      filters={filters}
+                      setFilters={setFilters}
+                      geoLocError={geoLocError}
+                      handleLocationRequest={handleLocationRequest}
+                      resetFilters={resetFilters}
+                      activeFilterCount={activeFilterCount}
+                      loading={loading}
+                      regions={regions}
+                      typesRestaurants={typesRestaurants}
+                    />
+                  </div>
+                </div>
+                {/* Filtered restaurants or skeleton or no results or map */}
+                <Content
+                  filters={filters}
+                  display={display}
+                  filteredRestaurants={filteredRestaurants}
+                  paginatedRestaurants={paginatedRestaurants}
+                  favouritesRestaurants={favouritesRestaurants}
+                  loading={loading}
+                  currentPage={currentPage}
+                  pageSize={pageSize}
+                  onPageChange={setCurrentPage}
+                  className="pb-10"
+                />
+              </div>
+            </ScrollArea>
+          </SheetContent>
+        </Sheet>
+        <Map loading={loading} />
+      </div>
+    );
+  }
+
 }

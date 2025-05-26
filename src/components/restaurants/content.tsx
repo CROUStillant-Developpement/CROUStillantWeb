@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Filters } from "@/lib/filters";
 import useMarkerStore from "@/store/markerStore";
 import Pagination from "../pagination";
+import { useMediaQuery } from "usehooks-ts";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -20,6 +21,7 @@ interface ContentProps {
   currentPage: number;
   pageSize: number;
   onPageChange: (page: number) => void;
+  className?: string;
 }
 
 export default function Content({
@@ -32,6 +34,7 @@ export default function Content({
   currentPage,
   pageSize,
   onPageChange: setCurrentPage,
+  className = "",
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
   const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
@@ -39,21 +42,24 @@ export default function Content({
 
   const { setHighlightedMarker } = useMarkerStore();
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   useEffect(() => {
     if (autoCollapsedfavourites && favouritesRestaurants.length > 3) {
       setUserCollapsedfavourites(true);
     }
   }, [favouritesRestaurants]);
 
+
   if (display === "map" && filters.crous === -1) {
     return (
-      <div className="h-[90vh] py-8">
+      <div className={"h-[90vh] py-8 " + className}>
         <MapComponent loading={loading} />
       </div>
     );
   } else {
     return (
-      <div className="flex gap-4 md:gap-8 flex-wrap-reverse md:flex-nowrap">
+      <div className={"flex gap-4 md:gap-8 flex-wrap-reverse md:flex-nowrap " + className}>
         <div className="flex-1">
           {/* Pagination */}
           {display === "list" && filteredRestaurants.length > 0 && (
@@ -84,9 +90,8 @@ export default function Content({
                 </span>
               </legend>
               <div
-                className={`gap-4 md:grid-cols-2 md:gap-8 ${
-                  userCollapsedfavourites ? "hidden" : "grid"
-                } ${filters.crous !== -1 ? "" : "lg:grid-cols-3"}`}
+                className={`gap-4 md:grid-cols-2 md:gap-8 ${userCollapsedfavourites ? "hidden" : "grid"
+                  } ${filters.crous !== -1 ? "" : "lg:grid-cols-3"}`}
               >
                 {favouritesRestaurants.map((restaurant) => (
                   <RestaurantCard
@@ -99,9 +104,8 @@ export default function Content({
           )}
           {/* Restaurants */}
           <div
-            className={`grid gap-4 md:gap-8 md:grid-cols-2 ${
-              filters.crous !== -1 ? "" : "lg:grid-cols-3"
-            }`}
+            className={`grid gap-4 md:gap-8 md:grid-cols-2 ${filters.crous !== -1 ? "" : "lg:grid-cols-3"
+              }`}
           >
             {loading ? (
               Array.from({ length: 20 }).map((_, index) => (
@@ -135,7 +139,7 @@ export default function Content({
           )}
         </div>
         {/* Map */}
-        {filters.crous !== -1 && (
+        {filters.crous !== -1 && !isMobile && (
           <div className="md:w-1/3 w-full md:h-[100vh] h-[30vh] sticky top-0 py-4">
             <MapComponent loading={loading} />
           </div>
