@@ -20,7 +20,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Map from "../map";
 import { Button } from "../ui/button";
-import { MapIcon } from "lucide-react";
+import { List, MapIcon } from "lucide-react";
 
 export default function RestaurantsPage({
   restaurants,
@@ -39,6 +39,7 @@ export default function RestaurantsPage({
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(21); // Default records per page
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 
   const { display, favourites } = useUserPreferences();
   const { addMarker, clearMarkers } = useMarkerStore();
@@ -155,13 +156,20 @@ export default function RestaurantsPage({
   } else {
     return (
       <div className="h-[90vh] relative">
-        <Sheet>
-          <SheetTrigger className="absolute bottom-4 z-50 flex items-center justify-center w-full">
+        <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+          <SheetTrigger className="absolute bottom-4 z-50 flex items-center justify-center w-full left-0">
             <Button className="w-fit">
-              OPEN <MapIcon className="ml-2 h-4 w-4" />
+              <List className="mr-2" />
+              {t("display.list")}
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-[90vh]">
+            <div className="absolute bottom-4 z-50 flex items-center justify-center w-full left-0">
+              <Button className="w-fit" onClick={() => setIsDrawerOpen(false)}>
+                <MapIcon className="mr-2" />
+                {t("display.map")}
+              </Button>
+            </div>
             <ScrollArea className="h-[90vh]">
               <div>
                 {/* Page title and filters */}
