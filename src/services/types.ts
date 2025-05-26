@@ -135,6 +135,8 @@ export interface GlobalStats {
   restaurants: number; // Nombre de restaurants
   restaurants_actifs: number; // Nombre de restaurants actifs
   types_restaurants: number; // Nombre de types de restaurants
+  visites?: number; // Nombre de visites sur le site
+  pagesVues?: number; // Nombre de pages vues sur le site
 }
 
 // Types for GithubRepo Stats
@@ -168,4 +170,45 @@ export interface ChangelogItemLanguage {
   title: string;
   shortDescription: string;
   fullDescription: string;
+}
+
+export interface UmamiGetToken {
+  token: string;
+  user: {
+    id: string;
+    username: string;
+    createdAt: string;
+  };
+}
+
+export interface UmamiActiveUsers {
+  visitors: number;
+}
+
+export interface UmamiDateRange {
+  mindate: string;
+  maxdate: string;
+}
+
+export interface UmamiStats {
+  pageviews: {
+    value: number;
+    prev: number;
+  };
+  visitors: {
+    value: number;
+    prev: number;
+  };
+  visits: {
+    value: number;
+    prev: number;
+  };
+  bounces: {
+    value: number;
+    prev: number;
+  };
+  totaltime: {
+    value: number;
+    prev: number;
+  };
 }

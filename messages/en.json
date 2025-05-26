@@ -1,18 +1,68 @@
 {
   "HomePage": {
     "badge": {
-      "title": "This project is 100% open-source!",
-      "link": "Learn more"
+      "title": "The project is 100% open-source!"
     },
     "title": {
-      "first": "Your meals,",
-      "second": "simple and accessible."
+      "first": "The Crous menu in one click",
+      "second": "All information about your restaurant",
+      "third": "Be part of the team",
+      "fourth": "Created by students, for students"
     },
-    "subtitle": "CROUStillant allows you to consult the menus of CROUS restaurants in France and overseas.",
+    "subtitle": "CROUStillant allows you to consult the menus of CROUS de France and overseas restaurants.",
     "cta": {
       "first": "Discover your menu",
       "second": "Find a restaurant",
-      "starred": "View menu of {name}"
+      "starred": "{name}",
+      "join": "Join the team!"
+    },
+    "card1": {
+      "title": "Search by region, city or restaurant",
+      "description": "Easily access your restaurant thanks to our search function",
+      "cta": "learn more"
+    },
+    "card2": {
+      "title": "Opening and closing hours",
+      "description": "Consult your CROUS university restaurant schedules quickly.",
+      "cta": "learn more"
+    },
+    "card3": {
+      "title": "Contacts and accepted payer",
+      "description": "Discover the means of payment accepted in your university restaurant.",
+      "cta": "learn more"
+    },
+    "card4": {
+      "title": "Access to all restaurants",
+      "description": "CROUStillant offers you a complete selection of Crous restaurants.",
+      "cta": "learn more"
+    },
+    "footer": {
+      "title": "Convinced ?",
+      "subtitle": "Start your use of CROUStillant now!"
+    }
+  },
+  "HomeCard": {
+    "RadarsCard": {
+      "title": "Created by students, for students",
+      "subtitle": "CROUStillant is a project which aims to provide information on the menus of university restaurants in France and overseas.",
+      "cta": "Participate in the project"
+    },
+    "GitCard": {
+      "title": "Join the team!",
+      "subtitle": "CROUStillant is a constantly evolving project. We are always looking for new talents to join the team and help us improve the service.",
+      "cta": "Join us",
+      "Card": {
+        "name": "Team members"
+      }
+    },
+    "ApiCard": {
+      "title": "Easy integration",
+      "subtitle": "Integrate CROUStillant information into your own application for free using our API.",
+      "cta": "Start using it now",
+      "Card": {
+        "title": "Server",
+        "subtitle": "Production server"
+      }
     }
   },
   "RestaurantsPage": {
@@ -39,7 +89,8 @@
     "nextDaysMenu": "Menu of the next days",
     "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
     "noMealAvailable": "No meal available for this restaurant 😢",
-    "noMealAvailableDescription": "The restaurant does not offer any meal. Please try again later.",
+    "noMealAvailableDescription": "The restaurant does not currently offer any meal. Please try again later.",
+    "noMealAvailableDescription2": "The menu must be manually updated by the restaurant. If the menu is never available, you can contact the restaurant to report your problem.",
     "seo": {
       "title": "Menu of {name}",
       "description": "Discover the details of {name}, located in {area}. Perfect for your next meal!",
@@ -155,15 +206,23 @@
       "members": {
         "member1": {
           "name": "Paul Bayfield",
-          "role": "Project founder and lead developer"
+          "role": "Project founder and lead developer",
+          "github": "https://github.com/PaulBayfield"
         },
         "member2": {
-          "name": "Alden Cherif",
-          "role": "UI designer and web developer"
+          "name": "Adlen Cherif",
+          "role": "UI designer and web developer",
+          "github": "https://github.com/cherifad"
         },
         "member3": {
           "name": "Lucas Debeve",
-          "role": "Database designer"
+          "role": "Database designer",
+          "github": "https://github.com/LucasDebeve"
+        },
+        "member4": {
+          "name": "Louis Descotes",
+          "role": "Web developer",
+          "github": "https://github.com/louisdescotes"
         }
       }
     },
@@ -176,6 +235,11 @@
       "title": "Integrate CROUS data",
       "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source.",
       "button": "View the API documentation"
+    },
+    "sources": {
+      "title": "Sources",
+      "description": "CROUStillant uses data provided by the official CROUS website, which is aggregated and updated several times a day, then made accessible via our API. The CROUStillant API is available on the official French government data site.",
+      "button": "Learn more about the sources"
     },
     "convinced": {
       "title": "Convinced?",
@@ -195,6 +259,7 @@
     }
   },
   "Footer": {
+    "visits": "Already <strong>{visitors}</strong> people have enjoyed themselves with CROUStillant! More than <strong>{pageviews}</strong> pages have been viewed 👀",
     "authors": "Made with ❤️ by the CROUStillant Développement team.",
     "copyright": "© 2022 - {year} CROUStillant Développement, all rights reserved.",
     "disclaimer": "CROUStillant is not affiliated with the \"CROUS\". CROUStillant is a non-profit project.",
@@ -403,7 +468,9 @@
       "repas": "Meals",
       "plats": "Dishes",
       "restaurants": "Restaurants",
-      "regions": "Regions"
+      "regions": "Regions",
+      "visits": "Visits",
+      "views": "Views"
     },
     "charts": {
       "menuAdded": {
@@ -460,7 +527,7 @@
       "title": "Legal information",
       "part1": {
         "title": "Site identification",
-        "content1": "The site: https://croustillant.bayfield.dev is the official site of CROUStillant.",
+        "content1": "The site: https://croustillant.menu is the official site of CROUStillant.",
         "content2": "CROUStillant is an open-source project that aims to provide information on the menus of university restaurants in France and overseas."
       },
       "part2": {
@@ -475,7 +542,7 @@
       },
       "part4": {
         "title": "Development",
-        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Alden Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
+        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Adlen Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
         "content2": "The site was designed to be simple, intuitive and accessible to all. It is entirely open-source and free."
       },
       "part5": {

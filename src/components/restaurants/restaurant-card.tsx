@@ -77,7 +77,7 @@ export default function RestaurantCard({
         </Link>
         <div className="flex justify-between items-center mt-2">
           <h1 className="text-xl font-bold">{restaurant.nom}</h1>
-          <Badge className={restaurant.ouvert ? "bg-green-500" : "bg-red-500"}>
+          <Badge className={restaurant.ouvert ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"}>
             {restaurant.ouvert ? t("open") : t("closed")}
           </Badge>
         </div>

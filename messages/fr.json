@@ -1,18 +1,68 @@
 {
   "HomePage": {
     "badge": {
-      "title": "Le projet est 100% open-source !",
-      "link": "En savoir plus"
+      "title": "Le projet est 100% open-source !"
     },
     "title": {
-      "first": "Vos repas,",
-      "second": "simples et accessibles."
+      "first": "Le menu du CROUS en un clic",
+      "second": "Toutes les informations sur votre restaurant",
+      "third": "Faites partie de l’équipe",
+      "fourth": "Créé par des étudiants, pour des étudiants"
     },
     "subtitle": "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.",
     "cta": {
       "first": "Découvrir votre menu",
       "second": "Voir les restaurants",
-      "starred": "Voir le menu du {name}"
+      "starred": "{name}",
+      "join": "Nous rejoindre"
+    },
+    "card1": {
+      "title": "Recherche par région, ville ou restaurant",
+      "description": "Accédez facilement à votre restaurant grâce à notre fonction de recherche",
+      "cta": "En savoir plus"
+    },
+    "card2": {
+      "title": "Horaires d'ouverture et de fermeture",
+      "description": "Consultez rapidement les horaires de votre restaurant universitaire du CROUS.",
+      "cta": "En savoir plus"
+    },
+    "card3": {
+      "title": "Contacts et moyens de paiement acceptés",
+      "description": "Découvrez les moyens de paiement acceptés dans votre restaurant universitaire.",
+      "cta": "En savoir plus"
+    },
+    "card4": {
+      "title": "Accès à tous les restaurants",
+      "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
+      "cta": "En savoir plus"
+    },
+    "footer":  {
+      "title": "Convaincu ?",
+      "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
+    }
+  },
+  "HomeCard": {
+    "RadarsCard": {
+      "title": "Créé par des étudiants, pour des étudiants",
+      "subtitle": "CROUStillant est un projet qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer.",
+      "cta": "Participer au projet"
+    },
+    "GitCard": {
+      "title": "Rejoignez l'équipe !",
+      "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
+      "cta": "Nous rejoindre",
+      "Card": {
+        "name": "Membres de l'équipe"
+      }
+    },
+    "ApiCard": {
+      "title": "Intégration facile",
+      "subtitle": "Intégrer les informations de CROUStillant sur votre propre application gratuitement en utilisant notre API.",
+      "cta": "Commencer à l’utiliser",
+      "Card": {
+        "title": "Serveur",
+        "subtitle": "Serveur de production"
+      }
     }
   },
   "RestaurantsPage": {
@@ -39,7 +89,8 @@
     "nextDaysMenu": "Menu des prochains jours",
     "qrCodeDescription": "Scannez ce QR Code pour accéder directement au menu du restaurant.",
     "noMealAvailable": "Aucun plat disponible pour ce restaurant 😢",
-    "noMealAvailableDescription": "Le restaurant ne propose aucun plat. Veuillez réessayer plus tard.",
+    "noMealAvailableDescription": "Le restaurant ne propose actuellement aucun plat. Veuillez réessayer plus tard.",
+    "noMealAvailableDescription2": "Le menu doit être manuellement mis à jour par le restaurant. Si le menu n'est jamais disponible, vous pouvez contacter le restaurant pour leur faire part de votre problème.",
     "seo": {
       "title": "Menu de {name}",
       "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
@@ -155,15 +206,23 @@
       "members": {
         "member1": {
           "name": "Paul Bayfield",
-          "role": "Fondateur du projet et développeur principal"
+          "role": "Fondateur du projet et développeur principal",
+          "github": "https://github.com/PaulBayfield"
         },
         "member2": {
-          "name": "Alden Cherif",
-          "role": "Concepteur de l'interface utilisateur et développeur web"
+          "name": "Adlen Cherif",
+          "role": "Concepteur de l'interface utilisateur et développeur web",
+          "github": "https://github.com/cherifad"
         },
         "member3": {
           "name": "Lucas Debeve",
-          "role": "Concepteur de la base de données"
+          "role": "Concepteur de la base de données",
+          "github": "https://github.com/LucasDebeve"
+        },
+        "member4": {
+          "name": "Louis Descotes",
+          "role": "Développeur web",
+          "github": "https://github.com/louisdescotes"
         }
       }
     },
@@ -176,6 +235,11 @@
       "title": "Intégration facile",
       "description": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.",
       "button": "Découvrir l'API"
+    },
+    "sources": {
+      "title": "Sources",
+      "description": "CROUStillant utilise les données fournies par le site officiel du CROUS qui sont agrégées et mises à jour plusieurs fois par jour, puis rendues accessibles via notre API. L'API de CROUStillant est disponible sur le site officiel de la Data du gouvernement français.", 
+      "button": "En savoir plus sur les sources"
     },
     "convinced": {
       "title": "Convaincu ?",
@@ -195,6 +259,7 @@
     }
   },
   "Footer": {
+    "visits": "Déjà <strong>{visitors}</strong> personnes se sont régalées avec CROUStillant ! Plus de <strong>{pageviews}</strong> pages vues 👀",
     "authors": "Réalisé avec ❤️ par CROUStillant Développement.",
     "copyright": "© 2022 - {year} CROUStillant Développement, tous droits réservés.",
     "disclaimer": "CROUStillant n'est pas affilié au \"CROUS\". CROUStillant n'est pas un projet à but lucratif.",
@@ -404,7 +469,9 @@
       "repas": "Repas",
       "plats": "Plats",
       "restaurants": "Restaurants",
-      "regions": "Régions"
+      "regions": "Régions",
+      "visits": "Visites",
+      "views": "Vues"
     },
     "charts": {
       "menuAdded": {
@@ -461,7 +528,7 @@
       "title": "Mentions légales",
       "part1": {
         "title": "Identité du site",
-        "content1": "Le site : https://croustillant.bayfield.dev/ est le site officiel de CROUstillant.",
+        "content1": "Le site : https://croustillant.menu/ est le site officiel de CROUstillant.",
         "content2": "CROUStillant est un projet open-source développé qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer."
       },
       "part2": {
@@ -476,7 +543,7 @@
       },
       "part4": {
         "title": "Conception",
-        "content1": "Le site a été conçu et développé par l'équipe de CROUStillant Développement. L'équipe est composée de bénévoles passionnés : Paul Bayfield (fondateur et développeur principal), Alden Cherif (développeur web) et Lucas Debeve (concepteur de la base de données).",
+        "content1": "Le site a été conçu et développé par l'équipe de CROUStillant Développement. L'équipe est composée de bénévoles passionnés : Paul Bayfield (fondateur et développeur principal), Adlen Cherif (développeur web) et Lucas Debeve (concepteur de la base de données).",
         "content2": "Le site a été conçu pour être simple, intuitif et accessible à tous. Il est entièrement open-source et gratuit."
       },
       "part5": {

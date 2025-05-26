@@ -35,7 +35,9 @@ export const filterRestaurants = (
     const matchesSearch =
       !search ||
       restaurant.nom.toLowerCase().includes(search) ||
-      restaurant.zone.toLowerCase().includes(search);
+      restaurant.zone.toLowerCase().includes(search) ||
+      restaurant.adresse?.toLowerCase().includes(search) ||
+      restaurant.code.toString().includes(search);
 
     return (
       matchesSearch &&

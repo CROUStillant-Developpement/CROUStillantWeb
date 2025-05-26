@@ -31,7 +31,7 @@
     --chart-5: 27 87% 67%;
   }
   .dark {
-    --background: 356 10% 5%;
+    --background: 0 2.44% 8.04%;
     --foreground: 356 0% 90%;
     --card: 356 0% 0%;
     --card-foreground: 356 0% 90%;
@@ -61,7 +61,8 @@
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out,
     .leaflet-control-attribution,
-    .leaflet-marker-icon {
+    .leaflet-marker-icon,
+    .leaflet-popup {
       filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
     }
   }
@@ -78,6 +79,30 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.container {
+  padding: 0 0;
+  margin: 0 auto;
+  max-width: 1430px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .container {
+    padding: 0 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding: 0 205px;
+  }
 }
 
 .snowy-button {
@@ -222,3 +247,20 @@ html {
 }
 
 
+@layer utilities {
+  @keyframes scan {
+    from {
+      transform: scale(0);
+      opacity: 1;
+    }
+    to {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .animate-scan {
+    animation: scan 2s ease-in-out infinite both;
+    will-change: transform, opacity;
+  }
+}

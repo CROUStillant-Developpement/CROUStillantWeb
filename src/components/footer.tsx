@@ -1,17 +1,27 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
 import AccessibilityButton from "./accessibility-button";
 import BreadcrumbComponent from "./breadcrumb";
 import FavQuickAccess from "./fav-quick-access";
+import { getStats } from "@/services/umami-service";
 
 export default async function Footer() {
   const t = await getTranslations("Footer");
 
+  const stats = await getStats();
+
+  const locale = await getLocale();
+  let localeString = "fr-FR";
+  if (locale === "en") {
+    localeString = "en-GB";
+  }
+
   return (
-    <footer className="border-grey align-center flex w-full flex-col border-t py-10 font-medium md:px-0 overflow-hidden">
-      <div className="mx-auto md:flex w-full justify-between gap-5 border-b px-5 pb-10 lg:!w-2/3 lg:px-0">
+    <footer className="border-grey align-center flex w-full flex-col mt-24 py-10 font-medium md:px-0 relative">
+      <div className="bg-[linear-gradient(180deg,_rgba(251,153,153,0.40)_0%,_rgba(242,242,242,0.40)_100%)] dark:bg-[linear-gradient(180deg,rgba(255,68,68,0.4)_0%,rgba(21,20,20,0.4)_100%)] rotate-180 h-[30rem] -translate-y-24 w-full absolute -bottom-24 -z-10" />
+      <div className="mx-auto md:flex w-full justify-between gap-5 border-b px-5 pb-10 lg:!w-2/3 lg:px-0 dark:border-b-[#ffffff] dark:border-opacity-30">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
@@ -130,7 +140,7 @@ export default async function Footer() {
             <ul className="mt-4 font-normal opacity-70">
               <li>
                 <Link
-                  href="https://api-croustillant.bayfield.dev"
+                  href="https://api.croustillant.menu"
                   className="hover:underline"
                   target="_blank"
                 >
@@ -171,6 +181,15 @@ export default async function Footer() {
       <div className="flex items-center flex-wrap">
         <div className="mx-auto w-full flex flex-col px-5 pt-10 lg:!w-2/3 lg:px-0 text-xs font-normal opacity-70">
           <p>{t("authors")}</p>
+          {stats.success && (
+            <p className="mt-2">
+              {t.rich("visits", {
+                strong: (chunks) => <strong>{chunks}</strong>,
+                visitors: (stats.data.visitors.value ?? 0).toLocaleString(localeString),
+                pageviews: (stats.data.pageviews.value ?? 0).toLocaleString(localeString),
+              })}
+            </p>
+          )}
           <p className="mt-2 font-semibold">
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
