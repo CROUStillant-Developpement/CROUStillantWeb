@@ -436,12 +436,12 @@
       "starredEditSuccessTitle": "Restaurant favori modifié !",
       "starredEditSuccessDescription": "Le favori a été changé avec succès.",
       "starredSelectPlaceholder": "Sélectionner",
-      "regionTitle": "Région favourite",
+      "regionTitle": "Région favorite",
       "regionDescription": "Choisissez une région pour afficher les restaurants de cette région en premier.",
       "regionSelectPlaceholder": "Sélectionner",
       "regionSelectAll": "Toutes les régions",
-      "regionEditSuccessTitle": "Région favourite modifiée !",
-      "regionEditSuccessDescription": "La région favourite a été changée avec succès"
+      "regionEditSuccessTitle": "Région favorite modifiée !",
+      "regionEditSuccessDescription": "La région favorite a été changée avec succès"
     },
     "personal": {
       "deleteDataTitle": "Supprimer les données",
