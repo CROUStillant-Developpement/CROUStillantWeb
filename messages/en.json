@@ -4,7 +4,7 @@
       "title": "The project is 100% open-source!"
     },
     "title": {
-      "first": "The Crous menu in one click",
+      "first": "The CROUS menu in one click",
       "second": "All information about your restaurant",
       "third": "Be part of the team",
       "fourth": "Created by students, for students"
@@ -435,11 +435,11 @@
       "starredEditSuccessTitle": "favourite changed!",
       "starredEditSuccessDescription": "The favourite restaurant has been successfully changed.",
       "starredSelectPlaceholder": "Select",
-      "regionTitle": "favourite region",
+      "regionTitle": "Favourite region",
       "regionDescription": "Choose your favourite region to display the restaurants of this region by default.",
       "regionSelectPlaceholder": "Select a region",
       "regionSelectAll": "All regions",
-      "regionEditSuccessTitle": "favourite region changed!",
+      "regionEditSuccessTitle": "Favourite region changed!",
       "regionEditSuccessDescription": "The favourite region has been successfully changed."
     },
     "personal": {
