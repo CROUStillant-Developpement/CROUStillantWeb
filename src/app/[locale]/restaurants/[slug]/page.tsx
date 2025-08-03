@@ -4,13 +4,24 @@ import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
 import { getTranslations } from "next-intl/server";
 
+
+function extractRestaurantId(slug: unknown): number | null {
+  if (typeof slug !== "string") return null;
+
+  const match = slug.match(/-r(\d+)$/);
+  if (!match) return null;
+
+  const id = parseInt(match[1], 10);
+  return isNaN(id) ? null : id;
+}
+
+
 // Server-side fetch for this route
 async function fetchRestaurantDetailsServer(slug: string) {
   try {
-    const restaurantId = slug.toString().split("-").pop()?.replace("r", "");
+    const restaurantId = extractRestaurantId(slug);
 
-    // Redirect to 404 if restaurantId is not a number or is not provided
-    if (!restaurantId || isNaN(parseInt(restaurantId))) {
+    if (restaurantId === null) {
       return notFound();
     }
 
@@ -23,7 +34,6 @@ async function fetchRestaurantDetailsServer(slug: string) {
     }
     return (await response.json()).data as Resto;
   } catch (error) {
-    console.error("Error fetching restaurant details on server:", error);
     return null;
   }
 }
