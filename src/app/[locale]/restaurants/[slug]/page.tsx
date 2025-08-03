@@ -33,7 +33,7 @@ async function fetchRestaurantDetailsServer(slug: string) {
       throw new Error("Failed to fetch restaurant details.");
     }
     return (await response.json()).data as Resto;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
