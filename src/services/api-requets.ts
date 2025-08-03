@@ -142,7 +142,7 @@ export async function apiRequest<T>({
       status: response.status,
     };
   } catch (err) {
-    console.error(`Failed to ${method} ${endpoint}:`, err);
+    console.error('Failed to %s %s:', method, endpoint, err);
 
     // Handle network errors or unexpected issues
     return {
