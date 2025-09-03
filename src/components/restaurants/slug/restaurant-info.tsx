@@ -41,16 +41,16 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
           <p className="text-sm font-semibold mb-2 italic opacity-50">
             {restaurant?.horaires?.join(", ")}
           </p>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <table className={`table-auto w-full ${isMobile ? "text-xs" : ""}`}>
               <thead className="">
                 <tr className="rounded-lg">
-                  <th className="text-center border px-4 py-2">{t("day")}</th>
-                  <th className="text-center border px-4 py-2">
+                  <th className="text-center border-b border-r px-4 py-2">{t("day")}</th>
+                  <th className="text-center border-b border-r px-4 py-2">
                     {t("breakfast")}
                   </th>
-                  <th className="text-center border px-4 py-2">{t("lunch")}</th>
-                  <th className="text-center border px-4 py-2">
+                  <th className="text-center border-b border-r px-4 py-2">{t("lunch")}</th>
+                  <th className="text-center border-b px-4 py-2">
                     {t("dinner")}
                   </th>
                 </tr>
@@ -58,10 +58,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               <tbody>
                 {restaurant?.jours_ouvert?.map((jour, index) => (
                   <tr key={index} className="text-center">
-                    <td className="border px-4 py-2 font-medium">
+                    <td className="px-4 py-2 border-r font-medium">
                       {isMobile ? t(jour.jour).slice(0, 3) : t(jour.jour)}
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="px-4 py-2 border-r">
                       {jour.ouverture.matin ? (
                         <div className="flex justify-center items-center">
                           <Check className="w-6 h-6 text-green-500" />
@@ -72,7 +72,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                         </div>
                       )}
                     </td>
-                    <td className="border px-4 py-2 mx-auto">
+                    <td className="px-4 py-2 border-r mx-auto">
                       {jour.ouverture.midi ? (
                         <div className="flex justify-center items-center">
                           <Check className="w-6 h-6 text-green-500" />
@@ -83,7 +83,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                         </div>
                       )}
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="px-4 py-2">
                       {jour.ouverture.soir ? (
                         <div className="flex justify-center items-center">
                           <Check className="w-6 h-6 text-green-500" />
