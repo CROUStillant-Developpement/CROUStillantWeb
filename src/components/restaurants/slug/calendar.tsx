@@ -14,7 +14,7 @@ export default function RestaurantCalendar({
   setSelectedDate,
 }: RestaurantCalendarProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
       {availableDates.map((date) => (
         <DateCard
           key={date.code}
