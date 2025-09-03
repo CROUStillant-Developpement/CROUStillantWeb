@@ -25,18 +25,14 @@ export default function DateCard({
       } text-center flex-1 cursor-pointer relative dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80`}
       onClick={() => onSelectedDateChange(date)}
     >
-      <CardHeader>
-        <CardContent>
+      <CardHeader className="pb-2">
+        <CardTitle>
           <p className="capitalize">
             {date.toLocaleDateString(locale, {
               weekday: "long",
+              day: "numeric",
             })}
           </p>
-        </CardContent>
-        <CardTitle>
-          {date.toLocaleDateString(locale, {
-            day: "numeric",
-          })}
         </CardTitle>
       </CardHeader>
       <CardContent>
