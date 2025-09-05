@@ -8,9 +8,7 @@ import { getTranslations } from "next-intl/server";
 function extractRestaurantId(slug: unknown): number | null {
   if (typeof slug !== "string") return null;
 
-  const match = typeof slug === "string"
-    ? slug.match(/-r(\d+)$/) || slug.match(/^(\d+)$/)
-    : null;
+  const match = slug.match(/-r(\d+)$/) || slug.match(/^(\d+)$/);
   if (!match) return null;
 
   const id = parseInt(match[1], 10);
