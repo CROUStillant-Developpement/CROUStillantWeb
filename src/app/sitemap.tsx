@@ -5,7 +5,7 @@ import { slugify } from "@/lib/utils";
 const SITE_URL = "https://croustillant.menu";
 const API_URL = "https://api.croustillant.menu";
 
-let links = [
+const links = [
   {
     url: SITE_URL,
     changeFrequency: "yearly" as const,
