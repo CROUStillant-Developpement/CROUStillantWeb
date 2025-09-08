@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getLast100Dishes, getTop100Dishes } from "@/services/stats-services";
 import ErrorPage from "@/components/error";
-import DishesPage from "@/components/dishies/dishies-page";
+import DishesPage from "@/components/dishes/dishes-page";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("DishesPage");
