@@ -2,89 +2,86 @@ import type { MetadataRoute } from "next";
 import { getRestaurants } from "@/services/restaurant-service";
 import { slugify } from "@/lib/utils";
 
-const SITE_URL = "https://croustillant.menu";
-const API_URL = "https://api.croustillant.menu";
-
 const links = [
   {
-    url: SITE_URL,
+    url: `${process.env.WEB_URL}`,
     changeFrequency: "yearly" as const,
     priority: 1,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr`,
-        en: `${SITE_URL}/en`,
+        fr: `${process.env.WEB_URL}/fr`,
+        en: `${process.env.WEB_URL}/en`,
       },
     },
   },
   {
-    url: API_URL,
+    url: `${process.env.API_URL}`,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   },
   {
-    url: `${SITE_URL}/fr/restaurants`,
+    url: `${process.env.WEB_URL}/fr/restaurants`,
     changeFrequency: "monthly" as const,
     priority: 0.8,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/restaurants`,
-        en: `${SITE_URL}/en/restaurants`,
+        fr: `${process.env.WEB_URL}/fr/restaurants`,
+        en: `${process.env.WEB_URL}/en/restaurants`,
       },
     },
   },
   {
-    url: `${SITE_URL}/fr/dishes`,
+    url: `${process.env.WEB_URL}/fr/dishes`,
     changeFrequency: "daily" as const,
     priority: 0.7,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/dishes`,
-        en: `${SITE_URL}/en/dishes`,
+        fr: `${process.env.WEB_URL}/fr/dishes`,
+        en: `${process.env.WEB_URL}/en/dishes`,
       },
     },
   },
   {
-    url: `${SITE_URL}/fr/stats`,
+    url: `${process.env.WEB_URL}/fr/stats`,
     changeFrequency: "daily" as const,
     priority: 0.7,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/stats`,
-        en: `${SITE_URL}/en/stats`,
+        fr: `${process.env.WEB_URL}/fr/stats`,
+        en: `${process.env.WEB_URL}/en/stats`,
       },
     },
   },
   {
-    url: `${SITE_URL}/fr/about`,
+    url: `${process.env.WEB_URL}/fr/about`,
     changeFrequency: "monthly" as const,
     priority: 0.7,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/about`,
-        en: `${SITE_URL}/en/about`,
+        fr: `${process.env.WEB_URL}/fr/about`,
+        en: `${process.env.WEB_URL}/en/about`,
       },
     },
   },
   {
-    url: `${SITE_URL}/fr/legal`,
+    url: `${process.env.WEB_URL}/fr/legal`,
     changeFrequency: "yearly" as const,
     priority: 0.5,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/legal`,
-        en: `${SITE_URL}/en/legal`,
+        fr: `${process.env.WEB_URL}/fr/legal`,
+        en: `${process.env.WEB_URL}/en/legal`,
       },
     },
   },
   {
-    url: `${SITE_URL}/fr/changelog`,
+    url: `${process.env.WEB_URL}/fr/changelog`,
     changeFrequency: "yearly" as const,
     priority: 0.5,
     alternates: {
       languages: {
-        fr: `${SITE_URL}/fr/changelog`,
-        en: `${SITE_URL}/en/changelog`,
+        fr: `${process.env.WEB_URL}/fr/changelog`,
+        en: `${process.env.WEB_URL}/en/changelog`,
       },
     },
   },
@@ -99,13 +96,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   restaurants.data.forEach((restaurant) => {
     links.push({
-      url: `${SITE_URL}/fr/restaurant/${slugify(restaurant.nom)}-r${restaurant.code}`,
+      url: `${process.env.WEB_URL}/fr/restaurant/${slugify(restaurant.nom)}-r${restaurant.code}`,
       changeFrequency: "daily" as const,
       priority: 0.9,
       alternates: {
         languages: {
-          fr: `${SITE_URL}/fr/restaurant/${slugify(restaurant.nom)}-r${restaurant.code}`,
-          en: `${SITE_URL}/en/restaurant/${slugify(restaurant.nom)}-r${restaurant.code}`
+          fr: `${process.env.WEB_URL}/fr/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`,
+          en: `${process.env.WEB_URL}/en/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`
         },
       },
     });

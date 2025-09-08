@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://croustillant.menu/sitemap.xml",
+    sitemap: `${process.env.WEB_URL}/sitemap.xml`,
   };
 }

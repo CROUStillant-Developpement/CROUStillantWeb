@@ -44,6 +44,7 @@ jobs:
           touch .env
           echo API_URL=${{ secrets.API_URL }} >> .env
           echo API_KEY=${{ secrets.API_KEY }} >> .env
+          echo WEB_URL="https://beta.croustillant.menu" >> .env
           cat .env
 
       - name: Extract version from package.json
