@@ -39,6 +39,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create .env file
+        run: |
+          touch .env
+          echo API_URL=${{ secrets.API_URL }} >> .env
+          echo API_KEY=${{ secrets.API_KEY }} >> .env
+          cat .env
+
       - name: Extract version from package.json
         id: get_version
         run: |
