@@ -96,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   restaurants.data.forEach((restaurant) => {
     links.push({
-      url: `${process.env.WEB_URL}/fr/restaurant/${slugify(restaurant.nom)}-r${restaurant.code}`,
+      url: `${process.env.WEB_URL}/fr/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`,
       changeFrequency: "daily" as const,
       priority: 0.9,
       alternates: {
