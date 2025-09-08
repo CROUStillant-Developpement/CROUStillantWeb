@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const t = await getTranslations("ContactPage"); // Access the ContactPage translations
+  const t = await getTranslations("ContactPage");
 
   return (
     <div className="flex flex-col items-center justify-center md:px-4 py-10">
