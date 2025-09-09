@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   keywords: [
     "CROUS",
     "CROUStillant",
-    "Crous Menu"
+    "Crous Menu",
     "Menu",
     "Restaurant",
     "Cantine",
