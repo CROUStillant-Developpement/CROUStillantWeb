@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocale } from "next-intl";
 
-
 type DateCardProps = {
   date: Date;
   onSelectedDateChange: (date: Date) => void;

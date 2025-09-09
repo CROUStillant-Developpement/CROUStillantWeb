@@ -4,6 +4,7 @@ import RestaurantCard from "./restaurant-card";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { useUmami } from "next-umami";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -23,6 +24,7 @@ export default function Content({
   loading,
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
+  const umami = useUmami();
   const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
   const [userCollapsedfavourites, setUserCollapsedfavourites] = useState(false);
 
@@ -47,6 +49,9 @@ export default function Content({
                 onClick={() => {
                   setAutoCollapsedfavourites(false);
                   setUserCollapsedfavourites(!userCollapsedfavourites);
+                  umami.event("Restaurants.Favourites.Toggle", {
+                    action: userCollapsedfavourites ? "expand" : "collapse",
+                  });
                 }}
               >
                 {userCollapsedfavourites

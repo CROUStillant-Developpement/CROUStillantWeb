@@ -14,11 +14,13 @@ import { useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import ReactCountryFlag from "react-country-flag"
+import { useUmami } from "next-umami";
 
 export default function LocaleToggle() {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const umami = useUmami();
 
   function handleChange(locale: string) {
     startTransition(() => {
@@ -29,7 +31,7 @@ export default function LocaleToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" onClick={() => umami.event('LocaleSwitcher.Toggle')}>
           <Languages className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Changer de langue</span>
         </Button>

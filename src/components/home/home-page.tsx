@@ -10,6 +10,7 @@ import {
 import { useTranslations } from "next-intl";
 import HomeCard from "./home-card";
 import { Link } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 interface CardProps {
   title: string;
@@ -28,6 +29,8 @@ function BasicCard({
   style,
   children,
 }: CardProps) {
+  const umami = useUmami();
+
   return (
     <aside
       className={`${style} relative flex items-center min-h-[160px] h-full w-full overflow-hidden border-2 border-[#555] border-opacity-5 bg-[#FAFAFA] dark:bg-[#151414] dark:border-[rgba(85,85,85,0.35)] rounded-xl p-4 md:p-6`}
@@ -39,7 +42,13 @@ function BasicCard({
           </h3>
           <p className="text-base">{description}</p>
         </div>
-        <Link href={`/${ctaLink}`} className="text-sm font-bold underline">
+        <Link
+          href={`/${ctaLink}`}
+          className="text-sm font-bold underline"
+          onClick={() => {
+            umami.event("Home.About");
+          }}
+        >
           {cta}
         </Link>
       </div>

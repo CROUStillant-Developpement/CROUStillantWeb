@@ -3,6 +3,7 @@
 import { Link } from "@/i18n/routing";
 import { slugify } from "@/lib/utils";
 import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useUmami } from "next-umami";
 
 interface IFavQuickAccessProps {
   text: string;
@@ -10,6 +11,7 @@ interface IFavQuickAccessProps {
 
 export default function FavQuickAccess({ text }: IFavQuickAccessProps) {
   const { starredFav } = useUserPreferences();
+  const umami = useUmami();
 
   return (
     <Link
@@ -19,6 +21,7 @@ export default function FavQuickAccess({ text }: IFavQuickAccessProps) {
           : "/restaurants"
       }
       className="hover:underline"
+      onClick={() => umami.event("Favourite.QuickAccess")}
     >
       {text}
     </Link>

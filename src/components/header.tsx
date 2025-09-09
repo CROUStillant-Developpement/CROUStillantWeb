@@ -11,6 +11,7 @@ import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 export default function Header() {
   const [stars, setStars] = useState<number>(0); // [1
@@ -18,6 +19,7 @@ export default function Header() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const t = useTranslations("Header");
+  const umami = useUmami();
 
   useEffect(() => {
     getGithubStarCount()
@@ -41,6 +43,7 @@ export default function Header() {
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
+              onClick={() => umami.event('Header.HomeButton')}
             >
               <Link href="/">
                 {isDesktop ? t("home") : <Home className="h-6 w-6" />}
@@ -55,6 +58,7 @@ export default function Header() {
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
+              onClick={() => umami.event('Header.RestaurantsButton')}
             >
               <Link href="/restaurants">
                 {isDesktop ? (
@@ -72,6 +76,7 @@ export default function Header() {
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
+              onClick={() => umami.event('Header.AboutButton')}
             >
               <Link href="/about">
                 {isDesktop ? t("about") : <Info className="h-6 w-6" />}
@@ -88,7 +93,7 @@ export default function Header() {
       </div>
       <div className="flex gap-2 md:w-64 justify-end">
         {isDesktop && (
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" onClick={() => umami.event('Header.GithubButton')}>
             <Link
               href="https://github.com/CROUStillant-Developpement"
               target="_blank"
@@ -104,6 +109,7 @@ export default function Header() {
           asChild
           variant={pathname === "/settings" ? "default" : "outline"}
           className={`select-none h-9 w-9 rounded-sm`}
+          onClick={() => umami.event('Header.SettingsButton')}
         >
           <Link href="/settings">
             <Settings className="h-6 w-6" />

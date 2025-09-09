@@ -3,11 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useTranslations } from "next-intl";
+import { useUmami } from "next-umami";
 import { useEffect } from "react";
 
 export default function AccessibilityButton() {
   const { dislexicFont, toggleDislexicFont } = useUserPreferences();
   const t = useTranslations("Footer");
+  const umami = useUmami();
 
   // Update body class and save preference when font state changes
   useEffect(() => {
@@ -20,7 +22,12 @@ export default function AccessibilityButton() {
 
   return (
     <Button
-      onClick={toggleDislexicFont}
+      onClick={
+        () => {
+          toggleDislexicFont();
+          umami.event('Accessibility.ToggleDislexicFont');
+        }
+      }
       variant="outline"
       className=""
     >
