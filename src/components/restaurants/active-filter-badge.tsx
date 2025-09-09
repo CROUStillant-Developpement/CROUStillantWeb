@@ -24,7 +24,7 @@ export default function ActiveFilterBadge({
         onClick={() => {
           onRemove?.();
           umami.event("Restaurant.Filter.Remove");
-        }
+        }}
       />
     </Badge>
   );
