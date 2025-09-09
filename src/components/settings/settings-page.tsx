@@ -27,12 +27,14 @@ import { Region } from "@/services/types";
 import { useTranslations, useLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { usePathname, useRouter } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 export default function SettingsPage() {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [regions, setRegions] = useState<Region[]>([]);
 
   const t = useTranslations("SettingsPage");
+  const umami = useUmami();
 
   const { toast } = useToast();
   const { setTheme, theme, systemTheme } = useTheme();
@@ -81,7 +83,10 @@ export default function SettingsPage() {
     getRegions().then((res) => {
       if (res.success) {
         res.data.sort((a, b) => a.libelle.localeCompare(b.libelle));
-        res.data.unshift({ code: -1, libelle: t("favourites.regionSelectAll") });
+        res.data.unshift({
+          code: -1,
+          libelle: t("favourites.regionSelectAll"),
+        });
         setRegions(res.data);
       }
     });
@@ -247,7 +252,12 @@ export default function SettingsPage() {
           </div>
           <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
             <PopoverTrigger asChild>
-              <Button variant="destructive">
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  umami.event("Settings.Personal.DeleteData");
+                }}
+              >
                 {t("personal.deleteDataButton")}
               </Button>
             </PopoverTrigger>
@@ -257,11 +267,20 @@ export default function SettingsPage() {
                 <div className="flex justify-end gap-2">
                   <Button
                     variant="outline"
-                    onClick={() => setPopoverOpen(false)}
+                    onClick={() => {
+                      setPopoverOpen(false);
+                      umami.event("Settings.Personal.DeleteData.Cancel");
+                    }}
                   >
                     {t("personal.deleteDataConfirmNo")}
                   </Button>
-                  <Button variant="destructive" onClick={handleClearfavourites}>
+                  <Button
+                    variant="destructive"
+                    onClick={() => {
+                      handleClearfavourites();
+                      umami.event("Settings.Personal.DeleteData.Confirm");
+                    }}
+                  >
                     {t("personal.deleteDataConfirmYes")}
                   </Button>
                 </div>

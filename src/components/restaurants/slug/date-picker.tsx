@@ -24,6 +24,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { useUmami } from "next-umami";
 
 type DatePickerProps = {
   onDateChange?: (date: Date) => void;
@@ -41,18 +42,24 @@ export default function DatePicker({
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleDateChange = (date: Date) => {
-    setDate((date)); // to trigger re-render
+    setDate(date); // to trigger re-render
     onDateChange?.(date);
   };
 
   const locale = useLocale();
   const t = useTranslations("DatePickers");
+  const umami = useUmami();
 
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">
+          <Button
+            variant="outline"
+            onClick={() => {
+              umami.event("DatePicker.Open");
+            }}
+          >
             {current
               ? t("currentDate", { date: current?.toLocaleDateString(locale) })
               : t("chooseDate")}
@@ -77,7 +84,12 @@ export default function DatePicker({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild className="mt-4 md:mt-8">
-        <Button variant="outline">
+        <Button
+          variant="outline"
+          onClick={() => {
+            umami.event("DatePicker.Open");
+          }}
+        >
           {current
             ? t("currentDate", { date: current?.toLocaleDateString(locale) })
             : t("chooseDate")}
@@ -125,6 +137,7 @@ function DatePickerSection({
 
   const locale = useLocale();
   const t = useTranslations("DatePickers");
+  const umami = useUmami();
 
   const [localDate, setLocalDate] = useState<Date | undefined>(currentDate);
 
@@ -155,6 +168,13 @@ function DatePickerSection({
         type="submit"
         className="w-full"
         disabled={!localDate || !currentDate}
+        onClick={() => {
+          umami.event("DatePicker.Choose", {
+            date: localDate
+              ? localDate.toISOString()
+              : currentDate.toISOString(),
+          });
+        }}
       >
         {t("closeAndChoose", {
           date: localDate

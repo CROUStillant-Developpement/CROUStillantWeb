@@ -20,6 +20,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { useMediaQuery } from "usehooks-ts";
+import { useUmami } from "next-umami";
 
 type RestaurantInfoProps = {
   restaurant: Restaurant;
@@ -27,6 +28,7 @@ type RestaurantInfoProps = {
 
 export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   const t = useTranslations("RestaurantInformation");
+  const umami = useUmami();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -45,11 +47,15 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
             <table className={`table-auto w-full ${isMobile ? "text-xs" : ""}`}>
               <thead className="">
                 <tr className="rounded-lg">
-                  <th className="text-center border-b border-r px-4 py-2">{t("day")}</th>
+                  <th className="text-center border-b border-r px-4 py-2">
+                    {t("day")}
+                  </th>
                   <th className="text-center border-b border-r px-4 py-2">
                     {t("breakfast")}
                   </th>
-                  <th className="text-center border-b border-r px-4 py-2">{t("lunch")}</th>
+                  <th className="text-center border-b border-r px-4 py-2">
+                    {t("lunch")}
+                  </th>
                   <th className="text-center border-b px-4 py-2">
                     {t("dinner")}
                   </th>
@@ -120,6 +126,11 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
             <Link
               href={`https://www.google.com/maps/search/?api=1&query=${restaurant.latitude},${restaurant.longitude}`}
               target="_blank"
+              onClick={() => {
+                umami.event("Restaurant.ExternalMap", {
+                  restaurant: restaurant.code,
+                });
+              }}
             >
               <Navigation className="w-6 h-6" />
             </Link>
@@ -180,7 +191,15 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
             {restaurant.email && (
               <div className="flex items-center gap-2 text-sm">
                 <span className="font-bold">{t("email")}:</span>{" "}
-                <Link className="underline" href={`mailto:${restaurant.email}`}>
+                <Link
+                  className="underline"
+                  href={`mailto:${restaurant.email}`}
+                  onClick={() => {
+                    umami.event("Restaurant.Email", {
+                      restaurant: restaurant.code,
+                    });
+                  }}
+                >
                   {restaurant.email}
                 </Link>
               </div>
@@ -191,6 +210,11 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                 <Link
                   className="underline"
                   href={`tel:${restaurant.telephone}`}
+                  onClick={() => {
+                    umami.event("Restaurant.Phone", {
+                      restaurant: restaurant.code,
+                    });
+                  }}
                 >
                   {restaurant.telephone}
                 </Link>
@@ -214,6 +238,12 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               <Link
                 className="underline"
                 href={`/restaurants?region=${restaurant.region.code}`}
+                onClick={() => {
+                  umami.event("Restaurant.Region", {
+                    restaurant: restaurant.code,
+                    region: restaurant.region.libelle,
+                  });
+                }}
               >
                 {restaurant.region.libelle}
               </Link>

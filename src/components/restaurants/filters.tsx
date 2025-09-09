@@ -34,6 +34,7 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ActiveFilterBadge from "./active-filter-badge";
+import { useUmami } from "next-umami";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;
@@ -55,6 +56,7 @@ export default function RestaurantsFilters({
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const t = useTranslations("Filters");
+  const umami = useUmami();
 
   const { display, toggleDisplay } = useUserPreferences();
 
@@ -107,7 +109,14 @@ export default function RestaurantsFilters({
         />
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
-            <Button variant={activeFilterCount > 0 ? "default" : "outline"}>
+            <Button
+              variant={activeFilterCount > 0 ? "default" : "outline"}
+              onClick={() => {
+                umami.event("Restaurants.FiltersToggle", {
+                  isOpened: String(!sheetOpen),
+                });
+              }}
+            >
               <Settings2 className="mr-2 h-4 w-4" />
               {t("title")}{" "}
               {activeFilterCount > 0 && (
@@ -355,7 +364,13 @@ export default function RestaurantsFilters({
               </div>
               <SheetFooter>
                 <SheetClose asChild>
-                  <Button className="w-full mt-4" type="submit">
+                  <Button
+                    className="w-full mt-4"
+                    type="submit"
+                    onClick={() => {
+                      umami.event("Restaurants.FiltersApply");
+                    }}
+                  >
                     {t("close")}
                   </Button>
                 </SheetClose>
@@ -366,7 +381,10 @@ export default function RestaurantsFilters({
         <Button
           variant="outline"
           disabled={loading}
-          onClick={handleLocationRequest}
+          onClick={() => {
+            handleLocationRequest();
+            umami.event("Restaurants.Geolocate");
+          }}
         >
           <Locate className="mr-2 h-4 w-4" />
           {loading
@@ -375,7 +393,16 @@ export default function RestaurantsFilters({
             ? t("geolocated.error")
             : t("geolocated.title")}
         </Button>
-        <Button variant="outline" disabled={loading} onClick={toggleDisplay}>
+        <Button
+          variant="outline"
+          disabled={loading}
+          onClick={() => {
+            toggleDisplay();
+            umami.event("Restaurants.ToggleDisplay", {
+              display: display === "list" ? "map" : "list",
+            });
+          }}
+        >
           {display == "list" ? (
             <>
               <Map className="mr-2 h-4 w-4" />
@@ -388,7 +415,14 @@ export default function RestaurantsFilters({
             </>
           )}
         </Button>
-        <Button variant="outline" disabled={loading} onClick={resetFilters}>
+        <Button
+          variant="outline"
+          disabled={loading}
+          onClick={() => {
+            resetFilters();
+            umami.event("Restaurants.FiltersReset");
+          }}
+        >
           <RotateCcw className="mr-2 h-4 w-4" /> {t("reset")}
         </Button>
       </div>
