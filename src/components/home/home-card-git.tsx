@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 interface Props {
   style?: string;
@@ -7,6 +8,8 @@ interface Props {
 
 export default function GitCard({ style }: Props) {
   const t = useTranslations("HomeCard.GitCard");
+  const umami = useUmami();
+
   const members = [
     {
       id: 1,
@@ -22,8 +25,8 @@ export default function GitCard({ style }: Props) {
     },
     {
       id: 4,
-      name: "Louis Descotes"
-    }
+      name: "Louis Descotes",
+    },
   ];
 
   return (
@@ -37,6 +40,9 @@ export default function GitCard({ style }: Props) {
           <Link
             href="https://github.com/CROUStillant-Developpement"
             className="underline text-base font-bold"
+            onClick={() => {
+              umami.event("Home.Join.GitHub");
+            }}
           >
             {t("cta")}
           </Link>
@@ -47,17 +53,22 @@ export default function GitCard({ style }: Props) {
               <p className="text-lg font-medium opacity-80">{t("Card.name")}</p>
             </div>
             <div className="flex flex-col gap-4">
-            {members.map((member) => (
-              <div className="flex items-start justify-between w-full" key={member.id}>
-                <div className="flex items-center gap-2">
-                  <div className="relative flex items-center justify-center pl-1.5 mr-2">
-                    <div className="absolute size-2 rounded-full bg-blue-500" />
-                    <div className="absolute size-3 rounded-full bg-blue-500 animate-scan" />
+              {members.map((member) => (
+                <div
+                  className="flex items-start justify-between w-full"
+                  key={member.id}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex items-center justify-center pl-1.5 mr-2">
+                      <div className="absolute size-2 rounded-full bg-blue-500" />
+                      <div className="absolute size-3 rounded-full bg-blue-500 animate-scan" />
+                    </div>
+                    <p className="text-sm md:text-lg font-medium">
+                      {member.name}
+                    </p>
                   </div>
-                  <p className="text-sm md:text-lg font-medium">{member.name}</p>
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           </aside>
         </section>

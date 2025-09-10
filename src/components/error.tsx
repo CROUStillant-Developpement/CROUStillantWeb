@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { FishOff } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useUmami } from "next-umami";
 
 interface ErrorPageProps {
   statusCode: number;
@@ -11,8 +12,11 @@ interface ErrorPageProps {
 
 export default function ErrorPage({ statusCode }: ErrorPageProps) {
   const t = useTranslations("ErrorPage");
+  const umami = useUmami();
 
-  const titles = Object.values(t.raw(statusCode.toString() + ".titles")) as string[];
+  const titles = Object.values(
+    t.raw(statusCode.toString() + ".titles")
+  ) as string[];
 
   return (
     <div className="flex flex-col items-center justify-center gap-6 px-4 md:px-6 h-80svh">
@@ -24,10 +28,14 @@ export default function ErrorPage({ statusCode }: ErrorPageProps) {
         {t(statusCode.toString() + ".description")}
       </p>
       <div className="flex gap-4 flex-wrap justify-center">
-        <Button asChild>
+        <Button asChild onClick={() => umami.event("ErrorPage.Reload")}>
           <Link href="/">{t(statusCode.toString() + ".cta")}</Link>
         </Button>
-        <Button asChild variant="secondary">
+        <Button
+          asChild
+          variant="secondary"
+          onClick={() => umami.event("ErrorPage.Report")}
+        >
           <Link href="/contact">{t(statusCode.toString() + ".report")}</Link>
         </Button>
       </div>

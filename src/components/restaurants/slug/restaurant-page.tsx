@@ -20,6 +20,7 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useSearchParams } from "next/navigation";
+import { useUmami } from "next-umami";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -44,6 +45,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
+  const umami = useUmami();
 
   const searchParams = useSearchParams();
 
@@ -81,7 +83,11 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             const qr = searchParams.get("qr");
             if (qr === "true") {
               if (!favourites.some((f) => f.code === restaurant.code)) {
-                addOrRemoveFromfavourites(restaurant.code, restaurant.nom, true);
+                addOrRemoveFromfavourites(
+                  restaurant.code,
+                  restaurant.nom,
+                  true
+                );
               }
             }
             setPageUrl(url.toString());
@@ -125,9 +131,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             variant="outline"
             size="icon"
             className="rounded-full ml-4 mt-2 md:mt-0"
-            onClick={() =>
-              addOrRemoveFromfavourites(restaurant.code, restaurant.nom)
-            }
+            onClick={() => {
+              addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
+              umami.event("Restaurant.Favorite", {
+                restaurant: restaurant.code,
+              });
+            }}
           >
             {favourites.some((f) => f.code === restaurant.code) ? (
               <Heart className="text-red-500 fill-red-500" />
@@ -141,6 +150,11 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 size="icon"
                 className="ml-4 mt-2 md:mt-0"
                 disabled={pageUrl === ""}
+                onClick={() => {
+                  umami.event("Restaurant.QRCode", {
+                    restaurant: restaurant.code,
+                  });
+                }}
               >
                 <QrCode />
               </Button>

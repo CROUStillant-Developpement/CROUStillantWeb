@@ -2,6 +2,7 @@ import { School, UtensilsCrossed } from "lucide-react";
 import { RadarsIcons } from "../ui/radarsIcon";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { useUmami } from "next-umami";
 
 interface Props {
   style?: string;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function RadarsCard({ style }: Props) {
   const t = useTranslations("HomeCard.RadarsCard");
+  const umami = useUmami();
 
   return (
     <section className={`${style}`}>
@@ -21,6 +23,9 @@ export default function RadarsCard({ style }: Props) {
           <Link
             href="https://github.com/CROUStillant-Developpement"
             className="underline text-base font-bold"
+            onClick={() => {
+              umami.event("Home.Contribute.GitHub");
+            }}
           >
             {t("cta")}
           </Link>

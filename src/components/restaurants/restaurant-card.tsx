@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useUmami } from "next-umami";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -26,6 +27,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const t = useTranslations("RestaurantCard");
+  const umami = useUmami();
 
   const handleImageError = () => {
     setImageSrc("/default_ru.png");
@@ -46,9 +48,12 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           variant="outline"
           size="icon"
           className="rounded-full absolute top-4 right-4 z-20"
-          onClick={() =>
-            addOrRemoveFromfavourites(restaurant.code, restaurant.nom)
-          }
+          onClick={() => {
+            addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
+            umami.event("Restaurant.Favourite", {
+              restaurant: restaurant.code,
+            });
+          }}
         >
           {favourites.some((f) => f.code === restaurant.code) ? (
             <Heart className="text-red-500 fill-red-500" />
@@ -59,6 +64,11 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
         <Link
           href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
           className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
+          onClick={() => {
+            umami.event("Restaurant.Card.View", {
+              restaurant: restaurant.code,
+            });
+          }}
         >
           <p className="text-lg font-bold text-primary-foreground">
             {t("cta")}
@@ -66,7 +76,13 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
         </Link>
         <div className="flex justify-between items-center mt-2">
           <h1 className="text-xl font-bold">{restaurant.nom}</h1>
-          <Badge className={restaurant.ouvert ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"}>
+          <Badge
+            className={
+              restaurant.ouvert
+                ? "bg-green-500 hover:bg-green-600"
+                : "bg-red-500 hover:bg-red-600"
+            }
+          >
             {restaurant.ouvert ? t("open") : t("closed")}
           </Badge>
         </div>
@@ -126,6 +142,11 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               href={`/restaurants/${slugify(restaurant.nom)}-r${
                 restaurant.code
               }`}
+              onClick={() => {
+                umami.event("Restaurant.Card.View", {
+                  restaurant: restaurant.code,
+                });
+              }}
             >
               {t("cta")}
             </Link>

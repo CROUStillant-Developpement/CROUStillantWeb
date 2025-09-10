@@ -16,6 +16,7 @@ import Image from "next/image";
 import { ArrowDownToLine, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
+import { useUmami } from "next-umami";
 
 interface QrCodeDialogProps {
   dialogTrigger: React.ReactNode;
@@ -37,6 +38,7 @@ export default function QrCodeDialog({
   const [qrCodeData, setQrCodeData] = useState<string | null>(null);
 
   const t = useTranslations("QrCodeDialog");
+  const umami = useUmami();
 
   const generateQrCode = async (url: string) => {
     try {
@@ -102,6 +104,7 @@ export default function QrCodeDialog({
             disabled={!qrCodeData}
             className="w-full mt-2"
             asChild
+            onClick={() => umami.event('QrCodeDialog.Download')}
           >
             <a href={qrCodeData ?? "#"} download={title + ".png"}>
               <ArrowDownToLine className="mr-2" />
@@ -110,7 +113,12 @@ export default function QrCodeDialog({
           </Button>
           <Button
             type="button"
-            onClick={handleCopyImage}
+            onClick={
+              () => {
+                handleCopyImage();
+                umami.event('QrCodeDialog.CopyImage');
+              }
+            }
             disabled={!qrCodeData}
             className="w-full mt-2"
           >

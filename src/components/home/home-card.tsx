@@ -2,9 +2,11 @@ import { useTranslations } from "next-intl";
 import RadarsCard from "./home-card-radar";
 import GitCard from "./home-card-git";
 import { Link } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 export default function HomeCard() {
   const t = useTranslations("HomeCard");
+  const umami = useUmami();
 
   return (
     <>
@@ -20,6 +22,9 @@ export default function HomeCard() {
             <Link
               href="https://api.croustillant.menu/"
               className="underline text-base font-bold"
+              onClick={() => {
+                umami.event("Home.API");
+              }}
             >
               {t("ApiCard.cta")}
             </Link>

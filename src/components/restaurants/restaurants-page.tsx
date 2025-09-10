@@ -11,6 +11,7 @@ import useMarkerStore from "@/store/markerStore";
 import { slugify } from "@/lib/utils";
 import Content from "./content";
 import { Link } from "@/i18n/routing";
+import { useUmami } from "next-umami";
 
 export default function RestaurantsPage({
   restaurants,
@@ -34,6 +35,7 @@ export default function RestaurantsPage({
   const { addMarker, clearMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");
+  const umami = useUmami();
 
   useEffect(() => {
     const favRestaurants = filteredRestaurants.filter((restaurant) =>
@@ -65,6 +67,11 @@ export default function RestaurantsPage({
                 href={`/restaurants/${slugify(restaurant.nom)}-r${
                   restaurant.code
                 }`}
+                onClick={() => {
+                  umami.event("Restaurant.Card.View", {
+                    restaurant: restaurant.code,
+                  });
+                }}
               >
                 {chunks}
               </Link>
