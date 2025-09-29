@@ -36,6 +36,9 @@ COPY --from=build /app/.next/static /app/.next/static
 # Omit me if you don't have static files in your public folder yet
 COPY --from=build /app/public /app/public
 
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+
 EXPOSE 3000
 
 # Run the app
