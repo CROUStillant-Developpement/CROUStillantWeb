@@ -20,7 +20,8 @@ export default function Home() {
       </div>
       <aside className="pt-10">
         <Link
-          href="#info"
+          href="https://github.com/CROUStillant-Developpement"
+          target="_blank"
           className="group cursor-pointer flex items-center gap-2 py-1.5 px-6 rounded-[20px] border border-[#FED7DA] bg-[#FED7DA] dark:bg-[#e4041566] shadow-[0px_2px_4px_0px_rgba(244,64,64,0.25),_0px_1px_1px_0px_rgba(162,10,21,0.25)_inset] w-fit mx-auto"
         >
           <p className="text-sm md:text-base">{t("badge.title")}</p>
@@ -39,9 +40,7 @@ export default function Home() {
           <Link
             href={
               starredFav
-                ? `/restaurants/${slugify(starredFav.name)}-r${
-                    starredFav.code
-                  }`
+                ? `/restaurants/${slugify(starredFav.name)}-r${starredFav.code}`
                 : "/restaurants"
             }
             className="flex items-center hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-[16px] bg-[#E40514] shadow-[inset_0px_1px_3px_0px_#E40514,_inset_0px_2px_2px_2px_rgba(255,255,255,0.25)] py-3 px-6 text-white group"
