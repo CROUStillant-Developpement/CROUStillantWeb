@@ -38,7 +38,6 @@ export default function MenuHistorySection({
       <div className="flex items-center flex-wrap w-full gap-2">
         <h1 className="font-bold text-3xl text-center" id="history">
           {t("menuHistory")}
-          {noHistoryAtAll ? "No History" : "History"}
         </h1>
         <Badge>{t("newBadge")}</Badge>
       </div>
