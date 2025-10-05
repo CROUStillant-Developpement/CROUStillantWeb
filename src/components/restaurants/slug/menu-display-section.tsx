@@ -16,6 +16,7 @@ interface MenuDisplaySectionProps {
   selectedDateLunch: Repas | null;
   selectedDateDinner: Repas | null;
   rightPanel?: ReactNode; // optional right side (calendar, info, etc.)
+  noMenuAtAll?: boolean;
   bordered?: boolean;
 }
 
@@ -28,11 +29,12 @@ export default function MenuDisplaySection({
   selectedDateLunch,
   selectedDateDinner,
   rightPanel,
+  noMenuAtAll = false,
   bordered = true,
 }: MenuDisplaySectionProps) {
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
-  
+
   return (
     <div className={`grid gap-4 ${rightPanel ? "lg:grid-cols-3" : ""} mt-8`}>
       {menuLoading ? (
@@ -66,12 +68,19 @@ export default function MenuDisplaySection({
             })}
           </legend>
           <div className="flex flex-col gap-4">
-            {selectedDateMeals.length === 0 ? (
+            {noMenuAtAll ? (
               <Alert className="md:text-3xl" variant={"warning"}>
                 <AlertTitle>{t("noMealAvailable")}</AlertTitle>
                 <AlertDescription>
                   {t("noMealAvailableDescription")}
                 </AlertDescription>
+                <AlertDescription className="mt-2">
+                  {t("noMealAvailableDescription2")}
+                </AlertDescription>
+              </Alert>
+            ) : selectedDateMeals.length === 0 ? (
+              <Alert className="md:text-3xl" variant={"warning"}>
+                <AlertTitle>{t("noMenuAvailable")}</AlertTitle>
               </Alert>
             ) : (
               <MealsDisplay

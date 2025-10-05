@@ -15,6 +15,30 @@ interface UseRestaurantMenuOptions {
   mode: "future" | "history";
 }
 
+/**
+ * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
+ *
+ * This hook provides state and logic for:
+ * - Fetching available menu dates (future or history) for a restaurant.
+ * - Fetching and caching menu data for a selected date.
+ * - Managing loading states for menu and dates.
+ * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
+ * - Handling unavailable menu dates via a blacklist.
+ *
+ * @param restaurantCode - The unique code identifying the restaurant.
+ * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
+ * @returns An object containing:
+ * - `menuLoading`: Indicates if the menu data is currently loading.
+ * - `datesLoading`: Indicates if the available dates are currently loading.
+ * - `dates`: Array of available dates for the menu.
+ * - `menu`: Array of menu data for the restaurant.
+ * - `selectedDate`: The currently selected date.
+ * - `setSelectedDate`: Setter for the selected date.
+ * - `selectedDateMeals`: Array of meals for the selected date.
+ * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
+ * - `selectedDateLunch`: The lunch meal for the selected date, if available.
+ * - `selectedDateDinner`: The dinner meal for the selected date, if available.
+ */
 export function useRestaurantMenu({
   restaurantCode,
   mode,
@@ -34,6 +58,8 @@ export function useRestaurantMenu({
   const [menuLoading, setMenuLoading] = useState<boolean>(false);
   const [datesLoading, setDatesLoading] = useState<boolean>(false);
   const [blacklistedDates, setBlacklistedDates] = useState<Date[]>([]);
+  const [noMenuAtAll, setNoMenuAtAll] = useState<boolean>(false);
+  const [noHistoryAtAll, setNoHistoryAtAll] = useState<boolean>(false);
 
   useEffect(() => {
     setMenuLoading(true);
@@ -50,6 +76,8 @@ export function useRestaurantMenu({
           if (menuResult.success && menuResult.data.length > 0) {
             setMenu(menuResult.data);
             setSelectedDate(formatToISODate(menuResult.data[0].date));
+          } else {
+            setNoMenuAtAll(true);
           }
 
           if (futureDatesResult.success && futureDatesResult.data) {
@@ -71,6 +99,8 @@ export function useRestaurantMenu({
             setDates(pastDates);
             if (pastDates.length > 0) {
               setSelectedDate(formatToISODate(pastDates[0].date));
+            } else {
+              setNoHistoryAtAll(true);
             }
           }
         }
@@ -83,6 +113,16 @@ export function useRestaurantMenu({
     fetchData();
   }, [restaurantCode, mode]);
 
+  /**
+   * Fetches the restaurant menu for a specific date and updates the local state.
+   *
+   * Formats the provided date, retrieves the menu using the restaurant code and formatted date,
+   * and updates the menu state if successful. If the menu is not found or the request fails,
+   * adds the date to the list of blacklisted dates.
+   *
+   * @param date - The date for which to fetch the restaurant menu.
+   * @returns A promise that resolves when the menu fetch and state update are complete.
+   */
   const fetchMenuForDate = async (date: Date) => {
     const formattedDate = `${date.getDate()}-${
       date.getMonth() + 1
@@ -105,31 +145,49 @@ export function useRestaurantMenu({
         normalizeToDate(selectedDate).getTime()
     );
 
-    if (!selectedDateMenu) {
-      if (
-        mode === "history" &&
-        blacklistedDates.every((d) => d.getTime() !== selectedDate.getTime())
-      ) {
-        setMenuLoading(true);
-        fetchMenuForDate(selectedDate).finally(() => setMenuLoading(false));
-      }
-      setSelectedDateMeals([]);
-      setSelectedDateBreakfast(null);
-      setSelectedDateLunch(null);
-      setSelectedDateDinner(null);
+    // If menu for this date already exists, update state immediately
+    if (selectedDateMenu) {
+      setSelectedDateMeals(selectedDateMenu.repas);
+      setSelectedDateBreakfast(
+        selectedDateMenu.repas.find((r) => r.type === "matin") ?? null
+      );
+      setSelectedDateLunch(
+        selectedDateMenu.repas.find((r) => r.type === "midi") ?? null
+      );
+      setSelectedDateDinner(
+        selectedDateMenu.repas.find((r) => r.type === "soir") ?? null
+      );
       return;
     }
 
-    setSelectedDateMeals(selectedDateMenu.repas);
-    setSelectedDateBreakfast(
-      selectedDateMenu.repas.find((r) => r.type === "matin") ?? null
-    );
-    setSelectedDateLunch(
-      selectedDateMenu.repas.find((r) => r.type === "midi") ?? null
-    );
-    setSelectedDateDinner(
-      selectedDateMenu.repas.find((r) => r.type === "soir") ?? null
-    );
+    // No menu yet → fetch it if needed
+    if (
+      mode === "history" &&
+      blacklistedDates.every((d) => d.getTime() !== selectedDate.getTime())
+    ) {
+      setMenuLoading(true);
+
+      fetchMenuForDate(selectedDate)
+        .catch(() => {
+          // Fetch failed → clear meals (menu not found)
+          setSelectedDateMeals([]);
+          setSelectedDateBreakfast(null);
+          setSelectedDateLunch(null);
+          setSelectedDateDinner(null);
+        })
+        .finally(() => {
+          setMenuLoading(false);
+        });
+
+      // 🚫 Don't clear meals immediately — wait for fetch result
+      return;
+    }
+
+    // If blacklisted (known no menu), clear immediately
+    setSelectedDateMeals([]);
+    setSelectedDateBreakfast(null);
+    setSelectedDateLunch(null);
+    setSelectedDateDinner(null);
   }, [selectedDate, menu]);
 
   return {
@@ -143,5 +201,7 @@ export function useRestaurantMenu({
     selectedDateBreakfast,
     selectedDateLunch,
     selectedDateDinner,
+    noMenuAtAll,
+    noHistoryAtAll,
   };
 }

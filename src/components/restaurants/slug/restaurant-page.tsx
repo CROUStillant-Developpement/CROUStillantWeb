@@ -16,6 +16,7 @@ import { useUmami } from "next-umami";
 import { useTranslations } from "next-intl";
 import { formatToISODate } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
+import { useEffect, useState } from "react";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -32,14 +33,21 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     selectedDateBreakfast,
     selectedDateLunch,
     selectedDateDinner,
+    noMenuAtAll,
+    noHistoryAtAll
   } = useRestaurantMenu({ restaurantCode: restaurant.code, mode: "future" });
 
   const t = useTranslations("RestaurantPage");
   const umami = useUmami();
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
+  const [tab, setTab] = useState<string>(noMenuAtAll ? "info" : "calendar");
 
-  if (menuLoading && datesLoading) return <RestaurantPageSkeleton />;
+  useEffect(() => {
+    if (noMenuAtAll) {
+      setTab("info");
+    }
+  }, [noMenuAtAll]);
 
   return (
     <div>
@@ -81,55 +89,76 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         />
       </div>
 
-      {/* Menu Display Section */}
-      <MenuDisplaySection
-        menuLoading={menuLoading}
-        datesLoading={datesLoading}
-        selectedDate={selectedDate}
-        selectedDateMeals={selectedDateMeals}
-        selectedDateBreakfast={selectedDateBreakfast}
-        selectedDateLunch={selectedDateLunch}
-        selectedDateDinner={selectedDateDinner}
-        rightPanel={
-          <Tabs defaultValue="calendar" className="w-full lg:mt-2">
-            <TabsList className="w-full">
-              <TabsTrigger className="flex-1" value="calendar">
-                {t("calendar")}
-              </TabsTrigger>
-              <TabsTrigger className="flex-1" value="info">
-                {t("information")}
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="calendar">
-              <fieldset className="grid gap-6 rounded-lg border p-4 mb-4 md:mb-8 h-fit">
-                <legend className="-ml-1 px-1 text-sm font-medium">
-                  {t("nextDaysMenu")}
-                </legend>
-                {dates.length > 0 && (
-                  <>
-                    <DatePicker
-                      onDateChange={setSelectedDate}
-                      maxDate={formatToISODate(dates[dates.length - 1].date)}
-                      current={selectedDate}
-                    />
-                    <RestaurantCalendar
-                      availableDates={dates}
-                      selectedDate={selectedDate}
-                      setSelectedDate={setSelectedDate}
-                    />
-                  </>
-                )}
-              </fieldset>
-            </TabsContent>
-            <TabsContent value="info">
-              <RestaurantInfo restaurant={restaurant} />
-            </TabsContent>
-          </Tabs>
-        }
-      />
+      {menuLoading && datesLoading ? (
+        <RestaurantPageSkeleton />
+      ) : (
+        <>
+          {/* Menu Display Section */}
+          <MenuDisplaySection
+            menuLoading={menuLoading}
+            datesLoading={datesLoading}
+            selectedDate={selectedDate}
+            selectedDateMeals={selectedDateMeals}
+            selectedDateBreakfast={selectedDateBreakfast}
+            selectedDateLunch={selectedDateLunch}
+            selectedDateDinner={selectedDateDinner}
+            noMenuAtAll={noMenuAtAll}
+            rightPanel={
+              <Tabs
+                defaultValue={noMenuAtAll ? "info" : "calendar"}
+                value={tab}
+                onValueChange={(value) => (noMenuAtAll ? null : setTab(value))}
+                className="w-full lg:mt-2"
+              >
+                <TabsList className="w-full">
+                  <TabsTrigger
+                    className={
+                      "flex-1" + (noMenuAtAll ? " cursor-not-allowed" : "")
+                    }
+                    value="calendar"
+                  >
+                    {t("calendar")}
+                  </TabsTrigger>
+                  <TabsTrigger className="flex-1" value="info">
+                    {t("information")}
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="calendar">
+                  <fieldset className="grid gap-6 rounded-lg border p-4 mb-4 md:mb-8 h-fit">
+                    <legend className="-ml-1 px-1 text-sm font-medium">
+                      {t("nextDaysMenu")}
+                    </legend>
+                    {dates.length > 0 && (
+                      <>
+                        <DatePicker
+                          onDateChange={setSelectedDate}
+                          maxDate={formatToISODate(
+                            dates[dates.length - 1].date
+                          )}
+                          current={selectedDate}
+                        />
+                        <RestaurantCalendar
+                          availableDates={dates}
+                          selectedDate={selectedDate}
+                          setSelectedDate={setSelectedDate}
+                        />
+                      </>
+                    )}
+                  </fieldset>
+                </TabsContent>
+                <TabsContent value="info">
+                  <RestaurantInfo restaurant={restaurant} />
+                </TabsContent>
+              </Tabs>
+            }
+          />
 
-      {/* Menu History */}
-      <MenuHistorySection restaurantCode={restaurant.code} />
+          {/* Menu History */}
+          {!noHistoryAtAll && (
+            <MenuHistorySection restaurantCode={restaurant.code} />
+          )}
+        </>
+      )}
     </div>
   );
 }
