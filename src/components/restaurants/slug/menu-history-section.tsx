@@ -34,9 +34,9 @@ export default function MenuHistorySection({
   const t = useTranslations("RestaurantPage");
 
   return (
-    <section className="mt-12 border-t pt-8">
+    <section className="mt-12 border-t pt-8" id="history">
       <div className="flex items-center flex-wrap w-full gap-2">
-        <h1 className="font-bold text-3xl text-center" id="history">
+        <h1 className="font-bold text-3xl text-center">
           {t("menuHistory")}
         </h1>
         <Badge>{t("newBadge")}</Badge>
