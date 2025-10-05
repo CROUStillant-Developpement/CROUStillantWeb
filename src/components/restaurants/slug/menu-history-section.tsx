@@ -28,6 +28,7 @@ export default function MenuHistorySection({
     selectedDateBreakfast,
     selectedDateLunch,
     selectedDateDinner,
+    noHistoryAtAll,
   } = useRestaurantMenu({ restaurantCode, mode: "history" });
 
   const t = useTranslations("RestaurantPage");
@@ -37,11 +38,12 @@ export default function MenuHistorySection({
       <div className="flex items-center flex-wrap w-full gap-2">
         <h1 className="font-bold text-3xl text-center" id="history">
           {t("menuHistory")}
+          {noHistoryAtAll ? "No History" : "History"}
         </h1>
         <Badge>{t("newBadge")}</Badge>
       </div>
 
-      {showHistory ? (
+      {showHistory && !noHistoryAtAll ? (
         <MenuDisplaySection
           menuLoading={menuLoading}
           datesLoading={datesLoading}
@@ -75,13 +77,17 @@ export default function MenuHistorySection({
             </fieldset>
           }
         />
-      ) : (
+      ) : !noHistoryAtAll ? (
         <div className="text-muted-foreground mt-4">
           {t("menuHistoryCta")}
           <br />
           <Button onClick={() => setShowHistory(true)} className="mt-2">
             {t("menuHistoryCtaBtn")}
           </Button>
+        </div>
+      ) : (
+        <div className="text-muted-foreground mt-4">
+          {t("noMenuHistoryAtAll")}
         </div>
       )}
     </section>

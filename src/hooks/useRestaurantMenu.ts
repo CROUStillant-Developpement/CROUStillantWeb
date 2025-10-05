@@ -91,6 +91,7 @@ export function useRestaurantMenu({
         } else {
           // HISTORY mode
           const result = await getDatesMenuAvailable(restaurantCode);
+          console.log(result);
           if (result.success && result.data) {
             const today = new Date();
             const pastDates = result.data.filter(
@@ -102,6 +103,11 @@ export function useRestaurantMenu({
             } else {
               setNoHistoryAtAll(true);
             }
+          } else {
+            console.log(
+              "Failed to fetch history dates, setting noHistoryAtAll to true"
+            );
+            setNoHistoryAtAll(true);
           }
         }
       } finally {

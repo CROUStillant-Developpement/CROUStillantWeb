@@ -34,7 +34,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     selectedDateLunch,
     selectedDateDinner,
     noMenuAtAll,
-    noHistoryAtAll
+    noHistoryAtAll,
   } = useRestaurantMenu({ restaurantCode: restaurant.code, mode: "future" });
 
   const t = useTranslations("RestaurantPage");

@@ -106,7 +106,8 @@
     "menuHistoryCta": "Click on \"View history\" to load previous dates.",
     "menuHistoryCtaBtn": "View history",
     "newBadge": "New",
-    "pastDays": "Past days"
+    "pastDays": "Past days",
+    "noMenuHistoryAtAll": "No menu history available for this restaurant 😢"
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
