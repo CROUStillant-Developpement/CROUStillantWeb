@@ -19,7 +19,8 @@ export default function MenuHistorySection({
 }: MenuHistoryProps) {
   const [showHistory, setShowHistory] = useState(false);
   const {
-    loading,
+    menuLoading,
+    datesLoading,
     dates,
     selectedDate,
     setSelectedDate,
@@ -42,7 +43,8 @@ export default function MenuHistorySection({
 
       {showHistory ? (
         <MenuDisplaySection
-          loading={loading}
+          menuLoading={menuLoading}
+          datesLoading={datesLoading}
           selectedDate={selectedDate}
           selectedDateMeals={selectedDateMeals}
           selectedDateBreakfast={selectedDateBreakfast}

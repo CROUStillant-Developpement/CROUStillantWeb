@@ -31,11 +31,13 @@ export function useRestaurantMenu({
   const [selectedDateDinner, setSelectedDateDinner] = useState<Repas | null>(
     null
   );
-  const [loading, setLoading] = useState(true);
+  const [menuLoading, setMenuLoading] = useState<boolean>(false);
+  const [datesLoading, setDatesLoading] = useState<boolean>(false);
   const [blacklistedDates, setBlacklistedDates] = useState<Date[]>([]);
 
   useEffect(() => {
-    setLoading(true);
+    setMenuLoading(true);
+    setDatesLoading(true);
 
     const fetchData = async () => {
       try {
@@ -73,7 +75,8 @@ export function useRestaurantMenu({
           }
         }
       } finally {
-        setLoading(false);
+        setMenuLoading(false);
+        setDatesLoading(false);
       }
     };
 
@@ -107,7 +110,8 @@ export function useRestaurantMenu({
         mode === "history" &&
         blacklistedDates.every((d) => d.getTime() !== selectedDate.getTime())
       ) {
-        fetchMenuForDate(selectedDate);
+        setMenuLoading(true);
+        fetchMenuForDate(selectedDate).finally(() => setMenuLoading(false));
       }
       setSelectedDateMeals([]);
       setSelectedDateBreakfast(null);
@@ -129,7 +133,8 @@ export function useRestaurantMenu({
   }, [selectedDate, menu]);
 
   return {
-    loading,
+    menuLoading,
+    datesLoading,
     dates,
     menu,
     selectedDate,

@@ -23,7 +23,8 @@ interface RestaurantPageProps {
 
 export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const {
-    loading,
+    menuLoading,
+    datesLoading,
     dates,
     selectedDate,
     setSelectedDate,
@@ -38,7 +39,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
 
-  if (loading) return <RestaurantPageSkeleton />;
+  if (menuLoading && datesLoading) return <RestaurantPageSkeleton />;
 
   return (
     <div>
@@ -82,7 +83,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
       {/* Menu Display Section */}
       <MenuDisplaySection
-        loading={loading}
+        menuLoading={menuLoading}
+        datesLoading={datesLoading}
         selectedDate={selectedDate}
         selectedDateMeals={selectedDateMeals}
         selectedDateBreakfast={selectedDateBreakfast}
