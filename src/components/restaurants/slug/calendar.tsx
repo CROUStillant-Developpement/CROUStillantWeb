@@ -6,12 +6,16 @@ interface RestaurantCalendarProps {
   availableDates: DateMenu[];
   selectedDate: Date;
   setSelectedDate: (date: Date) => void;
+  href?: string;
+  showYear?: boolean;
 }
 
 export default function RestaurantCalendar({
   availableDates,
   selectedDate,
   setSelectedDate,
+  href,
+  showYear = false,
 }: RestaurantCalendarProps) {
   return (
     <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
@@ -21,6 +25,8 @@ export default function RestaurantCalendar({
           date={formatToISODate(date.date)}
           onSelectedDateChange={setSelectedDate}
           selectedDate={selectedDate}
+          href={href}
+          showYear={showYear}
         />
       ))}
     </div>
