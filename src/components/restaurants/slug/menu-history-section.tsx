@@ -69,6 +69,7 @@ export default function MenuHistorySection({
                     availableDates={dates}
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
+                    menuIsLoading={menuLoading}
                     href="#history"
                     showYear={true}
                   />

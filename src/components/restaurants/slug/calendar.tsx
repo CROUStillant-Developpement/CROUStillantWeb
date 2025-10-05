@@ -6,6 +6,7 @@ interface RestaurantCalendarProps {
   availableDates: DateMenu[];
   selectedDate: Date;
   setSelectedDate: (date: Date) => void;
+  menuIsLoading?: boolean;
   href?: string;
   showYear?: boolean;
 }
@@ -14,6 +15,7 @@ export default function RestaurantCalendar({
   availableDates,
   selectedDate,
   setSelectedDate,
+  menuIsLoading = false,
   href,
   showYear = false,
 }: RestaurantCalendarProps) {
@@ -25,6 +27,7 @@ export default function RestaurantCalendar({
           date={formatToISODate(date.date)}
           onSelectedDateChange={setSelectedDate}
           selectedDate={selectedDate}
+          menuIsLoading={menuIsLoading}
           href={href}
           showYear={showYear}
         />

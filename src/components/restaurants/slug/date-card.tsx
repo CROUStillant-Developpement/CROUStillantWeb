@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoaderCircle } from "lucide-react";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 
@@ -6,6 +8,7 @@ type DateCardProps = {
   date: Date;
   onSelectedDateChange: (date: Date) => void;
   selectedDate: Date;
+  menuIsLoading?: boolean;
   href?: string;
   showYear?: boolean;
 };
@@ -14,6 +17,7 @@ export default function DateCard({
   date,
   onSelectedDateChange,
   selectedDate,
+  menuIsLoading = false,
   href = "#",
   showYear = false, // default: false
 }: DateCardProps) {
@@ -47,6 +51,11 @@ export default function DateCard({
         } text-center flex-1 cursor-pointer relative dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80`}
         onClick={() => onSelectedDateChange(date)}
       >
+        {menuIsLoading && isSelected && (
+          <Button className="absolute top-2 right-2 rounded-full" size="icon">
+            <LoaderCircle className="animate-spin" />
+          </Button>
+        )}
         <CardHeader className="pb-2">
           <CardTitle>
             <p className="capitalize">{formattedTop}</p>
