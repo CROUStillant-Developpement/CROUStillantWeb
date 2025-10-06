@@ -103,8 +103,8 @@
     "information": "Informations",
     "calendar": "Calendrier",
     "menuHistory": "Historique des menus",
-    "menuCta": "Cliquez sur \"Voir l'historique\" pour charger les dates précédentes.",
-    "menuCtaBtn": "Voir l'historique",
+    "menuHistoryCta": "Cliquez sur \"Voir l'historique\" pour charger les dates précédentes.",
+    "menuHistoryCtaBtn": "Voir l'historique",
     "newBadge": "Nouveau",
     "pastDays": "Jours précédents",
     "noMenuHistoryAtAll": "Aucun historique de menu disponible pour ce restaurant 😢"
