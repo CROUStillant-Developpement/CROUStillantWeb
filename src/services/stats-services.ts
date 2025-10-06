@@ -1,5 +1,6 @@
 import { Tache, GlobalStats, ApiResult, GithubRepo, Plat } from "./types";
 import { apiRequest } from "./api-requets";
+import log from "@/lib/log";
 
 /**
  * Fetches a list of tasks from the API.
@@ -41,7 +42,7 @@ export async function getGlobalStats(): Promise<ApiResult<GlobalStats>> {
  * @example
  * ```typescript
  * const totalStars = await getGithubStarCount();
- * console.log(`Total stars: ${totalStars}`);
+ * log.info(`Total stars: ${totalStars}`);
  * ```
  */
 export const getGithubStarCount = async (): Promise<number> => {
@@ -65,11 +66,12 @@ export const getGithubStarCount = async (): Promise<number> => {
     });
 
     if (!response.success) {
-      console.error(`Failed to fetch for: ${repo}`);
+      log.error([`Failed to fetch for: ${repo}`], "dev");
       continue;
     }
 
-    console.log(`Fetched ${repo} with ${response.data.stargazers_count} stars`);
+    // only in debug mode
+    log.info([`Fetched ${repo} with ${response.data.stargazers_count} stars`], "dev");
 
     stars += response.data.stargazers_count;
   }

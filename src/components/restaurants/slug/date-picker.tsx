@@ -44,7 +44,6 @@ export default function DatePicker({
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleDateChange = (date: Date) => {
-    console.log("Date selected:", date);
     setDate(date); // to trigger re-render
     onDateChange?.(date);
   };

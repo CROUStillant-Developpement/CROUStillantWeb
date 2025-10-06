@@ -2,6 +2,7 @@
 
 import { Restaurant, Region, TypeRestaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
+import log from "@/lib/log";
 import Loading from "@/app/[locale]/loading";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
@@ -49,7 +50,7 @@ export default function RestaurantsPage({
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     if (process.env.NODE_ENV === "development")
-      console.info("filteredRestaurants changed", filteredRestaurants.length);
+      log.info("filteredRestaurants changed", filteredRestaurants.length);
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
@@ -64,9 +65,8 @@ export default function RestaurantsPage({
           t.rich("markerDescription", {
             link: (chunks) => (
               <Link
-                href={`/restaurants/${slugify(restaurant.nom)}-r${
-                  restaurant.code
-                }`}
+                href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code
+                  }`}
                 onClick={() => {
                   umami.event("Restaurant.Card.View", {
                     restaurant: restaurant.code,

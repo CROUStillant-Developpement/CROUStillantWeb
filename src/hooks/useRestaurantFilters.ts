@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import log from "@/lib/log";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounceCallback } from "usehooks-ts";
 import {
@@ -60,7 +61,7 @@ export function useRestaurantFilters(
    */
   const initializeFilters = useCallback(() => {
     if (process.env.NODE_ENV === "development")
-      console.info("initializeFilters");
+      log.info(["initializeFilters"], "dev");
     setLoading(true);
     const tempFilters: Filters = {
       search: searchParams.get("search") || "",
@@ -96,8 +97,7 @@ export function useRestaurantFilters(
    * @returns {Promise<void>} A promise that resolves when the location request is complete.
    */
   const handleLocationRequest = useCallback(async () => {
-    if (process.env.NODE_ENV === "development")
-      console.info("handleLocationRequest");
+    log.info(["handleLocationRequest"], "dev");
     setLoading(true);
     try {
       const position = await getGeoLocation();
@@ -131,7 +131,7 @@ export function useRestaurantFilters(
    * @returns {void}
    */
   const resetFilters = useCallback(() => {
-    if (process.env.NODE_ENV === "development") console.info("resetFilters");
+    log.info(["resetFilters"], "dev");
     setFilters({
       search: "",
       isPmr: false,
@@ -163,8 +163,7 @@ export function useRestaurantFilters(
     // pass 1: filter restaurants based on filters
     const filtered = filterRestaurants(restaurants, filters);
 
-    if (process.env.NODE_ENV === "development")
-      console.info("debouncedFilterRestaurants", filters, filtered.length);
+    log.info(["debouncedFilterRestaurants", filters, filtered.length], "dev");
 
     // pass 2: sort restaurants based on filters
     const sorted = sortRestaurants(filtered, filters, locale);
@@ -175,16 +174,14 @@ export function useRestaurantFilters(
 
   // Update query string whenever filters change
   useEffect(() => {
-    if (process.env.NODE_ENV === "development")
-      console.info("useEffect change query string");
+    log.info(["useEffect change query string"], "dev");
     const queryString = buildQueryString(filters);
     router.push(`${pathname}?${queryString}`);
   }, [filters, router, pathname]);
 
   // Trigger debounced filtering when filters change
   useEffect(() => {
-    if (process.env.NODE_ENV === "development")
-      console.info("useEffect debouncedFilterRestaurants");
+    log.info(["useEffect debouncedFilterRestaurants"], "dev");
     setLoading(true);
 
     debouncedFilterRestaurants();

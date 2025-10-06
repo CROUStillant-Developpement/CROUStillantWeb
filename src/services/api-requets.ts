@@ -1,6 +1,7 @@
 "use server";
 
 import { ApiResult } from "@/services/types";
+import log from "@/lib/log";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const cache = new Map<string, { data: any; expiry: number }>();
@@ -43,19 +44,19 @@ export async function apiRequest<T>({
   if (cache.has(cacheKey)) {
     const cached = cache.get(cacheKey)!;
     if (Date.now() < cached.expiry) {
-      console.log(`Cache hit for ${method} ${endpoint}`);
+      log.debug([`Cache hit for ${method} ${endpoint}`], "all");
 
       return {
         success: true,
         data: cached.data as T,
       };
     } else {
-      console.log(`Cache expired for ${method} ${endpoint}`);
+      log.debug([`Cache expired for ${method} ${endpoint}`], "all");
       cache.delete(cacheKey);
     }
   }
 
-  console.log(`Making ${method} request to ${api_url}/${endpoint}`);
+  log.info([`Making ${method} request to ${api_url}/${endpoint}`], "all");
   const url = `${api_url}/${endpoint}`;
 
   const headers: HeadersInit = {};
@@ -119,7 +120,7 @@ export async function apiRequest<T>({
           });
         }
 
-        console.log(`Cached response for ${method} ${endpoint}`);
+        log.debug([`Cached response for ${method} ${endpoint}`], "all");
       }
 
       if (check_success) {
@@ -142,7 +143,7 @@ export async function apiRequest<T>({
       status: response.status,
     };
   } catch (err) {
-    console.error('Failed to %s %s:', method, endpoint, err);
+    log.error([`Failed to ${method} ${endpoint}:`, err], "all");
 
     // Handle network errors or unexpected issues
     return {
