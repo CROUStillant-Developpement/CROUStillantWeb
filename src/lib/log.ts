@@ -51,9 +51,6 @@ const format = (level: LogLevel, ...args: unknown[]) => {
   return [`[${level.toUpperCase()}]`, timestamp, ...args];
 };
 
-// If LOG_ALL_ENVS is set to 'true', log in all environments; otherwise, only in development
-const logAllEnvs = process.env.LOG_ALL_ENVS ? process.env.LOG_ALL_ENVS === 'true' : false;
-
 type LogEnv = 'dev' | 'prod' | 'all';
 
 function shouldLogEnv(env: LogEnv): boolean {
@@ -66,25 +63,21 @@ function shouldLogEnv(env: LogEnv): boolean {
 const log = {
   error: (args: unknown[], env: LogEnv = 'dev') => {
     if (shouldLogEnv(env) && shouldLog('error')) {
-      // eslint-disable-next-line no-console
       console.error(...format('error', ...args));
     }
   },
   warn: (args: unknown[], env: LogEnv = 'dev') => {
     if (shouldLogEnv(env) && shouldLog('warn')) {
-      // eslint-disable-next-line no-console
       console.warn(...format('warn', ...args));
     }
   },
   info: (args: unknown[], env: LogEnv = 'dev') => {
     if (shouldLogEnv(env) && shouldLog('info')) {
-      // eslint-disable-next-line no-console
       console.info(...format('info', ...args));
     }
   },
   debug: (args: unknown[], env: LogEnv = 'dev') => {
     if (shouldLogEnv(env) && shouldLog('debug')) {
-      // eslint-disable-next-line no-console
       console.debug(...format('debug', ...args));
     }
   },
