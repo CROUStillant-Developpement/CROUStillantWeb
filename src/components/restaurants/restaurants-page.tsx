@@ -49,8 +49,7 @@ export default function RestaurantsPage({
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    if (process.env.NODE_ENV === "development")
-      log.info("filteredRestaurants changed", filteredRestaurants.length);
+    log.info(["filteredRestaurants changed", filteredRestaurants.length], "dev");
     return filteredRestaurants.slice(startIndex, endIndex);
   }, [filteredRestaurants, currentPage, pageSize]);
 
