@@ -90,7 +90,7 @@ export default function RestaurantsPage({
           <h1 className="font-bold text-3xl">Restaurants</h1>
           <div className="opacity-50">
             {loading ? (
-              <Loading className="!justify-start" />
+              <Loading className="justify-start!" />
             ) : (
               t("results", { count: filteredRestaurants.length })
             )}
@@ -111,7 +111,7 @@ export default function RestaurantsPage({
               size="icon"
               className="rounded-r-none"
               onClick={() => toggleDisplay()}
-              variant={display === "list" ? "default" : "outline"}
+              variant={display === "list" ? "default" : "outline-solid"}
             >
               <AlignLeft className="h-4 w-4" />
             </Button>
@@ -119,7 +119,7 @@ export default function RestaurantsPage({
               size="icon"
               className="rounded-l-none"
               onClick={() => toggleDisplay()}
-              variant={display === "map" ? "default" : "outline"}
+              variant={display === "map" ? "default" : "outline-solid"}
             >
               <Map className="h-4 w-4" />
             </Button>

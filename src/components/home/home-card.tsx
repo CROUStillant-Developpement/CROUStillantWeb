@@ -15,7 +15,7 @@ export default function HomeCard() {
       <section className="md:col-span-2">
         <aside className=" flex flex-col md:flex-row w-full h-full gap-6 py-4 px-3.5 bg-[#FAFAFA] dark:bg-[rgba(218,214,214,0.08)] rounded-[8px] border-2 border-[#555555] border-opacity-[7%] ">
           <div className="flex flex-col gap-2">
-            <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent font-bold text-2xl">
+            <p className="bg-linear-to-r from-[#e40514] to-[#9e2020] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent font-bold text-2xl">
               {t("ApiCard.title")}
             </p>
             <p className="text-base">{t("ApiCard.subtitle")}</p>

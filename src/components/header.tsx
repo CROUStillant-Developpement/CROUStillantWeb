@@ -39,7 +39,7 @@ export default function Header() {
             <Button
               size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/" ? "default" : "outline"}
+              variant={pathname === "/" ? "default" : "outline-solid"}
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
@@ -54,7 +54,7 @@ export default function Header() {
             <Button
               size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/restaurants" ? "default" : "outline"}
+              variant={pathname === "/restaurants" ? "default" : "outline-solid"}
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
@@ -72,7 +72,7 @@ export default function Header() {
           <li>
             <Button
               asChild
-              variant={pathname === "/about" ? "default" : "outline"}
+              variant={pathname === "/about" ? "default" : "outline-solid"}
               className={`select-none h-9 rounded-sm text-sm ${
                 isDesktop ? "px-3 py-1" : "p-2"
               }`}
@@ -107,7 +107,7 @@ export default function Header() {
         <LocaleToggle />
         <Button
           asChild
-          variant={pathname === "/settings" ? "default" : "outline"}
+          variant={pathname === "/settings" ? "default" : "outline-solid"}
           className={`select-none h-9 w-9 rounded-sm`}
           onClick={() => umami.event('Header.SettingsButton')}
         >

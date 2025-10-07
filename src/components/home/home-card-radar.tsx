@@ -16,7 +16,7 @@ export default function RadarsCard({ style }: Props) {
     <section className={`${style}`}>
       <aside className=" flex flex-col w-full h-full gap-6 py-4 px-3.5 bg-[#FAFAFA] dark:bg-[rgba(218,214,214,0.08)] rounded-[8px] border-2 border-[#555555] border-opacity-[7%] ">
         <div className="flex flex-col gap-2">
-          <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent font-bold text-2xl">
+          <p className="bg-linear-to-r from-[#e40514] to-[#9e2020] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent font-bold text-2xl">
             {t("title")}
           </p>
           <p className="text-base">{t("subtitle")}</p>
@@ -94,10 +94,10 @@ export default function RadarsCard({ style }: Props) {
           <RadarsIcons big style={{ position: "absolute", zIndex: "10" }}>
             <School className="size-12" color="white" />
           </RadarsIcons>
-          <div className="z-[3] absolute rounded-full border-2 border-[#ffb9b9] bg-[radial-gradient(circle_at_center,_#ffd1d1_0%,_#ffbfbf_100%)] dark:bg-[radial-gradient(59.17%_59.17%_at_50%_50%,#464646_0%,#0D0A0A_100%)] size-44" />
-          <div className="z-[2] absolute rounded-full border-2 border-[rgba(251,174,174,0.6)] bg-[radial-gradient(circle_at_center,_rgba(248,233,233,0.8)_0%,_rgba(255,201,201,0.8)_100%)] dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(70,70,70,0.8)_0%,rgba(26,25,25,0.8)_100%)] size-72" />
-          <div className="z-[1] absolute rounded-full border-2 border-[rgba(255,202,202,0.4)] bg-[radial-gradient(circle_at_center,_rgba(248,233,233,0.6)_0%,_rgba(255,221,221,0.6)_100%)] dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(70,70,70,0.6)_0%,rgba(29,23,23,0.6)_100%)] size-[430px]" />
-          <div className="z-[4] absolute animate-scan bg-[#ff46466a] rounded-full size-[500px]" />
+          <div className="z-3 absolute rounded-full border-2 border-[#ffb9b9] bg-[radial-gradient(circle_at_center,#ffd1d1_0%,#ffbfbf_100%)] dark:bg-[radial-gradient(59.17%_59.17%_at_50%_50%,#464646_0%,#0D0A0A_100%)] size-44" />
+          <div className="z-2 absolute rounded-full border-2 border-[rgba(251,174,174,0.6)] bg-[radial-gradient(circle_at_center,rgba(248,233,233,0.8)_0%,rgba(255,201,201,0.8)_100%)] dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(70,70,70,0.8)_0%,rgba(26,25,25,0.8)_100%)] size-72" />
+          <div className="z-1 absolute rounded-full border-2 border-[rgba(255,202,202,0.4)] bg-[radial-gradient(circle_at_center,rgba(248,233,233,0.6)_0%,rgba(255,221,221,0.6)_100%)] dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(70,70,70,0.6)_0%,rgba(29,23,23,0.6)_100%)] size-[430px]" />
+          <div className="z-4 absolute animate-scan bg-[#ff46466a] rounded-full size-[500px]" />
         </aside>
       </aside>
     </section>

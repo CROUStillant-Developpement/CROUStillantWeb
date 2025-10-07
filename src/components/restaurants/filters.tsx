@@ -110,7 +110,7 @@ export default function RestaurantsFilters({
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
             <Button
-              variant={activeFilterCount > 0 ? "default" : "outline"}
+              variant={activeFilterCount > 0 ? "default" : "outline-solid"}
               onClick={() => {
                 umami.event("Restaurants.FiltersToggle", {
                   isOpened: String(!sheetOpen),

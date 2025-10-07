@@ -37,7 +37,7 @@ function BasicCard({
     >
       <div className="flex flex-col w-full max-w-[80%] h-fit gap-4 ">
         <div className="flex flex-col gap-1">
-          <h3 className="bg-gradient-to-r from-[#e40514] to-[#ff6868] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent text-2xl font-bold">
+          <h3 className="bg-linear-to-r from-[#e40514] to-[#ff6868] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent text-2xl font-bold">
             {title}
           </h3>
           <p className="text-base">{description}</p>
@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <>
       <section id="info" className="mt-32">
-        <h2 className="2xl:mt-28 lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent">
+        <h2 className="2xl:mt-28 lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-linear-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,#FAFAFA_13.49%,#E40514_87.52%)] bg-clip-text text-transparent">
           {t("title.second")}
         </h2>
         <aside className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 lg:mt-10">
@@ -129,7 +129,7 @@ export default function HomePage() {
         </aside>
       </section>
       <section id="team" className="flex flex-col gap-6 lg:gap-10 ">
-        <h2 className="mt-32 lg:text-6xl lg:text-center lg:max-w-[60%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent ">
+        <h2 className="mt-32 lg:text-6xl lg:text-center lg:max-w-[60%] lg:mx-auto text-3xl font-bold leading-tight bg-linear-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,#FAFAFA_13.49%,#E40514_87.52%)] bg-clip-text text-transparent ">
           {t("title.third")}
         </h2>
         <section className="grid grid-cols-1 md:grid-cols-2 mb-32 gap-6">
@@ -137,12 +137,12 @@ export default function HomePage() {
         </section>
       </section>
       <section>
-        <div className="flex flex-col items-center justify-center w-full px-6 mx-auto py-20 rounded-[20px] border-2 border-[rgba(255,255,255,0.70)] dark:border-[rgba(21,20,20,0.7)] bg-[linear-gradient(113deg,_rgba(255,255,255,0.62)_0%,_rgba(255,255,255,0.20)_110.84%)]  dark:bg-[linear-gradient(113deg,_#222222_100%,_#191818_110.84%)] backdrop-blur-[21px]">
-          <div className="mb-5 w-fit h-fit p-6 flex items-center justify-center rounded-[30px] border border-[#FF9595] bg-[radial-gradient(50%_50%_at_50%_50%,_#FF4646_0%,_rgba(255,71,71,0.80)_100%)] shadow-[inset_-6px_-3px_10px_0px_#FFD7D7] dark:shadow-[inset_-6px_-3px_10px_0px_#464646]">
+        <div className="flex flex-col items-center justify-center w-full px-6 mx-auto py-20 rounded-[20px] border-2 border-[rgba(255,255,255,0.70)] dark:border-[rgba(21,20,20,0.7)] bg-[linear-gradient(113deg,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.20)_110.84%)]  dark:bg-[linear-gradient(113deg,#222222_100%,#191818_110.84%)] backdrop-blur-[21px]">
+          <div className="mb-5 w-fit h-fit p-6 flex items-center justify-center rounded-[30px] border border-[#FF9595] bg-[radial-gradient(50%_50%_at_50%_50%,#FF4646_0%,rgba(255,71,71,0.80)_100%)] shadow-[inset_-6px_-3px_10px_0px_#FFD7D7] dark:shadow-[inset_-6px_-3px_10px_0px_#464646]">
             <HeartHandshakeIcon color="white" size={75} />
           </div>
           <div className="flex flex-col justify-center items-center text-center gap-3">
-            <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent font-bold text-4xl md:text-5xl">
+            <p className="bg-linear-to-r from-[#e40514] to-[#9e2020] dark:bg-[linear-gradient(90deg,#FAFAFA_13.49%,#E40514_87.52%)] bg-clip-text text-transparent font-bold text-4xl md:text-5xl">
               {t("footer.title")}
             </p>
             <p className="text-center text-base md:text-lg max-w-96">
@@ -151,7 +151,7 @@ export default function HomePage() {
           </div>
           <Link
             href={"/restaurants"}
-            className="mt-9 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-[16px] bg-[#E40514] shadow-[inset_0px_1px_3px_0px_#E40514,_inset_0px_2px_2px_2px_rgba(255,255,255,0.25)] py-3 px-6 text-white"
+            className="mt-9 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-[16px] bg-[#E40514] shadow-[inset_0px_1px_3px_0px_#E40514,inset_0px_2px_2px_2px_rgba(255,255,255,0.25)] py-3 px-6 text-white"
           >
             {t("cta.first")}
           </Link>
