@@ -115,7 +115,7 @@ export default function HomePage() {
             cta={t("card4.cta")}
             ctaLink="about"
             style={
-              " md:bg-[#DAD6D6] md:bg-opacity-15 dark:bg-[rgba(218,214,214,0.08)]"
+              " md:bg-[#DAD6D6] md:opacity-15 dark:bg-[rgba(218,214,214,0.08)]"
             }
           >
             <ForkKnifeCrossed

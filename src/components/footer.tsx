@@ -42,7 +42,7 @@ export default async function Footer() {
                 href="https://github.com/CROUStillant-Developpement"
               >
                 <svg
-                  className="fill-black dark:fill-white w-5 h-5 cursor-pointer hover:opacity-70"
+                  className="fill-black dark:fill-white size-5 cursor-pointer hover:opacity-70"
                   role="img"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ export default async function Footer() {
                 href="https://discord.gg/yG6FjqbWtk"
               >
                 <svg
-                  className="fill-black dark:fill-white w-5 h-5 cursor-pointer hover:opacity-70"
+                  className="fill-black dark:fill-white size-5 cursor-pointer hover:opacity-70"
                   role="img"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"

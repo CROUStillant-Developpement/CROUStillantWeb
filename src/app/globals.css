@@ -55,14 +55,17 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -78,6 +81,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -92,69 +96,69 @@
   will-change: transform, opacity;
 }
 
-@layer base {
-  :root {
-    --background: 356 0% 95%;
-    --foreground: 356 0% 0%;
-    --card: 356 0% 90%;
-    --card-foreground: 356 0% 10%;
-    --popover: 356 0% 95%;
-    --popover-foreground: 356 95% 0%;
-    --primary: 356 95.7% 45.7%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 356 10% 70%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 318 10% 85%;
-    --muted-foreground: 356 0% 35%;
-    --accent: 318 10% 80%;
-    --accent-foreground: 356 0% 10%;
-    --destructive: 0 50% 30%;
-    --destructive-foreground: 356 0% 90%;
-    --border: 356 20% 50%;
-    --input: 356 20% 18%;
-    --ring: 356 95.7% 45.7%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-  .dark {
-    --background: 0 2.44% 8.04%;
-    --foreground: 356 0% 90%;
-    --card: 356 0% 0%;
-    --card-foreground: 356 0% 90%;
-    --popover: 356 10% 5%;
-    --popover-foreground: 356 0% 90%;
-    --primary: 356 95.7% 45.7%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 356 10% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 318 10% 15%;
-    --muted-foreground: 356 0% 60%;
-    --accent: 318 10% 15%;
-    --accent-foreground: 356 0% 90%;
-    --destructive: 0 50% 30%;
-    --destructive-foreground: 356 0% 90%;
-    --border: 356 20% 18%;
-    --input: 356 20% 18%;
-    --ring: 356 95.7% 45.7%;
-    --radius: 0.5rem;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
 
-    .leaflet-layer,
-    .leaflet-control-zoom-in,
-    .leaflet-control-zoom-out,
-    .leaflet-control-attribution,
-    .leaflet-marker-icon,
-    .leaflet-popup {
-      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-    }
+:root {
+  --background: hsl(356 0% 95%);
+  --foreground: hsl(356 0% 0%);
+  --card: hsl(356 0% 90%);
+  --card-foreground: hsl(356 0% 10%);
+  --popover: hsl(356 0% 95%);
+  --popover-foreground: hsl(356 95% 0%);
+  --primary: hsl(356 95.7% 45.7%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(356 10% 70%);
+  --secondary-foreground: hsl(0 0% 0%);
+  --muted: hsl(318 10% 85%);
+  --muted-foreground: hsl(356 0% 35%);
+  --accent: hsl(318 10% 80%);
+  --accent-foreground: hsl(356 0% 10%);
+  --destructive: hsl(0 50% 30%);
+  --destructive-foreground: hsl(356 0% 90%);
+  --border: hsl(356 20% 50%);
+  --input: hsl(356 20% 18%);
+  --ring: hsl(356 95.7% 45.7%);
+  --radius: 0.5rem;
+  --chart-1: hsl(12 76% 61%);
+  --chart-2: hsl(173 58% 39%);
+  --chart-3: hsl(197 37% 24%);
+  --chart-4: hsl(43 74% 66%);
+  --chart-5: hsl(27 87% 67%);
+}
+
+.dark {
+  --background: hsl(0 2.44% 8.04%);
+  --foreground: hsl(356 0% 90%);
+  --card: hsl(356 0% 0%);
+  --card-foreground: hsl(356 0% 90%);
+  --popover: hsl(356 10% 5%);
+  --popover-foreground: hsl(356 0% 90%);
+  --primary: hsl(356 95.7% 45.7%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(356 10% 10%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(318 10% 15%);
+  --muted-foreground: hsl(356 0% 60%);
+  --accent: hsl(318 10% 15%);
+  --accent-foreground: hsl(356 0% 90%);
+  --destructive: hsl(0 50% 30%);
+  --destructive-foreground: hsl(356 0% 90%);
+  --border: hsl(356 20% 18%);
+  --input: hsl(356 20% 18%);
+  --ring: hsl(356 95.7% 45.7%);
+  --radius: 0.5rem;
+  --chart-1: hsl(220 70% 50%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+
+  .leaflet-layer,
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out,
+  .leaflet-control-attribution,
+  .leaflet-marker-icon,
+  .leaflet-popup {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
   }
 }
 
@@ -162,6 +166,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -217,131 +222,139 @@
     resize: both;
 
     &:active {
-      transform: scale(0.92);
-      filter: brightness(0.8);
+      @theme inline {
+        --color-background: var(--background);
+        --color-foreground: var(--foreground);
+
+        --color-card: var(--card);
+        --color-card-foreground: var(--card-foreground);
+
+        --color-popover: var(--popover);
+        --color-popover-foreground: var(--popover-foreground);
+
+        --color-primary: var(--primary);
+        --color-primary-foreground: var(--primary-foreground);
+
+        --color-secondary: var(--secondary);
+        --color-secondary-foreground: var(--secondary-foreground);
+
+        --color-muted: var(--muted);
+        --color-muted-foreground: var(--muted-foreground);
+
+        --color-accent: var(--accent);
+        --color-accent-foreground: var(--accent-foreground);
+
+        --color-destructive: var(--destructive);
+        --color-destructive-foreground: var(--destructive-foreground);
+
+        --color-border: var(--border);
+        --color-input: var(--input);
+        --color-ring: var(--ring);
+
+        --color-chart-1: var(--chart-1);
+        --color-chart-2: var(--chart-2);
+        --color-chart-3: var(--chart-3);
+        --color-chart-4: var(--chart-4);
+        --color-chart-5: var(--chart-5);
+
+        --radius-lg: var(--radius);
+        --radius-md: calc(var(--radius) - 2px);
+        --radius-sm: calc(var(--radius) - 4px);
+
+        --animate-accordion-down: accordion-down 0.2s ease-out;
+        --animate-accordion-up: accordion-up 0.2s ease-out;
+
+        --spacing-80svh: 80svh;
+        --spacing-65svh: 65svh;
+
+        --font-dyslexic: OpenDyslexic, sans-serif;
+
+        @keyframes accordion-down {
+          from {
+            height: 0;
+          }
+
+          to {
+            height: var(--radix-accordion-content-height);
+          }
+        }
+
+        @keyframes accordion-up {
+          from {
+            height: var(--radix-accordion-content-height);
+          }
+
+          to {
+            height: 0;
+          }
+        }
+      }
+
+      .fading-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 40%;
+        /* Only covers the top half */
+        border: 0.5px solid white;
+        border-bottom: none;
+        border-radius: 0.5rem;
+
+        /* Gradient mask to fade the border */
+        mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        pointer-events: none;
+        /* So it doesn't interfere with content clicks */
+      }
+
+      @font-face {
+        font-family: 'OpenDyslexic';
+        src: url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'OpenDyslexic';
+        src: url('/fonts/OpenDyslexic-Italic.otf') format('opentype');
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: 'OpenDyslexic';
+        src: url('/fonts/OpenDyslexic-Bold.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'OpenDyslexic';
+        src: url('/fonts/OpenDyslexic-BoldItalic.otf') format('opentype');
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      /* Apply font when the class is added */
+      .dyslexic-font {
+        font-family: 'OpenDyslexic', sans-serif !important;
+      }
     }
-  }
 
-  .snowy-button:hover {
-    color: #fff !important;
-  }
+    @layer utilities {
+      @keyframes scan {
+        from {
+          transform: scale(0);
+          opacity: 1;
+        }
 
-  .snowy-button::after {
-    --overflow-x: 4px;
-    --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: calc(var(--overflow-x) * -1);
-    border-image-source: var(--snow-image);
-    border-image-slice: calc(6 * 56 / 20) fill;
-    border-image-width: calc(28px / 3);
-    border-image-repeat: round;
-    width: calc(100% + var(--overflow-x) * 2);
-    height: 28px;
-    filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.25));
-    opacity: 1;
-    animation: fade-in 2s;
-  }
-
-  .custom-tooltip {
-    z-index: 9999;
-    background-color: #fff;
-    border: 1px solid #000;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    animation: fade-in 0.5s;
-  }
-
-  .dark .custom-tooltip {
-    background-color: #000;
-    color: #fff;
-    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.1);
-  }
-
-  .custom-tooltip > .label {
-    font-weight: bold;
-  }
-
-  .recharts-dot {
-    opacity: 0.3;
-  }
-
-  @keyframes fade-in {
-    0%,
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .fading-border {
-    position: relative;
-  }
-
-  .fading-border::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 40%; /* Only covers the top half */
-    border: 0.5px solid white;
-    border-bottom: none;
-    border-radius: 0.5rem;
-
-    /* Gradient mask to fade the border */
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    pointer-events: none; /* So it doesn't interfere with content clicks */
-  }
-
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/fonts/OpenDyslexic-Italic.otf') format('opentype');
-    font-weight: 400;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/fonts/OpenDyslexic-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/fonts/OpenDyslexic-BoldItalic.otf') format('opentype');
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  /* Apply font when the class is added */
-  .dyslexic-font {
-    font-family: 'OpenDyslexic', sans-serif !important;
-  }
-}
-
-@layer utilities {
-  @keyframes scan {
-    from {
-      transform: scale(0);
-      opacity: 1;
-    }
-    to {
-      transform: scale(1.5);
-      opacity: 0;
+        to {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
     }
   }
 }

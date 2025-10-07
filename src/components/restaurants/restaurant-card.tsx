@@ -63,7 +63,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
         </Button>
         <Link
           href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
-          className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
+          className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black opacity-75 transition-all duration-300 ease-in-out"
           onClick={() => {
             umami.event("Restaurant.Card.View", {
               restaurant: restaurant.code,
@@ -139,9 +139,8 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           </div>
           <Button asChild>
             <Link
-              href={`/restaurants/${slugify(restaurant.nom)}-r${
-                restaurant.code
-              }`}
+              href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code
+                }`}
               onClick={() => {
                 umami.event("Restaurant.Card.View", {
                   restaurant: restaurant.code,

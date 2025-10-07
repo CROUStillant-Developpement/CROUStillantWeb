@@ -70,33 +70,33 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                     <td className="px-4 py-2 border-r">
                       {jour.ouverture.matin ? (
                         <div className="flex justify-center items-center">
-                          <Check className="w-6 h-6 text-green-500" />
+                          <Check className="size-6 text-green-500" />
                         </div>
                       ) : (
                         <div className="flex justify-center items-center">
-                          <X className="w-6 h-6 text-red-500" />
+                          <X className="size-6 text-red-500" />
                         </div>
                       )}
                     </td>
                     <td className="px-4 py-2 border-r mx-auto">
                       {jour.ouverture.midi ? (
                         <div className="flex justify-center items-center">
-                          <Check className="w-6 h-6 text-green-500" />
+                          <Check className="size-6 text-green-500" />
                         </div>
                       ) : (
                         <div className="flex justify-center items-center">
-                          <X className="w-6 h-6 text-red-500" />
+                          <X className="size-6 text-red-500" />
                         </div>
                       )}
                     </td>
                     <td className="px-4 py-2">
                       {jour.ouverture.soir ? (
                         <div className="flex justify-center items-center">
-                          <Check className="w-6 h-6 text-green-500" />
+                          <Check className="size-6 text-green-500" />
                         </div>
                       ) : (
                         <div className="flex justify-center items-center">
-                          <X className="w-6 h-6 text-red-500" />
+                          <X className="size-6 text-red-500" />
                         </div>
                       )}
                     </td>
@@ -109,7 +109,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
         <li className="flex-1 flex flex-wrap justify-between items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <MapPinHouse className="w-6 h-6" />
+              <MapPinHouse className="size-6" />
               {restaurant?.adresse}
             </div>
             {restaurant?.acces?.map((acces, index) => (
@@ -117,7 +117,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                 className="flex items-center gap-2 ml-8 text-sm opacity-75"
                 key={index}
               >
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="size-4" />
                 {acces}
               </div>
             ))}
@@ -132,7 +132,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                 });
               }}
             >
-              <Navigation className="w-6 h-6" />
+              <Navigation className="size-6" />
             </Link>
           </Button>
         </li>

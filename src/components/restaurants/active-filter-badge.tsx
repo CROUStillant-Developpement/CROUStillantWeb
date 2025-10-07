@@ -20,7 +20,7 @@ export default function ActiveFilterBadge({
     <Badge className="cursor-pointer transition-all ease-in-out duration-300">
       <div onClick={() => setSheetOpen?.(true)}>{text}</div>
       <CircleX
-        className="w-4 h-4 ml-2 z-20 hover:scale-110 transition-transform ease-in-out duration-300"
+        className="size-4 ml-2 z-20 hover:scale-110 transition-transform ease-in-out duration-300"
         onClick={() => {
           onRemove?.();
           umami.event("Restaurant.Filter.Remove");

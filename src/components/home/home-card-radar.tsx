@@ -30,7 +30,7 @@ export default function RadarsCard({ style }: Props) {
             {t("cta")}
           </Link>
         </div>
-        <aside className="overflow-hidden relative flex items-center justify-center w-full h-60 bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] bg-opacity-40 rounded-xl">
+        <aside className="overflow-hidden relative flex items-center justify-center w-full h-60 bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] opacity-40 rounded-xl">
           <RadarsIcons
             style={{
               position: "absolute",

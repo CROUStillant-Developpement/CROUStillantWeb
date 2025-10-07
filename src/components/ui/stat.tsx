@@ -19,41 +19,49 @@ const statVariants = cva(
   }
 )
 
-const Stat = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof statVariants>
->(({ className, variant, ...props }, ref) => (
-  <div
-    ref={ref}
-    role="stat"
-    className={cn(statVariants({ variant }), className)}
-    {...props}
-  />
-))
+const Stat = (
+  {
+    ref,
+    className,
+    variant,
+    ...props
+  }
+) => (<div
+  ref={ref}
+  role="stat"
+  className={cn(statVariants({ variant }), className)}
+  {...props}
+/>)
 Stat.displayName = "Stat"
 
-const StatTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h5
-    ref={ref}
-    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
-    {...props}
-  />
-))
+const StatTitle = (
+  {
+    ref,
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLHeadingElement> & {
+    ref: React.RefObject<HTMLParagraphElement>;
+  }
+) => (<h5
+  ref={ref}
+  className={cn("mb-1 font-medium leading-none tracking-tight", className)}
+  {...props}
+/>)
 StatTitle.displayName = "StatTitle"
 
-const StatDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-2xl font-bold [&_p]:leading-relaxed", className)}
-    {...props}
-  />
-))
+const StatDescription = (
+  {
+    ref,
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLParagraphElement> & {
+    ref: React.RefObject<HTMLParagraphElement>;
+  }
+) => (<div
+  ref={ref}
+  className={cn("text-2xl font-bold [&_p]:leading-relaxed", className)}
+  {...props}
+/>)
 StatDescription.displayName = "StatDescription"
 
 export { Stat, StatTitle, StatDescription }

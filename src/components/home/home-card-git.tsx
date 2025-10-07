@@ -47,7 +47,7 @@ export default function GitCard({ style }: Props) {
             {t("cta")}
           </Link>
         </div>
-        <section className="flex items-center justify-center w-full h-full bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] bg-opacity-40 rounded-xl p-2 overflow-hidden">
+        <section className="flex items-center justify-center w-full h-full bg-[#F8E9E9] dark:bg-[rgba(70,70,70,0.40)] opacity-40 rounded-xl p-2 overflow-hidden">
           <aside className="flex flex-col gap-2 p-3 border border-[#FFCACA] border-opacity-40 dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,36,36,0.6)_0%,rgba(1,1,1,0.18)_100%)] w-full h-full rounded-[8px]">
             <div className="flex justify-between items-center w-full">
               <p className="text-lg font-medium opacity-80">{t("Card.name")}</p>

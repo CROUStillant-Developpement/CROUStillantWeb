@@ -9,14 +9,13 @@ export default function Loading({ className = "" }: LoadingProps) {
 
   return (
     <div
-      className={`${
-        className.length > 0 ? className + " " : className
-      }flex items-center justify-center w-full h-full flex-1`}
+      className={`${className.length > 0 ? className + " " : className
+        }flex items-center justify-center w-full h-full flex-1`}
     >
       <div className="flex justify-center items-center space-x-1 text-sm">
         <svg
           fill="none"
-          className="w-6 h-6 animate-spin"
+          className="size-6 animate-spin"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
         >
