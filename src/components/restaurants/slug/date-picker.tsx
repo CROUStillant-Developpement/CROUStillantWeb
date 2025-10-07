@@ -164,10 +164,12 @@ function DatePickerSection({
         defaultMonth={currentDate}
         selected={currentDate}
         onSelect={(date) => date && handleDateChange(date)}
-        fromDate={minDate}
-        toDate={
-          maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
-        } // 3 weeks if no maxDate
+        disabled={{
+          before: minDate,
+          after:
+            maxDate ||
+            new Date(new Date().setDate(new Date().getDate() + 21)),
+        }}
         lang={locale}
       />
       <Button
