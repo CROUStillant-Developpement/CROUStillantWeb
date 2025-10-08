@@ -31,9 +31,9 @@ describe('utils', () => {
 
   it('findRestaurantsAroundPosition filters and sorts by distance', () => {
     const restaurants = [
-      { id: 'a', latitude: 48.8566, longitude: 2.3522 }, // Paris
-      { id: 'b', latitude: 51.5074, longitude: -0.1278 }, // London
-      { id: 'c' }, // missing coords
+      { code: 'a', latitude: 48.8566, longitude: 2.3522 }, // Paris
+      { code: 'b', latitude: 51.5074, longitude: -0.1278 }, // London
+      { code: 'c' }, // missing coords
     ] as any
 
     const pos = { coords: { latitude: 48.8566, longitude: 2.3522 } } as any
