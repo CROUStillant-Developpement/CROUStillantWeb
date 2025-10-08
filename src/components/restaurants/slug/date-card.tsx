@@ -46,15 +46,18 @@ export default function DateCard({
     <Link href={href}>
       <Card
         key={date.toISOString()}
-        className={`${
-          isSelected ? "border-primary" : "border-card"
-        } text-center flex-1 cursor-pointer relative dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80`}
+        className={`${isSelected ? "border-primary" : "border-card"
+          } text-center flex-1 cursor-pointer relative dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80`}
         onClick={() => onSelectedDateChange(date)}
       >
         {menuIsLoading && isSelected && (
-          <Button className="absolute top-2 right-2 rounded-full" size="icon">
+          <span
+            className="absolute top-2 right-2 rounded-full flex items-center justify-center"
+            role="img"
+            aria-hidden="true"
+          >
             <LoaderCircle className="animate-spin" />
-          </Button>
+          </span>
         )}
         <CardHeader className="pb-2">
           <CardTitle>

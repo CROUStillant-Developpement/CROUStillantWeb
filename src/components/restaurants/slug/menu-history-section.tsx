@@ -9,6 +9,7 @@ import RestaurantCalendar from "./calendar";
 import DatePicker from "./date-picker";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
+import { useUmami } from "next-umami";
 
 interface MenuHistoryProps {
   restaurantCode: number;
@@ -32,6 +33,7 @@ export default function MenuHistorySection({
   } = useRestaurantMenu({ restaurantCode, mode: "history" });
 
   const t = useTranslations("RestaurantPage");
+  const umami = useUmami();
 
   return (
     <section className="mt-12 border-t pt-8" id="history">
@@ -81,7 +83,10 @@ export default function MenuHistorySection({
         <div className="text-muted-foreground mt-4">
           {t("menuHistoryCta")}
           <br />
-          <Button onClick={() => setShowHistory(true)} className="mt-2">
+          <Button onClick={() => {
+            umami.event("MenuHistory.Requested", { restaurantCode });
+            setShowHistory(true)
+          }} className="mt-2">
             {t("menuHistoryCtaBtn")}
           </Button>
         </div>

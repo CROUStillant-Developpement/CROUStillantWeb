@@ -126,9 +126,11 @@ export function useRestaurantMenu({
    * @returns A promise that resolves when the menu fetch and state update are complete.
    */
   const fetchMenuForDate = async (date: Date) => {
-    const formattedDate = `${date.getDate()}-${
-      date.getMonth() + 1
-    }-${date.getFullYear()}`;
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const formattedDate = `${day}-${month}-${date.getFullYear()}`;
+
     const result = await getMenuByRestaurantIdAndDate(
       restaurantCode,
       formattedDate
@@ -181,7 +183,7 @@ export function useRestaurantMenu({
           setMenuLoading(false);
         });
 
-      // 🚫 Don't clear meals immediately — wait for fetch result
+      // Don't clear meals immediately — wait for fetch result
       return;
     }
 
@@ -190,7 +192,7 @@ export function useRestaurantMenu({
     setSelectedDateBreakfast(null);
     setSelectedDateLunch(null);
     setSelectedDateDinner(null);
-  }, [selectedDate, menu]);
+  }, [selectedDate, menu, blacklistedDates, mode]);
 
   return {
     menuLoading,

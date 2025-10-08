@@ -85,7 +85,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
           }
           title={`${restaurant.nom} - CROUStillant`}
           description={t("qrCodeDescription")}
-          url={`${window.location.href}?qr=true`}
+          url={(() => { const u = new URL(window.location.href); u.searchParams.set('qr', 'true'); return u.toString(); })()}
         />
       </div>
 

@@ -50,7 +50,7 @@ export async function getFutureDatesMenuAvailable(
 /**
  * Gets menu by restaurant ID and date
  * @param restaurantId - Restaurant ID
- * @param date - Date in ISO format (format: DD-MM-YYYY)
+ * @param date - Date in DD-MM-YYYY format
  * @returns A promise that resolves to ApiResult containing either data or error
  * */
 export async function getMenuByRestaurantIdAndDate(
