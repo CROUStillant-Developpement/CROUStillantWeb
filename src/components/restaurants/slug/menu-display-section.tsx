@@ -39,9 +39,8 @@ export default function MenuDisplaySection({
     <div className={`grid gap-4 ${rightPanel ? "lg:grid-cols-3" : ""} mt-8`}>
       {menuLoading ? (
         <fieldset
-          className={`grid gap-6 ${
-            rightPanel ? "lg:col-span-2" : ""
-          } rounded-lg border p-4 mb-4 md:mb-8 h-fit`}
+          className={`grid gap-6 ${rightPanel ? "lg:col-span-2" : ""
+            } rounded-lg border p-4 mb-4 md:mb-8 h-fit`}
         >
           <legend className="-ml-1 px-1 text-sm font-medium">
             <Skeleton className="w-36 h-4" />
@@ -54,9 +53,8 @@ export default function MenuDisplaySection({
         </fieldset>
       ) : (
         <fieldset
-          className={`grid gap-6 ${rightPanel ? "lg:col-span-2" : ""} ${
-            bordered ? "rounded-lg border" : ""
-          } p-4 mb-4 md:mb-8 h-fit`}
+          className={`grid gap-6 ${rightPanel ? "lg:col-span-2" : ""} ${bordered ? "rounded-lg border" : ""
+            } p-4 mb-4 md:mb-8 h-fit`}
         >
           <legend className="-ml-1 px-1 text-sm font-medium">
             {t("menuOfTheDay", {
@@ -74,9 +72,9 @@ export default function MenuDisplaySection({
                 <AlertTitle>{t("noMealAvailable")}</AlertTitle>
                 <AlertDescription>
                   {t("noMealAvailableDescription")}
-                </AlertDescription>
-                <AlertDescription className="mt-2">
-                  {t("noMealAvailableDescription2")}
+                  <p className="text-sm text-muted-foreground mt-2 italic">
+                    {t("noMealAvailableDescription2")}
+                  </p>
                 </AlertDescription>
               </Alert>
             ) : selectedDateMeals.length === 0 ? (
