@@ -4,7 +4,7 @@ import "../globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
-import BackToTopButton from "@/components/ui/BackToTopButton";
+import BackToTopButton from "@/components/ui/back-to-top-button";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/app/[locale]/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
