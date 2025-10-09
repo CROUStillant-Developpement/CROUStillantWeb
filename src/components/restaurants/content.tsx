@@ -1,6 +1,7 @@
 import { DisplayType, Restaurant } from "@/services/types";
 import RestaurantCardSkeleton from "./restaurant-card-skeleton";
 import RestaurantCard from "./restaurant-card";
+import { motion, AnimatePresence } from "@/lib/motion";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -70,21 +71,48 @@ export default function Content({
             </div>
           </fieldset>
         )}
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-          {loading ? (
-            Array.from({ length: 20 }).map((_, index) => (
-              <RestaurantCardSkeleton key={index} />
-            ))
-          ) : filteredRestaurants.length > 0 ? (
-            paginatedRestaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.code} restaurant={restaurant} />
-            ))
-          ) : (
-            <p className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center">
-              {t("noResults")}
-            </p>
-          )}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={loading ? "loading" : "restaurants"}
+            className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            {loading ? (
+              Array.from({ length: 20 }).map((_, index) => (
+                <RestaurantCardSkeleton key={index} />
+              ))
+            ) : filteredRestaurants.length > 0 ? (
+              paginatedRestaurants.map((restaurant, i) => (
+                <motion.div
+                  key={restaurant.code}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -24 }}
+                  transition={{
+                    duration: 0.35,
+                    delay: i * 0.04,
+                    ease: "easeOut",
+                  }}
+                >
+                  <RestaurantCard restaurant={restaurant} />
+                </motion.div>
+              ))
+            ) : (
+              <motion.p
+                className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                {t("noResults")}
+              </motion.p>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </>
     );
   }
