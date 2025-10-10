@@ -28,12 +28,14 @@ import { useUmami } from "next-umami";
 
 type DatePickerProps = {
   onDateChange?: (date: Date) => void;
+  minDate?: Date;
   maxDate?: Date;
   current?: Date;
 };
 
 export default function DatePicker({
   onDateChange,
+  minDate,
   maxDate,
   current,
 }: DatePickerProps) {
@@ -73,6 +75,7 @@ export default function DatePicker({
           <DatePickerSection
             setDate={handleDateChange}
             onClose={() => setOpen(false)}
+            minDate={minDate}
             maxDate={maxDate}
             currentDate={current}
           />
@@ -104,6 +107,7 @@ export default function DatePicker({
           className="px-4"
           setDate={handleDateChange}
           onClose={() => setOpen(false)}
+          minDate={minDate}
           maxDate={maxDate}
         />
         <DrawerFooter className="pt-2">
@@ -118,6 +122,7 @@ export default function DatePicker({
 
 type DatePickerSectionProps = {
   className?: React.ComponentProps<"form">["className"];
+  minDate?: Date;
   maxDate?: Date;
   currentDate?: Date;
   setDate: (date: Date) => void;
@@ -126,6 +131,7 @@ type DatePickerSectionProps = {
 
 function DatePickerSection({
   className,
+  minDate = new Date(),
   maxDate,
   currentDate = new Date(),
   setDate,
@@ -158,7 +164,7 @@ function DatePickerSection({
         defaultMonth={currentDate}
         selected={currentDate}
         onSelect={(date) => date && handleDateChange(date)}
-        fromDate={new Date()}
+        fromDate={minDate}
         toDate={
           maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
         } // 3 weeks if no maxDate

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import log from "@/lib/log";
 import {
   Dialog,
   DialogContent,
@@ -48,7 +49,7 @@ export default function QrCodeDialog({
       });
       setQrCodeData(qrCodeData);
     } catch (error) {
-      console.error(error);
+      log.error([error], 'dev');
     }
   };
 

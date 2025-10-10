@@ -46,3 +46,19 @@ export async function getFutureDatesMenuAvailable(
     method: "GET",
   });
 }
+
+/**
+ * Gets menu by restaurant ID and date
+ * @param restaurantId - Restaurant ID
+ * @param date - Date in DD-MM-YYYY format
+ * @returns A promise that resolves to ApiResult containing either data or error
+ * */
+export async function getMenuByRestaurantIdAndDate(
+  restaurantId: number,
+  date: string
+): Promise<ApiResult<Menu | null>> {
+  return apiRequest<Menu | null>({
+    endpoint: `restaurants/${restaurantId}/menu/${date}`,
+    method: "GET",
+  });
+}

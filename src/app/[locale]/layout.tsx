@@ -4,6 +4,7 @@ import "../globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
+import BackToTopButton from "@/components/ui/BackToTopButton";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/app/[locale]/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
@@ -116,6 +117,7 @@ export default async function RootLayout({
             <main className="p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen">
               <Header />
               {children}
+              <BackToTopButton />
             </main>
             <Footer />
             <Toaster />

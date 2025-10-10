@@ -73,7 +73,8 @@ export const sortRestaurants = (
   filters: Filters,
   locale: string
 ): Restaurant[] => {
-  console.log(restaurants);
+  import("@/lib/log").then(mod => mod.default.debug(restaurants, "dev"));
+
 
   return restaurants.slice().sort((a, b) => {
     if (filters.restaurantCityAsc) {

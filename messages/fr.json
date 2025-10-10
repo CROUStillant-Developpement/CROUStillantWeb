@@ -36,7 +36,7 @@
       "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
       "cta": "En savoir plus"
     },
-    "footer":  {
+    "footer": {
       "title": "Convaincu ?",
       "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
     }
@@ -101,7 +101,13 @@
       }
     },
     "information": "Informations",
-    "calendar": "Calendrier"
+    "calendar": "Calendrier",
+    "menuHistory": "Historique des menus",
+    "menuHistoryCta": "Cliquez sur \"Voir l'historique\" pour charger les dates précédentes.",
+    "menuHistoryCtaBtn": "Voir l'historique",
+    "newBadge": "Nouveau",
+    "pastDays": "Jours précédents",
+    "noMenuHistoryAtAll": "Aucun historique de menu disponible pour ce restaurant 😢"
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
@@ -238,7 +244,7 @@
     },
     "sources": {
       "title": "Sources",
-      "description": "CROUStillant utilise les données fournies par le site officiel du CROUS qui sont agrégées et mises à jour plusieurs fois par jour, puis rendues accessibles via notre API. L'API de CROUStillant est disponible sur le site officiel de la Data du gouvernement français.", 
+      "description": "CROUStillant utilise les données fournies par le site officiel du CROUS qui sont agrégées et mises à jour plusieurs fois par jour, puis rendues accessibles via notre API. L'API de CROUStillant est disponible sur le site officiel de la Data du gouvernement français.",
       "button": "En savoir plus sur les sources"
     },
     "convinced": {

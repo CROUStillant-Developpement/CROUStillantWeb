@@ -198,6 +198,23 @@ export default async function Footer() {
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <p className="mt-2 italic">{t("disclaimer")}</p>
+          <div className="flex flex-wrap mt-2 gap-2">
+            <Link
+              href="https://github.com/CROUStillant-Developpement/CROUStillantWeb"
+              target="_blank"
+              className="hover:underline"
+            >
+              Source code
+            </Link>
+            {" • "}
+            <Link
+              href="https://github.com/CROUStillant-Developpement"
+              target="_blank"
+              className="hover:underline"
+            >
+              CROUStillant-Developpement
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
