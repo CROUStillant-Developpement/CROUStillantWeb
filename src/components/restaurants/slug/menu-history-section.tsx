@@ -84,8 +84,8 @@ export default function MenuHistorySection({
           {t("menuHistoryCta")}
           <br />
           <Button onClick={() => {
+            setShowHistory(true);
             umami.event("MenuHistory.Requested", { restaurantCode });
-            setShowHistory(true)
           }} className="mt-2">
             {t("menuHistoryCtaBtn")}
           </Button>
