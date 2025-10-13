@@ -19,7 +19,6 @@ import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
-// ...existing code...
 import log from "@/lib/log";
 
 interface RestaurantPageProps {
@@ -27,7 +26,6 @@ interface RestaurantPageProps {
 }
 
 export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
-  // ...existing code...
   const {
     menuLoading,
     datesLoading,
@@ -70,16 +68,6 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       setTab("info");
     }
   }, [noMenuAtAll]);
-
-  // Only set selected date from URL on initial mount
-  useEffect(() => {
-    if (searchParams.get("qr") === "true") {
-      addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
-      umami.event("Restaurant.Favorite", {
-        restaurant: restaurant.code,
-      });
-    }
-  }, [searchParams, restaurant.code]);
 
   // On mount, if date param is in the past, open history and set date
   useEffect(() => {
@@ -157,7 +145,6 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             description={t("qrCodeDescription")}
             url={(() => {
               const u = new URL(window.location.href);
-              u.searchParams.set("qr", "true");
               return u.toString();
             })()}
           />
