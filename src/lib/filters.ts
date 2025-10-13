@@ -73,11 +73,8 @@ export const sortRestaurants = (
   filters: Filters,
   locale: string
 ): Restaurant[] => {
-  if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const log = require("@/lib/log").default;
-    log.debug(restaurants);
-  }
+  import("@/lib/log").then(mod => mod.default.debug(restaurants, "dev"));
+
 
   return restaurants.slice().sort((a, b) => {
     if (filters.restaurantCityAsc) {

@@ -107,7 +107,7 @@ function calculateDistance(
  * Finds and returns a list of restaurants within a specified maximum distance from a given position.
  * 
  * The function filters the provided array of restaurants to include only those that have valid latitude and longitude
- * values and are within the `maxDistance` (in kilometers or meters, depending on the implementation of `calculateDistance`)
+ * values and are within the `maxDistance` (in kilometers, regarding the implementation of `calculateDistance`)
  * from the specified position. The resulting list is sorted in ascending order of distance from the position.
  * 
  * @param restaurants - An array of `Restaurant` objects to search through.

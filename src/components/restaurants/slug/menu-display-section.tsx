@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import MealsDisplay from "./meals-display";
+import { AnimatePresence, motion } from "@/lib/motion";
 import { Repas } from "@/services/types";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -74,9 +75,9 @@ export default function MenuDisplaySection({
                 <AlertTitle>{t("noMealAvailable")}</AlertTitle>
                 <AlertDescription>
                   {t("noMealAvailableDescription")}
-                </AlertDescription>
-                <AlertDescription className="mt-2">
-                  {t("noMealAvailableDescription2")}
+                  <p className="text-sm text-muted-foreground mt-2 italic">
+                    {t("noMealAvailableDescription2")}
+                  </p>
                 </AlertDescription>
               </Alert>
             ) : selectedDateMeals.length === 0 ? (
@@ -84,11 +85,22 @@ export default function MenuDisplaySection({
                 <AlertTitle>{t("noMenuAvailable")}</AlertTitle>
               </Alert>
             ) : (
-              <MealsDisplay
-                selectedDateBreakfast={selectedDateBreakfast}
-                selectedDateLunch={selectedDateLunch}
-                selectedDateDinner={selectedDateDinner}
-              />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={selectedDate?.toISOString?.() || "no-date"}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.32, ease: "easeOut" }}
+                >
+                  <MealsDisplay
+                    selectedDateBreakfast={selectedDateBreakfast}
+                    selectedDateLunch={selectedDateLunch}
+                    selectedDateDinner={selectedDateDinner}
+                    date={selectedDate}
+                  />
+                </motion.div>
+              </AnimatePresence>
             )}
           </div>
         </fieldset>
