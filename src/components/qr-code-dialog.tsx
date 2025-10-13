@@ -131,7 +131,7 @@ export default function QrCodeDialog({
           {/* ...existing code for download/copy image buttons... */}
           {url && (
             <div className="w-full">
-              <div className="flex w-full mt-2">
+              <div className="flex w-full items-center">
                 <input
                   type="text"
                   value={url}
@@ -156,7 +156,7 @@ export default function QrCodeDialog({
                   <Copy className="mr-1" size={18} />
                 </Button>
               </div>
-              <div className="flex flex-wrap justify-evenly w-full mt-2">
+              <div className="flex flex-wrap justify-evenly w-full mt-6">
                 <FacebookShareButton url={url} hashtag="#CROUStillant">
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
