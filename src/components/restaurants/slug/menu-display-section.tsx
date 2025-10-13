@@ -97,6 +97,7 @@ export default function MenuDisplaySection({
                     selectedDateBreakfast={selectedDateBreakfast}
                     selectedDateLunch={selectedDateLunch}
                     selectedDateDinner={selectedDateDinner}
+                    date={selectedDate}
                   />
                 </motion.div>
               </AnimatePresence>

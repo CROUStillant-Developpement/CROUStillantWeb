@@ -13,39 +13,45 @@ import { formatToISODate, normalizeToDate } from "@/lib/utils";
 interface UseRestaurantMenuOptions {
   restaurantCode: number;
   mode: "future" | "history";
+  defaultDate?: Date;
 }
 
-/**
- * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
- *
- * This hook provides state and logic for:
- * - Fetching available menu dates (future or history) for a restaurant.
- * - Fetching and caching menu data for a selected date.
- * - Managing loading states for menu and dates.
- * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
- * - Handling unavailable menu dates via a blacklist.
- *
- * @param restaurantCode - The unique code identifying the restaurant.
- * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
- * @returns An object containing:
- * - `menuLoading`: Indicates if the menu data is currently loading.
- * - `datesLoading`: Indicates if the available dates are currently loading.
- * - `dates`: Array of available dates for the menu.
- * - `menu`: Array of menu data for the restaurant.
- * - `selectedDate`: The currently selected date.
- * - `setSelectedDate`: Setter for the selected date.
- * - `selectedDateMeals`: Array of meals for the selected date.
- * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
- * - `selectedDateLunch`: The lunch meal for the selected date, if available.
- * - `selectedDateDinner`: The dinner meal for the selected date, if available.
- */
 export function useRestaurantMenu({
+  // ...existing code...
+
+  /**
+   * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
+   *
+   * This hook provides state and logic for:
+   * - Fetching available menu dates (future or history) for a restaurant.
+   * - Fetching and caching menu data for a selected date.
+   * - Managing loading states for menu and dates.
+   * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
+   * - Handling unavailable menu dates via a blacklist.
+   *
+   * @param restaurantCode - The unique code identifying the restaurant.
+   * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
+   * @returns An object containing:
+   * - `menuLoading`: Indicates if the menu data is currently loading.
+   * - `datesLoading`: Indicates if the available dates are currently loading.
+   * - `dates`: Array of available dates for the menu.
+   * - `menu`: Array of menu data for the restaurant.
+   * - `selectedDate`: The currently selected date.
+   * - `setSelectedDate`: Setter for the selected date.
+   * - `selectedDateMeals`: Array of meals for the selected date.
+   * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
+   * - `selectedDateLunch`: The lunch meal for the selected date, if available.
+   * - `selectedDateDinner`: The dinner meal for the selected date, if available.
+   */
   restaurantCode,
   mode,
+  defaultDate,
 }: UseRestaurantMenuOptions) {
   const [menu, setMenu] = useState<Menu[]>([]);
   const [dates, setDates] = useState<DateMenu[]>([]);
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(
+    defaultDate ?? new Date()
+  );
   const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
   const [selectedDateBreakfast, setSelectedDateBreakfast] =
     useState<Repas | null>(null);
@@ -75,7 +81,10 @@ export function useRestaurantMenu({
 
           if (menuResult.success && menuResult.data.length > 0) {
             setMenu(menuResult.data);
-            setSelectedDate(formatToISODate(menuResult.data[0].date));
+            // Only set selectedDate if not already set by defaultDate
+            setSelectedDate(
+              (prev) => prev ?? formatToISODate(menuResult.data[0].date)
+            );
           } else {
             setNoMenuAtAll(true);
           }
@@ -98,7 +107,9 @@ export function useRestaurantMenu({
             );
             setDates(pastDates);
             if (pastDates.length > 0) {
-              setSelectedDate(formatToISODate(pastDates[0].date));
+              setSelectedDate(
+                (prev) => prev ?? formatToISODate(pastDates[0].date)
+              );
             } else {
               setNoHistoryAtAll(true);
             }
@@ -126,9 +137,8 @@ export function useRestaurantMenu({
    * @returns A promise that resolves when the menu fetch and state update are complete.
    */
   const fetchMenuForDate = async (date: Date) => {
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const formattedDate = `${day}-${month}-${date.getFullYear()}`;
 
     const result = await getMenuByRestaurantIdAndDate(

@@ -309,7 +309,12 @@
       "toastTitle": "Image copiée !",
       "toastDescription": "L'image du QR Code a été copiée dans votre presse-papiers."
     },
-    "download": "Télécharger l'image"
+    "download": "Télécharger l'image",
+    "copyLink": {
+      "button": "Copier le lien",
+      "toastTitle": "Lien copié !",
+      "toastDescription": "Le lien du menu a été copié dans votre presse-papiers."
+    }
   },
   "Pagination": {
     "previous": "Précédent",
@@ -388,7 +393,15 @@
     "Jeudi": "Jeudi",
     "Vendredi": "Vendredi",
     "Samedi": "Samedi",
-    "Dimanche": "Dimanche"
+    "Dimanche": "Dimanche",
+    "qrCode": {
+      "breakfastTitle": "Menu du petit-déjeuner du {date}",
+      "breakfastDescription": "Scanne le QR code pour voir le menu du petit-déjeuner du {date} sur ton téléphone",
+      "lunchTitle": "Menu du déjeuner du {date}",
+      "lunchDescription": "Scanne le QR code pour voir le menu du déjeuner du {date} sur ton téléphone",
+      "dinnerTitle": "Menu du dîner du {date}",
+      "dinnerDescription": "Scanne le QR code pour voir le menu du dîner du {date} sur ton téléphone"
+    }
   },
   "Common": {
     "loading": "Chargement...",
