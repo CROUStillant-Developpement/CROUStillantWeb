@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/drawer";
 import { Calendar } from "@/components/ui/calendar";
 import { useLocale, useTranslations } from "next-intl";
+import { enUS, fr as frLocale } from "date-fns/locale";
+import type { Locale } from "date-fns";
 import { useState } from "react";
 import { useUmami } from "next-umami";
 
@@ -158,17 +160,33 @@ function DatePickerSection({
       onSubmit={handleSubmit}
       className={cn("flex flex-col items-center", className)}
     >
+      {locale}
       <Calendar
         className="mb-4 rounded-md border"
         mode="single"
         defaultMonth={currentDate}
         selected={currentDate}
         onSelect={(date) => date && handleDateChange(date)}
-        fromDate={minDate}
-        toDate={
+        startMonth={minDate}
+        endMonth={
           maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
-        } // 3 weeks if no maxDate
-        lang={locale}
+        }
+        disabled={{
+          before: minDate,
+          after:
+            maxDate || new Date(new Date().setDate(new Date().getDate() + 21)),
+        }}
+        locale={((): Locale | undefined => {
+          if (!locale) return undefined;
+          const lang = locale.split("-")[0];
+          switch (lang) {
+            case "fr":
+              return frLocale;
+            case "en":
+            default:
+              return enUS;
+          }
+        })()}
       />
       <Button
         type="submit"
