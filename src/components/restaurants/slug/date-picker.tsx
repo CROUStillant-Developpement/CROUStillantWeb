@@ -160,7 +160,6 @@ function DatePickerSection({
       onSubmit={handleSubmit}
       className={cn("flex flex-col items-center", className)}
     >
-      {locale}
       <Calendar
         className="mb-4 rounded-md border"
         mode="single"
