@@ -31,9 +31,7 @@ export default function DateCard({
   const year = date.toLocaleDateString(locale, { year: "numeric" });
 
   // Combine elements in the proper order for each locale
-  const formattedTop = isFrench
-    ? `${weekday} ${day}` // e.g. "lundi 6"
-    : `${weekday} ${day}`; // e.g. "Monday 6"
+  const formattedTop = `${weekday} ${day}`; // e.g. "lundi 6" or "Monday 6"
 
   const formattedBottom = isFrench
     ? `${month}${showYear ? ` ${year}` : ""}` // "octobre 2025"
