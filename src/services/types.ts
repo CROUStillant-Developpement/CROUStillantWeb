@@ -202,5 +202,5 @@ export interface UmamiStats {
     visits: number;
     bounces: number;
     totaltime: string;
-  }
+  };
 }
