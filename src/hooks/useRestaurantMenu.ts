@@ -16,33 +16,32 @@ interface UseRestaurantMenuOptions {
   defaultDate?: Date;
 }
 
+/**
+ * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
+ *
+ * This hook provides state and logic for:
+ * - Fetching available menu dates (future or history) for a restaurant.
+ * - Fetching and caching menu data for a selected date.
+ * - Managing loading states for menu and dates.
+ * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
+ * - Handling unavailable menu dates via a blacklist.
+ *
+ * @param restaurantCode - The unique code identifying the restaurant.
+ * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
+ * @returns An object containing:
+ * - `menuLoading`: Indicates if the menu data is currently loading.
+ * - `datesLoading`: Indicates if the available dates are currently loading.
+ * - `dates`: Array of available dates for the menu.
+ * - `menu`: Array of menu data for the restaurant.
+ * - `selectedDate`: The currently selected date.
+ * - `setSelectedDate`: Setter for the selected date.
+ * - `selectedDateMeals`: Array of meals for the selected date.
+ * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
+ * - `selectedDateLunch`: The lunch meal for the selected date, if available.
+ * - `selectedDateDinner`: The dinner meal for the selected date, if available.
+ */
 export function useRestaurantMenu({
   // ...existing code...
-
-  /**
-   * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
-   *
-   * This hook provides state and logic for:
-   * - Fetching available menu dates (future or history) for a restaurant.
-   * - Fetching and caching menu data for a selected date.
-   * - Managing loading states for menu and dates.
-   * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
-   * - Handling unavailable menu dates via a blacklist.
-   *
-   * @param restaurantCode - The unique code identifying the restaurant.
-   * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
-   * @returns An object containing:
-   * - `menuLoading`: Indicates if the menu data is currently loading.
-   * - `datesLoading`: Indicates if the available dates are currently loading.
-   * - `dates`: Array of available dates for the menu.
-   * - `menu`: Array of menu data for the restaurant.
-   * - `selectedDate`: The currently selected date.
-   * - `setSelectedDate`: Setter for the selected date.
-   * - `selectedDateMeals`: Array of meals for the selected date.
-   * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
-   * - `selectedDateLunch`: The lunch meal for the selected date, if available.
-   * - `selectedDateDinner`: The dinner meal for the selected date, if available.
-   */
   restaurantCode,
   mode,
   defaultDate,
