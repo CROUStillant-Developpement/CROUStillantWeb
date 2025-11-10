@@ -13,6 +13,7 @@ import { formatToISODate, normalizeToDate } from "@/lib/utils";
 interface UseRestaurantMenuOptions {
   restaurantCode: number;
   mode: "future" | "history";
+  defaultDate?: Date;
 }
 
 /**
@@ -40,12 +41,16 @@ interface UseRestaurantMenuOptions {
  * - `selectedDateDinner`: The dinner meal for the selected date, if available.
  */
 export function useRestaurantMenu({
+  // ...existing code...
   restaurantCode,
   mode,
+  defaultDate,
 }: UseRestaurantMenuOptions) {
   const [menu, setMenu] = useState<Menu[]>([]);
   const [dates, setDates] = useState<DateMenu[]>([]);
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(
+    defaultDate ?? new Date()
+  );
   const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
   const [selectedDateBreakfast, setSelectedDateBreakfast] =
     useState<Repas | null>(null);
@@ -75,7 +80,10 @@ export function useRestaurantMenu({
 
           if (menuResult.success && menuResult.data.length > 0) {
             setMenu(menuResult.data);
-            setSelectedDate(formatToISODate(menuResult.data[0].date));
+            // Only set selectedDate if not already set by defaultDate
+            setSelectedDate(
+              (prev) => prev ?? formatToISODate(menuResult.data[0].date)
+            );
           } else {
             setNoMenuAtAll(true);
           }
@@ -98,7 +106,9 @@ export function useRestaurantMenu({
             );
             setDates(pastDates);
             if (pastDates.length > 0) {
-              setSelectedDate(formatToISODate(pastDates[0].date));
+              setSelectedDate(
+                (prev) => prev ?? formatToISODate(pastDates[0].date)
+              );
             } else {
               setNoHistoryAtAll(true);
             }
@@ -126,9 +136,8 @@ export function useRestaurantMenu({
    * @returns A promise that resolves when the menu fetch and state update are complete.
    */
   const fetchMenuForDate = async (date: Date) => {
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const formattedDate = `${day}-${month}-${date.getFullYear()}`;
 
     const result = await getMenuByRestaurantIdAndDate(

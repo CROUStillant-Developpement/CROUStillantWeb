@@ -185,10 +185,10 @@ export default async function Footer() {
             <p className="mt-2">
               {t.rich("visits", {
                 strong: (chunks) => <strong>{chunks}</strong>,
-                visitors: (stats.data.visitors.value ?? 0).toLocaleString(
+                visitors: (stats.data.visitors ?? 0).toLocaleString(
                   localeString
                 ),
-                pageviews: (stats.data.pageviews.value ?? 0).toLocaleString(
+                pageviews: Math.max(0, Math.floor(Number(stats.data.pageviews) || 0)).toLocaleString(
                   localeString
                 ),
               })}

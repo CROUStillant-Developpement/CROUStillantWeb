@@ -309,7 +309,12 @@
       "toastTitle": "Image copied!",
       "toastDescription": "You can now paste the image wherever you want."
     },
-    "download": "Download the image"
+    "download": "Download the image",
+    "copyLink": {
+      "button": "Copy the link",
+      "toastTitle": "Link copied!",
+      "toastDescription": "The menu link has been copied to your clipboard."
+    }
   },
   "Pagination": {
     "previous": "Previous",
@@ -388,7 +393,15 @@
     "Jeudi": "Thursday",
     "Vendredi": "Friday",
     "Samedi": "Saturday",
-    "Dimanche": "Sunday"
+    "Dimanche": "Sunday",
+    "qrCode": {
+      "breakfastTitle": "Breakfast menu for {date}",
+      "breakfastDescription": "Scan the QR code to see the breakfast menu for {date} on your phone",
+      "lunchTitle": "Lunch menu for {date}",
+      "lunchDescription": "Scan the QR code to see the lunch menu for {date} on your phone",
+      "dinnerTitle": "Dinner menu for {date}",
+      "dinnerDescription": "Scan the QR code to see the dinner menu for {date} on your phone"
+    }
   },
   "Common": {
     "loading": "Loading...",

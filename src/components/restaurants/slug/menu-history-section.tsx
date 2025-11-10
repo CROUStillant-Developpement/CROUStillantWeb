@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "next-intl";
@@ -13,12 +13,21 @@ import { useUmami } from "next-umami";
 
 interface MenuHistoryProps {
   restaurantCode: number;
+  showHistory?: boolean;
+  setShowHistory?: (show: boolean) => void;
+  initialSelectedDate?: Date | null;
 }
 
 export default function MenuHistorySection({
   restaurantCode,
+  showHistory: showHistoryProp = false,
+  setShowHistory: setShowHistoryProp,
+  initialSelectedDate = null,
 }: MenuHistoryProps) {
-  const [showHistory, setShowHistory] = useState(false);
+  const [showHistory, setShowHistory] = useState(showHistoryProp);
+  const [selectedDateOverride, setSelectedDateOverride] = useState<Date | null>(
+    initialSelectedDate
+  );
   const {
     menuLoading,
     datesLoading,
@@ -30,17 +39,34 @@ export default function MenuHistorySection({
     selectedDateLunch,
     selectedDateDinner,
     noHistoryAtAll,
-  } = useRestaurantMenu({ restaurantCode, mode: "history" });
+  } = useRestaurantMenu({
+    restaurantCode,
+    mode: "history",
+    defaultDate: selectedDateOverride ?? undefined,
+  });
 
   const t = useTranslations("RestaurantPage");
   const umami = useUmami();
 
+  // Sync showHistory state with prop if provided
+  useEffect(() => {
+    if (typeof setShowHistoryProp === "function") {
+      setShowHistoryProp(showHistory);
+    }
+  }, [showHistory]);
+
+  // If initialSelectedDate changes (from parent), update selectedDateOverride
+  useEffect(() => {
+    if (initialSelectedDate) {
+      setSelectedDateOverride(initialSelectedDate);
+      setShowHistory(true);
+    }
+  }, [initialSelectedDate]);
+
   return (
     <section className="mt-12 border-t pt-8" id="history">
       <div className="flex items-center flex-wrap w-full gap-2">
-        <h1 className="font-bold text-3xl text-center">
-          {t("menuHistory")}
-        </h1>
+        <h1 className="font-bold text-3xl text-center">{t("menuHistory")}</h1>
         <Badge>{t("newBadge")}</Badge>
       </div>
 
@@ -83,10 +109,13 @@ export default function MenuHistorySection({
         <div className="text-muted-foreground mt-4">
           {t("menuHistoryCta")}
           <br />
-          <Button onClick={() => {
-            setShowHistory(true);
-            umami.event("MenuHistory.Requested", { restaurantCode });
-          }} className="mt-2">
+          <Button
+            onClick={() => {
+              setShowHistory(true);
+              umami.event("MenuHistory.Requested", { restaurantCode });
+            }}
+            className="mt-2"
+          >
             {t("menuHistoryCtaBtn")}
           </Button>
         </div>
