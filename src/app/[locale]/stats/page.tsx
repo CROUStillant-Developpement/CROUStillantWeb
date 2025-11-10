@@ -31,8 +31,8 @@ export default async function Stats() {
   }
 
   if (umamiStats.success) {
-    stats.data.visites = umamiStats.data.visitors.value;
-    stats.data.pagesVues = umamiStats.data.pageviews.value;
+    stats.data.visites = umamiStats.data.visitors;
+    stats.data.pagesVues = Math.max(0, Math.floor(Number(umamiStats.data.pageviews) || 0));
   }
 
   return <StatsPage taches={taches.data} stats={stats.data} />;

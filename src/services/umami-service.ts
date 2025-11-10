@@ -93,8 +93,8 @@ export const getStats = async (minDate: Date | null = null, maxDate: Date | null
       return dateRange;
     }
 
-    minDate = new Date(dateRange.data.mindate);
-    maxDate = new Date(dateRange.data.maxdate);
+    minDate = new Date(dateRange.data.startDate);
+    maxDate = new Date(dateRange.data.endDate);
   }
 
   return requestHandler<UmamiStats>(

@@ -186,29 +186,21 @@ export interface UmamiActiveUsers {
 }
 
 export interface UmamiDateRange {
-  mindate: string;
-  maxdate: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface UmamiStats {
-  pageviews: {
-    value: number;
-    prev: number;
-  };
-  visitors: {
-    value: number;
-    prev: number;
-  };
-  visits: {
-    value: number;
-    prev: number;
-  };
-  bounces: {
-    value: number;
-    prev: number;
-  };
-  totaltime: {
-    value: number;
-    prev: number;
+  pageviews: string;
+  visitors: number;
+  visits: number;
+  bounces: number;
+  totaltime: string;
+  comparison: {
+    pageviews: string;
+    visitors: number;
+    visits: number;
+    bounces: number;
+    totaltime: string;
   };
 }
