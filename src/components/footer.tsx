@@ -188,7 +188,7 @@ export default async function Footer() {
                 visitors: (stats.data.visitors ?? 0).toLocaleString(
                   localeString
                 ),
-                pageviews: (Math.max(0, Math.floor(Number(stats.data.pageviews) || 0)) ?? 0).toLocaleString(
+                pageviews: Math.max(0, Math.floor(Number(stats.data.pageviews) || 0)).toLocaleString(
                   localeString
                 ),
               })}
