@@ -92,6 +92,7 @@ export default function MenuDisplaySection({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.32, ease: "easeOut" }}
+                  className="flex flex-col gap-4"
                 >
                   <MealsDisplay
                     selectedDateBreakfast={selectedDateBreakfast}
