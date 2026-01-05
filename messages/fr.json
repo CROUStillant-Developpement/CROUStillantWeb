@@ -644,6 +644,13 @@
       "github": "Un bug repéré ? Signalez-le sur GitHub ! 🐛",
       "discord": "Discutez avec nous sur Discord ! 🎙️"
     },
+    "select": {
+      "placeholder": "Quel est le sujet de votre demande ?",
+      "site": "Problème lié au site CROUStillant",
+      "crous": "Question concernant le CROUS ou un restaurant",
+      "other": "Autre demande"
+    },
+    "notOfficial": "⚠️ CROUStillant n’est pas le site officiel du CROUS. Nous ne pouvons pas répondre aux demandes administratives ou officielles concernant le CROUS ou ses services. Pour toute demande officielle, veuillez contacter directement le CROUS ou le restaurant concerné.",
     "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
     "seo": {
       "title": "Contact",

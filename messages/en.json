@@ -643,6 +643,13 @@
       "github": "Spotted a bug? Open an issue on GitHub! 🐛",
       "discord": "Chat with us on Discord! 🎙️"
     },
+    "select": {
+      "placeholder": "What is the subject of your request?",
+      "site": "Issue related to the CROUStillant site",
+      "crous": "Question about the CROUS or a restaurant",
+      "other": "Other request"
+    },
+    "notOfficial": "⚠️ CROUStillant is not the official CROUS website. We cannot respond to administrative or official requests concerning the CROUS or its services. For any official request, please contact the CROUS or the restaurant concerned directly.",
     "footer": "We love to hear from you, just not through forms. 🍴",
     "seo": {
       "title": "Contact Us",
