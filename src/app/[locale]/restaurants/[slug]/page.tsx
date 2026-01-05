@@ -3,6 +3,7 @@ import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
 import { getTranslations } from "next-intl/server";
+import { getRestaurant } from "@/services/restaurant-service";
 
 
 function extractRestaurantId(slug: unknown): number | null {
@@ -25,14 +26,13 @@ async function fetchRestaurantDetailsServer(slug: string) {
       return notFound();
     }
 
-    const response = await fetch(
-      `${process.env.API_URL}/restaurants/${restaurantId}`,
-      { method: "GET" }
-    );
-    if (!response.ok) {
+    const result = await getRestaurant(restaurantId.toString());
+    
+    if (!result.success) {
       throw new Error("Failed to fetch restaurant details.");
     }
-    return (await response.json()).data as Resto;
+    
+    return result.data as Resto;
   } catch {
     return null;
   }
