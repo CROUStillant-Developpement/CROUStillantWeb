@@ -41,7 +41,7 @@ export async function GET(
 
     const imageResponse = await fetch(restaurant.image_url, {
       headers,
-      cache: "force-cache", // Cache the image
+      next: { revalidate: 86400 }, // Revalidate after 24 hours
     });
 
     if (!imageResponse.ok) {
