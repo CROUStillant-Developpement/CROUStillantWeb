@@ -22,7 +22,7 @@ interface RestaurantCardProps {
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
   const [imageSrc, setImageSrc] = useState(
-    restaurant.image_url ?? "/default_ru.png"
+    `/api/restaurants/${restaurant.code}/image`
   );
 
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();

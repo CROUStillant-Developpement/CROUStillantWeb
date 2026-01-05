@@ -78,7 +78,7 @@ export async function generateMetadata({
       }),
       images: [
         {
-          url: restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png",
+          url: `${process.env.WEB_URL}/api/restaurants/${restaurant.code}/image`,
         },
       ],
       siteName: "CROUStillant",
