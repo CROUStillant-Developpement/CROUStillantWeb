@@ -1,8 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { ContactMethods } from "@/components/contact-methods";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ContactPage");
@@ -32,33 +31,7 @@ export default async function ContactPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-gray-600 mb-6">{t("description")}</p>
-          <div className="space-y-4">
-            <Button asChild variant="default" className="w-full">
-              <Link href="mailto:croustillant@bayfield.dev">
-                {t("methods.email")}
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full" size="fit">
-              <Link
-                href="https://github.com/CROUStillant-Developpement/CROUStillantWeb/issues/new"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-wrap text-center"
-              >
-                {t("methods.github")}
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" className="w-full">
-              <a
-                href="https://discord.gg/yG6FjqbWtk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("methods.discord")}
-              </a>
-            </Button>
-          </div>
+          <ContactMethods />
         </CardContent>
       </Card>
       <div className="mt-6 text-center text-sm text-gray-500">
