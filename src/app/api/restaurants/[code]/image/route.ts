@@ -1,5 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRestaurant } from "@/services/restaurant-service";
+import { readFile } from "fs/promises";
+import { join } from "path";
+
+/**
+ * Serves the default restaurant image
+ */
+async function serveDefaultImage(): Promise<NextResponse> {
+  const defaultImagePath = join(process.cwd(), "public", "default_ru.png");
+  const defaultImage = await readFile(defaultImagePath);
+  
+  return new NextResponse(defaultImage, {
+    status: 200,
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=86400, immutable",
+    },
+  });
+}
 
 /**
  * API route to proxy restaurant images with API key authentication
@@ -26,11 +44,7 @@ export async function GET(
 
     // If no image URL, return default image
     if (!restaurant.image_url) {
-      // Redirect to default image
-      return NextResponse.redirect(
-        new URL("/default_ru.png", request.url),
-        { status: 302 }
-      );
+      return await serveDefaultImage();
     }
 
     // Fetch the image from the backend API with authentication
@@ -45,10 +59,7 @@ export async function GET(
     });
 
     if (!imageResponse.ok) {
-      return NextResponse.redirect(
-        new URL("/default_ru.png", request.url),
-        { status: 302 }
-      );
+      return await serveDefaultImage();
     }
 
     // Stream the response to avoid loading large images into memory
@@ -62,9 +73,15 @@ export async function GET(
     });
   } catch (error) {
     console.error("Error proxying restaurant image:", error);
-    return NextResponse.redirect(
-      new URL("/default_ru.png", request.url),
-      { status: 302 }
-    );
+    
+    try {
+      return await serveDefaultImage();
+    } catch (fallbackError) {
+      console.error("Error serving default image:", fallbackError);
+      return NextResponse.json(
+        { error: "Failed to load image" },
+        { status: 500 }
+      );
+    }
   }
 }
