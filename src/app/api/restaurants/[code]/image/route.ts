@@ -41,7 +41,7 @@ export async function GET(
 
     const imageResponse = await fetch(restaurant.image_url, {
       headers,
-      next: { revalidate: 86400 }, // Revalidate after 24 hours
+      cache: "no-store", // Disable Next.js cache to avoid 2MB limit error
     });
 
     if (!imageResponse.ok) {
@@ -51,15 +51,13 @@ export async function GET(
       );
     }
 
-    // Get the image buffer
-    const imageBuffer = await imageResponse.arrayBuffer();
-
-    // Return the image with appropriate headers
-    return new NextResponse(imageBuffer, {
+    // Stream the response to avoid loading large images into memory
+    // This prevents the "items over 2MB can not be cached" error
+    return new NextResponse(imageResponse.body, {
       status: 200,
       headers: {
         "Content-Type": imageResponse.headers.get("Content-Type") || "image/jpeg",
-        "Cache-Control": "public, max-age=86400, immutable", // Cache for 24 hours
+        "Cache-Control": "public, max-age=86400, immutable", // Cache for 24 hours in browser
       },
     });
   } catch (error) {
