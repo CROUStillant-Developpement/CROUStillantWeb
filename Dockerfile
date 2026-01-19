@@ -6,6 +6,12 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+ARG WEB_URL
+ARG API_URL
+
+ENV WEB_URL=${WEB_URL}
+ENV API_URL=${API_URL}
+
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 

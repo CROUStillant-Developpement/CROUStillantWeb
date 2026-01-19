@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import type { MetadataRoute } from "next";
 import { getRestaurants } from "@/services/restaurant-service";
 import { slugify } from "@/lib/utils";

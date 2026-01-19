@@ -77,6 +77,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            WEB_URL=${{ secrets.WEB_URL }}
+            API_URL=${{ secrets.API_URL }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
