@@ -23,7 +23,7 @@ export default async function LegalPage() {
 
   return (
     <>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-5 lg:p-12">
           <h1 className="text-2xl font-bold">{t("title")}</h1>
           <h2 className="text-lg font-semibold mt-4">{t("subtitle")}</h2>
@@ -56,12 +56,12 @@ export default async function LegalPage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="legal">
           <h1 className="text-2xl font-bold">{t("legal.title")}</h1>
           {["part1", "part2", "part3", "part4", "part5"].map((key) => (
             <>
-              <div className="mt-5 mb-10 h-px border-t border-gray-400 dark:border-gray-600 my-4"></div>
+              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
                 <h2 className="text-lg font-semibold">
                   {t(`legal.${key}.title`)}
@@ -75,12 +75,12 @@ export default async function LegalPage() {
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="privacy">
           <h1 className="text-2xl font-bold">{t("privacy.title")}</h1>
           {["part1", "part2", "part3"].map((key) => (
             <>
-              <div className="mt-5 mb-10 h-px border-t border-gray-400 dark:border-gray-600 my-4"></div>
+              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
                 <h2 className="text-lg font-semibold">
                   {t(`privacy.${key}.title`)}
@@ -94,12 +94,12 @@ export default async function LegalPage() {
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="cookies">
           <h1 className="text-2xl font-bold">{t("cookies.title")}</h1>
           {["part1", "part2"].map((key) => (
             <>
-              <div className="mt-5 mb-10 h-px border-t border-gray-400 dark:border-gray-600 my-4"></div>
+              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
                 <h2 className="text-lg font-semibold">
                   {t(`cookies.${key}.title`)}
@@ -113,12 +113,12 @@ export default async function LegalPage() {
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="terms">
           <h1 className="text-2xl font-bold">{t("terms.title")}</h1>
           {["part1", "part2", "part3", "part4", "part5"].map((key) => (
             <>
-              <div className="mt-5 mb-10 h-px border-t border-gray-400 dark:border-gray-600 my-4"></div>
+              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
               <div key={key} className="mt-4">
                 <h2 className="text-lg font-semibold">
                   {t(`terms.${key}.title`)}

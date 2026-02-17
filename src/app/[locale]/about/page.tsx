@@ -46,7 +46,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
@@ -64,7 +64,7 @@ export default async function AboutPage() {
             <p className="mt-4 lg:text-lg">{t("updates.description")}</p>
           </div>
         </div>
-        <div className="mx-2 h-px border-t lg:h-[unset] lg:w-px lg:border-l lg:border-t-0" />
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex-1 p-2 lg:p-12">
           <div className="flex flex-col justify-center lg:p-12 py-4 px-2">
             <h3 className="lg:text-4xl text-xl font-medium">
@@ -93,7 +93,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
           <h2 className="lg:text-4xl text-xl font-medium">
             {t("product.title")}
@@ -129,14 +129,14 @@ export default async function AboutPage() {
         </div>
       </div>
       <div
-        className="mx-auto lg:mt-36 mt-12 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800 scroll-mt-32"
+        className="mx-auto lg:mt-36 mt-12 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800 scroll-mt-32"
         id="team"
       >
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h2 className="lg:text-4xl text-xl font-medium">{t("team.title")}</h2>
           <p className="mt-4 lg:text-lg">{t("team.description")}</p>
         </div>
-        <div className="mx-2 h-px border-t lg:h-[unset] lg:w-px lg:border-l lg:border-t-0" />
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <div className="mt-8 w-full">
             <div className="flex items-center">
@@ -178,7 +178,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
           <h2 className="lg:text-4xl text-xl font-medium">{t("job.title")}</h2>
           <p className="mt-4 lg:text-lg">{t("job.description")}</p>
@@ -205,7 +205,7 @@ export default async function AboutPage() {
           />
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-center object-left xl:w-1/2">
           <Image
             width={1350}
@@ -233,7 +233,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 xl:w-1/2">
           <h2 className="lg:text-4xl text-xl font-medium">
             {t("integrated.title")}
@@ -258,7 +258,7 @@ export default async function AboutPage() {
           />
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 xl:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-center object-left xl:w-1/2">
           <Image
             width={1350}
@@ -287,7 +287,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow-sm md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
+      <div className="mx-auto lg:mt-36 mt-20 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h3 className="lg:text-4xl text-xl font-medium">
             {t("convinced.title")}
@@ -308,7 +308,7 @@ export default async function AboutPage() {
             </Button>
           </div>
         </div>
-        <div className="mx-2 h-px border-t lg:h-[unset] lg:w-px lg:border-l lg:border-t-0" />
+        <div className="mx-2 h-[1px] border-t lg:h-[unset] lg:w-[1px] lg:border-l lg:border-t-0" />
         <div className="flex flex-col justify-center p-4 py-6 lg:p-12 lg:w-1/2">
           <h3 className="lg:text-4xl text-xl font-medium">
             <HeartHandshake className="inline h-10 w-10 mr-3" />

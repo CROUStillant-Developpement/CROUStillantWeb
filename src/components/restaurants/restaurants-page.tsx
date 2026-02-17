@@ -90,7 +90,7 @@ export default function RestaurantsPage({
           <h1 className="font-bold text-3xl">Restaurants</h1>
           <div className="opacity-50">
             {loading ? (
-              <Loading className="justify-start!" />
+              <Loading className="!justify-start" />
             ) : (
               t("results", { count: filteredRestaurants.length })
             )}
