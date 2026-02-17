@@ -136,7 +136,7 @@ export default function QrCodeDialog({
                   type="text"
                   value={url}
                   readOnly
-                  className="flex-1 rounded-l-md border border-input bg-background px-3 py-2 text-sm shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary"
+                  className="flex-1 rounded-l-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   style={{ minWidth: 0 }}
                   onFocus={(e) => e.target.select()}
                 />
