@@ -63,7 +63,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
         </Button>
         <Link
           href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
-          className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 transition"
+          className="absolute top-0 left-0 h-56 w-full rounded-lg hidden group-hover:flex items-center justify-center bg-black/50 transition"
           onClick={() => {
             umami.event("Restaurant.Card.View", {
               restaurant: restaurant.code,
