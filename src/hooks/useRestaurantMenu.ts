@@ -12,36 +12,25 @@ import { formatToISODate, normalizeToDate } from "@/lib/utils";
 
 interface UseRestaurantMenuOptions {
   restaurantCode: number;
-  mode: "future" | "history";
+  mode: "future" | "history" | "all";
   defaultDate?: Date;
 }
 
 /**
- * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future or history).
+ * Custom React hook to manage and fetch restaurant menu data for a given restaurant and mode (future, history, or all).
  *
  * This hook provides state and logic for:
- * - Fetching available menu dates (future or history) for a restaurant.
+ * - Fetching available menu dates (future, history, or all) for a restaurant.
  * - Fetching and caching menu data for a selected date.
  * - Managing loading states for menu and dates.
  * - Selecting and exposing meals for breakfast, lunch, and dinner for the selected date.
  * - Handling unavailable menu dates via a blacklist.
  *
  * @param restaurantCode - The unique code identifying the restaurant.
- * @param mode - The mode of operation, either `"future"` for upcoming menus or `"history"` for past menus.
- * @returns An object containing:
- * - `menuLoading`: Indicates if the menu data is currently loading.
- * - `datesLoading`: Indicates if the available dates are currently loading.
- * - `dates`: Array of available dates for the menu.
- * - `menu`: Array of menu data for the restaurant.
- * - `selectedDate`: The currently selected date.
- * - `setSelectedDate`: Setter for the selected date.
- * - `selectedDateMeals`: Array of meals for the selected date.
- * - `selectedDateBreakfast`: The breakfast meal for the selected date, if available.
- * - `selectedDateLunch`: The lunch meal for the selected date, if available.
- * - `selectedDateDinner`: The dinner meal for the selected date, if available.
+ * @param mode - The mode of operation: `"future"`, `"history"`, or `"all"`.
+ * @returns An object containing hook state and functions.
  */
 export function useRestaurantMenu({
-  // ...existing code...
   restaurantCode,
   mode,
   defaultDate,
@@ -49,7 +38,7 @@ export function useRestaurantMenu({
   const [menu, setMenu] = useState<Menu[]>([]);
   const [dates, setDates] = useState<DateMenu[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date>(
-    defaultDate ?? new Date()
+    normalizeToDate(defaultDate ?? new Date())
   );
   const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
   const [selectedDateBreakfast, setSelectedDateBreakfast] =
@@ -96,13 +85,14 @@ export function useRestaurantMenu({
             );
             setDates(uniqueDates);
           }
-        } else {
+        } else if (mode === "history") {
           // HISTORY mode
           const result = await getDatesMenuAvailable(restaurantCode);
           if (result.success && result.data) {
             const today = new Date();
+            today.setHours(0, 0, 0, 0);
             const pastDates = result.data.filter(
-              (d) => new Date(d.date) < today
+              (d) => normalizeToDate(formatToISODate(d.date)) < today
             );
             setDates(pastDates);
             if (pastDates.length > 0) {
@@ -114,6 +104,38 @@ export function useRestaurantMenu({
             }
           } else {
             setNoHistoryAtAll(true);
+          }
+        } else {
+          // ALL mode
+          const result = await getDatesMenuAvailable(restaurantCode);
+          if (result.success && result.data) {
+            // Remove duplicates and sort by date ascending
+            const uniqueDates = result.data.filter(
+              (date, index, self) =>
+                index === self.findIndex((d) => d.date === date.date)
+            );
+            
+            uniqueDates.sort((a, b) => 
+               normalizeToDate(formatToISODate(a.date)).getTime() - 
+               normalizeToDate(formatToISODate(b.date)).getTime()
+            );
+            
+            setDates(uniqueDates);
+            
+            if (uniqueDates.length === 0) {
+               setNoMenuAtAll(true);
+            } else {
+               // Find today or closest future date
+               const today = new Date();
+               today.setHours(0, 0, 0, 0);
+               const closestDate = uniqueDates.find(d => 
+                  normalizeToDate(formatToISODate(d.date)) >= today
+               ) || uniqueDates[uniqueDates.length - 1];
+
+               setSelectedDate(prev => prev ?? formatToISODate(closestDate.date));
+            }
+          } else {
+            setNoMenuAtAll(true);
           }
         }
       } finally {
@@ -175,8 +197,8 @@ export function useRestaurantMenu({
 
     // No menu yet → fetch it if needed
     if (
-      mode === "history" &&
-      blacklistedDates.every((d) => d.getTime() !== selectedDate.getTime())
+      (mode === "history" || mode === "all") &&
+      blacklistedDates.every((d) => normalizeToDate(d).getTime() !== normalizeToDate(selectedDate).getTime())
     ) {
       setMenuLoading(true);
 
