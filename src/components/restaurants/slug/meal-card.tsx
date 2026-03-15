@@ -25,17 +25,22 @@ export default function MealCard({ meal }: MealCardProps) {
       type="single"
       collapsible
       defaultValue={isDesktop ? `meal-${meal.code}` : ""}
+      className="w-full"
     >
-      <AccordionItem value={`meal-${meal.code}`}>
-        <AccordionTrigger className="capitalize">
+      <AccordionItem value={`meal-${meal.code}`} className="border-b-0">
+        <AccordionTrigger className="capitalize text-lg font-semibold py-4 px-4 hover:bg-secondary/30 rounded-2xl transition-all hover:no-underline [&[data-state=open]]:bg-secondary/50 [&[data-state=open]]:rounded-b-none">
           {meal.libelle}
         </AccordionTrigger>
-        <AccordionContent>
-          <ul>
-            {meal.plats.map((foodItem: Plat, index: number) => (
-              <li key={index} className="flex items-center capitalize">
-                <ArrowRight className="h-4 w-4 mr-2" />
-                {foodItem.libelle}
+        <AccordionContent className="pt-2 pb-4 px-6 bg-secondary/20 rounded-b-2xl border-x border-b border-border/10">
+          <ul className="grid gap-3">
+            {meal.plats?.map((foodItem: Plat, index: number) => (
+              <li key={index} className="flex items-start capitalize text-sm font-medium group">
+                <div className="mt-1 mr-3 p-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <ArrowRight className="h-3 w-3" />
+                </div>
+                <span className="opacity-80 group-hover:opacity-100 transition-opacity">
+                  {foodItem.libelle}
+                </span>
               </li>
             ))}
           </ul>

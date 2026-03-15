@@ -11,6 +11,7 @@ import {
   ComposedChart,
   Tooltip,
   Legend,
+  Area,
 } from "recharts";
 import {
   Card,
@@ -24,6 +25,8 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
+import { motion } from "@/lib/motion";
+import { Activity, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid } from "lucide-react";
 
 interface StatsPageProps {
   taches: Tache[];
@@ -70,15 +73,15 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
   const formattedLabel =
     locale === "fr"
       ? new Date(label).toLocaleDateString("fr-FR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        })
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      })
       : new Date(label).toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        });
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
 
   let localeString = "fr-FR";
   if (locale === "en") {
@@ -92,9 +95,8 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         <ul>
           {payload.map((entry, index) => (
             <li key={`item-${index}`} style={{ color: entry.color }}>
-              {`${entry.value.toLocaleString(localeString)} ${
-                tooltipMapping[entry.dataKey] || entry.dataKey
-              }`}
+              {`${entry.value.toLocaleString(localeString)} ${tooltipMapping[entry.dataKey] || entry.dataKey
+                }`}
             </li>
           ))}
         </ul>
@@ -138,75 +140,119 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="font-bold text-3xl">{t("title")}</h1>
-        <p className="opacity-50">{t("description")}</p>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-8 px-4 mt-4"
+    >
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+        <div className="relative z-10 max-w-2xl">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+            {t("title")}
+          </h1>
+          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
+            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
+              {t("description")}
+            </span>
+          </div>
+        </div>
+
+        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
-      <div className="flex gap-6 w-full justify-center flex-wrap flex-row items-center">
-        <Stat variant="default">
-          <StatTitle>{t("stats.menus")}</StatTitle>
-          <StatDescription>
-            {(stats?.menus ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.compositions")}</StatTitle>
-          <StatDescription>
-            {(stats?.compositions ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.categories")}</StatTitle>
-          <StatDescription>
-            {(stats?.categories ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.repas")}</StatTitle>
-          <StatDescription>
-            {(stats?.repas ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.plats")}</StatTitle>
-          <StatDescription>
-            {(stats?.plats ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.restaurants")}</StatTitle>
-          <StatDescription>
-            {(stats?.restaurants_actifs ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
-        <Stat variant="default">
-          <StatTitle>{t("stats.regions")}</StatTitle>
-          <StatDescription>
-            {(stats?.regions ?? 0).toLocaleString(localeString)}
-          </StatDescription>
-        </Stat>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <StatCard
+          icon={<Menu className="w-5 h-5" />}
+          title={t("stats.menus")}
+          value={stats?.menus ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<LayoutGrid className="w-5 h-5" />}
+          title={t("stats.compositions")}
+          value={stats?.compositions ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<Hash className="w-5 h-5" />}
+          title={t("stats.categories")}
+          value={stats?.categories ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<Utensils className="w-5 h-5" />}
+          title={t("stats.repas")}
+          value={stats?.repas ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<Activity className="w-5 h-5" />}
+          title={t("stats.plats")}
+          value={stats?.plats ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<LayoutGrid className="w-5 h-5" />}
+          title={t("stats.restaurants")}
+          value={stats?.restaurants_actifs ?? 0}
+          locale={localeString}
+        />
+        <StatCard
+          icon={<MapPin className="w-5 h-5" />}
+          title={t("stats.regions")}
+          value={stats?.regions ?? 0}
+          locale={localeString}
+        />
         {stats?.visites && (
-          <Stat variant="default">
-            <StatTitle>{t("stats.visits")}</StatTitle>
-            <StatDescription>
-              {(stats?.visites ?? 0).toLocaleString(localeString)}
-            </StatDescription>
-          </Stat>
+          <StatCard
+            icon={<MousePointer2 className="w-5 h-5" />}
+            title={t("stats.visits")}
+            value={stats?.visites}
+            locale={localeString}
+          />
         )}
         {stats?.pagesVues && (
-          <Stat variant="default">
-            <StatTitle>{t("stats.views")}</StatTitle>
-            <StatDescription>
-              {(stats?.pagesVues ?? 0).toLocaleString(localeString)}
-            </StatDescription>
-          </Stat>
+          <StatCard
+            icon={<Eye className="w-5 h-5" />}
+            title={t("stats.views")}
+            value={stats?.pagesVues}
+            locale={localeString}
+          />
         )}
       </div>
+
       <TacheCharts data={taches} />
-    </div>
+    </motion.div>
   );
 }
+
+const StatCard = ({
+  icon,
+  title,
+  value,
+  locale,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  value: number;
+  locale: string;
+}) => (
+  <Stat className="w-full h-full flex flex-row items-center justify-start gap-4 p-6 rounded-3xl border-primary/5 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm">
+    <div className="p-3 rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+      {icon}
+    </div>
+    <div className="flex flex-col items-start gap-0.5">
+      <StatTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-tight mb-0">
+        {title}
+      </StatTitle>
+      <StatDescription className="text-3xl font-black tracking-tight">
+        {value.toLocaleString(locale)}
+      </StatDescription>
+    </div>
+  </Stat>
+);
 
 const chartConfig = {} satisfies ChartConfig;
 
@@ -277,38 +323,47 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Chart for the menus added over time */}
-      <Card>
-        <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>{t("charts.menuAdded.title")}</CardTitle>
-            <CardDescription>
+      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+        <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
+            <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
+              {t("charts.menuAdded.title")}
+            </CardTitle>
+            <CardDescription className="text-base font-medium">
               {t("charts.menuAdded.description")}
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="px-2 sm:p-6">
+        <CardContent className="p-4 sm:p-8">
           <ChartContainer
             config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+            className="aspect-auto h-[350px] w-full"
           >
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 accessibilityLayer
                 data={groupedDataArray}
                 margin={{
-                  left: 12,
-                  right: 12,
+                  left: 0,
+                  right: 0,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
+                <defs>
+                  <linearGradient id="colorMenus" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground) / 0.1)" />
                 <XAxis
                   dataKey="date"
                   tickLine={false}
                   axisLine={false}
-                  tickMargin={8}
+                  tickMargin={12}
                   minTickGap={32}
+                  tick={{ fill: "hsl(var(--muted-foreground))", fontWeight: 500, fontSize: 12 }}
                   tickFormatter={(value) => {
                     const date = new Date(value);
                     return date.toLocaleDateString(locale, {
@@ -317,8 +372,11 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     });
                   }}
                 />
-                <YAxis />
+                <YAxis
+                  hide
+                />
                 <Tooltip
+                  cursor={{ fill: "hsl(var(--primary) / 0.05)" }}
                   content={
                     <CustomTooltip
                       locale={locale as "en" | "fr"}
@@ -329,11 +387,13 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     />
                   }
                 />
-                <Legend />
+                <Legend verticalAlign="top" height={36} iconType="circle" />
                 <Bar
                   dataKey="deltaMenus"
-                  fill="#8884d8"
+                  fill="url(#colorMenus)"
+                  radius={[6, 6, 0, 0]}
                   name={t("charts.labels.menus")}
+                  maxBarSize={40}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -342,36 +402,39 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
       </Card>
 
       {/* Chart for the categories and compositions added over time */}
-      <Card>
-        <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>{t("charts.overTime.title")}</CardTitle>
-            <CardDescription>
+      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+        <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
+            <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
+              {t("charts.overTime.title")}
+            </CardTitle>
+            <CardDescription className="text-base font-medium">
               {t("charts.overTime.description")}
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="px-2 sm:p-6">
+        <CardContent className="p-4 sm:p-8">
           <ChartContainer
             config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+            className="aspect-auto h-[350px] w-full"
           >
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 accessibilityLayer
                 data={groupedDataArray}
                 margin={{
-                  left: 12,
-                  right: 12,
+                  left: 0,
+                  right: 0,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground) / 0.1)" />
                 <XAxis
                   dataKey="date"
                   tickLine={false}
                   axisLine={false}
-                  tickMargin={8}
+                  tickMargin={12}
                   minTickGap={32}
+                  tick={{ fill: "hsl(var(--muted-foreground))", fontWeight: 500, fontSize: 12 }}
                   tickFormatter={(value) => {
                     const date = new Date(value);
                     return date.toLocaleDateString(locale, {
@@ -380,8 +443,9 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     });
                   }}
                 />
-                <YAxis />
+                <YAxis hide />
                 <Tooltip
+                  cursor={{ stroke: "hsl(var(--primary) / 0.2)", strokeWidth: 2 }}
                   content={
                     <CustomTooltip
                       locale={locale as "en" | "fr"}
@@ -392,34 +456,42 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     />
                   }
                 />
-                <Legend />
+                <Legend verticalAlign="top" height={36} iconType="circle" />
                 <Line
                   type="monotone"
                   dataKey="deltaCompositions"
-                  stroke="#82ca9d"
+                  stroke="#10b981"
+                  strokeWidth={3}
                   name={t("charts.labels.compositions")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
+                  activeDot={{ r: 6, strokeWidth: 0 }}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaCategories"
-                  stroke="#ffc658"
+                  stroke="#f59e0b"
+                  strokeWidth={3}
                   name={t("charts.labels.categories")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
+                  activeDot={{ r: 6, strokeWidth: 0 }}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaRepas"
-                  stroke="#ff0000"
+                  stroke="#ef4444"
+                  strokeWidth={3}
                   name={t("charts.labels.repas")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
+                  activeDot={{ r: 6, strokeWidth: 0 }}
                 />
                 <Line
                   type="monotone"
                   dataKey="deltaPlats"
-                  stroke="#8884d8"
+                  stroke="#6366f1"
+                  strokeWidth={3}
                   name={t("charts.labels.plats")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
+                  activeDot={{ r: 6, strokeWidth: 0 }}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -428,36 +500,45 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
       </Card>
 
       {/* Chart for the requests over time */}
-      <Card>
-        <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>{t("charts.requests.title")}</CardTitle>
-            <CardDescription>
+      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+        <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
+            <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
+              {t("charts.requests.title")}
+            </CardTitle>
+            <CardDescription className="text-base font-medium">
               {t("charts.requests.description")}
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="px-2 sm:p-6">
+        <CardContent className="p-4 sm:p-8">
           <ChartContainer
             config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+            className="aspect-auto h-[350px] w-full"
           >
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 accessibilityLayer
                 data={groupedDataArray}
                 margin={{
-                  left: 12,
-                  right: 12,
+                  left: 0,
+                  right: 0,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
+                <defs>
+                  <linearGradient id="colorRequests" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#d946ef" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#d946ef" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground) / 0.1)" />
                 <XAxis
                   dataKey="date"
                   tickLine={false}
                   axisLine={false}
-                  tickMargin={8}
+                  tickMargin={12}
                   minTickGap={32}
+                  tick={{ fill: "hsl(var(--muted-foreground))", fontWeight: 500, fontSize: 12 }}
                   tickFormatter={(value) => {
                     const date = new Date(value);
                     return date.toLocaleDateString(locale, {
@@ -466,8 +547,9 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     });
                   }}
                 />
-                <YAxis />
+                <YAxis hide />
                 <Tooltip
+                  cursor={{ stroke: "#d946ef", strokeWidth: 2 }}
                   content={
                     <CustomTooltip
                       locale={locale as "en" | "fr"}
@@ -478,13 +560,15 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                     />
                   }
                 />
-                <Legend />
-                <Line
+                <Legend verticalAlign="top" height={36} iconType="circle" />
+                <Area
                   type="monotone"
                   dataKey="requetes"
-                  stroke="#ee82ee"
+                  stroke="#d946ef"
+                  strokeWidth={3}
+                  fillOpacity={1}
+                  fill="url(#colorRequests)"
                   name={t("charts.labels.requetes")}
-                  dot={(props: DotProps) => <CustomDot {...props} />}
                 />
               </ComposedChart>
             </ResponsiveContainer>

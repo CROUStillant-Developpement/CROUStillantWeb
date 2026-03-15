@@ -20,7 +20,7 @@ export default function FavQuickAccess({ text }: IFavQuickAccessProps) {
           ? `/restaurants/${slugify(starredFav.name)}-r${starredFav.code}`
           : "/restaurants"
       }
-      className="hover:underline"
+      className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
       onClick={() => umami.event("Favourite.QuickAccess")}
     >
       {text}
