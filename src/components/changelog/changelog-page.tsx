@@ -20,46 +20,57 @@ export default function ChangelogPage({ changelogs }: ChangelogPageProps) {
   const locale = useLocale();
 
   return (
-    <div>
-      <h1 className="font-bold text-3xl mb-4">Changelog</h1>
-      <Alert className="mb-6">
-        <Drill className="h-4 w-4" />
-        <AlertTitle>{t("buildInProgress")} 🚧</AlertTitle>
-        <AlertDescription>{t("buildInProgressDescription")}</AlertDescription>
+    <div className="space-y-12">
+      <Alert className="rounded-2xl border-primary/20 bg-primary/5 p-6 border-l-4 border-l-primary">
+        <Drill className="h-5 w-5 text-primary" />
+        <AlertTitle className="text-primary font-bold ml-2">
+          {t("buildInProgress")} 🚧
+        </AlertTitle>
+        <AlertDescription className="text-muted-foreground ml-2">
+          {t("buildInProgressDescription")}
+        </AlertDescription>
       </Alert>
-      <div className="my-6">
-        <div className="flex justify-evenly mb-6 flex-wrap gap-2">
-          {Object.keys(changelogs).map((key) => (
-            <Button asChild variant="outline" key={key}>
-              <Link key={key} href={`#${key}`}>
+
+      <div className="sticky top-0 z-40 py-4 bg-background/80 backdrop-blur-md -mx-4 px-4 overflow-x-auto">
+        <div className="flex justify-center gap-3">
+          {Object.keys(changelogs).reverse().map((key) => (
+            <Button asChild variant="outline" key={key} className="rounded-full px-6 border-primary/10 hover:bg-primary/5 hover:text-primary transition-all">
+              <Link href={`#${key}`}>
                 {key}
               </Link>
             </Button>
           ))}
         </div>
-        {Object.keys(changelogs).map((key) => (
-          <div key={key} id={key}>
-            <Separator />
-            <h1 className="font-bold text-2xl my-4">{key}</h1>
-            {changelogs[key].map((item, index) => {
-              return (
-                <ChangelogItem
-                  key={index}
-                  date={new Date(item.date).toLocaleDateString(locale)}
-                  version={item.version}
-                  shortDescription={
-                    locale === "en"
-                      ? item.en.shortDescription
-                      : item.fr.shortDescription
-                  }
-                  fullDescription={
-                    locale === "en"
-                      ? item.en.fullDescription
-                      : item.fr.fullDescription
-                  }
-                />
-              );
-            })}
+      </div>
+
+      <div className="space-y-20">
+        {Object.keys(changelogs).reverse().map((key) => (
+          <div key={key} id={key} className="scroll-mt-32">
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="font-black text-4xl text-primary/20 tracking-tighter uppercase">{key}</h2>
+              <Separator className="flex-1 opacity-20" />
+            </div>
+            <div className="grid gap-2">
+              {changelogs[key].map((item, index) => {
+                return (
+                  <ChangelogItem
+                    key={index}
+                    date={new Date(item.date).toLocaleDateString(locale, { day: '2-digit', month: 'long', year: 'numeric' })}
+                    version={item.version}
+                    shortDescription={
+                      locale === "en"
+                        ? item.en.shortDescription
+                        : item.fr.shortDescription
+                    }
+                    fullDescription={
+                      locale === "en"
+                        ? item.en.fullDescription
+                        : item.fr.fullDescription
+                    }
+                  />
+                );
+              })}
+            </div>
           </div>
         ))}
       </div>

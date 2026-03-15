@@ -139,13 +139,6 @@ export interface GlobalStats {
   pagesVues?: number; // Nombre de pages vues sur le site
 }
 
-// Types for GithubRepo Stats
-export interface GithubRepo {
-  id: number; // Identifiant du dépôt
-  name: string; // Nom du dépôt
-  stargazers_count: number; // Nombre d'étoiles du dépôt
-}
-
 export interface Changelog {
   [key: string]: ChangelogItem[];
 }

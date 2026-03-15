@@ -1,6 +1,8 @@
 import { Link } from "@/i18n/routing";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("LegalPage");
@@ -21,117 +23,81 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LegalPage() {
   const t = await getTranslations("LegalPage");
 
+  const sections = [
+    { id: "legal", key: "legal", parts: ["part1", "part2", "part3", "part4", "part5"] },
+    { id: "privacy", key: "privacy", parts: ["part1", "part2", "part3"] },
+    { id: "cookies", key: "cookies", parts: ["part1", "part2"] },
+    { id: "terms", key: "terms", parts: ["part1", "part2", "part3", "part4", "part5"] },
+  ];
+
   return (
-    <>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex-1 p-5 lg:p-12">
-          <h1 className="text-2xl font-bold">{t("title")}</h1>
-          <h2 className="text-lg font-semibold mt-4">{t("subtitle")}</h2>
-          <span>{t("description")}</span>
-          <div className="mt-4 flex flex-col gap-2">
-            <Link
-              href="#legal"
-              className="text-blue-500 dark:text-blue-400 hover:underline"
-            >
-              {t("legal.title")}
-            </Link>
-            <Link
-              href="#privacy"
-              className="text-blue-500 dark:text-blue-400 hover:underline"
-            >
-              {t("privacy.title")}
-            </Link>
-            <Link
-              href="#cookies"
-              className="text-blue-500 dark:text-blue-400 hover:underline"
-            >
-              {t("cookies.title")}
-            </Link>
-            <Link
-              href="#terms"
-              className="text-blue-500 dark:text-blue-400 hover:underline"
-            >
-              {t("terms.title")}
-            </Link>
+    <div className="w-full mt-4 px-4 flex flex-col gap-8">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+        <div className="relative z-10 max-w-2xl">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+            {t("title")}
+          </h1>
+          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
+            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
+              {t("subtitle")}
+            </span>
           </div>
         </div>
+
+        {/* Decorative elements */}
+        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="legal">
-          <h1 className="text-2xl font-bold">{t("legal.title")}</h1>
-          {["part1", "part2", "part3", "part4", "part5"].map((key) => (
-            <>
-              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
-              <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">
-                  {t(`legal.${key}.title`)}
-                </h2>
-                <div className="flex flex-col mt-2 gap-2">
-                  <span>{t(`legal.${key}.content1`)}</span>
-                  <span>{t(`legal.${key}.content2`)}</span>
+
+      <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xl shadow-lg overflow-hidden w-full sticky -top-10 z-40">
+        <CardContent className="p-8 lg:p-12 space-y-6">
+          <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
+          <div className="flex flex-wrap gap-3">
+            {sections.map((section) => (
+              <Link
+                key={section.id}
+                href={`#${section.id}`}
+                className="inline-flex items-center rounded-full bg-primary/5 px-4 py-2 text-sm font-semibold text-primary ring-1 ring-inset ring-primary/10 hover:bg-primary/10 transition-colors"
+              >
+                {t(`${section.key}.title`)}
+              </Link>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {sections.map((section) => (
+        <Card
+          key={section.id}
+          id={section.id}
+          className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-40"
+        >
+          <CardHeader className="bg-muted/30 border-b border-primary/5 p-8">
+            <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
+              {t(`${section.key}.title`)}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-8 lg:p-12 space-y-10">
+            {section.parts.map((partKey, index) => (
+              <div key={partKey} className="space-y-4">
+                <h3 className="text-xl font-bold flex items-center gap-3">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold">
+                    {index + 1}
+                  </span>
+                  {t(`${section.key}.${partKey}.title`)}
+                </h3>
+                <div className="flex flex-col gap-3 text-muted-foreground leading-relaxed pl-11">
+                  <p>{t(`${section.key}.${partKey}.content1`)}</p>
+                  <p>{t(`${section.key}.${partKey}.content2`)}</p>
                 </div>
+                {index < section.parts.length - 1 && (
+                  <Separator className="mt-10 opacity-50" />
+                )}
               </div>
-            </>
-          ))}
-        </div>
-      </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="privacy">
-          <h1 className="text-2xl font-bold">{t("privacy.title")}</h1>
-          {["part1", "part2", "part3"].map((key) => (
-            <>
-              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
-              <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">
-                  {t(`privacy.${key}.title`)}
-                </h2>
-                <div className="flex flex-col mt-2 gap-2">
-                  <span>{t(`privacy.${key}.content1`)}</span>
-                  <span>{t(`privacy.${key}.content2`)}</span>
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="cookies">
-          <h1 className="text-2xl font-bold">{t("cookies.title")}</h1>
-          {["part1", "part2"].map((key) => (
-            <>
-              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
-              <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">
-                  {t(`cookies.${key}.title`)}
-                </h2>
-                <div className="flex flex-col mt-2 gap-2">
-                  <span>{t(`cookies.${key}.content1`)}</span>
-                  <span>{t(`cookies.${key}.content2`)}</span>
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-      <div className="mx-auto mt-16 flex w-full flex-col shadow md:w-5/6 md:rounded-md lg:w-3/4 lg:flex-row border border-gray-200 dark:border-gray-800">
-        <div className="flex-1 p-5 lg:p-12 scroll-mt-20" id="terms">
-          <h1 className="text-2xl font-bold">{t("terms.title")}</h1>
-          {["part1", "part2", "part3", "part4", "part5"].map((key) => (
-            <>
-              <div className="mt-5 mb-10 h-[1px] border-t border-gray-400 dark:border-gray-600 my-4"></div>
-              <div key={key} className="mt-4">
-                <h2 className="text-lg font-semibold">
-                  {t(`terms.${key}.title`)}
-                </h2>
-                <div className="flex flex-col mt-2 gap-2">
-                  <span>{t(`terms.${key}.content1`)}</span>
-                  <span>{t(`terms.${key}.content2`)}</span>
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-    </>
+            ))}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 }

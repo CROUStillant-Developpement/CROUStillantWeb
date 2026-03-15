@@ -5,9 +5,13 @@ type SettingCardProps = {
 
 export default function SettingCard({ children, title }: SettingCardProps) {
   return (
-    <div>
-      <h1 className="mb-4 text-lg font-medium my-4">{title}</h1>
-      <div className="space-y-4">{children}</div>
+    <div className="space-y-4">
+      <h2 className="text-xl font-bold tracking-tight text-foreground/90 px-1">
+        {title}
+      </h2>
+      <div className="flex flex-col lg:flex-row lg:flex-wrap gap-6 w-full">
+        {children}
+      </div>
     </div>
   );
 }

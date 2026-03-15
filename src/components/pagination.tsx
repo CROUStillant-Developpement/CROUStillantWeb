@@ -99,15 +99,15 @@ export default function PaginationComponent({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <Pagination className="flex justify-center my-8">
+    <Pagination className="flex justify-center my-12 bg-secondary/50 max-w-fit mx-auto p-2 rounded-full border border-border/50 shadow-sm backdrop-blur-md">
       <PaginationPrevious
         isActive={hasPrevious && !loading}
         text={t("previous")}
         displayText={visibleDelta > 1}
         onClick={() => hasPrevious && onPageChange(currentPage - 1)}
         className={`${
-          hasPrevious && !loading ? "cursor-pointer" : "cursor-not-allowed"
-        } mr-2`}
+          hasPrevious && !loading ? "cursor-pointer hover:bg-muted" : "cursor-not-allowed opacity-50"
+        } mr-2 px-4 py-2 rounded-full transition-colors`}
       />
       <PaginationContent>
         {loading ? (
@@ -144,8 +144,8 @@ export default function PaginationComponent({
         text={t("next")}
         onClick={() => hasNext && onPageChange(currentPage + 1)}
         className={`${
-          hasNext && !loading ? "cursor-pointer" : "cursor-not-allowed"
-        } ml-2`}
+          hasNext && !loading ? "cursor-pointer hover:bg-muted" : "cursor-not-allowed opacity-50"
+        } ml-2 px-4 py-2 rounded-full transition-colors`}
       />
     </Pagination>
   );

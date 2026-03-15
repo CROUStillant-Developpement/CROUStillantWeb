@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useUmami } from "next-umami";
+import { Button } from "@/components/ui/button";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -39,14 +40,21 @@ export default function Content({
     return <MapComponent loading={loading} />;
   } else {
     return (
-      <>
+      <div className="flex flex-col gap-6 p-4">
         {/* favourites */}
         {favouritesRestaurants.length > 0 && (
-          <fieldset className="grid gap-6 md:col-span-2 rounded-lg border p-4 mb-4 md:mb-8">
-            <legend className="-ml-1 px-1 text-sm font-medium">
-              {t("favourites", { count: favouritesRestaurants.length })} -{" "}
-              <span
-                className="underline select-none cursor-pointer"
+          <div className="rounded-2xl border border-border/50 bg-secondary/20 shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4">
+              <h2 className="text-lg font-semibold flex items-center">
+                <span className="bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-full mr-3">
+                  {favouritesRestaurants.length}
+                </span>
+                {t("favourites", { count: favouritesRestaurants.length })}
+              </h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
                 onClick={() => {
                   setAutoCollapsedfavourites(false);
                   setUserCollapsedfavourites(!userCollapsedfavourites);
@@ -58,18 +66,18 @@ export default function Content({
                 {userCollapsedfavourites
                   ? t("clickToSeeAll")
                   : t("clickToSeeLess")}
-              </span>
-            </legend>
+              </Button>
+            </div>
+
             <div
-              className={`gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 ${
-                userCollapsedfavourites ? "hidden" : "grid"
-              }`}
+              className={`p-6 gap-6 md:grid-cols-2 lg:grid-cols-3 ${userCollapsedfavourites ? "hidden" : "grid"
+                }`}
             >
               {favouritesRestaurants.map((restaurant) => (
-                <RestaurantCard key={restaurant.code} restaurant={restaurant} />
+                <RestaurantCard key={`fav-${restaurant.code}`} restaurant={restaurant} />
               ))}
             </div>
-          </fieldset>
+          </div>
         )}
         <AnimatePresence mode="wait">
           <motion.div
@@ -113,7 +121,7 @@ export default function Content({
             )}
           </motion.div>
         </AnimatePresence>
-      </>
+      </div>
     );
   }
 }

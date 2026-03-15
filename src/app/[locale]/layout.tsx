@@ -22,6 +22,7 @@ const APP_DESCRIPTION =
   "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.WEB_URL || "https://croustillant.menu"),
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
@@ -46,6 +47,17 @@ export const metadata: Metadata = {
     "France",
     "Outre-mer",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -66,7 +78,7 @@ export const metadata: Metadata = {
     url: process.env.WEB_URL,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,

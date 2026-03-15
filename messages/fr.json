@@ -107,7 +107,11 @@
     "menuHistoryCtaBtn": "Voir l'historique",
     "newBadge": "Nouveau",
     "pastDays": "Jours précédents",
-    "noMenuHistoryAtAll": "Aucun historique de menu disponible pour ce restaurant 😢"
+    "noMenuHistoryAtAll": "Aucun historique de menu disponible pour ce restaurant 😢",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "favoriteHint": "Ajoutez ce restaurant à vos favoris pour le retrouver plus rapidement sur votre page d'accueil !",
+    "favoriteHintCta": "Ajouter aux favoris"
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
@@ -229,6 +233,11 @@
           "name": "Louis Descotes",
           "role": "Développeur web",
           "github": "https://github.com/louisdescotes"
+        },
+        "member5": {
+          "name": "Audric Fullhardt",
+          "role": "Développeur mobile",
+          "github": "https://github.com/audricfullhardt"
         }
       }
     },
@@ -240,7 +249,11 @@
     "integrated": {
       "title": "Intégration facile",
       "description": "Vous pouvez intégrer les informations des restaurants CROUS sur votre site web ou votre application en utilisant notre API. L'API est gratuite et ne nécessite pas d'inscription.",
-      "button": "Découvrir l'API"
+      "button": "Découvrir l'API",
+      "iframe_title": "Nouveauté : Intégrations Iframe",
+      "iframe_description": "Vous pouvez désormais intégrer directement les informations et les menus des restaurants sur votre propre site web.",
+      "iframe_info_title": "Informations du restaurant",
+      "iframe_menu_title": "Menu du restaurant"
     },
     "sources": {
       "title": "Sources",
@@ -304,6 +317,8 @@
     "about": "À propos"
   },
   "QrCodeDialog": {
+    "share": "Partager ce menu",
+    "alt": "QR Code généré",
     "copy": {
       "button": "Copier l'image",
       "toastTitle": "Image copiée !",
@@ -312,7 +327,8 @@
     "download": "Télécharger l'image",
     "copyLink": {
       "button": "Copier le lien",
-      "toastTitle": "Lien copié !",
+      "cta": "Copier",
+      "toastTitle": "Lien copié!",
       "toastDescription": "Le lien du menu a été copié dans votre presse-papiers."
     }
   },
@@ -372,18 +388,21 @@
   },
   "RestaurantInformation": {
     "openingHours": "Horaires d'ouverture",
-    "open": "Ouvert",
-    "closed": "Fermé",
     "day": "Jour",
     "breakfast": "Petit-déjeuner",
     "lunch": "Déjeuner",
     "dinner": "Dîner",
+    "clickToSeeAll": "Voir tout",
+    "clickToSeeLess": "Voir moins",
     "contact": "Contact",
     "accessibility": "Accessible aux personnes à mobilité réduite",
     "izly": "Paiement Izly accepté",
     "creditCard": "Paiement par carte bancaire accepté",
     "phone": "Téléphone",
     "email": "Email",
+    "location": "Localisation",
+    "contactAndServices": "Contact & Services",
+    "openInGoogleMaps": "Ouvrir dans Google Maps",
     "otherInformation": "Autres informations",
     "type": "Type",
     "crous": "CROUS",
@@ -425,6 +444,7 @@
   },
   "SettingsPage": {
     "title": "Paramètres",
+    "subtitle": "Préférences & personnalisation",
     "appearanceTitle": "Apparence",
     "behaviorTitle": "Comportement",
     "personalTitle": "Informations personnelles",
@@ -449,7 +469,7 @@
       "selectPlaceholder": "Sélectionner",
       "description": "Gérez vos restaurants favoris et accédez à leur menu en un clic.",
       "nofavouritesTitle": "Attention - Aucun restaurant favori",
-      "nofavouritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en se  rendant sur la page <restaurants>des restaurants</restaurants>.",
+      "nofavouritesDescription": "Vous n'avez pas de favoris pour le moment, les paramètres suivants sont désactivés. Ajoutez votre premier favori maintenant en vous  rendant sur la page <restaurants>des restaurants</restaurants>.",
       "starredTitle": "Votre restaurant favori",
       "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
       "starredEditSuccessTitle": "Restaurant favori modifié !",
@@ -464,9 +484,13 @@
     },
     "personal": {
       "deleteDataTitle": "Supprimer les données",
-      "deleteDataDescription": "Supprimez <strong>toutes les données</strong> stockées localement sur votre appareil. Cette action est irréversible.",
+      "deleteDataDescription": "Supprimez toutes les données stockées sur votre appareil. Cette action est irréversible.",
+      "viewDataTitle": "Données locales",
+      "viewDataDescription": "Visualisez l'ensemble des données actuellement stockées sur votre appareil.",
+      "viewDataButton": "Voir les données",
       "deleteDataButton": "Supprimer les données",
       "deleteDataConfirmTitle": "Êtes-vous sûr ?",
+      "deleteDataConfirmDescription": "Cette action supprimera définitivement toutes vos préférences.",
       "deleteDataConfirmYes": "Oui, supprimer",
       "deleteDataConfirmNo": "Non, annuler",
       "deleteDataSuccessTitle": "Données supprimées !",
@@ -480,7 +504,7 @@
   },
   "StatsPage": {
     "title": "Statistiques",
-    "description": "CROUStillant met à jour les menus des restaurants CROUS plusieurs fois par jour. Découvrez les statistiques de ces mises à jour.",
+    "description": "Découvrez les statistiques des mises à jour.",
     "stats": {
       "menus": "Menus",
       "compositions": "Compositions",
@@ -637,8 +661,9 @@
     }
   },
   "ContactPage": {
-    "title": "Contactez-nous - À votre service !",
-    "description": "Nous ne servons pas de formulaires. À la place, contactez-nous via ces liens. C'est plus rapide et tout aussi savoureux !",
+    "title": "Contactez-nous",
+    "description": "À votre service !",
+    "subdescription": "Nous ne servons pas de formulaires. À la place, contactez-nous via ces liens. C'est plus rapide et tout aussi savoureux !",
     "methods": {
       "email": "Envoyez-nous un email ! 📧",
       "github": "Un bug repéré ? Signalez-le sur GitHub ! 🐛",

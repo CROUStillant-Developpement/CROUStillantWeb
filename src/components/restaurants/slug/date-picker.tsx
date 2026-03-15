@@ -3,6 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
+import { CalendarDays } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -33,6 +34,7 @@ type DatePickerProps = {
   minDate?: Date;
   maxDate?: Date;
   current?: Date;
+  availableDates?: Date[];
 };
 
 export default function DatePicker({
@@ -40,6 +42,7 @@ export default function DatePicker({
   minDate,
   maxDate,
   current,
+  availableDates,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
   const [, setDate] = React.useState<Date | undefined>(new Date());
@@ -52,6 +55,7 @@ export default function DatePicker({
 
   const locale = useLocale();
   const t = useTranslations("DatePickers");
+  const tRes = useTranslations("RestaurantPage");
   const umami = useUmami();
 
   if (isDesktop) {
@@ -60,13 +64,16 @@ export default function DatePicker({
         <DialogTrigger asChild>
           <Button
             variant="outline"
+            size="sm"
+            className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
             onClick={() => {
               umami.event("DatePicker.Open");
             }}
           >
-            {current
-              ? t("currentDate", { date: current?.toLocaleDateString(locale) })
-              : t("chooseDate")}
+            <CalendarDays className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs hidden min-[400px]:inline">
+              {tRes("calendar")}
+            </span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
@@ -80,6 +87,7 @@ export default function DatePicker({
             minDate={minDate}
             maxDate={maxDate}
             currentDate={current}
+            availableDates={availableDates}
           />
         </DialogContent>
       </Dialog>
@@ -88,16 +96,19 @@ export default function DatePicker({
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild className="mt-4 md:mt-8">
+      <DrawerTrigger asChild>
         <Button
           variant="outline"
+          size="sm"
+          className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
           onClick={() => {
             umami.event("DatePicker.Open");
           }}
         >
-          {current
-            ? t("currentDate", { date: current?.toLocaleDateString(locale) })
-            : t("chooseDate")}
+          <CalendarDays className="w-4 h-4 text-muted-foreground" />
+          <span className="text-xs hidden min-[400px]:inline">
+            {tRes("calendar")}
+          </span>
         </Button>
       </DrawerTrigger>
       <DrawerContent>
@@ -111,6 +122,8 @@ export default function DatePicker({
           onClose={() => setOpen(false)}
           minDate={minDate}
           maxDate={maxDate}
+          currentDate={current}
+          availableDates={availableDates}
         />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
@@ -127,15 +140,17 @@ type DatePickerSectionProps = {
   minDate?: Date;
   maxDate?: Date;
   currentDate?: Date;
+  availableDates?: Date[];
   setDate: (date: Date) => void;
   onClose?: () => void;
 };
 
 function DatePickerSection({
   className,
-  minDate = new Date(),
+  minDate,
   maxDate,
   currentDate = new Date(),
+  availableDates,
   setDate,
   onClose,
 }: DatePickerSectionProps) {
@@ -155,6 +170,9 @@ function DatePickerSection({
     setDate(date);
   };
 
+  const defaultMaxDate = new Date(new Date().setDate(new Date().getDate() + 21));
+  const activeMaxDate = maxDate || defaultMaxDate;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -167,14 +185,21 @@ function DatePickerSection({
         selected={currentDate}
         onSelect={(date) => date && handleDateChange(date)}
         startMonth={minDate}
-        endMonth={
-          maxDate || new Date(new Date().setDate(new Date().getDate() + 21))
+        endMonth={activeMaxDate}
+        disabled={
+          availableDates
+            ? (date) =>
+                !availableDates.some(
+                  (d) =>
+                    d.getFullYear() === date.getFullYear() &&
+                    d.getMonth() === date.getMonth() &&
+                    d.getDate() === date.getDate()
+                )
+            : {
+                before: minDate,
+                after: activeMaxDate,
+              }
         }
-        disabled={{
-          before: minDate,
-          after:
-            maxDate || new Date(new Date().setDate(new Date().getDate() + 21)),
-        }}
         locale={((): Locale | undefined => {
           if (!locale) return undefined;
           const lang = locale.split("-")[0];
