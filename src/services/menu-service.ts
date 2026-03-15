@@ -29,6 +29,7 @@ export async function getDatesMenuAvailable(
   return apiRequest<DateMenu[]>({
     endpoint: `restaurants/${restaurantId}/menu/dates/all`,
     method: "GET",
+    cacheDuration: 1800000, // 30 minutes in milliseconds
   });
 }
 
@@ -44,6 +45,7 @@ export async function getFutureDatesMenuAvailable(
   return apiRequest<DateMenu[]>({
     endpoint: `restaurants/${restaurantId}/menu/dates`,
     method: "GET",
+    cacheDuration: 300000, // 5 minutes in milliseconds
   });
 }
 
@@ -60,5 +62,6 @@ export async function getMenuByRestaurantIdAndDate(
   return apiRequest<Menu | null>({
     endpoint: `restaurants/${restaurantId}/menu/${date}`,
     method: "GET",
+    cacheDuration: 1800000, // 30 minutes in milliseconds
   });
 }
