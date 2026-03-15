@@ -3,8 +3,6 @@ import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
 import AccessibilityButton from "./accessibility-button";
-import BreadcrumbComponent from "./breadcrumb";
-import FavQuickAccess from "./fav-quick-access";
 import { getStats } from "@/services/umami-service";
 import { cn } from "@/lib/utils";
 
