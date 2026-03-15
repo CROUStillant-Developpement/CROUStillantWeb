@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import ChangelogPage from "@/components/changelog/changelog-page";
 import { getTranslations } from "next-intl/server";
 import ErrorPage from "@/components/error";
-import { motion } from "@/lib/motion";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ChangelogPage");
