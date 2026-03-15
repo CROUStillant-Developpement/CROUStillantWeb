@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ContactMethods } from "@/components/contact-methods";
+import { Card, CardContent } from "@/components/ui/card";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ContactPage");

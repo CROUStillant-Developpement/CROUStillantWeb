@@ -103,7 +103,7 @@ export default function DishesPage({
                           </span>
                         </TableCell>
                         <TableCell className="text-center font-semibold">
-                          {item.total.toLocaleString()}
+                          {item.total?.toLocaleString()}
                         </TableCell>
                         <TableCell className="font-medium">{item.libelle}</TableCell>
                       </TableRow>

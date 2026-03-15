@@ -1,42 +1,38 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Region, Restaurant, TypeRestaurant } from "@/services/types";
+import { ReactNode, useMemo, useState } from "react";
+import Image from "next/image";
 import {
   Accessibility,
   AlignLeft,
   ArrowDownAZ,
   ArrowUpAZ,
   CalendarCheck,
-  CreditCard,
-  Locate,
-  Map,
-  Settings2,
-  Trash2,
-  Filter,
   ChevronLeft,
   ChevronRight,
-  Search,
+  CreditCard,
+  Filter,
   Info,
+  Locate,
+  Map,
+  Search,
+  Settings2,
+  Trash2,
 } from "lucide-react";
-import { ComboBoxResponsive } from "@/components/ui/combobox";
-import { Checkbox } from "@/components/ui/checkbox";
-import Image from "next/image";
-import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { useTranslations } from "next-intl";
-import { ReactNode, useMemo } from "react";
-import { useUserPreferences } from "@/store/userPreferencesStore";
-import { Separator } from "@/components/ui/separator";
-import ActiveFilterBadge from "./active-filter-badge";
 import { useUmami } from "next-umami";
-import { useState } from "react";
+import { useMediaQuery } from "usehooks-ts";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ComboBoxResponsive } from "@/components/ui/combobox";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
   SheetClose,
@@ -46,15 +42,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { cn } from "@/lib/utils";
-import { useMediaQuery } from "usehooks-ts";
+import { Region, Restaurant, TypeRestaurant } from "@/services/types";
+import { useUserPreferences } from "@/store/userPreferencesStore";
+import ActiveFilterBadge from "./active-filter-badge";
 
 interface RestaurantsFiltersProps {
   setFilteredRestaurants: (restaurants: Restaurant[]) => void;

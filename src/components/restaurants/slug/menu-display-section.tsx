@@ -1,19 +1,16 @@
 "use client";
 
-import { ReactNode } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import MealsDisplay from "./meals-display";
-import { AnimatePresence, motion } from "@/lib/motion";
-import { DateMenu, Repas } from "@/services/types";
+import { useMemo, ReactNode } from "react";
+import { CalendarCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import DateScroller from "./date-scroller";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AnimatePresence, motion } from "@/lib/motion";
+import { getNormalizedISODate, normalizeToDate } from "@/lib/utils";
+import { DateMenu, Repas } from "@/services/types";
 import DatePicker from "./date-picker";
-import { CalendarCheck, History } from "lucide-react";
-import { cn, formatToISODate, normalizeToDate } from "@/lib/utils";
-import { useState, useMemo, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import DateScroller from "./date-scroller";
+import MealsDisplay from "./meals-display";
 
 interface MenuDisplaySectionProps {
   menuLoading: boolean;
@@ -27,6 +24,30 @@ interface MenuDisplaySectionProps {
   rightPanel?: ReactNode;
   noMenuAtAll?: boolean;
 }
+
+const MenuAlert = ({
+  title,
+  description,
+  description2
+}: {
+  title: string;
+  description?: string;
+  description2?: string
+}) => (
+  <Alert className="rounded-3xl border-warning/20 bg-warning/5 p-8" variant={"warning"}>
+    <AlertTitle className="text-2xl font-bold mb-4">{title}</AlertTitle>
+    {description && (
+      <AlertDescription className="text-lg opacity-90">
+        {description}
+        {description2 && (
+          <p className="text-sm text-muted-foreground mt-4 italic">
+            {description2}
+          </p>
+        )}
+      </AlertDescription>
+    )}
+  </Alert>
+);
 
 export default function MenuDisplaySection({
   menuLoading,
@@ -42,24 +63,31 @@ export default function MenuDisplaySection({
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
 
-  // Automatically show history if selected date is in the past
-  useEffect(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDate]);
-
   const filteredDates = useMemo(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayTime = today.getTime();
+    const today = normalizeToDate(new Date()).getTime();
 
-    const futureDates = availableDates.filter(d =>
-      normalizeToDate(formatToISODate(d.date)).getTime() >= todayTime
+    return availableDates.filter(d =>
+      getNormalizedISODate(d.date).getTime() >= today
     );
+  }, [availableDates]);
 
-    return [...futureDates];
-  }, [availableDates, selectedDate]);
+  const datePickerMinMax = useMemo(() => {
+    if (availableDates.length === 0) return { min: undefined, max: undefined };
+    return {
+      min: getNormalizedISODate(availableDates[0].date),
+      max: getNormalizedISODate(availableDates[availableDates.length - 1].date)
+    };
+  }, [availableDates]);
+
+  const datePickerAvailableDates = useMemo(() => {
+    const dates = availableDates.map(d => getNormalizedISODate(d.date));
+    const today = normalizeToDate(new Date());
+
+    if (!dates.some(d => d.getTime() === today.getTime())) {
+      return [...dates, today];
+    }
+    return dates;
+  }, [availableDates]);
 
   return (
     <div className="flex flex-col gap-8 w-full min-w-0">
@@ -88,12 +116,10 @@ export default function MenuDisplaySection({
                 <div className="flex items-center gap-2 shrink-0 max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
                   <DatePicker
                     onDateChange={onDateChange}
-                    minDate={availableDates.length > 0 ? normalizeToDate(formatToISODate(availableDates[0].date)) : undefined}
-                    maxDate={availableDates.length > 0 ? normalizeToDate(formatToISODate(availableDates[availableDates.length - 1].date)) : undefined}
+                    minDate={datePickerMinMax.min}
+                    maxDate={datePickerMinMax.max}
                     current={selectedDate}
-                    availableDates={
-                      availableDates.length > 0 ? availableDates.map(d => normalizeToDate(formatToISODate(d.date))).includes(new Date()) ? availableDates.map(d => normalizeToDate(formatToISODate(d.date))) : [...availableDates.map(d => normalizeToDate(formatToISODate(d.date))), new Date()] : [new Date()]
-                    }
+                    availableDates={datePickerAvailableDates}
                   />
                 </div>
               </div>
@@ -118,19 +144,13 @@ export default function MenuDisplaySection({
         ) : (
           <div className="flex flex-col gap-6 min-w-0 w-full p-4">
             {noMenuAtAll ? (
-              <Alert className="rounded-3xl border-warning/20 bg-warning/5 p-8" variant={"warning"}>
-                <AlertTitle className="text-2xl font-bold mb-4">{t("noMealAvailable")}</AlertTitle>
-                <AlertDescription className="text-lg opacity-90">
-                  {t("noMealAvailableDescription")}
-                  <p className="text-sm text-muted-foreground mt-4 italic">
-                    {t("noMealAvailableDescription2")}
-                  </p>
-                </AlertDescription>
-              </Alert>
+              <MenuAlert
+                title={t("noMealAvailable")}
+                description={t("noMealAvailableDescription")}
+                description2={t("noMealAvailableDescription2")}
+              />
             ) : selectedDateMeals.length === 0 ? (
-              <Alert className="rounded-3xl border-warning/20 bg-warning/5 p-8" variant={"warning"}>
-                <AlertTitle className="text-2xl font-bold">{t("noMenuAvailable")}</AlertTitle>
-              </Alert>
+              <MenuAlert title={t("noMenuAvailable")} />
             ) : (
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div

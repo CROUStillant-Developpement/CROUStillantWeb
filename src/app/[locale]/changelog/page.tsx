@@ -1,8 +1,8 @@
-import { getChangelog } from "@/services/changelog-service";
 import { Metadata } from "next";
-import ChangelogPage from "@/components/changelog/changelog-page";
 import { getTranslations } from "next-intl/server";
+import ChangelogPage from "@/components/changelog/changelog-page";
 import ErrorPage from "@/components/error";
+import { getChangelog } from "@/services/changelog-service";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ChangelogPage");

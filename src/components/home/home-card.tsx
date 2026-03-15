@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { MapPin, HeartHandshakeIcon, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import RadarsCard from "./home-card-radar";
 import GitCard from "./home-card-git";
 import { Link } from "@/i18n/routing";

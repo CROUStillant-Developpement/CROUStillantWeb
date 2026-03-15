@@ -31,7 +31,7 @@ export default function ChangelogPage({ changelogs }: ChangelogPageProps) {
         </AlertDescription>
       </Alert>
 
-      <div className="sticky top-20 z-40 py-4 bg-background/80 backdrop-blur-md -mx-4 px-4 overflow-x-auto">
+      <div className="sticky top-0 z-40 py-4 bg-background/80 backdrop-blur-md -mx-4 px-4 overflow-x-auto">
         <div className="flex justify-center gap-3">
           {Object.keys(changelogs).reverse().map((key) => (
             <Button asChild variant="outline" key={key} className="rounded-full px-6 border-primary/10 hover:bg-primary/5 hover:text-primary transition-all">

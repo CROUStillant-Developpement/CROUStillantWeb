@@ -6,11 +6,9 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DialogTrigger} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import QrCode from "qrcode";
 import Image from "next/image";
@@ -32,8 +30,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
   WhatsappShareButton,
-  WhatsappIcon,
-} from "react-share";
+  WhatsappIcon} from "react-share";
 
 interface QrCodeDialogProps {
   dialogTrigger: React.ReactNode;

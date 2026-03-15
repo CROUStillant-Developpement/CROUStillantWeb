@@ -1,7 +1,6 @@
 import { Link } from "@/i18n/routing";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { motion } from "@/lib/motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
@@ -50,7 +49,7 @@ export default async function LegalPage() {
         <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
 
-      <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full">
+      <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xl shadow-lg overflow-hidden w-full sticky -top-10 z-40">
         <CardContent className="p-8 lg:p-12 space-y-6">
           <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
           <div className="flex flex-wrap gap-3">
@@ -71,7 +70,7 @@ export default async function LegalPage() {
         <Card
           key={section.id}
           id={section.id}
-          className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-24"
+          className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-40"
         >
           <CardHeader className="bg-muted/30 border-b border-primary/5 p-8">
             <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
