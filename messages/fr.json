@@ -129,13 +129,13 @@
     "additionnal": {
       "title": "Filtres additionnels",
       "open": "Ouvert maintenant",
-      "accessibility": "Accessible aux personnes à mobilité réduite"
+      "accessibility": "Accessible aux PMR"
     },
     "reset": "Réinitialiser",
     "payment": {
       "title": "Moyens de paiement",
-      "izly": "Paiement Izly accepté",
-      "creditCard": "Paiement par carte bancaire accepté"
+      "izly": "Izly",
+      "creditCard": "Carte bancaire"
     },
     "loading": "Chargement",
     "geolocated": {
@@ -155,15 +155,16 @@
       "noResults": "Aucun type de restaurant trouvé pour cette recherche 😢"
     },
     "restaurantCity": {
-      "title": "Ville du restaurant",
+      "title": "Ville",
       "sortAsc": "Ordre alphabétique (A-Z)",
       "sortDesc": "Ordre alphabétique inverse (Z-A)"
     },
     "restaurantName": {
-      "title": "Nom du restaurant",
+      "title": "Restaurant",
       "sortAsc": "Ordre alphabétique (A-Z)",
       "sortDesc": "Ordre alphabétique inverse (Z-A)"
     },
+    "order": "Trié par",
     "map": "Afficher sur la carte",
     "list": "Afficher en liste"
   },

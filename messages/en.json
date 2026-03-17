@@ -129,13 +129,13 @@
     "additionnal": {
       "title": "Additional filters",
       "open": "Open now",
-      "accessibility": "Accessibility for people with reduced mobility"
+      "accessibility": "Accessibility for PRM"
     },
     "reset": "Reset filters",
     "payment": {
       "title": "Payment methods",
-      "izly": "Izly payment accepted",
-      "creditCard": "Credit card payment accepted"
+      "izly": "Izly",
+      "creditCard": "Credit card"
     },
     "loading": "Loading...",
     "geolocated": {
@@ -160,10 +160,11 @@
       "sortDesc": "Reverse alphabetical order (Z-A)"
     },
     "restaurantName": {
-      "title": "Restaurant name",
+      "title": "Restaurant",
       "sortAsc": "Alphabetical order (A-Z)",
       "sortDesc": "Reverse alphabetical order (Z-A)"
     },
+    "order": "Order by",
     "map": "Display on map",
     "list": "Display in list"
   },

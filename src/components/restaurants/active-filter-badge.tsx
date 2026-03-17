@@ -17,10 +17,10 @@ export default function ActiveFilterBadge({
   const umami = useUmami();
 
   return (
-    <Badge className="cursor-pointer transition-all ease-in-out duration-300">
+    <Badge className="transition-all ease-in-out duration-300 rounded-full h-6 bg-white text-black hover:bg-primary/80 hover:text-white">
       <div onClick={() => setSheetOpen?.(true)}>{text}</div>
       <CircleX
-        className="w-4 h-4 ml-2 z-20 hover:scale-110 transition-transform ease-in-out duration-300"
+        className="w-4 h-4 ml-2 z-20 hover:scale-110 transition-transform ease-in-out duration-300 cursor-pointer"
         onClick={() => {
           onRemove?.();
           umami.event("Restaurant.Filter.Remove");

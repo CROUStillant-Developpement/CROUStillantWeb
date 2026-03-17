@@ -122,7 +122,7 @@ export default function RestaurantsFilters({
     <TooltipProvider delayDuration={0}>
       <Accordion type="multiple" defaultValue={["location"]} className="w-full border-none flex flex-col gap-3">
         {/* Location */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-2xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="location" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -137,7 +137,7 @@ export default function RestaurantsFilters({
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <Locate className="h-4 w-4 text-primary shrink-0" />
+                    <Locate className="h-4 w-4 shrink-0" />
                     {!isCollapsed && <span className="font-semibold text-sm">{t("region.title")}</span>}
                   </div>
                 </AccordionTrigger>
@@ -173,7 +173,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Restaurant Type */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-2xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="type" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -188,7 +188,7 @@ export default function RestaurantsFilters({
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <Filter className="h-4 w-4 text-primary shrink-0" />
+                    <Filter className="h-4 w-4 shrink-0" />
                     {!isCollapsed && <span className="font-semibold text-sm">{t("restaurantType.title")}</span>}
                   </div>
                 </AccordionTrigger>
@@ -224,7 +224,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Payment */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-2xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="payment" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -239,7 +239,7 @@ export default function RestaurantsFilters({
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <CreditCard className="h-4 w-4 text-primary shrink-0" />
+                    <CreditCard className="h-4 w-4 shrink-0" />
                     {!isCollapsed && <span className="font-semibold text-sm">{t("payment.title")}</span>}
                   </div>
                 </AccordionTrigger>
@@ -259,7 +259,6 @@ export default function RestaurantsFilters({
                       checked={filters.card}
                     />
                     <label htmlFor="card" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      <CreditCard className="h-3 w-3 mr-2 text-muted-foreground" />
                       {t("payment.creditCard")}
                     </label>
                   </div>
@@ -273,7 +272,6 @@ export default function RestaurantsFilters({
                       checked={filters.izly}
                     />
                     <label htmlFor="izly" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      <Image src="/icons/izly.png" alt="izly" width={16} height={16} className="h-3 w-3 mr-2" />
                       {t("payment.izly")}
                     </label>
                   </div>
@@ -284,7 +282,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Status / Additionnal */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-2xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="additional" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -299,7 +297,7 @@ export default function RestaurantsFilters({
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <Info className="h-4 w-4 text-primary shrink-0" />
+                    <Info className="h-4 w-4 shrink-0" />
                     {!isCollapsed && <span className="font-semibold text-sm">{t("additionnal.title")}</span>}
                   </div>
                 </AccordionTrigger>
@@ -319,7 +317,6 @@ export default function RestaurantsFilters({
                       checked={filters.isOpen}
                     />
                     <label htmlFor="open" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      <CalendarCheck className="h-3 w-3 mr-2 text-muted-foreground" />
                       {t("additionnal.open")}
                     </label>
                   </div>
@@ -333,7 +330,6 @@ export default function RestaurantsFilters({
                       checked={filters.isPmr}
                     />
                     <label htmlFor="ispmr" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      <Accessibility className="mr-2 h-3 w-3 text-muted-foreground" />
                       {t("additionnal.accessibility")}
                     </label>
                   </div>
@@ -344,7 +340,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Sorting */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-2xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="sort" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -359,12 +355,12 @@ export default function RestaurantsFilters({
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <AlignLeft className="h-4 w-4 text-primary shrink-0" />
-                    {!isCollapsed && <span className="font-semibold text-sm">{t("restaurantName.title")} / {t("restaurantCity.title")}</span>}
+                    <AlignLeft className="h-4 w-4 shrink-0" />
+                    {!isCollapsed && <span className="font-semibold text-sm">{t("order")} {t("restaurantName.title").toLowerCase()} / {t("restaurantCity.title").toLowerCase()}</span>}
                   </div>
                 </AccordionTrigger>
               </TooltipTrigger>
-              {isCollapsed && <TooltipContent side="right">{t("restaurantName.title")} / {t("restaurantCity.title")}</TooltipContent>}
+              {isCollapsed && <TooltipContent side="right">{t("order")} {t("restaurantName.title").toLowerCase()} / {t("restaurantCity.title").toLowerCase()}</TooltipContent>}
             </Tooltip>
             {!isCollapsed && (
               <AccordionContent className="pb-2">
@@ -449,8 +445,8 @@ export default function RestaurantsFilters({
     <div className="w-full flex flex-col gap-6">
       <div className="w-full lg:flex z-10 relative gap-6 items-start">
         <div className={cn(
-          "hidden lg:flex shrink-0 bg-secondary/30 border border-border/50 shadow-sm p-4 rounded-2xl transition-all duration-300 ease-in-out flex-col lg:sticky lg:top-[10px] overflow-x-hidden",
-          isCollapsed ? "w-16 items-center px-2" : "w-1/4"
+          "hidden lg:flex shrink-0 border border-border/50 backdrop-blur-xl shadow-md p-4 rounded-2xl transition-all duration-300 ease-in-out flex-col lg:sticky lg:top-[10px] overflow-x-hidden",
+          isCollapsed ? "w-16 items-center px-2 pb-2" : "lg:w-1/4 xl:w-1/5"
         )}>
           <div className={cn("flex items-center justify-between mb-4 text-foreground w-full", isCollapsed && "flex-col gap-3")}>
             <div
@@ -472,66 +468,39 @@ export default function RestaurantsFilters({
             </div>
           </div>
 
-          <div className={cn("mb-4 w-full", isCollapsed && "flex justify-center")}>
-            {isCollapsed ? (
-              <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setIsCollapsed(false)}
-                      className="h-12 w-11 p-0 rounded-xl bg-background border border-border/50 shadow-sm flex items-center justify-center"
-                    >
-                      <Search className="h-4 w-4 text-muted-foreground" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Search</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ) : (
-              <Input
-                placeholder={t("search")}
-                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setFilters({ ...filters, search: e.target.value })
-                }
-                value={filters.search}
-                className="w-full rounded-xl bg-background border-border/50 shadow-sm h-9 text-sm"
-              />
-            )}
-          </div>
-
-          <ScrollArea className={cn("flex-1 w-full mb-4", !isCollapsed && "pr-2 -mr-2")}>
+          <ScrollArea className={cn("flex-1 w-full mb-3", !isCollapsed && "-mr-2")}>
             {renderFiltersContent()}
           </ScrollArea>
 
-          <div className={cn(
-            "pt-4 border-t border-border/50",
-            isCollapsed ? "w-full flex justify-center" : "w-full"
-          )}>
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={activeFilterCount === 0}
-              onClick={() => resetFilters()}
-              className={cn(
-                "h-9 rounded-xl text-xs font-bold uppercase tracking-wider transition-all",
-                isCollapsed
-                  ? "w-9 p-0 border-none bg-background shadow-sm hover:bg-destructive/10 text-destructive disabled:opacity-30 flex-shrink-0"
-                  : "w-full border-destructive/30 text-destructive hover:bg-destructive hover:text-white disabled:bg-muted disabled:text-muted-foreground disabled:border-border"
-              )}
-            >
-              <Trash2 className={cn("h-4 w-4", !isCollapsed && "mr-2")} />
-              {!isCollapsed && t("reset")}
-            </Button>
-          </div>
+          <TooltipProvider delayDuration={0}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={activeFilterCount === 0}
+                  onClick={() => resetFilters()}
+                  className={cn(
+                    "h-9 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex gap-2",
+                    isCollapsed
+                      ? "w-full p-5 py-6 border border-border/40 rounded-xl shadow-sm hover:bg-destructive/10 text-destructive transition-colors disabled:opacity-30"
+                      : "w-full border-destructive/30 text-destructive hover:bg-destructive hover:text-white disabled:bg-muted disabled:text-muted-foreground disabled:border-border"
+                  )}
+                >
+                  <Trash2 className={cn("h-4 w-4")} />
+                  {!isCollapsed && t("reset")}
+                </Button>
+              </TooltipTrigger>
+              {isCollapsed && <TooltipContent side="right">{t("reset")}</TooltipContent>}
+            </Tooltip>
+          </TooltipProvider>
         </div>
 
         <div className={cn(
           "w-full flex flex-col gap-6 transition-all duration-300 ease-in-out min-h-screen",
-          isCollapsed ? "lg:w-[calc(100%-4rem-1.5rem)]" : "lg:w-3/4"
+          isCollapsed ? "lg:w-[calc(100%-4rem-1.5rem)]" : "lg:3/4 xl:w-4/5"
         )}>
-          <div className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 rounded-2xl border border-primary/20 shadow-xl transition-all duration-300 ring-1 ring-primary/5">
+          <div className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 rounded-2xl border border-primary/20 shadow-md transition-all duration-300 ring-1 ring-primary/5">
             <div className="flex flex-col md:flex-row items-center gap-3">
               <div className="flex gap-3 w-full">
                 <div className="bg-secondary/40 p-1 rounded-xl flex items-center shadow-inner border border-border/20 backdrop-blur-md w-full md:w-auto">
@@ -543,13 +512,13 @@ export default function RestaurantsFilters({
                       umami.event("Restaurants.ToggleDisplay", { display: "list" });
                     }}
                     className={cn(
-                      "rounded-lg h-9 flex-1 md:flex-initial px-4 text-sm transition-all duration-300 font-bold",
+                      "rounded-lg h-9 flex-1 md:flex-initial px-4 text-sm transition-all duration-300 font-bold gap-2",
                       display === "list"
                         ? "shadow-lg bg-background text-primary scale-105 hover:bg-background/80 ml-1 sm:ml-2 md:ml-1"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        : "text-muted-foreground hover:bg-primary/10"
                     )}
                   >
-                    <AlignLeft className="mr-2 h-4 w-4 shrink-0" />
+                    <AlignLeft className="h-4 w-4 shrink-0" />
                     {isSmallScreen ? t("list") : ""}
                   </Button>
                   <Button
@@ -560,13 +529,13 @@ export default function RestaurantsFilters({
                       umami.event("Restaurants.ToggleDisplay", { display: "map" });
                     }}
                     className={cn(
-                      "rounded-lg h-9 flex-1 md:flex-initial px-4 text-sm transition-all duration-300 font-bold",
+                      "rounded-lg h-9 flex-1 md:flex-initial px-4 text-sm transition-all duration-300 font-bold gap-2",
                       display === "map"
-                        ? "shadow-lg bg-background text-primary scale-105 hover:bg-background/80 mr-1 sm:ml-2 md:mr-1"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        ? "shadow-lg bg-background text-primary scale-105 hover:bg-background/80 mr-1 sm:mr-2 md:mr-1"
+                        : "text-muted-foreground hover:bg-primary/10"
                     )}
                   >
-                    <Map className="mr-2 h-4 w-4 shrink-0" />
+                    <Map className="h-4 w-4 shrink-0" />
                     {isSmallScreen ? t("map") : ""}
                   </Button>
                 </div>
@@ -597,16 +566,6 @@ export default function RestaurantsFilters({
                           </div>
                         </SheetHeader>
                         <ScrollArea className="flex-1 p-6">
-                          <div className="mb-6">
-                            <Input
-                              placeholder={t("search")}
-                              onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                setFilters({ ...filters, search: e.target.value })
-                              }
-                              value={filters.search}
-                              className="w-full rounded-xl bg-background border-border/50 shadow-sm"
-                            />
-                          </div>
                           {renderFiltersContent()}
                         </ScrollArea>
                         <SheetFooter className="p-6 border-t flex flex-row gap-3">
@@ -631,30 +590,52 @@ export default function RestaurantsFilters({
                 </div>
               </div>
 
-              <Button
-                className={cn(
-                  "rounded-xl h-11 px-6 text-sm font-bold transition-all border-none shadow-lg items-center gap-2 w-full md:w-auto",
-                  "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] hover:shadow-primary/20"
-                )}
-                variant="default"
-                disabled={loading}
-                onClick={() => {
-                  handleLocationRequest();
-                  umami.event("Restaurants.Geolocate");
-                }}
-              >
-                <Locate className={cn("h-5 w-5", loading && "animate-spin")} />
-                {loading
-                  ? t("loading")
-                  : geoLocError
-                    ? t("geolocated.error")
-                    : t("geolocated.title")}
-              </Button>
+              <div className="flex flex-col md:flex-row gap-3 w-full">
+                <Input
+                  placeholder={t("search")}
+                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setFilters({ ...filters, search: e.target.value })
+                  }
+                  value={filters.search}
+                  className="w-full rounded-xl bg-background border-border/50 shadow-sm text-sm h-11"
+                />
+
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        className={cn(
+                          "rounded-xl h-11 px-4 text-sm font-bold transition-all border-none shadow-lg items-center gap-2 w-full md:w-auto",
+                          "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] hover:shadow-primary/20"
+                        )}
+                        variant="default"
+                        disabled={loading}
+                        onClick={() => {
+                          handleLocationRequest();
+                          umami.event("Restaurants.Geolocate");
+                        }}
+                      >
+                        <Locate className={cn("h-5 w-5", loading && "animate-spin")} />
+                        <p className="block md:hidden xl:block">
+                          {loading
+                            ? t("loading")
+                            : geoLocError
+                              ? t("geolocated.error")
+                              : t("geolocated.title")}
+                        </p>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="left" className="lg:hidden">
+                      <p>{t("geolocated.title")}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
 
             {activeFilterCount > 0 && (
-              <div className="flex flex-wrap items-center gap-2 bg-primary/5 px-3 py-2 md:px-4 md:py-3 rounded-2xl border border-primary/10 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300 w-full">
-                <span className="text-[10px] font-black text-primary uppercase tracking-widest mr-1 opacity-70 shrink-0">{t("activeFilters")}</span>
+              <div className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-xl border border-primary/10 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300 w-full">
+                <span className="text-[10px] font-black uppercase tracking-widest mr-1 opacity-70 shrink-0">{t("activeFilters")}</span>
                 <div className="flex flex-wrap gap-2 items-center">
                   {filters.search && (
                     <ActiveFilterBadge
@@ -754,8 +735,9 @@ export default function RestaurantsFilters({
                     variant="ghost"
                     size="sm"
                     onClick={() => resetFilters()}
-                    className="h-7 px-3 text-[10px] text-destructive hover:bg-destructive/10 hover:text-destructive uppercase font-black transition-all rounded-lg ml-auto md:ml-0"
+                    className="h-7 px-3 text-[10px] text-destructive hover:bg-destructive/10 hover:text-destructive uppercase font-black transition-all rounded-full ml-auto md:ml-0 flex gap-2 shadow-sm"
                   >
+                    <Trash2 className={cn("h-4 w-4")} />
                     {t("reset")}
                   </Button>
                 </div>

@@ -123,13 +123,15 @@ export default function RestaurantsPage({
             loading={loading}
           />
           {display === "list" && filteredRestaurants.length > 0 && (
-            <Pagination
-              loading={loading}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              totalRecords={filteredRestaurants.length}
-              onPageChange={setCurrentPage}
-            />
+            <div className="mx-4">
+              <Pagination
+                loading={loading}
+                currentPage={currentPage}
+                pageSize={pageSize}
+                totalRecords={filteredRestaurants.length}
+                onPageChange={setCurrentPage}
+              />
+            </div>
           )}
         </RestaurantsFilters>
       </div>
