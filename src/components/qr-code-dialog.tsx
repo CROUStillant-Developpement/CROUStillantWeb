@@ -107,35 +107,35 @@ export default function QrCodeDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-[2.5rem] shadow-2xl p-8 overflow-hidden will-change-[transform,opacity]">
-        <DialogHeader className="mb-4">
-          <DialogTitle className="text-2xl font-black tracking-tight">{title}</DialogTitle>
-          <DialogDescription className="text-muted-foreground/80 font-medium">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
+        <DialogHeader className="mb-3 sm:mb-4">
+          <DialogTitle className="text-xl sm:text-2xl font-black tracking-tight">{title}</DialogTitle>
+          <DialogDescription className="text-muted-foreground/80 font-medium text-sm">
             {description}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-5 sm:gap-8">
           {qrCodeData && (
-            <div className="p-6 bg-white rounded-[2.5rem] shadow-xl border border-black/5 group hover:scale-[1.02] transition-transform duration-500">
+            <div className="p-4 sm:p-6 bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-xl border border-black/5 group hover:scale-[1.02] transition-transform duration-500">
               <Image
                 ref={imageRef}
                 src={qrCodeData}
                 alt={t("alt")}
-                width={280}
-                height={280}
-                className="rounded-2xl"
+                width={220}
+                height={220}
+                className="rounded-xl sm:rounded-2xl w-[180px] h-[180px] sm:w-[220px] sm:h-[220px]"
               />
             </div>
           )}
 
-          <div className="w-full space-y-6">
-            <div className="flex gap-2 p-1.5 bg-secondary/20 border border-primary/10 rounded-2xl items-center focus-within:border-primary/30 transition-colors">
+          <div className="w-full space-y-4 sm:space-y-6">
+            <div className="flex gap-2 p-1.5 bg-secondary/20 border border-primary/10 rounded-2xl items-center focus-within:border-primary/30 transition-colors min-w-0">
               <input
                 type="text"
                 value={url}
                 readOnly
-                className="flex-1 bg-transparent px-4 py-2 text-sm font-medium focus:outline-none"
+                className="flex-1 min-w-0 bg-transparent px-3 py-2 text-xs sm:text-sm font-medium focus:outline-none truncate"
                 onFocus={(e) => e.target.select()}
               />
               <Button
@@ -144,20 +144,20 @@ export default function QrCodeDialog({
                   handleCopyLink();
                   umami.event("QrCodeDialog.CopyLink");
                 }}
-                className="rounded-xl h-10 px-4 font-bold shadow-md hover:scale-105 active:scale-95 transition-all"
+                className="shrink-0 rounded-xl h-9 sm:h-10 px-3 sm:px-4 font-bold shadow-md hover:scale-105 active:scale-95 transition-all"
                 variant="default"
                 aria-label={t("copyLink.button")}
               >
-                <Copy className="h-4 w-4 mr-2" />
-                {t("copyLink.cta")}
+                <Copy className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">{t("copyLink.cta")}</span>
               </Button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 text-center">
                 {t("share")}
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-secondary/10 rounded-3xl border border-primary/5">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-3 sm:p-4 bg-secondary/10 rounded-3xl border border-primary/5">
                 {[
                   { Button: FacebookShareButton, Icon: FacebookIcon },
                   { Button: TwitterShareButton, Icon: TwitterIcon },
@@ -169,7 +169,7 @@ export default function QrCodeDialog({
                 ].map(({ Button: ShareBtn, Icon: ShareIcon }, idx) => (
                   <ShareBtn key={idx} url={url} title={title} className="hover:scale-110 active:scale-90 transition-transform">
                     {/* @ts-ignore - rounding issues in react-share types */}
-                    <ShareIcon size={36} round />
+                    <ShareIcon size={32} round />
                   </ShareBtn>
                 ))}
               </div>
