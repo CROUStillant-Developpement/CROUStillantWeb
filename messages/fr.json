@@ -96,7 +96,11 @@
     "live": "En direct",
     "noMenuToday": "Aucun menu disponible aujourd'hui",
     "noMenuDescription": "Le menu sera mis à jour dès qu'il sera disponible.",
-    "lastUpdated": "Mis à jour à {time}"
+    "lastUpdated": "Mis à jour à {time}",
+    "tooSmall": {
+      "title": "Écran trop petit",
+      "description": "Cette page est conçue pour les écrans de 1024 px ou plus. Veuillez l'ouvrir sur un grand écran ou un téléviseur."
+    }
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",

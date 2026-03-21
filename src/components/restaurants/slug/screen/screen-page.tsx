@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Restaurant, Menu, Repas, CategorieTriee } from "@/services/types";
 import { fetchTodayMenuForScreen } from "@/actions/screen-actions";
 import { useTranslations, useLocale } from "next-intl";
-import { ArrowRight, RefreshCw } from "lucide-react";
+import { ArrowRight, RefreshCw, Monitor } from "lucide-react";
 
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 const SCROLL_SPEED = 0.5; // px per frame (~36px/s at 60fps)
@@ -127,6 +127,14 @@ export default function ScreenPage({
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [now, setNow] = useState<Date>(new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isTooSmall, setIsTooSmall] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsTooSmall(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // Live clock — tick every second
   useEffect(() => {
@@ -181,6 +189,14 @@ export default function ScreenPage({
   return (
     // fixed inset-0 z-50 takes over the full viewport, bypassing the locale layout's header/footer
     <div className="fixed inset-0 z-50 bg-white text-zinc-900 flex flex-col [overflow:hidden] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none">
+      {/* ── Too-small overlay ── */}
+      {isTooSmall && (
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-zinc-950/95 text-white text-center px-8">
+          <Monitor className="h-16 w-16 text-zinc-400" />
+          <p className="text-2xl font-bold">{t("tooSmall.title")}</p>
+          <p className="text-base text-zinc-400 max-w-xs leading-relaxed">{t("tooSmall.description")}</p>
+        </div>
+      )}
       {/* ── Header ── */}
       <header className="shrink-0 px-10 py-6 flex items-center justify-between border-b border-zinc-200 bg-zinc-50">
         <div className="min-w-0 mr-10">

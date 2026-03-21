@@ -96,7 +96,11 @@
     "live": "Live",
     "noMenuToday": "No menu available today",
     "noMenuDescription": "The menu will be updated as soon as it is available.",
-    "lastUpdated": "Updated at {time}"
+    "lastUpdated": "Updated at {time}",
+    "tooSmall": {
+      "title": "Screen too small",
+      "description": "This page is designed for screens 1024 px wide or larger. Please open it on a large screen or TV."
+    }
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
