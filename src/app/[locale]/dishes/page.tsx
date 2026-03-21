@@ -31,10 +31,10 @@ export default async function Dishes() {
   }
 
   return (
-    <div className="w-full mt-4 px-4">
+    <div className="w-full mt-4 px-4 overflow-x-hidden">
       <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">

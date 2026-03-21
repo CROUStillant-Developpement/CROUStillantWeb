@@ -53,7 +53,6 @@ export default function DatePicker({
     onDateChange?.(date);
   };
 
-  const locale = useLocale();
   const t = useTranslations("DatePickers");
   const tRes = useTranslations("RestaurantPage");
   const umami = useUmami();
@@ -106,7 +105,7 @@ export default function DatePicker({
           }}
         >
           <CalendarDays className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs hidden min-[400px]:inline">
+          <span className="text-xs min-[400px]:inline">
             {tRes("calendar")}
           </span>
         </Button>

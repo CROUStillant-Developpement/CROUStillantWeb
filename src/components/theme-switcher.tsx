@@ -20,7 +20,7 @@ export default function ModeToggle() {
   const { setTheme, theme } = useTheme();
   const t = useTranslations("ModeToggle");
   const umami = useUmami();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   return (
     <DropdownMenu>

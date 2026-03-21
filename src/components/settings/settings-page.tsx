@@ -113,10 +113,10 @@ export default function SettingsPage() {
   }, []);
 
   return (
-    <div className="w-full mt-4 px-4">
+    <div className="w-full mt-4 px-4 overflow-x-hidden">
       <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
@@ -186,7 +186,7 @@ export default function SettingsPage() {
         <SettingCard title={t("behaviorTitle")}>
           {favourites.length === 0 && (
             <Alert variant="destructive" className="rounded-3xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full">
-              <TriangleAlert className="h-5 w-5" />
+              <TriangleAlert className="h-5 w-5 ml-2 mt-3" />
               <AlertTitle className="font-black text-lg ml-2">{t("favourites.nofavouritesTitle")}</AlertTitle>
               <AlertDescription className="ml-2 text-base opacity-90">
                 {t.rich("favourites.nofavouritesDescription", {
@@ -304,13 +304,13 @@ export default function SettingsPage() {
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>
-          <div className="group space-y-6 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 w-full">
+          <div className="group space-y-6 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 w-full">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />
               </div>
               <div className="space-y-1 text-left">
-                <p className="font-black text-xl text-foreground leading-none">
+                <p className="font-black text-lg sm:text-xl text-foreground leading-snug break-words">
                   {t("personal.viewDataTitle")} & {t("personal.deleteDataTitle").toLowerCase()}
                 </p>
                 <p className="text-sm text-muted-foreground max-w-2xl">
@@ -335,7 +335,7 @@ export default function SettingsPage() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] rounded-3xl p-0 border-border/50 overflow-hidden shadow-2xl backdrop-blur-xl">
-                  <DialogHeader className="p-8 pb-4 bg-secondary/20">
+                  <DialogHeader className="p-4 sm:p-8 pb-4 bg-secondary/20">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="p-2 rounded-xl bg-primary/10">
                         <ScrollText className="h-5 w-5 text-primary" />
@@ -348,7 +348,7 @@ export default function SettingsPage() {
                       {t("personal.viewDataDescription")}
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="p-8 pt-4">
+                  <div className="p-4 sm:p-8 pt-4">
                     <div className="rounded-2xl bg-muted/50 border border-border/50 p-6 font-mono text-sm overflow-auto max-h-[60vh] custom-scrollbar">
                       <pre className="text-foreground/90 whitespace-pre-wrap break-all">
                         {JSON.stringify(localData, null, 2)}

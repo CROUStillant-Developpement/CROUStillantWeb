@@ -54,9 +54,9 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
         <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50">
           {restaurant?.adresse}
           {restaurant?.acces?.map((acces, index) => (
-            <div className="flex items-start gap-2 mt-2 text-[11px] opacity-70 group" key={index}>
-              <ArrowRight className="w-3 h-3 mt-0.5 text-primary/50 group-hover:text-primary transition-colors" />
-              <span>{acces}</span>
+            <div className="flex items-start gap-2 mt-2 text-[11px] opacity-70 group min-w-0" key={index}>
+              <ArrowRight className="w-3 h-3 mt-0.5 shrink-0 text-primary/50 group-hover:text-primary transition-colors" />
+              <span className="min-w-0 break-words">{acces}</span>
             </div>
           ))}
         </div>
@@ -81,14 +81,14 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       <section className="bg-card border border-border/50 rounded-3xl overflow-hidden shadow-sm transition-all hover:border-primary/20 mt-2">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="opening-hours" className="border-none">
-            <div className="flex items-center justify-between px-5 pt-6 pb-4  ">
+            <div className="flex items-center justify-between px-5 pt-6 pb-4">
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-primary" />
                 <h2 className="text-lg font-bold">{t("openingHours")}</h2>
               </div>
             </div>
             {restaurant?.horaires && restaurant?.horaires.length > 0 && (
-              <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 mx-5">
+              <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 mx-5 break-words">
                 {restaurant?.horaires?.join(", ")}
               </div>
             )}
@@ -130,15 +130,15 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               {restaurant.email && (
                 <a
                   href={`mailto:${restaurant.email}`}
-                  className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-secondary/50 transition-colors border border-transparent hover:border-border/50"
+                  className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-secondary/50 transition-colors border border-transparent hover:border-border/50 min-w-0 overflow-hidden"
                   onClick={() => umami.event("Restaurant.Email", { restaurant: restaurant.code })}
                 >
                   <div className="p-2 rounded-xl bg-blue-500/10 text-blue-500">
                     <Mail className="w-4 h-4" />
                   </div>
-                  <div className="flex flex-col overflow-hidden">
+                  <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
                     <span className="text-[9px] uppercase font-bold opacity-50 leading-none mb-1">{t("email")}</span>
-                    <span className="text-[12px] font-medium truncate max-w-[160px] sm:max-w-[220px] text-ellipsis">{restaurant.email}</span>
+                    <span className="text-[12px] font-medium truncate">{restaurant.email}</span>
                   </div>
                 </a>
               )}
@@ -180,7 +180,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
           </TooltipProvider>
         </div>
 
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row flex-wrap items-center gap-2">
           {restaurant.type && (
             <Badge variant="secondary" className="rounded-full px-2 py-0">{restaurant.type.libelle}</Badge>
           )}

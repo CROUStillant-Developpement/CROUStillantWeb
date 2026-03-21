@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   const pathname = usePathname();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const t = useTranslations("Header");
   const umami = useUmami();
@@ -96,11 +96,10 @@ export default function Header() {
           {isDesktop && <span className="font-bold text-lg">CROUStillant</span>}
         </Link>
       </div>
-      <div className="flex md:w-64 justify-end">
+      <div className="flex justify-end">
         <div
           className={cn(
-            "flex items-center bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md",
-            !isDesktop && "gap-2"
+            "flex items-center bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
           )}
         >
           <ModeToggle />

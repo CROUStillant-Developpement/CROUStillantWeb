@@ -23,7 +23,7 @@ export default function LocaleToggle() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const umami = useUmami();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   function handleChange(locale: string) {
     startTransition(() => {

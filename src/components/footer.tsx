@@ -19,7 +19,7 @@ export default async function Footer() {
   }
 
   return (
-    <footer className="w-full px-8 lg:px-24 flex flex-col items-center">
+    <footer className="w-full px-4 md:px-8 lg:px-24 flex flex-col items-center">
       <div className={cn(
         "w-full bg-secondary/40 backdrop-blur-md border border-border/20 rounded-t-[2.5rem] shadow-xl p-8 md:p-12 relative overflow-hidden pb-4 md:pb-6"
       )}>

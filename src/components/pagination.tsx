@@ -99,7 +99,7 @@ export default function PaginationComponent({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <Pagination className="flex justify-between max-w-full p-2 rounded-2xl border border-border/50 shadow-md backdrop-blur-md">
+    <Pagination className="flex justify-between max-w-full p-2 rounded-2xl backdrop-blur-md">
       <PaginationPrevious
         isActive={hasPrevious && !loading}
         text={t("previous")}

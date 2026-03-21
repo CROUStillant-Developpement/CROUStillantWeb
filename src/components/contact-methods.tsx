@@ -69,13 +69,13 @@ export function ContactMethods() {
             </p>
 
             <div className="grid gap-4">
-              <Button asChild className="h-16 rounded-2xl group relative overflow-hidden bg-primary hover:bg-primary/90 transition-all">
-                <Link href="mailto:croustillant@bayfield.dev" className="flex items-center justify-between px-6 w-full">
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 rounded-xl bg-white/10">
+              <Button asChild className="h-16 rounded-2xl group relative overflow-hidden bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] transition-transform">
+                <Link href="mailto:croustillant@bayfield.dev" className="flex items-center justify-between px-3 sm:px-6 w-full">
+                  <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                    <div className="p-2 rounded-xl bg-white/10 shrink-0">
                       <Mail className="w-5 h-5 text-primary-foreground" />
                     </div>
-                    <span className="font-bold tracking-tight">{t("methods.email")}</span>
+                    <span className="font-bold tracking-tight truncate">{t("methods.email")}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
@@ -86,13 +86,13 @@ export function ContactMethods() {
                   href="https://github.com/CROUStillant-Developpement/CROUStillantWeb/issues/new"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between px-6 w-full"
+                  className="flex items-center justify-between px-3 sm:px-6 w-full"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 rounded-xl bg-primary/5">
+                  <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                    <div className="p-2 rounded-xl bg-primary/5 shrink-0">
                       <Github className="w-5 h-5 text-primary" />
                     </div>
-                    <span className="font-bold tracking-tight text-foreground">{t("methods.github")}</span>
+                    <span className="font-bold tracking-tight text-foreground truncate">{t("methods.github")}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
@@ -103,13 +103,13 @@ export function ContactMethods() {
                   href="https://discord.gg/yG6FjqbWtk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between px-6 w-full"
+                  className="flex items-center justify-between px-3 sm:px-6 w-full"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 rounded-xl bg-[#5865F2]/10 group-hover:bg-[#5865F2]/20 transition-colors">
+                  <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                    <div className="p-2 rounded-xl bg-[#5865F2]/10 group-hover:bg-[#5865F2]/20 transition-colors shrink-0">
                       <MessageSquare className="w-5 h-5 text-[#5865F2]" />
                     </div>
-                    <span className="font-bold tracking-tight text-foreground">{t("methods.discord")}</span>
+                    <span className="font-bold tracking-tight text-foreground truncate">{t("methods.discord")}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </a>

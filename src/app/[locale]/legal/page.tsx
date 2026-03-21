@@ -31,10 +31,10 @@ export default async function LegalPage() {
   ];
 
   return (
-    <div className="w-full mt-4 px-4 flex flex-col gap-8">
+    <div className="w-full mt-4 px-4 flex flex-col gap-8 overflow-x-hidden">
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
@@ -49,55 +49,57 @@ export default async function LegalPage() {
         <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
 
-      <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xl shadow-lg overflow-hidden w-full sticky -top-10 z-40">
-        <CardContent className="p-8 lg:p-12 space-y-6">
-          <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
-          <div className="flex flex-wrap gap-3">
-            {sections.map((section) => (
-              <Link
-                key={section.id}
-                href={`#${section.id}`}
-                className="inline-flex items-center rounded-full bg-primary/5 px-4 py-2 text-sm font-semibold text-primary ring-1 ring-inset ring-primary/10 hover:bg-primary/10 transition-colors"
-              >
-                {t(`${section.key}.title`)}
-              </Link>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {sections.map((section) => (
-        <Card
-          key={section.id}
-          id={section.id}
-          className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-40"
-        >
-          <CardHeader className="bg-muted/30 border-b border-primary/5 p-8">
-            <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
-              {t(`${section.key}.title`)}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-8 lg:p-12 space-y-10">
-            {section.parts.map((partKey, index) => (
-              <div key={partKey} className="space-y-4">
-                <h3 className="text-xl font-bold flex items-center gap-3">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold">
-                    {index + 1}
-                  </span>
-                  {t(`${section.key}.${partKey}.title`)}
-                </h3>
-                <div className="flex flex-col gap-3 text-muted-foreground leading-relaxed pl-11">
-                  <p>{t(`${section.key}.${partKey}.content1`)}</p>
-                  <p>{t(`${section.key}.${partKey}.content2`)}</p>
-                </div>
-                {index < section.parts.length - 1 && (
-                  <Separator className="mt-10 opacity-50" />
-                )}
-              </div>
-            ))}
+      <div className="mb-8 flex flex-col gap-10">
+        <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xl shadow-lg overflow-hidden w-full sticky -top-10 z-40">
+          <CardContent className="p-4 sm:p-8 lg:p-12 space-y-6">
+            <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
+            <div className="flex flex-wrap gap-3">
+              {sections.map((section) => (
+                <Link
+                  key={section.id}
+                  href={`#${section.id}`}
+                  className="inline-flex items-center rounded-full bg-primary/5 px-4 py-2 text-sm font-semibold text-primary ring-1 ring-inset ring-primary/10 hover:bg-primary/10 transition-colors"
+                >
+                  {t(`${section.key}.title`)}
+                </Link>
+              ))}
+            </div>
           </CardContent>
         </Card>
-      ))}
+
+        {sections.map((section) => (
+          <Card
+            key={section.id}
+            id={section.id}
+            className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-40"
+          >
+            <CardHeader className="bg-muted/30 border-b border-primary/5 p-4 sm:p-8">
+              <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary break-words">
+                {t(`${section.key}.title`)}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-8 lg:p-12 space-y-10">
+              {section.parts.map((partKey, index) => (
+                <div key={partKey} className="space-y-4">
+                  <h3 className="text-lg sm:text-xl font-bold flex items-center gap-3 break-words">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold shrink-0">
+                      {index + 1}
+                    </span>
+                    {t(`${section.key}.${partKey}.title`)}
+                  </h3>
+                  <div className="flex flex-col gap-3 text-muted-foreground leading-relaxed pl-0 sm:pl-11">
+                    <p>{t(`${section.key}.${partKey}.content1`)}</p>
+                    <p>{t(`${section.key}.${partKey}.content2`)}</p>
+                  </div>
+                  {index < section.parts.length - 1 && (
+                    <Separator className="mt-10 opacity-50" />
+                  )}
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

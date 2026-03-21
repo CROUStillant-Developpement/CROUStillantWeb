@@ -16,6 +16,7 @@ import {
   FileTerminal,
   ChevronsLeftRightEllipsis,
   Smartphone,
+  GithubIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
@@ -31,11 +32,11 @@ export default function AboutPage() {
   const t = useTranslations("AboutPage");
 
   return (
-    <div className="w-full mt-4 px-4">
+    <div className="w-full mt-4 px-4 overflow-x-hidden">
       {/* Header Section */}
       <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
             {t("seo.title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
@@ -53,12 +54,12 @@ export default function AboutPage() {
       <div className="space-y-12 mx-auto pb-20">
         {/* Presentation & Updates Card */}
         <div className="flex flex-col lg:flex-row gap-6 w-full">
-          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm">
+          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+            <div className="flex items-center gap-4 mb-6 min-w-0">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm shrink-0">
                 <GraduationCap className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground break-words">
                 {t("presentation.title")}
               </h2>
             </div>
@@ -67,12 +68,12 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm">
+          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+            <div className="flex items-center gap-4 mb-6 min-w-0">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm shrink-0">
                 <Soup className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground break-words">
                 {t("updates.title")}
               </h2>
             </div>
@@ -83,12 +84,12 @@ export default function AboutPage() {
         </div>
 
         {/* Open Source Card */}
-        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
+        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
           <div className="flex items-center gap-4 mb-8">
             <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm">
               <FileCode2 className="h-6 w-6 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground break-words">
               {t("open-source.title")}
             </h2>
           </div>
@@ -106,9 +107,9 @@ export default function AboutPage() {
         </div>
 
         {/* Product Preview Card */}
-        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
           <div className="flex-1">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 break-words">
               {t("product.title")}
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
@@ -135,11 +136,23 @@ export default function AboutPage() {
         </div>
 
         {/* Team Section */}
-        <div id="team" className="scroll-mt-32 rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
+        <div id="team" className="scroll-mt-32 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
           <div className="flex flex-col lg:flex-row-reverse gap-12">
-            <div className="lg:w-1/2">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-6">{t("team.title")}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">{t("team.description")}</p>
+            <div className="flex flex-col gap-10 lg:w-1/2 justify-center">
+              <div className="flex flex-col">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 break-words">{t("team.title")}</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">{t("team.description")}</p>
+              </div>
+              <div className="flex flex-col">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 break-words">{t("job.title")}</h2>
+                <p className="text-lg text-muted-foreground mb-8">{t("job.description")}</p>
+                <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
+                  <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-sm transition-all hover:bg-primary/5 hover:border-primary/50 group">
+                    {t("job.button")}
+                    <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
             </div>
             <div className="lg:w-1/2 grid grid-cols-1 gap-4">
               {[
@@ -149,15 +162,16 @@ export default function AboutPage() {
                 { key: "member4", icon: ChevronsLeftRightEllipsis },
                 { key: "member5", icon: Smartphone },
               ].map((member, i) => (
-                <div key={i} className="flex items-center gap-5 p-4 rounded-2xl bg-background/50 border border-border/20 hover:bg-background transition-colors group">
-                  <div className="p-3 rounded-xl bg-primary/10 transition-transform group-hover:scale-110">
+                <div key={i} className="flex items-center gap-3 sm:gap-5 p-4 rounded-2xl bg-background/50 border border-border/20 hover:bg-background transition-colors group">
+                  <div className="p-3 rounded-xl bg-primary/10 transition-transform group-hover:scale-110 shrink-0">
                     <member.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <div className="flex flex-col">
-                    <a href={t(`team.members.${member.key}.github`)} className="text-lg font-bold hover:text-primary transition-colors underline-offset-4 hover:underline">
+                  <div className="flex flex-col min-w-0">
+                    <a href={t(`team.members.${member.key}.github`)} className="text-base sm:text-lg font-bold hover:text-primary transition-colors underline-offset-4 hover:underline break-words">
                       {t(`team.members.${member.key}.name`)}
+                      <GithubIcon className="inline-block ml-2 h-4 w-4 text-muted-foreground shrink-0" />
                     </a>
-                    <p className="text-sm text-muted-foreground font-medium">{t(`team.members.${member.key}.role`)}</p>
+                    <p className="text-sm text-muted-foreground font-medium break-words">{t(`team.members.${member.key}.role`)}</p>
                   </div>
                 </div>
               ))}
@@ -165,33 +179,38 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Job & Integrated Section */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
-            <div className="flex-1 mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{t("job.title")}</h2>
-              <p className="text-lg text-muted-foreground mb-8">{t("job.description")}</p>
-              <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
-                <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-sm transition-all hover:bg-primary/5 hover:border-primary/50 group">
-                  {t("job.button")}
-                  <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-            <div className="mt-auto flex items-center justify-center">
-              <Image
-                width={1350}
-                height={900}
-                src="/previews/structure.png"
-                alt="Structure Preview"
-                className="rounded-2xl object-contain shadow-xl ring-1 ring-border/10"
-              />
-            </div>
+        {/* Sources Section */}
+        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 break-words">
+              {t("sources.title")}
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              {t("sources.description")}
+            </p>
+            <Link href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/" rel="noopener noreferrer" target="_blank">
+              <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-sm transition-all hover:bg-primary/5 group">
+                {t("sources.button")}
+                <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
+          <div className="flex-1 w-full flex items-center justify-center">
+            <Image
+              width={1350}
+              height={900}
+              src="/previews/data.gouv.fr.png"
+              alt="data.gouv.fr Preview"
+              className="rounded-2xl object-contain shadow-2xl ring-1 ring-border/20 transition-transform duration-500 hover:scale-[1.02]"
+            />
+          </div>
+        </div>
 
-          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        {/* Architecture & Integrated Section */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
             <div className="flex-1 mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{t("discord.title")}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 break-words">{t("discord.title")}</h2>
               <p className="text-lg text-muted-foreground mb-8">{t("discord.description")}</p>
               <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867" target="_blank">
                 <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
@@ -210,19 +229,35 @@ export default function AboutPage() {
               />
             </div>
           </div>
+
+          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+            <div className="flex-1 mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 break-words">{t("architecture.title")}</h2>
+              <p className="text-lg text-muted-foreground mb-8">{t("architecture.description")}</p>
+            </div>
+            <div className="mt-auto flex items-center justify-center">
+              <Image
+                width={1350}
+                height={900}
+                src="/previews/structure.png"
+                alt="Structure Preview"
+                className="rounded-2xl object-contain shadow-xl ring-1 ring-border/10"
+              />
+            </div>
+          </div>
         </div>
 
         {/* API Section */}
-        <div className="flex flex-col xl:flex-row-reverse gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="flex flex-col xl:flex-row-reverse gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
           <div className="flex-1">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 break-words">
               {t("integrated.title")}
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               {t("integrated.description")}
             </p>
             <Link href="https://api.croustillant.menu" target="_blank">
-              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20">
+              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
                 <Globe className="mr-3 h-5 w-5" />
                 {t("integrated.button")}
               </Button>
@@ -240,11 +275,11 @@ export default function AboutPage() {
         </div>
 
         {/* Iframe Section */}
-        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-6 flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-primary/10">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 flex items-center gap-3 break-words">
+                <div className="p-2 rounded-xl bg-primary/10 shrink-0">
                   <FileCode2 className="h-6 w-6 text-primary" />
                 </div>
                 {t("integrated.iframe_title")}
@@ -313,42 +348,15 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Sources Section */}
-        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50 overflow-hidden">
-          <div className="flex-1">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-6">
-              {t("sources.title")}
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              {t("sources.description")}
-            </p>
-            <Link href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/" rel="noopener noreferrer" target="_blank">
-              <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-sm transition-all hover:bg-primary/5 group">
-                {t("sources.button")}
-                <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
-          <div className="flex-1 w-full flex items-center justify-center">
-            <Image
-              width={1350}
-              height={900}
-              src="/previews/data.gouv.fr.png"
-              alt="data.gouv.fr Preview"
-              className="rounded-2xl object-contain shadow-2xl ring-1 ring-border/20 transition-transform duration-500 hover:scale-[1.02]"
-            />
-          </div>
-        </div>
-
         {/* Conclusion Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
-            <h3 className="text-3xl font-bold tracking-tight text-foreground mb-6">
+          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 break-words">
               {t("convinced.title")}
             </h3>
             <p className="text-lg text-muted-foreground mb-8">{t("convinced.description")}</p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="rounded-2xl px-6 font-black shadow-lg shadow-primary/20">
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="rounded-2xl px-6 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
                 <Link href="/restaurants" prefetch={true}>
                   <CookingPot className="mr-2 h-5 w-5" />
                   {t("convinced.button")}
@@ -363,12 +371,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-8 transition-all hover:bg-secondary/50">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm">
+          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+            <div className="flex items-center gap-4 mb-6 min-w-0">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm shrink-0">
                 <HeartHandshake className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold tracking-tight text-foreground">
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground break-words">
                 {t("more-convinced.title")}
               </h3>
             </div>

@@ -2,7 +2,7 @@
 
 import { Restaurant } from "@/services/types";
 import { Button } from "@/components/ui/button";
-import { Heart, QrCode } from "lucide-react";
+import { ArrowRight, Heart, QrCode, ScreenShare } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
@@ -11,13 +11,14 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useUmami } from "next-umami";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
 import log from "@/lib/log";
 import { X as CloseIcon } from "lucide-react";
+import { Link } from "@/i18n/routing";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -90,10 +91,10 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             }}
           />
 
-          <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start">
-            <div className="max-w-3xl">
-              <h1 className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight">{restaurant.nom}</h1>
-              <div className="mt-2 md:mt-3 flex items-center gap-3 text-white/90 font-medium">
+          <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">
+            <div className="max-w-3xl min-w-0">
+              <h1 className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight break-words">{restaurant.nom}</h1>
+              <div className="mt-2 md:mt-3 flex flex-wrap items-center gap-3 text-white/90 font-medium">
                 <span className="flex items-center text-sm md:text-base drop-shadow-md bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                   {restaurant.zone}
                 </span>
@@ -124,6 +125,19 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 }}
               >
                 <Heart className={isFavourite ? "text-red-500 fill-red-500 scale-110 transition-transform" : "scale-100 transition-transform"} />
+              </Button>
+              <Button
+                size="icon"
+                className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                onClick={() => {
+                  umami.event("Restaurant.Screen", {
+                    restaurant: restaurant.code,
+                  });
+                }}
+              >
+                <Link href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}/screen`} className="flex items-center justify-center h-full w-full">
+                  <ScreenShare size={20} />
+                </Link>
               </Button>
               <QrCodeDialog
                 dialogTrigger={
@@ -162,7 +176,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               transition={{ duration: 0.4, ease: "circOut" }}
               className="overflow-hidden"
             >
-              <div className="bg-primary/5 border border-primary/20 backdrop-blur-md rounded-3xl p-4 md:p-6 flex items-center justify-between gap-4 group hover:bg-primary/10 transition-colors">
+              <div className="bg-primary/5 border border-primary/20 backdrop-blur-md rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 group hover:bg-primary/10 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="hidden md:flex h-12 w-12 rounded-2xl bg-primary/10 text-primary items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                     <Heart size={24} />

@@ -124,7 +124,7 @@ export default function MenuDisplaySection({
                 </div>
               </div>
 
-              <div className="relative w-full max-w-[65vw] group m-auto">
+              <div className="relative w-full max-w-[80svw] md:max-w-[80svw] lg:max-w-[45svw] xl:max-w-[50svw] 2xl:max-w-[65svw] group m-auto">
                 <DateScroller
                   availableDates={filteredDates}
                   selectedDate={selectedDate}
@@ -142,7 +142,7 @@ export default function MenuDisplaySection({
             <Skeleton className="w-full h-40 rounded-3xl" />
           </div>
         ) : (
-          <div className="flex flex-col gap-6 min-w-0 w-full p-4">
+          <div className="flex flex-col gap-6 min-w-0 w-full p-4 pb-0">
             {noMenuAtAll ? (
               <MenuAlert
                 title={t("noMealAvailable")}
