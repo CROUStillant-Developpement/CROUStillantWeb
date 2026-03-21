@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/toaster";
+import LayoutShell from "@/components/layout-shell";
 import Header from "@/components/header";
 import BackToTopButton from "@/components/ui/back-to-top-button";
 import Footer from "@/components/footer";
@@ -126,13 +126,13 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen">
-              <Header />
+            <LayoutShell
+              header={<Header />}
+              footer={<Footer />}
+              backToTop={<BackToTopButton />}
+            >
               {children}
-              <BackToTopButton />
-            </main>
-            <Footer />
-            <Toaster />
+            </LayoutShell>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
