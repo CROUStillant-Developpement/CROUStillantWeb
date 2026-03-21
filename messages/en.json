@@ -83,6 +83,21 @@
       "keywords": "CROUS, restaurant, menu"
     }
   },
+  "ScreenPage": {
+    "seo": {
+      "title": "Screen - {name}",
+      "notFound": "Restaurant not found"
+    },
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "open": "Open",
+    "closed": "Closed",
+    "live": "Live",
+    "noMenuToday": "No menu available today",
+    "noMenuDescription": "The menu will be updated as soon as it is available.",
+    "lastUpdated": "Updated at {time}"
+  },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
     "noMenuAvailable": "No menu available for this date 😢",
@@ -246,6 +261,10 @@
       "title": "Available on Discord",
       "description": "Add our official Discord bot to your server to check the menus of CROUS restaurants directly on Discord!",
       "button": "Add the bot now"
+    },
+    "architecture": {
+      "title": "Architecture",
+      "description": "CROUStillant is made up of several interconnected services: a central API, a data scraper, a Discord bot, a mobile app, and a web interface. Each service communicates through the API to ensure up-to-date data across all platforms."
     },
     "integrated": {
       "title": "Integrate CROUS data",
@@ -474,6 +493,8 @@
       "starredDescription": "The button on the home page takes you directly to the menu of your favourite restaurant.",
       "starredEditSuccessTitle": "favourite changed!",
       "starredEditSuccessDescription": "The favourite restaurant has been successfully changed.",
+      "starredSuccessTitle": "Favourite restaurant set!",
+      "starredSuccessDescription": "Your favourite restaurant has been successfully set.",
       "starredSelectPlaceholder": "Select",
       "regionTitle": "Favourite region",
       "regionDescription": "Choose your favourite region to display the restaurants of this region by default.",

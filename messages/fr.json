@@ -83,6 +83,21 @@
       "keywords": "CROUS, restaurant, menu"
     }
   },
+  "ScreenPage": {
+    "seo": {
+      "title": "Écran - {name}",
+      "notFound": "Restaurant introuvable"
+    },
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "dinner": "Dîner",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "live": "En direct",
+    "noMenuToday": "Aucun menu disponible aujourd'hui",
+    "noMenuDescription": "Le menu sera mis à jour dès qu'il sera disponible.",
+    "lastUpdated": "Mis à jour à {time}"
+  },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",
     "noMenuAvailable": "Aucun menu disponible pour cette date 😢",
@@ -246,6 +261,10 @@
       "title": "Présent sur Discord",
       "description": "Vous pouvez retrouver tous les restaurants et menus directement sur Discord via le Bot officiel CROUStillant !",
       "button": "Ajouter le bot dès maintenant"
+    },
+    "architecture": {
+      "title": "Architecture",
+      "description": "CROUStillant est composé de plusieurs services interconnectés : une API centrale, un scraper de données, un bot Discord, une application mobile et une interface web. Chaque service communique via l'API pour garantir des données à jour sur l'ensemble des plateformes."
     },
     "integrated": {
       "title": "Intégration facile",
@@ -475,6 +494,8 @@
       "starredDescription": "Le bouton de la page d'accueil vous permet de voir directement le menu de votre restaurant favori.",
       "starredEditSuccessTitle": "Restaurant favori modifié !",
       "starredEditSuccessDescription": "Le favori a été changé avec succès.",
+      "starredSuccessTitle": "Restaurant favori défini !",
+      "starredSuccessDescription": "Votre restaurant favori a été défini avec succès.",
       "starredSelectPlaceholder": "Sélectionner",
       "regionTitle": "Région favorite",
       "regionDescription": "Choisissez une région pour afficher les restaurants de cette région en premier.",
