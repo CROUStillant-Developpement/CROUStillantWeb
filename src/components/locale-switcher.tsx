@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTransition } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import ReactCountryFlag from "react-country-flag"
@@ -23,7 +23,10 @@ export default function LocaleToggle() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const umami = useUmami();
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktopMedia = useMediaQuery("(min-width: 1024px)");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDesktop = mounted && isDesktopMedia;
 
   function handleChange(locale: string) {
     startTransition(() => {

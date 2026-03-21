@@ -33,8 +33,8 @@ function MealSection({
     [repas.categories]
   );
   return (
-    <Card className="relative overflow-hidden border-border/50 shadow-md hover:shadow-xl transition-all duration-300 group rounded-3xl">
-      <div className="absolute top-0 left-0 w-1 h-full bg-primary/40 group-hover:bg-primary transition-colors" />
+    <Card className="relative overflow-hidden border-border/50 shadow-md hover:shadow-xl transition-all duration-300 group rounded-3xl bg-transparent">
+      <div className="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors" />
       <QrCodeDialog
         dialogTrigger={
           <div className="absolute top-6 right-6 p-2 rounded-full bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">

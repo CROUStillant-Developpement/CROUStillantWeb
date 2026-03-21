@@ -46,7 +46,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   return (
     <div className="flex flex-col gap-6 p-1 h-full">
       {/* Location */}
-      <section className="bg-card border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <MapPinHouse className="w-5 h-5 text-primary" />
           {t("location")}
@@ -61,7 +61,11 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
           ))}
         </div>
 
-        <Button asChild className="w-full rounded-2xl h-10 font-bold group text-sm" variant="secondary">
+        <Button asChild className="w-full rounded-2xl h-10 font-bold group text-sm border-border/50" variant="outline" onClick={() => {
+          umami.event("Restaurant.GoogleMaps", {
+            restaurant: restaurant.code,
+          });
+        }}>
           <Link
             href={`https://www.google.com/maps/search/?api=1&query=${restaurant.latitude},${restaurant.longitude}`}
             target="_blank"
@@ -78,10 +82,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Opening Hours Section */}
-      <section className="bg-card border border-border/50 rounded-3xl overflow-hidden shadow-sm transition-all hover:border-primary/20 mt-2">
+      <section className="border border-border/50 rounded-3xl overflow-hidden shadow-sm transition-all hover:border-primary/20 mt-2">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="opening-hours" className="border-none">
-            <div className="flex items-center justify-between px-5 pt-6 pb-4">
+            <div className="flex items-center justify-between px-5 pt-5 pb-4">
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-primary" />
                 <h2 className="text-lg font-bold">{t("openingHours")}</h2>
@@ -118,7 +122,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Contact & Services */}
-      <section className="bg-card border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <Info className="w-5 h-5 text-primary" />
           {t("contactAndServices")}
@@ -215,7 +219,7 @@ function ServiceIcon({ icon, label }: { icon: React.ReactNode; label: string }) 
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
-        <div className="p-3 rounded-2xl bg-secondary/50 border border-border/50 text-foreground/70 hover:text-primary transition-colors cursor-help">
+        <div className="p-3 rounded-2xl border border-border/50 text-foreground/70 hover:text-primary transition-colors cursor-help">
           {icon}
         </div>
       </TooltipTrigger>

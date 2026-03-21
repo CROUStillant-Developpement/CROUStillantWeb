@@ -41,10 +41,10 @@ export default function ChangelogItem({
 
         {/* Text Content */}
         <div className="space-y-4">
-          <h3 className="font-black text-xl sm:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
+          <h3 className="font-black text-lg sm:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300 break-words">
             {shortDescription}
           </h3>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl">
+          <p className="text-muted-foreground leading-relaxed max-w-3xl break-words">
             {fullDescription}
           </p>
         </div>

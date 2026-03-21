@@ -118,6 +118,7 @@ export default async function RootLayout({
           "min-h-screen bg-background antialiased relative",
           inter.className
         )}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

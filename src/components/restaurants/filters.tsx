@@ -75,7 +75,7 @@ export default function RestaurantsFilters({
 }: RestaurantsFiltersProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const isSmallScreen = useMediaQuery("(min-width: 550px)");
+  const isSmallScreen = useMediaQuery("(min-width: 550px)", { initializeWithValue: false });
   const t = useTranslations("Filters");
   const umami = useUmami();
 

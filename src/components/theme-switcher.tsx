@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 import { useUmami } from "next-umami";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
@@ -20,7 +21,10 @@ export default function ModeToggle() {
   const { setTheme, theme } = useTheme();
   const t = useTranslations("ModeToggle");
   const umami = useUmami();
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktopMedia = useMediaQuery("(min-width: 1024px)");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDesktop = mounted && isDesktopMedia;
 
   return (
     <DropdownMenu>

@@ -47,7 +47,7 @@ export default function ChangelogPage({ changelogs }: ChangelogPageProps) {
         {Object.keys(changelogs).reverse().map((key) => (
           <div key={key} id={key} className="scroll-mt-32">
             <div className="flex items-center gap-4 mb-8">
-              <h2 className="font-black text-4xl text-primary/20 tracking-tighter uppercase">{key}</h2>
+              <h2 className="font-black text-2xl sm:text-4xl text-primary/20 tracking-tighter uppercase break-words">{key}</h2>
               <Separator className="flex-1 opacity-20" />
             </div>
             <div className="grid gap-2">

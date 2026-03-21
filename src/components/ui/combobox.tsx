@@ -47,7 +47,7 @@ export function ComboBoxResponsive({
   noResultsText = "No results found.",
 }: ComboBoxProps) {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)", { initializeWithValue: false });
 
   if (isDesktop) {
     return (

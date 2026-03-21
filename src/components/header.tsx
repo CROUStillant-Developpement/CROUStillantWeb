@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import ModeToggle from "@/components/theme-switcher";
 import { Settings, Home, Info, UtensilsCrossed } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
+import { useState, useEffect } from "react";
 import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
 import { useTranslations } from "next-intl";
@@ -14,7 +15,10 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   const pathname = usePathname();
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktopMedia = useMediaQuery("(min-width: 1024px)");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDesktop = mounted && isDesktopMedia;
 
   const t = useTranslations("Header");
   const umami = useUmami();
