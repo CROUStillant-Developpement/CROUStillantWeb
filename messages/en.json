@@ -721,5 +721,11 @@
       "description": "Discover the latest changes and updates made to CROUStillant. Stay informed of the latest features and improvements.",
       "keywords": "CROUS, restaurant, menu, changelog"
     }
+  },
+  "NewUIBanner": {
+    "title": "New interface!",
+    "message": "Welcome to the brand new CROUStillant interface! If you encounter a bug, feel free to",
+    "contact": "contact us",
+    "dismiss": "Dismiss"
   }
 }

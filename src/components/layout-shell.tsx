@@ -2,6 +2,8 @@
 
 import { usePathname } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/toaster";
+import NewUIBanner from "@/components/new-ui-banner";
+
 
 export default function LayoutShell({
   children,
@@ -30,6 +32,7 @@ export default function LayoutShell({
       </main>
       {footer}
       <Toaster />
+      <NewUIBanner />
     </>
   );
 }
