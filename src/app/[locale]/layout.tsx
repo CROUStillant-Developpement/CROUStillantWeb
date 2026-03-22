@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/toaster";
+import LayoutShell from "@/components/layout-shell";
 import Header from "@/components/header";
 import BackToTopButton from "@/components/ui/back-to-top-button";
 import Footer from "@/components/footer";
@@ -22,6 +22,7 @@ const APP_DESCRIPTION =
   "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.WEB_URL || "https://croustillant.menu"),
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
@@ -46,6 +47,17 @@ export const metadata: Metadata = {
     "France",
     "Outre-mer",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -66,7 +78,7 @@ export const metadata: Metadata = {
     url: process.env.WEB_URL,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,
@@ -106,6 +118,7 @@ export default async function RootLayout({
           "min-h-screen bg-background antialiased relative",
           inter.className
         )}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -114,13 +127,13 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen">
-              <Header />
+            <LayoutShell
+              header={<Header />}
+              footer={<Footer />}
+              backToTop={<BackToTopButton />}
+            >
               {children}
-              <BackToTopButton />
-            </main>
-            <Footer />
-            <Toaster />
+            </LayoutShell>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

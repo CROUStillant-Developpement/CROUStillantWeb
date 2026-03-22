@@ -20,7 +20,7 @@ RUN apk -U add build-base gyp pkgconfig python3 nodejs npm
 
 # Install node modules
 COPY --link package-lock.json package.json ./
-RUN npm ci --include=dev --force
+RUN npm ci --force
 
 # Copy application code
 COPY --link . .

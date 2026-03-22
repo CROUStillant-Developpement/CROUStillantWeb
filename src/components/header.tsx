@@ -3,50 +3,50 @@
 import { Button } from "./ui/button";
 import { Link } from "@/i18n/routing";
 import ModeToggle from "@/components/theme-switcher";
-import { Settings, Home, Info, Star, UtensilsCrossed } from "lucide-react";
+import { Settings, Home, Info, UtensilsCrossed } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
-import { getGithubStarCount } from "@/services/stats-services";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import LocaleToggle from "./locale-switcher";
 import Logo from "./logo";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 import { useUmami } from "next-umami";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
-  const [stars, setStars] = useState<number>(0); // [1
   const pathname = usePathname();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktopMedia = useMediaQuery("(min-width: 1024px)");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDesktop = mounted && isDesktopMedia;
 
   const t = useTranslations("Header");
   const umami = useUmami();
 
-  useEffect(() => {
-    getGithubStarCount()
-      .then((count) => setStars(count))
-      .catch(() => setStars(0));
-  }, []);
-
   return (
     <header className="flex justify-between items-center w-full mt-4 px-4">
-      <nav className="md:w-64">
+      <nav className="">
         <ul
-          className={`flex h-9 items-center space-x-1 bg-background p-1 rounded-none border-none ${
-            isDesktop ? "border border-b" : "gap-2"
-          }`}
+          className={cn(
+            "flex items-center space-x-1 bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
+          )}
         >
           <li>
             <Button
               size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/" ? "default" : "outline"}
-              className={`select-none h-9 rounded-sm text-sm ${
-                isDesktop ? "px-3 py-1" : "p-2"
-              }`}
+              variant={pathname === "/" ? "default" : "ghost"}
+              className={cn(
+                "select-none h-9 rounded-lg text-sm transition-all duration-300 font-bold",
+                pathname === "/"
+                  ? "shadow-lg bg-background text-primary hover:bg-background/80"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/10",
+                isDesktop ? "px-4" : "p-0 w-9"
+              )}
               onClick={() => umami.event('Header.HomeButton')}
             >
               <Link href="/">
-                {isDesktop ? t("home") : <Home className="h-6 w-6" />}
+                {isDesktop ? t("home") : <Home className="h-5 w-5" />}
               </Link>
             </Button>
           </li>
@@ -54,32 +54,41 @@ export default function Header() {
             <Button
               size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/restaurants" ? "default" : "outline"}
-              className={`select-none h-9 rounded-sm text-sm ${
-                isDesktop ? "px-3 py-1" : "p-2"
-              }`}
+              variant={pathname?.startsWith("/restaurants") ? "default" : "ghost"}
+              className={cn(
+                "select-none h-9 rounded-lg text-sm transition-all duration-300 font-bold",
+                pathname?.startsWith("/restaurants")
+                  ? "shadow-lg bg-background text-primary hover:bg-background/80"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/10",
+                isDesktop ? "px-4" : "p-0 w-9"
+              )}
               onClick={() => umami.event('Header.RestaurantsButton')}
             >
               <Link href="/restaurants">
                 {isDesktop ? (
                   t("restaurants")
                 ) : (
-                  <UtensilsCrossed className="h-6 w-6" />
+                  <UtensilsCrossed className="h-5 w-5" />
                 )}
               </Link>
             </Button>
           </li>
           <li>
             <Button
+              size={isDesktop ? "default" : "icon"}
               asChild
-              variant={pathname === "/about" ? "default" : "outline"}
-              className={`select-none h-9 rounded-sm text-sm ${
-                isDesktop ? "px-3 py-1" : "p-2"
-              }`}
+              variant={pathname === "/about" ? "default" : "ghost"}
+              className={cn(
+                "select-none h-9 rounded-lg text-sm transition-all duration-300 font-bold",
+                pathname === "/about"
+                  ? "shadow-lg bg-background text-primary hover:bg-background/80"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/10",
+                isDesktop ? "px-4" : "p-0 w-9"
+              )}
               onClick={() => umami.event('Header.AboutButton')}
             >
               <Link href="/about">
-                {isDesktop ? t("about") : <Info className="h-6 w-6" />}
+                {isDesktop ? t("about") : <Info className="h-5 w-5" />}
               </Link>
             </Button>
           </li>
@@ -91,30 +100,32 @@ export default function Header() {
           {isDesktop && <span className="font-bold text-lg">CROUStillant</span>}
         </Link>
       </div>
-      <div className="flex gap-2 md:w-64 justify-end">
-        {isDesktop && (
-          <Button asChild variant="outline" onClick={() => umami.event('Header.GithubButton')}>
-            <Link
-              href="https://github.com/CROUStillant-Developpement"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {stars} <Star className="h-4 w-4" />
+      <div className="flex justify-end">
+        <div
+          className={cn(
+            "flex items-center bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
+          )}
+        >
+          <ModeToggle />
+          <LocaleToggle />
+          <Button
+            asChild
+            variant={pathname === "/settings" ? "default" : "ghost"}
+            size={isDesktop ? "default" : "icon"}
+            className={cn(
+              "select-none h-9 rounded-lg transition-all duration-300 font-bold",
+              pathname === "/settings"
+                ? "shadow-lg bg-background text-primary hover:bg-background/80"
+                : "text-muted-foreground hover:text-primary hover:bg-primary/10",
+              isDesktop ? "px-4" : "p-0 w-9"
+            )}
+            onClick={() => umami.event('Header.SettingsButton')}
+          >
+            <Link href="/settings">
+              <Settings className="h-5 w-5" />
             </Link>
           </Button>
-        )}
-        <ModeToggle />
-        <LocaleToggle />
-        <Button
-          asChild
-          variant={pathname === "/settings" ? "default" : "outline"}
-          className={`select-none h-9 w-9 rounded-sm`}
-          onClick={() => umami.event('Header.SettingsButton')}
-        >
-          <Link href="/settings">
-            <Settings className="h-6 w-6" />
-          </Link>
-        </Button>
+        </div>
       </div>
     </header>
   );

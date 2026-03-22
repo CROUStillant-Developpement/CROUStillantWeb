@@ -83,77 +83,58 @@ export default function RestaurantsPage({
   }, [filteredRestaurants]);
 
   return (
-    <div>
-      {/* Page title and filters */}
-      <div className="w-full justify-between lg:flex mb-4 z-10">
-        <div className="w-full">
-          <h1 className="font-bold text-3xl">Restaurants</h1>
-          <div className="opacity-50">
+    <div className="w-full mt-4 px-4">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+        <div className="relative z-10 max-w-2xl">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+            Restaurants
+          </h1>
+          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
             {loading ? (
               <Loading className="!justify-start" />
             ) : (
-              t("results", { count: filteredRestaurants.length })
+              <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
+                {t("results", { count: filteredRestaurants.length })}
+              </span>
             )}
           </div>
-          <RestaurantsFilters
-            setFilteredRestaurants={setFilteredRestaurants}
-            restaurants={restaurants}
-            setLoading={setLoading}
-            loading={loading}
-            regions={regions}
-            typesRestaurants={typesRestaurants}
-          />
         </div>
-        {/* <div className="flex items-center gap-3 mt-4 lg:mt-0 w-fit">
-          <p>{t("display.title")}</p>
-          <div>
-            <Button
-              size="icon"
-              className="rounded-r-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "list" ? "default" : "outline"}
-            >
-              <AlignLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              size="icon"
-              className="rounded-l-none"
-              onClick={() => toggleDisplay()}
-              variant={display === "map" ? "default" : "outline"}
-            >
-              <Map className="h-4 w-4" />
-            </Button>
-          </div>
-        </div> */}
+
+        {/* Decorative elements */}
+        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
-      {display === "list" && filteredRestaurants.length > 0 && (
-        // Pagination
-        <Pagination
+
+      <div className="w-full z-10 relative">
+        <RestaurantsFilters
+          setFilteredRestaurants={setFilteredRestaurants}
+          restaurants={restaurants}
+          setLoading={setLoading}
           loading={loading}
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalRecords={filteredRestaurants.length}
-          onPageChange={setCurrentPage}
-        />
-      )}
-      {/* Filtered restaurants or skeleton or no results or map */}
-      <Content
-        display={display}
-        filteredRestaurants={filteredRestaurants}
-        paginatedRestaurants={paginatedRestaurants}
-        favouritesRestaurants={favouritesRestaurants}
-        loading={loading}
-      />
-      {display === "list" && filteredRestaurants.length > 0 && (
-        // Pagination
-        <Pagination
-          loading={loading}
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalRecords={filteredRestaurants.length}
-          onPageChange={setCurrentPage}
-        />
-      )}
+          regions={regions}
+          typesRestaurants={typesRestaurants}
+        >
+          {/* Filtered restaurants or skeleton or no results or map */}
+          <Content
+            display={display}
+            filteredRestaurants={filteredRestaurants}
+            paginatedRestaurants={paginatedRestaurants}
+            favouritesRestaurants={favouritesRestaurants}
+            loading={loading}
+          />
+          {display === "list" && filteredRestaurants.length > 0 && (
+            <div className="mx-4">
+              <Pagination
+                loading={loading}
+                currentPage={currentPage}
+                pageSize={pageSize}
+                totalRecords={filteredRestaurants.length}
+                onPageChange={setCurrentPage}
+              />
+            </div>
+          )}
+        </RestaurantsFilters>
+      </div>
     </div>
   );
 }

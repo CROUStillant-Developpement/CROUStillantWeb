@@ -38,7 +38,7 @@
     },
     "footer": {
       "title": "Convinced ?",
-      "subtitle": "Start your use of CROUStillant now!"
+      "subtitle": "Start using CROUStillant now!"
     }
   },
   "HomeCard": {
@@ -83,6 +83,25 @@
       "keywords": "CROUS, restaurant, menu"
     }
   },
+  "ScreenPage": {
+    "seo": {
+      "title": "Screen - {name}",
+      "notFound": "Restaurant not found"
+    },
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "open": "Open",
+    "closed": "Closed",
+    "live": "Live",
+    "noMenuToday": "No menu available today",
+    "noMenuDescription": "The menu will be updated as soon as it is available.",
+    "lastUpdated": "Updated at {time}",
+    "tooSmall": {
+      "title": "Screen too small",
+      "description": "This page is designed for screens 1024 px wide or larger. Please open it on a large screen or TV."
+    }
+  },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
     "noMenuAvailable": "No menu available for this date 😢",
@@ -107,7 +126,11 @@
     "menuHistoryCtaBtn": "View history",
     "newBadge": "New",
     "pastDays": "Past days",
-    "noMenuHistoryAtAll": "No menu history available for this restaurant 😢"
+    "noMenuHistoryAtAll": "No menu history available for this restaurant 😢",
+    "open": "Open now",
+    "closed": "Closed",
+    "favoriteHint": "Add this restaurant to your favorites to find it more quickly on your home page!",
+    "favoriteHintCta": "Add to favorites"
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
@@ -125,13 +148,13 @@
     "additionnal": {
       "title": "Additional filters",
       "open": "Open now",
-      "accessibility": "Accessibility for people with reduced mobility"
+      "accessibility": "Accessibility for PRM"
     },
     "reset": "Reset filters",
     "payment": {
       "title": "Payment methods",
-      "izly": "Izly payment accepted",
-      "creditCard": "Credit card payment accepted"
+      "izly": "Izly",
+      "creditCard": "Credit card"
     },
     "loading": "Loading...",
     "geolocated": {
@@ -156,10 +179,11 @@
       "sortDesc": "Reverse alphabetical order (Z-A)"
     },
     "restaurantName": {
-      "title": "Restaurant name",
+      "title": "Restaurant",
       "sortAsc": "Alphabetical order (A-Z)",
       "sortDesc": "Reverse alphabetical order (Z-A)"
     },
+    "order": "Order by",
     "map": "Display on map",
     "list": "Display in list"
   },
@@ -229,6 +253,11 @@
           "name": "Louis Descotes",
           "role": "Web developer",
           "github": "https://github.com/louisdescotes"
+        },
+        "member5": {
+          "name": "Audric Fullhardt",
+          "role": "Mobile developer",
+          "github": "https://github.com/audricfullhardt"
         }
       }
     },
@@ -237,10 +266,18 @@
       "description": "Add our official Discord bot to your server to check the menus of CROUS restaurants directly on Discord!",
       "button": "Add the bot now"
     },
+    "architecture": {
+      "title": "Architecture",
+      "description": "CROUStillant is made up of several interconnected services: a central API, a data scraper, a Discord bot, a mobile app, and a web interface. Each service communicates through the API to ensure up-to-date data across all platforms."
+    },
     "integrated": {
       "title": "Integrate CROUS data",
       "description": "You can integrate CROUS data directly into your own projects using our API. The API is free and open-source.",
-      "button": "View the API documentation"
+      "button": "View the API documentation",
+      "iframe_title": "New: Iframe Integrations",
+      "iframe_description": "You can now directly integrate restaurant information and menus onto your own website.",
+      "iframe_info_title": "Restaurant information",
+      "iframe_menu_title": "Restaurant menu"
     },
     "sources": {
       "title": "Sources",
@@ -304,6 +341,8 @@
     "about": "About"
   },
   "QrCodeDialog": {
+    "share": "Share this menu",
+    "alt": "Generated QR Code",
     "copy": {
       "button": "Copy the image",
       "toastTitle": "Image copied!",
@@ -312,6 +351,7 @@
     "download": "Download the image",
     "copyLink": {
       "button": "Copy the link",
+      "cta": "Copy",
       "toastTitle": "Link copied!",
       "toastDescription": "The menu link has been copied to your clipboard."
     }
@@ -372,18 +412,21 @@
   },
   "RestaurantInformation": {
     "openingHours": "Opening hours",
-    "open": "Open now",
-    "closed": "Closed",
     "day": "Day",
     "breakfast": "Breakfast",
     "lunch": "Lunch",
     "dinner": "Dinner",
+    "clickToSeeAll": "See all",
+    "clickToSeeLess": "See less",
     "contact": "Contact",
     "accessibility": "Accessibility for people with reduced mobility",
     "izly": "Izly payment accepted",
     "creditCard": "Credit card payment accepted",
     "phone": "Phone",
     "email": "Email",
+    "location": "Location",
+    "contactAndServices": "Contact & Services",
+    "openInGoogleMaps": "Open in Google Maps",
     "otherInformation": "Other information",
     "type": "Type",
     "crous": "CROUS",
@@ -425,6 +468,7 @@
   },
   "SettingsPage": {
     "title": "Settings",
+    "subtitle": "Preferences & personalization",
     "appearanceTitle": "Appearance",
     "behaviorTitle": "Behavior",
     "personalTitle": "Personal data",
@@ -453,6 +497,8 @@
       "starredDescription": "The button on the home page takes you directly to the menu of your favourite restaurant.",
       "starredEditSuccessTitle": "favourite changed!",
       "starredEditSuccessDescription": "The favourite restaurant has been successfully changed.",
+      "starredSuccessTitle": "Favourite restaurant set!",
+      "starredSuccessDescription": "Your favourite restaurant has been successfully set.",
       "starredSelectPlaceholder": "Select",
       "regionTitle": "Favourite region",
       "regionDescription": "Choose your favourite region to display the restaurants of this region by default.",
@@ -463,9 +509,13 @@
     },
     "personal": {
       "deleteDataTitle": "Delete data",
-      "deleteDataDescription": "Delete <strong>all your favourites and settings</strong>. This action is irreversible.",
+      "deleteDataDescription": "Delete all your data stored on your device. This action is irreversible.",
+      "viewDataTitle": "Local data",
+      "viewDataDescription": "View all the data currently stored on your device.",
+      "viewDataButton": "View data",
       "deleteDataButton": "Delete data",
       "deleteDataConfirmTitle": "Are you sure?",
+      "deleteDataConfirmDescription": "This action will permanently remove all your preferences.",
       "deleteDataConfirmYes": "Yes, delete",
       "deleteDataConfirmNo": "No, cancel",
       "deleteDataSuccessTitle": "Data deleted!",
@@ -479,7 +529,7 @@
   },
   "StatsPage": {
     "title": "Statistics",
-    "description": "CROUStillant updates the menus of CROUS restaurants several times a day. Discover the statistics of these updates.",
+    "description": "Discover the statistics of the updates.",
     "stats": {
       "menus": "Menus",
       "compositions": "Compositions",
@@ -636,8 +686,9 @@
     }
   },
   "ContactPage": {
-    "title": "Contact Us - Serving Connections!",
-    "description": "We don't serve forms. Instead, get in touch with us through one of these links. It's faster and tastier!",
+    "title": "Contact Us",
+    "description": "Serving Connections!",
+    "subdescription": "We don't serve forms. Instead, get in touch with us through one of these links. It's faster and tastier!",
     "methods": {
       "email": "Send us an email! 📧",
       "github": "Spotted a bug? Open an issue on GitHub! 🐛",
@@ -674,5 +725,11 @@
       "description": "Discover the latest changes and updates made to CROUStillant. Stay informed of the latest features and improvements.",
       "keywords": "CROUS, restaurant, menu, changelog"
     }
+  },
+  "NewUIBanner": {
+    "title": "New interface!",
+    "message": "Welcome to the brand new CROUStillant interface! If you encounter a bug, feel free to",
+    "contact": "contact us",
+    "dismiss": "Dismiss"
   }
 }

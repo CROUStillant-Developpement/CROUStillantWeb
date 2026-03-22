@@ -63,16 +63,16 @@ const Map = ({
   const { markers } = useMarkerStore();
 
   return (
-    <div className="col-span-3 flex-1 h-65svh relative">
+    <div className="col-span-3 flex-1 relative p-4">
       {loading && (
-        <div className="absolute top-0 left-0 inset-0 flex flex-col items-center justify-center rounded-lg bg-transparent z-20 backdrop-blur-sm">
+        <div className="absolute top-0 left-0 inset-0 flex flex-col items-center justify-center rounded-2xl bg-transparent z-20 backdrop-blur-sm">
           <div className="rounded-full h-20 w-20 bg-primary animate-ping"></div>
         </div>
       )}
       <MapContainer
         center={center}
         zoom={zoom}
-        className="flex-1 w-full h-full rounded-lg z-10"
+        className="flex-1 w-full h-80svh rounded-2xl z-10"
         minZoom={2}
       >
         <TileLayer

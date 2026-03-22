@@ -6,11 +6,9 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DialogTrigger} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import QrCode from "qrcode";
 import Image from "next/image";
@@ -32,8 +30,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
   WhatsappShareButton,
-  WhatsappIcon,
-} from "react-share";
+  WhatsappIcon} from "react-share";
 
 interface QrCodeDialogProps {
   dialogTrigger: React.ReactNode;
@@ -110,92 +107,75 @@ export default function QrCodeDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
+        <DialogHeader className="mb-3 sm:mb-4">
+          <DialogTitle className="text-xl sm:text-2xl font-black tracking-tight">{title}</DialogTitle>
+          <DialogDescription className="text-muted-foreground/80 font-medium text-sm">
+            {description}
+          </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+
+        <div className="flex flex-col items-center gap-5 sm:gap-8">
           {qrCodeData && (
-            <Image
-              ref={imageRef}
-              src={qrCodeData}
-              alt="Generated QR Code"
-              width={SIZE}
-              height={SIZE}
-              className="rounded-lg"
-            />
-          )}
-        </div>
-        <DialogFooter>
-          {/* ...existing code for download/copy image buttons... */}
-          {url && (
-            <div className="w-full">
-              <div className="flex w-full items-center">
-                <input
-                  type="text"
-                  value={url}
-                  readOnly
-                  className="flex-1 rounded-l-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  style={{ minWidth: 0 }}
-                  onFocus={(e) => e.target.select()}
-                />
-                <Button
-                  type="button"
-                  onClick={() => {
-                    handleCopyLink();
-                    umami.event("QrCodeDialog.CopyLink");
-                  }}
-                  className="rounded-l-none rounded-r-md"
-                  variant="outline"
-                  tabIndex={0}
-                  aria-label={t("copyLink.button", {
-                    defaultValue: "Copy link",
-                  })}
-                >
-                  <Copy className="mr-1" size={18} />
-                </Button>
-              </div>
-              <div className="flex flex-wrap justify-evenly w-full mt-6">
-                <FacebookShareButton url={url} hashtag="#CROUStillant">
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
-                <TwitterShareButton
-                  url={url}
-                  title={title}
-                  hashtags={["CROUStillant", "Menu"]}
-                  via="CROUStillant"
-                >
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-                <LinkedinShareButton
-                  url={url}
-                  title={title}
-                  summary={description}
-                  source="CROUStillant"
-                >
-                  <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
-                <WhatsappShareButton url={url} title={title} separator=" - ">
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
-                <TelegramShareButton url={url} title={title}>
-                  <TelegramIcon size={32} round />
-                </TelegramShareButton>
-                <RedditShareButton url={url} title={title}>
-                  <RedditIcon size={32} round />
-                </RedditShareButton>
-                <EmailShareButton
-                  url={url}
-                  subject={title}
-                  body={description || url}
-                >
-                  <EmailIcon size={32} round />
-                </EmailShareButton>
-              </div>
+            <div className="p-4 sm:p-6 bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-xl border border-black/5 group hover:scale-[1.02] transition-transform duration-500">
+              <Image
+                ref={imageRef}
+                src={qrCodeData}
+                alt={t("alt")}
+                width={220}
+                height={220}
+                className="rounded-xl sm:rounded-2xl w-[180px] h-[180px] sm:w-[220px] sm:h-[220px]"
+              />
             </div>
           )}
-        </DialogFooter>
+
+          <div className="w-full space-y-4 sm:space-y-6">
+            <div className="flex gap-2 p-1.5 bg-secondary/20 border border-primary/10 rounded-2xl items-center focus-within:border-primary/30 transition-colors min-w-0">
+              <input
+                type="text"
+                value={url}
+                readOnly
+                className="flex-1 min-w-0 bg-transparent px-3 py-2 text-xs sm:text-sm font-medium focus:outline-none truncate"
+                onFocus={(e) => e.target.select()}
+              />
+              <Button
+                type="button"
+                onClick={() => {
+                  handleCopyLink();
+                  umami.event("QrCodeDialog.CopyLink");
+                }}
+                className="shrink-0 rounded-xl h-9 sm:h-10 px-3 sm:px-4 font-bold shadow-md hover:scale-105 active:scale-95 transition-all"
+                variant="default"
+                aria-label={t("copyLink.button")}
+              >
+                <Copy className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">{t("copyLink.cta")}</span>
+              </Button>
+            </div>
+
+            <div className="space-y-3 sm:space-y-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 text-center">
+                {t("share")}
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-3 sm:p-4 bg-secondary/10 rounded-3xl border border-primary/5">
+                {[
+                  { Button: FacebookShareButton, Icon: FacebookIcon },
+                  { Button: TwitterShareButton, Icon: TwitterIcon },
+                  { Button: LinkedinShareButton, Icon: LinkedinIcon },
+                  { Button: WhatsappShareButton, Icon: WhatsappIcon },
+                  { Button: TelegramShareButton, Icon: TelegramIcon },
+                  { Button: RedditShareButton, Icon: RedditIcon },
+                  { Button: EmailShareButton, Icon: EmailIcon },
+                ].map(({ Button: ShareBtn, Icon: ShareIcon }, idx) => (
+                  <ShareBtn key={idx} url={url} title={title} className="hover:scale-110 active:scale-90 transition-transform">
+                    {/* @ts-ignore - rounding issues in react-share types */}
+                    <ShareIcon size={32} round />
+                  </ShareBtn>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -6,6 +6,7 @@ import {
   ForkKnifeCrossed,
   MapPin,
   HeartHandshakeIcon,
+  ArrowRight,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import HomeCard from "./home-card";
@@ -21,65 +22,65 @@ interface CardProps {
   children: React.ReactNode;
 }
 
-function BasicCard({
+const BasicCard = ({
   title,
   description,
   cta,
   ctaLink,
-  style,
   children,
-}: CardProps) {
+}: CardProps) => {
   const umami = useUmami();
 
   return (
-    <aside
-      className={`${style} relative flex items-center min-h-[160px] h-full w-full overflow-hidden border-2 border-[#555] border-opacity-5 bg-[#FAFAFA] dark:bg-[#151414] dark:border-[rgba(85,85,85,0.35)] rounded-xl p-4 md:p-6`}
-    >
-      <div className="flex flex-col w-full max-w-[80%] h-fit gap-4 ">
-        <div className="flex flex-col gap-1">
-          <h3 className="bg-gradient-to-r from-[#e40514] to-[#ff6868] dark:linear-gradient(to right, #E40514 0%, #FF7474 100%) bg-clip-text text-transparent text-2xl font-bold">
+    <div className="group relative flex items-center min-h-[180px] w-full overflow-hidden rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 hover:shadow-xl hover:shadow-primary/5">
+      <div className="flex flex-col w-full max-w-[75%] gap-4 relative z-10 font-bold">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-2xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
             {title}
           </h3>
-          <p className="text-base">{description}</p>
+          <p className="text-base text-muted-foreground leading-relaxed font-medium">
+            {description}
+          </p>
         </div>
         <Link
           href={`/${ctaLink}`}
-          className="text-sm font-bold underline"
+          className="text-sm font-bold underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all flex items-center gap-2 group/link"
           onClick={() => {
             umami.event("Home.About");
           }}
         >
           {cta}
+          <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
         </Link>
       </div>
-      <div className="absolute -right-16">{children}</div>
-    </aside>
+      <div className="absolute -right-8 opacity-10 group-hover:opacity-20 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500">
+        {children}
+      </div>
+    </div>
   );
-}
+};
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
 
   return (
-    <>
-      <section id="info" className="mt-32">
-        <h2 className="2xl:mt-28 lg:text-6xl lg:text-center lg:max-w-[80%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent">
-          {t("title.second")}
-        </h2>
-        <aside className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 lg:mt-10">
+    <div className="w-full space-y-24 md:space-y-32">
+      <section id="info" className="scroll-mt-32">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
+            {t("title.second")}
+          </h2>
+          <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <BasicCard
             title={t("card1.title")}
             description={t("card1.description")}
             cta={t("card1.cta")}
             ctaLink="about"
           >
-            <MapPin
-              height={200}
-              width={125}
-              color="#555555"
-              opacity={0.1}
-              className="dark:opacity-30"
-            />
+            <MapPin size={180} className="text-primary" />
           </BasicCard>
           <BasicCard
             title={t("card2.title")}
@@ -87,13 +88,7 @@ export default function HomePage() {
             cta={t("card2.cta")}
             ctaLink="about"
           >
-            <Clock
-              height={200}
-              width={125}
-              color="#555555"
-              opacity={0.1}
-              className="dark:opacity-30"
-            />
+            <Clock size={180} className="text-primary" />
           </BasicCard>
           <BasicCard
             title={t("card3.title")}
@@ -101,62 +96,67 @@ export default function HomePage() {
             cta={t("card3.cta")}
             ctaLink="about"
           >
-            <CreditCard
-              height={200}
-              width={125}
-              color="#555555"
-              opacity={0.1}
-              className="dark:opacity-30"
-            />
+            <CreditCard size={180} className="text-primary" />
           </BasicCard>
           <BasicCard
             title={t("card4.title")}
             description={t("card4.description")}
             cta={t("card4.cta")}
             ctaLink="about"
-            style={
-              " md:bg-[#DAD6D6] md:bg-opacity-15 dark:bg-[rgba(218,214,214,0.08)]"
-            }
           >
-            <ForkKnifeCrossed
-              height={200}
-              width={125}
-              color="#555555"
-              opacity={0.1}
-              className="dark:opacity-30"
-            />
+            <ForkKnifeCrossed size={180} className="text-primary" />
           </BasicCard>
-        </aside>
-      </section>
-      <section id="team" className="flex flex-col gap-6 lg:gap-10 ">
-        <h2 className="mt-32 lg:text-6xl lg:text-center lg:max-w-[60%] lg:mx-auto text-3xl font-bold leading-tight bg-gradient-to-r from-[#151414] via-[#151414] to-[#E40514] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent ">
-          {t("title.third")}
-        </h2>
-        <section className="grid grid-cols-1 md:grid-cols-2 mb-32 gap-6">
-          <HomeCard />
-        </section>
-      </section>
-      <section>
-        <div className="flex flex-col items-center justify-center w-full px-6 mx-auto py-20 rounded-[20px] border-2 border-[rgba(255,255,255,0.70)] dark:border-[rgba(21,20,20,0.7)] bg-[linear-gradient(113deg,_rgba(255,255,255,0.62)_0%,_rgba(255,255,255,0.20)_110.84%)]  dark:bg-[linear-gradient(113deg,_#222222_100%,_#191818_110.84%)] backdrop-blur-[21px]">
-          <div className="mb-5 w-fit h-fit p-6 flex items-center justify-center rounded-[30px] border border-[#FF9595] bg-[radial-gradient(50%_50%_at_50%_50%,_#FF4646_0%,_rgba(255,71,71,0.80)_100%)] shadow-[inset_-6px_-3px_10px_0px_#FFD7D7] dark:shadow-[inset_-6px_-3px_10px_0px_#464646]">
-            <HeartHandshakeIcon color="white" size={75} />
-          </div>
-          <div className="flex flex-col justify-center items-center text-center gap-3">
-            <p className="bg-gradient-to-r from-[#e40514] to-[#9e2020] dark:bg-[linear-gradient(90deg,_#FAFAFA_13.49%,_#E40514_87.52%)] bg-clip-text text-transparent font-bold text-4xl md:text-5xl">
-              {t("footer.title")}
-            </p>
-            <p className="text-center text-base md:text-lg max-w-96">
-              {t("footer.subtitle")}
-            </p>
-          </div>
-          <Link
-            href={"/restaurants"}
-            className="mt-9 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-[16px] bg-[#E40514] shadow-[inset_0px_1px_3px_0px_#E40514,_inset_0px_2px_2px_2px_rgba(255,255,255,0.25)] py-3 px-6 text-white"
-          >
-            {t("cta.first")}
-          </Link>
         </div>
       </section>
-    </>
+
+      <section id="team" className="scroll-mt-32">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
+            {t("title.third")}
+          </h2>
+          <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <HomeCard />
+        </div>
+      </section>
+
+      <section className="">
+        <div className="relative overflow-hidden rounded-[3rem] bg-secondary/30 border border-border/50 p-10 sm:p-20 transition-all hover:bg-secondary/40 shadow-xl">
+          <div className="relative z-10 flex flex-col items-center text-center gap-10">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-110 group-hover:scale-125 transition-transform" />
+              <div className="relative p-8 rounded-[2.5rem] bg-primary shadow-2xl shadow-primary/40 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                <HeartHandshakeIcon className="text-white h-16 w-16" />
+              </div>
+            </div>
+
+            <div className="space-y-4 max-w-2xl">
+              <h3 className="text-4xl md:text-6xl font-black tracking-tight text-foreground italic underline decoration-primary decoration-8 underline-offset-4">
+                {t("footer.title")}
+              </h3>
+              <p className="text-xl text-muted-foreground font-medium">
+                {t("footer.subtitle")}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link
+                href="/restaurants"
+                className="flex items-center hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-white font-black group"
+              >
+                {t("cta.first")}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Decorative blurs */}
+          <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
+          <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
+        </div>
+      </section>
+    </div>
   );
 }

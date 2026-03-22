@@ -33,10 +33,13 @@ function MealSection({
     [repas.categories]
   );
   return (
-    <Card className="relative">
+    <Card className="relative overflow-hidden border-border/50 shadow-md hover:shadow-xl transition-all duration-300 group rounded-3xl bg-transparent">
+      <div className="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors" />
       <QrCodeDialog
         dialogTrigger={
-          <Share2 className="absolute top-4 right-4 opacity-50 hover:opacity-100 cursor-pointer" />
+          <div className="absolute top-6 right-6 p-2 rounded-full bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+            <Share2 className="w-5 h-5 opacity-70" />
+          </div>
         }
         title={qrTitle}
         url={(() => {
@@ -50,15 +53,18 @@ function MealSection({
         })()}
         description={qrDescription}
       />
-      <CardHeader>
-        <CardTitle>
-          {emoji} {title}
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl flex items-center gap-3">
+          <span className="text-3xl">{emoji}</span>
+          <span className="font-extrabold tracking-tight">{title}</span>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        {sortedCategories.map((meal) => (
-          <MealCard key={meal.code} meal={meal} />
-        ))}
+      <CardContent className="px-6 pb-6">
+        <div className="grid gap-3">
+          {sortedCategories.map((meal) => (
+            <MealCard key={meal.code} meal={meal} />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

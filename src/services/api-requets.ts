@@ -69,88 +69,118 @@ export async function apiRequest<T>({
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  try {
-    let bodyContent = undefined;
+  const inFlightRequests = (globalThis as any).inFlightRequests || new Map<string, Promise<any>>();
+  if (!(globalThis as any).inFlightRequests) {
+    (globalThis as any).inFlightRequests = inFlightRequests;
+  }
 
-    if (body) {
-      bodyContent = body instanceof FormData ? body : JSON.stringify(body);
-    }
+  // Deduplicate identical in-flight requests
+  if (inFlightRequests.has(cacheKey)) {
+    log.debug([`Deduplicating request for ${method} ${endpoint}`], "all");
+    return inFlightRequests.get(cacheKey) as Promise<ApiResult<T>>;
+  }
 
-    if (!(body instanceof FormData) && body) {
-      headers["Content-Type"] = "application/json";
-    }
+  const requestPromise: Promise<ApiResult<T>> = (async () => {
+    try {
+      let bodyContent = undefined;
 
-    const response = await fetch(url, {
-      method,
-      headers: headers,
-      body: bodyContent,
-    });
+      if (body) {
+        bodyContent = body instanceof FormData ? body : JSON.stringify(body);
+      }
 
-    // Handle the case of 204 No Content
-    if (response.status === 204) {
-      return {
-        success: true,
-        data: undefined as unknown as T, // No data returned, but marked as successful
+      if (!(body instanceof FormData) && body) {
+        headers["Content-Type"] = "application/json";
+      }
+
+      const fetchOptions: RequestInit = {
+        method,
+        headers: headers,
+        body: bodyContent,
       };
-    }
 
-    // If the response is OK, return the data
-    if (response.ok) {
-      const data = await response.json();
+      // Use Next.js fetch cache if cacheDuration is provided
+      if (cacheDuration > 0 && method === "GET") {
+        fetchOptions.next = {
+          revalidate: Math.floor(cacheDuration / 1000), // Next.js expects seconds
+        };
+      } else if (method === "GET") {
+        fetchOptions.cache = "no-store";
+      }
 
-      if (check_success && !data.success) {
+      const response = await fetch(url, fetchOptions);
+
+      // Handle the case of 204 No Content
+      if (response.status === 204) {
         return {
-          success: false,
-          error: data.message,
-          status: response.status,
+          success: true,
+          data: undefined as unknown as T, // No data returned, but marked as successful
         };
       }
 
-      // Cache the response if caching is enabled
-      if (cacheDuration > 0) {
-        if (check_success) {
-          cache.set(cacheKey, {
-            data: data.data,
-            expiry: Date.now() + cacheDuration,
-          });
-        } else {
-          cache.set(cacheKey, {
-            data: data,
-            expiry: Date.now() + cacheDuration,
-          });
+      // If the response is OK, return the data
+      if (response.ok) {
+        const data = await response.json();
+
+        if (check_success && !data.success) {
+          return {
+            success: false,
+            error: data.message,
+            status: response.status,
+          };
         }
 
-        log.debug([`Cached response for ${method} ${endpoint}`], "all");
+        // Cache the response if caching is enabled
+        if (cacheDuration > 0) {
+          if (check_success) {
+            cache.set(cacheKey, {
+              data: data.data,
+              expiry: Date.now() + cacheDuration,
+            });
+          } else {
+            cache.set(cacheKey, {
+              data: data,
+              expiry: Date.now() + cacheDuration,
+            });
+          }
+
+          log.debug([`Cached response for ${method} ${endpoint}`], "all");
+        }
+
+        if (check_success) {
+          return {
+            success: true,
+            data: data.data as T,
+          };
+        } else {
+          return {
+            success: true,
+            data: data as T,
+          };
+        }
       }
 
-      if (check_success) {
-        return {
-          success: true,
-          data: data.data as T,
-        };
-      } else {
-        return {
-          success: true,
-          data: data as T,
-        };
-      }
-    }
+      // If the response is not OK, return an error
+      return {
+        success: false,
+        error: `Error ${method} ${endpoint}: ${response.statusText}`,
+        status: response.status,
+      };
+    } catch (err) {
+      log.error([`Failed to ${method} ${endpoint}:`, err], "all");
 
-    // If the response is not OK, return an error
-    return {
-      success: false,
-      error: `Error ${method} ${endpoint}: ${response.statusText}`,
-      status: response.status,
-    };
-  } catch (err) {
-    log.error([`Failed to ${method} ${endpoint}:`, err], "all");
-
-    // Handle network errors or unexpected issues
-    return {
-      success: false,
-      error: `Network or server error: ${err instanceof Error ? err.message : String(err)
+      // Handle network errors or unexpected issues
+      return {
+        success: false,
+        error: `Network or server error: ${
+          err instanceof Error ? err.message : String(err)
         }`,
-      status: 500, // Generic status for network failures
-    };
-  }
+        status: 500, // Generic status for network failures
+      };
+    } finally {
+      inFlightRequests.delete(cacheKey);
+    }
+  })();
+
+  inFlightRequests.set(cacheKey, requestPromise);
+  return requestPromise;
 }

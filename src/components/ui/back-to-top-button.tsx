@@ -26,7 +26,7 @@ export default function BackToTopButton() {
       onClick={scrollToTop}
       variant="secondary"
       size="icon"
-      className="fixed bottom-8 right-8 z-50 shadow-lg rounded-full bg-background border border-border hover:bg-accent transition-colors"
+      className="fixed bottom-8 right-8 z-50 shadow-md rounded-full bg-background border border-border/50 hover:bg-accent transition-colors"
       aria-label="Back to top"
     >
       <ArrowUpFromDot className="h-5 w-5" />

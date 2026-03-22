@@ -88,7 +88,7 @@ export default function PaginationComponent({
 
   useEffect(() => {
     if (totalPages <= 0) return;
-    
+
     if (currentPage > totalPages) {
       onPageChange(totalPages);
     } else if (currentPage < 1) {
@@ -99,15 +99,14 @@ export default function PaginationComponent({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <Pagination className="flex justify-center my-8">
+    <Pagination className="flex justify-between max-w-full p-2 rounded-2xl backdrop-blur-md">
       <PaginationPrevious
         isActive={hasPrevious && !loading}
         text={t("previous")}
         displayText={visibleDelta > 1}
         onClick={() => hasPrevious && onPageChange(currentPage - 1)}
-        className={`${
-          hasPrevious && !loading ? "cursor-pointer" : "cursor-not-allowed"
-        } mr-2`}
+        className={`${hasPrevious && !loading ? "cursor-pointer hover:bg-muted" : "cursor-not-allowed opacity-50"
+          } mr-2 px-4 py-2 rounded-xl transition-colors`}
       />
       <PaginationContent>
         {loading ? (
@@ -128,6 +127,7 @@ export default function PaginationComponent({
             return (
               <PaginationItem key={page} className="cursor-pointer">
                 <PaginationLink
+                  className="rounded-xl"
                   isActive={isCurrent}
                   onClick={() => onPageChange(page)}
                 >
@@ -143,9 +143,8 @@ export default function PaginationComponent({
         displayText={visibleDelta > 1}
         text={t("next")}
         onClick={() => hasNext && onPageChange(currentPage + 1)}
-        className={`${
-          hasNext && !loading ? "cursor-pointer" : "cursor-not-allowed"
-        } ml-2`}
+        className={`${hasNext && !loading ? "cursor-pointer hover:bg-muted" : "cursor-not-allowed opacity-50"
+          } ml-2 px-4 py-2 rounded-xl transition-colors`}
       />
     </Pagination>
   );

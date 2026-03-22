@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Restaurant, Position } from "@/services/types";
+import { Position, Restaurant } from "@/services/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -171,8 +171,7 @@ export function findRestaurantsAroundPosition(
  */
 export const formatToISODate = (dateString: string): Date => {
   const [day, month, year] = dateString.split("-");
-  const isoDateString = `${year}-${month}-${day}T00:00:00Z`; // Convert to "2024-12-30"
-  return new Date(isoDateString);
+  return new Date(Number(year), Number(month) - 1, Number(day));
 };
 
 /**
@@ -184,4 +183,15 @@ export const formatToISODate = (dateString: string): Date => {
  */
 export const normalizeToDate = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
+
+/**
+ * Helper to get a normalized date from a "DD-MM-YYYY" string.
+ * Commonly used for comparing dates without time components.
+ * 
+ * @param dateString - The date string in "DD-MM-YYYY" format.
+ * @returns A normalized Date object.
+ */
+export const getNormalizedISODate = (dateString: string): Date => {
+  return normalizeToDate(formatToISODate(dateString));
 };
