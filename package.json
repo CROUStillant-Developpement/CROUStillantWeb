@@ -28,7 +28,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "leaflet": "^1.9.4",
-    "lucide-react": "^0.577.0",
+    "lucide-react": "^1.0.1",
     "motion": "^12.34.3",
     "next": "^16.2.1",
     "next-intl": "^4.8.2",
