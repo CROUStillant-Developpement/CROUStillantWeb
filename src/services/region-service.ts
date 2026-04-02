@@ -1,5 +1,5 @@
 import { Region, ApiResult } from "./types";
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 
 /**
  * Fetches a list of regions from the API.

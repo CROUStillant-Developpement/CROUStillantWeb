@@ -1,5 +1,5 @@
 import { Tache, GlobalStats, ApiResult, Plat } from "./types";
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 
 /**
  * Fetches a list of tasks from the API.
