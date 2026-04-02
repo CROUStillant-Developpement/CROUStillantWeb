@@ -1,5 +1,5 @@
 import { Restaurant, ApiResult } from "./types";
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 
 /**
  * Fetches a list of restaurants with caching for 5 minutes.

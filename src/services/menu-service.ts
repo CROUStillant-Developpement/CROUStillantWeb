@@ -1,5 +1,5 @@
 import { Menu, DateMenu, ApiResult } from "./types";
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 
 /**
  * Gets menu by restaurant ID
