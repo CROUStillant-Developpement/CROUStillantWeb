@@ -15,9 +15,9 @@ import {
   Database,
   FileTerminal,
   ChevronsLeftRightEllipsis,
-  Smartphone,
-  GithubIcon,
+  Smartphone
 } from "lucide-react";
+import { FaGithub } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
@@ -169,7 +169,7 @@ export default function AboutPage() {
                   <div className="flex flex-col min-w-0">
                     <a href={t(`team.members.${member.key}.github`)} className="text-base sm:text-lg font-bold hover:text-primary transition-colors underline-offset-4 hover:underline wrap-break-word">
                       {t(`team.members.${member.key}.name`)}
-                      <GithubIcon className="inline-block ml-2 h-4 w-4 text-muted-foreground shrink-0" />
+                      <FaGithub className="inline-block ml-2 h-4 w-4 text-muted-foreground shrink-0" />
                     </a>
                     <p className="text-sm text-muted-foreground font-medium wrap-break-word">{t(`team.members.${member.key}.role`)}</p>
                   </div>
