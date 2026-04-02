@@ -369,7 +369,7 @@ export default function RestaurantsFilters({
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{t("restaurantName.title")}</p>
                     <div className="flex gap-2">
                       <Button
-                        variant={filters.restaurantNameAsc ? "default" : "outline-solid"}
+                        variant={filters.restaurantNameAsc ? "default" : "outline"}
                         size="sm"
                         className="flex-1 h-8 text-xs rounded-lg"
                         onClick={() => setFilters({
@@ -383,7 +383,7 @@ export default function RestaurantsFilters({
                         <ArrowDownAZ className="h-3 w-3 mr-1" /> A-Z
                       </Button>
                       <Button
-                        variant={filters.restaurantNameDesc ? "default" : "outline-solid"}
+                        variant={filters.restaurantNameDesc ? "default" : "outline"}
                         size="sm"
                         className="flex-1 h-8 text-xs rounded-lg"
                         onClick={() => setFilters({
@@ -403,7 +403,7 @@ export default function RestaurantsFilters({
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{t("restaurantCity.title")}</p>
                     <div className="flex gap-2">
                       <Button
-                        variant={filters.restaurantCityAsc ? "default" : "outline-solid"}
+                        variant={filters.restaurantCityAsc ? "default" : "outline"}
                         size="sm"
                         className="flex-1 h-8 text-xs rounded-lg"
                         onClick={() => setFilters({
@@ -417,7 +417,7 @@ export default function RestaurantsFilters({
                         <ArrowDownAZ className="h-3 w-3 mr-1" /> A-Z
                       </Button>
                       <Button
-                        variant={filters.restaurantCityDesc ? "default" : "outline-solid"}
+                        variant={filters.restaurantCityDesc ? "default" : "outline"}
                         size="sm"
                         className="flex-1 h-8 text-xs rounded-lg"
                         onClick={() => setFilters({
@@ -545,7 +545,7 @@ export default function RestaurantsFilters({
                     <SheetTrigger asChild>
                       <Button
                         className="rounded-xl h-11 w-11 p-0 shadow-md border-primary/20 hover:border-primary/40 relative"
-                        variant={activeFilterCount > 0 ? "default" : "outline-solid"}
+                        variant={activeFilterCount > 0 ? "default" : "outline"}
                       >
                         <Filter className="h-5 w-5" />
                         {activeFilterCount > 0 && (
