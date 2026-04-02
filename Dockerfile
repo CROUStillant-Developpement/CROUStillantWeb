@@ -3,9 +3,6 @@ FROM alpine:3.19 AS base
 # Next.js app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
-
 ARG WEB_URL
 ARG API_URL
 
@@ -32,6 +29,9 @@ RUN npm run build
 RUN npm prune --omit=dev --force
 
 FROM base AS run
+
+# Set production environment
+ENV NODE_ENV="production"
 
 # Install node.js
 RUN apk add nodejs
