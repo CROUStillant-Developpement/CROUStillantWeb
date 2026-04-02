@@ -36,8 +36,6 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
 
-  const restaurantUrl = `/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`;
-
   return (
     <TooltipProvider>
       <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 bg-background/50 backdrop-blur-sm">
@@ -68,7 +66,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           </Button>
 
           <Link
-            href={restaurantUrl}
+            href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
             className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
             onClick={() => {
               umami.event("Restaurant.Card.View", {
@@ -152,7 +150,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
             <Button asChild variant="ghost" size="sm" className="font-semibold text-primary hover:bg-primary/10">
               <Link
-                href={restaurantUrl}
+                href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code}`}
                 onClick={() => {
                   umami.event("Restaurant.Card.View", {
                     restaurant: restaurant.code,
