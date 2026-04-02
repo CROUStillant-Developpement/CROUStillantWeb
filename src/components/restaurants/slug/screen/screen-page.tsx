@@ -70,7 +70,7 @@ function MealColumn({
   );
 
   return (
-    <div className="flex flex-col min-h-0 bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm">
+    <div className="flex flex-col min-h-0 bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-200 shadow-xs">
       <div className="px-8 py-5 bg-white border-b border-zinc-200 shrink-0">
         <h2 className="text-4xl font-bold flex items-center gap-4 text-zinc-800">
           <span className="text-5xl">{emoji}</span>
@@ -110,7 +110,7 @@ function MealColumn({
           </div>
         </div>
         {/* Gradient sibling — outside the scroll container so it doesn't affect scrollHeight */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-50 to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-zinc-50 to-transparent pointer-events-none z-10" />
       </div>
     </div>
   );
@@ -188,7 +188,7 @@ export default function ScreenPage({
 
   return (
     // fixed inset-0 z-50 takes over the full viewport, bypassing the locale layout's header/footer
-    <div className="fixed inset-0 z-50 bg-white text-zinc-900 flex flex-col [overflow:hidden] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none">
+    <div className="fixed inset-0 z-50 bg-white text-zinc-900 flex flex-col overflow-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none">
       {/* ── Too-small overlay ── */}
       {isTooSmall && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-zinc-950/95 text-white text-center px-8">

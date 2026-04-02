@@ -40,7 +40,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   return (
     <TooltipProvider>
-      <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 bg-background/50 backdrop-blur-sm">
+      <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 bg-background/50 backdrop-blur-xs">
         <div className="relative h-52 w-full overflow-hidden">
           <Image
             src={imageSrc}
@@ -50,7 +50,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             onError={handleImageError}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-80" />
           
           <Button
             variant="ghost"
@@ -69,7 +69,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
           <Link
             href={restaurantUrl}
-            className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
+            className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-xs transition-opacity duration-300 group-hover:opacity-100"
             onClick={() => {
               umami.event("Restaurant.Card.View", {
                 restaurant: restaurant.code,
@@ -109,7 +109,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               {restaurant.paiement?.includes("Carte bancaire") && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-muted text-muted-foreground shadow-sm transition-transform hover:z-10 hover:scale-110">
+                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-muted text-muted-foreground shadow-xs transition-transform hover:z-10 hover:scale-110">
                       <CreditCard className="h-4 w-4" />
                     </div>
                   </TooltipTrigger>
@@ -121,7 +121,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               {restaurant.paiement?.includes("IZLY") && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-[#E1000F]/10 shadow-sm transition-transform hover:z-10 hover:scale-110">
+                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-[#E1000F]/10 shadow-xs transition-transform hover:z-10 hover:scale-110">
                       <Image
                         src="/icons/izly.png"
                         alt="Izly"
@@ -139,7 +139,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               {restaurant.ispmr && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-blue-500/10 text-blue-600 shadow-sm transition-transform hover:z-10 hover:scale-110">
+                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-blue-500/10 text-blue-600 shadow-xs transition-transform hover:z-10 hover:scale-110">
                       <Accessibility className="h-4 w-4" />
                     </div>
                   </TooltipTrigger>

@@ -14,7 +14,7 @@ export default function HomeCard() {
       <RadarsCard />
       <GitCard />
       <section className="md:col-span-2">
-        <aside className="group flex flex-col md:flex-row w-full h-full gap-8 p-8 bg-secondary/30 rounded-[2rem] border border-border/50 transition-all hover:bg-secondary/40 hover:shadow-xl hover:shadow-primary/5">
+        <aside className="group flex flex-col md:flex-row w-full h-full gap-8 p-8 bg-secondary/30 rounded-4xl border border-border/50 transition-all hover:bg-secondary/40 hover:shadow-xl hover:shadow-primary/5">
           <div className="flex flex-col gap-6 flex-1">
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
@@ -35,7 +35,7 @@ export default function HomeCard() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
             </Link>
           </div>
-          <section className="flex items-center justify-center flex-1 bg-background/50 backdrop-blur-sm border border-primary/10 rounded-2xl p-4 min-h-[160px]">
+          <section className="flex items-center justify-center flex-1 bg-background/50 backdrop-blur-xs border border-primary/10 rounded-2xl p-4 min-h-[160px]">
             <aside className="flex flex-col justify-between w-full h-full gap-0.5">
               <div className="flex gap-2 items-center px-4 py-2 bg-primary/5 border border-primary/10 border-b-0 rounded-t-xl">
                 <p className="text-lg font-medium opacity-80">

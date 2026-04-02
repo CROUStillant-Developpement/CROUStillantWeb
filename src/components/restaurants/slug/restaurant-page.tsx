@@ -81,7 +81,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         className="w-full mt-4 px-4"
       >
         <div className="relative overflow-hidden rounded-3xl bg-secondary/20 border border-primary/10 shadow-lg mb-8 h-56 md:h-72 flex items-end group">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
           <img
             src={restaurant.image_url || "/default_ru.png"}
             alt={restaurant.nom}
@@ -93,7 +93,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
           <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">
             <div className="max-w-3xl min-w-0">
-              <h1 className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight break-words">{restaurant.nom}</h1>
+              <h1 className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight wrap-break-word">{restaurant.nom}</h1>
               <div className="mt-2 md:mt-3 flex flex-wrap items-center gap-3 text-white/90 font-medium">
                 <span className="flex items-center text-sm md:text-base drop-shadow-md bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                   {restaurant.zone}

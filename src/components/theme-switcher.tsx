@@ -46,19 +46,19 @@ export default function ModeToggle() {
       <DropdownMenuContent align="end" className="rounded-xl border-primary/20 shadow-xl p-2 gap-1 flex flex-col bg-background/80 backdrop-blur-xl min-w-[140px]">
         <DropdownMenuItem 
           onClick={() => setTheme("light")}
-          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "light" ? "bg-primary/10 text-primary shadow-sm font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "light" ? "bg-primary/10 text-primary shadow-xs font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
         >
           {t("light")}
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => setTheme("dark")}
-          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "dark" ? "bg-primary/10 text-primary shadow-sm font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "dark" ? "bg-primary/10 text-primary shadow-xs font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
         >
           {t("dark")}
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => setTheme("system")}
-          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "system" ? "bg-primary/10 text-primary shadow-sm font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+          className={`rounded-lg cursor-pointer transition-all py-2 ${theme === "system" ? "bg-primary/10 text-primary shadow-xs font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
         >
           {t("system")}
         </DropdownMenuItem>
