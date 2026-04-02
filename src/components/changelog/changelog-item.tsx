@@ -14,7 +14,7 @@ export default function ChangelogItem({
   return (
     <div className="relative pl-8 sm:pl-32 py-10 group">
       {/* Timeline Vertical Line */}
-      <div className="absolute left-2 sm:left-14 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent sm:ml-[1.5px]" />
+      <div className="absolute left-2 sm:left-14 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/20 via-primary/5 to-transparent sm:ml-[1.5px]" />
 
       {/* Version Floating Label (Caveat font) */}
       <div className="sm:absolute left-0 top-10 sm:w-28 text-right pr-12 hidden sm:block">
@@ -26,7 +26,7 @@ export default function ChangelogItem({
       {/* Marker & Content Section */}
       <div className="relative">
         {/* Circle Marker */}
-        <div className="absolute -left-[27px] sm:-left-[75px] top-1.5 w-4 h-4 rounded-full border-4 border-background bg-primary shadow-sm ring-4 ring-primary/10 transition-transform group-hover:scale-125 duration-300" />
+        <div className="absolute -left-[27px] sm:-left-[75px] top-1.5 w-4 h-4 rounded-full border-4 border-background bg-primary shadow-xs ring-4 ring-primary/10 transition-transform group-hover:scale-125 duration-300" />
 
         {/* Date Badge */}
         <div className="mb-3">
@@ -41,10 +41,10 @@ export default function ChangelogItem({
 
         {/* Text Content */}
         <div className="space-y-4">
-          <h3 className="font-black text-lg sm:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300 break-words">
+          <h3 className="font-black text-lg sm:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300 wrap-break-word">
             {shortDescription}
           </h3>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl break-words">
+          <p className="text-muted-foreground leading-relaxed max-w-3xl wrap-break-word">
             {fullDescription}
           </p>
         </div>

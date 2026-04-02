@@ -1,5 +1,5 @@
 import { Changelog, ApiResult } from "./types";
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 
 /**
  * Get all changelog items

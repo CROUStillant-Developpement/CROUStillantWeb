@@ -1,6 +1,215 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Popup animation keyframes */
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1))
+      rotate(var(--tw-enter-rotate, 0));
+  }
+}
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+      scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1))
+      rotate(var(--tw-exit-rotate, 0));
+  }
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --spacing-80svh: 80svh;
+  --spacing-65svh: 65svh;
+
+  --font-dyslexic: OpenDyslexic, sans-serif;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility animate-scan {
+  animation: scan 2s ease-in-out infinite both;
+  will-change: transform, opacity;
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+/* Popup animation utilities */
+
+@utility animate-in {
+  animation-name: enter;
+  animation-duration: var(--tw-animate-duration, 150ms);
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+@utility animate-out {
+  animation-name: exit;
+  animation-duration: var(--tw-animate-duration, 150ms);
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+
+/* Fade */
+@utility fade-in-0  { --tw-enter-opacity: 0; }
+@utility fade-out-0 { --tw-exit-opacity: 0; }
+@utility fade-out-80 { --tw-exit-opacity: 0.8; }
+
+/* Zoom */
+@utility zoom-in    { --tw-enter-scale: 0; }
+@utility zoom-in-95 { --tw-enter-scale: 0.95; }
+@utility zoom-out-95 { --tw-exit-scale: 0.95; }
+
+/* Slide – no value (DEFAULT = 100%) */
+@utility slide-in-from-top    { --tw-enter-translate-y: -100%; }
+@utility slide-in-from-bottom { --tw-enter-translate-y: 100%; }
+@utility slide-in-from-left   { --tw-enter-translate-x: -100%; }
+@utility slide-in-from-right  { --tw-enter-translate-x: 100%; }
+@utility slide-out-to-top     { --tw-exit-translate-y: -100%; }
+@utility slide-out-to-bottom  { --tw-exit-translate-y: 100%; }
+@utility slide-out-to-left    { --tw-exit-translate-x: -100%; }
+@utility slide-out-to-right   { --tw-exit-translate-x: 100%; }
+
+/* Slide – named "full" (100%) */
+@utility slide-in-from-top-full    { --tw-enter-translate-y: -100%; }
+@utility slide-in-from-bottom-full { --tw-enter-translate-y: 100%; }
+@utility slide-in-from-left-full   { --tw-enter-translate-x: -100%; }
+@utility slide-in-from-right-full  { --tw-enter-translate-x: 100%; }
+@utility slide-out-to-top-full     { --tw-exit-translate-y: -100%; }
+@utility slide-out-to-bottom-full  { --tw-exit-translate-y: 100%; }
+@utility slide-out-to-left-full    { --tw-exit-translate-x: -100%; }
+@utility slide-out-to-right-full   { --tw-exit-translate-x: 100%; }
+
+/* Slide – dynamic values (spacing scale, arbitrary lengths/percentages) */
+@utility slide-in-from-top-* {
+  --tw-enter-translate-y: calc(--value(--spacing, [length], [percentage]) * -1);
+}
+@utility slide-in-from-bottom-* {
+  --tw-enter-translate-y: --value(--spacing, [length], [percentage]);
+}
+@utility slide-in-from-left-* {
+  --tw-enter-translate-x: calc(--value(--spacing, [length], [percentage]) * -1);
+}
+@utility slide-in-from-right-* {
+  --tw-enter-translate-x: --value(--spacing, [length], [percentage]);
+}
+@utility slide-out-to-top-* {
+  --tw-exit-translate-y: calc(--value(--spacing, [length], [percentage]) * -1);
+}
+@utility slide-out-to-bottom-* {
+  --tw-exit-translate-y: --value(--spacing, [length], [percentage]);
+}
+@utility slide-out-to-left-* {
+  --tw-exit-translate-x: calc(--value(--spacing, [length], [percentage]) * -1);
+}
+@utility slide-out-to-right-* {
+  --tw-exit-translate-x: --value(--spacing, [length], [percentage]);
+}
+
+/* Duration – sets both transition-duration and animation duration */
+@utility duration-75   { transition-duration: 75ms;   --tw-animate-duration: 75ms; }
+@utility duration-100  { transition-duration: 100ms;  --tw-animate-duration: 100ms; }
+@utility duration-150  { transition-duration: 150ms;  --tw-animate-duration: 150ms; }
+@utility duration-200  { transition-duration: 200ms;  --tw-animate-duration: 200ms; }
+@utility duration-300  { transition-duration: 300ms;  --tw-animate-duration: 300ms; }
+@utility duration-500  { transition-duration: 500ms;  --tw-animate-duration: 500ms; }
+@utility duration-700  { transition-duration: 700ms;  --tw-animate-duration: 700ms; }
+@utility duration-1000 { transition-duration: 1000ms; --tw-animate-duration: 1000ms; }
 
 @layer base {
   :root {
@@ -77,166 +286,171 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-  scrollbar-gutter: stable;
-}
+@layer utilities {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
 
-.container {
-  padding: 0 0;
-  margin: 0 auto;
-  max-width: 1430px;
-}
-
-@media (min-width: 640px) {
   .container {
-    padding: 0 32px;
+    padding: 0 0;
+    margin: 0 auto;
+    max-width: 1430px;
   }
-}
 
-@media (min-width: 768px) and (max-width: 1279px) {
-  .container {
-    padding: 0 48px;
+  @media (min-width: 640px) {
+    .container {
+      padding: 0 32px;
+    }
   }
-}
 
-@media (min-width: 1280px) {
-  .container {
-    padding: 0 205px;
+  @media (min-width: 768px) and (max-width: 1279px) {
+    .container {
+      padding: 0 48px;
+    }
   }
-}
 
-.snowy-button {
-  position: relative;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  text-align: center;
-  color: #fff;
-  background-image: linear-gradient(to bottom, #f12828, #a00332, #9f0f31),
-    linear-gradient(to bottom, #ae0034, #6f094c);
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-  box-shadow: inset 0 1px rgb(255 255 255 / 0.25), inset 0 -1px rgb(0 0 0 / 0.1),
-    0 2px 4px rgb(0 0 0 / 0.25);
-  transition-property: transform, filter;
-  transition-duration: 0.2s;
-  will-change: transform;
-  resize: both;
-
-  &:active {
-    transform: scale(0.92);
-    filter: brightness(0.8);
+  @media (min-width: 1280px) {
+    .container {
+      padding: 0 205px;
+    }
   }
-}
 
-.snowy-button:hover {
-  color: #fff !important;
-}
+  .snowy-button {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-align: center;
+    color: #fff;
+    background-image:
+      linear-gradient(to bottom, #f12828, #a00332, #9f0f31),
+      linear-gradient(to bottom, #ae0034, #6f094c);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    box-shadow:
+      inset 0 1px rgb(255 255 255 / 0.25),
+      inset 0 -1px rgb(0 0 0 / 0.1),
+      0 2px 4px rgb(0 0 0 / 0.25);
+    transition-property: transform, filter;
+    transition-duration: 0.2s;
+    will-change: transform;
+    resize: both;
 
-.snowy-button::after {
-  --overflow-x: 4px;
-  --snow-image: url("https://assets.codepen.io/4175254/snow-cap-test-2.png");
-  content: "";
-  position: absolute;
-  top: -6px;
-  left: calc(var(--overflow-x) * -1);
-  border-image-source: var(--snow-image);
-  border-image-slice: calc(6 * 56 / 20) fill;
-  border-image-width: calc(28px / 3);
-  border-image-repeat: round;
-  width: calc(100% + var(--overflow-x) * 2);
-  height: 28px;
-  filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.25));
-  opacity: 1;
-  animation: fade-in 2s;
-}
-
-.custom-tooltip {
-  z-index: 9999;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-  animation: fade-in 0.5s;
-}
-
-.dark .custom-tooltip {
-  background-color: #000;
-  color: #fff;
-  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.1);
-}
-
-.custom-tooltip > .label {
-  font-weight: bold;
-}
-
-.recharts-dot {
-  opacity: 0.3;
-}
-
-@keyframes fade-in {
-  0%,
-  50% {
-    opacity: 0;
+    &:active {
+      transform: scale(0.92);
+      filter: brightness(0.8);
+    }
   }
-  100% {
+
+  .snowy-button:hover {
+    color: #fff !important;
+  }
+
+  .snowy-button::after {
+    --overflow-x: 4px;
+    --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: calc(var(--overflow-x) * -1);
+    border-image-source: var(--snow-image);
+    border-image-slice: calc(6 * 56 / 20) fill;
+    border-image-width: calc(28px / 3);
+    border-image-repeat: round;
+    width: calc(100% + var(--overflow-x) * 2);
+    height: 28px;
+    filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.25));
     opacity: 1;
+    animation: fade-in 2s;
   }
-}
 
-.fading-border {
-  position: relative;
-}
+  .custom-tooltip {
+    z-index: 9999;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    animation: fade-in 0.5s;
+  }
 
-.fading-border::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 40%; /* Only covers the top half */
-  border: 0.5px solid white;
-  border-bottom: none;
-  border-radius: 0.5rem;
+  .dark .custom-tooltip {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.1);
+  }
 
-  /* Gradient mask to fade the border */
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  pointer-events: none; /* So it doesn't interfere with content clicks */
-}
+  .custom-tooltip > .label {
+    font-weight: bold;
+  }
 
-@font-face {
-  font-family: "OpenDyslexic";
-  src: url("/fonts/OpenDyslexic-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
+  .recharts-dot {
+    opacity: 0.3;
+  }
 
-@font-face {
-  font-family: "OpenDyslexic";
-  src: url("/fonts/OpenDyslexic-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
-}
+  @keyframes fade-in {
+    0%,
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-@font-face {
-  font-family: "OpenDyslexic";
-  src: url("/fonts/OpenDyslexic-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
+  .fading-border {
+    position: relative;
+  }
 
-@font-face {
-  font-family: "OpenDyslexic";
-  src: url("/fonts/OpenDyslexic-BoldItalic.otf") format("opentype");
-  font-weight: 700;
-  font-style: italic;
-}
+  .fading-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 40%; /* Only covers the top half */
+    border: 0.5px solid white;
+    border-bottom: none;
+    border-radius: 0.5rem;
 
-/* Apply font when the class is added */
-.dyslexic-font {
-  font-family: "OpenDyslexic", sans-serif !important;
+    /* Gradient mask to fade the border */
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    pointer-events: none; /* So it doesn't interfere with content clicks */
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/OpenDyslexic-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/OpenDyslexic-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/OpenDyslexic-BoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  /* Apply font when the class is added */
+  .dyslexic-font {
+    font-family: 'OpenDyslexic', sans-serif !important;
+  }
 }
 
 @layer utilities {
@@ -249,24 +463,5 @@ html {
       transform: scale(1.5);
       opacity: 0;
     }
-  }
-
-  .animate-scan {
-    animation: scan 2s ease-in-out infinite both;
-    will-change: transform, opacity;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/20 rounded-full;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/40;
   }
 }

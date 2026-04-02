@@ -36,7 +36,7 @@ export default function GitCard({ style }: Props) {
 
   return (
     <section className={style}>
-      <aside className="group flex flex-col w-full h-full gap-6 p-8 bg-secondary/30 rounded-[2rem] border border-border/50 transition-all hover:bg-secondary/40 hover:shadow-xl hover:shadow-primary/5">
+      <aside className="group flex flex-col w-full h-full gap-6 p-8 bg-secondary/30 rounded-4xl border border-border/50 transition-all hover:bg-secondary/40 hover:shadow-xl hover:shadow-primary/5">
         <div className="flex flex-col gap-4">
           <h3 className="text-3xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
             {t("title")}
@@ -55,7 +55,7 @@ export default function GitCard({ style }: Props) {
             <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
           </Link>
         </div>
-        <section className="flex items-center justify-center w-full h-full bg-background/50 backdrop-blur-sm rounded-3xl border border-primary/10 p-6 overflow-hidden">
+        <section className="flex items-center justify-center w-full h-full bg-background/50 backdrop-blur-xs rounded-3xl border border-primary/10 p-6 overflow-hidden">
           <aside className="flex flex-col gap-6 w-full h-full">
             <div className="flex justify-between items-center w-full">
               <p className="text-xl font-black tracking-tight text-primary/80 uppercase">{t("Card.name")}</p>

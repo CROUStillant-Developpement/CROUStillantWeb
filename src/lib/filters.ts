@@ -91,6 +91,6 @@ export const sortRestaurants = (
     }
 
     // if no sort is applied, sort by restaurant's area
-    return a.zone.localeCompare(b.nom, locale);
+    return a.zone.localeCompare(b.zone, locale);
   });
 };

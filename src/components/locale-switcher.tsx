@@ -53,7 +53,7 @@ export default function LocaleToggle() {
       <DropdownMenuContent align="end" className="rounded-xl border-primary/20 shadow-xl p-2 gap-1 flex flex-col bg-background/80 backdrop-blur-xl min-w-[140px]">
         <DropdownMenuItem
           disabled={useLocale() === "fr" || isPending}
-          className={`rounded-lg cursor-pointer transition-all py-2 ${useLocale() === "fr" ? "bg-primary/10 text-primary shadow-sm font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+          className={`rounded-lg cursor-pointer transition-all py-2 ${useLocale() === "fr" ? "bg-primary/10 text-primary shadow-xs font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
           onClick={() => {
             handleChange("fr");
           }}
@@ -69,7 +69,7 @@ export default function LocaleToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem
           disabled={useLocale() === "en" || isPending}
-          className={`rounded-lg cursor-pointer transition-all py-2 ${useLocale() === "en" ? "bg-primary/10 text-primary shadow-sm font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+          className={`rounded-lg cursor-pointer transition-all py-2 ${useLocale() === "en" ? "bg-primary/10 text-primary shadow-xs font-bold" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
           onClick={() => {
             handleChange("en");
           }}

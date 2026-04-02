@@ -32,9 +32,9 @@ export default async function LegalPage() {
 
   return (
     <div className="w-full mt-4 px-4 flex flex-col gap-8 overflow-x-hidden">
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
@@ -71,17 +71,17 @@ export default async function LegalPage() {
           <Card
             key={section.id}
             id={section.id}
-            className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden w-full scroll-mt-40"
+            className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xs shadow-lg overflow-hidden w-full scroll-mt-40"
           >
             <CardHeader className="bg-muted/30 border-b border-primary/5 p-4 sm:p-8">
-              <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary break-words">
+              <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary wrap-break-word">
                 {t(`${section.key}.title`)}
               </CardTitle>
             </CardHeader>
             <CardContent className="p-4 sm:p-8 lg:p-12 space-y-10">
               {section.parts.map((partKey, index) => (
                 <div key={partKey} className="space-y-4">
-                  <h3 className="text-lg sm:text-xl font-bold flex items-center gap-3 break-words">
+                  <h3 className="text-lg sm:text-xl font-bold flex items-center gap-3 wrap-break-word">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold shrink-0">
                       {index + 1}
                     </span>

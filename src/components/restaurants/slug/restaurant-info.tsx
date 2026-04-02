@@ -46,7 +46,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   return (
     <div className="flex flex-col gap-6 p-1 h-full">
       {/* Location */}
-      <section className="border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="border border-border/50 rounded-3xl p-5 shadow-xs flex flex-col gap-4 transition-all hover:border-primary/20">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <MapPinHouse className="w-5 h-5 text-primary" />
           {t("location")}
@@ -56,7 +56,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
           {restaurant?.acces?.map((acces, index) => (
             <div className="flex items-start gap-2 mt-2 text-[11px] opacity-70 group min-w-0" key={index}>
               <ArrowRight className="w-3 h-3 mt-0.5 shrink-0 text-primary/50 group-hover:text-primary transition-colors" />
-              <span className="min-w-0 break-words">{acces}</span>
+              <span className="min-w-0 wrap-break-word">{acces}</span>
             </div>
           ))}
         </div>
@@ -82,7 +82,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Opening Hours Section */}
-      <section className="border border-border/50 rounded-3xl overflow-hidden shadow-sm transition-all hover:border-primary/20 mt-2">
+      <section className="border border-border/50 rounded-3xl overflow-hidden shadow-xs transition-all hover:border-primary/20 mt-2">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="opening-hours" className="border-none">
             <div className="flex items-center justify-between px-5 pt-5 pb-4">
@@ -92,7 +92,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               </div>
             </div>
             {restaurant?.horaires && restaurant?.horaires.length > 0 && (
-              <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 mx-5 break-words">
+              <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 mx-5 wrap-break-word">
                 {restaurant?.horaires?.join(", ")}
               </div>
             )}
@@ -122,7 +122,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Contact & Services */}
-      <section className="border border-border/50 rounded-3xl p-5 shadow-sm flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="border border-border/50 rounded-3xl p-5 shadow-xs flex flex-col gap-4 transition-all hover:border-primary/20">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <Info className="w-5 h-5 text-primary" />
           {t("contactAndServices")}

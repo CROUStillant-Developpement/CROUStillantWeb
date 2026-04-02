@@ -114,9 +114,9 @@ export default function SettingsPage() {
 
   return (
     <div className="w-full mt-4 px-4 overflow-x-hidden">
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
@@ -135,7 +135,7 @@ export default function SettingsPage() {
         <SettingCard title={t("appearanceTitle")}>
           <div className="group space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Palette className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -158,7 +158,7 @@ export default function SettingsPage() {
 
           <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Languages className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -169,7 +169,7 @@ export default function SettingsPage() {
               </div>
             </div>
             <Select defaultValue={locale} onValueChange={handleLocaleChange}>
-              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-sm text-base font-medium">
+              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-xs text-base font-medium">
                 <SelectValue placeholder={t("favourites.selectPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="rounded-2xl border-border/50">
@@ -202,7 +202,7 @@ export default function SettingsPage() {
 
           <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Star className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -231,7 +231,7 @@ export default function SettingsPage() {
               disabled={favourites.length === 0}
               defaultValue={starredFav?.code.toString()}
             >
-              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-sm text-base font-medium">
+              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-xs text-base font-medium">
                 <SelectValue
                   placeholder={
                     starredFav?.name || t("favourites.starredSelectPlaceholder")
@@ -254,7 +254,7 @@ export default function SettingsPage() {
 
           <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <MapPin className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -284,7 +284,7 @@ export default function SettingsPage() {
               defaultValue={favouriteRegion?.code.toString()}
               value={favouriteRegion?.code.toString()}
             >
-              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-sm text-base font-medium">
+              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-xs text-base font-medium">
                 <SelectValue
                   placeholder={
                     favouriteRegion?.libelle ||
@@ -306,11 +306,11 @@ export default function SettingsPage() {
         <SettingCard title={t("personalTitle")}>
           <div className="group space-y-6 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 w-full">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />
               </div>
               <div className="space-y-1 text-left">
-                <p className="font-black text-lg sm:text-xl text-foreground leading-snug break-words">
+                <p className="font-black text-lg sm:text-xl text-foreground leading-snug wrap-break-word">
                   {t("personal.viewDataTitle")} & {t("personal.deleteDataTitle").toLowerCase()}
                 </p>
                 <p className="text-sm text-muted-foreground max-w-2xl">
@@ -325,7 +325,7 @@ export default function SettingsPage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 h-14 rounded-2xl font-black text-lg shadow-sm hover:bg-primary/5 hover:text-primary transition-all group"
+                    className="flex-1 h-14 rounded-2xl font-black text-lg shadow-xs hover:bg-primary/5 hover:text-primary transition-all group"
                     onClick={() => {
                       umami.event("Settings.Personal.ViewData");
                     }}

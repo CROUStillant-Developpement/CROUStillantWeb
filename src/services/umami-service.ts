@@ -1,4 +1,4 @@
-import { apiRequest } from "./api-requets";
+import { apiRequest } from "./api-request";
 import { ApiResult, UmamiGetToken, UmamiActiveUsers, UmamiDateRange, UmamiStats } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

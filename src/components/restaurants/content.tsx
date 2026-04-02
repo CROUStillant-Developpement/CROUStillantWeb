@@ -43,7 +43,7 @@ export default function Content({
       <div className="flex flex-col gap-6 p-4">
         {/* favourites */}
         {favouritesRestaurants.length > 0 && (
-          <div className="rounded-xl border border-border/50 bg-secondary/20 shadow-sm overflow-hidden">
+          <div className="rounded-xl border border-border/50 bg-secondary/20 shadow-xs overflow-hidden">
             <div className="flex items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4">
               <h2 className="text-lg font-semibold flex items-center">
                 <span className="bg-primary text-primary-foreground font-semibold p-4 rounded-full mr-3 h-8 w-8 flex items-center justify-center">

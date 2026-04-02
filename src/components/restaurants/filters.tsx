@@ -122,7 +122,7 @@ export default function RestaurantsFilters({
     <TooltipProvider delayDuration={0}>
       <Accordion type="multiple" defaultValue={["location"]} className="w-full border-none flex flex-col gap-3">
         {/* Location */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors max-w-full", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors max-w-full", isCollapsed && "px-2")}>
           <AccordionItem value="location" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -173,7 +173,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Restaurant Type */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="type" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -224,7 +224,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Payment */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="payment" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -282,7 +282,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Status / Additionnal */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="additional" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -340,7 +340,7 @@ export default function RestaurantsFilters({
         </div>
 
         {/* Sorting */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-sm hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
+        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
           <AccordionItem value="sort" className="border-none">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -483,7 +483,7 @@ export default function RestaurantsFilters({
                   className={cn(
                     "h-9 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex gap-2",
                     isCollapsed
-                      ? "w-full p-5 py-6 border border-border/40 rounded-xl shadow-sm hover:bg-destructive/10 text-destructive transition-colors disabled:opacity-30"
+                      ? "w-full p-5 py-6 border border-border/40 rounded-xl shadow-xs hover:bg-destructive/10 text-destructive transition-colors disabled:opacity-30"
                       : "w-full border-destructive/30 text-destructive hover:bg-destructive hover:text-white disabled:bg-muted disabled:text-muted-foreground disabled:border-border"
                   )}
                 >
@@ -597,7 +597,7 @@ export default function RestaurantsFilters({
                     setFilters({ ...filters, search: e.target.value })
                   }
                   value={filters.search}
-                  className="w-full rounded-xl bg-background border-border/50 shadow-sm text-sm h-11"
+                  className="w-full rounded-xl bg-background border-border/50 shadow-xs text-sm h-11"
                 />
 
                 <TooltipProvider delayDuration={0}>
@@ -634,7 +634,7 @@ export default function RestaurantsFilters({
             </div>
 
             {activeFilterCount > 0 && (
-              <div className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-xl border border-primary/10 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300 w-full">
+              <div className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-xl border border-primary/10 shadow-xs animate-in fade-in slide-in-from-top-2 duration-300 w-full">
                 <span className="text-[10px] font-black uppercase tracking-widest mr-1 opacity-70 shrink-0">{t("activeFilters")}</span>
                 <div className="flex flex-wrap gap-2 items-center">
                   {filters.search && (
@@ -735,7 +735,7 @@ export default function RestaurantsFilters({
                     variant="ghost"
                     size="sm"
                     onClick={() => resetFilters()}
-                    className="h-7 px-3 text-[10px] text-destructive hover:bg-destructive/10 hover:text-destructive uppercase font-black transition-all rounded-full ml-auto md:ml-0 flex gap-2 shadow-sm"
+                    className="h-7 px-3 text-[10px] text-destructive hover:bg-destructive/10 hover:text-destructive uppercase font-black transition-all rounded-full ml-auto md:ml-0 flex gap-2 shadow-xs"
                   >
                     <Trash2 className={cn("h-4 w-4")} />
                     {t("reset")}
