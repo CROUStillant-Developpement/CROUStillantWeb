@@ -146,7 +146,7 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
       transition={{ duration: 0.5 }}
       className="space-y-8 px-4 mt-4"
     >
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-sm border border-primary/10">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
         <div className="relative z-10 max-w-2xl">
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
             {t("title")}
@@ -239,7 +239,7 @@ const StatCard = ({
   value: number;
   locale: string;
 }) => (
-  <Stat className="w-full h-full flex flex-row items-center justify-start gap-4 p-6 rounded-3xl border-primary/5 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm">
+  <Stat className="w-full h-full flex flex-row items-center justify-start gap-4 p-6 rounded-3xl border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
     <div className="p-3 rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
       {icon}
     </div>
@@ -325,7 +325,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
   return (
     <div className="space-y-8">
       {/* Chart for the menus added over time */}
-      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+      <Card className="rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs">
         <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
             <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
@@ -402,7 +402,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
       </Card>
 
       {/* Chart for the categories and compositions added over time */}
-      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+      <Card className="rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs">
         <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
             <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">
@@ -500,7 +500,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
       </Card>
 
       {/* Chart for the requests over time */}
-      <Card className="rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm">
+      <Card className="rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs">
         <CardHeader className="flex flex-col items-stretch space-y-0 border-b border-primary/5 p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-8 py-6">
             <CardTitle className="text-2xl font-black uppercase tracking-tight text-primary">

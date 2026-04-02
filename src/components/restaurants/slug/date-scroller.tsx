@@ -81,7 +81,7 @@ export default function DateScroller({
             <Button
               variant="secondary"
               size="icon"
-              className="rounded-full shadow-xl bg-background/90 backdrop-blur-sm border-border/50 hover:bg-background h-8 w-8"
+              className="rounded-full shadow-xl bg-background/90 backdrop-blur-xs border-border/50 hover:bg-background h-8 w-8"
               onClick={() => scrollBy("left")}
             >
               <ChevronLeft className="w-4 h-4" />
@@ -101,7 +101,7 @@ export default function DateScroller({
             <Button
               variant="secondary"
               size="icon"
-              className="rounded-full shadow-xl bg-background/90 backdrop-blur-sm border-border/50 hover:bg-background h-8 w-8"
+              className="rounded-full shadow-xl bg-background/90 backdrop-blur-xs border-border/50 hover:bg-background h-8 w-8"
               onClick={() => scrollBy("right")}
             >
               <ChevronRight className="w-4 h-4" />

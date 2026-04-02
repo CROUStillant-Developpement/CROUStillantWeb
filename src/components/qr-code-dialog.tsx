@@ -107,7 +107,7 @@ export default function QrCodeDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
-      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-4xl sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
         <DialogHeader className="mb-3 sm:mb-4">
           <DialogTitle className="text-xl sm:text-2xl font-black tracking-tight">{title}</DialogTitle>
           <DialogDescription className="text-muted-foreground/80 font-medium text-sm">
@@ -117,7 +117,7 @@ export default function QrCodeDialog({
 
         <div className="flex flex-col items-center gap-5 sm:gap-8">
           {qrCodeData && (
-            <div className="p-4 sm:p-6 bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-xl border border-black/5 group hover:scale-[1.02] transition-transform duration-500">
+            <div className="p-4 sm:p-6 bg-white rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-black/5 group hover:scale-[1.02] transition-transform duration-500">
               <Image
                 ref={imageRef}
                 src={qrCodeData}
@@ -135,7 +135,7 @@ export default function QrCodeDialog({
                 type="text"
                 value={url}
                 readOnly
-                className="flex-1 min-w-0 bg-transparent px-3 py-2 text-xs sm:text-sm font-medium focus:outline-none truncate"
+                className="flex-1 min-w-0 bg-transparent px-3 py-2 text-xs sm:text-sm font-medium focus:outline-hidden truncate"
                 onFocus={(e) => e.target.select()}
               />
               <Button

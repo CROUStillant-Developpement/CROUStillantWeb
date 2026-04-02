@@ -49,10 +49,10 @@ export default function DishesPage({
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap gap-3 justify-center md:hidden">
-        <Button asChild variant="secondary" className="rounded-full shadow-sm border-primary/10">
+        <Button asChild variant="secondary" className="rounded-full shadow-xs border-primary/10">
           <Link href="#top100">{t("top100")}</Link>
         </Button>
-        <Button asChild variant="secondary" className="rounded-full shadow-sm border-primary/10">
+        <Button asChild variant="secondary" className="rounded-full shadow-xs border-primary/10">
           <Link href="#last100">{t("last100")}</Link>
         </Button>
       </div>
@@ -64,14 +64,14 @@ export default function DishesPage({
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8 flex flex-col gap-10"
         >
-          <Card className="h-full rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm" id="top100">
+          <Card className="h-full rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs" id="top100">
             <CardHeader className="border-b border-primary/5 pb-6">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
                   <Trophy className="w-6 h-6" />
                 </div>
                 <div className="min-w-0">
-                  <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary break-words">{t("top100")}</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary wrap-break-word">{t("top100")}</CardTitle>
                   <CardDescription className="text-sm sm:text-base font-medium">{t("top100Description")}</CardDescription>
                 </div>
               </div>
@@ -129,14 +129,14 @@ export default function DishesPage({
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-8 flex flex-col gap-10"
         >
-          <Card className="h-full rounded-[2rem] border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-sm" id="last100">
+          <Card className="h-full rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs" id="last100">
             <CardHeader className="border-b border-primary/5 pb-6">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
                   <History className="w-6 h-6" />
                 </div>
                 <div className="min-w-0">
-                  <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary break-words">{t("last100")}</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary wrap-break-word">{t("last100")}</CardTitle>
                   <CardDescription className="text-sm sm:text-base font-medium">{t("last100Description")}</CardDescription>
                 </div>
               </div>

@@ -30,9 +30,9 @@ export default async function Changelog() {
 
   return (
     <div className="overflow-x-hidden space-y-8 px-4 mt-4 pb-20">
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-4 sm:p-10 shadow-sm border border-primary/10">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-4 sm:p-10 shadow-xs border border-primary/10">
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground break-words">
+          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
             {t("title")}
           </h1>
           <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">

@@ -11,7 +11,7 @@ export default function HomeHero() {
   const { starredFav } = useUserPreferences();
 
   return (
-    <div className="relative mb-24 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary/10 via-background to-background p-8 sm:p-16 shadow-sm border border-primary/10">
+    <div className="relative mb-24 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-primary/10 via-background to-background p-8 sm:p-16 shadow-xs border border-primary/10">
       <div className="relative z-10 flex flex-col items-center text-center gap-8 max-w-4xl mx-auto">
         <Link
           href="https://github.com/CROUStillant-Developpement"
@@ -25,7 +25,7 @@ export default function HomeHero() {
           />
         </Link>
 
-        <h1 className="text-4xl md:text-8xl font-black tracking-tight leading-[1.1] bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-8xl font-black tracking-tight leading-[1.1] bg-linear-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
           {t("title.first")}
         </h1>
 
