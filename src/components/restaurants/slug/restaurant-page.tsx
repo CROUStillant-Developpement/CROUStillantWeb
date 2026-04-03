@@ -176,7 +176,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               transition={{ duration: 0.4, ease: "circOut" }}
               className="overflow-hidden"
             >
-              <div className="bg-primary/5 border border-primary/20 backdrop-blur-md rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 group hover:bg-primary/10 transition-colors">
+              <div className="bg-primary/5 border border-primary/20 backdrop-blur-md rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 group hover:bg-primary/10 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="hidden md:flex h-12 w-12 rounded-2xl bg-primary/10 text-primary items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                     <Heart size={24} />

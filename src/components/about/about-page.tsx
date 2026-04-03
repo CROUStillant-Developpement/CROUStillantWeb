@@ -54,7 +54,7 @@ export default function AboutPage() {
       <div className="space-y-12 mx-auto pb-20">
         {/* Presentation & Updates Card */}
         <div className="flex flex-col lg:flex-row gap-6 w-full">
-          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+          <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
                 <GraduationCap className="h-6 w-6 text-primary" />
@@ -68,7 +68,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="flex-1 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+          <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
                 <Soup className="h-6 w-6 text-primary" />
@@ -84,7 +84,7 @@ export default function AboutPage() {
         </div>
 
         {/* Open Source Card */}
-        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+        <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex items-center gap-4 mb-8">
             <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs">
               <FileCode2 className="h-6 w-6 text-primary" />
@@ -107,7 +107,7 @@ export default function AboutPage() {
         </div>
 
         {/* Product Preview Card */}
-        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex-1">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
               {t("product.title")}
@@ -136,7 +136,7 @@ export default function AboutPage() {
         </div>
 
         {/* Team Section */}
-        <div id="team" className="scroll-mt-32 rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+        <div id="team" className="scroll-mt-32 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex flex-col lg:flex-row-reverse gap-12">
             <div className="flex flex-col gap-10 lg:w-1/2 justify-center">
               <div className="flex flex-col">
@@ -180,7 +180,7 @@ export default function AboutPage() {
         </div>
 
         {/* Sources Section */}
-        <div className="flex flex-col xl:flex-row gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex-1">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
               {t("sources.title")}
@@ -208,7 +208,7 @@ export default function AboutPage() {
 
         {/* Architecture & Integrated Section */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+          <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex-1 mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 wrap-break-word">{t("discord.title")}</h2>
               <p className="text-lg text-muted-foreground mb-8">{t("discord.description")}</p>
@@ -230,7 +230,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+          <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex-1 mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 wrap-break-word">{t("architecture.title")}</h2>
               <p className="text-lg text-muted-foreground mb-8">{t("architecture.description")}</p>
@@ -248,7 +248,7 @@ export default function AboutPage() {
         </div>
 
         {/* API Section */}
-        <div className="flex flex-col xl:flex-row-reverse gap-8 items-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="flex flex-col xl:flex-row-reverse gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex-1">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
               {t("integrated.title")}
@@ -275,7 +275,7 @@ export default function AboutPage() {
         </div>
 
         {/* Iframe Section */}
-        <div className="rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 overflow-hidden">
+        <div className="p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden overflow-hidden">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 flex items-center gap-3 wrap-break-word">
@@ -350,7 +350,7 @@ export default function AboutPage() {
 
         {/* Conclusion Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+          <div className="flex flex-col justify-center rounded-2xl bg-card/50 border border-primary/5 p-4 sm:p-8 transition-all hover:bg-card hover:border-primary/20 overflow-hidden">
             <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
               {t("convinced.title")}
             </h3>
@@ -371,7 +371,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50">
+          <div className="flex flex-col justify-center rounded-2xl bg-card/50 border border-primary/5 p-4 sm:p-8 transition-all hover:bg-card hover:border-primary/20 overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
                 <HeartHandshake className="h-6 w-6 text-primary" />
