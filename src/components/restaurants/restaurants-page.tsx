@@ -76,7 +76,8 @@ export default function RestaurantsPage({
               </Link>
             ),
             name: restaurant.nom,
-          })
+          }),
+          restaurant
         );
       }
     });
