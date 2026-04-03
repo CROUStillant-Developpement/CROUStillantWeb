@@ -30,7 +30,7 @@ export default function GitCard({ style }: Props) {
     },
     {
       id: 5,
-      name: "Audric Fullhard",
+      name: "Audric Fullhardt",
     },
   ];
 
