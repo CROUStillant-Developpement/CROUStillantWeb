@@ -50,7 +50,7 @@ export default async function LegalPage() {
       </div>
 
       <div className="mb-8 flex flex-col gap-10">
-        <Card className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xl shadow-lg overflow-hidden w-full sticky -top-10 z-40">
+        <Card className="rounded-2xl border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
           <CardContent className="p-4 sm:p-8 lg:p-12 space-y-6">
             <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
             <div className="flex flex-wrap gap-3">
@@ -71,9 +71,9 @@ export default async function LegalPage() {
           <Card
             key={section.id}
             id={section.id}
-            className="rounded-3xl border-primary/10 bg-card/50 backdrop-blur-xs shadow-lg overflow-hidden w-full scroll-mt-40"
+            className="rounded-2xl border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs w-full scroll-mt-40"
           >
-            <CardHeader className="bg-muted/30 border-b border-primary/5 p-4 sm:p-8">
+            <CardHeader className="bg-muted/30 border-b border-primary/5 p-4 sm:p-8 rounded-t-2xl">
               <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary wrap-break-word">
                 {t(`${section.key}.title`)}
               </CardTitle>

@@ -445,7 +445,7 @@ export default function RestaurantsFilters({
     <div className="w-full flex flex-col gap-6">
       <div className="w-full lg:flex z-10 relative gap-6 items-start">
         <div className={cn(
-          "hidden lg:flex shrink-0 border border-border/50 backdrop-blur-xl shadow-md p-4 rounded-2xl transition-all duration-300 ease-in-out flex-col lg:sticky lg:top-[10px] overflow-x-hidden",
+          "hidden lg:flex shrink-0 p-4 rounded-2xl border border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs ease-in-out flex-col lg:sticky lg:top-[10px] overflow-x-hidden",
           isCollapsed ? "w-16 items-center px-2 pb-2" : "xl:w-1/4 2xl:w-1/5"
         )}>
           <div className={cn("flex items-center justify-between mb-4 text-foreground w-full", isCollapsed && "flex-col gap-3")}>
@@ -500,7 +500,7 @@ export default function RestaurantsFilters({
           "w-full flex flex-col gap-6 transition-all duration-300 ease-in-out min-h-screen",
           !isCollapsed && "xl:3/4 2xl:w-4/5"
         )}>
-          <div className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 rounded-2xl border border-primary/20 shadow-md transition-all duration-300 ring-1 ring-primary/5">
+          <div className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
             <div className="flex flex-col md:flex-row items-center gap-3">
               <div className="flex gap-3 w-full">
                 <div className="bg-secondary/40 p-1 rounded-xl flex items-center shadow-inner border border-border/20 backdrop-blur-md w-full md:w-auto">

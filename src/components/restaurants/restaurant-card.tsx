@@ -40,7 +40,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   return (
     <TooltipProvider>
-      <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 bg-background/50 backdrop-blur-xs">
+      <Card className="group relative overflow-hidden rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs hover:shadow-xl hover:-translate-y-1">
         <div className="relative h-52 w-full overflow-hidden">
           <Image
             src={imageSrc}
@@ -55,7 +55,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-3 right-3 z-20 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 border border-white/30 text-white"
+            className="absolute top-3 right-3 z-20 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 border border-white/30 text-white transition-all hover:scale-115"
             onClick={(e) => {
               e.preventDefault();
               addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
@@ -64,7 +64,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               });
             }}
           >
-            <Heart className={isFavourite ? "text-red-500 fill-red-500" : ""} />
+            <Heart className={isFavourite ? "text-red-500 fill-red-500" : "text-white"} />
           </Button>
 
           <Link
