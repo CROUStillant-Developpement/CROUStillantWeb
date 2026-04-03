@@ -30,13 +30,13 @@ export default function GitCard({ style }: Props) {
     },
     {
       id: 5,
-      name: "Audric Fullhard",
+      name: "Audric Fullhardt",
     },
   ];
 
   return (
     <section className={style}>
-      <aside className="group flex flex-col w-full h-full gap-6 p-8 bg-secondary/30 rounded-4xl border border-border/50 transition-all hover:bg-secondary/40 hover:shadow-xl hover:shadow-primary/5">
+      <aside className="flex flex-col w-full h-full gap-6 p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
         <div className="flex flex-col gap-4">
           <h3 className="text-3xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
             {t("title")}

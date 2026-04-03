@@ -42,7 +42,7 @@ export default async function ContactPage() {
       </div>
 
       <div className="flex flex-col items-center justify-center py-10">
-        <Card className="w-full rounded-[2.5rem] border-primary/10 bg-card/50 backdrop-blur-xs shadow-xl overflow-hidden p-4 sm:p-8 lg:p-12">
+        <Card className="w-full overflow-hidden p-4 sm:p-8 lg:p-12 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
           <CardContent className="p-0">
             <ContactMethods />
           </CardContent>

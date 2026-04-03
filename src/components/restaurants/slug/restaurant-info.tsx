@@ -46,7 +46,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   return (
     <div className="flex flex-col gap-6 p-1 h-full">
       {/* Location */}
-      <section className="border border-border/50 rounded-3xl p-5 shadow-xs flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="p-5 flex flex-col gap-4 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <MapPinHouse className="w-5 h-5 text-primary" />
           {t("location")}
@@ -75,14 +75,14 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               });
             }}
           >
-            <Navigation className="w-4 h-4 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <Navigation className="w-4 h-4 mr-1 group-hover:scale-115 transition-transform" />
             {t("openInGoogleMaps")}
           </Link>
         </Button>
       </section>
 
       {/* Opening Hours Section */}
-      <section className="border border-border/50 rounded-3xl overflow-hidden shadow-xs transition-all hover:border-primary/20 mt-2">
+      <section className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs mt-2">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="opening-hours" className="border-none">
             <div className="flex items-center justify-between px-5 pt-5 pb-4">
@@ -97,7 +97,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
               </div>
             )}
 
-            <AccordionTrigger className="px-5 py-2 hover:no-underline hover:bg-secondary/20 transition-colors text-[11px] font-medium opacity-60 mt-4">
+            <AccordionTrigger className="px-5 py-2 hover:no-underline hover:bg-secondary/20 transition-colors text-[11px] font-medium opacity-60 mt-4 rounded-b-2xl">
               {t("clickToSeeAll")}
             </AccordionTrigger>
 
@@ -122,7 +122,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Contact & Services */}
-      <section className="border border-border/50 rounded-3xl p-5 shadow-xs flex flex-col gap-4 transition-all hover:border-primary/20">
+      <section className="p-5 flex flex-col gap-4 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
         <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
           <Info className="w-5 h-5 text-primary" />
           {t("contactAndServices")}

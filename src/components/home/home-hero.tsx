@@ -11,7 +11,7 @@ export default function HomeHero() {
   const { starredFav } = useUserPreferences();
 
   return (
-    <div className="relative mb-24 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-primary/10 via-background to-background p-8 sm:p-16 shadow-xs border border-primary/10">
+    <div className="relative mb-24 overflow-hidden rounded-[3rem] bg-linear-to-br from-primary/10 via-background to-background p-8 sm:p-16 border border-primary/10 shadow-sm hover:shadow-md transition-all duration-300">
       <div className="relative z-10 flex flex-col items-center text-center gap-8 max-w-4xl mx-auto">
         <Link
           href="https://github.com/CROUStillant-Developpement"

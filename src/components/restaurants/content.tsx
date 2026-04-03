@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useUmami } from "next-umami";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const MapComponent = dynamic(() => import("@/components/map"), { ssr: false }); // Don't render on server side to avoid window is not defined error
 
@@ -43,8 +44,8 @@ export default function Content({
       <div className="flex flex-col gap-6 p-4">
         {/* favourites */}
         {favouritesRestaurants.length > 0 && (
-          <div className="rounded-xl border border-border/50 bg-secondary/20 shadow-xs overflow-hidden">
-            <div className="flex items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4">
+          <div className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+            <div className={cn(`flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4 rounded-t-2xl`, userCollapsedfavourites && "rounded-2xl")}>
               <h2 className="text-lg font-semibold flex items-center">
                 <span className="bg-primary text-primary-foreground font-semibold p-4 rounded-full mr-3 h-8 w-8 flex items-center justify-center">
                   {favouritesRestaurants.length}

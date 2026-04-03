@@ -107,7 +107,7 @@ export default function QrCodeDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
-      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-4xl sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[480px] bg-background/80 backdrop-blur-xl border border-primary/20 rounded-sm shadow-2xl p-5 sm:p-8 overflow-hidden will-change-[transform,opacity]">
         <DialogHeader className="mb-3 sm:mb-4">
           <DialogTitle className="text-xl sm:text-2xl font-black tracking-tight">{title}</DialogTitle>
           <DialogDescription className="text-muted-foreground/80 font-medium text-sm">

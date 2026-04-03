@@ -32,7 +32,7 @@ const BasicCard = ({
   const umami = useUmami();
 
   return (
-    <div className="group relative flex items-center min-h-[180px] w-full overflow-hidden rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 hover:shadow-xl hover:shadow-primary/5">
+    <div className="relative flex items-center min-h-[180px] w-full overflow-hidden rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
       <div className="flex flex-col w-full max-w-[75%] gap-4 relative z-10 font-bold">
         <div className="flex flex-col gap-2">
           <h3 className="text-2xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
@@ -123,7 +123,7 @@ export default function HomePage() {
       </section>
 
       <section className="">
-        <div className="relative overflow-hidden rounded-[3rem] bg-secondary/30 border border-border/50 p-10 sm:p-20 transition-all hover:bg-secondary/40 shadow-xl">
+        <div className="relative overflow-hidden rounded-[3rem] border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm p-10 hover:shadow-md">
           <div className="relative z-10 flex flex-col items-center text-center gap-10">
             <div className="relative group">
               <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-110 group-hover:scale-125 transition-transform" />

@@ -133,7 +133,7 @@ export default function SettingsPage() {
 
       <div className="space-y-12 mx-auto pb-20">
         <SettingCard title={t("appearanceTitle")}>
-          <div className="group space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
+          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Palette className="h-5 w-5 text-primary" />
@@ -156,7 +156,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
+          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Languages className="h-5 w-5 text-primary" />
@@ -185,7 +185,7 @@ export default function SettingsPage() {
 
         <SettingCard title={t("behaviorTitle")}>
           {favourites.length === 0 && (
-            <Alert variant="destructive" className="rounded-3xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full">
+            <Alert variant="destructive" className="rounded-2xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full hover:bg-destructive/10 transition-colors">
               <TriangleAlert className="h-5 w-5 ml-2 mt-3" />
               <AlertTitle className="font-black text-lg ml-2">{t("favourites.nofavouritesTitle")}</AlertTitle>
               <AlertDescription className="ml-2 text-base opacity-90">
@@ -200,7 +200,7 @@ export default function SettingsPage() {
             </Alert>
           )}
 
-          <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
+          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Star className="h-5 w-5 text-primary" />
@@ -252,7 +252,7 @@ export default function SettingsPage() {
             </Select>
           </div>
 
-          <div className="group space-y-4 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-6 transition-all hover:bg-secondary/50 lg:flex-1 lg:min-w-[400px]">
+          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <MapPin className="h-5 w-5 text-primary" />
@@ -304,7 +304,7 @@ export default function SettingsPage() {
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>
-          <div className="group space-y-6 flex flex-col rounded-3xl bg-secondary/30 border border-border/50 p-4 sm:p-8 transition-all hover:bg-secondary/50 w-full">
+          <div className="space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />

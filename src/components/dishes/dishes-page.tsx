@@ -64,7 +64,7 @@ export default function DishesPage({
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8 flex flex-col gap-10"
         >
-          <Card className="h-full rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs" id="top100">
+          <Card className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs" id="top100">
             <CardHeader className="border-b border-primary/5 pb-6">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
@@ -129,7 +129,7 @@ export default function DishesPage({
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-8 flex flex-col gap-10"
         >
-          <Card className="h-full rounded-4xl border-primary/10 shadow-lg overflow-hidden bg-card/50 backdrop-blur-xs" id="last100">
+          <Card className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs" id="last100">
             <CardHeader className="border-b border-primary/5 pb-6">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
