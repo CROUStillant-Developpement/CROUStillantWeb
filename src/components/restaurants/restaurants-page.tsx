@@ -9,10 +9,7 @@ import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useTranslations } from "next-intl";
 import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
-import { slugify } from "@/lib/utils";
 import Content from "./content";
-import { Link } from "@/i18n/routing";
-import { useUmami } from "next-umami";
 
 export default function RestaurantsPage({
   restaurants,
@@ -33,10 +30,9 @@ export default function RestaurantsPage({
   const [pageSize] = useState(21); // Default records per page
 
   const { display, favourites } = useUserPreferences();
-  const { addMarker, clearMarkers } = useMarkerStore();
+  const { setMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");
-  const umami = useUmami();
 
   useEffect(() => {
     const favRestaurants = filteredRestaurants.filter((restaurant) =>
@@ -54,33 +50,16 @@ export default function RestaurantsPage({
   }, [filteredRestaurants, currentPage, pageSize]);
 
   useEffect(() => {
-    clearMarkers();
-    filteredRestaurants.forEach((restaurant) => {
-      if (restaurant.latitude && restaurant.longitude) {
-        addMarker(
-          restaurant.code,
-          [restaurant.latitude, restaurant.longitude],
-          restaurant.nom,
-          t.rich("markerDescription", {
-            link: (chunks) => (
-              <Link
-                href={`/restaurants/${slugify(restaurant.nom)}-r${restaurant.code
-                  }`}
-                onClick={() => {
-                  umami.event("Restaurant.Card.View", {
-                    restaurant: restaurant.code,
-                  });
-                }}
-              >
-                {chunks}
-              </Link>
-            ),
-            name: restaurant.nom,
-          }),
-          restaurant
-        );
-      }
-    });
+    setMarkers(
+      filteredRestaurants
+        .filter((r) => r.latitude && r.longitude)
+        .map((restaurant) => ({
+          id: restaurant.code,
+          position: [restaurant.latitude!, restaurant.longitude!] as [number, number],
+          title: restaurant.nom,
+          restaurant,
+        }))
+    );
   }, [filteredRestaurants]);
 
   return (

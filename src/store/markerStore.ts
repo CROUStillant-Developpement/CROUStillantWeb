@@ -14,12 +14,14 @@ export interface Marker {
 
 interface MarkerStore {
     markers: Marker[];
+    setMarkers: (markers: Marker[]) => void;
     addMarker: (id: number, position: LatLngExpression, title?: string, description?: ReactNode, restaurant?: Restaurant) => void;
     clearMarkers: () => void;
 }
 
 const useMarkerStore = create<MarkerStore>((set) => ({
     markers: [],
+    setMarkers: (markers) => set({ markers }),
     addMarker: (id, position, title, description, restaurant) => set((state) => ({ markers: [...state.markers, { id, position, title, description, restaurant }] })),
     clearMarkers: () => set({ markers: [] }),
 }));

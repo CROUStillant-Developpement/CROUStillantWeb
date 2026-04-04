@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { LatLngExpression, LatLngBounds, Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -95,16 +96,17 @@ const RestaurantPanel = ({
         "absolute z-20 bg-background shadow-2xl border border-border flex flex-col overflow-y-auto",
         isMobile
           ? "inset-x-4 bottom-4 max-h-[55svh] rounded-2xl"
-          : "top-4 right-4 bottom-4 w-80 lg:w-96 rounded-2xl"
+          : "top-4 right-4 bottom-4 w-80 lg:w-96 rounded-2xl max-h-[80svh]"
       )}
     >
       {/* Hero image */}
       <div className="relative h-44 shrink-0 overflow-hidden rounded-t-2xl">
-        <img
+        <Image
           src={restaurant.image_url || "/default_ru.png"}
           alt={restaurant.nom}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          onError={(e) => { e.currentTarget.src = "/default_ru.png"; }}
+          fill
+          sizes="(max-width: 768px) 100vw, 384px"
+          className="object-cover transition-transform duration-500 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -119,10 +121,10 @@ const RestaurantPanel = ({
         <div className="absolute bottom-3 left-3">
           <Badge
             className={cn(
-              "text-xs font-semibold border-0",
+              "text-xs font-semibold border-0 hover",
               restaurant.ouvert
-                ? "bg-green-500/90 text-white"
-                : "bg-red-500/90 text-white"
+                ? "bg-green-500/90 text-white hover:bg-green-700"
+                : "bg-red-500/90 text-white hover:bg-red-700"
             )}
           >
             <div
@@ -167,9 +169,9 @@ const RestaurantPanel = ({
               {restaurant.paiement?.includes("Carte bancaire") && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="p-2 rounded-xl border border-border/50 text-foreground/70 hover:text-primary transition-colors cursor-help">
+                    <button type="button" className="p-2 rounded-xl border border-border/50 text-foreground/70 hover:text-primary transition-colors cursor-help">
                       <CreditCard className="w-4 h-4" />
-                    </div>
+                    </button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} className="rounded-xl font-bold">
                     {t("creditCard")}
@@ -179,9 +181,9 @@ const RestaurantPanel = ({
               {restaurant.paiement?.includes("IZLY") && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="p-2 rounded-xl border border-border/50 hover:opacity-80 transition-opacity cursor-help">
+                    <button type="button" className="p-2 rounded-xl border border-border/50 hover:opacity-80 transition-opacity cursor-help">
                       <img src="/icons/izly.png" alt="IZLY" className="w-4 h-4 object-contain" />
-                    </div>
+                    </button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} className="rounded-xl font-bold">
                     {t("izly")}
@@ -191,9 +193,9 @@ const RestaurantPanel = ({
               {restaurant.ispmr && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <div className="p-2 rounded-xl border border-border/50 text-blue-500 hover:text-blue-600 transition-colors cursor-help">
+                    <button type="button" className="p-2 rounded-xl border border-border/50 text-blue-500 hover:text-blue-600 transition-colors cursor-help">
                       <Accessibility className="w-4 h-4" />
-                    </div>
+                    </button>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={8} className="rounded-xl font-bold">
                     {t("accessibility")}
@@ -271,9 +273,9 @@ const Map = ({
         <FitBoundsToMarkers />
         <MapClickHandler onMapClick={() => setSelectedRestaurant(null)} />
         <MarkerClusterGroup showCoverageOnHover={false}>
-          {markers.map((marker, idx) => (
+          {markers.map((marker) => (
             <Marker
-              key={idx}
+              key={marker.id}
               position={marker.position}
               icon={selectedRestaurant?.code === marker.id ? selectedIcon : defaultIcon}
               eventHandlers={{
