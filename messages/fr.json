@@ -732,5 +732,11 @@
     "message": "Bienvenue sur la toute nouvelle interface de CROUStillant ! Si vous rencontrez un bug, n'hésitez pas à",
     "contact": "nous contacter",
     "dismiss": "Fermer"
+  },
+  "BetaBanner": {
+    "title": "Version bêta",
+    "message": "Vous utilisez la version bêta de CROUStillant. Des bugs peuvent survenir. N'hésitez pas à",
+    "contact": "nous les signaler",
+    "dismiss": "Fermer"
   }
 }
