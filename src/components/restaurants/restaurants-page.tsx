@@ -23,9 +23,6 @@ export default function RestaurantsPage({
   const [loading, setLoading] = useState(true);
   const [filteredRestaurants, setFilteredRestaurants] =
     useState<Restaurant[]>(restaurants);
-  const [favouritesRestaurants, setfavouritesRestaurants] = useState<
-    Restaurant[]
-  >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(21); // Default records per page
 
@@ -34,13 +31,12 @@ export default function RestaurantsPage({
 
   const t = useTranslations("RestaurantsPage");
 
-  useEffect(() => {
-    const favRestaurants = filteredRestaurants.filter((restaurant) =>
+  const favouritesRestaurants = useMemo(() =>
+    filteredRestaurants.filter((restaurant) =>
       favourites.some((f) => f.code === restaurant.code)
-    );
-
-    setfavouritesRestaurants(favRestaurants);
-  }, [favourites, filteredRestaurants]);
+    ),
+    [favourites, filteredRestaurants]
+  );
 
   const paginatedRestaurants = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;

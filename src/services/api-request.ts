@@ -69,9 +69,11 @@ export async function apiRequest<T>({
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const inFlightRequests = (globalThis as any).inFlightRequests || new Map<string, Promise<any>>();
-  if (!(globalThis as any).inFlightRequests) {
-    (globalThis as any).inFlightRequests = inFlightRequests;
+  type InFlightMap = Map<string, Promise<unknown>>;
+  const g = globalThis as typeof globalThis & { inFlightRequests?: InFlightMap };
+  const inFlightRequests: InFlightMap = g.inFlightRequests ?? new Map();
+  if (!g.inFlightRequests) {
+    g.inFlightRequests = inFlightRequests;
   }
 
   // Deduplicate identical in-flight requests
