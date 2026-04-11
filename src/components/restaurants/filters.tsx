@@ -720,6 +720,12 @@ export default function RestaurantsFilters({
                       }
                     />
                   )}
+                  {filters.nearMe && (
+                    <ActiveFilterBadge
+                      text={t("geolocated.title")}
+                      onRemove={() => setFilters({ ...filters, nearMe: false })}
+                    />
+                  )}
                   {filters.restaurantType !== -1 && (
                     <ActiveFilterBadge
                       text={`${t("restaurantType.title")}: ${typesRestaurants.find(

@@ -66,7 +66,10 @@ export const getDates = (startDate: Date, stopDate: Date): Date[] => {
 export const getGeoLocation = async (): Promise<Position | null> => {
   if ("geolocation" in navigator) {
     return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        timeout: 10000,
+        maximumAge: 60000,
+      });
     });
   } else {
     return null;

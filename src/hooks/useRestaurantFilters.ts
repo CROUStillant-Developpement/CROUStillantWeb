@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import log from "@/lib/log";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounceCallback } from "usehooks-ts";
@@ -9,7 +9,7 @@ import {
   sortRestaurants,
 } from "@/lib/filters";
 import { Restaurant } from "@/services/types";
-import { findRestaurantsAroundPosition, getGeoLocation } from "@/lib/utils";
+import { getGeoLocation } from "@/lib/utils";
 import { useLocale } from "next-intl";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 
@@ -30,10 +30,12 @@ export function useRestaurantFilters(
     restaurantNameAsc: false,
     restaurantNameDesc: false,
     restaurantType: -1,
+    nearMe: false,
   };
 
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
+  const userPositionRef = useRef<{ latitude: number; longitude: number } | null>(null);
   const { favouriteRegion } = useUserPreferences();
 
   const searchParams = useSearchParams();
@@ -103,24 +105,20 @@ export function useRestaurantFilters(
       const position = await getGeoLocation();
 
       if (position) {
-        const nearbyRestaurants = findRestaurantsAroundPosition(
-          restaurants,
-          position,
-          10
-        );
-        if (nearbyRestaurants.length > 0) {
-          setFilteredRestaurants(nearbyRestaurants);
-        }
+        userPositionRef.current = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        setFilters((prev) => ({ ...prev, nearMe: true }));
       } else {
         throw new Error();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setGeoLocError(error.message);
-    } finally {
       setLoading(false);
     }
-  }, [setFilteredRestaurants]);
+  }, []);
 
   /**
    * Resets the restaurant filters to their default values and updates the filtered restaurants list.
@@ -132,6 +130,7 @@ export function useRestaurantFilters(
    */
   const resetFilters = useCallback(() => {
     log.info(["resetFilters"], "dev");
+    userPositionRef.current = null;
     setFilters({
       search: "",
       isPmr: false,
@@ -144,6 +143,7 @@ export function useRestaurantFilters(
       restaurantNameAsc: false,
       restaurantNameDesc: false,
       restaurantType: -1,
+      nearMe: false,
     });
     setFilteredRestaurants(restaurants);
   }, [setFilteredRestaurants]);
@@ -161,7 +161,7 @@ export function useRestaurantFilters(
    */
   const debouncedFilterRestaurants = useDebounceCallback(() => {
     // pass 1: filter restaurants based on filters
-    const filtered = filterRestaurants(restaurants, filters);
+    const filtered = filterRestaurants(restaurants, filters, userPositionRef.current);
 
     log.info(["debouncedFilterRestaurants", filters, filtered.length], "dev");
 
