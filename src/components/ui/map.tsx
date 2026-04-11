@@ -1126,14 +1126,17 @@ function MapRoute({
 
   // When coordinates change, update the source data
   useEffect(() => {
-    if (!isLoaded || !map || coordinates.length < 2) return;
+    if (!isLoaded || !map) return;
 
     const source = map.getSource(sourceId) as MapLibreGL.GeoJSONSource;
     if (source) {
       source.setData({
         type: "Feature",
         properties: {},
-        geometry: { type: "LineString", coordinates },
+        geometry: {
+          type: "LineString",
+          coordinates: coordinates.length >= 2 ? coordinates : [],
+        },
       });
     }
   }, [isLoaded, map, coordinates, sourceId]);
