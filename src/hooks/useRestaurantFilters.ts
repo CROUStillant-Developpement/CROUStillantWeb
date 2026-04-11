@@ -80,6 +80,7 @@ export function useRestaurantFilters(
       restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
       restaurantNameDesc: searchParams.get("restaurantNameDesc") === "true",
       restaurantType: parseInt(searchParams.get("restaurantType") || "-1", 10),
+      nearMe: false,
     };
     setFilters(tempFilters);
   }, []);
