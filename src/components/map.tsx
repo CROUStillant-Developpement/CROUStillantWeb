@@ -385,24 +385,96 @@ const Map = ({
     GeoJSON.Point,
     SerializedMarker
   > => {
-    type Group = { lats: number[]; lngs: number[]; restaurants: Restaurant[] };
+    type Group = {
+      lats: number[];
+      lngs: number[];
+      restaurants: Restaurant[];
+      cellKeys: Set<string>;
+    };
+
     const groups: Group[] = [];
+    const grid = new Map<string, Group[]>();
+    const metersPerDegreeLat = 111_320;
+    const cellSizeLat = PROXIMITY_M / metersPerDegreeLat;
+
+    const getLngCellSize = (lat: number) => {
+      const metersPerDegreeLng =
+        metersPerDegreeLat * Math.max(Math.cos((lat * Math.PI) / 180), 0.000001);
+      return PROXIMITY_M / metersPerDegreeLng;
+    };
+
+    const getCellCoords = (lat: number, lng: number) => {
+      const lngCellSize = getLngCellSize(lat);
+      return {
+        cellLat: Math.floor(lat / cellSizeLat),
+        cellLng: Math.floor(lng / lngCellSize),
+      };
+    };
+
+    const getNeighborKeys = (lat: number, lng: number) => {
+      const { cellLat, cellLng } = getCellCoords(lat, lng);
+      const keys: string[] = [];
+      for (let latOffset = -1; latOffset <= 1; latOffset++) {
+        for (let lngOffset = -1; lngOffset <= 1; lngOffset++) {
+          keys.push(`${cellLat + latOffset}:${cellLng + lngOffset}`);
+        }
+      }
+      return keys;
+    };
+
+    const addGroupToCell = (group: Group, lat: number, lng: number) => {
+      const { cellLat, cellLng } = getCellCoords(lat, lng);
+      const key = `${cellLat}:${cellLng}`;
+
+      if (group.cellKeys.has(key)) return;
+
+      group.cellKeys.add(key);
+      const existing = grid.get(key);
+      if (existing) {
+        existing.push(group);
+      } else {
+        grid.set(key, [group]);
+      }
+    };
 
     for (const marker of markers) {
       const [lat, lng] = marker.position;
-      const match = groups.find((g) =>
-        g.lats.some((gLat, i) => haversineDistance(lat, lng, gLat, g.lngs[i]) <= PROXIMITY_M)
-      );
+      const candidateGroups = new Set<Group>();
+
+      for (const key of getNeighborKeys(lat, lng)) {
+        const cellGroups = grid.get(key);
+        if (!cellGroups) continue;
+        for (const group of cellGroups) {
+          candidateGroups.add(group);
+        }
+      }
+
+      let match: Group | undefined;
+      for (const group of candidateGroups) {
+        if (
+          group.lats.some(
+            (gLat, i) => haversineDistance(lat, lng, gLat, group.lngs[i]) <= PROXIMITY_M
+          )
+        ) {
+          match = group;
+          break;
+        }
+      }
+
       if (match) {
         match.lats.push(lat);
         match.lngs.push(lng);
         if (marker.restaurant) match.restaurants.push(marker.restaurant);
+        addGroupToCell(match, lat, lng);
       } else {
-        groups.push({
+        const group: Group = {
           lats: [lat],
           lngs: [lng],
           restaurants: marker.restaurant ? [marker.restaurant] : [],
-        });
+          cellKeys: new Set<string>(),
+        };
+        groups.push(group);
+        addGroupToCell(group, lat, lng);
       }
     }
 
