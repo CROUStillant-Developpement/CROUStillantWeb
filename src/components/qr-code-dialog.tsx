@@ -168,7 +168,6 @@ export default function QrCodeDialog({
                   { Button: EmailShareButton, Icon: EmailIcon },
                 ].map(({ Button: ShareBtn, Icon: ShareIcon }, idx) => (
                   <ShareBtn key={idx} url={url} title={title} className="hover:scale-110 active:scale-90 transition-transform">
-                    {/* @ts-ignore - rounding issues in react-share types */}
                     <ShareIcon size={32} round />
                   </ShareBtn>
                 ))}

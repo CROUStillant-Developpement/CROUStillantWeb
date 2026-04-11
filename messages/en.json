@@ -731,5 +731,11 @@
     "message": "Welcome to the brand new CROUStillant interface! If you encounter a bug, feel free to",
     "contact": "contact us",
     "dismiss": "Dismiss"
+  },
+  "BetaBanner": {
+    "title": "Beta version",
+    "message": "You are using the beta version of CROUStillant. Some issues may occur. Feel free to",
+    "contact": "report them",
+    "dismiss": "Dismiss"
   }
 }

@@ -24,11 +24,11 @@ export default function Header() {
   const umami = useUmami();
 
   return (
-    <header className="flex justify-between items-center w-full mt-4 px-4">
+    <header className="grid grid-cols-3 items-center w-full mt-4 px-4">
       <nav className="">
         <ul
           className={cn(
-            "flex items-center space-x-1 bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
+            "flex items-center space-x-1 bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md w-fit"
           )}
         >
           <li>

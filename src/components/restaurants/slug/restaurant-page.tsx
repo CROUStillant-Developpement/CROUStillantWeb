@@ -2,7 +2,7 @@
 
 import { Restaurant } from "@/services/types";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Heart, QrCode, ScreenShare } from "lucide-react";
+import { Heart, QrCode, ScreenShare } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn, slugify } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
 import log from "@/lib/log";
@@ -44,6 +45,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
   const searchParams = useSearchParams();
   const [showFavoriteHint, setShowFavoriteHint] = useState(false);
+  const [imgSrc, setImgSrc] = useState(restaurant.image_url || "/default_ru.png");
 
   useEffect(() => {
     // Show hint after a short delay if not favourite
@@ -82,13 +84,13 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
       >
         <div className="relative overflow-hidden rounded-3xl bg-secondary/20 border border-primary/10 shadow-lg mb-8 h-56 md:h-72 flex items-end group">
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
-          <img
-            src={restaurant.image_url || "/default_ru.png"}
+          <Image
+            src={imgSrc}
             alt={restaurant.nom}
-            className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105"
-            onError={(e) => {
-              e.currentTarget.src = "/default_ru.png";
-            }}
+            fill
+            sizes="(max-width: 768px) 100vw, 1920px"
+            className="object-cover z-0 transition-transform duration-700 group-hover:scale-105"
+            onError={() => setImgSrc("/default_ru.png")}
           />
 
           <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">

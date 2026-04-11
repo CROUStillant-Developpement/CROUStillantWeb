@@ -44,8 +44,13 @@ export default function Content({
       <div className="flex flex-col gap-6 p-4">
         {/* favourites */}
         {favouritesRestaurants.length > 0 && (
-          <div className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
-            <div className={cn(`flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4 rounded-t-2xl`, userCollapsedfavourites && "rounded-2xl")}>
+          <div className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">
+            <div
+              className={cn(
+                `flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between border-b border-border/10 bg-secondary/30 px-6 py-4 rounded-t-2xl`,
+                userCollapsedfavourites && "rounded-2xl",
+              )}
+            >
               <h2 className="text-lg font-semibold flex items-center">
                 <span className="bg-primary text-primary-foreground font-semibold p-4 rounded-full mr-3 h-8 w-8 flex items-center justify-center">
                   {favouritesRestaurants.length}
@@ -71,11 +76,15 @@ export default function Content({
             </div>
 
             <div
-              className={`p-6 gap-6 md:grid-cols-2 lg:grid-cols-3 ${userCollapsedfavourites ? "hidden" : "grid"
-                }`}
+              className={`p-6 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 ${
+                userCollapsedfavourites ? "hidden" : "grid"
+              }`}
             >
               {favouritesRestaurants.map((restaurant) => (
-                <RestaurantCard key={`fav-${restaurant.code}`} restaurant={restaurant} />
+                <RestaurantCard
+                  key={`fav-${restaurant.code}`}
+                  restaurant={restaurant}
+                />
               ))}
             </div>
           </div>
@@ -83,7 +92,7 @@ export default function Content({
         <AnimatePresence mode="wait">
           <motion.div
             key={loading ? "loading" : "restaurants"}
-            className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+            className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 2xl:grid-cols-4"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
@@ -111,7 +120,7 @@ export default function Content({
               ))
             ) : (
               <motion.p
-                className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center"
+                className="w-full col-span-3 2xl:col-span-4 font-bold text-xl h-56 flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

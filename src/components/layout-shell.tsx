@@ -3,6 +3,7 @@
 import { usePathname } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/toaster";
 import NewUIBanner from "@/components/new-ui-banner";
+import BetaBanner from "@/components/beta-banner";
 
 
 export default function LayoutShell({
@@ -25,7 +26,7 @@ export default function LayoutShell({
 
   return (
     <>
-      <main className="md:p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen">
+      <main className="md:p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen max-w-[1920px] mx-auto w-full">
         {header}
         {children}
         {backToTop}
@@ -33,6 +34,7 @@ export default function LayoutShell({
       {footer}
       <Toaster />
       <NewUIBanner />
+      <BetaBanner />
     </>
   );
 }

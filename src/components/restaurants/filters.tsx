@@ -1,13 +1,10 @@
 "use client";
 
-import { ReactNode, useMemo, useState } from "react";
-import Image from "next/image";
+import { ReactNode, useMemo, useRef, useState } from "react";
 import {
-  Accessibility,
   AlignLeft,
   ArrowDownAZ,
   ArrowUpAZ,
-  CalendarCheck,
   ChevronLeft,
   ChevronRight,
   CreditCard,
@@ -15,7 +12,6 @@ import {
   Info,
   Locate,
   Map,
-  Search,
   Settings2,
   Trash2,
 } from "lucide-react";
@@ -74,6 +70,7 @@ export default function RestaurantsFilters({
   children,
 }: RestaurantsFiltersProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const stickyBarRef = useRef<HTMLDivElement>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const isSmallScreen = useMediaQuery("(min-width: 550px)", { initializeWithValue: false });
   const t = useTranslations("Filters");
@@ -500,7 +497,7 @@ export default function RestaurantsFilters({
           "w-full flex flex-col gap-6 transition-all duration-300 ease-in-out min-h-screen",
           !isCollapsed && "xl:3/4 2xl:w-4/5"
         )}>
-          <div className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+          <div ref={stickyBarRef} className="sticky top-[10px] z-30 flex flex-col gap-3 w-full justify-between bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
             <div className="flex flex-col md:flex-row items-center gap-3">
               <div className="flex gap-3 w-full">
                 <div className="bg-secondary/40 p-1 rounded-xl flex items-center shadow-inner border border-border/20 backdrop-blur-md w-full md:w-auto">
@@ -509,6 +506,7 @@ export default function RestaurantsFilters({
                     size="sm"
                     onClick={() => {
                       if (display !== "list") toggleDisplay();
+                      stickyBarRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
                       umami.event("Restaurants.ToggleDisplay", { display: "list" });
                     }}
                     className={cn(
@@ -526,6 +524,7 @@ export default function RestaurantsFilters({
                     size="sm"
                     onClick={() => {
                       if (display !== "map") toggleDisplay();
+                      stickyBarRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
                       umami.event("Restaurants.ToggleDisplay", { display: "map" });
                     }}
                     className={cn(
@@ -718,6 +717,12 @@ export default function RestaurantsFilters({
                       onRemove={() =>
                         setFilters({ ...filters, restaurantCityDesc: false })
                       }
+                    />
+                  )}
+                  {filters.nearMe && (
+                    <ActiveFilterBadge
+                      text={t("geolocated.title")}
+                      onRemove={() => setFilters({ ...filters, nearMe: false })}
                     />
                   )}
                   {filters.restaurantType !== -1 && (

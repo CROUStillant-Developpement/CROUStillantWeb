@@ -17,7 +17,7 @@ export default function ActiveFilterBadge({
   const umami = useUmami();
 
   return (
-    <Badge className="transition-all ease-in-out duration-300 rounded-full h-6 bg-white text-black hover:bg-primary/80 hover:text-white">
+    <Badge className="transition-all ease-in-out duration-300 rounded-full h-6 bg-background/40 text-black hover:bg-primary/80 hover:text-white dark:text-white dark:hover:bg-primary/80">
       <div onClick={() => setSheetOpen?.(true)}>{text}</div>
       <CircleX
         className="w-4 h-4 ml-2 z-20 hover:scale-110 transition-transform ease-in-out duration-300 cursor-pointer"
