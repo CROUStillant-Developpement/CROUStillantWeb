@@ -154,7 +154,7 @@ const RestaurantPanel = ({
                       type="button"
                       className="p-2 rounded-xl border border-border/50 hover:opacity-80 transition-opacity cursor-help"
                     >
-                      <img
+                      <Image
                         src="/icons/izly.png"
                         alt="IZLY"
                         className="w-4 h-4 object-contain"

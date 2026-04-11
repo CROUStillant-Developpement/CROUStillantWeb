@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import { FishOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useUmami } from "next-umami";
+import { useState } from "react";
 
 interface ErrorPageProps {
   statusCode: number;
@@ -18,11 +19,13 @@ export default function ErrorPage({ statusCode }: ErrorPageProps) {
     t.raw(statusCode.toString() + ".titles")
   ) as string[];
 
+  const [title] = useState(() => titles[Math.floor(Math.random() * titles.length)].toString());
+
   return (
     <div className="flex flex-col items-center justify-center gap-6 px-4 md:px-6 h-80svh">
       <FishOff className="h-20 w-20 text-gray-500 dark:text-gray-400" />
       <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">
-        {titles[Math.floor(Math.random() * titles.length)].toString()}
+        {title}
       </h1>
       <p className="text-gray-500 dark:text-gray-400 max-w-md text-center">
         {t(statusCode.toString() + ".description")}

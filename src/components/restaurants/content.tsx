@@ -76,7 +76,7 @@ export default function Content({
             </div>
 
             <div
-              className={`p-6 gap-6 md:grid-cols-2 lg:grid-cols-3 ${
+              className={`p-6 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 ${
                 userCollapsedfavourites ? "hidden" : "grid"
               }`}
             >
@@ -92,7 +92,7 @@ export default function Content({
         <AnimatePresence mode="wait">
           <motion.div
             key={loading ? "loading" : "restaurants"}
-            className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+            className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 2xl:grid-cols-4"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
@@ -120,7 +120,7 @@ export default function Content({
               ))
             ) : (
               <motion.p
-                className="w-full col-span-3 font-bold text-xl h-56 flex items-center justify-center"
+                className="w-full col-span-3 2xl:col-span-4 font-bold text-xl h-56 flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

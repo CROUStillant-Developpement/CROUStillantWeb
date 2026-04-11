@@ -32,6 +32,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const RestaurantMiniMap = dynamic(() => import("./restaurant-mini-map"), { ssr: false });
 
 type RestaurantInfoProps = {
   restaurant: Restaurant;
@@ -60,6 +63,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
             </div>
           ))}
         </div>
+
+        {restaurant.latitude && restaurant.longitude && (
+          <RestaurantMiniMap latitude={restaurant.latitude} longitude={restaurant.longitude} />
+        )}
 
         <Button asChild className="w-full rounded-2xl h-10 font-bold group text-sm border-border/50" variant="outline" onClick={() => {
           umami.event("Restaurant.GoogleMaps", {
