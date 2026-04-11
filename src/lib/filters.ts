@@ -12,11 +12,22 @@ export interface Filters {
   restaurantNameAsc: boolean;
   restaurantNameDesc: boolean;
   restaurantType: number;
+  nearMe: boolean;
+}
+
+function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 export const filterRestaurants = (
   restaurants: Restaurant[],
-  filters: Filters
+  filters: Filters,
+  userPosition?: { latitude: number; longitude: number } | null
 ): Restaurant[] => {
   return restaurants.filter((restaurant) => {
     const matchesPmr = !filters.isPmr || restaurant.ispmr;
@@ -29,6 +40,12 @@ export const filterRestaurants = (
     const matchesRestaurantType =
       filters.restaurantType === -1 ||
       restaurant.type?.code === filters.restaurantType;
+    const matchesNearMe =
+      !filters.nearMe ||
+      !userPosition ||
+      (restaurant.latitude !== undefined &&
+        restaurant.longitude !== undefined &&
+        haversineKm(userPosition.latitude, userPosition.longitude, restaurant.latitude, restaurant.longitude) <= 10);
 
     // Search by restaurant name or city
     const search = filters.search.toLowerCase();
@@ -46,7 +63,8 @@ export const filterRestaurants = (
       matchesRegion &&
       matchesIzly &&
       matchesCard &&
-      matchesRestaurantType
+      matchesRestaurantType &&
+      matchesNearMe
     );
   });
 };

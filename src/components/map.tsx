@@ -282,8 +282,8 @@ const GroupPickerPanel = ({
               className={cn(
                 "text-xs font-semibold border-0 shrink-0",
                 r.ouvert
-                  ? "bg-green-500/90 text-white"
-                  : "bg-red-500/90 text-white",
+                  ? "bg-green-500/90 text-white hover:bg-green-700"
+                  : "bg-red-500/90 text-white hover:bg-red-700",
               )}
             >
               {r.ouvert ? t("open") : t("closed")}
@@ -363,7 +363,7 @@ const MapClickHandler = ({ onMapClick }: { onMapClick: () => void }) => {
   return null;
 };
 
-const Map = ({
+const MapComponent = ({
   center = DEFAULT_CENTER,
   zoom = DEFAULT_ZOOM,
   loading = false,
@@ -582,4 +582,4 @@ const Map = ({
   );
 };
 
-export default Map;
+export default MapComponent;
