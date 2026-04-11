@@ -106,7 +106,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <UmamiProvider
           websiteId="727eceb7-824d-4cac-b24b-789188b2480c"

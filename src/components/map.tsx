@@ -157,7 +157,9 @@ const RestaurantPanel = ({
                       <Image
                         src="/icons/izly.png"
                         alt="IZLY"
-                        className="w-4 h-4 object-contain"
+                        width={16}
+                        height={16}
+                        className="object-contain"
                       />
                     </button>
                   </TooltipTrigger>
