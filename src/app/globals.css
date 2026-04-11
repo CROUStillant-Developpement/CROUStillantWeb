@@ -102,10 +102,10 @@
     border-color: var(--color-gray-200, currentcolor);
   }
   .maplibregl-popup-content {
-    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+    @apply !bg-transparent !shadow-none !p-0 !rounded-none;
   }
   .maplibregl-popup-tip {
-    @apply hidden!;
+    @apply !hidden;
   }
 }
 
