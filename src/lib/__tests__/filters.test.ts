@@ -13,8 +13,6 @@ const defaultFilters: Filters = {
   isPmr: false,
   isOpen: false,
   crous: -1,
-  izly: false,
-  card: false,
   restaurantCityAsc: false,
   restaurantCityDesc: false,
   restaurantNameAsc: false,
@@ -102,26 +100,6 @@ describe("filterRestaurants", () => {
         makeRestaurant({ region: { code: 20, libelle: "Bretagne" } }),
       ];
       expect(filterRestaurants(list, defaultFilters)).toHaveLength(2);
-    });
-  });
-
-  describe("payment filters", () => {
-    it("filters by IZLY", () => {
-      const list = [
-        makeRestaurant({ paiement: ["IZLY", "Carte bancaire"] }),
-        makeRestaurant({ paiement: ["Carte bancaire"] }),
-      ];
-      const result = filterRestaurants(list, { ...defaultFilters, izly: true });
-      expect(result).toHaveLength(1);
-    });
-
-    it("filters by card", () => {
-      const list = [
-        makeRestaurant({ paiement: ["Carte bancaire"] }),
-        makeRestaurant({ paiement: ["IZLY"] }),
-      ];
-      const result = filterRestaurants(list, { ...defaultFilters, card: true });
-      expect(result).toHaveLength(1);
     });
   });
 
@@ -244,23 +222,6 @@ describe("sortRestaurants", () => {
 // filterRestaurants — additional edge cases
 // ---------------------------------------------------------------------------
 describe("filterRestaurants — edge cases", () => {
-  describe("missing paiement field", () => {
-    it("excludes restaurant with undefined paiement when izly filter is on", () => {
-      const r = makeRestaurant({ paiement: undefined });
-      expect(filterRestaurants([r], { ...defaultFilters, izly: true })).toHaveLength(0);
-    });
-
-    it("excludes restaurant with undefined paiement when card filter is on", () => {
-      const r = makeRestaurant({ paiement: undefined });
-      expect(filterRestaurants([r], { ...defaultFilters, card: true })).toHaveLength(0);
-    });
-
-    it("includes restaurant with undefined paiement when no payment filter is on", () => {
-      const r = makeRestaurant({ paiement: undefined });
-      expect(filterRestaurants([r], defaultFilters)).toHaveLength(1);
-    });
-  });
-
   describe("missing type field", () => {
     it("excludes restaurant without type when restaurantType filter is set", () => {
       const r = makeRestaurant({ type: undefined });
@@ -307,15 +268,7 @@ describe("buildQueryString — additional cases", () => {
     expect(new URLSearchParams(buildQueryString(defaultFilters)).has("restaurantType")).toBe(false);
   });
 
-  it("encodes izly flag", () => {
-    const qs = buildQueryString({ ...defaultFilters, izly: true });
-    expect(new URLSearchParams(qs).get("izly")).toBe("true");
-  });
 
-  it("encodes card flag", () => {
-    const qs = buildQueryString({ ...defaultFilters, card: true });
-    expect(new URLSearchParams(qs).get("card")).toBe("true");
-  });
 
   it("nearMe flag is NOT serialized to the query string", () => {
     const qs = buildQueryString({ ...defaultFilters, nearMe: true });

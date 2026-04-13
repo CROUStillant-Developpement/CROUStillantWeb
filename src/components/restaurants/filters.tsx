@@ -7,7 +7,6 @@ import {
   ArrowUpAZ,
   ChevronLeft,
   ChevronRight,
-  CreditCard,
   Filter,
   Info,
   Locate,
@@ -214,64 +213,6 @@ export default function RestaurantsFilters({
                     noResultsText={t("restaurantType.noResults")}
                     loading={loading}
                   />
-                </div>
-              </AccordionContent>
-            )}
-          </AccordionItem>
-        </div>
-
-        {/* Payment */}
-        <div className={cn("bg-background/40 border border-border/40 rounded-xl p-2 px-3 shadow-xs hover:border-primary/20 transition-colors", isCollapsed && "px-2")}>
-          <AccordionItem value="payment" className="border-none">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <AccordionTrigger
-                  className={cn("hover:no-underline py-2", isCollapsed && "justify-center")}
-                  hideArrow={isCollapsed}
-                  onClick={(e) => {
-                    if (isCollapsed) {
-                      e.preventDefault();
-                      setIsCollapsed(false);
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <CreditCard className="h-4 w-4 shrink-0" />
-                    {!isCollapsed && <span className="font-semibold text-sm">{t("payment.title")}</span>}
-                  </div>
-                </AccordionTrigger>
-              </TooltipTrigger>
-              {isCollapsed && <TooltipContent side="right">{t("payment.title")}</TooltipContent>}
-            </Tooltip>
-            {!isCollapsed && (
-              <AccordionContent className="pb-2">
-                <div className="flex flex-col gap-3 pt-2">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      disabled={loading}
-                      id="card"
-                      onCheckedChange={(checked) =>
-                        setFilters({ ...filters, card: checked === true })
-                      }
-                      checked={filters.card}
-                    />
-                    <label htmlFor="card" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      {t("payment.creditCard")}
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      disabled={loading}
-                      id="izly"
-                      onCheckedChange={(checked) =>
-                        setFilters({ ...filters, izly: checked === true })
-                      }
-                      checked={filters.izly}
-                    />
-                    <label htmlFor="izly" className="text-sm font-medium leading-none cursor-pointer flex items-center">
-                      {t("payment.izly")}
-                    </label>
-                  </div>
                 </div>
               </AccordionContent>
             )}
@@ -653,18 +594,6 @@ export default function RestaurantsFilters({
                         sortedRegions.find((r) => r.code === filters.crous)?.libelle
                       }
                       onRemove={() => setFilters({ ...filters, crous: -1 })}
-                    />
-                  )}
-                  {filters.card && (
-                    <ActiveFilterBadge
-                      text={t("payment.creditCard")}
-                      onRemove={() => setFilters({ ...filters, card: false })}
-                    />
-                  )}
-                  {filters.izly && (
-                    <ActiveFilterBadge
-                      text={t("payment.izly")}
-                      onRemove={() => setFilters({ ...filters, izly: false })}
                     />
                   )}
                   {filters.isPmr && (

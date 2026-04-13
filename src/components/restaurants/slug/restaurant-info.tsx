@@ -4,7 +4,6 @@ import {
   ArrowRight,
   MapPinHouse,
   X,
-  CreditCard,
   Accessibility,
   Navigation,
   Clock,
@@ -176,9 +175,6 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
 
         <div className="flex flex-wrap gap-2">
           <TooltipProvider>
-            {restaurant.paiement?.includes("Carte bancaire") && (
-              <ServiceIcon icon={<CreditCard size={18} />} label={t("creditCard")} />
-            )}
             {restaurant.paiement?.includes("IZLY") && (
               <ServiceIcon
                 icon={<Image src="/icons/izly.png" alt="izly" width={18} height={18} />}

@@ -23,8 +23,6 @@ export function useRestaurantFilters(
     isPmr: false,
     isOpen: false,
     crous: -1,
-    izly: false,
-    card: false,
     restaurantCityAsc: false,
     restaurantCityDesc: false,
     restaurantNameAsc: false,
@@ -54,8 +52,6 @@ export function useRestaurantFilters(
    * - `isPmr`: A boolean indicating if the restaurant is PMR accessible.
    * - `isOpen`: A boolean indicating if the restaurant is currently open.
    * - `region`: A number representing the region ID.
-   * - `izly`: A boolean indicating if the restaurant accepts Izly payments.
-   * - `card`: A boolean indicating if the restaurant accepts card payments.
    *
    * @param searchParams - The URLSearchParams object containing the search parameters.
    *
@@ -73,8 +69,6 @@ export function useRestaurantFilters(
         searchParams.get("region") || favouriteRegion?.code.toString() || "-1",
         10
       ),
-      izly: searchParams.get("izly") === "true",
-      card: searchParams.get("card") === "true",
       restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",
       restaurantCityDesc: searchParams.get("restaurantCityDesc") === "true",
       restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
@@ -137,8 +131,6 @@ export function useRestaurantFilters(
       isPmr: false,
       isOpen: false,
       crous: -1,
-      izly: false,
-      card: false,
       restaurantCityAsc: false,
       restaurantCityDesc: false,
       restaurantNameAsc: false,

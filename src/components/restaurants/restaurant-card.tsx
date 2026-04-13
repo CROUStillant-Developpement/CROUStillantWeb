@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { Accessibility, CreditCard, Heart, MapPin } from "lucide-react";
+import { Accessibility, Heart, MapPin } from "lucide-react";
 import { slugify } from "@/lib/utils";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Restaurant } from "@/services/types";
@@ -111,18 +111,6 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
             <div className="mt-5 flex items-center justify-between">
               <div className="flex -space-x-1.5 overflow-hidden">
-                {restaurant.paiement?.includes("Carte bancaire") && (
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>
-                      <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-muted text-muted-foreground shadow-xs transition-transform hover:z-10 hover:scale-110">
-                        <CreditCard className="h-4 w-4" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent sideOffset={8} align="center">
-                      {t("creditCard")}
-                    </TooltipContent>
-                  </Tooltip>
-                )}
                 {restaurant.paiement?.includes("IZLY") && (
                   <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild>
