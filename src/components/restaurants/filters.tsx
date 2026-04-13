@@ -533,7 +533,7 @@ export default function RestaurantsFilters({
               <div className="flex flex-col md:flex-row gap-3 w-full">
                 <Input
                   placeholder={t("search")}
-                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e) =>
                     setFilters({ ...filters, search: e.target.value })
                   }
                   value={filters.search}
