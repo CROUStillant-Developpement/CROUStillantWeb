@@ -151,11 +151,6 @@
       "accessibility": "Accessible aux PMR"
     },
     "reset": "Réinitialiser",
-    "payment": {
-      "title": "Moyens de paiement",
-      "izly": "Izly",
-      "creditCard": "Carte bancaire"
-    },
     "loading": "Chargement",
     "geolocated": {
       "title": "Restaurants à proximité",
@@ -192,7 +187,6 @@
     "closed": "Fermé",
     "open": "Ouvert",
     "izly": "Paiement Izly accepté",
-    "creditCard": "Paiement par carte bancaire accepté",
     "accessibility": "Accessibilité PMR",
     "active": "Actif"
   },
@@ -421,7 +415,6 @@
     "contact": "Contact",
     "accessibility": "Accessible aux personnes à mobilité réduite",
     "izly": "Paiement Izly accepté",
-    "creditCard": "Paiement par carte bancaire accepté",
     "phone": "Téléphone",
     "email": "Email",
     "location": "Localisation",

@@ -15,7 +15,6 @@ import {
   X,
   MapPin,
   Clock,
-  CreditCard,
   Accessibility,
   Navigation,
 } from "lucide-react";
@@ -129,24 +128,6 @@ const RestaurantPanel = ({
         {(restaurant.paiement?.length || restaurant.ispmr) && (
           <TooltipProvider>
             <div className="flex gap-2 flex-wrap">
-              {restaurant.paiement?.includes("Carte bancaire") && (
-                <Tooltip delayDuration={0}>
-                  <TooltipTrigger asChild>
-                    <button
-                      type="button"
-                      className="p-2 rounded-xl border border-border/50 text-foreground/70 hover:text-primary transition-colors cursor-help"
-                    >
-                      <CreditCard className="w-4 h-4" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent
-                    sideOffset={8}
-                    className="rounded-xl font-bold"
-                  >
-                    {t("creditCard")}
-                  </TooltipContent>
-                </Tooltip>
-              )}
               {restaurant.paiement?.includes("IZLY") && (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>

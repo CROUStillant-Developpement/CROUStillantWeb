@@ -151,11 +151,6 @@
       "accessibility": "Accessibility for PRM"
     },
     "reset": "Reset filters",
-    "payment": {
-      "title": "Payment methods",
-      "izly": "Izly",
-      "creditCard": "Credit card"
-    },
     "loading": "Loading...",
     "geolocated": {
       "title": "Nearby restaurants",
@@ -192,7 +187,6 @@
     "closed": "Closed",
     "open": "Open",
     "izly": "Izly payment accepted",
-    "creditCard": "Credit card payment accepted",
     "accessibility": "Accessibility for people with reduced mobility",
     "active": "Active"
   },
@@ -421,7 +415,6 @@
     "contact": "Contact",
     "accessibility": "Accessibility for people with reduced mobility",
     "izly": "Izly payment accepted",
-    "creditCard": "Credit card payment accepted",
     "phone": "Phone",
     "email": "Email",
     "location": "Location",

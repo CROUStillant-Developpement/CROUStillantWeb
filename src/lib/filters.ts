@@ -5,8 +5,6 @@ export interface Filters {
   isPmr: boolean;
   isOpen: boolean;
   crous: number;
-  izly: boolean;
-  card: boolean;
   restaurantCityAsc: boolean;
   restaurantCityDesc: boolean;
   restaurantNameAsc: boolean;
@@ -34,9 +32,6 @@ export const filterRestaurants = (
     const matchesOpen = !filters.isOpen || restaurant.ouvert;
     const matchesRegion =
       filters.crous === -1 || restaurant.region.code === filters.crous;
-    const matchesIzly = !filters.izly || restaurant.paiement?.includes("IZLY");
-    const matchesCard =
-      !filters.card || restaurant.paiement?.includes("Carte bancaire");
     const matchesRestaurantType =
       filters.restaurantType === -1 ||
       restaurant.type?.code === filters.restaurantType;
@@ -61,8 +56,6 @@ export const filterRestaurants = (
       matchesPmr &&
       matchesOpen &&
       matchesRegion &&
-      matchesIzly &&
-      matchesCard &&
       matchesRestaurantType &&
       matchesNearMe
     );
@@ -75,8 +68,6 @@ export const buildQueryString = (filters: Filters): string => {
   if (filters.isPmr) queryString.set("ispmr", "true");
   if (filters.isOpen) queryString.set("open", "true");
   if (filters.crous !== -1) queryString.set("region", filters.crous.toString());
-  if (filters.izly) queryString.set("izly", "true");
-  if (filters.card) queryString.set("card", "true");
   if (filters.restaurantCityAsc) queryString.set("restaurantCityAsc", "true");
   if (filters.restaurantCityDesc) queryString.set("restaurantCityDesc", "true");
   if (filters.restaurantNameAsc) queryString.set("restaurantNameAsc", "true");

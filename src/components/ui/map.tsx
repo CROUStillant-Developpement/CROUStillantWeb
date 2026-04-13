@@ -526,9 +526,23 @@ function MarkerContent({ children, className }: MarkerContentProps) {
   );
 }
 
+function markerSvg(fill: string, iconFill: string): string {
+  return `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="16" fill="${fill}" fill-opacity="1"/>
+      <path d="M11 26V16.85C10.15 16.6167 9.43767 16.15 8.863 15.45C8.28833 14.75 8.00067 13.9333 8 13V6H10V13H11V6H13V13H14V6H16V13C16 13.9333 15.7127 14.75 15.138 15.45C14.5633 16.15 13.8507 16.6167 13 16.85V26H11ZM21 26V18H18V11C18 9.61667 18.4877 8.43767 19.463 7.463C20.4383 6.48833 21.6173 6.00067 23 6V26H21Z" fill="${iconFill}"/>
+    </svg>`,
+  )}`;
+}
+
 function DefaultMarkerIcon() {
   return (
-    <div className="relative h-4 w-4 rounded-full border-2 border-white bg-blue-500 shadow-lg" />
+    <div className="relative drop-shadow-md">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="16" fill="white" fillOpacity="1"/>
+        <path d="M11 26V16.85C10.15 16.6167 9.43767 16.15 8.863 15.45C8.28833 14.75 8.00067 13.9333 8 13V6H10V13H11V6H13V13H14V6H16V13C16 13.9333 15.7127 14.75 15.138 15.45C14.5633 16.15 13.8507 16.6167 13 16.85V26H11ZM21 26V18H18V11C18 9.61667 18.4877 8.43767 19.463 7.463C20.4383 6.48833 21.6173 6.00067 23 6V26H21Z" fill="#B52606"/>
+      </svg>
+    </div>
   );
 }
 
@@ -1317,21 +1331,32 @@ function MapClusterLayer<
       },
     });
 
-    // Add unclustered point layer
-    map.addLayer({
-      id: unclusteredLayerId,
-      type: "circle",
-      source: sourceId,
-      filter: ["!", ["has", "point_count"]],
-      paint: {
-        "circle-color": pointColor,
-        "circle-radius": 5,
-        "circle-stroke-width": 2,
-        "circle-stroke-color": "#fff",
-      },
-    });
+    // Load marker SVG image then add symbol layer for unclustered points
+    let cancelled = false;
+    const imageId = `restaurant-marker-${id}`;
+    const img = new Image(32, 32);
+    img.onload = () => {
+      if (cancelled) return;
+      if (!map.hasImage(imageId)) map.addImage(imageId, img);
+      if (!map.getLayer(unclusteredLayerId)) {
+        map.addLayer({
+          id: unclusteredLayerId,
+          type: "symbol",
+          source: sourceId,
+          filter: ["!", ["has", "point_count"]],
+          layout: {
+            "icon-image": imageId,
+            "icon-size": 1,
+            "icon-allow-overlap": true,
+            "icon-ignore-placement": true,
+          },
+        });
+      }
+    };
+    img.src = markerSvg(pointColor, "#fff");
 
     return () => {
+      cancelled = true;
       try {
         if (map.getLayer(clusterCountLayerId))
           map.removeLayer(clusterCountLayerId);
@@ -1339,6 +1364,7 @@ function MapClusterLayer<
           map.removeLayer(unclusteredLayerId);
         if (map.getLayer(clusterLayerId)) map.removeLayer(clusterLayerId);
         if (map.getSource(sourceId)) map.removeSource(sourceId);
+        if (map.hasImage(imageId)) map.removeImage(imageId);
       } catch {
         // ignore
       }
@@ -1385,11 +1411,6 @@ function MapClusterLayer<
         clusterThresholds[1],
         40,
       ]);
-    }
-
-    // Update unclustered point layer color
-    if (map.getLayer(unclusteredLayerId) && prev.pointColor !== pointColor) {
-      map.setPaintProperty(unclusteredLayerId, "circle-color", pointColor);
     }
 
     stylePropsRef.current = { clusterColors, clusterThresholds, pointColor };
