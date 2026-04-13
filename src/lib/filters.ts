@@ -68,7 +68,6 @@ export const buildQueryString = (filters: Filters): string => {
   if (filters.isPmr) queryString.set("ispmr", "true");
   if (filters.isOpen) queryString.set("open", "true");
   if (filters.crous !== -1) queryString.set("region", filters.crous.toString());
-  if (filters.izly) queryString.set("izly", "true");
   if (filters.restaurantCityAsc) queryString.set("restaurantCityAsc", "true");
   if (filters.restaurantCityDesc) queryString.set("restaurantCityDesc", "true");
   if (filters.restaurantNameAsc) queryString.set("restaurantNameAsc", "true");
