@@ -28,7 +28,7 @@ export default async function Footer() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
                 <Logo />
-                <h1 className="text-2xl font-bold opacity-90 group-hover:opacity-100 transition-opacity">CROUStillant</h1>
+                <span className="text-2xl font-bold opacity-90 group-hover:opacity-100 transition-opacity">CROUStillant</span>
               </Link>
               <Link href="/changelog">
                 <Badge variant="version" className="animate-appear text-xs">
@@ -42,6 +42,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/CROUStillant-Developpement"
+                aria-label="GitHub"
                 className="p-2 rounded-xl bg-background/50 hover:bg-background transition-all border border-border/10 hover:border-primary/30"
               >
                 <svg
@@ -58,6 +59,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://discord.gg/yG6FjqbWtk"
+                aria-label="Discord"
                 className="p-2 rounded-xl bg-background/50 hover:bg-background transition-all border border-border/10 hover:border-primary/30"
               >
                 <svg
@@ -74,6 +76,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://www.linkedin.com/company/croustillant-menu"
+                aria-label="LinkedIn"
                 className="p-2 rounded-xl bg-background/50 hover:bg-background transition-all border border-border/10 hover:border-primary/30"
               >
                 <svg
@@ -95,7 +98,7 @@ export default async function Footer() {
 
           <div className="flex flex-wrap gap-10 md:gap-16">
             <div className="flex flex-col gap-4">
-              <h2 className="text-sm font-bold opacity-40 uppercase tracking-widest">
+              <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
                 {t("links.discover.title")}
               </h2>
               <ul className="flex flex-col gap-2 text-sm font-medium">
@@ -121,7 +124,7 @@ export default async function Footer() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-sm font-bold opacity-40 uppercase tracking-widest">
+              <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
                 {t("links.about.title")}
               </h2>
               <ul className="flex flex-col gap-2 text-sm font-medium">
@@ -154,7 +157,7 @@ export default async function Footer() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-sm font-bold opacity-40 uppercase tracking-widest">
+              <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
                 {t("links.resources.title")}
               </h2>
               <ul className="flex flex-col gap-2 text-sm font-medium">

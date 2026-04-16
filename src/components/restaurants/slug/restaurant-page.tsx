@@ -40,6 +40,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   } = useRestaurantMenu({ restaurantCode: restaurant.code, mode: "all" });
 
   const t = useTranslations("RestaurantPage");
+  const tCard = useTranslations("RestaurantCard");
   const umami = useUmami();
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
@@ -118,6 +119,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             <div className="flex items-center gap-3 mt-4 md:mt-0 drop-shadow-md">
               <Button
                 size="icon"
+                aria-label={isFavourite ? tCard("removeFromFavourites") : tCard("addToFavourites")}
                 className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
                 onClick={() => {
                   addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
@@ -130,6 +132,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               </Button>
               <Button
                 size="icon"
+                aria-label={tCard("viewOnScreen")}
                 className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
                 onClick={() => {
                   umami.event("Restaurant.Screen", {
@@ -145,6 +148,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 dialogTrigger={
                   <Button
                     size="icon"
+                    aria-label={tCard("viewQrCode")}
                     className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
                     onClick={() =>
                       umami.event("Restaurant.QRCode", {
@@ -207,6 +211,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                   <Button
                     variant="ghost"
                     size="icon"
+                    aria-label={t("dismissHint")}
                     className="h-10 w-10 rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
                     onClick={() => setShowFavoriteHint(false)}
                   >

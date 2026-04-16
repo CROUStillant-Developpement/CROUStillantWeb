@@ -2,7 +2,7 @@
 
 import { cn, formatToISODate } from "@/lib/utils";
 import { DateMenu } from "@/services/types";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -20,6 +20,7 @@ export default function DateScroller({
   onDateChange,
 }: DateScrollerProps) {
   const locale = useLocale();
+  const t = useTranslations("Common");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
@@ -81,6 +82,7 @@ export default function DateScroller({
             <Button
               variant="secondary"
               size="icon"
+              aria-label={t("scrollLeft")}
               className="rounded-full shadow-xl bg-background/90 backdrop-blur-xs border-border/50 hover:bg-background h-8 w-8"
               onClick={() => scrollBy("left")}
             >
@@ -101,6 +103,7 @@ export default function DateScroller({
             <Button
               variant="secondary"
               size="icon"
+              aria-label={t("scrollRight")}
               className="rounded-full shadow-xl bg-background/90 backdrop-blur-xs border-border/50 hover:bg-background h-8 w-8"
               onClick={() => scrollBy("right")}
             >
