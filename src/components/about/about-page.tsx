@@ -322,6 +322,7 @@ export default function AboutPage() {
                 </div>
                 <iframe
                   src="https://api.croustillant.menu/v1/restaurants/871/iframe"
+                  title={t("integrated.iframe_info_title")}
                   className="w-full h-full"
                   loading="lazy"
                 />
@@ -340,6 +341,7 @@ export default function AboutPage() {
                 </div>
                 <iframe
                   src="https://api.croustillant.menu/v1/restaurants/871/menu/13-03-2026/iframe"
+                  title={t("integrated.iframe_menu_title")}
                   className="w-full h-full"
                   loading="lazy"
                 />

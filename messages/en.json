@@ -130,7 +130,8 @@
     "open": "Open now",
     "closed": "Closed",
     "favoriteHint": "Add this restaurant to your favorites to find it more quickly on your home page!",
-    "favoriteHintCta": "Add to favorites"
+    "favoriteHintCta": "Add to favorites",
+    "dismissHint": "Dismiss"
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
@@ -188,7 +189,11 @@
     "open": "Open",
     "izly": "Izly payment accepted",
     "accessibility": "Accessibility for people with reduced mobility",
-    "active": "Active"
+    "active": "Active",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites",
+    "viewOnScreen": "View menu on screen",
+    "viewQrCode": "Show QR Code"
   },
   "AboutPage": {
     "presentation": {
@@ -332,7 +337,8 @@
   "Header": {
     "home": "Home",
     "restaurants": "Restaurants",
-    "about": "About"
+    "about": "About",
+    "settings": "Settings"
   },
   "QrCodeDialog": {
     "share": "Share this menu",
@@ -444,6 +450,10 @@
     "error": "An error occurred while loading the data 😢",
     "back": "Back",
     "close": "Close",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "skipToMainContent": "Skip to main content",
+    "removeFilter": "Remove filter",
     "search": "Search...",
     "noResults": "No results found for this search 😢",
     "yes": "Yes",
@@ -461,9 +471,9 @@
   },
   "SettingsPage": {
     "title": "Settings",
-    "subtitle": "Preferences & personalization",
+    "subtitle": "Preferences & personalisation",
     "appearanceTitle": "Appearance",
-    "behaviorTitle": "Behavior",
+    "behaviorTitle": "Behaviour",
     "personalTitle": "Personal data",
     "language": {
       "title": "Language",
@@ -516,7 +526,7 @@
     },
     "seo": {
       "title": "Settings",
-      "description": "Configure your settings on CROUStillant to personalize your experience.",
+      "description": "Configure your settings on CROUStillant to personalise your experience.",
       "keywords": "CROUS, restaurant, menu, settings"
     }
   },
@@ -729,6 +739,7 @@
     "title": "Beta version",
     "message": "You are using the beta version of CROUStillant. Some issues may occur. Feel free to",
     "contact": "report them",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "production": "Go to the stable version"
   }
 }

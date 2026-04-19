@@ -45,7 +45,7 @@ export default function Header() {
               )}
               onClick={() => umami.event('Header.HomeButton')}
             >
-              <Link href="/">
+              <Link href="/" aria-label={t("home")}>
                 {isDesktop ? t("home") : <Home className="h-5 w-5" />}
               </Link>
             </Button>
@@ -64,7 +64,7 @@ export default function Header() {
               )}
               onClick={() => umami.event('Header.RestaurantsButton')}
             >
-              <Link href="/restaurants">
+              <Link href="/restaurants" aria-label={t("restaurants")}>
                 {isDesktop ? (
                   t("restaurants")
                 ) : (
@@ -87,7 +87,7 @@ export default function Header() {
               )}
               onClick={() => umami.event('Header.AboutButton')}
             >
-              <Link href="/about">
+              <Link href="/about" aria-label={t("about")}>
                 {isDesktop ? t("about") : <Info className="h-5 w-5" />}
               </Link>
             </Button>
@@ -95,7 +95,7 @@ export default function Header() {
         </ul>
       </nav>
       <div className="flex items-center justify-center">
-        <Link href="/" className="flex items-center gap-1">
+        <Link href="/" aria-label="CROUStillant" className="flex items-center gap-1">
           <Logo />
           {isDesktop && <span className="font-bold text-lg">CROUStillant</span>}
         </Link>
@@ -121,7 +121,7 @@ export default function Header() {
             )}
             onClick={() => umami.event('Header.SettingsButton')}
           >
-            <Link href="/settings">
+            <Link href="/settings" aria-label={t("settings")}>
               <Settings className="h-5 w-5" />
             </Link>
           </Button>

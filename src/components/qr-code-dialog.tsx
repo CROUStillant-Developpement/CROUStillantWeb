@@ -135,6 +135,7 @@ export default function QrCodeDialog({
                 type="text"
                 value={url}
                 readOnly
+                aria-label={t("copyLink.button")}
                 className="flex-1 min-w-0 bg-transparent px-3 py-2 text-xs sm:text-sm font-medium focus:outline-hidden truncate"
                 onFocus={(e) => e.target.select()}
               />
@@ -148,7 +149,7 @@ export default function QrCodeDialog({
                 variant="default"
                 aria-label={t("copyLink.button")}
               >
-                <Copy className="h-4 w-4 sm:mr-2" />
+                <Copy className="h-4 w-4 sm:mr-2" aria-hidden="true" />
                 <span className="hidden sm:inline">{t("copyLink.cta")}</span>
               </Button>
             </div>

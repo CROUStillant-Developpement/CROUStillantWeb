@@ -133,11 +133,12 @@ const RestaurantPanel = ({
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label={t("izly")}
                       className="p-2 rounded-xl border border-border/50 hover:opacity-80 transition-opacity cursor-help"
                     >
                       <Image
                         src="/icons/izly.png"
-                        alt="IZLY"
+                        alt=""
                         width={16}
                         height={16}
                         className="object-contain"
@@ -157,6 +158,7 @@ const RestaurantPanel = ({
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label={t("accessibility")}
                       className="p-2 rounded-xl border border-border/50 text-blue-500 hover:text-blue-600 transition-colors cursor-help"
                     >
                       <Accessibility className="w-4 h-4" />
@@ -187,12 +189,12 @@ const RestaurantPanel = ({
             variant="outline"
             size="icon"
             className="rounded-xl shrink-0"
-            title={tInfo("openInGoogleMaps")}
           >
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${restaurant.latitude},${restaurant.longitude}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={tInfo("openInGoogleMaps")}
             >
               <Navigation className="w-4 h-4" />
             </a>
