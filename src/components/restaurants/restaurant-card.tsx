@@ -56,6 +56,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
             <Button
               variant="ghost"
               size="icon"
+              aria-label={isFavourite ? t("removeFromFavourites") : t("addToFavourites")}
               className="absolute top-3 right-3 z-20 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 border border-white/30 text-white transition-all hover:scale-115"
               onClick={(e) => {
                 e.preventDefault();

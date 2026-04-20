@@ -271,15 +271,6 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-
-    .leaflet-layer,
-    .leaflet-control-zoom-in,
-    .leaflet-control-zoom-out,
-    .leaflet-control-attribution,
-    .leaflet-marker-icon,
-    .leaflet-popup {
-      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-    }
   }
 }
 
@@ -289,6 +280,24 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Pointer cursor on all interactive elements */
+  a, button, [role="button"], label, [role="option"], [role="menuitem"], [role="tab"] {
+    cursor: pointer;
+  }
+  /* Ensure focus rings are always visible for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

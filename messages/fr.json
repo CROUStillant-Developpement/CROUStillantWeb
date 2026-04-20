@@ -130,7 +130,8 @@
     "open": "Ouvert",
     "closed": "Fermé",
     "favoriteHint": "Ajoutez ce restaurant à vos favoris pour le retrouver plus rapidement sur votre page d'accueil !",
-    "favoriteHintCta": "Ajouter aux favoris"
+    "favoriteHintCta": "Ajouter aux favoris",
+    "dismissHint": "Fermer"
   },
   "DatePickers": {
     "currentDate": "Date actuelle : {date}",
@@ -188,7 +189,11 @@
     "open": "Ouvert",
     "izly": "Paiement Izly accepté",
     "accessibility": "Accessibilité PMR",
-    "active": "Actif"
+    "active": "Actif",
+    "addToFavourites": "Ajouter aux favoris",
+    "removeFromFavourites": "Retirer des favoris",
+    "viewOnScreen": "Afficher le menu sur écran",
+    "viewQrCode": "Afficher le QR Code"
   },
   "AboutPage": {
     "presentation": {
@@ -332,7 +337,8 @@
   "Header": {
     "home": "Accueil",
     "restaurants": "Restaurants",
-    "about": "À propos"
+    "about": "À propos",
+    "settings": "Paramètres"
   },
   "QrCodeDialog": {
     "share": "Partager ce menu",
@@ -444,6 +450,10 @@
     "error": "Une erreur est survenue lors du chargement des données 😢",
     "back": "Retour",
     "close": "Fermer",
+    "scrollLeft": "Défiler vers la gauche",
+    "scrollRight": "Défiler vers la droite",
+    "skipToMainContent": "Aller au contenu principal",
+    "removeFilter": "Supprimer le filtre",
     "search": "Rechercher...",
     "noResults": "Aucun résultat trouvé pour cette recherche 😢",
     "yes": "Oui",
@@ -728,8 +738,9 @@
   },
   "BetaBanner": {
     "title": "Version bêta",
-    "message": "Vous utilisez la version bêta de CROUStillant. Des bugs peuvent survenir. N'hésitez pas à",
+    "message": "Vous utilisez la version bêta. Des bugs peuvent survenir. N'hésitez pas à",
     "contact": "nous les signaler",
-    "dismiss": "Fermer"
+    "dismiss": "Fermer",
+    "production": "Accéder à la version stable"
   }
 }

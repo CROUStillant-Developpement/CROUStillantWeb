@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, FlaskConical } from "lucide-react";
+import { X, FlaskConical, ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
@@ -58,7 +58,17 @@ export default function BetaBanner() {
               >
                 {t("contact")}
               </Link>
+              .
             </p>
+            <a
+              href="https://croustillant.menu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-amber-500 underline-offset-2 hover:underline font-medium mt-1"
+            >
+              <ExternalLink className="h-3 w-3" aria-hidden="true" />
+              {t("production")}
+            </a>
           </div>
         </div>
       </div>
