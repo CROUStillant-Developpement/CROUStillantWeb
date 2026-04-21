@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NewUIBanner from "@/components/new-ui-banner";
 import BetaBanner from "@/components/beta-banner";
 import { useTranslations } from "next-intl";
+import UpdateBanner from "@/components/update-banner";
 
 
 export default function LayoutShell({
@@ -43,6 +44,7 @@ export default function LayoutShell({
       <Toaster />
       <NewUIBanner />
       <BetaBanner />
+      <UpdateBanner />
     </>
   );
 }

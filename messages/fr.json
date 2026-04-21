@@ -742,5 +742,11 @@
     "contact": "nous les signaler",
     "dismiss": "Fermer",
     "production": "Accéder à la version stable"
+  },
+  "UpdateBanner": {
+    "title": "Nouvelle version disponible",
+    "message": "Une mise à jour a été déployée. Rechargez la page pour en profiter.",
+    "refresh": "Recharger",
+    "dismiss": "Fermer"
   }
 }
