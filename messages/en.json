@@ -741,5 +741,11 @@
     "contact": "report them",
     "dismiss": "Dismiss",
     "production": "Go to the stable version"
+  },
+  "UpdateBanner": {
+    "title": "New version available",
+    "message": "A new deployment is live. Reload the page to get the latest version.",
+    "refresh": "Reload",
+    "dismiss": "Dismiss"
   }
 }
