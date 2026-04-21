@@ -10,10 +10,11 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
   rules: {
     "react-hooks/exhaustive-deps": "off",
     "react-hooks/set-state-in-effect": "off",
-    "react-hooks/refs": "off"
+    "react-hooks/refs": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_", "destructuredArrayIgnorePattern": "^_" }]
   },
 }, {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
+  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "coverage/**", "next-env.d.ts"]
 }];
 
 export default eslintConfig;
