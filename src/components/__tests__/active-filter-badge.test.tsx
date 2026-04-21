@@ -10,6 +10,10 @@ vi.mock("next-umami", () => ({
   useUmami: () => ({ event: umamiEvent }),
 }));
 
+vi.mock("next-intl", () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 beforeEach(() => {
   umamiEvent.mockReset();
 });
