@@ -31,7 +31,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^1.8.0",
-    "maplibre-gl": "^5.23.0",
+    "maplibre-gl": "^5.24.0",
     "motion": "^12.34.3",
     "next": "^16.2.4",
     "next-intl": "^4.8.2",
