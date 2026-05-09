@@ -18,6 +18,7 @@ export default function LeafletMiniMap({
 }: LeafletMiniMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("leaflet").Map | null>(null);
+  const markerRef = useRef<import("leaflet").Marker | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -49,7 +50,7 @@ export default function LeafletMiniMap({
         maxZoom: 19,
       }).addTo(map);
 
-      L.marker([latitude, longitude], { icon }).addTo(map);
+      markerRef.current = L.marker([latitude, longitude], { icon }).addTo(map);
       L.control.zoom({ position: "bottomright" }).addTo(map);
 
       mapRef.current = map;
@@ -58,8 +59,15 @@ export default function LeafletMiniMap({
     return () => {
       mapRef.current?.remove();
       mapRef.current = null;
+      markerRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+    mapRef.current.setView([latitude, longitude], zoom);
+    markerRef.current?.setLatLng([latitude, longitude]);
+  }, [latitude, longitude, zoom]);
 
   return <div ref={containerRef} className={className ?? "h-full w-full"} />;
 }

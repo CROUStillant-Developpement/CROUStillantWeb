@@ -46,6 +46,10 @@ export default function RestaurantsPage({
   }, [filteredRestaurants, currentPage, pageSize]);
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredRestaurants]);
+
+  useEffect(() => {
     setMarkers(
       filteredRestaurants
         .filter((r) => r.latitude && r.longitude)
