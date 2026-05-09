@@ -1,6 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Map, MapMarker, MarkerContent, MapControls } from "@/components/ui/map";
+
+const LeafletMiniMap = dynamic(
+  () => import("@/components/ui/leaflet-mini-map"),
+  { ssr: false },
+);
 
 interface RestaurantMiniMapProps {
   latitude: number;
@@ -16,6 +22,14 @@ export default function RestaurantMiniMap({ latitude, longitude }: RestaurantMin
         className="w-full h-full rounded-2xl"
         minZoom={2}
         scrollZoom={false}
+        webGLUnsupportedFallback={
+          <LeafletMiniMap
+            latitude={latitude}
+            longitude={longitude}
+            zoom={14}
+            className="h-full w-full"
+          />
+        }
       >
         <MapMarker longitude={longitude} latitude={latitude}>
           <MarkerContent />

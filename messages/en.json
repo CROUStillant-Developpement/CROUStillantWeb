@@ -77,6 +77,10 @@
     "clickToSeeAll": "See all",
     "clickToSeeLess": "See less",
     "markerDescription": "View the menu of the restaurant <link>{name}</link>.",
+    "webglUnavailable": {
+      "title": "Map unavailable",
+      "description": "Your browser does not support WebGL, which is required to display the interactive map."
+    },
     "seo": {
       "title": "Restaurants",
       "description": "Discover the list of CROUS restaurants in France and overseas. Find the perfect restaurant for your next meal!",

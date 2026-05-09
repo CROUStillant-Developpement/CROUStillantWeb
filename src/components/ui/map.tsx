@@ -142,6 +142,8 @@ type MapProps = {
   onViewportChange?: (viewport: MapViewport) => void;
   /** Show a loading indicator on the map */
   loading?: boolean;
+  /** Content to render when WebGL is not available. Defaults to a generic error message. */
+  webGLUnsupportedFallback?: ReactNode;
 } & Omit<MapLibreGL.MapOptions, "container" | "style">;
 
 function DefaultLoader() {
@@ -176,6 +178,7 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
     viewport,
     onViewportChange,
     loading = false,
+    webGLUnsupportedFallback,
     ...props
   },
   ref,
@@ -184,6 +187,7 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
   const [mapInstance, setMapInstance] = useState<MapLibreGL.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isStyleLoaded, setIsStyleLoaded] = useState(false);
+  const [webGLUnsupported, setWebGLUnsupported] = useState(false);
   const currentStyleRef = useRef<MapStyleOption | null>(null);
   const styleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const internalUpdateRef = useRef(false);
@@ -215,6 +219,18 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
   // Initialize the map
   useEffect(() => {
     if (!containerRef.current) return;
+
+    try {
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl2") ?? canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl");
+      if (!gl) {
+        setWebGLUnsupported(true);
+        return;
+      }
+    } catch {
+      setWebGLUnsupported(true);
+      return;
+    }
 
     const initialStyle =
       resolvedTheme === "dark" ? mapStyles.dark : mapStyles.light;
@@ -320,6 +336,24 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
     }),
     [mapInstance, isLoaded, isStyleLoaded],
   );
+
+  if (webGLUnsupported) {
+    if (webGLUnsupportedFallback) {
+      return (
+        <div className={cn("relative h-full w-full", className)}>
+          {webGLUnsupportedFallback}
+        </div>
+      );
+    }
+
+    return (
+      <div className={cn("relative h-full w-full flex flex-col items-center justify-center gap-3 bg-muted/40 rounded-xl border border-border text-center p-6", className)}>
+        <p className="text-sm text-muted-foreground">
+          Map unavailable — WebGL is not supported by your browser.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <MapContext.Provider value={contextValue}>
