@@ -353,6 +353,7 @@ const MapComponent = ({
   zoom = DEFAULT_ZOOM,
   loading = false,
 }: MapProps) => {
+  const tMap = useTranslations("RestaurantsPage");
   const { markers } = useMarkerStore();
   // A group holds all restaurants at a shared coordinate.
   // If length === 1 the panel shows directly; if > 1 a picker is shown first.
@@ -521,7 +522,21 @@ const MapComponent = ({
       )}
 
       <div className="w-full h-[80svh] rounded-2xl overflow-hidden relative z-10">
-        <MapGL center={center} zoom={zoom} className="rounded-2xl" minZoom={2} projection={{ type: "globe" }}>
+        <MapGL
+          center={center}
+          zoom={zoom}
+          className="rounded-2xl"
+          minZoom={2}
+          projection={{ type: "globe" }}
+          webGLUnsupportedFallback={
+            <>
+              <div className={cn("relative h-full w-full flex flex-col items-center justify-center gap-3 bg-muted/40 rounded-xl border border-border text-center p-6 rounded-2xl", "animate-fade-in")}>
+                <p className="text-base font-semibold text-foreground">{tMap("webglUnavailable.title")}</p>
+                <p className="text-sm text-muted-foreground max-w-xs">{tMap("webglUnavailable.description")}</p>
+              </div>
+            </>
+          }
+        >
           <FitBoundsToMarkers />
           <MapClickHandler onMapClick={handleMapClick} />
           <MapClusterLayer<SerializedMarker>

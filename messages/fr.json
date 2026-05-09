@@ -77,6 +77,10 @@
     "clickToSeeAll": "Voir tout",
     "clickToSeeLess": "Voir moins",
     "markerDescription": "Voir le menu du restaurant <link>{name}</link>.",
+    "webglUnavailable": {
+      "title": "Carte indisponible",
+      "description": "Votre navigateur ne prend pas en charge WebGL, nécessaire pour afficher la carte interactive."
+    },
     "seo": {
       "title": "Restaurants",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
