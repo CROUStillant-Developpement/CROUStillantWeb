@@ -17,7 +17,7 @@ import {
   ChevronsLeftRightEllipsis,
   Smartphone
 } from "lucide-react";
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaAndroid, FaApple, FaGooglePlay } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
@@ -345,6 +345,50 @@ export default function AboutPage() {
                   className="w-full h-full"
                   loading="lazy"
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile App Section */}
+        <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
+              {t("mobile.title")}
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              {t("mobile.description")}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/mobile/android">
+                <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                  <FaGooglePlay className="mr-3 h-4 w-4" />
+                  {t("mobile.androidButton")}
+                </Button>
+              </Link>
+              <Link href="/mobile/ios">
+                <Button size="lg" variant="outline" className="rounded-2xl px-8 font-bold hover:scale-[1.02] transition-transform">
+                  <FaApple className="mr-3 h-5 w-5" />
+                  {t("mobile.iosButton")}
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <div className="flex-1 w-full flex items-center justify-center">
+            <div className="relative flex items-center justify-center w-full max-w-xs">
+              <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full pointer-events-none" />
+              <div className="relative flex flex-col items-center gap-6 p-8">
+                <div className="flex gap-6">
+                  <div className="p-4 rounded-3xl bg-green-500/10 border border-green-500/20 shadow-lg">
+                    <FaAndroid className="h-12 w-12 text-green-500" />
+                  </div>
+                  <div className="p-4 rounded-3xl bg-blue-500/10 border border-blue-500/20 shadow-lg">
+                    <FaApple className="h-12 w-12 text-blue-500 dark:text-blue-400" />
+                  </div>
+                </div>
+                <div className="p-5 rounded-3xl bg-primary/10 border border-primary/20 shadow-xl">
+                  <Smartphone className="h-16 w-16 text-primary" />
+                </div>
               </div>
             </div>
           </div>

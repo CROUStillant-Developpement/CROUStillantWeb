@@ -7,7 +7,9 @@ import {
   MapPin,
   HeartHandshakeIcon,
   ArrowRight,
+  Smartphone,
 } from "lucide-react";
+import { FaAndroid, FaApple } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import HomeCard from "./home-card";
 import { Link } from "@/i18n/routing";
@@ -106,6 +108,56 @@ export default function HomePage() {
           >
             <ForkKnifeCrossed size={180} className="text-primary" />
           </BasicCard>
+        </div>
+      </section>
+
+      <section className="">
+        <div className="relative overflow-hidden rounded-[3rem] border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm p-10 hover:shadow-md">
+          <div className="relative z-10 flex flex-col items-center text-center gap-10">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-110 group-hover:scale-125 transition-transform" />
+              <div className="relative p-8 rounded-[2.5rem] bg-primary shadow-2xl shadow-primary/40 transform rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                <Smartphone className="text-white h-16 w-16" />
+              </div>
+            </div>
+
+            <div className="space-y-4 max-w-2xl">
+              <h3 className="text-4xl md:text-6xl font-black tracking-tight text-foreground">
+                {t("mobile.title")}
+              </h3>
+              <p className="text-xl text-muted-foreground font-medium">
+                {t("mobile.description")}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/mobile/android"
+                className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-primary-foreground font-black group"
+              >
+                <FaAndroid className="h-5 w-5" />
+                {t("mobile.androidCta")}
+              </Link>
+              <Link
+                href="/mobile/ios"
+                className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl border border-border bg-background py-4 px-8 text-foreground font-black"
+              >
+                <FaApple className="h-5 w-5" />
+                {t("mobile.iosCta")}
+              </Link>
+            </div>
+
+            <Link
+              href="/mobile"
+              className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all group/link"
+            >
+              {t("mobile.learnMore")}
+              <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
+          <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
         </div>
       </section>
 

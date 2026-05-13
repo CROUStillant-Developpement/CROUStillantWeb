@@ -125,6 +125,48 @@ export default async function Footer() {
 
             <div className="flex flex-col gap-4">
               <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
+                {t("links.services.title")}
+              </h2>
+              <ul className="flex flex-col gap-2 text-sm font-medium">
+                <li>
+                  <Link
+                    href="https://api.croustillant.menu"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                    target="_blank"
+                  >
+                    {t("links.services.api")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://discord.com/oauth2/authorize?client_id=1024564077068025867"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                    target="_blank"
+                  >
+                    {t("links.services.discord")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/mobile"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                  >
+                    {t("links.services.mobile")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://www.data.gouv.fr/users/paul-bayfield"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                  >
+                    {t("links.services.datasets")}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
                 {t("links.about.title")}
               </h2>
               <ul className="flex flex-col gap-2 text-sm font-medium">
@@ -163,11 +205,11 @@ export default async function Footer() {
               <ul className="flex flex-col gap-2 text-sm font-medium">
                 <li>
                   <Link
-                    href="https://api.croustillant.menu"
+                    href="https://uptime.bayfield.dev/status/croustillant"
                     className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
                     target="_blank"
                   >
-                    {t("links.resources.api")}
+                    {t("links.resources.status")}
                   </Link>
                 </li>
                 <li>
@@ -176,25 +218,34 @@ export default async function Footer() {
                     className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
                     target="_blank"
                   >
-                    {t("links.resources.documentation")}
+                    {t("links.resources.github")}
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://discord.com/oauth2/authorize?client_id=1024564077068025867"
+                    href="https://discord.gg/yG6FjqbWtk"
                     className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
                     target="_blank"
                   >
-                    {t("links.resources.discord")}
+                    {t("links.resources.discord-server")}
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://uptime.bayfield.dev/status/croustillant"
+                    href="https://www.linkedin.com/company/croustillant-menu"
                     className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
                     target="_blank"
                   >
-                    {t("links.resources.status")}
+                    {t("links.resources.linkedIn")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://monitor.croustillant.menu"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                    target="_blank"
+                  >
+                    {t("links.resources.monitoring")}
                   </Link>
                 </li>
               </ul>
