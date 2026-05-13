@@ -317,6 +317,13 @@
         "dishes": "Dishes",
         "stats": "Statistics"
       },
+      "services": {
+        "title": "Services",
+        "api": "API",
+        "discord": "Discord Bot",
+        "mobile": "Mobile App",
+        "datasets": "Datasets"
+      },
       "about": {
         "title": "About",
         "project": "The project",
@@ -326,13 +333,12 @@
         "changelog": "Changelog"
       },
       "resources": {
-        "title": "Useful links",
-        "api": "API",
-        "documentation": "Documentation",
-        "discord": "Discord Bot",
-        "discordServer": "Discord Server",
+        "title": "Lien utiles",
         "status": "Status",
-        "github": "GitHub"
+        "github": "GitHub",
+        "discord-server": "Serveur Discord",
+        "monitoring": "Monitoring",
+        "linkedIn": "LinkedIn"
       }
     },
     "accessibility": {
