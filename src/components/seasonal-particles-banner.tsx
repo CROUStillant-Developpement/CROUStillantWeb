@@ -1,30 +1,40 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Sparkles, Bug } from "lucide-react";
+import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { detectSeasonFromDate, SEASON_CONFIGS } from "@/lib/seasonal";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 
-const STORAGE_KEY = "new-ui-banner-dismissed";
-
-export default function NewUIBanner() {
+export default function SeasonalParticlesBanner() {
   const [visible, setVisible] = useState(false);
-  const t = useTranslations("NewUIBanner");
+  const t = useTranslations("SeasonalParticlesBanner");
+  const { seasonalParticles } = useUserPreferences();
+
+  const season = detectSeasonFromDate(new Date());
+  const config = SEASON_CONFIGS.find((s) => s.id === season) ?? null;
+  const storageKey = `seasonal-particles-hint-${season}`;
 
   useEffect(() => {
-    if (!sessionStorage.getItem(STORAGE_KEY)) {
+    if (!config || !seasonalParticles) return;
+    if (!sessionStorage.getItem(storageKey)) {
       const timer = setTimeout(() => setVisible(true), 800);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [config, seasonalParticles, storageKey]);
 
   function dismiss() {
-    sessionStorage.setItem(STORAGE_KEY, "1");
+    sessionStorage.setItem(storageKey, "1");
     setVisible(false);
   }
 
+  if (!config) return null;
+
   return (
     <div
+      role="status"
+      aria-live="polite"
       className={`fixed bottom-6 left-6 z-50 max-w-sm transition-all duration-500 ease-out ${
         visible
           ? "opacity-100 translate-y-0 pointer-events-auto"
@@ -41,20 +51,19 @@ export default function NewUIBanner() {
         </button>
 
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 shrink-0 rounded-xl bg-primary/10 p-2 text-primary">
-            <Sparkles className="h-4 w-4" />
+          <div className="mt-0.5 shrink-0 rounded-xl bg-primary/10 p-2 text-lg leading-none select-none">
+            {config.emoji}
           </div>
           <div className="space-y-1">
             <p className="text-sm font-semibold leading-snug">{t("title")}</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {t("message")}{" "}
               <Link
-                href="/contact"
+                href="/settings"
                 onClick={dismiss}
-                className="inline-flex items-center gap-1 text-primary underline-offset-2 hover:underline font-medium"
+                className="text-primary underline-offset-2 hover:underline font-medium"
               >
-                <Bug className="h-3 w-3" />
-                {t("contact")}
+                {t("settingsLink")}
               </Link>
             </p>
           </div>

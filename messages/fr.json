@@ -533,6 +533,13 @@
       "title": "Paramètres",
       "description": "Personnalisez les paramètres de CROUStillant pour une expérience optimale.",
       "keywords": "CROUS, restaurant, menu, paramètres"
+    },
+    "seasonal": {
+      "title": "Décorations saisonnières",
+      "description": "Activez les particules animées lors des périodes festives (Noël, Halloween, etc.).",
+      "successTitle": "Décorations saisonnières modifiées !",
+      "successEnabled": "Les décorations saisonnières ont été activées.",
+      "successDisabled": "Les décorations saisonnières ont été désactivées."
     }
   },
   "StatsPage": {
@@ -734,12 +741,6 @@
       "keywords": "CROUS, restaurant, menu, mises à jour"
     }
   },
-  "NewUIBanner": {
-    "title": "Nouvelle interface !",
-    "message": "Bienvenue sur la toute nouvelle interface de CROUStillant ! Si vous rencontrez un bug, n'hésitez pas à",
-    "contact": "nous contacter",
-    "dismiss": "Fermer"
-  },
   "BetaBanner": {
     "title": "Version bêta",
     "message": "Vous utilisez la version bêta. Des bugs peuvent survenir. N'hésitez pas à",
@@ -751,6 +752,12 @@
     "title": "Nouvelle version disponible",
     "message": "Une mise à jour a été déployée. Rechargez la page pour en profiter.",
     "refresh": "Recharger",
+    "dismiss": "Fermer"
+  },
+  "SeasonalParticlesBanner": {
+    "title": "Décorations saisonnières actives !",
+    "message": "Des particules animées sont affichées sur le site. Vous pouvez les désactiver dans les",
+    "settingsLink": "paramètres",
     "dismiss": "Fermer"
   }
 }

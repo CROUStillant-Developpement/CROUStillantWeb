@@ -161,7 +161,7 @@
 @utility zoom-in-95 { --tw-enter-scale: 0.95; }
 @utility zoom-out-95 { --tw-exit-scale: 0.95; }
 
-/* Slide – no value (DEFAULT = 100%) */
+/* Slide - no value (DEFAULT = 100%) */
 @utility slide-in-from-top    { --tw-enter-translate-y: -100%; }
 @utility slide-in-from-bottom { --tw-enter-translate-y: 100%; }
 @utility slide-in-from-left   { --tw-enter-translate-x: -100%; }
@@ -171,7 +171,7 @@
 @utility slide-out-to-left    { --tw-exit-translate-x: -100%; }
 @utility slide-out-to-right   { --tw-exit-translate-x: 100%; }
 
-/* Slide – named "full" (100%) */
+/* Slide - named "full" (100%) */
 @utility slide-in-from-top-full    { --tw-enter-translate-y: -100%; }
 @utility slide-in-from-bottom-full { --tw-enter-translate-y: 100%; }
 @utility slide-in-from-left-full   { --tw-enter-translate-x: -100%; }
@@ -181,7 +181,7 @@
 @utility slide-out-to-left-full    { --tw-exit-translate-x: -100%; }
 @utility slide-out-to-right-full   { --tw-exit-translate-x: 100%; }
 
-/* Slide – dynamic values (spacing scale, arbitrary lengths/percentages) */
+/* Slide - dynamic values (spacing scale, arbitrary lengths/percentages) */
 @utility slide-in-from-top-* {
   --tw-enter-translate-y: calc(--value(--spacing, [length], [percentage]) * -1);
 }
@@ -207,7 +207,7 @@
   --tw-exit-translate-x: --value(--spacing, [length], [percentage]);
 }
 
-/* Duration – sets both transition-duration and animation duration */
+/* Duration - sets both transition-duration and animation duration */
 @utility duration-75   { transition-duration: 75ms;   --tw-animate-duration: 75ms; }
 @utility duration-100  { transition-duration: 100ms;  --tw-animate-duration: 100ms; }
 @utility duration-150  { transition-duration: 150ms;  --tw-animate-duration: 150ms; }
@@ -245,6 +245,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
   }
+
   .dark {
     --background: 0 2.44% 8.04%;
     --foreground: 356 0% 90%;
@@ -272,6 +273,135 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  /* Christmas - forest green primary, red accent */
+  [data-seasonal="christmas"] {
+    --primary: 141 65% 36%;
+    --ring:    141 65% 36%;
+    --accent:  0   80% 55%;
+  }
+  .dark[data-seasonal="christmas"] {
+    --primary: 141 60% 45%;
+    --ring:    141 60% 45%;
+    --accent:  0   70% 55%;
+  }
+
+  /* Halloween - pumpkin orange primary, deep purple accent */
+  [data-seasonal="halloween"] {
+    --primary: 25  95% 48%;
+    --ring:    25  95% 48%;
+    --accent:  270 55% 38%;
+  }
+  .dark[data-seasonal="halloween"] {
+    --primary: 25  95% 54%;
+    --ring:    25  95% 54%;
+    --accent:  270 55% 45%;
+  }
+
+  /* Valentine's Day - deep rose primary */
+  [data-seasonal="valentines"] {
+    --primary: 340 78% 54%;
+    --ring:    340 78% 54%;
+    --accent:  310 45% 78%;
+  }
+  .dark[data-seasonal="valentines"] {
+    --primary: 340 75% 60%;
+    --ring:    340 75% 60%;
+    --accent:  310 45% 32%;
+  }
+
+  /* April Fools - bright cyan primary, lime accent */
+  [data-seasonal="aprilfools"] {
+    --primary: 195 90% 42%;
+    --ring:    195 90% 42%;
+    --accent:  62  90% 50%;
+  }
+  .dark[data-seasonal="aprilfools"] {
+    --primary: 195 90% 50%;
+    --ring:    195 90% 50%;
+    --accent:  62  90% 55%;
+  }
+
+  /* Easter - lavender primary, mint accent */
+  [data-seasonal="easter"] {
+    --primary: 275 60% 54%;
+    --ring:    275 60% 54%;
+    --accent:  150 48% 68%;
+  }
+  .dark[data-seasonal="easter"] {
+    --primary: 275 58% 62%;
+    --ring:    275 58% 62%;
+    --accent:  150 48% 38%;
+  }
+}
+
+.header-nav-pill {
+  position: relative;
+  overflow: visible;
+}
+
+/* Christmas - snow cap */
+[data-seasonal="christmas"] .header-nav-pill::before {
+  --overflow-x: 6px;
+  --snow-image: url('/snow-cap.png');
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: calc(var(--overflow-x) * -1);
+  width: calc(100% + var(--overflow-x) * 2);
+  height: 28px;
+  border-image-source: var(--snow-image);
+  border-image-slice: calc(6 * 56 / 20) fill;
+  border-image-width: calc(28px / 3);
+  border-image-repeat: round;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.12));
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Christmas - icy glow */
+[data-seasonal="christmas"] .header-nav-pill {
+  box-shadow: 0 0 0 1px hsl(200 80% 85% / 0.25), 0 0 16px hsl(200 80% 85% / 0.12);
+}
+
+/* Halloween - pumpkin glow */
+[data-seasonal="halloween"] .header-nav-pill {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.35), 0 0 16px hsl(var(--primary) / 0.18);
+}
+
+/* Valentine's - rosy glow */
+[data-seasonal="valentines"] .header-nav-pill {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.35), 0 0 16px hsl(var(--primary) / 0.18);
+}
+
+/* Easter - lavender glow */
+[data-seasonal="easter"] .header-nav-pill {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.35), 0 0 16px hsl(var(--primary) / 0.18);
+}
+
+/* April Fools - animated rainbow outline */
+[data-seasonal="aprilfools"] .header-nav-pill {
+  animation: header-rainbow 2.5s linear infinite;
+}
+
+@keyframes header-rainbow {
+  0%   { box-shadow: 0 0 0 1.5px hsl(0   90% 65% / 0.55), 0 0 12px hsl(0   90% 65% / 0.12); }
+  25%  { box-shadow: 0 0 0 1.5px hsl(60  90% 50% / 0.55), 0 0 12px hsl(60  90% 50% / 0.12); }
+  50%  { box-shadow: 0 0 0 1.5px hsl(195 90% 50% / 0.55), 0 0 12px hsl(195 90% 50% / 0.12); }
+  75%  { box-shadow: 0 0 0 1.5px hsl(280 90% 65% / 0.55), 0 0 12px hsl(280 90% 65% / 0.12); }
+  100% { box-shadow: 0 0 0 1.5px hsl(0   90% 65% / 0.55), 0 0 12px hsl(0   90% 65% / 0.12); }
+}
+
+/* Falling particle animation for seasonal decorations */
+@keyframes seasonal-fall {
+  0%   { transform: translateY(-4rem) rotate(0deg);   opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translateY(108vh) rotate(540deg); opacity: 0; }
+}
+
+.seasonal-particle {
+  animation: seasonal-fall linear infinite;
 }
 
 @layer base {
@@ -329,54 +459,6 @@
     .container {
       padding: 0 205px;
     }
-  }
-
-  .snowy-button {
-    position: relative;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    text-align: center;
-    color: #fff;
-    background-image:
-      linear-gradient(to bottom, #f12828, #a00332, #9f0f31),
-      linear-gradient(to bottom, #ae0034, #6f094c);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    box-shadow:
-      inset 0 1px rgb(255 255 255 / 0.25),
-      inset 0 -1px rgb(0 0 0 / 0.1),
-      0 2px 4px rgb(0 0 0 / 0.25);
-    transition-property: transform, filter;
-    transition-duration: 0.2s;
-    will-change: transform;
-    resize: both;
-
-    &:active {
-      transform: scale(0.92);
-      filter: brightness(0.8);
-    }
-  }
-
-  .snowy-button:hover {
-    color: #fff !important;
-  }
-
-  .snowy-button::after {
-    --overflow-x: 4px;
-    --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: calc(var(--overflow-x) * -1);
-    border-image-source: var(--snow-image);
-    border-image-slice: calc(6 * 56 / 20) fill;
-    border-image-width: calc(28px / 3);
-    border-image-repeat: round;
-    width: calc(100% + var(--overflow-x) * 2);
-    height: 28px;
-    filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.25));
-    opacity: 1;
-    animation: fade-in 2s;
   }
 
   .custom-tooltip {
