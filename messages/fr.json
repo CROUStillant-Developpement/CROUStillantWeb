@@ -305,6 +305,12 @@
       "description": "Rejoignez notre communauté Discord pour discuter avec d'autres utilisateurs et les membres de l'équipe CROUStillant !",
       "button": "Notre serveur Discord"
     },
+    "mobile": {
+      "title": "Disponible sur mobile",
+      "description": "L'application CROUStillant est disponible sur Android et iOS. Consultez les menus de votre restaurant CROUS partout, à tout moment, directement depuis votre smartphone.",
+      "androidButton": "Télécharger sur Android",
+      "iosButton": "Télécharger sur iOS"
+    },
     "seo": {
       "title": "À propos",
       "description": "Découvrez l'équipe de CROUStillant, le projet et les fonctionnalités du service. Nous sommes là pour vous aider !",
