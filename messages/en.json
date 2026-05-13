@@ -39,6 +39,13 @@
     "footer": {
       "title": "Convinced ?",
       "subtitle": "Start using CROUStillant now!"
+    },
+    "mobile": {
+      "title": "Take CROUStillant everywhere",
+      "description": "The CROUStillant mobile app is available on Android and iOS. Check your CROUS restaurant menus wherever you are.",
+      "androidCta": "Android",
+      "iosCta": "iOS",
+      "learnMore": "Learn more"
     }
   },
   "HomeCard": {

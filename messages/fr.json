@@ -39,6 +39,13 @@
     "footer": {
       "title": "Convaincu ?",
       "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
+    },
+    "mobile": {
+      "title": "Emportez CROUStillant partout",
+      "description": "L'application mobile CROUStillant est disponible sur Android et iOS. Consultez les menus de votre restaurant CROUS où que vous soyez.",
+      "androidCta": "Android",
+      "iosCta": "iOS",
+      "learnMore": "En savoir plus"
     }
   },
   "HomeCard": {
@@ -773,15 +780,15 @@
       "badge": "Application mobile",
       "title": "CROUStillant dans votre poche",
       "description": "Consultez les menus de votre restaurant CROUS où que vous soyez, directement depuis votre smartphone. Rapide, intuitif et gratuit.",
-      "androidCta": "Télécharger sur Android",
-      "iosCta": "Télécharger sur iOS"
+      "androidCta": "Android",
+      "iosCta": "iOS"
     },
     "platforms": {
       "title": "Choisissez votre plateforme",
       "android": {
         "title": "Android",
         "description": "Disponible sur le Google Play Store. Rejoignez la bêta pour découvrir l'application en avant-première.",
-        "cta": "Télécharger sur Google Play",
+        "cta": "Télécharger Google Play",
         "badge": "Bêta",
         "pageTitle": "CROUStillant pour Android",
         "pageDescription": "Téléchargez l'application CROUStillant sur Google Play et consultez les menus de votre restaurant CROUS directement depuis votre smartphone Android."

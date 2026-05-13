@@ -41,7 +41,7 @@ export default function MobilePage() {
               </Button>
             </Link>
             <Link href="/mobile/ios">
-              <Button size="lg" variant="secondary" className="rounded-2xl px-6 font-bold shadow-xs border border-border/50 hover:scale-[1.02] transition-transform">
+              <Button size="lg" variant="outline" className="rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group">
                 <FaApple className="mr-2 h-5 w-5" />
                 {t("hero.iosCta")}
               </Button>
@@ -75,7 +75,7 @@ export default function MobilePage() {
               </div>
               <p className="text-muted-foreground mb-8 flex-1 leading-relaxed">{t("platforms.android.description")}</p>
               <Link href="/mobile/android">
-                <Button size="lg" className="w-full rounded-2xl font-black shadow-lg shadow-primary/20 group-hover:scale-[1.02] transition-transform">
+                <Button size="lg" variant="outline" className="w-full rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group border-green-500/20 hover:border-green-500/50 transition-transform">
                   <FaGooglePlay className="mr-2 h-4 w-4" />
                   {t("platforms.android.cta")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -98,7 +98,7 @@ export default function MobilePage() {
               </div>
               <p className="text-muted-foreground mb-8 flex-1 leading-relaxed">{t("platforms.ios.description")}</p>
               <Link href="/mobile/ios">
-                <Button size="lg" variant="secondary" className="w-full rounded-2xl font-black border border-border/50 group-hover:scale-[1.02] transition-transform">
+                <Button size="lg" variant="outline" className="w-full rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group border-blue-500/20 hover:border-blue-500/50 transition-transform">
                   <FaApple className="mr-2 h-4 w-4" />
                   {t("platforms.ios.cta")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
