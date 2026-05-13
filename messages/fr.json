@@ -330,7 +330,9 @@
         "api": "API",
         "documentation": "Documentation",
         "discord": "Bot Discord",
-        "status": "Status"
+        "discord-server": "Serveur Discord",
+        "status": "Status",
+        "github": "GitHub"
       }
     },
     "accessibility": {
@@ -759,5 +761,63 @@
     "message": "Des particules animées sont affichées sur le site. Vous pouvez les désactiver dans les",
     "settingsLink": "paramètres",
     "dismiss": "Fermer"
+  },
+  "MobilePage": {
+    "hero": {
+      "badge": "Application mobile",
+      "title": "CROUStillant dans votre poche",
+      "description": "Consultez les menus de votre restaurant CROUS où que vous soyez, directement depuis votre smartphone. Rapide, intuitif et gratuit.",
+      "androidCta": "Télécharger sur Android",
+      "iosCta": "Télécharger sur iOS"
+    },
+    "platforms": {
+      "title": "Choisissez votre plateforme",
+      "android": {
+        "title": "Android",
+        "description": "Disponible sur le Google Play Store. Rejoignez la bêta pour découvrir l'application en avant-première.",
+        "cta": "Télécharger sur Google Play",
+        "badge": "Bêta",
+        "pageTitle": "CROUStillant pour Android",
+        "pageDescription": "Téléchargez l'application CROUStillant sur Google Play et consultez les menus de votre restaurant CROUS directement depuis votre smartphone Android."
+      },
+      "ios": {
+        "title": "iOS",
+        "description": "Disponible sur l'App Store d'Apple. Compatible avec iPhone et iPad.",
+        "cta": "Télécharger sur l'App Store",
+        "badge": "iPhone & iPad",
+        "pageTitle": "CROUStillant pour iOS",
+        "pageDescription": "Téléchargez l'application CROUStillant sur l'App Store et consultez les menus de votre restaurant CROUS directement depuis votre iPhone ou iPad."
+      }
+    },
+    "features": {
+      "title": "Tout ce que vous aimez, en mobile",
+      "description": "Retrouvez toutes les fonctionnalités de CROUStillant directement sur votre smartphone.",
+      "feature1": {
+        "title": "Menus en temps réel",
+        "description": "Accédez aux menus du jour de votre restaurant CROUS en un coup d'œil, où que vous soyez."
+      },
+      "feature2": {
+        "title": "Restaurant favori",
+        "description": "Définissez votre restaurant favori et accédez à son menu en un seul tap."
+      },
+      "feature3": {
+        "title": "Recherche rapide",
+        "description": "Trouvez n'importe quel restaurant CROUS de France en quelques secondes."
+      },
+      "feature4": {
+        "title": "Entièrement gratuit",
+        "description": "L'application est totalement gratuite, sans publicité et sans abonnement."
+      }
+    },
+    "backMobile": "Voir toutes les plateformes",
+    "seo": {
+      "title": "Application mobile",
+      "description": "Téléchargez l'application CROUStillant sur Android et iOS. Consultez les menus de votre restaurant CROUS où que vous soyez.",
+      "keywords": "CROUS, restaurant, menu, application mobile, Android, iOS, Google Play, App Store",
+      "androidTitle": "Application Android",
+      "androidDescription": "Téléchargez CROUStillant sur Android. Consultez les menus de votre restaurant CROUS directement depuis votre smartphone.",
+      "iosTitle": "Application iOS",
+      "iosDescription": "Téléchargez CROUStillant sur iOS. Consultez les menus de votre restaurant CROUS directement depuis votre iPhone ou iPad."
+    }
   }
 }
