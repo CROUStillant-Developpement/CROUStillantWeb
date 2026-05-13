@@ -280,7 +280,7 @@
     --ring:    141 65% 36%;
     --accent:  0   80% 55%;
   }
-  .dark [data-seasonal="christmas"] {
+  .dark[data-seasonal="christmas"] {
     --primary: 141 60% 45%;
     --ring:    141 60% 45%;
     --accent:  0   70% 55%;
@@ -292,7 +292,7 @@
     --ring:    25  95% 48%;
     --accent:  270 55% 38%;
   }
-  .dark [data-seasonal="halloween"] {
+  .dark[data-seasonal="halloween"] {
     --primary: 25  95% 54%;
     --ring:    25  95% 54%;
     --accent:  270 55% 45%;
@@ -304,7 +304,7 @@
     --ring:    340 78% 54%;
     --accent:  310 45% 78%;
   }
-  .dark [data-seasonal="valentines"] {
+  .dark[data-seasonal="valentines"] {
     --primary: 340 75% 60%;
     --ring:    340 75% 60%;
     --accent:  310 45% 32%;
@@ -316,7 +316,7 @@
     --ring:    195 90% 42%;
     --accent:  62  90% 50%;
   }
-  .dark [data-seasonal="aprilfools"] {
+  .dark[data-seasonal="aprilfools"] {
     --primary: 195 90% 50%;
     --ring:    195 90% 50%;
     --accent:  62  90% 55%;
@@ -328,7 +328,7 @@
     --ring:    275 60% 54%;
     --accent:  150 48% 68%;
   }
-  .dark [data-seasonal="easter"] {
+  .dark[data-seasonal="easter"] {
     --primary: 275 58% 62%;
     --ring:    275 58% 62%;
     --accent:  150 48% 38%;

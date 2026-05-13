@@ -193,6 +193,7 @@ export const useUserPreferences = create<StoreState>()(
           starredFav: null,
           display: "list",
           favouriteRegion: { code: -1, libelle: "All Regions" },
+          seasonalParticles: true,
         })),
     }),
     {
