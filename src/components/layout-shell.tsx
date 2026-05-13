@@ -2,10 +2,11 @@
 
 import { usePathname } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/toaster";
-import NewUIBanner from "@/components/new-ui-banner";
 import BetaBanner from "@/components/beta-banner";
 import { useTranslations } from "next-intl";
 import UpdateBanner from "@/components/update-banner";
+import SeasonalThemeProvider from "@/components/seasonal-theme-provider";
+import SeasonalParticlesBanner from "@/components/seasonal-particles-banner";
 
 
 export default function LayoutShell({
@@ -42,9 +43,10 @@ export default function LayoutShell({
       </main>
       {footer}
       <Toaster />
-      <NewUIBanner />
       <BetaBanner />
       <UpdateBanner />
+      <SeasonalParticlesBanner />
+      <SeasonalThemeProvider />
     </>
   );
 }

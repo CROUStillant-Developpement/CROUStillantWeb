@@ -28,7 +28,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText } from "lucide-react";
+import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { getRegions } from "@/services/region-service";
 import { Region } from "@/services/types";
@@ -59,6 +59,8 @@ export default function SettingsPage() {
     favouriteRegion,
     display,
     dislexicFont,
+    seasonalParticles,
+    toggleSeasonalParticles,
   } = useUserPreferences();
 
   const localData = useMemo(() => ({
@@ -67,9 +69,19 @@ export default function SettingsPage() {
     favouriteRegion,
     display,
     dislexicFont,
+    seasonalParticles,
     theme,
     locale,
-  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, theme, locale]);
+  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale]);
+
+  const handleSeasonalParticlesChange = (checked: boolean) => {
+    if (checked !== seasonalParticles) toggleSeasonalParticles();
+    umami.event("Settings.Appearance.SeasonalParticles", { enabled: String(checked) });
+    toast({
+      title: t("seasonal.successTitle"),
+      description: checked ? t("seasonal.successEnabled") : t("seasonal.successDisabled"),
+    });
+  };
 
   const handleClearfavourites = () => {
     clearUserPreferences();
@@ -151,6 +163,27 @@ export default function SettingsPage() {
                   theme === "system" ? systemTheme === "dark" : theme === "dark"
                 }
                 onCheckedChange={handleThemeChange}
+                className="scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Sparkles className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("seasonal.title")}</p>
+                <p className="text-sm text-muted-foreground max-w-[300px]">
+                  {t("seasonal.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end pt-2 sm:pt-0">
+              <Switch
+                checked={seasonalParticles}
+                onCheckedChange={handleSeasonalParticlesChange}
                 className="scale-110"
               />
             </div>

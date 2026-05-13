@@ -37,6 +37,12 @@ interface StoreState {
   dislexicFont: boolean;
 
   /**
+   * Whether seasonal particle decorations are shown.
+   * The active season is always auto-detected from the current date.
+   */
+  seasonalParticles: boolean;
+
+  /**
    * Toggles the display type.
    */
   toggleDisplay: () => void;
@@ -47,8 +53,13 @@ interface StoreState {
   toggleDislexicFont: () => void;
 
   /**
+   * Toggles seasonal particle decorations on/off.
+   */
+  toggleSeasonalParticles: () => void;
+
+  /**
    * Adds or removes an item from the favourites list.
-   * 
+   *
    * @param code - The code of the item.
    * @param name - The name of the item (optional).
    */
@@ -56,14 +67,14 @@ interface StoreState {
 
   /**
    * Sets the starred favourite item.
-   * 
+   *
    * @param favourite - The favourite item to be starred.
    */
   setStarredFav: (favourite: LocalStoragefavourite) => void;
 
   /**
    * Sets the favourite region.
-   * 
+   *
    * @param region - The region to be set as favourite.
    */
   setfavouriteRegion: (region: Region) => void;
@@ -85,14 +96,14 @@ interface StoreState {
  * @property {null | {code: number, name: string}} starredFav - The starred favourite item.
  * @property {{code: number, libelle: string}} favouriteRegion - The user's favourite region.
  * @property {boolean} dislexicFont - Whether the dyslexic font is enabled.
+ * @property {boolean} seasonalParticles - Whether seasonal particle decorations are shown.
  *
  * @method toggleDisplay - Toggles the display mode between "list" and "map".
  * @method toggleDislexicFont - Toggles the dyslexic font setting.
+ * @method toggleSeasonalParticles - Toggles seasonal particle decorations on/off.
  * @method addOrRemoveFromfavourites - Adds or removes an item from the favourites list.
  * @param {number} code - The code of the item to add or remove.
  * @param {string} [name] - The name of the item to add (optional).
- * @param {number} code - The code of the item to add.
- * @param {string} name - The name of the item to add.
  * @method setStarredFav - Sets the starred favourite item.
  * @param {LocalStoragefavourite} favourite - The favourite item to set as starred.
  * @method setfavouriteRegion - Sets the user's favourite region.
@@ -107,6 +118,7 @@ export const useUserPreferences = create<StoreState>()(
       starredFav: null,
       favouriteRegion: { code: -1, libelle: "All Regions" },
       dislexicFont: false,
+      seasonalParticles: true,
 
       toggleDisplay: () =>
         set((state) => ({
@@ -116,6 +128,11 @@ export const useUserPreferences = create<StoreState>()(
       toggleDislexicFont: () =>
         set((state) => ({
           dislexicFont: !state.dislexicFont,
+        })),
+
+      toggleSeasonalParticles: () =>
+        set((state) => ({
+          seasonalParticles: !state.seasonalParticles,
         })),
 
       addOrRemoveFromfavourites: (code: number, name?: string, qr: boolean = false) =>

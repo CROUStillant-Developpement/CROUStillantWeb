@@ -532,6 +532,13 @@
       "title": "Settings",
       "description": "Configure your settings on CROUStillant to personalise your experience.",
       "keywords": "CROUS, restaurant, menu, settings"
+    },
+    "seasonal": {
+      "title": "Seasonal decorations",
+      "description": "Show animated particles during festive periods (Christmas, Halloween, etc.).",
+      "successTitle": "Seasonal decorations updated!",
+      "successEnabled": "Seasonal decorations have been enabled.",
+      "successDisabled": "Seasonal decorations have been disabled."
     }
   },
   "StatsPage": {
@@ -733,12 +740,6 @@
       "keywords": "CROUS, restaurant, menu, changelog"
     }
   },
-  "NewUIBanner": {
-    "title": "New interface!",
-    "message": "Welcome to the brand new CROUStillant interface! If you encounter a bug, feel free to",
-    "contact": "contact us",
-    "dismiss": "Dismiss"
-  },
   "BetaBanner": {
     "title": "Beta version",
     "message": "You are using the beta version of CROUStillant. Some issues may occur. Feel free to",
@@ -750,6 +751,12 @@
     "title": "New version available",
     "message": "A new deployment is live. Reload the page to get the latest version.",
     "refresh": "Reload",
+    "dismiss": "Dismiss"
+  },
+  "SeasonalParticlesBanner": {
+    "title": "Seasonal decorations are active!",
+    "message": "Animated particles are shown across the site. You can disable them in",
+    "settingsLink": "settings",
     "dismiss": "Dismiss"
   }
 }
