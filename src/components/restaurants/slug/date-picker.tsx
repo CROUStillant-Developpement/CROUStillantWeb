@@ -155,6 +155,7 @@ function DatePickerSection({
 }: DatePickerSectionProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onClose?.();
   };
 
   const locale = useLocale();
