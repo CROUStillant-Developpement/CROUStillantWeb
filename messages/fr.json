@@ -68,8 +68,8 @@
       }
     },
     "ApiCard": {
-      "title": "Intégration facile",
-      "subtitle": "Intégrer les informations de CROUStillant sur votre propre application gratuitement en utilisant notre API.",
+      "title": "API ouverte aux développeurs",
+      "subtitle": "Intégrez les informations de CROUStillant dans votre propre application gratuitement grâce à notre API publique.",
       "cta": "Commencer à l’utiliser",
       "Card": {
         "title": "Serveur",
