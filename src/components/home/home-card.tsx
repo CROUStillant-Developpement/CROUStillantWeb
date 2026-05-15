@@ -4,6 +4,12 @@ import RadarsCard from "./home-card-radar";
 import GitCard from "./home-card-git";
 import { Link } from "@/i18n/routing";
 import { useUmami } from "next-umami";
+import { motion } from "@/lib/motion";
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
 
 export default function HomeCard() {
   const t = useTranslations("HomeCard");
@@ -11,9 +17,13 @@ export default function HomeCard() {
 
   return (
     <>
-      <RadarsCard />
-      <GitCard />
-      <section className="md:col-span-2">
+      <motion.div variants={itemVariant}>
+        <RadarsCard />
+      </motion.div>
+      <motion.div variants={itemVariant}>
+        <GitCard />
+      </motion.div>
+      <motion.section className="md:col-span-2" variants={itemVariant}>
         <aside className="flex flex-col md:flex-row w-full h-full gap-8 p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
           <div className="flex flex-col gap-6 flex-1">
             <div className="flex flex-col gap-4">
@@ -59,7 +69,7 @@ export default function HomeCard() {
             </aside>
           </section>
         </aside>
-      </section>
+      </motion.section>
     </>
   );
 }

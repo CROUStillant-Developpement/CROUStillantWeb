@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 import { useUmami } from "next-umami";
 import { cn } from "@/lib/utils";
+import { motion } from "@/lib/motion";
 
 export default function Header() {
   const pathname = usePathname();
@@ -24,7 +25,12 @@ export default function Header() {
   const umami = useUmami();
 
   return (
-    <header className="grid grid-cols-3 items-center w-full mt-4 px-4">
+    <motion.header
+      className="grid grid-cols-3 items-center w-full mt-4 px-4"
+      initial={{ opacity: 0, y: -16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
       <nav className="">
         <ul
           className={cn(
@@ -127,6 +133,6 @@ export default function Header() {
           </Button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

@@ -14,6 +14,17 @@ import { useTranslations } from "next-intl";
 import HomeCard from "./home-card";
 import { Link } from "@/i18n/routing";
 import { useUmami } from "next-umami";
+import { motion } from "@/lib/motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
+
+const staggerGrid = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
 
 interface CardProps {
   title: string;
@@ -68,50 +79,76 @@ export default function HomePage() {
   return (
     <div className="w-full space-y-24 md:space-y-32">
       <section id="info" className="scroll-mt-32">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
             {t("title.second")}
           </h2>
           <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <BasicCard
-            title={t("card1.title")}
-            description={t("card1.description")}
-            cta={t("card1.cta")}
-            ctaLink="about"
-          >
-            <MapPin size={180} className="text-primary" />
-          </BasicCard>
-          <BasicCard
-            title={t("card2.title")}
-            description={t("card2.description")}
-            cta={t("card2.cta")}
-            ctaLink="about"
-          >
-            <Clock size={180} className="text-primary" />
-          </BasicCard>
-          <BasicCard
-            title={t("card3.title")}
-            description={t("card3.description")}
-            cta={t("card3.cta")}
-            ctaLink="about"
-          >
-            <CreditCard size={180} className="text-primary" />
-          </BasicCard>
-          <BasicCard
-            title={t("card4.title")}
-            description={t("card4.description")}
-            cta={t("card4.cta")}
-            ctaLink="about"
-          >
-            <ForkKnifeCrossed size={180} className="text-primary" />
-          </BasicCard>
-        </div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={staggerGrid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          <motion.div variants={fadeUp}>
+            <BasicCard
+              title={t("card1.title")}
+              description={t("card1.description")}
+              cta={t("card1.cta")}
+              ctaLink="about"
+            >
+              <MapPin size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+          <motion.div variants={fadeUp}>
+            <BasicCard
+              title={t("card2.title")}
+              description={t("card2.description")}
+              cta={t("card2.cta")}
+              ctaLink="about"
+            >
+              <Clock size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+          <motion.div variants={fadeUp}>
+            <BasicCard
+              title={t("card3.title")}
+              description={t("card3.description")}
+              cta={t("card3.cta")}
+              ctaLink="about"
+            >
+              <CreditCard size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+          <motion.div variants={fadeUp}>
+            <BasicCard
+              title={t("card4.title")}
+              description={t("card4.description")}
+              cta={t("card4.cta")}
+              ctaLink="about"
+            >
+              <ForkKnifeCrossed size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+        </motion.div>
       </section>
 
-      <section className="">
+      <motion.section
+        className=""
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <div className="relative overflow-hidden rounded-[3rem] border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm p-10 hover:shadow-md">
           <div className="relative z-10 flex flex-col items-center text-center gap-10">
             <div className="relative group">
@@ -131,20 +168,24 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/mobile/android"
-                className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-primary-foreground font-black group"
-              >
-                <FaAndroid className="h-5 w-5" />
-                {t("mobile.androidCta")}
-              </Link>
-              <Link
-                href="/mobile/ios"
-                className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl border border-border bg-background py-4 px-8 text-foreground font-black"
-              >
-                <FaApple className="h-5 w-5" />
-                {t("mobile.iosCta")}
-              </Link>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/mobile/android"
+                  className="flex items-center gap-2 text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-primary-foreground font-black group"
+                >
+                  <FaAndroid className="h-5 w-5" />
+                  {t("mobile.androidCta")}
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/mobile/ios"
+                  className="flex items-center gap-2 text-sm md:text-base rounded-2xl border border-border bg-background py-4 px-8 text-foreground font-black"
+                >
+                  <FaApple className="h-5 w-5" />
+                  {t("mobile.iosCta")}
+                </Link>
+              </motion.div>
             </div>
 
             <Link
@@ -159,22 +200,40 @@ export default function HomePage() {
           <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
           <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
         </div>
-      </section>
+      </motion.section>
 
       <section id="team" className="scroll-mt-32">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
             {t("title.third")}
           </h2>
           <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={staggerGrid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           <HomeCard />
-        </div>
+        </motion.div>
       </section>
 
-      <section className="">
+      <motion.section
+        className=""
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <div className="relative overflow-hidden rounded-[3rem] border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-sm p-10 hover:shadow-md">
           <div className="relative z-10 flex flex-col items-center text-center gap-10">
             <div className="relative group">
@@ -194,21 +253,22 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-6">
-              <Link
-                href="/restaurants"
-                className="flex items-center hover:scale-105 transition-transform duration-300 ease-out text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-white font-black group"
-              >
-                {t("cta.first")}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/restaurants"
+                  className="flex items-center text-sm md:text-base rounded-2xl bg-primary shadow-lg shadow-primary/25 py-4 px-8 text-white font-black group"
+                >
+                  {t("cta.first")}
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
             </div>
           </div>
 
-          {/* Decorative blurs */}
           <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
           <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px] pointer-events-none" />
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
