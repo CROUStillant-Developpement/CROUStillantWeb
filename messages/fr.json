@@ -36,6 +36,11 @@
       "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
       "cta": "En savoir plus"
     },
+    "cardWidget": {
+      "title": "Intégrez CROUStillant partout",
+      "description": "Créez votre propre widget par glisser-déposer et intégrez-le facilement sur n'importe quel site, blog ou ENT.",
+      "cta": "Créer un widget"
+    },
     "footer": {
       "title": "Convaincu ?",
       "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
@@ -240,6 +245,11 @@
         "feature4": "Contacts et moyens de paiement acceptés"
       }
     },
+    "widget": {
+      "title": "Générateur de widget intégrable",
+      "description": "Composez votre propre widget CROUStillant par glisser-déposer : choisissez les blocs à afficher, personnalisez le thème, la couleur et la police, puis copiez le code HTML en un clic pour l'intégrer sur n'importe quel site.",
+      "cta": "Créer mon widget"
+    },
     "team": {
       "title": "L'équipe",
       "description": "L'équipe de CROUStillant est composée de bénévoles passionnés. Nous travaillons ensemble pour rendre les informations des restaurants CROUS plus accessibles et plus lisibles.",
@@ -335,7 +345,8 @@
         "api": "API",
         "discord": "Bot Discord",
         "mobile": "Appli mobile",
-        "datasets": "Jeux de données"
+        "datasets": "Jeux de données",
+        "widget": "Générateur de widget"
       },
       "about": {
         "title": "À propos",
@@ -841,7 +852,7 @@
   },
   "IframeBuilderPage": {
     "seo": {
-      "title": "Générateur de widget — CROUStillant",
+      "title": "Générateur de widget • CROUStillant",
       "description": "Créez et personnalisez votre widget CROUStillant intégrable : choisissez les blocs, le thème, la couleur et la police.",
       "keywords": "CROUS, widget, iframe, menu, personnalisation, intégration"
     },

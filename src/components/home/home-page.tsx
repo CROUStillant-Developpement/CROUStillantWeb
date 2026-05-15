@@ -8,6 +8,7 @@ import {
   HeartHandshakeIcon,
   ArrowRight,
   Smartphone,
+  LayoutTemplate,
 } from "lucide-react";
 import { FaAndroid, FaApple } from "react-icons/fa";
 import { useTranslations } from "next-intl";
@@ -137,6 +138,18 @@ export default function HomePage() {
               ctaLink="about"
             >
               <ForkKnifeCrossed size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+
+          {/* Widget builder — full width */}
+          <motion.div variants={fadeUp} className="md:col-span-2">
+            <BasicCard
+              title={t("cardWidget.title")}
+              description={t("cardWidget.description")}
+              cta={t("cardWidget.cta")}
+              ctaLink="iframe-builder"
+            >
+              <LayoutTemplate size={180} className="text-primary" />
             </BasicCard>
           </motion.div>
         </motion.div>

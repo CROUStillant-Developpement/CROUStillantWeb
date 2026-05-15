@@ -36,6 +36,11 @@
       "description": "CROUStillant offers you a complete selection of Crous restaurants.",
       "cta": "learn more"
     },
+    "cardWidget": {
+      "title": "Embed CROUStillant anywhere",
+      "description": "Build your own widget with drag-and-drop and embed it easily on any website, blog or university portal.",
+      "cta": "Create a widget"
+    },
     "footer": {
       "title": "Convinced ?",
       "subtitle": "Start using CROUStillant now!"
@@ -240,6 +245,11 @@
         "feature4": "Contacts and accepted payment methods"
       }
     },
+    "widget": {
+      "title": "Embeddable widget builder",
+      "description": "Build your own CROUStillant widget with drag-and-drop: choose the blocks to display, customise the theme, colour and font, then copy the HTML code in one click to embed it on any website.",
+      "cta": "Build my widget"
+    },
     "team": {
       "title": "The team",
       "description": "The CROUStillant team is made up of passionate volunteers. We work together to make the information of CROUS restaurants more accessible and readable.",
@@ -335,7 +345,8 @@
         "api": "API",
         "discord": "Discord Bot",
         "mobile": "Mobile App",
-        "datasets": "Datasets"
+        "datasets": "Datasets",
+        "widget": "Widget builder"
       },
       "about": {
         "title": "About",
@@ -840,7 +851,7 @@
   },
   "IframeBuilderPage": {
     "seo": {
-      "title": "Widget builder — CROUStillant",
+      "title": "Widget builder • CROUStillant",
       "description": "Build and customise your embeddable CROUStillant widget: choose blocks, theme, colour and font.",
       "keywords": "CROUS, widget, iframe, menu, customisation, embed"
     },
