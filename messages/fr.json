@@ -838,5 +838,89 @@
       "iosTitle": "Application iOS",
       "iosDescription": "Téléchargez CROUStillant sur iOS. Consultez les menus de votre restaurant CROUS directement depuis votre iPhone ou iPad."
     }
+  },
+  "IframeBuilderPage": {
+    "seo": {
+      "title": "Générateur de widget — CROUStillant",
+      "description": "Créez et personnalisez votre widget CROUStillant intégrable : choisissez les blocs, le thème, la couleur et la police.",
+      "keywords": "CROUS, widget, iframe, menu, personnalisation, intégration"
+    },
+    "title": "Générateur de widget",
+    "subtitle": "Composez votre widget CROUStillant par glisser-déposer, puis copiez le code d'intégration.",
+    "sections": {
+      "restaurant": "Restaurant",
+      "blocks": "Blocs",
+      "style": "Apparence",
+      "menu": "Options du menu",
+      "dimensions": "Dimensions"
+    },
+    "search": {
+      "placeholder": "Rechercher un restaurant...",
+      "clear": "Effacer",
+      "empty": "Aucun résultat"
+    },
+    "blocks": {
+      "hint": "Glissez pour réordonner. Activez ou désactivez chaque bloc.",
+      "header": "En-tête avec image",
+      "header_text": "En-tête texte (sans image)",
+      "region": "Région & type",
+      "status": "Statut d'ouverture",
+      "address": "Adresse",
+      "menu": "Menu du jour",
+      "hours": "Horaires",
+      "contact": "Contact",
+      "payment": "Moyens de paiement",
+      "access": "Accès",
+      "link": "Lien CROUStillant"
+    },
+    "style": {
+      "theme": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "color": "Couleur d'accent",
+      "font": "Police",
+      "fontSystem": "Système",
+      "lang": "Langue du widget"
+    },
+    "menu": {
+      "date": "Date",
+      "pickDate": "Choisir une date...",
+      "loadingDates": "Chargement des dates...",
+      "dateHint": "Laissez vide pour afficher le menu d'aujourd'hui.",
+      "meals": "Repas à afficher"
+    },
+    "meals": {
+      "morning": "Matin",
+      "lunch": "Midi",
+      "evening": "Soir"
+    },
+    "dimensions": {
+      "width": "Largeur",
+      "height": "Hauteur"
+    },
+    "preview": {
+      "title": "Prévisualisation",
+      "openRaw": "Ouvrir",
+      "live": "Live",
+      "checking": "Vérification...",
+      "errorTitle": "Erreur",
+      "errorBadge": "Erreur",
+      "error429": "Trop de requêtes envoyées. Attendez quelques secondes avant de réessayer.",
+      "error404": "Le restaurant est introuvable.",
+      "error500": "Le serveur rencontre un problème. Veuillez réessayer plus tard.",
+      "errorUnknown": "Une erreur est survenue (code {code}).",
+      "errorGeneric": "Une erreur inattendue est survenue.",
+      "retry": "Réessayer",
+      "empty": "Sélectionnez un restaurant",
+      "emptyHint": "Le widget s'affichera ici.",
+      "noBlocks": "Activez au moins un bloc."
+    },
+    "embed": {
+      "title": "Code d'intégration",
+      "code": "Balise iframe",
+      "url": "URL directe",
+      "copy": "Copier",
+      "copied": "Copié !"
+    }
   }
 }

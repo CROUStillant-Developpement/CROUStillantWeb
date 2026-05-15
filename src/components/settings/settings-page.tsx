@@ -30,6 +30,7 @@ import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
+import { useIframeBuilderStore } from "@/store/iframeBuilderStore";
 import { getRegions } from "@/services/region-service";
 import { Region } from "@/services/types";
 import { useTranslations, useLocale } from "next-intl";
@@ -63,16 +64,24 @@ export default function SettingsPage() {
     toggleSeasonalParticles,
   } = useUserPreferences();
 
+  const builderStore = useIframeBuilderStore();
+
   const localData = useMemo(() => ({
-    favourites,
-    starredFav,
-    favouriteRegion,
-    display,
-    dislexicFont,
-    seasonalParticles,
-    theme,
-    locale,
-  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale]);
+    preferences: { favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale },
+    widgetBuilder: {
+      restaurantCode: builderStore.restaurantCode,
+      theme: builderStore.theme,
+      color: `#${builderStore.color}`,
+      font: builderStore.font,
+      lang: builderStore.lang,
+      meals: builderStore.meals,
+      width: builderStore.width,
+      height: builderStore.height,
+      blocks: builderStore.blocks.filter((b) => b.enabled).map((b) => b.id),
+    },
+  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale,
+       builderStore.restaurantCode, builderStore.theme, builderStore.color, builderStore.font,
+       builderStore.lang, builderStore.meals, builderStore.width, builderStore.height, builderStore.blocks]);
 
   const handleSeasonalParticlesChange = (checked: boolean) => {
     if (checked !== seasonalParticles) toggleSeasonalParticles();
@@ -85,6 +94,7 @@ export default function SettingsPage() {
 
   const handleClearfavourites = () => {
     clearUserPreferences();
+    builderStore.reset();
     setPopoverOpen(false);
     toast({
       title: t("personal.deleteDataSuccessTitle"),

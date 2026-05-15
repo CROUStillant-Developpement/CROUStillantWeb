@@ -837,5 +837,89 @@
       "iosTitle": "iOS app",
       "iosDescription": "Download CROUStillant on iOS. Check your CROUS restaurant menus directly from your iPhone or iPad."
     }
+  },
+  "IframeBuilderPage": {
+    "seo": {
+      "title": "Widget builder — CROUStillant",
+      "description": "Build and customise your embeddable CROUStillant widget: choose blocks, theme, colour and font.",
+      "keywords": "CROUS, widget, iframe, menu, customisation, embed"
+    },
+    "title": "Widget builder",
+    "subtitle": "Compose your CROUStillant widget with drag-and-drop, then copy the embed code.",
+    "sections": {
+      "restaurant": "Restaurant",
+      "blocks": "Blocks",
+      "style": "Appearance",
+      "menu": "Menu options",
+      "dimensions": "Dimensions"
+    },
+    "search": {
+      "placeholder": "Search for a restaurant...",
+      "clear": "Clear",
+      "empty": "No results"
+    },
+    "blocks": {
+      "hint": "Drag to reorder. Enable or disable each block.",
+      "header": "Header with image",
+      "header_text": "Text header (no image)",
+      "region": "Region & type",
+      "status": "Opening status",
+      "address": "Address",
+      "menu": "Today's menu",
+      "hours": "Opening hours",
+      "contact": "Contact",
+      "payment": "Payment methods",
+      "access": "Access",
+      "link": "CROUStillant link"
+    },
+    "style": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "color": "Accent colour",
+      "font": "Font",
+      "fontSystem": "System",
+      "lang": "Widget language"
+    },
+    "menu": {
+      "date": "Date",
+      "pickDate": "Pick a date...",
+      "loadingDates": "Loading dates...",
+      "dateHint": "Leave empty to display today's menu.",
+      "meals": "Meals to display"
+    },
+    "meals": {
+      "morning": "Morning",
+      "lunch": "Lunch",
+      "evening": "Evening"
+    },
+    "dimensions": {
+      "width": "Width",
+      "height": "Height"
+    },
+    "preview": {
+      "title": "Preview",
+      "openRaw": "Open",
+      "live": "Live",
+      "checking": "Checking...",
+      "errorTitle": "Error",
+      "errorBadge": "Error",
+      "error429": "Too many requests. Wait a few seconds before trying again.",
+      "error404": "Restaurant not found.",
+      "error500": "The server is experiencing an issue. Please try again later.",
+      "errorUnknown": "An error occurred (code {code}).",
+      "errorGeneric": "An unexpected error occurred.",
+      "retry": "Retry",
+      "empty": "Select a restaurant",
+      "emptyHint": "The widget will appear here.",
+      "noBlocks": "Enable at least one block."
+    },
+    "embed": {
+      "title": "Embed code",
+      "code": "iframe tag",
+      "url": "Direct URL",
+      "copy": "Copy",
+      "copied": "Copied!"
+    }
   }
 }
