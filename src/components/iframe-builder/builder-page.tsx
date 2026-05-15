@@ -69,9 +69,8 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
       lang: store.lang,
       date,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [store.restaurantCode, store.blocks, store.theme, store.color, store.font,
-     store.meals, store.width, store.height, store.lang, date]
+     store.meals, store.width, store.height, store.lang, date],
   );
 
   useEffect(() => {
@@ -107,7 +106,6 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
       params.set("date", `${dd}-${mm}-${date.getFullYear()}`);
     }
     return `${apiUrl}/restaurants/${store.restaurantCode}/iframe/custom?${params.toString()}`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.restaurantCode, store.blocks, store.theme, store.color, store.font,
       store.meals, store.height, store.lang, date, apiUrl]);
 

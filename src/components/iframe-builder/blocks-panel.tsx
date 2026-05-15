@@ -19,7 +19,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
-  Image,
+  Image as ImageIcon,
   AlignLeft,
   Globe,
   CircleDot,
@@ -35,7 +35,7 @@ import {
 import type { BlockConfig } from "./builder-page";
 
 const BLOCK_ICONS: Record<string, React.ReactNode> = {
-  header:      <Image className="w-3.5 h-3.5" />,
+  header:      <ImageIcon className="w-3.5 h-3.5" />,
   header_text: <AlignLeft className="w-3.5 h-3.5" />,
   region:      <Globe className="w-3.5 h-3.5" />,
   status:      <CircleDot className="w-3.5 h-3.5" />,

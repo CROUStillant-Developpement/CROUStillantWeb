@@ -68,7 +68,6 @@ export default function ColorPicker({ value, onChange }: Props) {
       setHsv(hexToHsv(incoming));
       setHexInput(incoming);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   // Debounced external onChange — UI updates instantly, API call waits 500 ms
