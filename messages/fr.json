@@ -248,7 +248,15 @@
     "widget": {
       "title": "Générateur de widget intégrable",
       "description": "Composez votre propre widget CROUStillant par glisser-déposer : choisissez les blocs à afficher, personnalisez le thème, la couleur et la police, puis copiez le code HTML en un clic pour l'intégrer sur n'importe quel site.",
-      "cta": "Créer mon widget"
+      "cta": "Créer mon widget",
+      "on": "ON",
+      "off": "OFF",
+      "blocks": {
+        "header": "En-tête",
+        "status": "Statut",
+        "menu": "Menu",
+        "hours": "Horaires"
+      }
     },
     "team": {
       "title": "L'équipe",

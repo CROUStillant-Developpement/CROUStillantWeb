@@ -32,6 +32,7 @@ interface CardProps {
   description: string;
   cta: string;
   ctaLink: string;
+  eventName?: string;
   style?: string;
   children: React.ReactNode;
 }
@@ -41,6 +42,7 @@ const BasicCard = ({
   description,
   cta,
   ctaLink,
+  eventName = "Home.About",
   children,
 }: CardProps) => {
   const umami = useUmami();
@@ -60,7 +62,7 @@ const BasicCard = ({
           href={`/${ctaLink}`}
           className="text-sm font-bold underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all flex items-center gap-2 group/link"
           onClick={() => {
-            umami.event("Home.About");
+            umami.event(eventName);
           }}
         >
           {cta}
@@ -148,6 +150,7 @@ export default function HomePage() {
               description={t("cardWidget.description")}
               cta={t("cardWidget.cta")}
               ctaLink="iframe-builder"
+              eventName="Home.Widget"
             >
               <LayoutTemplate size={180} className="text-primary" />
             </BasicCard>

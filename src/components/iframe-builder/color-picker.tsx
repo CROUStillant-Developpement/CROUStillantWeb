@@ -59,6 +59,7 @@ export default function ColorPicker({ value, onChange }: Props) {
   const draggingSV = useRef(false);
   const draggingHue = useRef(false);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingHexRef = useRef<string | null>(null);
 
   // Sync incoming value → internal HSV (only when value changes from outside)
   useEffect(() => {
@@ -72,13 +73,20 @@ export default function ColorPicker({ value, onChange }: Props) {
 
   // Debounced external onChange — UI updates instantly, API call waits 500 ms
   const debouncedOnChange = useCallback((newHex: string) => {
+    pendingHexRef.current = newHex;
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
-    debounceTimer.current = setTimeout(() => onChange(newHex), 500);
+    debounceTimer.current = setTimeout(() => {
+      pendingHexRef.current = null;
+      onChange(newHex);
+    }, 500);
   }, [onChange]);
 
   useEffect(() => () => {
-    if (debounceTimer.current) clearTimeout(debounceTimer.current);
-  }, []);
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+      if (pendingHexRef.current !== null) onChange(pendingHexRef.current);
+    }
+  }, [onChange]);
 
   const commit = useCallback((h: number, s: number, v: number) => {
     const newHex = hsvToHex(h, s, v);

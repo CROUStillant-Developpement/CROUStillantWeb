@@ -76,9 +76,11 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
   useEffect(() => {
     if (!store.restaurantCode) { setAvailableDates([]); return; }
     setDatesLoading(true);
-    fetch(`${apiUrl}/restaurants/${store.restaurantCode}/menu/dates/all`)
+    const controller = new AbortController();
+    fetch(`${apiUrl}/restaurants/${store.restaurantCode}/menu/dates/all`, { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
+        if (controller.signal.aborted) return;
         if (data.success && Array.isArray(data.data)) {
           setAvailableDates(data.data.map((e: { date: string }) => {
             const [dd, mm, yyyy] = e.date.split("-").map(Number);
@@ -88,8 +90,9 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
           setAvailableDates([]);
         }
       })
-      .catch(() => setAvailableDates([]))
-      .finally(() => setDatesLoading(false));
+      .catch((err) => { if (err.name !== "AbortError") setAvailableDates([]); })
+      .finally(() => { if (!controller.signal.aborted) setDatesLoading(false); });
+    return () => controller.abort();
   }, [store.restaurantCode, apiUrl]);
 
   const iframeUrl = useMemo(() => {
@@ -232,7 +235,7 @@ function MenuOptions({ state, onChange, t, availableDates, datesLoading }: {
                 </span>
               </button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 rounder-none border-none" align="start">
+            <PopoverContent className="w-auto p-0 rounded-none border-none" align="start">
               <Calendar mode="single" selected={state.date ?? undefined} onSelect={(date) => onChange("date", date ?? null)} disabled={availableDates.length > 0 ? (date) => !isDateAvailable(date) : false} locale={dateLocale} autoFocus />
             </PopoverContent>
           </Popover>

@@ -30,6 +30,8 @@ function Checkmark() {
   );
 }
 
+const WIDGET_DEMO_BLOCKS = ["header", "status", "menu", "hours"] as const;
+
 export default function AboutPage() {
   const t = useTranslations("AboutPage");
 
@@ -376,12 +378,12 @@ export default function AboutPage() {
           <div className="flex-1 w-full flex items-center justify-center">
             <div className="w-full max-w-sm rounded-2xl border border-border/50 bg-background/50 p-6 shadow-lg">
               <div className="space-y-2.5">
-                {["header", "status", "menu", "hours"].map((block, i) => (
+                {WIDGET_DEMO_BLOCKS.map((block, i) => (
                   <div key={block} className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-primary/10 bg-card/80">
                     <span className={`w-2 h-2 rounded-full shrink-0 ${i < 2 ? "bg-primary" : "bg-primary/40"}`} />
-                    <span className="text-sm font-medium text-foreground/80 capitalize">{block}</span>
+                    <span className="text-sm font-medium text-foreground/80">{t(`widget.blocks.${block}`)}</span>
                     <span className={`ml-auto text-xs px-2 py-0.5 rounded-full font-medium ${i < 2 ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
-                      {i < 2 ? "ON" : "OFF"}
+                      {i < 2 ? t("widget.on") : t("widget.off")}
                     </span>
                   </div>
                 ))}

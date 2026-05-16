@@ -248,7 +248,15 @@
     "widget": {
       "title": "Embeddable widget builder",
       "description": "Build your own CROUStillant widget with drag-and-drop: choose the blocks to display, customise the theme, colour and font, then copy the HTML code in one click to embed it on any website.",
-      "cta": "Build my widget"
+      "cta": "Build my widget",
+      "on": "ON",
+      "off": "OFF",
+      "blocks": {
+        "header": "Header",
+        "status": "Status",
+        "menu": "Menu",
+        "hours": "Hours"
+      }
     },
     "team": {
       "title": "The team",
