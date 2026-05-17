@@ -162,6 +162,14 @@ export default async function Footer() {
                     {t("links.services.datasets")}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/iframe-builder"
+                    className="opacity-70 hover:opacity-100 hover:translate-x-1 transition-all inline-block"
+                  >
+                    {t("links.services.widget")}
+                  </Link>
+                </li>
               </ul>
             </div>
 

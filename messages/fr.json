@@ -36,6 +36,11 @@
       "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
       "cta": "En savoir plus"
     },
+    "cardWidget": {
+      "title": "Intégrez CROUStillant partout",
+      "description": "Créez votre propre widget par glisser-déposer et intégrez-le facilement sur n'importe quel site, blog ou ENT.",
+      "cta": "Créer un widget"
+    },
     "footer": {
       "title": "Convaincu ?",
       "subtitle": "Débutez votre utilisation de CROUStillant dès maintenant !"
@@ -63,8 +68,8 @@
       }
     },
     "ApiCard": {
-      "title": "Intégration facile",
-      "subtitle": "Intégrer les informations de CROUStillant sur votre propre application gratuitement en utilisant notre API.",
+      "title": "API ouverte aux développeurs",
+      "subtitle": "Intégrez les informations de CROUStillant dans votre propre application gratuitement grâce à notre API publique.",
       "cta": "Commencer à l’utiliser",
       "Card": {
         "title": "Serveur",
@@ -240,6 +245,19 @@
         "feature4": "Contacts et moyens de paiement acceptés"
       }
     },
+    "widget": {
+      "title": "Générateur de widget intégrable",
+      "description": "Composez votre propre widget CROUStillant par glisser-déposer : choisissez les blocs à afficher, personnalisez le thème, la couleur et la police, puis copiez le code HTML en un clic pour l'intégrer sur n'importe quel site.",
+      "cta": "Créer mon widget",
+      "on": "ON",
+      "off": "OFF",
+      "blocks": {
+        "header": "En-tête",
+        "status": "Statut",
+        "menu": "Menu",
+        "hours": "Horaires"
+      }
+    },
     "team": {
       "title": "L'équipe",
       "description": "L'équipe de CROUStillant est composée de bénévoles passionnés. Nous travaillons ensemble pour rendre les informations des restaurants CROUS plus accessibles et plus lisibles.",
@@ -335,7 +353,8 @@
         "api": "API",
         "discord": "Bot Discord",
         "mobile": "Appli mobile",
-        "datasets": "Jeux de données"
+        "datasets": "Jeux de données",
+        "widget": "Générateur de widget"
       },
       "about": {
         "title": "À propos",
@@ -837,6 +856,90 @@
       "androidDescription": "Téléchargez CROUStillant sur Android. Consultez les menus de votre restaurant CROUS directement depuis votre smartphone.",
       "iosTitle": "Application iOS",
       "iosDescription": "Téléchargez CROUStillant sur iOS. Consultez les menus de votre restaurant CROUS directement depuis votre iPhone ou iPad."
+    }
+  },
+  "IframeBuilderPage": {
+    "seo": {
+      "title": "Générateur de widget • CROUStillant",
+      "description": "Créez et personnalisez votre widget CROUStillant intégrable : choisissez les blocs, le thème, la couleur et la police.",
+      "keywords": "CROUS, widget, iframe, menu, personnalisation, intégration"
+    },
+    "title": "Générateur de widget",
+    "subtitle": "Composez votre widget CROUStillant par glisser-déposer, puis copiez le code d'intégration.",
+    "sections": {
+      "restaurant": "Restaurant",
+      "blocks": "Blocs",
+      "style": "Apparence",
+      "menu": "Options du menu",
+      "dimensions": "Dimensions"
+    },
+    "search": {
+      "placeholder": "Rechercher un restaurant...",
+      "clear": "Effacer",
+      "empty": "Aucun résultat"
+    },
+    "blocks": {
+      "hint": "Glissez pour réordonner. Activez ou désactivez chaque bloc.",
+      "header": "En-tête avec image",
+      "header_text": "En-tête texte (sans image)",
+      "region": "Région & type",
+      "status": "Statut d'ouverture",
+      "address": "Adresse",
+      "menu": "Menu du jour",
+      "hours": "Horaires",
+      "contact": "Contact",
+      "payment": "Moyens de paiement",
+      "access": "Accès",
+      "link": "Lien CROUStillant"
+    },
+    "style": {
+      "theme": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "color": "Couleur d'accent",
+      "font": "Police",
+      "fontSystem": "Système",
+      "lang": "Langue du widget"
+    },
+    "menu": {
+      "date": "Date",
+      "pickDate": "Choisir une date...",
+      "loadingDates": "Chargement des dates...",
+      "dateHint": "Laissez vide pour afficher le menu d'aujourd'hui.",
+      "meals": "Repas à afficher"
+    },
+    "meals": {
+      "morning": "Matin",
+      "lunch": "Midi",
+      "evening": "Soir"
+    },
+    "dimensions": {
+      "width": "Largeur",
+      "height": "Hauteur"
+    },
+    "preview": {
+      "title": "Prévisualisation",
+      "openRaw": "Ouvrir",
+      "live": "Live",
+      "checking": "Vérification...",
+      "errorTitle": "Erreur",
+      "errorBadge": "Erreur",
+      "error429": "Trop de requêtes envoyées. Attendez quelques secondes avant de réessayer.",
+      "error404": "Le restaurant est introuvable.",
+      "error500": "Le serveur rencontre un problème. Veuillez réessayer plus tard.",
+      "errorUnknown": "Une erreur est survenue (code {code}).",
+      "errorGeneric": "Une erreur inattendue est survenue.",
+      "retry": "Réessayer",
+      "empty": "Sélectionnez un restaurant",
+      "emptyHint": "Le widget s'affichera ici.",
+      "noBlocks": "Activez au moins un bloc."
+    },
+    "embed": {
+      "title": "Code d'intégration",
+      "code": "Balise iframe",
+      "url": "URL directe",
+      "copy": "Copier",
+      "copied": "Copié !"
     }
   }
 }

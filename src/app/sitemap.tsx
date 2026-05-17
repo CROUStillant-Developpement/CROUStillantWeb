@@ -66,6 +66,17 @@ const links = [
     },
   },
   {
+    url: `${process.env.WEB_URL}/fr/iframe-builder`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+    alternates: {
+      languages: {
+        fr: `${process.env.WEB_URL}/fr/iframe-builder`,
+        en: `${process.env.WEB_URL}/en/iframe-builder`,
+      },
+    },
+  },
+  {
     url: `${process.env.WEB_URL}/fr/legal`,
     changeFrequency: "yearly" as const,
     priority: 0.5,

@@ -15,7 +15,9 @@ import {
   Database,
   FileTerminal,
   ChevronsLeftRightEllipsis,
-  Smartphone
+  Smartphone,
+  LayoutTemplate,
+  ArrowRight,
 } from "lucide-react";
 import { FaGithub, FaAndroid, FaApple, FaGooglePlay } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
@@ -27,6 +29,8 @@ function Checkmark() {
     <CheckIcon className="h-7 w-7 flex-none rounded-full bg-green-500 p-1 text-black dark:bg-green-400" />
   );
 }
+
+const WIDGET_DEMO_BLOCKS = ["header", "status", "menu", "hours"] as const;
 
 export default function AboutPage() {
   const t = useTranslations("AboutPage");
@@ -279,7 +283,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-8">
             <div className="flex flex-col">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 flex items-center gap-3 wrap-break-word">
-                <div className="p-2 rounded-xl bg-primary/10 shrink-0">
+                <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
                   <FileCode2 className="h-6 w-6 text-primary" />
                 </div>
                 {t("integrated.iframe_title")}
@@ -345,6 +349,44 @@ export default function AboutPage() {
                   className="w-full h-full"
                   loading="lazy"
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Widget Builder Card */}
+        <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
+          <div className="flex-1">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+                <LayoutTemplate className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
+                {t("widget.title")}
+              </h2>
+            </div>
+            <p className="text-lg text-muted-foreground mb-8">
+              {t("widget.description")}
+            </p>
+            <Link href="/iframe-builder">
+              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                {t("widget.cta")}
+                <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+          <div className="flex-1 w-full flex items-center justify-center">
+            <div className="w-full max-w-sm rounded-2xl border border-border/50 bg-background/50 p-6 shadow-lg">
+              <div className="space-y-2.5">
+                {WIDGET_DEMO_BLOCKS.map((block, i) => (
+                  <div key={block} className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-primary/10 bg-card/80">
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${i < 2 ? "bg-primary" : "bg-primary/40"}`} />
+                    <span className="text-sm font-medium text-foreground/80">{t(`widget.blocks.${block}`)}</span>
+                    <span className={`ml-auto text-xs px-2 py-0.5 rounded-full font-medium ${i < 2 ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
+                      {i < 2 ? t("widget.on") : t("widget.off")}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

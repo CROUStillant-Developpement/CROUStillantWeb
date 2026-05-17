@@ -1,6 +1,6 @@
 "use client";
 
-import { Smartphone, ArrowLeft, ArrowRight, CheckIcon, TabletSmartphone } from "lucide-react";
+import { Smartphone, ArrowRight, CheckIcon, TabletSmartphone } from "lucide-react";
 import { FaAndroid, FaApple, FaGooglePlay } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
