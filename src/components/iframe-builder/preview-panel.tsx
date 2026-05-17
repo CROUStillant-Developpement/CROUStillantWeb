@@ -94,7 +94,7 @@ export default function PreviewPanel({ iframeUrl, width, height, restaurantCode,
   })();
 
   const embedCode = iframeUrl
-    ? `<iframe\n  src="${iframeUrl}"\n  width="${width}"\n  height="${height}"\n  style="border:none;border-radius:12px;"\n  title="Widget CROUStillant"\n  loading="lazy"\n></iframe>`
+    ? `<iframe\n  src="${iframeUrl}"\n  width="${width}"\n  height="${height+40}"\n  style="border:none;border-radius:12px;"\n  title="Widget CROUStillant"\n  loading="lazy"\n></iframe>`
     : null;
 
   const copy = useCallback(async (text: string, type: "embed" | "url") => {
@@ -326,6 +326,7 @@ export default function PreviewPanel({ iframeUrl, width, height, restaurantCode,
                 copiedLabel={t("embed.copied")}
                 mono
                 multiline
+                highlight="html"
               />
               <CodeBlock
                 icon={<Link2 className="w-3.5 h-3.5" />}
@@ -346,8 +347,79 @@ export default function PreviewPanel({ iframeUrl, width, height, restaurantCode,
   );
 }
 
+type HtmlTokenType = "tag" | "attr" | "string" | "punct" | "text";
+
+function tokenizeHtml(code: string): { text: string; type: HtmlTokenType }[] {
+  const tokens: { text: string; type: HtmlTokenType }[] = [];
+  let i = 0;
+
+  while (i < code.length) {
+    if (code[i] === "<") {
+      tokens.push({ text: "<", type: "punct" });
+      i++;
+      if (code[i] === "/") {
+        tokens.push({ text: "/", type: "punct" });
+        i++;
+      }
+      const tagMatch = code.slice(i).match(/^[a-zA-Z][a-zA-Z0-9]*/);
+      if (tagMatch) {
+        tokens.push({ text: tagMatch[0], type: "tag" });
+        i += tagMatch[0].length;
+      }
+      while (i < code.length && code[i] !== ">") {
+        if (code[i] === '"') {
+          const end = code.indexOf('"', i + 1);
+          if (end !== -1) {
+            tokens.push({ text: code.slice(i, end + 1), type: "string" });
+            i = end + 1;
+          } else {
+            tokens.push({ text: code[i], type: "text" });
+            i++;
+          }
+        } else if (code[i] === "=") {
+          tokens.push({ text: "=", type: "punct" });
+          i++;
+        } else if (/[a-zA-Z]/.test(code[i])) {
+          const attrMatch = code.slice(i).match(/^[a-zA-Z][a-zA-Z0-9-]*/);
+          if (attrMatch) {
+            tokens.push({ text: attrMatch[0], type: "attr" });
+            i += attrMatch[0].length;
+          } else {
+            tokens.push({ text: code[i], type: "text" });
+            i++;
+          }
+        } else {
+          tokens.push({ text: code[i], type: "text" });
+          i++;
+        }
+      }
+      if (i < code.length && code[i] === ">") {
+        tokens.push({ text: ">", type: "punct" });
+        i++;
+      }
+    } else {
+      let text = "";
+      while (i < code.length && code[i] !== "<") {
+        text += code[i];
+        i++;
+      }
+      if (text) tokens.push({ text, type: "text" });
+    }
+  }
+
+  return tokens;
+}
+
+const HTML_TOKEN_CLASSES: Record<HtmlTokenType, string> = {
+  tag: "text-sky-500",
+  attr: "text-amber-500",
+  string: "text-emerald-500",
+  punct: "text-zinc-500",
+  text: "text-muted-foreground",
+};
+
 function CodeBlock({
-  icon, label, content, onCopy, copied, copyLabel, copiedLabel, mono, multiline,
+  icon, label, content, onCopy, copied, copyLabel, copiedLabel, mono, multiline, highlight,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -358,6 +430,7 @@ function CodeBlock({
   copiedLabel: string;
   mono: boolean;
   multiline: boolean;
+  highlight?: "html";
 }) {
   return (
     <div>
@@ -381,8 +454,12 @@ function CodeBlock({
         </button>
       </div>
       {multiline ? (
-        <pre className={`text-xs rounded-xl border border-border/50 bg-muted/30 p-3 overflow-x-auto text-foreground leading-relaxed whitespace-pre-wrap break-all ${mono ? "font-mono" : ""}`}>
-          {content}
+        <pre className={`text-xs rounded-xl border border-border/50 bg-muted/30 p-3 overflow-x-auto leading-relaxed whitespace-pre-wrap break-all ${mono ? "font-mono" : ""} ${highlight ? "" : "text-foreground"}`}>
+          {highlight === "html"
+            ? tokenizeHtml(content).map((token, idx) => (
+                <span key={idx} className={HTML_TOKEN_CLASSES[token.type]}>{token.text}</span>
+              ))
+            : content}
         </pre>
       ) : (
         <div className={`text-xs rounded-xl border border-border/50 bg-muted/30 p-3 overflow-x-auto text-foreground break-all ${mono ? "font-mono" : ""}`}>
