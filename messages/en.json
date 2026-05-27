@@ -754,7 +754,7 @@
       "crous": "Question about the CROUS or a restaurant",
       "other": "Other request"
     },
-    "notOfficial": "⚠️ CROUStillant is not the official CROUS website. We cannot respond to administrative or official requests concerning the CROUS or its services. For any official request, please contact the CROUS or the restaurant concerned directly.",
+    "notOfficial": "CROUStillant is not the official CROUS website. We cannot respond to administrative or official requests concerning the CROUS or its services. For any official request, please contact the CROUS or the restaurant concerned directly.",
     "footer": "We love to hear from you, just not through forms. 🍴",
     "seo": {
       "title": "Contact Us",
@@ -939,6 +939,29 @@
       "url": "Direct URL",
       "copy": "Copy",
       "copied": "Copied!"
+    }
+  },
+  "CommunityApps": {
+    "title": "Community Applications",
+    "description": "Independent developers have built applications using the CROUStillant API. These projects are unofficial but supported and recommended by the team.",
+    "badge": "Endorsed by the team",
+    "githubButton": "View on GitHub",
+    "platforms": {
+      "android": "Android",
+      "ios": "iOS",
+      "web": "Web"
+    },
+    "apps": {
+      "croustillapp": {
+        "name": "Croustillapp",
+        "description": "Alternative mobile app to browse CROUS restaurant menus, built using the CROUStillant API.",
+        "author": "by Toum404"
+      }
+    },
+    "cta": {
+      "title": "Your project here?",
+      "description": "Did you build an app using the CROUStillant API and want it featured here? Reach out to us!",
+      "button": "Contact us"
     }
   }
 }
