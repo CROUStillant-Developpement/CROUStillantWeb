@@ -5,6 +5,7 @@ import { FaAndroid, FaApple, FaGooglePlay } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import CommunityAppsSection from "@/components/community-apps/community-apps-section";
 
 export default function MobilePage() {
   const t = useTranslations("MobilePage");
@@ -128,6 +129,9 @@ export default function MobilePage() {
             ))}
           </div>
         </div>
+
+        {/* Community Apps */}
+        <CommunityAppsSection />
       </div>
     </div>
   );

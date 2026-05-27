@@ -5,6 +5,7 @@ import { FaAndroid, FaApple, FaGooglePlay } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import CommunityAppsSection from "@/components/community-apps/community-apps-section";
 
 const ANDROID_URL = "https://play.google.com/apps/testing/com.audric.CroustillantApp";
 const IOS_URL = "https://apps.apple.com/fr/app/croustillantapp/id6754869187";
@@ -130,6 +131,9 @@ export default function PlatformPage({ platform }: { platform: "android" | "ios"
             </Button>
           </Link>
         </div>
+
+        {/* Community Apps filtered by platform */}
+        <CommunityAppsSection platform={platform} />
       </div>
     </div>
   );
