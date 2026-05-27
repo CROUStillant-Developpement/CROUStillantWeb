@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Star, ChevronLeft, ChevronRight, ExternalLink, Smartphone, Plus } from "lucide-react";
-import { FaGithub, FaAndroid, FaApple, FaGlobe } from "react-icons/fa";
+import { FaGithub, FaAndroid, FaApple } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
@@ -15,7 +15,6 @@ function PlatformBadge({ platform }: { platform: Platform }) {
   const config: Record<Platform, { icon: React.ElementType; className: string }> = {
     android: { icon: FaAndroid, className: "text-green-500 bg-green-500/10 border-green-500/20" },
     ios: { icon: FaApple, className: "text-blue-500 dark:text-blue-400 bg-blue-500/10 border-blue-500/20" },
-    web: { icon: FaGlobe, className: "text-primary bg-primary/10 border-primary/20" },
   };
   const { icon: Icon, className } = config[platform];
   return (
