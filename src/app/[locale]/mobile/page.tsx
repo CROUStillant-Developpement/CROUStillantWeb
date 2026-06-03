@@ -1,19 +1,33 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Metadata } from "next";
 import MobilePage from "@/components/mobile/mobile-page";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("MobilePage");
+  const locale = await getLocale();
 
   return {
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
+    alternates: {
+      canonical: `/${locale}/mobile`,
+      languages: {
+        fr: "/fr/mobile",
+        en: "/en/mobile",
+      },
+    },
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
       images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: process.env.WEB_URL + "/banner.png" },
     },
   };
 }

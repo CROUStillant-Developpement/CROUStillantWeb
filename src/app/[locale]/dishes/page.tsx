@@ -1,21 +1,35 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { getLast100Dishes, getTop100Dishes } from "@/services/stats-services";
 import ErrorPage from "@/components/error";
 import DishesPage from "@/components/dishes/dishes-page";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("DishesPage");
+  const locale = await getLocale();
 
   return {
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
+    alternates: {
+      canonical: `/${locale}/dishes`,
+      languages: {
+        fr: "/fr/dishes",
+        en: "/en/dishes",
+      },
+    },
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
       images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: process.env.WEB_URL + "/banner.png" },
     },
   };
 }

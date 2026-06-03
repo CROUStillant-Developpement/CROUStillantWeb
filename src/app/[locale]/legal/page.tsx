@@ -1,21 +1,35 @@
 import { Link } from "@/i18n/routing";
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("LegalPage");
+  const locale = await getLocale();
 
   return {
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
+    alternates: {
+      canonical: `/${locale}/legal`,
+      languages: {
+        fr: "/fr/legal",
+        en: "/en/legal",
+      },
+    },
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
       images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: process.env.WEB_URL + "/banner.png" },
     },
   };
 }
