@@ -96,7 +96,7 @@
     "seo": {
       "title": "Restaurants",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
-      "keywords": "CROUS, restaurant, menu"
+      "keywords": "CROUS, restaurant universitaire, menu CROUS, RU, resto U, restauration universitaire, France"
     }
   },
   "ScreenPage": {
@@ -332,7 +332,7 @@
     "seo": {
       "title": "À propos",
       "description": "Découvrez l'équipe de CROUStillant, le projet et les fonctionnalités du service. Nous sommes là pour vous aider !",
-      "keywords": "CROUS, restaurant, menu, équipe, projet"
+      "keywords": "CROUStillant, à propos, équipe, projet open-source, CROUS, restaurant universitaire, menu, API, bot Discord, application mobile"
     }
   },
   "Footer": {
@@ -365,8 +365,8 @@
         "changelog": "Mises à jour"
       },
       "resources": {
-        "title": "Lien utiles",
-        "status": "Status",
+        "title": "Liens utiles",
+        "status": "Statut",
         "github": "GitHub",
         "discord-server": "Serveur Discord",
         "monitoring": "Supervision",
@@ -755,7 +755,7 @@
       "crous": "Question concernant le CROUS ou un restaurant",
       "other": "Autre demande"
     },
-    "notOfficial": "⚠️ CROUStillant n’est pas le site officiel du CROUS. Nous ne pouvons pas répondre aux demandes administratives ou officielles concernant le CROUS ou ses services. Pour toute demande officielle, veuillez contacter directement le CROUS ou le restaurant concerné.",
+    "notOfficial": "CROUStillant n’est pas le site officiel du CROUS. Nous ne pouvons pas répondre aux demandes administratives ou officielles concernant le CROUS ou ses services. Pour toute demande officielle, veuillez contacter directement le CROUS ou le restaurant concerné.",
     "footer": "Nous adorons avoir de vos nouvelles, mais pas via des formulaires. 🍴",
     "seo": {
       "title": "Contact",
@@ -940,6 +940,29 @@
       "url": "URL directe",
       "copy": "Copier",
       "copied": "Copié !"
+    }
+  },
+  "CommunityApps": {
+    "title": "Applications communautaires",
+    "description": "Des développeurs indépendants ont créé des applications utilisant l'API CROUStillant. Ces projets sont soutenus et recommandés par l'équipe.",
+    "badge": "Soutenu par l'équipe",
+    "githubButton": "Voir sur GitHub",
+    "platforms": {
+      "android": "Android",
+      "ios": "iOS",
+      "web": "Web"
+    },
+    "apps": {
+      "croustillapp": {
+        "name": "Croustillapp",
+        "description": "Application mobile alternative pour consulter les menus des restaurants CROUS, développée en utilisant l'API CROUStillant.",
+        "author": "par Toum404"
+      }
+    },
+    "cta": {
+      "title": "Votre projet ici ?",
+      "description": "Vous avez développé une application utilisant l’API CROUStillant et souhaitez la voir figurer ici ? Contactez-nous !",
+      "button": "Nous contacter"
     }
   }
 }

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { Restaurant as Resto } from "@/services/types";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 
 function extractRestaurantId(slug: unknown): number | null {
@@ -47,6 +47,7 @@ export async function generateMetadata({
   const restaurant = await fetchRestaurantDetailsServer(slug);
 
   const t = await getTranslations("RestaurantPage");
+  const locale = await getLocale();
 
   if (!restaurant) {
     return {
@@ -60,6 +61,8 @@ export async function generateMetadata({
     };
   }
 
+  const imageUrl = restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png";
+
   return {
     title: t("seo.title", { name: restaurant.nom }),
     description: t("seo.description", {
@@ -70,18 +73,30 @@ export async function generateMetadata({
       name: restaurant.nom,
       area: restaurant.region.libelle,
     }),
+    alternates: {
+      canonical: `/${locale}/restaurants/${slug}`,
+      languages: {
+        fr: `/fr/restaurants/${slug}`,
+        en: `/en/restaurants/${slug}`,
+      },
+    },
     openGraph: {
       title: t("seo.title", { name: restaurant.nom }),
       description: t("seo.description", {
         name: restaurant.nom,
         area: restaurant.region.libelle,
       }),
-      images: [
-        {
-          url: restaurant.image_url ?? process.env.WEB_URL + "/default-ru.png",
-        },
-      ],
+      images: [{ url: imageUrl }],
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title", { name: restaurant.nom }),
+      description: t("seo.description", {
+        name: restaurant.nom,
+        area: restaurant.region.libelle,
+      }),
+      images: [{ url: imageUrl }],
     },
   };
 }

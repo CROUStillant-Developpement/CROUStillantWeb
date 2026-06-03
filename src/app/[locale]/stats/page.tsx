@@ -3,20 +3,34 @@ import StatsPage from "@/components/stats/stats-page";
 import { getTaches, getGlobalStats } from "@/services/stats-services";
 import { getStats } from "@/services/umami-service";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("StatsPage");
+  const locale = await getLocale();
 
   return {
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
+    alternates: {
+      canonical: `/${locale}/stats`,
+      languages: {
+        fr: "/fr/stats",
+        en: "/en/stats",
+      },
+    },
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
       images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: process.env.WEB_URL + "/banner.png" },
     },
   };
 }

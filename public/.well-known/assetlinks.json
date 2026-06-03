@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.croustillapp",
+      "sha256_cert_fingerprints": [
+        "36:BD:1D:03:94:5D:97:9A:E3:71:BB:18:06:FE:0C:6B:A1:D5:2F:FA:9C:75:E2:F5:3C:37:9A:7B:98:DC:80:51"
+      ]
+    }
+  }
+]

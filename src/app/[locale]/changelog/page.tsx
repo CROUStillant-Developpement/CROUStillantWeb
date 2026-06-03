@@ -1,21 +1,35 @@
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import ChangelogPage from "@/components/changelog/changelog-page";
 import ErrorPage from "@/components/error";
 import { getChangelog } from "@/services/changelog-service";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ChangelogPage");
+  const locale = await getLocale();
 
   return {
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
+    alternates: {
+      canonical: `/${locale}/changelog`,
+      languages: {
+        fr: "/fr/changelog",
+        en: "/en/changelog",
+      },
+    },
     openGraph: {
       title: t("seo.title"),
       description: t("seo.description"),
       images: { url: process.env.WEB_URL + "/banner.png" },
       siteName: "CROUStillant",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("seo.title"),
+      description: t("seo.description"),
+      images: { url: process.env.WEB_URL + "/banner.png" },
     },
   };
 }
