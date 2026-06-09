@@ -10,5 +10,17 @@
         "36:BD:1D:03:94:5D:97:9A:E3:71:BB:18:06:FE:0C:6B:A1:D5:2F:FA:9C:75:E2:F5:3C:37:9A:7B:98:DC:80:51"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.croustillapp",
+      "sha256_cert_fingerprints": [
+        "D3:FF:69:1A:B3:30:01:AC:54:EF:EF:71:8D:EB:F4:86:70:E6:DF:5E:0D:D6:0F:25:63:B9:36:E7:0C:2B:4F:05"
+      ]
+    }
   }
 ]
