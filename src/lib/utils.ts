@@ -198,3 +198,18 @@ export const normalizeToDate = (date: Date): Date => {
 export const getNormalizedISODate = (dateString: string): Date => {
   return normalizeToDate(formatToISODate(dateString));
 };
+
+/**
+ * Formats a Date object as a "YYYY-MM-DD" string using its local date components.
+ * Unlike `Date.prototype.toISOString`, this does not convert the date to UTC,
+ * avoiding off-by-one-day errors for dates close to midnight.
+ *
+ * @param date - The Date object to format.
+ * @returns The date formatted as "YYYY-MM-DD".
+ */
+export const toLocalISODateString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};

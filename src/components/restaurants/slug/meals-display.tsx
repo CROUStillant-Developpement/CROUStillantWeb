@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Repas } from "@/services/types";
 import { Share2 } from "lucide-react";
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { toLocalISODateString } from "@/lib/utils";
 
 interface MealsDisplayProps {
   selectedDateBreakfast: Repas | null;
@@ -44,7 +45,7 @@ function MealSection({
         title={qrTitle}
         url={(() => {
           const u = new URL(window.location.href);
-          u.searchParams.set("date", date.toISOString().split("T")[0]);
+          u.searchParams.set("date", toLocalISODateString(date));
           // if past date, add #history to URL
           if (date < new Date()) {
             u.hash = "history";
@@ -77,6 +78,14 @@ export default function MealsDisplay({
   date,
 }: MealsDisplayProps) {
   const t = useTranslations("RestaurantInformation");
+  const locale = useLocale();
+
+  const formattedDate = date.toLocaleDateString(locale, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <>
@@ -86,9 +95,9 @@ export default function MealsDisplay({
           title={t("breakfast")}
           emoji="🥞"
           date={date}
-          qrTitle={t("qrCode.breakfastTitle", { date: date.toDateString() })}
+          qrTitle={t("qrCode.breakfastTitle", { date: formattedDate })}
           qrDescription={t("qrCode.breakfastDescription", {
-            date: date.toDateString(),
+            date: formattedDate,
           })}
         />
       )}
@@ -98,9 +107,9 @@ export default function MealsDisplay({
           title={t("lunch")}
           emoji="🍽"
           date={date}
-          qrTitle={t("qrCode.lunchTitle", { date: date.toDateString() })}
+          qrTitle={t("qrCode.lunchTitle", { date: formattedDate })}
           qrDescription={t("qrCode.lunchDescription", {
-            date: date.toDateString(),
+            date: formattedDate,
           })}
         />
       )}
@@ -110,9 +119,9 @@ export default function MealsDisplay({
           title={t("dinner")}
           emoji="🍲"
           date={date}
-          qrTitle={t("qrCode.dinnerTitle", { date: date.toDateString() })}
+          qrTitle={t("qrCode.dinnerTitle", { date: formattedDate })}
           qrDescription={t("qrCode.dinnerDescription", {
-            date: date.toDateString(),
+            date: formattedDate,
           })}
         />
       )}
