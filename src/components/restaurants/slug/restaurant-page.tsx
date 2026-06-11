@@ -63,7 +63,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     const dateParam = searchParams.get("date");
     if (dateParam) {
       log.info(["Found date param in URL:", dateParam], "dev");
-      const parsedDate = new Date(dateParam);
+      const [year, month, day] = dateParam.split("-").map(Number);
+      const parsedDate = new Date(year, (month ?? 1) - 1, day ?? 1);
       if (!isNaN(parsedDate.getTime())) {
         log.info(["Parsed date from URL:", parsedDate], "dev");
         setSelectedDate(parsedDate);
