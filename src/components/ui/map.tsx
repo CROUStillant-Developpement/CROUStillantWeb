@@ -1259,6 +1259,11 @@ function regionFilter(idProperty: string, selectedId: number): MapLibreGL.Filter
   return ["==", ["get", idProperty], selectedId];
 }
 
+// Stable reference for the `ignoreLayers` default — a `= []` default parameter
+// would otherwise create a new array every render, making the click/hover
+// effect below tear down and re-register its listeners on every render.
+const NO_IGNORE_LAYERS: string[] = [];
+
 type MapRegionLayerProps<
   P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
 > = {
@@ -1266,6 +1271,12 @@ type MapRegionLayerProps<
   data: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, P>;
   /** Feature property used as each region's unique id (default: "crous_id") */
   idProperty?: string;
+  /**
+   * Flat color used for every region's fill/border instead of the default
+   * per-region rainbow (golden-angle hash of idProperty). Use this for a
+   * monochrome, theme-aware overlay (e.g. `hsl(var(--foreground))`).
+   */
+  color?: string;
   /** Currently selected/highlighted region id, or -1 for none */
   selectedId?: number;
   /** Fill opacity for unselected regions (default: 0.06) */
@@ -1295,6 +1306,7 @@ function MapRegionLayer<
 >({
   data,
   idProperty = "crous_id",
+  color,
   selectedId = -1,
   fillOpacity = 0.06,
   selectedFillOpacity = 0.32,
@@ -1302,7 +1314,7 @@ function MapRegionLayer<
   selectedLineWidth = 2.5,
   onFeatureClick,
   interactive = true,
-  ignoreLayers = [],
+  ignoreLayers = NO_IGNORE_LAYERS,
 }: MapRegionLayerProps<P>) {
   const { map, isLoaded } = useMap();
   const id = useId();
@@ -1310,8 +1322,9 @@ function MapRegionLayer<
   const fillLayerId = `region-fill-${id}`;
   const lineLayerId = `region-line-${id}`;
 
-  // Inject a deterministic per-region color as a feature property so it can be
-  // referenced by a MapLibre paint expression (["get", "_fillColor"]).
+  // Inject a per-region color as a feature property so it can be referenced
+  // by a MapLibre paint expression (["get", "_fillColor"]) — either a flat
+  // `color` for all regions, or a deterministic per-region rainbow hash.
   const coloredData = useMemo(
     () => ({
       ...data,
@@ -1319,11 +1332,11 @@ function MapRegionLayer<
         ...feature,
         properties: {
           ...feature.properties,
-          _fillColor: idToColor(feature.properties?.[idProperty] as number | string),
+          _fillColor: color ?? idToColor(feature.properties?.[idProperty] as number | string),
         },
       })),
     }),
-    [data, idProperty],
+    [data, idProperty, color],
   );
 
   useEffect(() => {
@@ -1334,13 +1347,18 @@ function MapRegionLayer<
       data: coloredData as GeoJSON.FeatureCollection,
     });
 
+    // MapLibre's addLayer validator rejects a `filter` key set to `undefined`
+    // (unlike setFilter(), which accepts undefined to mean "no filter") — the
+    // key must be omitted entirely when there's no selection.
+    const initialFilter = regionFilter(idProperty, selectedId);
+
     map.addLayer({
       id: fillLayerId,
       type: "fill",
       source: sourceId,
       // When a region is selected, filter the other 25 out entirely instead
       // of just dimming them.
-      filter: regionFilter(idProperty, selectedId),
+      ...(initialFilter && { filter: initialFilter }),
       paint: {
         "fill-color": ["get", "_fillColor"],
         "fill-opacity": [
@@ -1356,7 +1374,7 @@ function MapRegionLayer<
       id: lineLayerId,
       type: "line",
       source: sourceId,
-      filter: regionFilter(idProperty, selectedId),
+      ...(initialFilter && { filter: initialFilter }),
       layout: { "line-join": "round" },
       paint: {
         "line-color": ["get", "_fillColor"],
@@ -1389,9 +1407,17 @@ function MapRegionLayer<
     if (source) source.setData(coloredData as GeoJSON.FeatureCollection);
   }, [isLoaded, map, coloredData, sourceId]);
 
-  // Push highlight (selectedId) updates without re-adding the layers
+  // Push highlight (selectedId) updates without re-adding the layers.
+  // Skipped on the very first run — the layer-creation effect above already
+  // applies the initial filter/paint, so re-applying here would just fire a
+  // redundant styledata event.
+  const highlightMountedRef = useRef(false);
   useEffect(() => {
     if (!isLoaded || !map || !map.getLayer(fillLayerId) || !map.getLayer(lineLayerId)) return;
+    if (!highlightMountedRef.current) {
+      highlightMountedRef.current = true;
+      return;
+    }
 
     const filter = regionFilter(idProperty, selectedId);
     map.setFilter(fillLayerId, filter);
@@ -1815,6 +1841,7 @@ export {
   MapRegionLayer,
   MapClusterLayer,
   getClusterLayerIds,
+  useResolvedTheme,
 };
 
-export type { MapRef, MapViewport };
+export type { MapRef, MapViewport, Theme };

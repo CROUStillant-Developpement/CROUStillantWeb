@@ -51,6 +51,11 @@
       "androidCta": "Android",
       "iosCta": "iOS",
       "learnMore": "Learn more"
+    },
+    "regionsMap": {
+      "title": "Find your region",
+      "description": "Click on a region to see the CROUS restaurants located there.",
+      "cta": "See all restaurants"
     }
   },
   "HomeCard": {
