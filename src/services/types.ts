@@ -17,6 +17,22 @@ export interface Region {
   libelle: string; // Libellé de la région
 }
 
+// Properties of a CROUS region GeoJSON feature (GET /regions/geojson)
+export interface RegionGeoJSONProperties {
+  crous_id: number; // Correspond à Region.code
+  crous_slug: string;
+  crous_libelle: string; // Correspond à Region.libelle
+  crous_nom: string; // Nom officiel long du CROUS
+  departements: string[]; // Codes INSEE des départements rattachés
+  credit: string;
+  [key: string]: unknown;
+}
+
+export type RegionGeoJSON = GeoJSON.FeatureCollection<
+  GeoJSON.Polygon | GeoJSON.MultiPolygon,
+  RegionGeoJSONProperties
+>;
+
 // Types for Restaurant
 export interface Restaurant {
   isOpen: boolean;
