@@ -183,6 +183,77 @@ export interface UmamiDateRange {
   endDate: string;
 }
 
+// Types for RestaurantInsights
+export interface InsightsPeriode {
+  debut: string; // Début de la période (DD-MM-YYYY)
+  fin: string; // Fin de la période (DD-MM-YYYY)
+}
+
+export interface InsightsCouverture {
+  jours_ouvres: number; // Nombre de jours d'ouverture attendus sur la période
+  jours_avec_menu: number; // Nombre de jours avec un menu publié
+  jours_sans_menu: number; // Nombre de jours sans menu publié
+  taux_couverture: number; // Taux de couverture en pourcentage
+}
+
+export interface InsightsRepartitionRepas {
+  matin: number; // Nombre de petits-déjeuners servis sur la période
+  midi: number; // Nombre de déjeuners servis sur la période
+  soir: number; // Nombre de dîners servis sur la période
+}
+
+export interface InsightsCouvertureJour {
+  jour: string; // Jour de la semaine
+  jours_ouvres: number; // Nombre d'occurrences de ce jour où le restaurant est censé être ouvert
+  jours_avec_menu: number; // Nombre d'occurrences de ce jour avec un menu publié
+  taux_couverture: number; // Taux de couverture pour ce jour en pourcentage
+}
+
+export interface InsightsSerieActuelle {
+  avec_menu: boolean; // La série en cours est-elle avec menu (true) ou sans menu (false) ?
+  jours: number; // Longueur de la série en cours (en jours d'ouverture)
+}
+
+export interface InsightsSeries {
+  meilleure_serie_avec_menu: number; // Plus longue série de jours d'ouverture consécutifs avec un menu publié
+  plus_longue_serie_sans_menu: number; // Plus longue série de jours d'ouverture consécutifs sans menu publié
+  serie_actuelle: InsightsSerieActuelle;
+}
+
+export interface InsightsVariete {
+  plats_uniques: number; // Nombre de plats distincts servis sur la période
+  plats_total: number; // Nombre total de plats servis sur la période (occurrences)
+  taux_variete: number; // Taux de variété (plats_uniques / plats_total) en pourcentage
+}
+
+export interface InsightsRichesse {
+  moyenne_categories_par_repas: number; // Nombre moyen de catégories par repas
+  moyenne_plats_par_repas: number; // Nombre moyen de plats par repas
+}
+
+export interface InsightsDelaiPublication {
+  moyenne_jours: number | null; // Délai moyen (en jours) entre l'ingestion d'un menu et sa date d'application
+}
+
+export interface InsightsComparaisonRegionale {
+  jours_avec_menu_restaurant: number; // Nombre de jours avec menu pour ce restaurant sur la période
+  moyenne_jours_avec_menu_region: number | null; // Moyenne du nombre de jours avec menu pour les autres restaurants actifs de la région
+  nb_restaurants_compares: number; // Nombre de restaurants de la région utilisés pour la comparaison
+}
+
+export interface RestaurantInsights {
+  periode: InsightsPeriode;
+  couverture: InsightsCouverture;
+  repartition_repas: InsightsRepartitionRepas;
+  plats_frequents: Plat[]; // Plats les plus fréquents sur la période (utilise total pour le nombre d'occurrences)
+  couverture_par_jour: InsightsCouvertureJour[];
+  series: InsightsSeries;
+  variete: InsightsVariete;
+  richesse: InsightsRichesse;
+  delai_publication: InsightsDelaiPublication;
+  comparaison_regionale: InsightsComparaisonRegionale;
+}
+
 export interface UmamiStats {
   pageviews: string;
   visitors: number;
