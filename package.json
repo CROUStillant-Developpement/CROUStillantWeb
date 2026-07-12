@@ -73,7 +73,7 @@
     "postcss": "^8.5.15",
     "tailwindcss": "^4.2.2",
     "typescript": "^6",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.9"
   },
   "overrides": {
     "@types/react": "19.2.16",
