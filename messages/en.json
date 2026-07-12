@@ -150,8 +150,20 @@
     "dismissHint": "Dismiss",
     "tabs": {
       "menu": "Menu",
-      "insights": "Insights"
+      "insights": "Insights",
+      "activity": "Activity"
     }
+  },
+  "RestaurantActivity": {
+    "addedOn": "Added on",
+    "lastUpdated": "Last updated",
+    "checksCount": "Number of checks",
+    "notAvailable": "N/A",
+    "recentChecksTitle": "Recent checks",
+    "recentChecksDescription": "History of the last times our servers checked this restaurant's menus.",
+    "noChecks": "No checks recorded for this restaurant 😢",
+    "errorTitle": "Activity unavailable",
+    "errorDescription": "An error occurred while fetching this restaurant's activity. Please try again later."
   },
   "RestaurantInsights": {
     "period": "Stats from {debut} to {fin} (current school year)",

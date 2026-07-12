@@ -241,6 +241,19 @@ export interface InsightsComparaisonRegionale {
   nb_restaurants_compares: number; // Nombre de restaurants de la région utilisés pour la comparaison
 }
 
+export interface ActivityRun {
+  id: number; // Identifiant de la tâche d'ingestion
+  debut: string | null; // Date et heure de début de la tâche
+  fin: string | null; // Date et heure de fin de la tâche
+}
+
+export interface RestaurantActivity {
+  ajout: string; // Date d'ajout du restaurant dans la base de données
+  modifie: string | null; // Date de dernière mise à jour du restaurant
+  nb_verifications: number; // Nombre total de tâches d'ingestion ayant vérifié ce restaurant
+  dernieres_verifications: ActivityRun[]; // Les dernières tâches d'ingestion, les plus récentes en premier
+}
+
 export interface RestaurantInsights {
   periode: InsightsPeriode;
   couverture: InsightsCouverture;

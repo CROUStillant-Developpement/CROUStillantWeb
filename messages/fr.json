@@ -150,8 +150,20 @@
     "dismissHint": "Fermer",
     "tabs": {
       "menu": "Menu",
-      "insights": "Insights"
+      "insights": "Statistiques",
+      "activity": "Activité"
     }
+  },
+  "RestaurantActivity": {
+    "addedOn": "Ajouté le",
+    "lastUpdated": "Dernière mise à jour",
+    "checksCount": "Nombre de vérifications",
+    "notAvailable": "N/A",
+    "recentChecksTitle": "Dernières vérifications",
+    "recentChecksDescription": "Historique des dernières fois où nos serveurs ont vérifié les menus de ce restaurant.",
+    "noChecks": "Aucune vérification enregistrée pour ce restaurant 😢",
+    "errorTitle": "Activité indisponible",
+    "errorDescription": "Une erreur est survenue lors de la récupération de l'activité de ce restaurant. Veuillez réessayer plus tard."
   },
   "RestaurantInsights": {
     "period": "Statistiques du {debut} au {fin} (année scolaire en cours)",

@@ -7,9 +7,10 @@ import QrCodeDialog from "@/components/qr-code-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
 import RestaurantInsights from "@/components/restaurants/slug/restaurant-insights";
+import RestaurantActivity from "@/components/restaurants/slug/restaurant-activity";
 import RestaurantPageSkeleton from "./restaurant-page-skeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { CalendarDays, LineChart } from "lucide-react";
+import { CalendarDays, LineChart, History } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useUmami } from "next-umami";
 import { useTranslations } from "next-intl";
@@ -252,6 +253,10 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                       <LineChart className="w-4 h-4" />
                       {t("tabs.insights")}
                     </TabsTrigger>
+                    <TabsTrigger value="activity" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
+                      <History className="w-4 h-4" />
+                      {t("tabs.activity")}
+                    </TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="menu">
@@ -270,6 +275,10 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
                   <TabsContent value="insights">
                     <RestaurantInsights restaurantCode={restaurant.code} />
+                  </TabsContent>
+
+                  <TabsContent value="activity">
+                    <RestaurantActivity restaurantCode={restaurant.code} />
                   </TabsContent>
                 </Tabs>
               </motion.div>
