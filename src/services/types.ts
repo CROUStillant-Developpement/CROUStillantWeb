@@ -125,6 +125,19 @@ export interface Tache {
 }
 
 // Types for GlobalStats
+// Types for RegionStats
+export interface RegionStats {
+  code: number; // Identifiant de la région
+  libelle: string; // Libellé de la région
+  nb_restaurants: number; // Nombre de restaurants dans la région
+  nb_restaurants_actifs: number; // Nombre de restaurants actifs dans la région
+  nb_restaurants_avec_menu: number; // Nombre de restaurants actifs ayant publié un menu sur l'année scolaire en cours
+  nb_repas: number; // Nombre de repas servis sur l'année scolaire en cours
+  nb_categories: number; // Nombre de catégories sur l'année scolaire en cours
+  nb_plats: number; // Nombre de plats servis sur l'année scolaire en cours
+  plats_uniques: number; // Nombre de plats distincts servis sur l'année scolaire en cours
+}
+
 export interface GlobalStats {
   categories: number; // Nombre de catégories
   compositions: number; // Nombre de compositions
@@ -238,7 +251,8 @@ export interface InsightsDelaiPublication {
 export interface InsightsComparaisonRegionale {
   jours_avec_menu_restaurant: number; // Nombre de jours avec menu pour ce restaurant sur la période
   moyenne_jours_avec_menu_region: number | null; // Moyenne du nombre de jours avec menu pour les autres restaurants actifs de la région
-  nb_restaurants_compares: number; // Nombre de restaurants de la région utilisés pour la comparaison
+  nb_restaurants_compares: number; // Nombre de restaurants actifs de la région ayant publié un menu, utilisés pour la comparaison
+  nb_restaurants_actifs_region: number; // Nombre total de restaurants actifs dans la région (avec ou sans menu publié)
 }
 
 export interface ActivityRun {

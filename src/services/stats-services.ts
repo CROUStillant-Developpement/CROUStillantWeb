@@ -1,4 +1,4 @@
-import { Tache, GlobalStats, ApiResult, Plat } from "./types";
+import { Tache, GlobalStats, ApiResult, Plat, RegionStats } from "./types";
 import { apiRequest } from "./api-request";
 
 /**
@@ -21,6 +21,18 @@ export async function getTaches(): Promise<ApiResult<Tache[]>> {
 export async function getGlobalStats(): Promise<ApiResult<GlobalStats>> {
   return await apiRequest<GlobalStats>({
     endpoint: "stats",
+    method: "GET",
+  });
+}
+
+/**
+ * Fetches stats grouped by region from the API.
+ *
+ * @returns {Promise<ApiResult<RegionStats[]>>} A promise that resolves to an ApiResult containing an array of RegionStats objects.
+ */
+export async function getRegionStats(): Promise<ApiResult<RegionStats[]>> {
+  return await apiRequest<RegionStats[]>({
+    endpoint: "stats/regions",
     method: "GET",
   });
 }

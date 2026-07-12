@@ -266,6 +266,14 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
                   comparaison_regionale.moyenne_jours_avec_menu_region
                 )}
               />
+              {comparaison_regionale.nb_restaurants_actifs_region > comparaison_regionale.nb_restaurants_compares && (
+                <p className="text-xs text-muted-foreground italic">
+                  {t("regionalComparisonCoverageNote", {
+                    withMenu: comparaison_regionale.nb_restaurants_compares,
+                    total: comparaison_regionale.nb_restaurants_actifs_region,
+                  })}
+                </p>
+              )}
             </div>
           )}
         </CardContent>

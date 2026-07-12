@@ -200,7 +200,8 @@
     "regionalComparisonDescription": "Comparison of the number of days with a menu against other active restaurants in the same region.",
     "regionalComparisonNoData": "Not enough comparable restaurants in this region to draw a comparison.",
     "thisRestaurant": "This restaurant",
-    "regionalAverage": "Regional average ({count} restaurants)"
+    "regionalAverage": "Regional average ({count} restaurants with a menu)",
+    "regionalComparisonCoverageNote": "{withMenu} out of {total} active restaurants in the region have published a menu this school year."
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
@@ -637,6 +638,19 @@
   "StatsPage": {
     "title": "Statistics",
     "description": "Discover the statistics of the updates.",
+    "regions": {
+      "title": "Statistics by region",
+      "description": "Menu richness and variety per CROUS region over the current school year.",
+      "search": "Search a region...",
+      "region": "Region",
+      "restaurants": "Active / total restaurants",
+      "avecMenu": "With published menu",
+      "repas": "Meals",
+      "categories": "Categories",
+      "plats": "Dishes",
+      "platsUniques": "Unique dishes",
+      "noResults": "No region found for this search 😢"
+    },
     "stats": {
       "menus": "Menus",
       "compositions": "Compositions",
