@@ -1,6 +1,6 @@
 import RestaurantsPage from "@/components/restaurants/restaurants-page";
 import { getRestaurants } from "@/services/restaurant-service";
-import { getRegions } from "@/services/region-service";
+import { getRegions, getRegionsGeoJSON } from "@/services/region-service";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import ErrorPage from "@/components/error";
@@ -38,6 +38,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Restaurants() {
   const restaurants = await getRestaurants();
   const regions = await getRegions();
+  // Overlay/filter on the map only — degrade gracefully instead of failing the whole page.
+  const regionsGeoJson = await getRegionsGeoJSON();
 
   if (!restaurants.success || !regions.success) {
     return <ErrorPage statusCode={500} />;
@@ -58,6 +60,7 @@ export default async function Restaurants() {
       restaurants={restaurants.data}
       regions={regions.data}
       typesRestaurants={typesRestaurants}
+      regionsGeoJson={regionsGeoJson.success ? regionsGeoJson.data : null}
     />
   );
 }

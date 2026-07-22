@@ -1,6 +1,6 @@
 import ErrorPage from "@/components/error";
 import StatsPage from "@/components/stats/stats-page";
-import { getTaches, getGlobalStats } from "@/services/stats-services";
+import { getTaches, getGlobalStats, getRegionStats } from "@/services/stats-services";
 import { getStats } from "@/services/umami-service";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -38,6 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Stats() {
   const taches = await getTaches();
   const stats = await getGlobalStats();
+  const regionStats = await getRegionStats();
   const umamiStats = await getStats();
 
   if (!taches.success || !stats.success) {
@@ -49,5 +50,11 @@ export default async function Stats() {
     stats.data.pagesVues = Math.max(0, Math.floor(Number(umamiStats.data.pageviews) || 0));
   }
 
-  return <StatsPage taches={taches.data} stats={stats.data} />;
+  return (
+    <StatsPage
+      taches={taches.data}
+      stats={stats.data}
+      regionStats={regionStats.success ? regionStats.data : []}
+    />
+  );
 }

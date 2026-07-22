@@ -20,17 +20,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tache, GlobalStats } from "@/services/types";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import { Tache, GlobalStats, RegionStats } from "@/services/types";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
 import { motion } from "@/lib/motion";
-import { Activity, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid } from "lucide-react";
+import { Activity, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid, Search } from "lucide-react";
+import { useState } from "react";
 
 interface StatsPageProps {
   taches: Tache[];
   stats: GlobalStats;
+  regionStats: RegionStats[];
 }
 
 interface ProcessedTache {
@@ -130,7 +141,7 @@ const CustomDot = (props: DotProps) => {
   );
 };
 
-export default function StatsPage({ taches, stats }: StatsPageProps) {
+export default function StatsPage({ taches, stats, regionStats }: StatsPageProps) {
   const t = useTranslations("StatsPage");
 
   const locale = useLocale();
@@ -224,6 +235,8 @@ export default function StatsPage({ taches, stats }: StatsPageProps) {
       </div>
 
       <TacheCharts data={taches} />
+
+      <RegionStatsTable data={regionStats} locale={localeString} />
     </motion.div>
   );
 }
@@ -253,6 +266,84 @@ const StatCard = ({
     </div>
   </Stat>
 );
+
+const RegionStatsTable = ({ data, locale }: { data: RegionStats[]; locale: string }) => {
+  const t = useTranslations("StatsPage");
+  const [search, setSearch] = useState("");
+
+  const filtered = data
+    .filter((region) => region.libelle.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => b.nb_restaurants - a.nb_restaurants);
+
+  return (
+    <Card className="rounded-2xl border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+      <CardHeader className="border-b border-primary/5 pb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
+            <MapPin className="w-6 h-6" />
+          </div>
+          <div className="min-w-0">
+            <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary">
+              {t("regions.title")}
+            </CardTitle>
+            <CardDescription className="text-sm sm:text-base font-medium">
+              {t("regions.description")}
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <div className="relative group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          <Input
+            className="pl-11 rounded-2xl bg-muted/30 border-primary/5 focus-visible:ring-primary/20 h-12 text-base"
+            placeholder={t("regions.search")}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="rounded-2xl border border-primary/5 overflow-x-auto">
+          <Table>
+            <TableHeader className="bg-muted/30">
+              <TableRow className="hover:bg-transparent border-primary/5">
+                <TableHead className="font-bold">{t("regions.region")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.restaurants")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.avecMenu")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.repas")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.categories")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.plats")}</TableHead>
+                <TableHead className="text-center font-bold">{t("regions.platsUniques")}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filtered.map((region) => (
+                <TableRow key={region.code} className="border-primary/5 hover:bg-primary/5 transition-colors">
+                  <TableCell className="font-medium">{region.libelle}</TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {region.nb_restaurants_actifs.toLocaleString(locale)}
+                    <span className="text-muted-foreground font-normal"> / {region.nb_restaurants.toLocaleString(locale)}</span>
+                  </TableCell>
+                  <TableCell className="text-center font-semibold">{region.nb_restaurants_avec_menu.toLocaleString(locale)}</TableCell>
+                  <TableCell className="text-center font-semibold">{region.nb_repas.toLocaleString(locale)}</TableCell>
+                  <TableCell className="text-center font-semibold">{region.nb_categories.toLocaleString(locale)}</TableCell>
+                  <TableCell className="text-center font-semibold">{region.nb_plats.toLocaleString(locale)}</TableCell>
+                  <TableCell className="text-center font-semibold">{region.plats_uniques.toLocaleString(locale)}</TableCell>
+                </TableRow>
+              ))}
+              {filtered.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={7} className="h-32 text-center text-muted-foreground italic">
+                    {t("regions.noResults")}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const chartConfig = {} satisfies ChartConfig;
 

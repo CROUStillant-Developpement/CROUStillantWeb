@@ -1,4 +1,4 @@
-import { DisplayType, Restaurant } from "@/services/types";
+import { DisplayType, Restaurant, RegionGeoJSON } from "@/services/types";
 import RestaurantCardSkeleton from "./restaurant-card-skeleton";
 import RestaurantCard from "./restaurant-card";
 import { motion, AnimatePresence } from "@/lib/motion";
@@ -17,6 +17,7 @@ interface ContentProps {
   paginatedRestaurants: Restaurant[];
   favouritesRestaurants: Restaurant[];
   loading: boolean;
+  regionsGeoJson: RegionGeoJSON | null;
 }
 
 export default function Content({
@@ -25,6 +26,7 @@ export default function Content({
   paginatedRestaurants,
   favouritesRestaurants,
   loading,
+  regionsGeoJson,
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
   const umami = useUmami();
@@ -38,7 +40,7 @@ export default function Content({
   }, [favouritesRestaurants]);
 
   if (display === "map") {
-    return <MapComponent loading={loading} />;
+    return <MapComponent loading={loading} regionsGeoJson={regionsGeoJson} />;
   } else {
     return (
       <div className="flex flex-col gap-6 p-4">

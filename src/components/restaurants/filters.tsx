@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useMemo, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import {
   AlignLeft,
   ArrowDownAZ,
@@ -47,6 +47,7 @@ import { useRestaurantFilters } from "@/hooks/useRestaurantFilters";
 import { cn } from "@/lib/utils";
 import { Region, Restaurant, TypeRestaurant } from "@/services/types";
 import { useUserPreferences } from "@/store/userPreferencesStore";
+import useMarkerStore from "@/store/markerStore";
 import ActiveFilterBadge from "./active-filter-badge";
 
 interface RestaurantsFiltersProps {
@@ -113,6 +114,21 @@ export default function RestaurantsFilters({
     resetFilters,
     activeFilterCount,
   } = useRestaurantFilters(restaurants, setFilteredRestaurants, setLoading);
+
+  const { setSelectedCrous, setOnRegionClick } = useMarkerStore();
+
+  // Mirror the region filter into the marker store so the map's region overlay
+  // can highlight the selected CROUS (the map is rendered by a sibling/child
+  // component reached via `children`, not through props).
+  useEffect(() => {
+    setSelectedCrous(filters.crous);
+  }, [filters.crous, setSelectedCrous]);
+
+  // Let clicking a region polygon on the map drive this same filter back.
+  useEffect(() => {
+    setOnRegionClick((crousId) => setFilters({ ...filters, crous: crousId }));
+    return () => setOnRegionClick(null);
+  }, [filters, setFilters, setOnRegionClick]);
 
   const renderFiltersContent = () => (
     <TooltipProvider delayDuration={0}>
