@@ -165,11 +165,14 @@ export function useRestaurantFilters(
     setLoading(false);
   }, 300);
 
-  // Update query string whenever filters change
+  // Update query string whenever filters change.
+  // scroll: false — otherwise Next.js resets the window scroll to top on every
+  // filter change (e.g. clicking a region on the map), which on the map view
+  // pushes the sticky map back down under the page header.
   useEffect(() => {
     log.info(["useEffect change query string"], "dev");
     const queryString = buildQueryString(filters);
-    router.push(`${pathname}?${queryString}`);
+    router.push(`${pathname}?${queryString}`, { scroll: false });
   }, [filters, router, pathname]);
 
   // Trigger debounced filtering when filters change

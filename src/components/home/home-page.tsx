@@ -13,9 +13,11 @@ import {
 import { FaAndroid, FaApple } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import HomeCard from "./home-card";
+import HomeRegionsMap from "./home-regions-map";
 import { Link } from "@/i18n/routing";
 import { useUmami } from "next-umami";
 import { motion } from "@/lib/motion";
+import { RegionGeoJSON } from "@/services/types";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -76,7 +78,11 @@ const BasicCard = ({
   );
 };
 
-export default function HomePage() {
+export default function HomePage({
+  regionsGeoJson,
+}: {
+  regionsGeoJson: RegionGeoJSON | null;
+}) {
   const t = useTranslations("HomePage");
 
   return (
@@ -157,6 +163,8 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
       </section>
+
+      <HomeRegionsMap regionsGeoJson={regionsGeoJson} />
 
       <motion.section
         className=""
