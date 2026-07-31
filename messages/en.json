@@ -51,6 +51,11 @@
       "androidCta": "Android",
       "iosCta": "iOS",
       "learnMore": "Learn more"
+    },
+    "regionsMap": {
+      "title": "Find your region",
+      "description": "Click on a region to see the CROUS restaurants located there.",
+      "cta": "See all restaurants"
     }
   },
   "HomeCard": {
@@ -147,7 +152,61 @@
     "closed": "Closed",
     "favoriteHint": "Add this restaurant to your favorites to find it more quickly on your home page!",
     "favoriteHintCta": "Add to favorites",
-    "dismissHint": "Dismiss"
+    "dismissHint": "Dismiss",
+    "tabs": {
+      "menu": "Menu",
+      "insights": "Insights",
+      "activity": "Activity"
+    }
+  },
+  "RestaurantActivity": {
+    "addedOn": "Added on",
+    "lastUpdated": "Last updated",
+    "checksCount": "Number of checks",
+    "notAvailable": "N/A",
+    "recentChecksTitle": "Recent checks",
+    "recentChecksDescription": "History of the last times our servers checked this restaurant's menus.",
+    "noChecks": "No checks recorded for this restaurant 😢",
+    "errorTitle": "Activity unavailable",
+    "errorDescription": "An error occurred while fetching this restaurant's activity. Please try again later."
+  },
+  "RestaurantInsights": {
+    "period": "Stats from {debut} to {fin} (current school year)",
+    "daysWithMenu": "Days with menu",
+    "daysWithoutMenu": "Days without menu",
+    "coverageRate": "Coverage rate",
+    "coverageTitle": "Menu coverage",
+    "coverageDescription": "Breakdown of open days with or without a published menu over the period.",
+    "topDishesTitle": "Most frequent dishes",
+    "topDishesDescription": "The dishes that come up most often on the menu over the period.",
+    "ranking": "Rank",
+    "occurrences": "Occurrences",
+    "label": "Dish",
+    "noDishes": "No dishes found for this period 😢",
+    "noDataTitle": "Not enough data yet 😢",
+    "noDataDescription": "This restaurant hasn't published a menu yet during the current school year.",
+    "errorTitle": "Insights unavailable",
+    "errorDescription": "An error occurred while fetching this restaurant's stats. Please try again later.",
+    "weekdayTitle": "Coverage by day of week",
+    "weekdayDescription": "Menu coverage rate depending on the day of the week.",
+    "bestStreak": "Best streak (with menu)",
+    "longestGap": "Longest gap",
+    "currentStreakWithMenu": "Current streak (with menu)",
+    "currentStreakWithoutMenu": "Current streak (without menu)",
+    "publishLag": "Publish lag",
+    "publishLagValue": "{jours} d",
+    "notAvailable": "N/A",
+    "varietyTitle": "Menu richness & variety",
+    "varietyDescription": "{uniques} distinct dishes out of {total} dishes served overall during the period.",
+    "varietyRate": "Variety rate",
+    "categoriesPerMeal": "Categories / meal",
+    "dishesPerMeal": "Dishes / meal",
+    "regionalComparisonTitle": "Regional comparison",
+    "regionalComparisonDescription": "Comparison of the number of days with a menu against other active restaurants in the same region.",
+    "regionalComparisonNoData": "Not enough comparable restaurants in this region to draw a comparison.",
+    "thisRestaurant": "This restaurant",
+    "regionalAverage": "Regional average ({count} restaurants with a menu)",
+    "regionalComparisonCoverageNote": "{withMenu} out of {total} active restaurants in the region have published a menu this school year."
   },
   "DatePickers": {
     "currentDate": "Current date: {date}",
@@ -584,6 +643,19 @@
   "StatsPage": {
     "title": "Statistics",
     "description": "Discover the statistics of the updates.",
+    "regions": {
+      "title": "Statistics by region",
+      "description": "Menu richness and variety per CROUS region over the current school year.",
+      "search": "Search a region...",
+      "region": "Region",
+      "restaurants": "Active / total restaurants",
+      "avecMenu": "With published menu",
+      "repas": "Meals",
+      "categories": "Categories",
+      "plats": "Dishes",
+      "platsUniques": "Unique dishes",
+      "noResults": "No region found for this search 😢"
+    },
     "stats": {
       "menus": "Menus",
       "compositions": "Compositions",

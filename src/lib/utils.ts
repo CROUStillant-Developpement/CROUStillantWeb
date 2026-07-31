@@ -161,6 +161,16 @@ export function findRestaurantsAroundPosition(
 
 
 /**
+ * Splits a "-"-separated date part into { day, month, year }, accepting either
+ * "DD-MM-YYYY" or "YYYY-MM-DD" ordering (the 4-digit segment is always the year).
+ * This tolerates API responses momentarily served in the other order during a deploy.
+ */
+const splitDatePart = (datePart: string): { day: string; month: string; year: string } => {
+  const [a, month, b] = datePart.split("-");
+  return a.length === 4 ? { year: a, month, day: b } : { day: a, month, year: b };
+};
+
+/**
  * Converts a date string in "DD-MM-YYYY" format to a JavaScript `Date` object in ISO format.
  *
  * @param dateString - The date string to convert, expected in "DD-MM-YYYY" format.
@@ -173,8 +183,35 @@ export function findRestaurantsAroundPosition(
  * ```
  */
 export const formatToISODate = (dateString: string): Date => {
-  const [day, month, year] = dateString.split("-");
+  const { day, month, year } = splitDatePart(dateString);
   return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
+/**
+ * Parses a datetime string in "DD-MM-YYYY HH:MM:SS" format (as returned by the API) into a
+ * JavaScript `Date` object.
+ *
+ * @param dateTimeString - The datetime string to parse, expected in "DD-MM-YYYY HH:MM:SS" format.
+ * @returns A `Date` object representing the parsed datetime.
+ *
+ * @example
+ * ```typescript
+ * const date = parseApiDateTime("30-12-2024 14:05:00");
+ * // date => new Date(2024, 11, 30, 14, 5, 0)
+ * ```
+ */
+export const parseApiDateTime = (dateTimeString: string): Date => {
+  const [datePart, timePart] = dateTimeString.split(" ");
+  const { day, month, year } = splitDatePart(datePart);
+  const [hours, minutes, seconds] = (timePart ?? "00:00:00").split(":");
+  return new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hours ?? 0),
+    Number(minutes ?? 0),
+    Number(seconds ?? 0)
+  );
 };
 
 /**

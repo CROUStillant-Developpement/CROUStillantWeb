@@ -1238,9 +1238,273 @@ function MapRoute({
   return null;
 }
 
+/**
+ * Deterministic, distinct color for an arbitrary id (e.g. a CROUS region id),
+ * without needing a hand-maintained palette table. Golden-angle hue rotation
+ * gives well-spread hues even for consecutive ids.
+ */
+function idToColor(id: number | string): string {
+  const numericId =
+    typeof id === "number" ? id : Array.from(String(id)).reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const hue = (numericId * 137.508) % 360;
+  return `hsl(${hue.toFixed(1)}, 70%, 55%)`;
+}
+
+/** -1 means "no region selected" (matches the app's `filters.crous` convention). */
+const REGION_NO_SELECTION = -1;
+
+/** Restricts the region layers to just the selected feature, or shows all when none is selected. */
+function regionFilter(idProperty: string, selectedId: number): MapLibreGL.FilterSpecification | undefined {
+  if (selectedId === REGION_NO_SELECTION) return undefined;
+  return ["==", ["get", idProperty], selectedId];
+}
+
+// Stable reference for the `ignoreLayers` default — a `= []` default parameter
+// would otherwise create a new array every render, making the click/hover
+// effect below tear down and re-register its listeners on every render.
+const NO_IGNORE_LAYERS: string[] = [];
+
+type MapRegionLayerProps<
+  P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
+> = {
+  /** GeoJSON FeatureCollection of Polygon/MultiPolygon regions */
+  data: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, P>;
+  /** Feature property used as each region's unique id (default: "crous_id") */
+  idProperty?: string;
+  /**
+   * Flat color used for every region's fill/border instead of the default
+   * per-region rainbow (golden-angle hash of idProperty). Use this for a
+   * monochrome, theme-aware overlay (e.g. `hsl(var(--foreground))`).
+   */
+  color?: string;
+  /** Currently selected/highlighted region id, or -1 for none */
+  selectedId?: number;
+  /** Fill opacity for unselected regions (default: 0.06) */
+  fillOpacity?: number;
+  /** Fill opacity for the selected region (default: 0.32) */
+  selectedFillOpacity?: number;
+  /** Border width for unselected regions (default: 1) */
+  lineWidth?: number;
+  /** Border width for the selected region (default: 2.5) */
+  selectedLineWidth?: number;
+  /** Callback with the feature's properties when a region is clicked */
+  onFeatureClick?: (properties: P) => void;
+  /** Whether the layer reacts to hover/click (default: true) */
+  interactive?: boolean;
+  /**
+   * Layer ids (e.g. from getClusterLayerIds) that sit visually on top of this
+   * region layer. A click that also hits one of these is assumed to be meant
+   * for that layer (a marker/cluster), so onFeatureClick is skipped instead
+   * of firing for both — otherwise clicking a marker also toggles the region
+   * filter underneath it.
+   */
+  ignoreLayers?: string[];
+};
+
+function MapRegionLayer<
+  P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
+>({
+  data,
+  idProperty = "crous_id",
+  color,
+  selectedId = -1,
+  fillOpacity = 0.06,
+  selectedFillOpacity = 0.32,
+  lineWidth = 1,
+  selectedLineWidth = 2.5,
+  onFeatureClick,
+  interactive = true,
+  ignoreLayers = NO_IGNORE_LAYERS,
+}: MapRegionLayerProps<P>) {
+  const { map, isLoaded } = useMap();
+  const id = useId();
+  const sourceId = `region-source-${id}`;
+  const fillLayerId = `region-fill-${id}`;
+  const lineLayerId = `region-line-${id}`;
+
+  // Inject a per-region color as a feature property so it can be referenced
+  // by a MapLibre paint expression (["get", "_fillColor"]) — either a flat
+  // `color` for all regions, or a deterministic per-region rainbow hash.
+  const coloredData = useMemo(
+    () => ({
+      ...data,
+      features: data.features.map((feature) => ({
+        ...feature,
+        properties: {
+          ...feature.properties,
+          _fillColor: color ?? idToColor(feature.properties?.[idProperty] as number | string),
+        },
+      })),
+    }),
+    [data, idProperty, color],
+  );
+
+  useEffect(() => {
+    if (!isLoaded || !map) return;
+
+    map.addSource(sourceId, {
+      type: "geojson",
+      data: coloredData as GeoJSON.FeatureCollection,
+    });
+
+    // MapLibre's addLayer validator rejects a `filter` key set to `undefined`
+    // (unlike setFilter(), which accepts undefined to mean "no filter") — the
+    // key must be omitted entirely when there's no selection.
+    const initialFilter = regionFilter(idProperty, selectedId);
+
+    map.addLayer({
+      id: fillLayerId,
+      type: "fill",
+      source: sourceId,
+      // When a region is selected, filter the other 25 out entirely instead
+      // of just dimming them.
+      ...(initialFilter && { filter: initialFilter }),
+      paint: {
+        "fill-color": ["get", "_fillColor"],
+        "fill-opacity": [
+          "case",
+          ["==", ["get", idProperty], selectedId],
+          selectedFillOpacity,
+          fillOpacity,
+        ],
+      },
+    });
+
+    map.addLayer({
+      id: lineLayerId,
+      type: "line",
+      source: sourceId,
+      ...(initialFilter && { filter: initialFilter }),
+      layout: { "line-join": "round" },
+      paint: {
+        "line-color": ["get", "_fillColor"],
+        "line-width": [
+          "case",
+          ["==", ["get", idProperty], selectedId],
+          selectedLineWidth,
+          lineWidth,
+        ],
+        "line-opacity": 0.9,
+      },
+    });
+
+    return () => {
+      try {
+        if (map.getLayer(lineLayerId)) map.removeLayer(lineLayerId);
+        if (map.getLayer(fillLayerId)) map.removeLayer(fillLayerId);
+        if (map.getSource(sourceId)) map.removeSource(sourceId);
+      } catch {
+        // ignore
+      }
+    };
+    // Layers are created once; data/paint updates are pushed via the effects below.
+  }, [isLoaded, map]);
+
+  // Push data updates (e.g. if the FeatureCollection reference changes)
+  useEffect(() => {
+    if (!isLoaded || !map) return;
+    const source = map.getSource(sourceId) as MapLibreGL.GeoJSONSource;
+    if (source) source.setData(coloredData as GeoJSON.FeatureCollection);
+  }, [isLoaded, map, coloredData, sourceId]);
+
+  // Push highlight (selectedId) updates without re-adding the layers.
+  // Skipped on the very first run — the layer-creation effect above already
+  // applies the initial filter/paint, so re-applying here would just fire a
+  // redundant styledata event.
+  const highlightMountedRef = useRef(false);
+  useEffect(() => {
+    if (!isLoaded || !map || !map.getLayer(fillLayerId) || !map.getLayer(lineLayerId)) return;
+    if (!highlightMountedRef.current) {
+      highlightMountedRef.current = true;
+      return;
+    }
+
+    const filter = regionFilter(idProperty, selectedId);
+    map.setFilter(fillLayerId, filter);
+    map.setFilter(lineLayerId, filter);
+
+    map.setPaintProperty(fillLayerId, "fill-opacity", [
+      "case",
+      ["==", ["get", idProperty], selectedId],
+      selectedFillOpacity,
+      fillOpacity,
+    ]);
+    map.setPaintProperty(lineLayerId, "line-width", [
+      "case",
+      ["==", ["get", idProperty], selectedId],
+      selectedLineWidth,
+      lineWidth,
+    ]);
+  }, [
+    isLoaded,
+    map,
+    fillLayerId,
+    lineLayerId,
+    idProperty,
+    selectedId,
+    fillOpacity,
+    selectedFillOpacity,
+    lineWidth,
+    selectedLineWidth,
+  ]);
+
+  // Handle click and hover events
+  useEffect(() => {
+    if (!isLoaded || !map || !interactive) return;
+
+    const handleClick = (
+      e: MapLibreGL.MapLayerMouseEvent,
+    ) => {
+      // A marker/cluster rendered on top of this region polygon should win —
+      // otherwise clicking it also toggles the region filter underneath it.
+      const existingIgnoreLayers = ignoreLayers.filter((layerId) => map.getLayer(layerId));
+      if (existingIgnoreLayers.length > 0) {
+        const hits = map.queryRenderedFeatures(e.point, { layers: existingIgnoreLayers });
+        if (hits.length > 0) return;
+      }
+
+      const feature = e.features?.[0];
+      if (feature) onFeatureClick?.(feature.properties as P);
+    };
+    const handleMouseEnter = () => {
+      map.getCanvas().style.cursor = "pointer";
+    };
+    const handleMouseLeave = () => {
+      map.getCanvas().style.cursor = "";
+    };
+
+    map.on("click", fillLayerId, handleClick);
+    map.on("mouseenter", fillLayerId, handleMouseEnter);
+    map.on("mouseleave", fillLayerId, handleMouseLeave);
+
+    return () => {
+      map.off("click", fillLayerId, handleClick);
+      map.off("mouseenter", fillLayerId, handleMouseEnter);
+      map.off("mouseleave", fillLayerId, handleMouseLeave);
+    };
+  }, [isLoaded, map, fillLayerId, onFeatureClick, interactive, ignoreLayers]);
+
+  return null;
+}
+
+/**
+ * The layer ids MapClusterLayer will create for a given `id` prop — lets a
+ * sibling layer (e.g. MapRegionLayer) hit-test against them, so overlapping
+ * clicks (a marker/cluster sitting on top of a region polygon) can be
+ * resolved by picking the topmost layer instead of firing both handlers.
+ */
+function getClusterLayerIds(id: string): { clusterLayerId: string; unclusteredLayerId: string } {
+  return {
+    clusterLayerId: `clusters-${id}`,
+    unclusteredLayerId: `unclustered-point-${id}`,
+  };
+}
+
 type MapClusterLayerProps<
   P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
 > = {
+  /** Optional unique identifier for the cluster layer (needed to reference its layer ids from outside, e.g. MapRegionLayer's ignoreLayers) */
+  id?: string;
   /** GeoJSON FeatureCollection data or URL to fetch GeoJSON from */
   data: string | GeoJSON.FeatureCollection<GeoJSON.Point, P>;
   /** Maximum zoom level to cluster points on (default: 14) */
@@ -1280,6 +1544,7 @@ type MapClusterLayerProps<
 function MapClusterLayer<
   P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
 >({
+  id: propId,
   data,
   clusterMaxZoom = 14,
   clusterRadius = 50,
@@ -1292,11 +1557,11 @@ function MapClusterLayer<
   countField,
 }: MapClusterLayerProps<P>) {
   const { map, isLoaded } = useMap();
-  const id = useId();
+  const autoId = useId();
+  const id = propId ?? autoId;
   const sourceId = `cluster-source-${id}`;
-  const clusterLayerId = `clusters-${id}`;
   const clusterCountLayerId = `cluster-count-${id}`;
-  const unclusteredLayerId = `unclustered-point-${id}`;
+  const { clusterLayerId, unclusteredLayerId } = getClusterLayerIds(id);
 
   const stylePropsRef = useRef({
     clusterColors,
@@ -1573,7 +1838,10 @@ export {
   MapPopup,
   MapControls,
   MapRoute,
+  MapRegionLayer,
   MapClusterLayer,
+  getClusterLayerIds,
+  useResolvedTheme,
 };
 
-export type { MapRef, MapViewport };
+export type { MapRef, MapViewport, Theme };

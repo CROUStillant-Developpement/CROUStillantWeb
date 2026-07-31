@@ -1,6 +1,6 @@
 "use client";
 
-import { Restaurant, Region, TypeRestaurant } from "@/services/types";
+import { Restaurant, Region, TypeRestaurant, RegionGeoJSON } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
 import log from "@/lib/log";
 import Loading from "@/app/[locale]/loading";
@@ -15,10 +15,12 @@ export default function RestaurantsPage({
   restaurants,
   regions,
   typesRestaurants,
+  regionsGeoJson,
 }: {
   restaurants: Restaurant[];
   regions: Region[];
   typesRestaurants: TypeRestaurant[];
+  regionsGeoJson: RegionGeoJSON | null;
 }) {
   const [loading, setLoading] = useState(true);
   const [filteredRestaurants, setFilteredRestaurants] =
@@ -101,6 +103,7 @@ export default function RestaurantsPage({
             paginatedRestaurants={paginatedRestaurants}
             favouritesRestaurants={favouritesRestaurants}
             loading={loading}
+            regionsGeoJson={regionsGeoJson}
           />
           {display === "list" && filteredRestaurants.length > 0 && (
             <div className="mx-4">

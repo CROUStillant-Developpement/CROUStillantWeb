@@ -17,6 +17,22 @@ export interface Region {
   libelle: string; // Libellé de la région
 }
 
+// Properties of a CROUS region GeoJSON feature (GET /regions/geojson)
+export interface RegionGeoJSONProperties {
+  crous_id: number; // Correspond à Region.code
+  crous_slug: string;
+  crous_libelle: string; // Correspond à Region.libelle
+  crous_nom: string; // Nom officiel long du CROUS
+  departements: string[]; // Codes INSEE des départements rattachés
+  credit: string;
+  [key: string]: unknown;
+}
+
+export type RegionGeoJSON = GeoJSON.FeatureCollection<
+  GeoJSON.Polygon | GeoJSON.MultiPolygon,
+  RegionGeoJSONProperties
+>;
+
 // Types for Restaurant
 export interface Restaurant {
   isOpen: boolean;
@@ -125,6 +141,19 @@ export interface Tache {
 }
 
 // Types for GlobalStats
+// Types for RegionStats
+export interface RegionStats {
+  code: number; // Identifiant de la région
+  libelle: string; // Libellé de la région
+  nb_restaurants: number; // Nombre de restaurants dans la région
+  nb_restaurants_actifs: number; // Nombre de restaurants actifs dans la région
+  nb_restaurants_avec_menu: number; // Nombre de restaurants actifs ayant publié un menu sur l'année scolaire en cours
+  nb_repas: number; // Nombre de repas servis sur l'année scolaire en cours
+  nb_categories: number; // Nombre de catégories sur l'année scolaire en cours
+  nb_plats: number; // Nombre de plats servis sur l'année scolaire en cours
+  plats_uniques: number; // Nombre de plats distincts servis sur l'année scolaire en cours
+}
+
 export interface GlobalStats {
   categories: number; // Nombre de catégories
   compositions: number; // Nombre de compositions
@@ -181,6 +210,91 @@ export interface UmamiActiveUsers {
 export interface UmamiDateRange {
   startDate: string;
   endDate: string;
+}
+
+// Types for RestaurantInsights
+export interface InsightsPeriode {
+  debut: string; // Début de la période (DD-MM-YYYY)
+  fin: string; // Fin de la période (DD-MM-YYYY)
+}
+
+export interface InsightsCouverture {
+  jours_ouvres: number; // Nombre de jours d'ouverture attendus sur la période
+  jours_avec_menu: number; // Nombre de jours avec un menu publié
+  jours_sans_menu: number; // Nombre de jours sans menu publié
+  taux_couverture: number; // Taux de couverture en pourcentage
+}
+
+export interface InsightsRepartitionRepas {
+  matin: number; // Nombre de petits-déjeuners servis sur la période
+  midi: number; // Nombre de déjeuners servis sur la période
+  soir: number; // Nombre de dîners servis sur la période
+}
+
+export interface InsightsCouvertureJour {
+  jour: string; // Jour de la semaine
+  jours_ouvres: number; // Nombre d'occurrences de ce jour où le restaurant est censé être ouvert
+  jours_avec_menu: number; // Nombre d'occurrences de ce jour avec un menu publié
+  taux_couverture: number; // Taux de couverture pour ce jour en pourcentage
+}
+
+export interface InsightsSerieActuelle {
+  avec_menu: boolean; // La série en cours est-elle avec menu (true) ou sans menu (false) ?
+  jours: number; // Longueur de la série en cours (en jours d'ouverture)
+}
+
+export interface InsightsSeries {
+  meilleure_serie_avec_menu: number; // Plus longue série de jours d'ouverture consécutifs avec un menu publié
+  plus_longue_serie_sans_menu: number; // Plus longue série de jours d'ouverture consécutifs sans menu publié
+  serie_actuelle: InsightsSerieActuelle;
+}
+
+export interface InsightsVariete {
+  plats_uniques: number; // Nombre de plats distincts servis sur la période
+  plats_total: number; // Nombre total de plats servis sur la période (occurrences)
+  taux_variete: number; // Taux de variété (plats_uniques / plats_total) en pourcentage
+}
+
+export interface InsightsRichesse {
+  moyenne_categories_par_repas: number; // Nombre moyen de catégories par repas
+  moyenne_plats_par_repas: number; // Nombre moyen de plats par repas
+}
+
+export interface InsightsDelaiPublication {
+  moyenne_jours: number | null; // Délai moyen (en jours) entre l'ingestion d'un menu et sa date d'application
+}
+
+export interface InsightsComparaisonRegionale {
+  jours_avec_menu_restaurant: number; // Nombre de jours avec menu pour ce restaurant sur la période
+  moyenne_jours_avec_menu_region: number | null; // Moyenne du nombre de jours avec menu pour les autres restaurants actifs de la région
+  nb_restaurants_compares: number; // Nombre de restaurants actifs de la région ayant publié un menu, utilisés pour la comparaison
+  nb_restaurants_actifs_region: number; // Nombre total de restaurants actifs dans la région (avec ou sans menu publié)
+}
+
+export interface ActivityRun {
+  id: number; // Identifiant de la tâche d'ingestion
+  debut: string | null; // Date et heure de début de la tâche
+  fin: string | null; // Date et heure de fin de la tâche
+}
+
+export interface RestaurantActivity {
+  ajout: string; // Date d'ajout du restaurant dans la base de données
+  modifie: string | null; // Date de dernière mise à jour du restaurant
+  nb_verifications: number; // Nombre total de tâches d'ingestion ayant vérifié ce restaurant
+  dernieres_verifications: ActivityRun[]; // Les dernières tâches d'ingestion, les plus récentes en premier
+}
+
+export interface RestaurantInsights {
+  periode: InsightsPeriode;
+  couverture: InsightsCouverture;
+  repartition_repas: InsightsRepartitionRepas;
+  plats_frequents: Plat[]; // Plats les plus fréquents sur la période (utilise total pour le nombre d'occurrences)
+  couverture_par_jour: InsightsCouvertureJour[];
+  series: InsightsSeries;
+  variete: InsightsVariete;
+  richesse: InsightsRichesse;
+  delai_publication: InsightsDelaiPublication;
+  comparaison_regionale: InsightsComparaisonRegionale;
 }
 
 export interface UmamiStats {

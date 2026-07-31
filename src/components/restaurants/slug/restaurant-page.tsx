@@ -6,7 +6,11 @@ import { Heart, QrCode, ScreenShare } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
+import RestaurantInsights from "@/components/restaurants/slug/restaurant-insights";
+import RestaurantActivity from "@/components/restaurants/slug/restaurant-activity";
 import RestaurantPageSkeleton from "./restaurant-page-skeleton";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { CalendarDays, LineChart, History } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useUmami } from "next-umami";
 import { useTranslations } from "next-intl";
@@ -232,25 +236,53 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
               <RestaurantInfo restaurant={restaurant} />
             </aside>
 
-            <div className="flex-1 w-full min-w-0">
-              {/* Menu Display Section */}
+            <div className="flex-1 w-full min-w-0 mt-1">
               <motion.div
                 initial={{ opacity: 0, y: 32 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -32 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <MenuDisplaySection
-                  menuLoading={menuLoading}
-                  availableDates={dates}
-                  selectedDate={selectedDate}
-                  onDateChange={setSelectedDate}
-                  selectedDateMeals={selectedDateMeals}
-                  selectedDateBreakfast={selectedDateBreakfast}
-                  selectedDateLunch={selectedDateLunch}
-                  selectedDateDinner={selectedDateDinner}
-                  noMenuAtAll={noMenuAtAll}
-                />
+                <Tabs defaultValue="menu">
+                  <div className="flex justify-center sm:justify-start mb-6">
+                    <TabsList>
+                      <TabsTrigger value="menu" className="px-3" onClick={() => umami.event("Restaurant.Menu", { restaurant: restaurant.code })}>
+                        <CalendarDays className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.menu")}</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="insights" className="px-3" onClick={() => umami.event("Restaurant.Insights", { restaurant: restaurant.code })}>
+                        <LineChart className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.insights")}</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="activity" className="px-3" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
+                        <History className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.activity")}</span>
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
+
+                  <TabsContent value="menu">
+                    <MenuDisplaySection
+                      menuLoading={menuLoading}
+                      availableDates={dates}
+                      selectedDate={selectedDate}
+                      onDateChange={setSelectedDate}
+                      selectedDateMeals={selectedDateMeals}
+                      selectedDateBreakfast={selectedDateBreakfast}
+                      selectedDateLunch={selectedDateLunch}
+                      selectedDateDinner={selectedDateDinner}
+                      noMenuAtAll={noMenuAtAll}
+                    />
+                  </TabsContent>
+
+                  <TabsContent value="insights">
+                    <RestaurantInsights restaurantCode={restaurant.code} />
+                  </TabsContent>
+
+                  <TabsContent value="activity">
+                    <RestaurantActivity restaurantCode={restaurant.code} />
+                  </TabsContent>
+                </Tabs>
               </motion.div>
             </div>
           </div>

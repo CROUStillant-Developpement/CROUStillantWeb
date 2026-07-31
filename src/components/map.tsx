@@ -6,10 +6,12 @@ import {
   Map as MapGL,
   MapClusterLayer,
   MapControls,
+  MapRegionLayer,
+  getClusterLayerIds,
   useMap,
 } from "@/components/ui/map";
 import useMarkerStore from "@/store/markerStore";
-import { Restaurant } from "@/services/types";
+import { Restaurant, RegionGeoJSON, RegionGeoJSONProperties } from "@/services/types";
 import { motion, AnimatePresence } from "@/lib/motion";
 import {
   X,
@@ -306,6 +308,7 @@ interface MapProps {
   center?: [number, number];
   zoom?: number;
   loading?: boolean;
+  regionsGeoJson?: RegionGeoJSON | null;
 }
 
 const FitBoundsToMarkers = () => {
@@ -352,9 +355,10 @@ const MapComponent = ({
   center = DEFAULT_CENTER,
   zoom = DEFAULT_ZOOM,
   loading = false,
+  regionsGeoJson = null,
 }: MapProps) => {
   const tMap = useTranslations("RestaurantsPage");
-  const { markers } = useMarkerStore();
+  const { markers, selectedCrous, onRegionClick } = useMarkerStore();
   // A group holds all restaurants at a shared coordinate.
   // If length === 1 the panel shows directly; if > 1 a picker is shown first.
   const [selectedGroup, setSelectedGroup] = useState<Restaurant[]>([]);
@@ -362,6 +366,14 @@ const MapComponent = ({
     useState<Restaurant | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const pointJustClicked = useRef(false);
+  // Markers/clusters render on top of the region polygons, on the same
+  // "restaurants" cluster layer instance — MapRegionLayer uses these ids to
+  // yield to whichever marker is under the click instead of also toggling
+  // the region filter underneath it.
+  const restaurantLayerIds = useMemo(() => {
+    const { clusterLayerId, unclusteredLayerId } = getClusterLayerIds("restaurants");
+    return [clusterLayerId, unclusteredLayerId];
+  }, []);
 
   // Group restaurants within PROXIMITY_M of each other into one GeoJSON point.
   // The point is placed at the centroid of the group.
@@ -502,6 +514,15 @@ const MapComponent = ({
     setSelectedGroup([]);
   }, []);
 
+  const handleRegionClick = useCallback(
+    (properties: RegionGeoJSONProperties) => {
+      onRegionClick?.(
+        selectedCrous === properties.crous_id ? -1 : properties.crous_id,
+      );
+    },
+    [onRegionClick, selectedCrous],
+  );
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -539,7 +560,17 @@ const MapComponent = ({
         >
           <FitBoundsToMarkers />
           <MapClickHandler onMapClick={handleMapClick} />
+          {regionsGeoJson && (
+            <MapRegionLayer<RegionGeoJSONProperties>
+              data={regionsGeoJson}
+              idProperty="crous_id"
+              selectedId={selectedCrous}
+              onFeatureClick={handleRegionClick}
+              ignoreLayers={restaurantLayerIds}
+            />
+          )}
           <MapClusterLayer<SerializedMarker>
+            id="restaurants"
             data={geoJsonData}
             clusterColors={["#B52606", "#8a1d04", "#5c1202"]}
             clusterThresholds={[10, 50]}
