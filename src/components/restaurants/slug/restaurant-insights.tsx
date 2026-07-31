@@ -33,6 +33,8 @@ import {
   MapPin,
 } from "lucide-react";
 import { useRestaurantInsights } from "@/hooks/useRestaurantInsights";
+import { formatToISODate } from "@/lib/utils";
+import { PieChart, Pie, ResponsiveContainer, Tooltip } from "recharts";
 
 interface RestaurantInsightsProps {
   restaurantCode: number;
@@ -80,14 +82,18 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
   }
 
   const pctAvecMenu = couverture.taux_couverture;
-  const pctSansMenu = Math.max(0, 100 - pctAvecMenu);
+
+  const coverageData = [
+    { name: t("daysWithMenu"), value: couverture.jours_avec_menu, fill: "#22c55e" },
+    { name: t("daysWithoutMenu"), value: couverture.jours_sans_menu, fill: "#ef4444" },
+  ];
 
   return (
     <div className="flex flex-col gap-8 min-w-0 w-full">
       <p className="text-sm font-medium text-muted-foreground px-1">
         {t("period", {
-          debut: new Date(periode.debut).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
-          fin: new Date(periode.fin).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
+          debut: formatToISODate(periode.debut).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
+          fin: formatToISODate(periode.fin).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
         })}
       </p>
 
@@ -118,26 +124,51 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
             {t("coverageDescription")}
           </CardDescription>
         </CardHeader>
-        <CardContent className="pb-6 flex flex-col gap-3">
-          <div className="flex h-4 w-full overflow-hidden rounded-full bg-secondary/20">
-            <div
-              className="h-full bg-green-500 first:rounded-l-full"
-              style={{ width: `${pctAvecMenu}%` }}
-              title={`${t("daysWithMenu")}: ${couverture.jours_avec_menu}`}
-            />
-            <div
-              className="h-full bg-red-500/60 last:rounded-r-full"
-              style={{ width: `${pctSansMenu}%` }}
-              title={`${t("daysWithoutMenu")}: ${couverture.jours_sans_menu}`}
-            />
+        <CardContent className="pb-6 flex flex-col items-center gap-4">
+          <div className="relative w-full max-w-[200px] aspect-square shrink-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={coverageData}
+                  dataKey="value"
+                  nameKey="name"
+                  innerRadius="72%"
+                  outerRadius="100%"
+                  startAngle={90}
+                  endAngle={-270}
+                  stroke="none"
+                  paddingAngle={couverture.jours_avec_menu > 0 && couverture.jours_sans_menu > 0 ? 3 : 0}
+                  isAnimationActive={false}
+                />
+                <Tooltip
+                  wrapperStyle={{ zIndex: 50 }}
+                  content={({ active, payload }) => {
+                    if (!active || !payload || !payload.length) return null;
+                    const entry = payload[0];
+                    return (
+                      <div className="custom-tooltip">
+                        <p className="label">{entry.name}</p>
+                        <p>{entry.value}</p>
+                      </div>
+                    );
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none">
+              <span className="text-3xl font-black tracking-tight">{pctAvecMenu}%</span>
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-tight text-center px-2">
+                {t("coverageRate")}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-4 text-xs font-semibold">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+          <div className="flex items-center gap-6 text-sm font-semibold">
+            <span className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500 shrink-0" />
               {t("daysWithMenu")} ({couverture.jours_avec_menu})
             </span>
-            <span className="flex items-center gap-1.5 text-muted-foreground">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+            <span className="flex items-center gap-2 text-muted-foreground">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60 shrink-0" />
               {t("daysWithoutMenu")} ({couverture.jours_sans_menu})
             </span>
           </div>
@@ -248,23 +279,12 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
           comparaison_regionale.nb_restaurants_compares === 0 ? (
             <p className="text-sm text-muted-foreground italic">{t("regionalComparisonNoData")}</p>
           ) : (
-            <div className="flex flex-col gap-4">
-              <ComparisonBar
-                label={t("thisRestaurant")}
+            <div className="flex flex-col gap-4 items-center">
+              <RegionalComparisonGauge
                 value={comparaison_regionale.jours_avec_menu_restaurant}
-                max={Math.max(
-                  comparaison_regionale.jours_avec_menu_restaurant,
-                  comparaison_regionale.moyenne_jours_avec_menu_region
-                )}
-                highlight
-              />
-              <ComparisonBar
-                label={t("regionalAverage", { count: comparaison_regionale.nb_restaurants_compares })}
-                value={comparaison_regionale.moyenne_jours_avec_menu_region}
-                max={Math.max(
-                  comparaison_regionale.jours_avec_menu_restaurant,
-                  comparaison_regionale.moyenne_jours_avec_menu_region
-                )}
+                average={comparaison_regionale.moyenne_jours_avec_menu_region}
+                valueLabel={t("thisRestaurant")}
+                averageLabel={t("regionalAverage", { count: comparaison_regionale.nb_restaurants_compares })}
               />
               {comparaison_regionale.nb_restaurants_actifs_region > comparaison_regionale.nb_restaurants_compares && (
                 <p className="text-xs text-muted-foreground italic">
@@ -333,31 +353,91 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
   );
 }
 
-function ComparisonBar({
-  label,
+function RegionalComparisonGauge({
   value,
-  max,
-  highlight,
+  average,
+  valueLabel,
+  averageLabel,
 }: {
-  label: string;
   value: number;
-  max: number;
-  highlight?: boolean;
+  average: number;
+  valueLabel: string;
+  averageLabel: string;
 }) {
-  const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0;
+  const width = 240;
+  const strokeWidth = 16;
+  const radius = 88;
+  const topPadding = 10;
+  const height = radius + strokeWidth + topPadding;
+  const cx = width / 2;
+  const cy = height - strokeWidth / 2;
+
+  const maxValue = Math.max(value, average, 1) * 1.05;
+
+  const angleForValue = (v: number) => 180 - (Math.min(Math.max(v, 0), maxValue) / maxValue) * 180;
+
+  const polarToCartesian = (angleDeg: number, r: number) => {
+    const angleRad = (angleDeg * Math.PI) / 180;
+    return {
+      x: cx + r * Math.cos(angleRad),
+      y: cy - r * Math.sin(angleRad),
+    };
+  };
+
+  const start = polarToCartesian(180, radius);
+  const end = polarToCartesian(0, radius);
+  const valuePoint = polarToCartesian(angleForValue(value), radius);
+
+  const trackPath = `M ${start.x} ${start.y} A ${radius} ${radius} 0 1 1 ${end.x} ${end.y}`;
+  const valuePath = `M ${start.x} ${start.y} A ${radius} ${radius} 0 0 1 ${valuePoint.x} ${valuePoint.y}`;
+
+  const markerAngle = angleForValue(average);
+  const markerInner = polarToCartesian(markerAngle, radius - strokeWidth / 2 - 5);
+  const markerOuter = polarToCartesian(markerAngle, radius + strokeWidth / 2 + 5);
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex items-center justify-between text-xs font-semibold">
-        <span className="text-muted-foreground">{label}</span>
-        <span>{value.toLocaleString()}</span>
-      </div>
-      <div className="h-2.5 w-full rounded-full bg-secondary/20 overflow-hidden">
-        <div
-          className={`h-full rounded-full ${highlight ? "bg-primary" : "bg-muted-foreground/40"}`}
-          style={{ width: `${pct}%` }}
+    <div className="flex flex-col items-center gap-1">
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="max-w-full">
+        <path
+          d={trackPath}
+          fill="none"
+          stroke="hsl(var(--secondary) / 0.3)"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
         />
-      </div>
+        <path
+          d={valuePath}
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+        />
+        <line
+          x1={markerInner.x}
+          y1={markerInner.y}
+          x2={markerOuter.x}
+          y2={markerOuter.y}
+          stroke="hsl(var(--foreground))"
+          strokeWidth={3}
+          strokeLinecap="round"
+        />
+        <text
+          x={cx}
+          y={cy - 6}
+          textAnchor="middle"
+          className="fill-foreground font-black"
+          style={{ fontSize: 30 }}
+        >
+          {value.toLocaleString()}
+        </text>
+      </svg>
+      <span className="text-xs font-semibold text-primary uppercase tracking-tight text-center">
+        {valueLabel}
+      </span>
+      <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground text-center mt-1">
+        <span className="w-2.5 h-0.5 rounded-full bg-foreground inline-block shrink-0" />
+        {averageLabel} : {average.toLocaleString()}
+      </span>
     </div>
   );
 }

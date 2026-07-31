@@ -244,20 +244,22 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <Tabs defaultValue="menu">
-                  <TabsList className="mb-6">
-                    <TabsTrigger value="menu" onClick={() => umami.event("Restaurant.Menu", { restaurant: restaurant.code })}>
-                      <CalendarDays className="w-4 h-4" />
-                      {t("tabs.menu")}
-                    </TabsTrigger>
-                    <TabsTrigger value="insights" onClick={() => umami.event("Restaurant.Insights", { restaurant: restaurant.code })}>
-                      <LineChart className="w-4 h-4" />
-                      {t("tabs.insights")}
-                    </TabsTrigger>
-                    <TabsTrigger value="activity" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
-                      <History className="w-4 h-4" />
-                      {t("tabs.activity")}
-                    </TabsTrigger>
-                  </TabsList>
+                  <div className="flex justify-center sm:justify-start mb-6">
+                    <TabsList>
+                      <TabsTrigger value="menu" className="px-3" onClick={() => umami.event("Restaurant.Menu", { restaurant: restaurant.code })}>
+                        <CalendarDays className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.menu")}</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="insights" className="px-3" onClick={() => umami.event("Restaurant.Insights", { restaurant: restaurant.code })}>
+                        <LineChart className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.insights")}</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="activity" className="px-3" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
+                        <History className="w-4 h-4 shrink-0" />
+                        <span className="sr-only sm:not-sr-only">{t("tabs.activity")}</span>
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
 
                   <TabsContent value="menu">
                     <MenuDisplaySection

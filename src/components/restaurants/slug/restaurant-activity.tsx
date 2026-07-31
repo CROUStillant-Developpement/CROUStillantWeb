@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { CalendarPlus, RefreshCw, History, Clock } from "lucide-react";
 import { useRestaurantActivity } from "@/hooks/useRestaurantActivity";
+import { parseApiDateTime } from "@/lib/utils";
 
 interface RestaurantActivityProps {
   restaurantCode: number;
@@ -20,8 +21,8 @@ interface RestaurantActivityProps {
 
 function formatDateTime(value: string | null, locale: string) {
   if (!value) return null;
-  // API dates are formatted as "YYYY-MM-DD HH:MM:SS" (space separator, no timezone)
-  const parsed = new Date(value.replace(" ", "T"));
+  // API dates are formatted as "DD-MM-YYYY HH:MM:SS"
+  const parsed = parseApiDateTime(value);
   if (isNaN(parsed.getTime())) return null;
   return parsed.toLocaleDateString(locale, {
     year: "numeric",
@@ -34,8 +35,8 @@ function formatDateTime(value: string | null, locale: string) {
 
 function formatDuration(debut: string | null, fin: string | null) {
   if (!debut || !fin) return null;
-  const start = new Date(debut.replace(" ", "T")).getTime();
-  const end = new Date(fin.replace(" ", "T")).getTime();
+  const start = parseApiDateTime(debut).getTime();
+  const end = parseApiDateTime(fin).getTime();
   if (isNaN(start) || isNaN(end) || end < start) return null;
 
   const seconds = Math.round((end - start) / 1000);
