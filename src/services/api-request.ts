@@ -61,6 +61,10 @@ export async function apiRequest<T>({
 
   const headers: HeadersInit = {};
 
+  const appVersion = process.env.VERSION || process.env.NEXT_PUBLIC_VERSION || "dev";
+  const appUrl = process.env.WEB_URL || "https://croustillant.menu";
+  headers["User-Agent"] = `CROUStillantWeb/${appVersion} (+${appUrl})`;
+
   if (process.env.API_KEY && api_url === process.env.API_URL) {
     headers["X-Api-Key"] = process.env.API_KEY as string;
   }
@@ -100,12 +104,12 @@ export async function apiRequest<T>({
         body: bodyContent,
       };
 
-      // Use Next.js fetch cache if cacheDuration is provided
-      if (cacheDuration > 0 && method === "GET") {
-        fetchOptions.next = {
-          revalidate: Math.floor(cacheDuration / 1000), // Next.js expects seconds
-        };
-      } else if (method === "GET") {
+      // Caching is handled entirely by the in-memory `cache` Map above
+      // (checked before this fetch ever runs). Next.js' own fetch/Data
+      // Cache is deliberately not used: it silently fails to cache — and
+      // logs an error on — any response over 2MB (e.g. regions/geojson),
+      // which would otherwise be re-fetched from the API on every request.
+      if (method === "GET") {
         fetchOptions.cache = "no-store";
       }
 

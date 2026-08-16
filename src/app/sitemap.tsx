@@ -1,4 +1,10 @@
-export const dynamic = "force-dynamic";
+// Matches the restaurant list's own cache window (see restaurant-service.ts)
+// so a crawl burst doesn't force a full sitemap rebuild on every request.
+// force-static is required alongside revalidate: apiRequest() always fetches
+// with cache: "no-store" (see api-request.ts), which would otherwise make
+// Next.js treat this whole route as fully dynamic.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 import type { MetadataRoute } from "next";
 import { getRestaurants } from "@/services/restaurant-service";

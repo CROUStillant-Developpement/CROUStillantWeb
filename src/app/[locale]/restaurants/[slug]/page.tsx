@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
-import { Restaurant as Resto } from "@/services/types";
 import { getTranslations, getLocale } from "next-intl/server";
+import { getRestaurant } from "@/services/restaurant-service";
 
 
 function extractRestaurantId(slug: unknown): number | null {
@@ -16,7 +16,8 @@ function extractRestaurantId(slug: unknown): number | null {
 }
 
 
-// Server-side fetch for this route
+// Server-side fetch for this route — routed through the shared API
+// helper so it picks up the API key and the 5-minute response cache.
 async function fetchRestaurantDetailsServer(slug: string) {
   try {
     const restaurantId = extractRestaurantId(slug);
@@ -25,14 +26,8 @@ async function fetchRestaurantDetailsServer(slug: string) {
       return notFound();
     }
 
-    const response = await fetch(
-      `${process.env.API_URL}/restaurants/${restaurantId}`,
-      { method: "GET" }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch restaurant details.");
-    }
-    return (await response.json()).data as Resto;
+    const result = await getRestaurant(String(restaurantId));
+    return result.success ? result.data : null;
   } catch {
     return null;
   }

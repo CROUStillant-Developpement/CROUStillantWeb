@@ -86,16 +86,14 @@ describe("apiRequest — basic GET", () => {
     expect(opts.cache).toBe("no-store");
   });
 
-  it("sets revalidate when cacheDuration > 0", async () => {
+  it("still sets cache: no-store for GET when cacheDuration > 0 (caching is app-level, not Next.js fetch cache)", async () => {
     const endpoint = ep();
     vi.mocked(global.fetch).mockResolvedValueOnce(
       jsonResponse({ success: true, data: null })
     );
     await apiRequest({ endpoint, cacheDuration: 60_000 });
-    const opts = vi.mocked(global.fetch).mock.calls[0][1] as RequestInit & {
-      next?: { revalidate?: number };
-    };
-    expect(opts.next?.revalidate).toBe(60);
+    const opts = vi.mocked(global.fetch).mock.calls[0][1] as RequestInit;
+    expect(opts.cache).toBe("no-store");
   });
 });
 
@@ -612,16 +610,15 @@ describe("apiRequest — headers (additional)", () => {
     }
   });
 
-  it("revalidate value is correctly converted from ms to seconds", async () => {
+  it("does not set a Next.js fetch-cache revalidate option (would silently fail to cache responses over 2MB)", async () => {
     const endpoint = ep();
     vi.mocked(global.fetch).mockResolvedValueOnce(
       jsonResponse({ success: true, data: null })
     );
-    // 90 000 ms → 90 s
     await apiRequest({ endpoint, cacheDuration: 90_000 });
     const opts = vi.mocked(global.fetch).mock.calls[0][1] as RequestInit & {
       next?: { revalidate?: number };
     };
-    expect(opts.next?.revalidate).toBe(90);
+    expect(opts.next).toBeUndefined();
   });
 });

@@ -513,6 +513,13 @@
       }
     }
   },
+  "TooManyRequestsPage": {
+    "title": "Trop de requêtes",
+    "description": "Vous avez envoyé trop de requêtes. Merci de réessayer dans quelques instants.",
+    "retryIn": "Vous pourrez réessayer dans",
+    "retryButton": "Réessayer",
+    "home": "Retour à l'accueil"
+  },
   "RestaurantInformation": {
     "openingHours": "Horaires d'ouverture",
     "day": "Jour",
