@@ -513,6 +513,11 @@
       }
     }
   },
+  "TooManyRequestsPage": {
+    "title": "Too many requests",
+    "description": "You've sent too many requests. Please try again in a moment.",
+    "home": "Back to home"
+  },
   "RestaurantInformation": {
     "openingHours": "Opening hours",
     "day": "Day",
