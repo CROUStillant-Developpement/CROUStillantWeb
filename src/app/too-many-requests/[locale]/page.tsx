@@ -1,13 +1,19 @@
 import { Clock } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import RetryCountdown from "./retry-countdown";
 
 export default async function TooManyRequestsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ retryAfter?: string }>;
 }) {
   const { locale } = await params;
+  const { retryAfter } = await searchParams;
   const t = await getTranslations({ locale, namespace: "TooManyRequestsPage" });
+
+  const initialSeconds = Math.max(0, parseInt(retryAfter ?? "", 10) || 0);
 
   return (
     <>
@@ -38,6 +44,11 @@ export default async function TooManyRequestsPage({
         >
           {t("description")}
         </p>
+        <RetryCountdown
+          initialSeconds={initialSeconds}
+          retryInLabel={t("retryIn")}
+          retryButtonLabel={t("retryButton")}
+        />
       </main>
       <footer
         style={{

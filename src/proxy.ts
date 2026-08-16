@@ -66,10 +66,10 @@ export default function proxy(request: NextRequest) {
     const localeMatch = request.nextUrl.pathname.match(/^\/(fr|en)(\/|$)/);
     const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
 
-    const response = NextResponse.rewrite(
-      new URL(`/too-many-requests/${locale}`, request.url),
-      { status: 429 }
-    );
+    const rewriteUrl = new URL(`/too-many-requests/${locale}`, request.url);
+    rewriteUrl.searchParams.set("retryAfter", String(retryAfterSeconds));
+
+    const response = NextResponse.rewrite(rewriteUrl, { status: 429 });
     response.headers.set("Retry-After", String(retryAfterSeconds));
     return response;
   }
