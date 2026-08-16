@@ -72,7 +72,7 @@
     "jsdom": "^29.1.1",
     "postcss": "^8.5.18",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6",
+    "typescript": "^7",
     "vitest": "^4.1.9"
   },
   "overrides": {
