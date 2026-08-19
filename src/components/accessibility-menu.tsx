@@ -72,9 +72,9 @@ export default function AccessibilityMenu() {
         <DropdownMenuCheckboxItem
           checked={dislexicFont}
           onSelect={keepOpen}
-          onCheckedChange={() => {
+          onCheckedChange={(checked) => {
             toggleDislexicFont();
-            umami.event("Accessibility.ToggleDislexicFont");
+            umami.event("Accessibility.ToggleDislexicFont", { enabled: String(checked), source: "footer" });
           }}
           className="rounded-lg cursor-pointer gap-2 py-2"
         >
@@ -85,9 +85,9 @@ export default function AccessibilityMenu() {
         <DropdownMenuCheckboxItem
           checked={highContrast}
           onSelect={keepOpen}
-          onCheckedChange={() => {
+          onCheckedChange={(checked) => {
             toggleHighContrast();
-            umami.event("Accessibility.ToggleHighContrast");
+            umami.event("Accessibility.ToggleHighContrast", { enabled: String(checked), source: "footer" });
           }}
           className="rounded-lg cursor-pointer gap-2 py-2"
         >
@@ -98,9 +98,9 @@ export default function AccessibilityMenu() {
         <DropdownMenuCheckboxItem
           checked={reducedMotion}
           onSelect={keepOpen}
-          onCheckedChange={() => {
+          onCheckedChange={(checked) => {
             toggleReducedMotion();
-            umami.event("Accessibility.ToggleReducedMotion");
+            umami.event("Accessibility.ToggleReducedMotion", { enabled: String(checked), source: "footer" });
           }}
           className="rounded-lg cursor-pointer gap-2 py-2"
         >
@@ -111,9 +111,9 @@ export default function AccessibilityMenu() {
         <DropdownMenuCheckboxItem
           checked={readingSpacing}
           onSelect={keepOpen}
-          onCheckedChange={() => {
+          onCheckedChange={(checked) => {
             toggleReadingSpacing();
-            umami.event("Accessibility.ToggleReadingSpacing");
+            umami.event("Accessibility.ToggleReadingSpacing", { enabled: String(checked), source: "footer" });
           }}
           className="rounded-lg cursor-pointer gap-2 py-2"
         >
@@ -132,7 +132,7 @@ export default function AccessibilityMenu() {
           value={textSize}
           onValueChange={(value) => {
             setTextSize(value as TextSize);
-            umami.event("Accessibility.SetTextSize", { size: value });
+            umami.event("Accessibility.SetTextSize", { size: value, source: "footer" });
           }}
         >
           <DropdownMenuRadioItem value="normal" onSelect={keepOpen} className="rounded-lg cursor-pointer py-2">

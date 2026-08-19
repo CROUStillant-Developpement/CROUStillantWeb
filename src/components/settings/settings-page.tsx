@@ -107,7 +107,7 @@ export default function SettingsPage() {
 
   const handleDislexicFontChange = (checked: boolean) => {
     if (checked !== dislexicFont) toggleDislexicFont();
-    umami.event("Accessibility.ToggleDislexicFont", { enabled: String(checked) });
+    umami.event("Accessibility.ToggleDislexicFont", { enabled: String(checked), source: "settings" });
     toast({
       title: t("accessibility.dislexicFont.successTitle"),
       description: checked
@@ -118,7 +118,7 @@ export default function SettingsPage() {
 
   const handleHighContrastChange = (checked: boolean) => {
     if (checked !== highContrast) toggleHighContrast();
-    umami.event("Settings.Accessibility.HighContrast", { enabled: String(checked) });
+    umami.event("Accessibility.ToggleHighContrast", { enabled: String(checked), source: "settings" });
     toast({
       title: t("accessibility.highContrast.successTitle"),
       description: checked
@@ -129,7 +129,7 @@ export default function SettingsPage() {
 
   const handleReducedMotionChange = (checked: boolean) => {
     if (checked !== reducedMotion) toggleReducedMotion();
-    umami.event("Settings.Accessibility.ReducedMotion", { enabled: String(checked) });
+    umami.event("Accessibility.ToggleReducedMotion", { enabled: String(checked), source: "settings" });
     toast({
       title: t("accessibility.reducedMotion.successTitle"),
       description: checked
@@ -140,7 +140,7 @@ export default function SettingsPage() {
 
   const handleReadingSpacingChange = (checked: boolean) => {
     if (checked !== readingSpacing) toggleReadingSpacing();
-    umami.event("Settings.Accessibility.ReadingSpacing", { enabled: String(checked) });
+    umami.event("Accessibility.ToggleReadingSpacing", { enabled: String(checked), source: "settings" });
     toast({
       title: t("accessibility.readingSpacing.successTitle"),
       description: checked
@@ -151,7 +151,7 @@ export default function SettingsPage() {
 
   const handleTextSizeChange = (value: string) => {
     setTextSize(value as "normal" | "large" | "x-large");
-    umami.event("Settings.Accessibility.TextSize", { size: value });
+    umami.event("Accessibility.SetTextSize", { size: value, source: "settings" });
     toast({
       title: t("accessibility.textSize.successTitle"),
       description: t("accessibility.textSize.successDescription"),
