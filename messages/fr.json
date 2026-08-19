@@ -583,6 +583,7 @@
     "title": "Paramètres",
     "subtitle": "Préférences & personnalisation",
     "appearanceTitle": "Apparence",
+    "accessibilityTitle": "Accessibilité",
     "behaviorTitle": "Comportement",
     "personalTitle": "Informations personnelles",
     "language": {
@@ -646,6 +647,45 @@
       "successTitle": "Décorations saisonnières modifiées !",
       "successEnabled": "Les décorations saisonnières ont été activées.",
       "successDisabled": "Les décorations saisonnières ont été désactivées."
+    },
+    "accessibility": {
+      "dislexicFont": {
+        "title": "Police adaptée à la dyslexie",
+        "description": "Basculez l'ensemble du texte vers la police OpenDyslexic pour faciliter la lecture.",
+        "successTitle": "Police modifiée !",
+        "successEnabled": "La police adaptée à la dyslexie a été activée.",
+        "successDisabled": "La police adaptée à la dyslexie a été désactivée."
+      },
+      "highContrast": {
+        "title": "Contraste élevé",
+        "description": "Augmentez le contraste entre le texte, les fonds et les bordures pour une meilleure lisibilité.",
+        "successTitle": "Contraste modifié !",
+        "successEnabled": "Le mode contraste élevé a été activé.",
+        "successDisabled": "Le mode contraste élevé a été désactivé."
+      },
+      "reducedMotion": {
+        "title": "Mouvement réduit",
+        "description": "Réduisez les animations et transitions sur l'ensemble du site.",
+        "successTitle": "Mouvement modifié !",
+        "successEnabled": "Le mode mouvement réduit a été activé.",
+        "successDisabled": "Le mode mouvement réduit a été désactivé."
+      },
+      "readingSpacing": {
+        "title": "Espacement de lecture",
+        "description": "Ajoutez de l'espacement entre les lignes, les lettres et les paragraphes pour faciliter la lecture.",
+        "successTitle": "Espacement modifié !",
+        "successEnabled": "L'espacement de lecture a été activé.",
+        "successDisabled": "L'espacement de lecture a été désactivé."
+      },
+      "textSize": {
+        "title": "Taille du texte",
+        "description": "Ajustez la taille du texte sur l'ensemble du site.",
+        "normal": "Normale",
+        "large": "Grande",
+        "xlarge": "Très grande",
+        "successTitle": "Taille du texte modifiée !",
+        "successDescription": "La taille du texte a été changée avec succès."
+      }
     }
   },
   "StatsPage": {

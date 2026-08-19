@@ -274,6 +274,65 @@
     --chart-5: 340 75% 55%;
   }
 
+  /* High contrast mode - near-maximum contrast palette + stronger borders/focus rings */
+  .high-contrast {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 356 100% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 88%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 88%;
+    --muted-foreground: 0 0% 15%;
+    --accent: 0 0% 85%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 90% 35%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 220 100% 40%;
+  }
+
+  .high-contrast.dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 356 100% 65%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 90%;
+    --accent: 0 0% 22%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 90% 65%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 200 100% 65%;
+  }
+
+  .high-contrast * {
+    border-color: hsl(var(--border)) !important;
+  }
+
+  .high-contrast a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .high-contrast :focus-visible {
+    outline: 3px solid hsl(var(--ring)) !important;
+    outline-offset: 2px !important;
+  }
+
   /* Christmas - forest green primary, red accent */
   [data-seasonal="christmas"] {
     --primary: 141 65% 36%;
@@ -547,6 +606,46 @@
   /* Apply font when the class is added */
   .dyslexic-font {
     font-family: 'OpenDyslexic', sans-serif !important;
+  }
+
+  /* Reduced motion mode - minimises animations/transitions for motion-sensitive users */
+  .reduced-motion,
+  .reduced-motion *,
+  .reduced-motion *::before,
+  .reduced-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reading spacing mode - extra line/letter/paragraph spacing to ease reading */
+  .reading-spacing p,
+  .reading-spacing li,
+  .reading-spacing span,
+  .reading-spacing a,
+  .reading-spacing h1,
+  .reading-spacing h2,
+  .reading-spacing h3,
+  .reading-spacing h4,
+  .reading-spacing h5,
+  .reading-spacing h6 {
+    line-height: 1.9 !important;
+    letter-spacing: 0.04em !important;
+    word-spacing: 0.12em !important;
+  }
+
+  .reading-spacing p {
+    margin-bottom: 1.2em !important;
+  }
+
+  /* Text size mode - scales the root font size so rem-based spacing/type scales with it */
+  html[data-text-size="large"] {
+    font-size: 112.5%;
+  }
+
+  html[data-text-size="x-large"] {
+    font-size: 125%;
   }
 }
 
