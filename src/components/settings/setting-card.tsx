@@ -9,7 +9,7 @@ export default function SettingCard({ children, title }: SettingCardProps) {
       <h2 className="text-xl font-bold tracking-tight text-foreground/90 px-1">
         {title}
       </h2>
-      <div className="flex flex-col lg:flex-row lg:flex-wrap gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
         {children}
       </div>
     </div>

@@ -221,19 +221,19 @@ export default function SettingsPage() {
 
       <div className="space-y-12 mx-auto pb-20">
         <SettingCard title={t("appearanceTitle")}>
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Palette className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("theme.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("theme.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={
                   theme === "system" ? systemTheme === "dark" : theme === "dark"
@@ -244,19 +244,19 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("seasonal.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("seasonal.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={seasonalParticles}
                 onCheckedChange={handleSeasonalParticlesChange}
@@ -265,7 +265,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Languages className="h-5 w-5 text-primary" />
@@ -293,19 +293,19 @@ export default function SettingsPage() {
         </SettingCard>
 
         <SettingCard title={t("accessibilityTitle")}>
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("accessibility.dislexicFont.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("accessibility.dislexicFont.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={dislexicFont}
                 onCheckedChange={handleDislexicFontChange}
@@ -314,19 +314,19 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Contrast className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("accessibility.highContrast.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("accessibility.highContrast.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={highContrast}
                 onCheckedChange={handleHighContrastChange}
@@ -335,19 +335,19 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <ZapOff className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("accessibility.reducedMotion.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("accessibility.reducedMotion.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={reducedMotion}
                 onCheckedChange={handleReducedMotionChange}
@@ -356,19 +356,19 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Rows3 className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("accessibility.readingSpacing.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("accessibility.readingSpacing.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={readingSpacing}
                 onCheckedChange={handleReadingSpacingChange}
@@ -377,7 +377,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Type className="h-5 w-5 text-primary" />
@@ -410,7 +410,7 @@ export default function SettingsPage() {
 
         <SettingCard title={t("behaviorTitle")}>
           {favourites.length === 0 && (
-            <Alert variant="destructive" className="rounded-2xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full hover:bg-destructive/10 transition-colors">
+            <Alert variant="destructive" className="col-span-full rounded-2xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full hover:bg-destructive/10 transition-colors">
               <TriangleAlert className="h-5 w-5 ml-2 mt-3" />
               <AlertTitle className="font-black text-lg ml-2">{t("favourites.nofavouritesTitle")}</AlertTitle>
               <AlertDescription className="ml-2 text-base opacity-90">
@@ -425,7 +425,7 @@ export default function SettingsPage() {
             </Alert>
           )}
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Star className="h-5 w-5 text-primary" />
@@ -477,7 +477,7 @@ export default function SettingsPage() {
             </Select>
           </div>
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <MapPin className="h-5 w-5 text-primary" />
@@ -529,7 +529,7 @@ export default function SettingsPage() {
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>
-          <div className="space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
+          <div className="col-span-full space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />
