@@ -433,8 +433,18 @@
       }
     },
     "accessibility": {
-      "normal": "Police normale",
-      "dislexic": "Police dyslexique"
+      "title": "Accessibilité",
+      "dislexicFont": "Police adaptée à la dyslexie",
+      "highContrast": "Contraste élevé",
+      "reducedMotion": "Mouvement réduit",
+      "readingSpacing": "Espacement de lecture",
+      "textSize": {
+        "title": "Taille du texte",
+        "normal": "Normale",
+        "large": "Grande",
+        "xlarge": "Très grande"
+      },
+      "moreSettings": "Plus de réglages d'accessibilité"
     }
   },
   "Header": {

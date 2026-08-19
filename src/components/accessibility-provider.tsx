@@ -4,13 +4,17 @@ import { useEffect } from "react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 
 /**
- * Syncs accessibility preferences (high contrast, reduced motion, reading
- * spacing, text size) from the user preferences store onto <html>, so the
- * matching CSS in globals.css can apply site-wide.
+ * Syncs accessibility preferences (dyslexia font, high contrast, reduced
+ * motion, reading spacing, text size) from the user preferences store onto
+ * <html>/<body>, so the matching CSS in globals.css can apply site-wide.
  */
 export default function AccessibilityProvider() {
-  const { highContrast, reducedMotion, readingSpacing, textSize } =
+  const { dislexicFont, highContrast, reducedMotion, readingSpacing, textSize } =
     useUserPreferences();
+
+  useEffect(() => {
+    document.body.classList.toggle("dyslexic-font", dislexicFont);
+  }, [dislexicFont]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("high-contrast", highContrast);
