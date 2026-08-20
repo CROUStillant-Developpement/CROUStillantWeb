@@ -8,6 +8,11 @@ export interface LocalStoragefavourite {
 }
 
 /**
+ * The available site-wide text size scales.
+ */
+export type TextSize = "normal" | "large" | "x-large";
+
+/**
  * Represents the state of the user preferences store.
  */
 interface StoreState {
@@ -43,6 +48,26 @@ interface StoreState {
   seasonalParticles: boolean;
 
   /**
+   * Indicates whether the high contrast mode is enabled.
+   */
+  highContrast: boolean;
+
+  /**
+   * Indicates whether animations/transitions should be minimised.
+   */
+  reducedMotion: boolean;
+
+  /**
+   * Indicates whether extra line/letter/paragraph spacing is enabled.
+   */
+  readingSpacing: boolean;
+
+  /**
+   * The site-wide text size scale.
+   */
+  textSize: TextSize;
+
+  /**
    * Toggles the display type.
    */
   toggleDisplay: () => void;
@@ -56,6 +81,26 @@ interface StoreState {
    * Toggles seasonal particle decorations on/off.
    */
   toggleSeasonalParticles: () => void;
+
+  /**
+   * Toggles the high contrast mode.
+   */
+  toggleHighContrast: () => void;
+
+  /**
+   * Toggles the reduced motion mode.
+   */
+  toggleReducedMotion: () => void;
+
+  /**
+   * Toggles the reading spacing mode.
+   */
+  toggleReadingSpacing: () => void;
+
+  /**
+   * Sets the site-wide text size scale.
+   */
+  setTextSize: (size: TextSize) => void;
 
   /**
    * Adds or removes an item from the favourites list.
@@ -119,6 +164,10 @@ export const useUserPreferences = create<StoreState>()(
       favouriteRegion: { code: -1, libelle: "All Regions" },
       dislexicFont: false,
       seasonalParticles: true,
+      highContrast: false,
+      reducedMotion: false,
+      readingSpacing: false,
+      textSize: "normal",
 
       toggleDisplay: () =>
         set((state) => ({
@@ -133,6 +182,26 @@ export const useUserPreferences = create<StoreState>()(
       toggleSeasonalParticles: () =>
         set((state) => ({
           seasonalParticles: !state.seasonalParticles,
+        })),
+
+      toggleHighContrast: () =>
+        set((state) => ({
+          highContrast: !state.highContrast,
+        })),
+
+      toggleReducedMotion: () =>
+        set((state) => ({
+          reducedMotion: !state.reducedMotion,
+        })),
+
+      toggleReadingSpacing: () =>
+        set((state) => ({
+          readingSpacing: !state.readingSpacing,
+        })),
+
+      setTextSize: (size: TextSize) =>
+        set(() => ({
+          textSize: size,
         })),
 
       addOrRemoveFromfavourites: (code: number, name?: string, qr: boolean = false) =>
@@ -194,6 +263,10 @@ export const useUserPreferences = create<StoreState>()(
           display: "list",
           favouriteRegion: { code: -1, libelle: "All Regions" },
           seasonalParticles: true,
+          highContrast: false,
+          reducedMotion: false,
+          readingSpacing: false,
+          textSize: "normal",
         })),
     }),
     {

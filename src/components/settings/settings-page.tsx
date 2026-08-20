@@ -28,7 +28,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles } from "lucide-react";
+import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles, Contrast, ZapOff, Rows3, Type, BookOpen } from "lucide-react";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useIframeBuilderStore } from "@/store/iframeBuilderStore";
 import { getRegions } from "@/services/region-service";
@@ -60,14 +60,26 @@ export default function SettingsPage() {
     favouriteRegion,
     display,
     dislexicFont,
+    toggleDislexicFont,
     seasonalParticles,
     toggleSeasonalParticles,
+    highContrast,
+    toggleHighContrast,
+    reducedMotion,
+    toggleReducedMotion,
+    readingSpacing,
+    toggleReadingSpacing,
+    textSize,
+    setTextSize,
   } = useUserPreferences();
 
   const builderStore = useIframeBuilderStore();
 
   const localData = useMemo(() => ({
-    preferences: { favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale },
+    preferences: {
+      favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles,
+      highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
+    },
     widgetBuilder: {
       restaurantCode: builderStore.restaurantCode,
       theme: builderStore.theme,
@@ -79,7 +91,8 @@ export default function SettingsPage() {
       height: builderStore.height,
       blocks: builderStore.blocks.filter((b) => b.enabled).map((b) => b.id),
     },
-  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles, theme, locale,
+  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles,
+       highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
        builderStore.restaurantCode, builderStore.theme, builderStore.color, builderStore.font,
        builderStore.lang, builderStore.meals, builderStore.width, builderStore.height, builderStore.blocks]);
 
@@ -89,6 +102,59 @@ export default function SettingsPage() {
     toast({
       title: t("seasonal.successTitle"),
       description: checked ? t("seasonal.successEnabled") : t("seasonal.successDisabled"),
+    });
+  };
+
+  const handleDislexicFontChange = (checked: boolean) => {
+    if (checked !== dislexicFont) toggleDislexicFont();
+    umami.event("Accessibility.ToggleDislexicFont", { enabled: String(checked), source: "settings" });
+    toast({
+      title: t("accessibility.dislexicFont.successTitle"),
+      description: checked
+        ? t("accessibility.dislexicFont.successEnabled")
+        : t("accessibility.dislexicFont.successDisabled"),
+    });
+  };
+
+  const handleHighContrastChange = (checked: boolean) => {
+    if (checked !== highContrast) toggleHighContrast();
+    umami.event("Accessibility.ToggleHighContrast", { enabled: String(checked), source: "settings" });
+    toast({
+      title: t("accessibility.highContrast.successTitle"),
+      description: checked
+        ? t("accessibility.highContrast.successEnabled")
+        : t("accessibility.highContrast.successDisabled"),
+    });
+  };
+
+  const handleReducedMotionChange = (checked: boolean) => {
+    if (checked !== reducedMotion) toggleReducedMotion();
+    umami.event("Accessibility.ToggleReducedMotion", { enabled: String(checked), source: "settings" });
+    toast({
+      title: t("accessibility.reducedMotion.successTitle"),
+      description: checked
+        ? t("accessibility.reducedMotion.successEnabled")
+        : t("accessibility.reducedMotion.successDisabled"),
+    });
+  };
+
+  const handleReadingSpacingChange = (checked: boolean) => {
+    if (checked !== readingSpacing) toggleReadingSpacing();
+    umami.event("Accessibility.ToggleReadingSpacing", { enabled: String(checked), source: "settings" });
+    toast({
+      title: t("accessibility.readingSpacing.successTitle"),
+      description: checked
+        ? t("accessibility.readingSpacing.successEnabled")
+        : t("accessibility.readingSpacing.successDisabled"),
+    });
+  };
+
+  const handleTextSizeChange = (value: string) => {
+    setTextSize(value as "normal" | "large" | "x-large");
+    umami.event("Accessibility.SetTextSize", { size: value, source: "settings" });
+    toast({
+      title: t("accessibility.textSize.successTitle"),
+      description: t("accessibility.textSize.successDescription"),
     });
   };
 
@@ -155,19 +221,19 @@ export default function SettingsPage() {
 
       <div className="space-y-12 mx-auto pb-20">
         <SettingCard title={t("appearanceTitle")}>
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Palette className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("theme.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("theme.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={
                   theme === "system" ? systemTheme === "dark" : theme === "dark"
@@ -178,19 +244,19 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
                 <p className="font-bold text-lg leading-none">{t("seasonal.title")}</p>
-                <p className="text-sm text-muted-foreground max-w-[300px]">
+                <p className="text-sm text-muted-foreground">
                   {t("seasonal.description")}
                 </p>
               </div>
             </div>
-            <div className="flex justify-end pt-2 sm:pt-0">
+            <div className="flex justify-end">
               <Switch
                 checked={seasonalParticles}
                 onCheckedChange={handleSeasonalParticlesChange}
@@ -199,7 +265,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Languages className="h-5 w-5 text-primary" />
@@ -226,9 +292,125 @@ export default function SettingsPage() {
           </div>
         </SettingCard>
 
+        <SettingCard title={t("accessibilityTitle")}>
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <BookOpen className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("accessibility.dislexicFont.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("accessibility.dislexicFont.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={dislexicFont}
+                onCheckedChange={handleDislexicFontChange}
+                className="scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Contrast className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("accessibility.highContrast.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("accessibility.highContrast.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={highContrast}
+                onCheckedChange={handleHighContrastChange}
+                className="scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <ZapOff className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("accessibility.reducedMotion.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("accessibility.reducedMotion.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={reducedMotion}
+                onCheckedChange={handleReducedMotionChange}
+                className="scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Rows3 className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("accessibility.readingSpacing.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("accessibility.readingSpacing.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={readingSpacing}
+                onCheckedChange={handleReadingSpacingChange}
+                className="scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Type className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">{t("accessibility.textSize.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("accessibility.textSize.description")}
+                </p>
+              </div>
+            </div>
+            <Select value={textSize} onValueChange={handleTextSizeChange}>
+              <SelectTrigger className="w-full h-12 rounded-2xl bg-background border-border/50 shadow-xs text-base font-medium">
+                <SelectValue placeholder={t("favourites.selectPlaceholder")} />
+              </SelectTrigger>
+              <SelectContent className="rounded-2xl border-border/50">
+                <SelectItem value="normal" className="rounded-xl my-1 mx-2">
+                  {t("accessibility.textSize.normal")}
+                </SelectItem>
+                <SelectItem value="large" className="rounded-xl my-1 mx-2">
+                  {t("accessibility.textSize.large")}
+                </SelectItem>
+                <SelectItem value="x-large" className="rounded-xl my-1 mx-2">
+                  {t("accessibility.textSize.xlarge")}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </SettingCard>
+
         <SettingCard title={t("behaviorTitle")}>
           {favourites.length === 0 && (
-            <Alert variant="destructive" className="rounded-2xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full hover:bg-destructive/10 transition-colors">
+            <Alert variant="destructive" className="col-span-full rounded-2xl border-destructive/20 bg-destructive/5 py-6 px-6 w-full hover:bg-destructive/10 transition-colors">
               <TriangleAlert className="h-5 w-5 ml-2 mt-3" />
               <AlertTitle className="font-black text-lg ml-2">{t("favourites.nofavouritesTitle")}</AlertTitle>
               <AlertDescription className="ml-2 text-base opacity-90">
@@ -243,7 +425,7 @@ export default function SettingsPage() {
             </Alert>
           )}
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Star className="h-5 w-5 text-primary" />
@@ -295,7 +477,7 @@ export default function SettingsPage() {
             </Select>
           </div>
 
-          <div className="space-y-4 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 lg:flex-1 lg:min-w-[400px]">
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <MapPin className="h-5 w-5 text-primary" />
@@ -347,7 +529,7 @@ export default function SettingsPage() {
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>
-          <div className="space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
+          <div className="col-span-full space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />

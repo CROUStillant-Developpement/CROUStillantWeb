@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import UpdateBanner from "@/components/update-banner";
 import SeasonalThemeProvider from "@/components/seasonal-theme-provider";
 import SeasonalParticlesBanner from "@/components/seasonal-particles-banner";
+import AccessibilityProvider from "@/components/accessibility-provider";
 
 
 export default function LayoutShell({
@@ -47,6 +48,7 @@ export default function LayoutShell({
       <UpdateBanner />
       <SeasonalParticlesBanner />
       <SeasonalThemeProvider />
+      <AccessibilityProvider />
     </>
   );
 }

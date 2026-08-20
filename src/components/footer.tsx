@@ -2,7 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import Logo from "./logo";
 import { Link } from "@/i18n/routing";
 import { Badge } from "./ui/badge";
-import AccessibilityButton from "./accessibility-button";
+import AccessibilityMenu from "./accessibility-menu";
 import { getStats } from "@/services/umami-service";
 import { cn } from "@/lib/utils";
 import FavQuickAccess from "./fav-quick-access";
@@ -284,7 +284,7 @@ export default async function Footer() {
             </div>
 
             <div className="flex flex-wrap gap-x-4 gap-y-2 opacity-60 font-medium">
-              <AccessibilityButton />
+              <AccessibilityMenu />
             </div>
           </div>
         </div>

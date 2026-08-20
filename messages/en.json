@@ -433,8 +433,18 @@
       }
     },
     "accessibility": {
-      "normal": "Normal font",
-      "dislexic": "Dyslexic font"
+      "title": "Accessibility",
+      "dislexicFont": "Dyslexia-friendly font",
+      "highContrast": "High contrast",
+      "reducedMotion": "Reduced motion",
+      "readingSpacing": "Reading spacing",
+      "textSize": {
+        "title": "Text size",
+        "normal": "Normal",
+        "large": "Large",
+        "xlarge": "Extra large"
+      },
+      "moreSettings": "More accessibility settings"
     }
   },
   "Header": {
@@ -583,6 +593,7 @@
     "title": "Settings",
     "subtitle": "Preferences & personalisation",
     "appearanceTitle": "Appearance",
+    "accessibilityTitle": "Accessibility",
     "behaviorTitle": "Behaviour",
     "personalTitle": "Personal data",
     "language": {
@@ -645,6 +656,45 @@
       "successTitle": "Seasonal decorations updated!",
       "successEnabled": "Seasonal decorations have been enabled.",
       "successDisabled": "Seasonal decorations have been disabled."
+    },
+    "accessibility": {
+      "dislexicFont": {
+        "title": "Dyslexia-friendly font",
+        "description": "Switch all text to OpenDyslexic to make reading easier.",
+        "successTitle": "Font updated!",
+        "successEnabled": "The dyslexia-friendly font has been enabled.",
+        "successDisabled": "The dyslexia-friendly font has been disabled."
+      },
+      "highContrast": {
+        "title": "High contrast",
+        "description": "Increase contrast between text, backgrounds and borders for better readability.",
+        "successTitle": "Contrast updated!",
+        "successEnabled": "High contrast mode has been enabled.",
+        "successDisabled": "High contrast mode has been disabled."
+      },
+      "reducedMotion": {
+        "title": "Reduced motion",
+        "description": "Minimise animations and transitions across the site.",
+        "successTitle": "Motion updated!",
+        "successEnabled": "Reduced motion mode has been enabled.",
+        "successDisabled": "Reduced motion mode has been disabled."
+      },
+      "readingSpacing": {
+        "title": "Reading spacing",
+        "description": "Add extra line, letter and paragraph spacing to make text easier to follow.",
+        "successTitle": "Spacing updated!",
+        "successEnabled": "Reading spacing has been enabled.",
+        "successDisabled": "Reading spacing has been disabled."
+      },
+      "textSize": {
+        "title": "Text size",
+        "description": "Scale the size of text across the entire site.",
+        "normal": "Normal",
+        "large": "Large",
+        "xlarge": "Extra large",
+        "successTitle": "Text size updated!",
+        "successDescription": "The text size has been changed successfully."
+      }
     }
   },
   "StatsPage": {
