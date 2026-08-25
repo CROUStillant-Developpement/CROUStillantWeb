@@ -1068,6 +1068,12 @@
       "url": "Direct URL",
       "copy": "Copy",
       "copied": "Copied!"
+    },
+    "share": {
+      "button": "Share",
+      "title": "Share this configuration",
+      "description": "Copy this link to send this exact configuration to someone else, without them having to set every parameter by hand.",
+      "restored": "Configuration restored from the shared link."
     }
   },
   "CommunityApps": {
