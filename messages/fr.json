@@ -1069,6 +1069,12 @@
       "url": "URL directe",
       "copy": "Copier",
       "copied": "Copié !"
+    },
+    "share": {
+      "button": "Partager",
+      "title": "Partager cette configuration",
+      "description": "Copiez ce lien pour renvoyer cette configuration exacte à quelqu'un d'autre, sans qu'il ait à régler les paramètres à la main.",
+      "restored": "Configuration restaurée depuis le lien partagé."
     }
   },
   "CommunityApps": {

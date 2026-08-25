@@ -1,18 +1,24 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useUmami } from "next-umami";
 import { motion, AnimatePresence } from "@/lib/motion";
-import { LayoutTemplate, Paintbrush, Utensils, Ruler, Building2, CalendarDays, X } from "lucide-react";
+import { LayoutTemplate, Paintbrush, Utensils, Ruler, Building2, CalendarDays, Share2, X } from "lucide-react";
 import { enUS, fr as frLocale } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import QrCodeDialog from "@/components/qr-code-dialog";
 import type { Restaurant } from "@/services/types";
 import {
   useIframeBuilderStore,
   type BlockConfig,
   type PersistedBuilderState,
 } from "@/store/iframeBuilderStore";
+import { buildShareParams, parseShareParams } from "@/lib/iframe-builder-share";
 import RestaurantSearch from "./restaurant-search";
 import BlocksPanel from "./blocks-panel";
 import StylePanel from "./style-panel";
@@ -38,9 +44,15 @@ interface Props { restaurants: Restaurant[]; apiUrl: string; }
 export default function BuilderPage({ restaurants, apiUrl }: Props) {
   const t = useTranslations("IframeBuilderPage");
   const store = useIframeBuilderStore();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { toast } = useToast();
+  const umami = useUmami();
   const [date, setDate] = useState<Date | null>(null);
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
   const [datesLoading, setDatesLoading] = useState(false);
+  const hydratedFromUrl = useRef(false);
 
   const updateState = useCallback(
     <K extends keyof BuilderState>(key: K, value: BuilderState[K]) => {
@@ -55,6 +67,19 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
     },
     [store]
   );
+
+  // Restore a shared configuration from the URL (?r=...&blocks=...&...), once, then clean the address bar.
+  useEffect(() => {
+    if (hydratedFromUrl.current) return;
+    hydratedFromUrl.current = true;
+    const shared = parseShareParams(searchParams);
+    if (!shared) return;
+    (Object.keys(shared) as (keyof BuilderState)[]).forEach((key) => {
+      updateState(key, shared[key] as BuilderState[typeof key]);
+    });
+    toast({ title: t("share.restored") });
+    router.replace(pathname, { scroll: false });
+  }, []);
 
   const state: BuilderState = useMemo(
     () => ({
@@ -112,6 +137,11 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
   }, [store.restaurantCode, store.blocks, store.theme, store.color, store.font,
       store.meals, store.height, store.lang, date, apiUrl]);
 
+  const shareUrl = useMemo(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    return `${origin}${pathname}?${buildShareParams(state).toString()}`;
+  }, [state, pathname]);
+
   const selectedRestaurant = useMemo(
     () => restaurants.find((r) => r.code === store.restaurantCode) ?? null,
     [restaurants, store.restaurantCode]
@@ -122,11 +152,29 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-8 px-4 mt-4 pb-16">
       <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">{t("title")}</h1>
-          <div className="mt-4 flex items-center">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">{t("subtitle")}</span>
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+          <div className="max-w-2xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">{t("title")}</h1>
+            <div className="mt-4 flex items-center">
+              <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">{t("subtitle")}</span>
+            </div>
           </div>
+          <QrCodeDialog
+            dialogTrigger={
+              <Button
+                type="button"
+                variant="outline"
+                className="shrink-0 gap-2 rounded-xl bg-background/60 backdrop-blur-xs"
+                onClick={() => umami.event("IframeBuilder.Share")}
+              >
+                <Share2 className="w-4 h-4" />
+                {t("share.button")}
+              </Button>
+            }
+            title={t("share.title")}
+            description={t("share.description")}
+            url={shareUrl}
+          />
         </div>
         <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
