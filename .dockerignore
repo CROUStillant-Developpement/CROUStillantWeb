@@ -1,0 +1,34 @@
+# Keep secrets out of the build context entirely. The build-time .env is
+# supplied to `npm run build` as a BuildKit secret (see Dockerfile), so it must
+# never be COPY'd into a layer — layers are pushed to the GHA build cache.
+.env
+.env.*
+!.env.example
+*.pem
+
+# Not needed by the build, and .git in a layer is a credential-leak vector.
+.git
+.github
+.gitignore
+.vscode
+
+# Rebuilt inside the image; copying the host's would poison the build.
+node_modules
+.next
+out
+build
+
+# Test and tooling output
+coverage
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Docs and local editor cruft
+*.md
+!README.md
+.DS_Store
+Dockerfile
+.dockerignore

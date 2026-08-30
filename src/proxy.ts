@@ -13,8 +13,8 @@ const intlMiddleware = createMiddleware(routing);
 // Per-IP rate limiting — a backstop against crawl/scrape bursts (see the
 // beta unauthenticated-API-calls incident). Fixed window, in-memory.
 // ---------------------------------------------------------------------------
-const WINDOW_MS = 60_000;
-const MAX_REQUESTS_PER_WINDOW = 180; // ~3 req/s sustained average per IP
+const WINDOW_MS = 30_000;
+const MAX_REQUESTS_PER_WINDOW = 300; // ~3 req/s sustained average per IP
 
 type Bucket = { count: number; resetAt: number };
 const buckets = new Map<string, Bucket>();
@@ -30,11 +30,20 @@ function cleanupExpiredBuckets(now: number) {
 
 function getClientIp(request: NextRequest): string {
   // Matches the identity the API itself rate-limits on (CF-Connecting-IP).
-  return (
-    request.headers.get("cf-connecting-ip") ??
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-    "unknown"
-  );
+  const cloudflareIp = request.headers.get("cf-connecting-ip");
+  if (cloudflareIp) return cloudflareIp;
+
+  if (process.env.NODE_ENV !== "production") {
+    return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  }
+
+  return "unknown";
+}
+
+// Locale negotiation applies to page routes only. Asset routes are matched
+// purely so they count against the rate limit, and must not be rewritten.
+function isPageRequest(pathname: string): boolean {
+  return pathname === "/" || /^\/(fr|en)(\/|$)/.test(pathname);
 }
 
 function checkRateLimit(ip: string): { limited: boolean; retryAfterSeconds: number } {
@@ -59,11 +68,21 @@ function checkRateLimit(ip: string): { limited: boolean; retryAfterSeconds: numb
 }
 
 export default function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isPage = isPageRequest(pathname);
+
   const ip = getClientIp(request);
   const { limited, retryAfterSeconds } = checkRateLimit(ip);
 
   if (limited) {
-    const localeMatch = request.nextUrl.pathname.match(/^\/(fr|en)(\/|$)/);
+    if (!isPage) {
+      return new NextResponse("Too Many Requests", {
+        status: 429,
+        headers: { "Retry-After": String(retryAfterSeconds) },
+      });
+    }
+
+    const localeMatch = pathname.match(/^\/(fr|en)(\/|$)/);
     const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
 
     const rewriteUrl = new URL(`/too-many-requests/${locale}`, request.url);
@@ -74,10 +93,13 @@ export default function proxy(request: NextRequest) {
     return response;
   }
 
+  if (!isPage) return NextResponse.next();
+
   return intlMiddleware(request);
 }
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ["/", "/(fr|en)/:path*"],
+  // Internationalized pathnames, plus the image optimizer — the most expensive
+  // endpoint the app exposes, and the one a scrape burst would hit hardest.
+  matcher: ["/", "/(fr|en)/:path*", "/_next/image"],
 };

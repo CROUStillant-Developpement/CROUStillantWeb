@@ -39,13 +39,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create .env file
+      # Passed to the build as a BuildKit secret, never COPY'd into a layer.
+      # Do not `cat` this file — it holds API_KEY.
+      - name: Create build-time .env file
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
         run: |
-          touch .env
-          echo API_URL=${{ secrets.API_URL }} >> .env
-          echo API_KEY=${{ secrets.API_KEY }} >> .env
-          echo WEB_URL="https://croustillant.menu" >> .env
-          cat .env
+          umask 077
+          {
+            echo "API_URL=${API_URL}"
+            echo "API_KEY=${API_KEY}"
+            echo "WEB_URL=https://croustillant.menu"
+          } > .env
 
       - name: Extract version from package.json
         id: get_version
@@ -80,6 +86,8 @@ jobs:
           build-args: |
             WEB_URL=${{ secrets.WEB_URL }}
             API_URL=${{ secrets.API_URL }}
+          secret-files: |
+            dotenv=./.env
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v4

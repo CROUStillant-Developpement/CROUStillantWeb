@@ -1,4 +1,4 @@
-import { INITIAL_BLOCKS, type BlockConfig, type PersistedBuilderState } from "@/store/iframeBuilderStore";
+import { FONTS, INITIAL_BLOCKS, type BlockConfig, type PersistedBuilderState } from "@/store/iframeBuilderStore";
 
 const MEAL_IDS = ["matin", "midi", "soir"];
 
@@ -76,7 +76,7 @@ export function parseShareParams(
   if (color && /^[0-9a-fA-F]{6}$/.test(color)) result.color = color.toLowerCase();
 
   const font = params.get("font");
-  if (font) result.font = font;
+  if (font && (FONTS as readonly string[]).includes(font)) result.font = font;
 
   const meals = params.get("meals");
   if (meals) {
