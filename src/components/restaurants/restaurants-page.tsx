@@ -10,6 +10,8 @@ import { useTranslations } from "next-intl";
 import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import Content from "./content";
+import { AnimatePresence, motion } from "@/lib/motion";
+import CelebrationBanner, { useCelebrationBanner } from "./slug/celebration-banner";
 
 export default function RestaurantsPage({
   restaurants,
@@ -27,7 +29,8 @@ export default function RestaurantsPage({
     useState<Restaurant[]>(restaurants);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(21); // Default records per page
-
+  const { visible: showCelebration, dismiss: dismissCelebration } = useCelebrationBanner();
+  
   const { display, favourites } = useUserPreferences();
   const { setMarkers } = useMarkerStore();
 
@@ -86,6 +89,20 @@ export default function RestaurantsPage({
         <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
+
+      <AnimatePresence>
+          {showCelebration && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="overflow-hidden"
+            >
+              <CelebrationBanner onDismiss={dismissCelebration} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       <div className="w-full z-10 relative">
         <RestaurantsFilters
