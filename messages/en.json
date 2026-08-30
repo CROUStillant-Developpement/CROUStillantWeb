@@ -928,6 +928,18 @@
     "settingsLink": "settings",
     "dismiss": "Dismiss"
   },
+  "CelebrationBanner": {
+    "title": "Thank you for 100,000 visits! 🎉",
+    "message": "CROUStillant has just passed 100,000 visits. Thank you all! The whole team wishes you a great start to the 2026 school year.",
+    "sub-message": "The project remains 100% free and ad-free! The best way to support us? Share the site with your friends 😎",
+    "shareCta": "Share the site",
+    "shareText": "CROUStillant: check out CROUS restaurant menus at a glance!",
+    "copied": {
+      "title": "Link copied!",
+      "description": "The site link has been copied to your clipboard. Thanks for sharing it ❤️"
+    },
+    "dismiss": "Close"
+  },
   "MobilePage": {
     "hero": {
       "badge": "Mobile app",

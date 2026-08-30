@@ -20,6 +20,8 @@ export const INITIAL_BLOCKS: BlockConfig[] = [
   { id: "link",        enabled: false },
 ];
 
+export const FONTS = ["Inter", "Roboto", "Outfit", "Nunito", "system"] as const;
+
 export interface PersistedBuilderState {
   restaurantCode: number | null;
   blocks: BlockConfig[];

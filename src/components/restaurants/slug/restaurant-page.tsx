@@ -24,6 +24,7 @@ import { useSearchParams } from "next/navigation";
 import log from "@/lib/log";
 import { X as CloseIcon } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import CelebrationBanner, { useCelebrationBanner } from "./celebration-banner";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -51,6 +52,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
   const searchParams = useSearchParams();
   const [showFavoriteHint, setShowFavoriteHint] = useState(false);
   const [imgSrc, setImgSrc] = useState(restaurant.image_url || "/default_ru.png");
+  const { visible: showCelebration, dismiss: dismissCelebration } = useCelebrationBanner();
 
   useEffect(() => {
     // Show hint after a short delay if not favourite
@@ -179,7 +181,21 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
         </div>
 
         <AnimatePresence>
-          {showFavoriteHint && !isFavourite && (
+          {showCelebration && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="overflow-hidden"
+            >
+              <CelebrationBanner onDismiss={dismissCelebration} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {showFavoriteHint && !isFavourite && !showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
               animate={{ opacity: 1, height: "auto", marginBottom: 32 }}

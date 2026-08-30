@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from "@/lib/motion";
 import { Sun, Moon, X } from "lucide-react";
 import type { BuilderState } from "./builder-page";
 import ColorPicker from "./color-picker";
-
-const FONTS = ["Inter", "Roboto", "Outfit", "Nunito", "system"] as const;
+import { FONTS } from "@/store/iframeBuilderStore";
 
 interface Props {
   state: BuilderState;

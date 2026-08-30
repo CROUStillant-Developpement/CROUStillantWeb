@@ -1,6 +1,7 @@
 import { Clock } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import RetryCountdown from "./retry-countdown";
+import { routing } from "@/i18n/routing";
 
 export default async function TooManyRequestsPage({
   params,
@@ -9,8 +10,15 @@ export default async function TooManyRequestsPage({
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ retryAfter?: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
   const { retryAfter } = await searchParams;
+
+  // The proxy only ever rewrites here with a known locale, but this route is
+  // also directly addressable, so don't pass an arbitrary segment through.
+  const locale = (routing.locales as readonly string[]).includes(rawLocale)
+    ? rawLocale
+    : routing.defaultLocale;
+
   const t = await getTranslations({ locale, namespace: "TooManyRequestsPage" });
 
   const initialSeconds = Math.max(0, parseInt(retryAfter ?? "", 10) || 0);

@@ -38,8 +38,8 @@
     "lucide-react": "^1.31.0",
     "maplibre-gl": "^5.24.0",
     "motion": "^12.40.0",
-    "next": "^16.3.1",
-    "next-intl": "^4.13.2",
+    "next": "^16.3.3",
+    "next-intl": "^4.13.7",
     "next-themes": "^0.4.6",
     "next-umami": "github:PaulBayfield/next-umami",
     "qrcode": "^1.5.4",
@@ -57,14 +57,14 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^26",
     "@types/qrcode": "^1.5.6",
     "@types/react": "19.2.16",
-    "@types/react-dom": "19.2.3",
+    "@types/react-dom": "19.2.5",
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^10.4.1",
@@ -77,6 +77,6 @@
   },
   "overrides": {
     "@types/react": "19.2.16",
-    "@types/react-dom": "19.2.3"
+    "@types/react-dom": "19.2.5"
   }
 }

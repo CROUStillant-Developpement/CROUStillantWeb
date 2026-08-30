@@ -929,6 +929,18 @@
     "settingsLink": "paramètres",
     "dismiss": "Fermer"
   },
+  "CelebrationBanner": {
+    "title": "Merci pour les 100 000 visites ! 🎉",
+    "message": "CROUStillant vient de franchir la barre des 100 000 visites. Merci à vous ! Toute l'équipe vous souhaite une excellente rentrée 2026.",
+    "sub-message": "Le projet reste 100% gratuit et sans pubs ! Le meilleur moyen de nous aider ? Partager le site autour de vous 😎",
+    "shareCta": "Partager le site",
+    "shareText": "CROUStillant : consulte les menus des restaurants CROUS en un clin d'œil !",
+    "copied": {
+      "title": "Lien copié !",
+      "description": "Le lien du site a été copié dans votre presse-papiers. Merci de le partager ❤️"
+    },
+    "dismiss": "Fermer"
+  },
   "MobilePage": {
     "hero": {
       "badge": "Application mobile",
