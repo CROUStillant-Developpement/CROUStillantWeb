@@ -940,6 +940,33 @@
     },
     "dismiss": "Close"
   },
+  "DishDuel": {
+    "title": "Dish Duel 🍽️",
+    "description": "You found one of the site’s easter eggs! Two dishes face off — pick the one CROUS restaurants have served the most.",
+    "question": "Which dish has been served the most times?",
+    "versus": "VS",
+    "streak": "Streak: {score}",
+    "best": "Best: {score}",
+    "servings": "on the menu {count} times",
+    "loading": "Getting the trays out...",
+    "error": "The dishes could not be loaded right now 😢",
+    "close": "Close",
+    "footnote": "Live data from the CROUStillant API — the 100 most served dishes.",
+    "gameOver": {
+      "title": "Empty tray! 🧽",
+      "score": "You got {score} right in a row.",
+      "record": "New best: {score} correct answers in a row 🏆",
+      "replay": "Play again",
+      "share": "Share"
+    },
+    "share": {
+      "text": "I scored {score} on the Dish Duel hidden inside CROUStillant. Think you can beat it?",
+      "copied": {
+        "title": "Score copied!",
+        "description": "Your score was copied to the clipboard. Go challenge your friends 😎"
+      }
+    }
+  },
   "MobilePage": {
     "hero": {
       "badge": "Mobile app",

@@ -941,6 +941,33 @@
     },
     "dismiss": "Fermer"
   },
+  "DishDuel": {
+    "title": "Le Duel des Plats 🍽️",
+    "description": "Vous avez trouvé un des easter eggs du site ! Deux plats s’affrontent, à vous de désigner celui que les restaurants CROUS ont servi le plus souvent.",
+    "question": "Quel plat a été servi le plus de fois ?",
+    "versus": "VS",
+    "streak": "Série : {score}",
+    "best": "Record : {score}",
+    "servings": "{count} fois au menu",
+    "loading": "On sort les plateaux...",
+    "error": "Impossible de charger les plats pour le moment 😢",
+    "close": "Fermer",
+    "footnote": "Données en direct de l’API CROUStillant — top 100 des plats les plus servis.",
+    "gameOver": {
+      "title": "Plateau vide ! 🧽",
+      "score": "Vous avez enchaîné {score} bonnes réponses.",
+      "record": "Nouveau record : {score} bonnes réponses à la suite 🏆",
+      "replay": "Rejouer",
+      "share": "Partager"
+    },
+    "share": {
+      "text": "J’ai fait {score} au Duel des Plats caché dans CROUStillant. Sauras-tu faire mieux ?",
+      "copied": {
+        "title": "Score copié !",
+        "description": "Votre score a été copié dans le presse-papiers. À vous de défier vos amis 😎"
+      }
+    }
+  },
   "MobilePage": {
     "hero": {
       "badge": "Application mobile",

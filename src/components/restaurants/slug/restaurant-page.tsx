@@ -25,6 +25,7 @@ import log from "@/lib/log";
 import { X as CloseIcon } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import CelebrationBanner, { useCelebrationBanner } from "./celebration-banner";
+import EasterEggLauncher from "@/components/easter-egg/easter-egg-launcher";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -103,7 +104,7 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
 
           <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">
             <div className="max-w-3xl min-w-0">
-              <h1 className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight wrap-break-word">{restaurant.nom}</h1>
+              <h1 data-easter-egg className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight wrap-break-word select-none">{restaurant.nom}</h1>
               <div className="mt-2 md:mt-3 flex flex-wrap items-center gap-3 text-white/90 font-medium">
                 <span className="flex items-center text-sm md:text-base drop-shadow-md bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                   {restaurant.zone}
@@ -303,6 +304,8 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
             </div>
           </div>
         )}
+
+        <EasterEggLauncher />
       </motion.div>
     </AnimatePresence>
   );
