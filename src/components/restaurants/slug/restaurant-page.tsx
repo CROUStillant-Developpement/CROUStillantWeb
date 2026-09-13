@@ -1,6 +1,6 @@
 "use client";
 
-import { Restaurant } from "@/services/types";
+import { DateMenu, Menu, Restaurant } from "@/services/types";
 import { Button } from "@/components/ui/button";
 import { Heart, QrCode, ScreenShare } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
@@ -29,9 +29,17 @@ import EasterEggLauncher from "@/components/easter-egg/easter-egg-launcher";
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
+  /** Menus fetched server-side, so the initial HTML already carries today's menu. */
+  initialMenu?: Menu[];
+  /** Available dates fetched server-side. */
+  initialDates?: DateMenu[];
 }
 
-export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
+export default function RestaurantPage({
+  restaurant,
+  initialMenu,
+  initialDates,
+}: RestaurantPageProps) {
   const {
     menuLoading,
     datesLoading,
@@ -43,7 +51,12 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     selectedDateLunch,
     selectedDateDinner,
     noMenuAtAll,
-  } = useRestaurantMenu({ restaurantCode: restaurant.code, mode: "all" });
+  } = useRestaurantMenu({
+    restaurantCode: restaurant.code,
+    mode: "all",
+    initialMenu,
+    initialDates,
+  });
 
   const t = useTranslations("RestaurantPage");
   const tCard = useTranslations("RestaurantCard");

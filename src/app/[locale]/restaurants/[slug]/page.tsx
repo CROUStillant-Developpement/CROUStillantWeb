@@ -3,6 +3,12 @@ import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
 import { notFound } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getRestaurant } from "@/services/restaurant-service";
+import {
+  getDatesMenuAvailable,
+  getMenuByRestaurantId,
+} from "@/services/menu-service";
+import { buildRestaurantJsonLd } from "@/lib/restaurant-jsonld";
+import { DateMenu, Menu } from "@/services/types";
 
 
 function extractRestaurantId(slug: unknown): number | null {
@@ -96,6 +102,27 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * Fetches the menus and the available dates server-side.
+ *
+ * Without this the menu is only requested after hydration, so the HTML served to
+ * crawlers (Googlebot, GPTBot, ClaudeBot, PerplexityBot — none of them run JS)
+ * contains no dish at all. It is also what feeds the JSON-LD.
+ */
+async function fetchMenuServer(
+  restaurantCode: number
+): Promise<{ menu: Menu[]; dates: DateMenu[] }> {
+  const [menuResult, datesResult] = await Promise.all([
+    getMenuByRestaurantId(restaurantCode),
+    getDatesMenuAvailable(restaurantCode),
+  ]);
+
+  return {
+    menu: menuResult.success ? menuResult.data : [],
+    dates: datesResult.success ? datesResult.data : [],
+  };
+}
+
 export default async function Restaurant({
   params,
 }: {
@@ -108,5 +135,32 @@ export default async function Restaurant({
     return notFound();
   }
 
-  return <RestaurantPage restaurant={restaurant} />;
+  const locale = await getLocale();
+  const { menu, dates } = await fetchMenuServer(restaurant.code);
+
+  const baseUrl = process.env.WEB_URL || "https://croustillant.menu";
+  const jsonLd = buildRestaurantJsonLd(
+    restaurant,
+    menu,
+    `${baseUrl}/${locale}/restaurants/${slug}`
+  );
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // The JSON-LD comes from our own API and is serialised by JSON.stringify;
+        // `<` is escaped so a dish label containing "</script>" cannot close the
+        // tag early.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <RestaurantPage
+        restaurant={restaurant}
+        initialMenu={menu}
+        initialDates={dates}
+      />
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Menu, Repas, DateMenu } from "@/services/types";
 import {
   getMenuByRestaurantId,
@@ -14,6 +14,14 @@ interface UseRestaurantMenuOptions {
   restaurantCode: number;
   mode: "future" | "history" | "all";
   defaultDate?: Date;
+  /**
+   * Menus already fetched server-side. When provided, the first render (the one
+   * sent in the HTML, so the one crawlers see) shows the menu straight away
+   * instead of waiting for hydration to kick off a fetch.
+   */
+  initialMenu?: Menu[];
+  /** Available dates already fetched server-side, same rationale as `initialMenu`. */
+  initialDates?: DateMenu[];
 }
 
 /**
@@ -28,26 +36,24 @@ interface UseRestaurantMenuOptions {
  *
  * @param restaurantCode - The unique code identifying the restaurant.
  * @param mode - The mode of operation: `"future"`, `"history"`, or `"all"`.
+ * @param defaultDate - The date selected on first render (defaults to today).
+ * @param initialMenu - Menus prefetched server-side, rendered without waiting for hydration.
+ * @param initialDates - Available dates prefetched server-side.
  * @returns An object containing hook state and functions.
  */
 export function useRestaurantMenu({
   restaurantCode,
   mode,
   defaultDate,
+  initialMenu,
+  initialDates,
 }: UseRestaurantMenuOptions) {
-  const [menu, setMenu] = useState<Menu[]>([]);
-  const [dates, setDates] = useState<DateMenu[]>([]);
+  const hasInitialMenu = Boolean(initialMenu && initialMenu.length > 0);
+
+  const [menu, setMenu] = useState<Menu[]>(initialMenu ?? []);
+  const [dates, setDates] = useState<DateMenu[]>(initialDates ?? []);
   const [selectedDate, setSelectedDate] = useState<Date>(
     normalizeToDate(defaultDate ?? new Date())
-  );
-  const [selectedDateMeals, setSelectedDateMeals] = useState<Repas[]>([]);
-  const [selectedDateBreakfast, setSelectedDateBreakfast] =
-    useState<Repas | null>(null);
-  const [selectedDateLunch, setSelectedDateLunch] = useState<Repas | null>(
-    null
-  );
-  const [selectedDateDinner, setSelectedDateDinner] = useState<Repas | null>(
-    null
   );
   const [menuLoading, setMenuLoading] = useState<boolean>(false);
   const [datesLoading, setDatesLoading] = useState<boolean>(false);
@@ -134,7 +140,9 @@ export function useRestaurantMenu({
 
                setSelectedDate(prev => prev ?? formatToISODate(closestDate.date));
             }
-          } else {
+          } else if (!hasInitialMenu) {
+            // A server-prefetched menu proves at least one exists: a failure on
+            // the date list must not wipe out the menu already being displayed.
             setNoMenuAtAll(true);
           }
         }
@@ -173,60 +181,63 @@ export function useRestaurantMenu({
     }
   };
 
+  // The selected date's meals are *derived* from `menu` rather than held in
+  // state fed by an effect. That is what lets the server render contain the menu
+  // when `initialMenu` is provided: an effect never runs during SSR, a `useMemo`
+  // does.
+  const selectedDateMenu = useMemo(
+    () =>
+      menu.find(
+        (m) =>
+          normalizeToDate(formatToISODate(m.date)).getTime() ===
+          normalizeToDate(selectedDate).getTime()
+      ),
+    [menu, selectedDate]
+  );
+
+  const selectedDateMeals: Repas[] = useMemo(
+    () => selectedDateMenu?.repas ?? [],
+    [selectedDateMenu]
+  );
+
+  const selectedDateBreakfast =
+    selectedDateMeals.find((r) => r.type === "matin") ?? null;
+  const selectedDateLunch =
+    selectedDateMeals.find((r) => r.type === "midi") ?? null;
+  const selectedDateDinner =
+    selectedDateMeals.find((r) => r.type === "soir") ?? null;
+
   useEffect(() => {
-    const selectedDateMenu = menu.find(
-      (m) =>
-        normalizeToDate(formatToISODate(m.date)).getTime() ===
-        normalizeToDate(selectedDate).getTime()
+    // Menu already known (prefetched server-side or loaded earlier).
+    if (selectedDateMenu) {
+      return;
+    }
+
+    if (mode !== "history" && mode !== "all") {
+      return;
+    }
+
+    // Date already known to have no menu -> no point asking the API again.
+    const isBlacklisted = blacklistedDates.some(
+      (d) =>
+        normalizeToDate(d).getTime() === normalizeToDate(selectedDate).getTime()
     );
 
-    // If menu for this date already exists, update state immediately
-    if (selectedDateMenu) {
-      setSelectedDateMeals(selectedDateMenu.repas);
-      setSelectedDateBreakfast(
-        selectedDateMenu.repas.find((r) => r.type === "matin") ?? null
-      );
-      setSelectedDateLunch(
-        selectedDateMenu.repas.find((r) => r.type === "midi") ?? null
-      );
-      setSelectedDateDinner(
-        selectedDateMenu.repas.find((r) => r.type === "soir") ?? null
-      );
+    if (isBlacklisted) {
       return;
     }
 
-    // No menu yet → fetch it if needed
-    if (
-      (mode === "history" || mode === "all") &&
-      blacklistedDates.every((d) => normalizeToDate(d).getTime() !== normalizeToDate(selectedDate).getTime())
-    ) {
-      setMenuLoading(true);
+    setMenuLoading(true);
 
-      fetchMenuForDate(selectedDate)
-        .catch(() => {
-          // Fetch failed → clear meals (menu not found)
-          setSelectedDateMeals([]);
-          setSelectedDateBreakfast(null);
-          setSelectedDateLunch(null);
-          setSelectedDateDinner(null);
-        })
-        .finally(() => {
-          setMenuLoading(false);
-        });
-
-      // Don't clear meals immediately — wait for fetch result
-      return;
-    }
-
-    // If blacklisted (known no menu), clear immediately
-    setSelectedDateMeals([]);
-    setSelectedDateBreakfast(null);
-    setSelectedDateLunch(null);
-    setSelectedDateDinner(null);
-  }, [selectedDate, menu, blacklistedDates, mode]);
+    fetchMenuForDate(selectedDate).finally(() => {
+      setMenuLoading(false);
+    });
+  }, [selectedDate, selectedDateMenu, blacklistedDates, mode]);
 
   return {
-    menuLoading,
+    // With prefetched menus the first render already has content: showing the
+    // skeleton on top of it would make the page flicker on hydration.
+    menuLoading: menuLoading && !hasInitialMenu,
     datesLoading,
     dates,
     menu,
