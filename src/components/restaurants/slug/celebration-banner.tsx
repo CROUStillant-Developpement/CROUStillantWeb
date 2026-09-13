@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import log from "@/lib/log";
 
-const STORAGE_KEY = "celebration-banner-100k-rentree-2026-dismissed";
+const STORAGE_KEY = "celebration-banner-300k-rentree-2026-dismissed";
 const SHARE_URL = "https://croustillant.menu";
 
 /**

@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import HomePage from "@/components/home/home-page";
 import HomeHero from "@/components/home/home-hero";
 import { getRegionsGeoJSON } from "@/services/region-service";
+import { buildPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("HomePage");
   const locale = await getLocale();
 
-  return {
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        fr: "/fr",
-        en: "/en",
-      },
-    },
-  };
+  return buildPageMetadata({
+    locale,
+    path: "",
+    title: t("seo.title"),
+    description: t("seo.description"),
+    keywords: t("seo.keywords"),
+  });
 }
 
 export default async function Home() {

@@ -13,17 +13,17 @@ export type DisplayType = "list" | "map";
 
 // Types for Regions
 export interface Region {
-  code: number; // Identifiant de la région
-  libelle: string; // Libellé de la région
+  code: number; // Region identifier
+  libelle: string; // Region label
 }
 
 // Properties of a CROUS region GeoJSON feature (GET /regions/geojson)
 export interface RegionGeoJSONProperties {
-  crous_id: number; // Correspond à Region.code
+  crous_id: number; // Matches Region.code
   crous_slug: string;
-  crous_libelle: string; // Correspond à Region.libelle
-  crous_nom: string; // Nom officiel long du CROUS
-  departements: string[]; // Codes INSEE des départements rattachés
+  crous_libelle: string; // Matches Region.libelle
+  crous_nom: string; // Full official CROUS name
+  departements: string[]; // INSEE codes of the attached departments
   credit: string;
   [key: string]: unknown;
 }
@@ -36,136 +36,136 @@ export type RegionGeoJSON = GeoJSON.FeatureCollection<
 // Types for Restaurant
 export interface Restaurant {
   isOpen: boolean;
-  acces?: string[]; // Informations sur l'accès au restaurant
-  adresse: string; // Adresse du restaurant
-  code: number; // Identifiant du restaurant
-  email?: string | null; // Adresse email du restaurant
-  horaires?: string[]; // Horaires d'ouverture du restaurant
-  image_url?: string | null; // URL de l'image du restaurant
-  ispmr: boolean; // Le restaurant est-il accessible aux PMR ?
-  jours_ouvert?: Jours[]; // Jours d'ouverture du restaurant
-  latitude: number; // Latitude du restaurant
-  longitude: number; // Longitude du restaurant
-  nom: string; // Nom du restaurant
-  paiement?: string[]; // Moyens de paiement acceptés par le restaurant
-  region: Region; // Région du restaurant
-  telephone?: string | null; // Numéro de téléphone du restaurant
-  type_restaurant: TypeRestaurant; // Type de restauration
-  zone: string; // Zone du restaurant
-  ouvert: boolean; // Le restaurant est-il ouvert ?
-  type?: TypeRestaurant; // Type de restauration
-  actif: boolean; // Le restaurant est-il actif ?
+  acces?: string[]; // Access information for the restaurant
+  adresse: string; // Restaurant address
+  code: number; // Restaurant identifier
+  email?: string | null; // Restaurant email address
+  horaires?: string[]; // Restaurant opening hours
+  image_url?: string | null; // Restaurant image URL
+  ispmr: boolean; // Is the restaurant wheelchair accessible?
+  jours_ouvert?: Jours[]; // Days the restaurant is open
+  latitude: number; // Restaurant latitude
+  longitude: number; // Restaurant longitude
+  nom: string; // Restaurant name
+  paiement?: string[]; // Payment methods the restaurant accepts
+  region: Region; // Restaurant region
+  telephone?: string | null; // Restaurant phone number
+  type_restaurant: TypeRestaurant; // Catering type
+  zone: string; // Restaurant zone
+  ouvert: boolean; // Is the restaurant currently open?
+  type?: TypeRestaurant; // Catering type
+  actif: boolean; // Is the restaurant active?
 }
 
 // Types for TypeRestaurant
 export interface TypeRestaurant {
-  code: number; // Identifiant du type de restauration
-  libelle: string; // Libellé du type de restauration
+  code: number; // Catering type identifier
+  libelle: string; // Catering type label
 }
 
 // Types for Jours
 export interface Jours {
-  jour: string; // Jours de la semaine
-  ouverture: Ouverture; // Informations sur les ouvertures (matin, midi, soir)
+  jour: string; // Day of the week
+  ouverture: Ouverture; // Opening information (morning, midday, evening)
 }
 
 // Types for Ouverture
 export interface Ouverture {
-  matin: boolean; // Ouverture le matin
-  midi: boolean; // Ouverture le midi
-  soir: boolean; // Ouverture le soir
+  matin: boolean; // Open in the morning
+  midi: boolean; // Open at midday
+  soir: boolean; // Open in the evening
 }
 
 // Types for Plat
 export interface Plat {
-  code: string; // Identifiant du plat
-  libelle: string; // Libellé du plat
-  ordre?: number; // Ordre du plat dans la catégorie
-  total?: number; // Nombre total d'occurrences du plat
+  code: string; // Dish identifier
+  libelle: string; // Dish label
+  ordre?: number; // Position of the dish within the category
+  total?: number; // Total number of occurrences of the dish
 }
 
 // Types for Categorie
 export interface Categorie {
-  code: string; // Identifiant de la catégorie
-  libelle: string; // Libellé de la catégorie
-  plats: Plat[]; // Liste des plats de la catégorie
+  code: string; // Category identifier
+  libelle: string; // Category label
+  plats: Plat[]; // Dishes in the category
 }
 
 // Types for CategorieTriee
 export interface CategorieTriee extends Categorie {
-  ordre: number; // Ordre de la catégorie dans le menu
+  ordre: number; // Position of the category within the menu
 }
 
 // Types for Repas
 export interface Repas {
-  categories: CategorieTriee[]; // Liste des catégories du repas
-  code: string; // Identifiant du repas
-  type: "matin" | "midi" | "soir"; // Type du repas
+  categories: CategorieTriee[]; // Categories of the meal
+  code: string; // Meal identifier
+  type: "matin" | "midi" | "soir"; // Meal type
 }
 
 // Types for Menu
 export interface Menu {
-  code: string; // Identifiant du menu
-  date: string; // Date du menu
-  repas: Repas[]; // Liste des repas du menu
+  code: string; // Menu identifier
+  date: string; // Menu date
+  repas: Repas[]; // Meals of the menu
 }
 
 // Types for Date
 export interface DateMenu {
-  code: string; // Identifiant du menu
-  date: string; // Date du menu
+  code: string; // Menu identifier
+  date: string; // Menu date
 }
 
 // Types for Tache
 export interface Tache {
-  debut: string; // Date de début de la tâche
-  debut_categories: number; // Nombre de catégories récupérées au début de la tâche
-  debut_compositions: number; // Nombre de compositions récupérées au début de la tâche
-  debut_menus: number; // Nombre de menus récupérés au début de la tâche
-  debut_plats: number; // Nombre de plats récupérés au début de la tâche
-  debut_regions: number; // Nombre de régions récupérées au début de la tâche
-  debut_repas: number; // Nombre de repas récupérés au début de la tâche
-  debut_restaurants: number; // Nombre de restaurants récupérés au début de la tâche
-  debut_types_restaurants: number; // Nombre de types de restaurants récupérés au début de la tâche
-  fin: string; // Date de fin de la tâche
-  fin_categories: number; // Nombre de catégories récupérées à la fin de la tâche
-  fin_compositions: number; // Nombre de compositions récupérées à la fin de la tâche
-  fin_menus: number; // Nombre de menus récupérés à la fin de la tâche
-  fin_plats: number; // Nombre de plats récupérés à la fin de la tâche
-  fin_regions: number; // Nombre de régions récupérées à la fin de la tâche
-  fin_repas: number; // Nombre de repas récupérés à la fin de la tâche
-  fin_restaurants: number; // Nombre de restaurants récupérés à la fin de la tâche
-  fin_types_restaurants: number; // Nombre de types de restaurants récupérés à la fin de la tâche
-  id: string; // Identifiant de la tâche
-  requetes: number; // Nombre de requêtes effectuées
+  debut: string; // Task start date
+  debut_categories: number; // Categories collected when the task started
+  debut_compositions: number; // Compositions collected when the task started
+  debut_menus: number; // Menus collected when the task started
+  debut_plats: number; // Dishes collected when the task started
+  debut_regions: number; // Regions collected when the task started
+  debut_repas: number; // Meals collected when the task started
+  debut_restaurants: number; // Restaurants collected when the task started
+  debut_types_restaurants: number; // Restaurant types collected when the task started
+  fin: string; // Task end date
+  fin_categories: number; // Categories collected when the task ended
+  fin_compositions: number; // Compositions collected when the task ended
+  fin_menus: number; // Menus collected when the task ended
+  fin_plats: number; // Dishes collected when the task ended
+  fin_regions: number; // Regions collected when the task ended
+  fin_repas: number; // Meals collected when the task ended
+  fin_restaurants: number; // Restaurants collected when the task ended
+  fin_types_restaurants: number; // Restaurant types collected when the task ended
+  id: string; // Task identifier
+  requetes: number; // Number of requests made
 }
 
 // Types for GlobalStats
 // Types for RegionStats
 export interface RegionStats {
-  code: number; // Identifiant de la région
-  libelle: string; // Libellé de la région
-  nb_restaurants: number; // Nombre de restaurants dans la région
-  nb_restaurants_actifs: number; // Nombre de restaurants actifs dans la région
-  nb_restaurants_avec_menu: number; // Nombre de restaurants actifs ayant publié un menu sur l'année scolaire en cours
-  nb_repas: number; // Nombre de repas servis sur l'année scolaire en cours
-  nb_categories: number; // Nombre de catégories sur l'année scolaire en cours
-  nb_plats: number; // Nombre de plats servis sur l'année scolaire en cours
-  plats_uniques: number; // Nombre de plats distincts servis sur l'année scolaire en cours
+  code: number; // Region identifier
+  libelle: string; // Region label
+  nb_restaurants: number; // Restaurants in the region
+  nb_restaurants_actifs: number; // Active restaurants in the region
+  nb_restaurants_avec_menu: number; // Active restaurants that published a menu during the current school year
+  nb_repas: number; // Meals served during the current school year
+  nb_categories: number; // Categories during the current school year
+  nb_plats: number; // Dishes served during the current school year
+  plats_uniques: number; // Distinct dishes served during the current school year
 }
 
 export interface GlobalStats {
-  categories: number; // Nombre de catégories
-  compositions: number; // Nombre de compositions
-  menus: number; // Nombre de menus
-  plats: number; // Nombre de plats
-  regions: number; // Nombre de régions
-  repas: number; // Nombre de repas
-  restaurants: number; // Nombre de restaurants
-  restaurants_actifs: number; // Nombre de restaurants actifs
-  types_restaurants: number; // Nombre de types de restaurants
-  visites?: number; // Nombre de visites sur le site
-  pagesVues?: number; // Nombre de pages vues sur le site
+  categories: number; // Number of categories
+  compositions: number; // Number of compositions
+  menus: number; // Number of menus
+  plats: number; // Number of dishes
+  regions: number; // Number of regions
+  repas: number; // Number of meals
+  restaurants: number; // Number of restaurants
+  restaurants_actifs: number; // Number of active restaurants
+  types_restaurants: number; // Number of restaurant types
+  visites?: number; // Number of visits to the site
+  pagesVues?: number; // Number of page views on the site
 }
 
 export interface Changelog {
@@ -214,81 +214,81 @@ export interface UmamiDateRange {
 
 // Types for RestaurantInsights
 export interface InsightsPeriode {
-  debut: string; // Début de la période (DD-MM-YYYY)
-  fin: string; // Fin de la période (DD-MM-YYYY)
+  debut: string; // Start of the period (DD-MM-YYYY)
+  fin: string; // End of the period (DD-MM-YYYY)
 }
 
 export interface InsightsCouverture {
-  jours_ouvres: number; // Nombre de jours d'ouverture attendus sur la période
-  jours_avec_menu: number; // Nombre de jours avec un menu publié
-  jours_sans_menu: number; // Nombre de jours sans menu publié
-  taux_couverture: number; // Taux de couverture en pourcentage
+  jours_ouvres: number; // Expected opening days over the period
+  jours_avec_menu: number; // Days with a published menu
+  jours_sans_menu: number; // Days without a published menu
+  taux_couverture: number; // Coverage rate, as a percentage
 }
 
 export interface InsightsRepartitionRepas {
-  matin: number; // Nombre de petits-déjeuners servis sur la période
-  midi: number; // Nombre de déjeuners servis sur la période
-  soir: number; // Nombre de dîners servis sur la période
+  matin: number; // Breakfasts served over the period
+  midi: number; // Lunches served over the period
+  soir: number; // Dinners served over the period
 }
 
 export interface InsightsCouvertureJour {
-  jour: string; // Jour de la semaine
-  jours_ouvres: number; // Nombre d'occurrences de ce jour où le restaurant est censé être ouvert
-  jours_avec_menu: number; // Nombre d'occurrences de ce jour avec un menu publié
-  taux_couverture: number; // Taux de couverture pour ce jour en pourcentage
+  jour: string; // Day of the week
+  jours_ouvres: number; // Occurrences of this weekday on which the restaurant is meant to be open
+  jours_avec_menu: number; // Occurrences of this weekday with a published menu
+  taux_couverture: number; // Coverage rate for this weekday, as a percentage
 }
 
 export interface InsightsSerieActuelle {
-  avec_menu: boolean; // La série en cours est-elle avec menu (true) ou sans menu (false) ?
-  jours: number; // Longueur de la série en cours (en jours d'ouverture)
+  avec_menu: boolean; // Is the current streak one with menus (true) or without (false)?
+  jours: number; // Length of the current streak, in opening days
 }
 
 export interface InsightsSeries {
-  meilleure_serie_avec_menu: number; // Plus longue série de jours d'ouverture consécutifs avec un menu publié
-  plus_longue_serie_sans_menu: number; // Plus longue série de jours d'ouverture consécutifs sans menu publié
+  meilleure_serie_avec_menu: number; // Longest run of consecutive opening days with a published menu
+  plus_longue_serie_sans_menu: number; // Longest run of consecutive opening days without a published menu
   serie_actuelle: InsightsSerieActuelle;
 }
 
 export interface InsightsVariete {
-  plats_uniques: number; // Nombre de plats distincts servis sur la période
-  plats_total: number; // Nombre total de plats servis sur la période (occurrences)
-  taux_variete: number; // Taux de variété (plats_uniques / plats_total) en pourcentage
+  plats_uniques: number; // Distinct dishes served over the period
+  plats_total: number; // Total dishes served over the period (occurrences)
+  taux_variete: number; // Variety rate (plats_uniques / plats_total), as a percentage
 }
 
 export interface InsightsRichesse {
-  moyenne_categories_par_repas: number; // Nombre moyen de catégories par repas
-  moyenne_plats_par_repas: number; // Nombre moyen de plats par repas
+  moyenne_categories_par_repas: number; // Average number of categories per meal
+  moyenne_plats_par_repas: number; // Average number of dishes per meal
 }
 
 export interface InsightsDelaiPublication {
-  moyenne_jours: number | null; // Délai moyen (en jours) entre l'ingestion d'un menu et sa date d'application
+  moyenne_jours: number | null; // Average delay, in days, between a menu being ingested and the date it applies to
 }
 
 export interface InsightsComparaisonRegionale {
-  jours_avec_menu_restaurant: number; // Nombre de jours avec menu pour ce restaurant sur la période
-  moyenne_jours_avec_menu_region: number | null; // Moyenne du nombre de jours avec menu pour les autres restaurants actifs de la région
-  nb_restaurants_compares: number; // Nombre de restaurants actifs de la région ayant publié un menu, utilisés pour la comparaison
-  nb_restaurants_actifs_region: number; // Nombre total de restaurants actifs dans la région (avec ou sans menu publié)
+  jours_avec_menu_restaurant: number; // Days with a menu for this restaurant over the period
+  moyenne_jours_avec_menu_region: number | null; // Average number of days with a menu for the other active restaurants in the region
+  nb_restaurants_compares: number; // Active restaurants in the region that published a menu, used for the comparison
+  nb_restaurants_actifs_region: number; // Total active restaurants in the region (with or without a published menu)
 }
 
 export interface ActivityRun {
-  id: number; // Identifiant de la tâche d'ingestion
-  debut: string | null; // Date et heure de début de la tâche
-  fin: string | null; // Date et heure de fin de la tâche
+  id: number; // Ingestion task identifier
+  debut: string | null; // Task start date and time
+  fin: string | null; // Task end date and time
 }
 
 export interface RestaurantActivity {
-  ajout: string; // Date d'ajout du restaurant dans la base de données
-  modifie: string | null; // Date de dernière mise à jour du restaurant
-  nb_verifications: number; // Nombre total de tâches d'ingestion ayant vérifié ce restaurant
-  dernieres_verifications: ActivityRun[]; // Les dernières tâches d'ingestion, les plus récentes en premier
+  ajout: string; // Date the restaurant was added to the database
+  modifie: string | null; // Date the restaurant was last updated
+  nb_verifications: number; // Total ingestion tasks that checked this restaurant
+  dernieres_verifications: ActivityRun[]; // The latest ingestion tasks, most recent first
 }
 
 export interface RestaurantInsights {
   periode: InsightsPeriode;
   couverture: InsightsCouverture;
   repartition_repas: InsightsRepartitionRepas;
-  plats_frequents: Plat[]; // Plats les plus fréquents sur la période (utilise total pour le nombre d'occurrences)
+  plats_frequents: Plat[]; // Most frequent dishes over the period (uses total for the occurrence count)
   couverture_par_jour: InsightsCouvertureJour[];
   series: InsightsSeries;
   variete: InsightsVariete;

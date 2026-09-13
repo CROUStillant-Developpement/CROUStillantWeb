@@ -56,6 +56,11 @@
       "title": "Find your region",
       "description": "Click on a region to see the CROUS restaurants located there.",
       "cta": "See all restaurants"
+    },
+    "seo": {
+      "title": "Menus of French university restaurants",
+      "description": "Browse today's menus of the CROUS university restaurants across mainland France and its overseas territories, for free. Opening hours, addresses, maps and dishes served, updated several times a day.",
+      "keywords": "CROUS, CROUS menu, university restaurant, student canteen, campus food, today's menu, France, overseas territories"
     }
   },
   "HomeCard": {
@@ -929,8 +934,8 @@
     "dismiss": "Dismiss"
   },
   "CelebrationBanner": {
-    "title": "Thank you for 100,000 visits! 🎉",
-    "message": "CROUStillant has just passed 100,000 visits. Thank you all! The whole team wishes you a great start to the 2026 school year.",
+    "title": "Thank you for 300,000 page views! 🎉",
+    "message": "CROUStillant has just passed 300,000 page views. Thank you all! The whole team wishes you a great start to the 2026 school year.",
     "sub-message": "The project remains 100% free and ad-free! The best way to support us? Share the site with your friends 😎",
     "shareCta": "Share the site",
     "shareText": "CROUStillant: check out CROUS restaurant menus at a glance!",
@@ -939,6 +944,33 @@
       "description": "The site link has been copied to your clipboard. Thanks for sharing it ❤️"
     },
     "dismiss": "Close"
+  },
+  "DishDuel": {
+    "title": "Dish Duel 🍽️",
+    "description": "You found one of the site’s easter eggs! Two dishes face off — pick the one CROUS restaurants have served the most.",
+    "question": "Which dish has been served the most times?",
+    "versus": "VS",
+    "streak": "Streak: {score}",
+    "best": "Best: {score}",
+    "servings": "on the menu {count} times",
+    "loading": "Getting the trays out...",
+    "error": "The dishes could not be loaded right now 😢",
+    "close": "Close",
+    "footnote": "Live data from the CROUStillant API — the 100 most served dishes.",
+    "gameOver": {
+      "title": "Empty tray! 🧽",
+      "score": "You got {score} right in a row.",
+      "record": "New best: {score} correct answers in a row 🏆",
+      "replay": "Play again",
+      "share": "Share"
+    },
+    "share": {
+      "text": "I scored {score} on the Dish Duel hidden inside CROUStillant. Think you can beat it?",
+      "copied": {
+        "title": "Score copied!",
+        "description": "Your score was copied to the clipboard. Go challenge your friends 😎"
+      }
+    }
   },
   "MobilePage": {
     "hero": {
@@ -1110,5 +1142,10 @@
       "description": "Did you build an app using the CROUStillant API and want it featured here? Reach out to us!",
       "button": "Contact us"
     }
+  },
+  "Metadata": {
+    "siteDescription": "CROUStillant lets you browse the menus of the CROUS university restaurants across France and its overseas territories, for free.",
+    "bannerAlt": "CROUStillant — menus of the CROUS university restaurants",
+    "restaurantImageAlt": "{name} — menu and practical information"
   }
 }
