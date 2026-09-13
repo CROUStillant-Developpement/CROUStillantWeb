@@ -2,35 +2,19 @@ import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import { ContactMethods } from "@/components/contact-methods";
 import { Card, CardContent } from "@/components/ui/card";
+import { buildPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ContactPage");
   const locale = await getLocale();
 
-  return {
+  return buildPageMetadata({
+    locale,
+    path: "/contact",
     title: t("seo.title"),
     description: t("seo.description"),
     keywords: t("seo.keywords"),
-    alternates: {
-      canonical: `/${locale}/contact`,
-      languages: {
-        fr: "/fr/contact",
-        en: "/en/contact",
-      },
-    },
-    openGraph: {
-      title: t("seo.title"),
-      description: t("seo.description"),
-      images: { url: process.env.WEB_URL + "/banner.png" },
-      siteName: "CROUStillant",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t("seo.title"),
-      description: t("seo.description"),
-      images: { url: process.env.WEB_URL + "/banner.png" },
-    },
-  };
+  });
 }
 
 export default async function ContactPage() {

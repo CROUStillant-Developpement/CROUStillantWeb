@@ -56,6 +56,11 @@
       "title": "Trouvez votre région",
       "description": "Cliquez sur une région pour voir les restaurants CROUS qui s'y trouvent.",
       "cta": "Voir tous les restaurants"
+    },
+    "seo": {
+      "title": "Les menus des restaurants universitaires CROUS",
+      "description": "Consultez gratuitement les menus du jour des restaurants universitaires CROUS de France et d'outre-mer. Horaires, adresses, cartes et plats servis, mis à jour plusieurs fois par jour.",
+      "keywords": "CROUS, menu CROUS, restaurant universitaire, RU, resto U, menu du jour, restauration universitaire, étudiant, France, outre-mer"
     }
   },
   "HomeCard": {
@@ -1138,5 +1143,10 @@
       "description": "Vous avez développé une application utilisant l’API CROUStillant et souhaitez la voir figurer ici ? Contactez-nous !",
       "button": "Nous contacter"
     }
+  },
+  "Metadata": {
+    "siteDescription": "CROUStillant vous permet de consulter gratuitement les menus des restaurants universitaires CROUS de France et d'outre-mer.",
+    "bannerAlt": "CROUStillant — les menus des restaurants universitaires CROUS",
+    "restaurantImageAlt": "{name} — menu et informations pratiques"
   }
 }

@@ -56,6 +56,11 @@
       "title": "Find your region",
       "description": "Click on a region to see the CROUS restaurants located there.",
       "cta": "See all restaurants"
+    },
+    "seo": {
+      "title": "Menus of French university restaurants",
+      "description": "Browse today's menus of the CROUS university restaurants across mainland France and its overseas territories, for free. Opening hours, addresses, maps and dishes served, updated several times a day.",
+      "keywords": "CROUS, CROUS menu, university restaurant, student canteen, campus food, today's menu, France, overseas territories"
     }
   },
   "HomeCard": {
@@ -1137,5 +1142,10 @@
       "description": "Did you build an app using the CROUStillant API and want it featured here? Reach out to us!",
       "button": "Contact us"
     }
+  },
+  "Metadata": {
+    "siteDescription": "CROUStillant lets you browse the menus of the CROUS university restaurants across France and its overseas territories, for free.",
+    "bannerAlt": "CROUStillant — menus of the CROUS university restaurants",
+    "restaurantImageAlt": "{name} — menu and practical information"
   }
 }

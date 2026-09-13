@@ -8,7 +8,14 @@ import BackToTopButton from "@/components/ui/back-to-top-button";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/app/[locale]/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  buildAlternates,
+} from "@/lib/metadata";
+import { buildSiteJsonLd } from "@/lib/site-jsonld";
+import JsonLd from "@/components/json-ld";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import UmamiProvider from "next-umami";
@@ -18,75 +25,106 @@ const inter = Inter({ subsets: ["latin"] });
 const APP_NAME = "CROUStillant";
 const APP_DEFAULT_TITLE = "CROUStillant";
 const APP_TITLE_TEMPLATE = "%s - CROUStillant";
-const APP_DESCRIPTION =
-  "CROUStillant vous permet de consulter les menus des restaurants CROUS de France et d'outre-mer.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.WEB_URL || "https://croustillant.menu"),
-  applicationName: APP_NAME,
-  title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
-  },
-  description: APP_DESCRIPTION,
-  keywords: [
-    "CROUS",
-    "CROUStillant",
-    "Crous Menu",
-    "Menu",
-    "Restaurant",
-    "Cantine",
-    "Restauration",
-    "Université",
-    "Étudiant",
-    "RU",
-    "Resto U",
-    "Restauration Universitaire",
-    "Nourriture",
-    "Repas",
-    "France",
-    "Outre-mer",
-  ],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+/**
+ * Site-wide defaults inherited by every page.
+ *
+ * Localised through `generateMetadata` rather than a static export: these
+ * strings used to be hardcoded French, so English pages advertised a French
+ * description and French keywords to crawlers.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Metadata");
+  const locale = await getLocale();
+
+  const description = t("siteDescription");
+  const banner = { ...DEFAULT_OG_IMAGE, alt: t("bannerAlt") };
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    applicationName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description,
+    authors: [
+      {
+        name: "CROUStillant Développement",
+        url: "https://github.com/CROUStillant-Developpement",
+      },
+    ],
+    creator: "CROUStillant Développement",
+    publisher: "CROUStillant Développement",
+    category: "food",
+    keywords: [
+      "CROUS",
+      "CROUStillant",
+      "Crous Menu",
+      "Menu",
+      "Restaurant",
+      "Cantine",
+      "Restauration",
+      "Université",
+      "Étudiant",
+      "RU",
+      "Resto U",
+      "Restauration Universitaire",
+      "Nourriture",
+      "Repas",
+      "France",
+      "Outre-mer",
+    ],
+    alternates: buildAlternates(locale),
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  openGraph: {
-    type: "website",
-    siteName: APP_NAME,
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/logo.png",
     },
-    description: APP_DESCRIPTION,
-    images: { url: process.env.WEB_URL + "/banner.png" },
-    url: process.env.WEB_URL,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: APP_DEFAULT_TITLE,
     },
-    description: APP_DESCRIPTION,
-    images: { url: process.env.WEB_URL + "/banner.png" },
-  },
-};
+    formatDetection: {
+      telephone: false,
+    },
+    openGraph: {
+      type: "website",
+      siteName: APP_NAME,
+      title: {
+        default: APP_DEFAULT_TITLE,
+        template: APP_TITLE_TEMPLATE,
+      },
+      description,
+      images: [banner],
+      url: `${SITE_URL}/${locale}`,
+      locale: locale === "en" ? "en_GB" : "fr_FR",
+      alternateLocale: locale === "en" ? ["fr_FR"] : ["en_GB"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: {
+        default: APP_DEFAULT_TITLE,
+        template: APP_TITLE_TEMPLATE,
+      },
+      description,
+      images: [banner],
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -105,6 +143,9 @@ export default async function RootLayout({
 
   const messages = await getMessages();
 
+  const t = await getTranslations("Metadata");
+  const siteJsonLd = buildSiteJsonLd(locale, t("siteDescription"));
+
   return (
     <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
@@ -112,6 +153,7 @@ export default async function RootLayout({
           websiteId="727eceb7-824d-4cac-b24b-789188b2480c"
           src="https://analytics.bayfield.dev/script.js"
         />
+        <JsonLd data={siteJsonLd} />
       </head>
       <body
         className={cn(
