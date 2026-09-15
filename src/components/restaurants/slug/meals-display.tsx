@@ -44,6 +44,9 @@ function MealSection({
         }
         title={qrTitle}
         url={(() => {
+          if (typeof window === "undefined") {
+            return "";
+          }
           const u = new URL(window.location.href);
           u.searchParams.set("date", toLocalISODateString(date));
           // if past date, add #history to URL
