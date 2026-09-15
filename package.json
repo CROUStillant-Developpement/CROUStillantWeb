@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/copy-maplibre-worker.mjs",
     "dev": "next dev --turbopack",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -36,7 +38,7 @@
     "date-fns": "^4.4.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.31.0",
-    "maplibre-gl": "^5.24.0",
+    "maplibre-gl": "^6.4.1",
     "motion": "^13.2.0",
     "next": "^16.3.3",
     "next-intl": "^4.14.2",
