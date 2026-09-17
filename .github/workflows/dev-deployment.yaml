@@ -50,7 +50,6 @@ jobs:
           {
             echo "API_URL=${API_URL}"
             echo "API_KEY=${API_KEY}"
-            echo "WEB_URL=https://beta.croustillant.menu"
           } > .env
 
       - name: Extract version from package.json
@@ -84,7 +83,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            WEB_URL=${{ secrets.WEB_URL }}
+            WEB_URL=https://beta.croustillant.menu
             API_URL=${{ secrets.API_URL }}
           secret-files: |
             dotenv=./.env
