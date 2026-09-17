@@ -11,6 +11,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import {
   DEFAULT_OG_IMAGE,
+  IS_PRODUCTION_DEPLOYMENT,
+  NO_INDEX_ROBOTS,
   SITE_URL,
   buildAlternates,
 } from "@/lib/metadata";
@@ -76,17 +78,19 @@ export async function generateMetadata(): Promise<Metadata> {
       "Outre-mer",
     ],
     alternates: buildAlternates(locale),
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    robots: IS_PRODUCTION_DEPLOYMENT
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        }
+      : NO_INDEX_ROBOTS,
     manifest: "/manifest.webmanifest",
     icons: {
       icon: "/favicon.ico",

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import RestaurantPage from "@/components/restaurants/slug/restaurant-page";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getRestaurant } from "@/services/restaurant-service";
 import {
@@ -11,18 +11,11 @@ import { buildRestaurantJsonLd } from "@/lib/restaurant-jsonld";
 import { buildRestaurantBreadcrumb } from "@/lib/site-jsonld";
 import JsonLd from "@/components/json-ld";
 import { DEFAULT_OG_IMAGE, SITE_URL, buildPageMetadata } from "@/lib/metadata";
+import {
+  buildRestaurantSlug,
+  extractRestaurantId,
+} from "@/lib/restaurant-slug";
 import { DateMenu, Menu } from "@/services/types";
-
-
-function extractRestaurantId(slug: unknown): number | null {
-  if (typeof slug !== "string") return null;
-
-  const match = slug.match(/-r(\d+)$/) || slug.match(/^(\d+)$/);
-  if (!match) return null;
-
-  const id = parseInt(match[1], 10);
-  return isNaN(id) ? null : id;
-}
 
 
 // Server-side fetch for this route — routed through the shared API
@@ -78,7 +71,9 @@ export async function generateMetadata({
 
   return buildPageMetadata({
     locale,
-    path: `/restaurants/${slug}`,
+    // The canonical slug, never the requested one: an alias URL must advertise
+    // the URL it redirects to, not itself. See `buildRestaurantSlug`.
+    path: `/restaurants/${buildRestaurantSlug(restaurant)}`,
     title: t("seo.title", { name: restaurant.nom }),
     description: t("seo.description", {
       name: restaurant.nom,
@@ -126,12 +121,22 @@ export default async function Restaurant({
   }
 
   const locale = await getLocale();
+
+  // Aliases (a bare id, or a name the CROUS has since changed) resolve to the
+  // same restaurant and used to render a 200 that canonicalised to itself,
+  // which is how the same restaurant ended up indexed under several URLs.
+  // Redirecting permanently leaves exactly one indexable URL per locale.
+  const canonicalSlug = buildRestaurantSlug(restaurant);
+  if (slug !== canonicalSlug) {
+    permanentRedirect(`/${locale}/restaurants/${canonicalSlug}`);
+  }
+
   const { menu, dates } = await fetchMenuServer(restaurant.code);
 
   const jsonLd = buildRestaurantJsonLd(
     restaurant,
     menu,
-    `${SITE_URL}/${locale}/restaurants/${slug}`
+    `${SITE_URL}/${locale}/restaurants/${canonicalSlug}`
   );
 
   const tRestaurants = await getTranslations("RestaurantsPage");
@@ -139,7 +144,7 @@ export default async function Restaurant({
     locale,
     tRestaurants("seo.title"),
     restaurant.nom,
-    slug
+    canonicalSlug
   );
 
   return (

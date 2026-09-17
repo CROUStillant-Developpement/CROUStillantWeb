@@ -40,10 +40,39 @@ function getClientIp(request: NextRequest): string {
   return "unknown";
 }
 
+const LOCALE_PREFIX = /^\/(fr|en)(\/|$)/;
+
+// Routes that live outside the localized tree and must never be prefixed.
+const NON_LOCALIZED_PATHS = new Set([
+  "/health",
+  "/version",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/manifest.webmanifest",
+  "/llms.txt",
+]);
+
 // Locale negotiation applies to page routes only. Asset routes are matched
 // purely so they count against the rate limit, and must not be rewritten.
 function isPageRequest(pathname: string): boolean {
-  return pathname === "/" || /^\/(fr|en)(\/|$)/.test(pathname);
+  return pathname === "/" || LOCALE_PREFIX.test(pathname);
+}
+
+/**
+ * True for a page URL that is missing its locale prefix.
+ *
+ * The redirect target is fixed rather than content-negotiated: a permanent
+ * redirect that varies per Accept-Language cannot be cached, and these URLs
+ * were French to begin with.
+ */
+function needsLocalePrefix(pathname: string): boolean {
+  if (pathname === "/" || LOCALE_PREFIX.test(pathname)) return false;
+  if (pathname.startsWith("/_next") || pathname.startsWith("/too-many-requests")) {
+    return false;
+  }
+  if (NON_LOCALIZED_PATHS.has(pathname)) return false;
+  // Anything with an extension is a static asset, not a page.
+  return !/\.[a-zA-Z0-9]+$/.test(pathname);
 }
 
 function checkRateLimit(ip: string): { limited: boolean; retryAfterSeconds: number } {
@@ -69,6 +98,12 @@ function checkRateLimit(ip: string): { limited: boolean; retryAfterSeconds: numb
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // The container's healthcheck reaches the app without CF-Connecting-IP, so it
+  // shares the "unknown" bucket with every other direct request. Rate-limiting
+  // it would let a burst take the container out of rotation.
+  if (pathname === "/health") return NextResponse.next();
+
   const isPage = isPageRequest(pathname);
 
   const ip = getClientIp(request);
@@ -93,13 +128,21 @@ export default function proxy(request: NextRequest) {
     return response;
   }
 
+  if (needsLocalePrefix(pathname)) {
+    const target = request.nextUrl.clone();
+    target.pathname = `/${routing.defaultLocale}${pathname}`;
+    return NextResponse.redirect(target, 308);
+  }
+
   if (!isPage) return NextResponse.next();
 
   return intlMiddleware(request);
 }
 
 export const config = {
-  // Internationalized pathnames, plus the image optimizer — the most expensive
-  // endpoint the app exposes, and the one a scrape burst would hit hardest.
-  matcher: ["/", "/(fr|en)/:path*", "/_next/image"],
+  // Everything but Next's own asset routes and static files, so unprefixed
+  // page URLs reach `needsLocalePrefix` instead of 404ing. `/_next/image` is
+  // re-added on its own: it is excluded above, but it is the most expensive
+  // endpoint the app exposes and must still count against the rate limit.
+  matcher: ["/((?!_next|.*\\.[a-zA-Z0-9]+$).*)", "/_next/image"],
 };

@@ -5,6 +5,22 @@ import { routing } from "@/i18n/routing";
 export const SITE_URL = process.env.WEB_URL || "https://croustillant.menu";
 export const SITE_NAME = "CROUStillant";
 
+/** The only origin that may appear in search results. */
+export const CANONICAL_ORIGIN = "https://croustillant.menu";
+
+/**
+ * False on every deployment that is not production — beta above all.
+ */
+export const IS_PRODUCTION_DEPLOYMENT =
+  SITE_URL.replace(/\/$/, "") === CANONICAL_ORIGIN;
+
+/** Applied site-wide on non-production deployments. */
+export const NO_INDEX_ROBOTS = {
+  index: false,
+  follow: false,
+  googleBot: { index: false, follow: false },
+} as const;
+
 /**
  * Open Graph wants a full locale code (language + territory), not the bare
  * language tag used in the URL.

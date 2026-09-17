@@ -8,10 +8,11 @@ export const revalidate = 300;
 
 import type { MetadataRoute } from "next";
 import { getRestaurants } from "@/services/restaurant-service";
-import { slugify } from "@/lib/utils";
+import { buildRestaurantSlug } from "@/lib/restaurant-slug";
 
 const BASE = process.env.WEB_URL || "https://croustillant.menu";
 const LOCALES = ["fr", "en"] as const;
+const DEFAULT_LOCALE = "fr";
 
 type ChangeFreq = MetadataRoute.Sitemap[0]["changeFrequency"];
 
@@ -64,10 +65,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return STATIC_ENTRIES;
   }
 
-  const restaurantEntries: MetadataRoute.Sitemap = restaurants.data.flatMap(
+  // Only the default locale is submitted for restaurant sheets, with the
+  // English URL still declared through hreflang.
+  const restaurantEntries: MetadataRoute.Sitemap = restaurants.data.map(
     (restaurant) => {
-      const slug = `${slugify(restaurant.nom)}-r${restaurant.code}`;
-      return localeEntry(`/restaurants/${slug}`, "daily", 0.9, now);
+      const path = `/restaurants/${buildRestaurantSlug(restaurant)}`;
+
+      return {
+        url: `${BASE}/${DEFAULT_LOCALE}${path}`,
+        lastModified: now,
+        changeFrequency: "daily",
+        priority: 0.9,
+        alternates: {
+          languages: Object.fromEntries(
+            LOCALES.map((l) => [l, `${BASE}/${l}${path}`])
+          ),
+        },
+      };
     }
   );
 

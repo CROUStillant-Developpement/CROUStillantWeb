@@ -4,17 +4,7 @@ import { fetchTodayMenuForScreen } from "@/actions/screen-actions";
 import ScreenPage from "@/components/restaurants/slug/screen/screen-page";
 import { getTranslations } from "next-intl/server";
 import { getRestaurant } from "@/services/restaurant-service";
-
-
-function extractRestaurantId(slug: unknown): number | null {
-  if (typeof slug !== "string") return null;
-
-  const match = slug.match(/-r(\d+)$/) || slug.match(/^(\d+)$/);
-  if (!match) return null;
-
-  const id = parseInt(match[1], 10);
-  return isNaN(id) ? null : id;
-}
+import { extractRestaurantId } from "@/lib/restaurant-slug";
 
 // Routed through the shared API helper so it picks up the API key
 // and the 5-minute response cache.
