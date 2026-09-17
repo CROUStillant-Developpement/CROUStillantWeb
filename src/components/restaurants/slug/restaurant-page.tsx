@@ -2,8 +2,9 @@
 
 import { DateMenu, Menu, Restaurant } from "@/services/types";
 import { Button } from "@/components/ui/button";
-import { Heart, QrCode, ScreenShare } from "lucide-react";
+import { CalendarPlus, Heart, QrCode, ScreenShare } from "lucide-react";
 import QrCodeDialog from "@/components/qr-code-dialog";
+import CalendarSubscribeDialog, { useCalendarHint } from "./calendar-subscribe-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
 import RestaurantInsights from "@/components/restaurants/slug/restaurant-insights";
@@ -67,6 +68,7 @@ export default function RestaurantPage({
   const [showFavoriteHint, setShowFavoriteHint] = useState(false);
   const [imgSrc, setImgSrc] = useState(restaurant.image_url || "/default_ru.png");
   const { visible: showCelebration, dismiss: dismissCelebration } = useCelebrationBanner();
+  const { visible: showCalendarHint, dismiss: dismissCalendarHint } = useCalendarHint();
 
   useEffect(() => {
     // Show hint after a short delay if not favourite
@@ -165,6 +167,25 @@ export default function RestaurantPage({
                   <ScreenShare size={20} />
                 </Link>
               </Button>
+              <CalendarSubscribeDialog
+                restaurantCode={restaurant.code}
+                restaurantName={restaurant.nom}
+                dialogTrigger={
+                  <Button
+                    size="icon"
+                    aria-label={tCard("addToCalendar")}
+                    title={tCard("addToCalendar")}
+                    className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                    onClick={() =>
+                      umami.event("Restaurant.Calendar", {
+                        restaurant: restaurant.code,
+                      })
+                    }
+                  >
+                    <CalendarPlus size={20} />
+                  </Button>
+                }
+              />
               <QrCodeDialog
                 dialogTrigger={
                   <Button
@@ -258,6 +279,59 @@ export default function RestaurantPage({
           )}
         </AnimatePresence>
 
+        <AnimatePresence>
+          {showCalendarHint && isFavourite && !showCelebration && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="overflow-hidden"
+            >
+              <div className="bg-primary/5 border border-primary/20 backdrop-blur-md rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 group hover:bg-primary/10 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="hidden md:flex h-12 w-12 rounded-2xl bg-primary/10 text-primary items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <CalendarPlus size={24} />
+                  </div>
+                  <p className="text-sm md:text-base font-semibold text-foreground/90 leading-relaxed">
+                    {t("calendarHint")}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CalendarSubscribeDialog
+                    restaurantCode={restaurant.code}
+                    restaurantName={restaurant.nom}
+                    dialogTrigger={
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="rounded-xl h-10 px-4 font-bold hover:bg-primary/10 text-primary"
+                        onClick={() =>
+                          umami.event("Restaurant.Calendar.HintClick", {
+                            restaurant: restaurant.code,
+                          })
+                        }
+                      >
+                        <CalendarPlus className="w-4 h-4 mr-2" />
+                        {t("calendarHintCta")}
+                      </Button>
+                    }
+                  />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label={t("dismissHint")}
+                    className="h-10 w-10 rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
+                    onClick={dismissCalendarHint}
+                  >
+                    <CloseIcon size={18} className="opacity-50" />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {menuLoading && datesLoading ? (
           <RestaurantPageSkeleton />
         ) : (
@@ -302,6 +376,7 @@ export default function RestaurantPage({
                       selectedDateLunch={selectedDateLunch}
                       selectedDateDinner={selectedDateDinner}
                       noMenuAtAll={noMenuAtAll}
+                      restaurant={restaurant}
                     />
                   </TabsContent>
 

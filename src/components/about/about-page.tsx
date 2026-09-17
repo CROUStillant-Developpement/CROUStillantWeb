@@ -18,7 +18,9 @@ import {
   Smartphone,
   LayoutTemplate,
   ArrowRight,
+  CalendarPlus,
 } from "lucide-react";
+import { CALENDAR_API_URL } from "@/lib/calendar";
 import { FaGithub, FaAndroid, FaApple, FaGooglePlay } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
@@ -351,6 +353,43 @@ export default function AboutPage() {
                 />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Calendar Subscription Card */}
+        <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+                <CalendarPlus className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
+                {t("calendar.title")}
+              </h2>
+            </div>
+            <p className="text-lg text-muted-foreground mb-6">
+              {t("calendar.description")}
+            </p>
+            <ol className="space-y-2 mb-8 text-muted-foreground font-medium list-decimal list-inside">
+              <li>{t("calendar.steps.step1")}</li>
+              <li>{t("calendar.steps.step2")}</li>
+              <li>{t("calendar.steps.step3")}</li>
+            </ol>
+            <Link href="/restaurants">
+              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                {t("calendar.cta")}
+                <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+          <div className="flex-1 w-full min-w-0 space-y-3">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-primary/70">{t("calendar.url_title")}</p>
+            <div className="p-4 rounded-2xl bg-background/50 border border-border/20 font-mono text-sm break-all opacity-80 select-all">
+              {`${CALENDAR_API_URL}/<code>.ics`}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {t("calendar.url_params")}
+            </p>
           </div>
         </div>
 

@@ -23,6 +23,8 @@ interface MenuDisplaySectionProps {
   selectedDateDinner: Repas | null;
   rightPanel?: ReactNode;
   noMenuAtAll?: boolean;
+  /** Enables the "add to calendar" shortcut on each meal card. */
+  restaurant?: { code: number; nom: string };
 }
 
 const MenuAlert = ({
@@ -59,6 +61,7 @@ export default function MenuDisplaySection({
   selectedDateLunch,
   selectedDateDinner,
   noMenuAtAll = false,
+  restaurant,
 }: MenuDisplaySectionProps) {
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
@@ -166,6 +169,7 @@ export default function MenuDisplaySection({
                     selectedDateLunch={selectedDateLunch}
                     selectedDateDinner={selectedDateDinner}
                     date={selectedDate}
+                    restaurant={restaurant}
                   />
                 </motion.div>
               </AnimatePresence>
