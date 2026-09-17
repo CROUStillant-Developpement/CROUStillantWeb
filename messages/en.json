@@ -36,6 +36,11 @@
       "description": "CROUStillant offers you a complete selection of Crous restaurants.",
       "cta": "learn more"
     },
+    "cardCalendar": {
+      "title": "Menus in your calendar",
+      "description": "Subscribe to your restaurant's menu in Google Calendar, Apple Calendar or Outlook: it updates by itself.",
+      "cta": "Pick my restaurant"
+    },
     "cardWidget": {
       "title": "Embed CROUStillant anywhere",
       "description": "Build your own widget with drag-and-drop and embed it easily on any website, blog or university portal.",
@@ -158,6 +163,8 @@
     "favoriteHint": "Add this restaurant to your favorites to find it more quickly on your home page!",
     "favoriteHintCta": "Add to favorites",
     "dismissHint": "Dismiss",
+    "calendarHint": "Get this restaurant's menu straight in your calendar, updated automatically!",
+    "calendarHintCta": "Add to my calendar",
     "tabs": {
       "menu": "Menu",
       "insights": "Insights",
@@ -273,7 +280,8 @@
     "addToFavourites": "Add to favourites",
     "removeFromFavourites": "Remove from favourites",
     "viewOnScreen": "View menu on screen",
-    "viewQrCode": "Show QR Code"
+    "viewQrCode": "Show QR Code",
+    "addToCalendar": "Add the menu to my calendar"
   },
   "AboutPage": {
     "presentation": {
@@ -321,6 +329,18 @@
         "menu": "Menu",
         "hours": "Hours"
       }
+    },
+    "calendar": {
+      "title": "Menus in your calendar",
+      "description": "Subscribe to your restaurant's menu from Google Calendar, Apple Calendar or Outlook. Each meal shows up as an event listing the dishes, and the calendar updates automatically as soon as a new menu is published.",
+      "steps": {
+        "step1": "Open your restaurant's page.",
+        "step2": "Click the calendar button at the top of the page.",
+        "step3": "Pick your app: you're done!"
+      },
+      "cta": "Pick my restaurant",
+      "url_title": "Calendar link",
+      "url_params": "Optional parameters: repas (matin, midi, soir) to filter meals, and minimal=true for short 15-minute events."
     },
     "team": {
       "title": "The team",
@@ -472,6 +492,33 @@
       "cta": "Copy",
       "toastTitle": "Link copied!",
       "toastDescription": "The menu link has been copied to your clipboard."
+    }
+  },
+  "CalendarDialog": {
+    "title": "Add to my calendar",
+    "description": "Subscribe to {name}'s menu: each meal shows up in your calendar with the list of dishes, and updates automatically.",
+    "meals": {
+      "title": "Meals",
+      "matin": "Breakfast",
+      "midi": "Lunch",
+      "soir": "Dinner"
+    },
+    "minimal": {
+      "title": "Short events",
+      "description": "Shows 15-minute events (8am, 12pm, 7pm) instead of the opening hours, to keep your calendar tidy."
+    },
+    "providers": {
+      "title": "Add to",
+      "google": "Google",
+      "apple": "Apple",
+      "outlook": "Outlook"
+    },
+    "copyLink": {
+      "title": "Or copy the link",
+      "cta": "Copy",
+      "help": "Paste this link into your calendar app (e.g. Google Calendar: Other calendars → From URL). Updates may take a few hours to show up.",
+      "toastTitle": "Link copied!",
+      "toastDescription": "The calendar link has been copied to your clipboard."
     }
   },
   "Pagination": {

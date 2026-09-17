@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Smartphone,
   LayoutTemplate,
+  CalendarPlus,
 } from "lucide-react";
 import { FaAndroid, FaApple } from "react-icons/fa";
 import { useTranslations } from "next-intl";
@@ -149,8 +150,19 @@ export default function HomePage({
             </BasicCard>
           </motion.div>
 
-          {/* Widget builder — full width */}
-          <motion.div variants={fadeUp} className="md:col-span-2">
+          <motion.div variants={fadeUp}>
+            <BasicCard
+              title={t("cardCalendar.title")}
+              description={t("cardCalendar.description")}
+              cta={t("cardCalendar.cta")}
+              ctaLink="restaurants"
+              eventName="Home.Calendar"
+            >
+              <CalendarPlus size={180} className="text-primary" />
+            </BasicCard>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
             <BasicCard
               title={t("cardWidget.title")}
               description={t("cardWidget.description")}

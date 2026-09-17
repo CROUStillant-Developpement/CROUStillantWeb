@@ -8,6 +8,7 @@ export const revalidate = 300;
 
 import { getRestaurants } from "@/services/restaurant-service";
 import { slugify } from "@/lib/utils";
+import { CALENDAR_API_URL } from "@/lib/calendar";
 
 const BASE = process.env.WEB_URL || "https://croustillant.menu";
 const API = process.env.API_URL || "https://api.croustillant.menu/v1";
@@ -104,6 +105,16 @@ iframe, with no API key and no account.
 - Information widget: \`${API}/restaurants/{code}/iframe\`
 - Today's menu widget: \`${API}/restaurants/{code}/menu/iframe\`
 - Custom widget: \`${API}/restaurants/{code}/iframe/custom\` (parameters \`blocks\`, \`meals\`, \`theme\`, \`color\`, \`font\`, \`height\`, \`lang\`, \`date\`)
+
+## Calendar subscription
+
+Every restaurant's menus are published as an iCalendar feed that Google Calendar,
+Apple Calendar and Outlook can subscribe to: one event per meal, refreshed
+automatically, with the dishes in the event description. The "add to calendar"
+button on each restaurant page generates the one-click subscription links.
+
+- Feed: \`${CALENDAR_API_URL}/{code}.ics\` (stable, unversioned URL — prefer it for subscriptions; also served at \`${API}/restaurants/{code}/menu/calendar.ics\`)
+- Optional parameters: \`repas\` (comma-separated among \`matin\`, \`midi\`, \`soir\`) and \`minimal=true\` (fixed 15-minute events at 8:00, 12:00 and 19:00 instead of the opening hours)
 
 ## Screen mode
 

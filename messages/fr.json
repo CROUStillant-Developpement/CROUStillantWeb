@@ -36,6 +36,11 @@
       "description": "CROUStillant vous propose une sélection complète des restaurants du CROUS.",
       "cta": "En savoir plus"
     },
+    "cardCalendar": {
+      "title": "Les menus dans votre agenda",
+      "description": "Abonnez-vous au menu de votre restaurant dans Google Agenda, Apple Calendar ou Outlook : il se met à jour tout seul.",
+      "cta": "Choisir mon restaurant"
+    },
     "cardWidget": {
       "title": "Intégrez CROUStillant partout",
       "description": "Créez votre propre widget par glisser-déposer et intégrez-le facilement sur n'importe quel site, blog ou ENT.",
@@ -158,6 +163,8 @@
     "favoriteHint": "Ajoutez ce restaurant à vos favoris pour le retrouver plus rapidement sur votre page d'accueil !",
     "favoriteHintCta": "Ajouter aux favoris",
     "dismissHint": "Fermer",
+    "calendarHint": "Retrouvez le menu de ce restaurant directement dans votre agenda, mis à jour automatiquement !",
+    "calendarHintCta": "Ajouter à mon agenda",
     "tabs": {
       "menu": "Menu",
       "insights": "Statistiques",
@@ -273,7 +280,8 @@
     "addToFavourites": "Ajouter aux favoris",
     "removeFromFavourites": "Retirer des favoris",
     "viewOnScreen": "Afficher le menu sur écran",
-    "viewQrCode": "Afficher le QR Code"
+    "viewQrCode": "Afficher le QR Code",
+    "addToCalendar": "Ajouter le menu à mon agenda"
   },
   "AboutPage": {
     "presentation": {
@@ -321,6 +329,18 @@
         "menu": "Menu",
         "hours": "Horaires"
       }
+    },
+    "calendar": {
+      "title": "Les menus dans votre agenda",
+      "description": "Abonnez-vous au menu de votre restaurant depuis Google Agenda, Apple Calendar ou Outlook. Chaque repas apparaît comme un événement avec la liste des plats, et le calendrier se met à jour automatiquement dès qu'un nouveau menu est publié.",
+      "steps": {
+        "step1": "Ouvrez la page de votre restaurant.",
+        "step2": "Cliquez sur le bouton calendrier en haut de la page.",
+        "step3": "Choisissez votre application : c'est terminé !"
+      },
+      "cta": "Choisir mon restaurant",
+      "url_title": "Lien du calendrier",
+      "url_params": "Paramètres facultatifs : repas (matin, midi, soir) pour filtrer les repas, et minimal=true pour des événements courts de 15 minutes."
     },
     "team": {
       "title": "L'équipe",
@@ -472,6 +492,33 @@
       "cta": "Copier",
       "toastTitle": "Lien copié!",
       "toastDescription": "Le lien du menu a été copié dans votre presse-papiers."
+    }
+  },
+  "CalendarDialog": {
+    "title": "Ajouter à mon agenda",
+    "description": "Abonnez-vous au menu de {name} : chaque repas apparaît dans votre agenda avec la liste des plats, et se met à jour automatiquement.",
+    "meals": {
+      "title": "Repas",
+      "matin": "Petit-déjeuner",
+      "midi": "Déjeuner",
+      "soir": "Dîner"
+    },
+    "minimal": {
+      "title": "Événements courts",
+      "description": "Affiche des événements de 15 minutes (8h, 12h, 19h) plutôt que les horaires d'ouverture, pour ne pas encombrer votre agenda."
+    },
+    "providers": {
+      "title": "Ajouter à",
+      "google": "Google",
+      "apple": "Apple",
+      "outlook": "Outlook"
+    },
+    "copyLink": {
+      "title": "Ou copiez le lien",
+      "cta": "Copier",
+      "help": "Collez ce lien dans votre application de calendrier (ex. Google Agenda : Autres agendas → À partir de l'URL). Les mises à jour peuvent prendre quelques heures à apparaître.",
+      "toastTitle": "Lien copié !",
+      "toastDescription": "Le lien du calendrier a été copié dans votre presse-papiers."
     }
   },
   "Pagination": {
