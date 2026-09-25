@@ -19,6 +19,11 @@ describe("getRestaurantCity", () => {
     expect(getRestaurantCity(restaurant("62 rue Michel Ange - 44600, Saint Nazaire"))).toBe("Saint Nazaire");
   });
 
+  it("reads a trailing \"à <ville>\"", () => {
+    expect(getRestaurantCity(restaurant("18 avenue de Bardanac à Pessac"))).toBe("Pessac");
+    expect(getRestaurantCity(restaurant("2 avenue Poplawski à PAU"))).toBe("Pau");
+  });
+
   it("falls back to the CROUS region", () => {
     expect(getRestaurantCity(restaurant("Avenue Jean Monnet"))).toBe("Reims");
     expect(getRestaurantCity(restaurant(null as unknown as string))).toBe("Reims");

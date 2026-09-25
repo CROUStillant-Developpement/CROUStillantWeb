@@ -8,9 +8,11 @@ import {
   getMenuByRestaurantId,
 } from "@/services/menu-service";
 import { buildRestaurantJsonLd } from "@/lib/restaurant-jsonld";
-import { buildRestaurantBreadcrumb } from "@/lib/site-jsonld";
+import { buildBreadcrumb } from "@/lib/site-jsonld";
+import { buildRegionSlug } from "@/lib/region-slug";
+import { getRestaurants } from "@/services/restaurant-service";
 import JsonLd from "@/components/json-ld";
-import RestaurantSummary from "@/components/restaurants/slug/restaurant-summary";
+import RestaurantNearby from "@/components/restaurants/slug/restaurant-nearby";
 import { DEFAULT_OG_IMAGE, SITE_URL, buildPageMetadata } from "@/lib/metadata";
 import {
   buildRestaurantSlug,
@@ -166,12 +168,23 @@ export default async function Restaurant({
   );
 
   const tRestaurants = await getTranslations("RestaurantsPage");
-  const breadcrumbJsonLd = buildRestaurantBreadcrumb(
-    locale,
-    tRestaurants("seo.title"),
-    restaurant.nom,
-    canonicalSlug
-  );
+  const tRegion = await getTranslations("RegionPage");
+  const regionSlug = buildRegionSlug(restaurant.region);
+  const breadcrumbJsonLd = buildBreadcrumb(locale, [
+    { name: tRestaurants("seo.title"), path: "/restaurants" },
+    {
+      name: tRegion("breadcrumb", { region: restaurant.region.libelle }),
+      path: `/crous/${regionSlug}`,
+    },
+    { name: restaurant.nom, path: `/restaurants/${canonicalSlug}` },
+  ]);
+
+  // The full list is already cached for the sitemap and the list page; reading
+  // the region out of it costs nothing extra.
+  const allRestaurants = await getRestaurants();
+  const regionRestaurants = allRestaurants.success
+    ? allRestaurants.data.filter((r) => r.region.code === restaurant.region.code)
+    : [];
 
   return (
     <>
@@ -181,7 +194,12 @@ export default async function Restaurant({
         restaurant={restaurant}
         initialMenu={menu}
         initialDates={dates}
-        summary={<RestaurantSummary restaurant={restaurant} locale={locale} />}
+        footer={
+          <RestaurantNearby
+            restaurant={restaurant}
+            regionRestaurants={regionRestaurants}
+          />
+        }
       />
     </>
   );

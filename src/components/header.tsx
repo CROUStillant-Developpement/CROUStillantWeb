@@ -34,7 +34,7 @@ export default function Header() {
       <nav className="">
         <ul
           className={cn(
-            "header-nav-pill flex items-center space-x-1 bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md w-fit"
+            "header-nav-pill flex items-center space-x-1 bg-secondary/40 dark:bg-card/50 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md w-fit"
           )}
         >
           <li>
@@ -109,7 +109,7 @@ export default function Header() {
       <div className="flex justify-end">
         <div
           className={cn(
-            "header-nav-pill flex items-center bg-secondary/40 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
+            "header-nav-pill flex items-center bg-secondary/40 dark:bg-card/50 p-1 rounded-xl shadow-inner border border-border/20 backdrop-blur-md"
           )}
         >
           <ModeToggle />

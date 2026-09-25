@@ -110,9 +110,29 @@
     },
     "seo": {
       "title": "Restaurants",
+      "byRegion": "Restaurants by CROUS region",
       "description": "Discover the list of CROUS restaurants in France and overseas. Find the perfect restaurant for your next meal!",
       "keywords": "CROUS, university restaurant, CROUS menu, student canteen, France, overseas"
     }
+  },
+  "RegionPage": {
+    "seo": {
+      "title": "CROUS {region} menus: university restaurants and cafeterias",
+      "description": "Today's menu for the {count} CROUS {region} university restaurants ({cities}…): opening hours, addresses and payment.",
+      "keywords": "CROUS {region}, CROUS {region} menu, university restaurant {region}, RU {region}, CROUS {region} cafeteria",
+      "notFound": {
+        "title": "CROUS not found",
+        "description": "This CROUS region does not exist."
+      }
+    },
+    "breadcrumb": "CROUS {region}",
+    "title": "CROUS {region} university restaurants",
+    "intro": "CROUS {region} has {count, plural, one {# restaurant} other {# restaurants}} listed on CROUStillant, {cityCount, plural, one {in # city} other {across # cities}}. Pick a restaurant to see today's menu, its opening hours and its address.",
+    "cityHeading": "Restaurants in {city}",
+    "openNow": "Open",
+    "closedNow": "Closed",
+    "otherRegions": "Other CROUS regions",
+    "map": "See the restaurants on the map"
   },
   "ScreenPage": {
     "seo": {
@@ -152,6 +172,8 @@
       "summaryHours": "Published opening hours: {hours}.",
       "summaryPayment": "Accepted payment: {payment}.",
       "summaryMenu": "Today's menu is published here as soon as the CROUS releases it, along with the menus for the following days.",
+      "nearby": "Other restaurants in {city}",
+      "regionLink": "All CROUS {region} restaurants",
       "notFound": {
         "title": "Restaurant not found",
         "description": "The restaurant you are looking for does not exist or has been moved."

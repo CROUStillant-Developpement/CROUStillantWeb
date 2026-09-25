@@ -8,6 +8,8 @@ import { Menu, Restaurant } from "@/services/types";
 
 // "51100 Reims", "21 000 DIJON", "44600, Saint Nazaire"
 const POSTCODE_CITY = /\b\d{2}\s?\d{3},?\s+([A-Za-zÀ-ÿ' -]+?)\s*(?:cedex.*)?$/i;
+// "18 avenue de Bardanac à Pessac", "2 avenue Poplawski à PAU"
+const A_CITY = /\sà\s+([A-Za-zÀ-ÿ' -]+)$/i;
 
 function toTitleCase(value: string): string {
   if (value !== value.toUpperCase()) {
@@ -26,7 +28,8 @@ function toTitleCase(value: string): string {
  * (named after the academy's main city) is the closest usable fallback.
  */
 export function getRestaurantCity(restaurant: Restaurant): string {
-  const match = restaurant.adresse?.trim().match(POSTCODE_CITY);
+  const address = restaurant.adresse?.trim();
+  const match = address?.match(POSTCODE_CITY) ?? address?.match(A_CITY);
   const city = match?.[1]?.trim();
 
   return city ? toTitleCase(city) : restaurant.region.libelle;

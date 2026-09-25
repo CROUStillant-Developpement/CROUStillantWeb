@@ -61,45 +61,32 @@ export function buildSiteJsonLd(locale: string, description: string) {
   };
 }
 
+/** One step of a breadcrumb: a label and a path after the locale prefix. */
+export interface Crumb {
+  name: string;
+  path: string;
+}
+
 /**
- * Builds a `BreadcrumbList` for a restaurant page.
+ * Builds a `BreadcrumbList` from the site root down to the current page.
  *
  * Search engines render this as the path shown above the result title, in place
  * of the bare URL.
  *
  * @param locale - The locale the page is rendered for.
- * @param restaurantsLabel - Localised label of the restaurant list page.
- * @param restaurantName - Name of the restaurant.
- * @param slug - The restaurant page slug.
+ * @param crumbs - The steps after the site root, current page last.
  */
-export function buildRestaurantBreadcrumb(
-  locale: string,
-  restaurantsLabel: string,
-  restaurantName: string,
-  slug: string
-) {
+export function buildBreadcrumb(locale: string, crumbs: Crumb[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
+    itemListElement: [{ name: SITE_NAME, path: "" }, ...crumbs].map(
+      (crumb, index) => ({
         "@type": "ListItem",
-        position: 1,
-        name: SITE_NAME,
-        item: `${SITE_URL}/${locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: restaurantsLabel,
-        item: `${SITE_URL}/${locale}/restaurants`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: restaurantName,
-        item: `${SITE_URL}/${locale}/restaurants/${slug}`,
-      },
-    ],
+        position: index + 1,
+        name: crumb.name,
+        item: `${SITE_URL}/${locale}${crumb.path}`,
+      })
+    ),
   };
 }

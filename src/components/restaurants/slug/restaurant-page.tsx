@@ -34,15 +34,15 @@ interface RestaurantPageProps {
   initialMenu?: Menu[];
   /** Available dates fetched server-side. */
   initialDates?: DateMenu[];
-  /** Server-rendered text description, shown under the header. */
-  summary?: ReactNode;
+  /** Server-rendered links to nearby restaurants, shown at the bottom. */
+  footer?: ReactNode;
 }
 
 export default function RestaurantPage({
   restaurant,
   initialMenu,
   initialDates,
-  summary,
+  footer,
 }: RestaurantPageProps) {
   const {
     menuLoading,
@@ -109,7 +109,7 @@ export default function RestaurantPage({
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full mt-4 px-4"
       >
-        <div className="relative overflow-hidden rounded-3xl bg-secondary/20 border border-primary/10 shadow-lg mb-8 h-56 md:h-72 flex items-end group">
+        <div className="relative overflow-hidden rounded-3xl bg-secondary/20 dark:bg-card/50 border border-primary/10 shadow-lg mb-8 h-56 md:h-72 flex items-end group">
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
           <Image
             src={imgSrc}
@@ -218,9 +218,7 @@ export default function RestaurantPage({
           </div>
         </div>
 
-        {summary}
-
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
@@ -232,7 +230,7 @@ export default function RestaurantPage({
               <CelebrationBanner onDismiss={dismissCelebration} />
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
         <AnimatePresence>
           {showFavoriteHint && !isFavourite && !showCelebration && (
@@ -397,6 +395,8 @@ export default function RestaurantPage({
             </div>
           </div>
         )}
+
+        {footer}
 
         <EasterEggLauncher />
       </motion.div>

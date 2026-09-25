@@ -110,9 +110,29 @@
     },
     "seo": {
       "title": "Restaurants",
+      "byRegion": "Restaurants par CROUS",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant universitaire, menu CROUS, RU, resto U, restauration universitaire, France"
     }
+  },
+  "RegionPage": {
+    "seo": {
+      "title": "Menus du CROUS {region} : resto U et cafétérias",
+      "description": "Menu du jour des {count} restaurants universitaires du CROUS {region} ({cities}…) : horaires, adresses et paiement.",
+      "keywords": "CROUS {region}, menu CROUS {region}, resto U {region}, restaurant universitaire {region}, RU {region}, cafétéria CROUS {region}",
+      "notFound": {
+        "title": "CROUS introuvable",
+        "description": "Cette région CROUS n'existe pas."
+      }
+    },
+    "breadcrumb": "CROUS {region}",
+    "title": "Restaurants universitaires du CROUS {region}",
+    "intro": "Le CROUS {region} compte {count, plural, one {# restaurant référencé} other {# restaurants référencés}} sur CROUStillant, {cityCount, plural, one {dans # ville} other {répartis dans # villes}}. Choisissez un restaurant pour voir son menu du jour, ses horaires et son adresse.",
+    "cityHeading": "Restaurants à {city}",
+    "openNow": "Ouvert",
+    "closedNow": "Fermé",
+    "otherRegions": "Les autres CROUS",
+    "map": "Voir les restaurants sur la carte"
   },
   "ScreenPage": {
     "seo": {
@@ -147,11 +167,13 @@
       "description": "Menu du jour, horaires, adresse et moyens de paiement de {name} à {city}. Menus CROUS mis à jour plusieurs fois par jour, gratuitement.",
       "descriptionWithDishes": "Menu du jour de {name} ({city}) : {dishes}… Horaires, adresse et paiement.",
       "keywords": "{name}, {name} {city}, menu {name}, horaires {name}, resto U {city}, CROUS {area}, restaurant universitaire {city}",
-      "summary": "{name} est un restaurant universitaire du CROUS de {area}. Adresse : {address}.",
+      "summary": "{name} est un restaurant universitaire du CROUS {area}. Adresse : {address}.",
       "summaryDays": "Jours d'ouverture : {days} ({meals}).",
       "summaryHours": "Horaires communiqués : {hours}.",
       "summaryPayment": "Paiement accepté : {payment}.",
       "summaryMenu": "Le menu du jour est publié ici dès que le CROUS le communique, avec les menus des jours suivants.",
+      "nearby": "Autres restaurants à {city}",
+      "regionLink": "Tous les restaurants du CROUS {region}",
       "notFound": {
         "title": "Restaurant introuvable",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."

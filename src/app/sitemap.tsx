@@ -9,6 +9,8 @@ export const revalidate = 300;
 import type { MetadataRoute } from "next";
 import { getRestaurants } from "@/services/restaurant-service";
 import { buildRestaurantSlug } from "@/lib/restaurant-slug";
+import { getRegions } from "@/services/region-service";
+import { buildRegionSlug } from "@/lib/region-slug";
 
 const BASE = process.env.WEB_URL || "https://croustillant.menu";
 const LOCALES = ["fr", "en"] as const;
@@ -59,11 +61,39 @@ const STATIC_ENTRIES: MetadataRoute.Sitemap = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const restaurants = await getRestaurants();
+  const [restaurants, regions] = await Promise.all([
+    getRestaurants(),
+    getRegions(),
+  ]);
 
   if (!restaurants.success) {
     return STATIC_ENTRIES;
   }
+
+  // Region pages are the landing pages for "CROUS <ville>" / "resto U <ville>"
+  // searches. Same locale policy as the restaurant sheets below.
+  const regionsWithRestaurants = new Set(
+    restaurants.data.map((restaurant) => restaurant.region.code)
+  );
+  const regionEntries: MetadataRoute.Sitemap = regions.success
+    ? regions.data
+        .filter((region) => regionsWithRestaurants.has(region.code))
+        .map((region) => {
+          const path = `/crous/${buildRegionSlug(region)}`;
+
+          return {
+            url: `${BASE}/${DEFAULT_LOCALE}${path}`,
+            lastModified: now,
+            changeFrequency: "daily",
+            priority: 0.8,
+            alternates: {
+              languages: Object.fromEntries(
+                LOCALES.map((l) => [l, `${BASE}/${l}${path}`])
+              ),
+            },
+          };
+        })
+    : [];
 
   // Only the default locale is submitted for restaurant sheets, with the
   // English URL still declared through hreflang.
@@ -85,5 +115,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   );
 
-  return [...STATIC_ENTRIES, ...restaurantEntries];
+  return [...STATIC_ENTRIES, ...regionEntries, ...restaurantEntries];
 }

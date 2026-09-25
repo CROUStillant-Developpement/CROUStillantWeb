@@ -8,6 +8,7 @@ export const revalidate = 300;
 
 import { getRestaurants } from "@/services/restaurant-service";
 import { slugify } from "@/lib/utils";
+import { buildRegionSlug } from "@/lib/region-slug";
 import { CALENDAR_API_URL } from "@/lib/calendar";
 
 const BASE = process.env.WEB_URL || "https://croustillant.menu";
@@ -31,8 +32,13 @@ export async function GET() {
   // sitemap.xml remains the exhaustive source.
   const regions = restaurants.success
     ? Array.from(
-        new Set(restaurants.data.map((restaurant) => restaurant.region.libelle))
-      ).sort((a, b) => a.localeCompare(b, "fr"))
+        new Map(
+          restaurants.data.map((restaurant) => [
+            restaurant.region.code,
+            restaurant.region,
+          ])
+        ).values()
+      ).sort((a, b) => a.libelle.localeCompare(b.libelle, "fr"))
     : [];
 
   const restaurantCount = restaurants.success ? restaurants.data.length : 0;
@@ -158,7 +164,10 @@ https://github.com/CROUStillant-Developpement
 
 # All CROUS regions
 
-${regions.length > 0 ? regions.map((region) => `- ${region}`).join("\n") : "- (list temporarily unavailable)"}
+Each region has a page listing its restaurants grouped by city, at
+\`${BASE}/fr/crous/{region}\` (French, the canonical version).
+
+${regions.length > 0 ? regions.map((region) => `- [CROUS ${region.libelle}](${BASE}/fr/crous/${buildRegionSlug(region)})`).join("\n") : "- (list temporarily unavailable)"}
 
 ## A few restaurants
 
