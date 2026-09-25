@@ -3,7 +3,7 @@
 import { Restaurant, Region, TypeRestaurant, RegionGeoJSON } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
 import log from "@/lib/log";
-import Loading from "@/app/[locale]/loading";
+import Loading from "@/components/page-loading";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useTranslations } from "next-intl";
