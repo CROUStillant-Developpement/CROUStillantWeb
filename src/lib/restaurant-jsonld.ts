@@ -1,5 +1,10 @@
 import { Menu, Restaurant } from "@/services/types";
 import { formatToISODate } from "@/lib/utils";
+import {
+  getRestaurantCity,
+  getRestaurantPostcode,
+  parseOpeningRange,
+} from "@/lib/restaurant-seo";
 
 // Days come back from the API capitalised and in French ("Lundi", "Mardi", ...).
 // Normalise them (lowercase, unaccented) before mapping to schema.org DayOfWeek.
@@ -48,13 +53,15 @@ function toIsoDay(apiDate: string): string | null {
 
 /**
  * Builds the `openingHoursSpecification` entries from the restaurant's opening days.
- * Exact hours are not structured API-side (free-text field), so this only declares
- * the days on which the restaurant serves at least one meal.
+ * Exact hours are free text API-side; when a time range can be read out of them
+ * it is added as `opens`/`closes`, otherwise only the days are declared.
  */
 function buildOpeningHours(restaurant: Restaurant) {
   if (!restaurant.jours_ouvert?.length) {
     return undefined;
   }
+
+  const range = parseOpeningRange(restaurant.horaires);
 
   const specs = restaurant.jours_ouvert
     .filter(
@@ -66,6 +73,7 @@ function buildOpeningHours(restaurant: Restaurant) {
     .map((day) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: `https://schema.org/${day}`,
+      ...(range ?? {}),
     }));
 
   return specs.length > 0 ? specs : undefined;
@@ -135,6 +143,7 @@ export function buildRestaurantJsonLd(
 ) {
   const openingHours = buildOpeningHours(restaurant);
   const menuSections = buildMenuSections(menus);
+  const postcode = getRestaurantPostcode(restaurant);
 
   return {
     "@context": "https://schema.org",
@@ -148,6 +157,8 @@ export function buildRestaurantJsonLd(
     address: {
       "@type": "PostalAddress",
       streetAddress: restaurant.adresse,
+      addressLocality: getRestaurantCity(restaurant),
+      ...(postcode ? { postalCode: postcode } : {}),
       addressRegion: restaurant.region.libelle,
       addressCountry: "FR",
     },

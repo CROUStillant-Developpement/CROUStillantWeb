@@ -10,11 +10,18 @@ import {
 import { buildRestaurantJsonLd } from "@/lib/restaurant-jsonld";
 import { buildRestaurantBreadcrumb } from "@/lib/site-jsonld";
 import JsonLd from "@/components/json-ld";
+import RestaurantSummary from "@/components/restaurants/slug/restaurant-summary";
 import { DEFAULT_OG_IMAGE, SITE_URL, buildPageMetadata } from "@/lib/metadata";
 import {
   buildRestaurantSlug,
   extractRestaurantId,
 } from "@/lib/restaurant-slug";
+import {
+  getRestaurantCity,
+  nameContainsCity,
+  pickHighlightDishes,
+  truncateForSnippet,
+} from "@/lib/restaurant-seo";
 import { DateMenu, Menu } from "@/services/types";
 
 
@@ -69,18 +76,37 @@ export async function generateMetadata({
       }
     : { ...DEFAULT_OG_IMAGE, alt: tMeta("bannerAlt") };
 
+  // Searches are "<restaurant> <city>", so the city goes in the title unless
+  // the name already carries it ("Cafet IUT Reims").
+  const city = getRestaurantCity(restaurant);
+  const title = nameContainsCity(restaurant.nom, city)
+    ? t("seo.titleNoCity", { name: restaurant.nom })
+    : t("seo.title", { name: restaurant.nom, city });
+
+  // Today's dishes in the snippet answer the query before the click — the one
+  // thing the CROUS page and the other aggregators do not put there.
+  const menuResult = await getMenuByRestaurantId(restaurant.code);
+  const dishes = pickHighlightDishes(menuResult.success ? menuResult.data : []);
+  const description = truncateForSnippet(
+    dishes.length > 0
+      ? t("seo.descriptionWithDishes", {
+          name: restaurant.nom,
+          city,
+          dishes: dishes.join(", "),
+        })
+      : t("seo.description", { name: restaurant.nom, city })
+  );
+
   return buildPageMetadata({
     locale,
     // The canonical slug, never the requested one: an alias URL must advertise
     // the URL it redirects to, not itself. See `buildRestaurantSlug`.
     path: `/restaurants/${buildRestaurantSlug(restaurant)}`,
-    title: t("seo.title", { name: restaurant.nom }),
-    description: t("seo.description", {
-      name: restaurant.nom,
-      area: restaurant.region.libelle,
-    }),
+    title,
+    description,
     keywords: t("seo.keywords", {
       name: restaurant.nom,
+      city,
       area: restaurant.region.libelle,
     }),
     images: [image],
@@ -155,6 +181,7 @@ export default async function Restaurant({
         restaurant={restaurant}
         initialMenu={menu}
         initialDates={dates}
+        summary={<RestaurantSummary restaurant={restaurant} locale={locale} />}
       />
     </>
   );

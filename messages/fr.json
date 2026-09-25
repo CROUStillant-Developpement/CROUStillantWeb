@@ -142,9 +142,16 @@
     "noMealAvailableDescription": "Le restaurant ne propose actuellement aucun plat. Veuillez réessayer plus tard.",
     "noMealAvailableDescription2": "Le menu doit être manuellement mis à jour par le restaurant. Si le menu n'est jamais disponible, vous pouvez contacter le restaurant pour leur faire part de votre problème.",
     "seo": {
-      "title": "Menu de {name}",
-      "description": "Découvrez les détails de {name}, situé à {area}. Parfait pour votre prochain repas !",
-      "keywords": "CROUS, restaurant, menu, {name}, {area}",
+      "title": "{name} à {city} : menu du jour et horaires",
+      "titleNoCity": "{name} : menu du jour et horaires",
+      "description": "Menu du jour, horaires, adresse et moyens de paiement de {name} à {city}. Menus CROUS mis à jour plusieurs fois par jour, gratuitement.",
+      "descriptionWithDishes": "Menu du jour de {name} ({city}) : {dishes}… Horaires, adresse et paiement.",
+      "keywords": "{name}, {name} {city}, menu {name}, horaires {name}, resto U {city}, CROUS {area}, restaurant universitaire {city}",
+      "summary": "{name} est un restaurant universitaire du CROUS de {area}. Adresse : {address}.",
+      "summaryDays": "Jours d'ouverture : {days} ({meals}).",
+      "summaryHours": "Horaires communiqués : {hours}.",
+      "summaryPayment": "Paiement accepté : {payment}.",
+      "summaryMenu": "Le menu du jour est publié ici dès que le CROUS le communique, avec les menus des jours suivants.",
       "notFound": {
         "title": "Restaurant introuvable",
         "description": "Le restaurant que vous cherchez n'existe pas ou a été déplacé."

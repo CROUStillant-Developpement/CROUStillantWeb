@@ -18,7 +18,7 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { cn, slugify } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
@@ -34,12 +34,15 @@ interface RestaurantPageProps {
   initialMenu?: Menu[];
   /** Available dates fetched server-side. */
   initialDates?: DateMenu[];
+  /** Server-rendered text description, shown under the header. */
+  summary?: ReactNode;
 }
 
 export default function RestaurantPage({
   restaurant,
   initialMenu,
   initialDates,
+  summary,
 }: RestaurantPageProps) {
   const {
     menuLoading,
@@ -214,6 +217,8 @@ export default function RestaurantPage({
             </div>
           </div>
         </div>
+
+        {summary}
 
         <AnimatePresence>
           {showCelebration && (

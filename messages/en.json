@@ -142,9 +142,16 @@
     "noMealAvailableDescription": "The restaurant does not currently offer any meal. Please try again later.",
     "noMealAvailableDescription2": "The menu must be manually updated by the restaurant. If the menu is never available, you can contact the restaurant to report your problem.",
     "seo": {
-      "title": "Menu of {name}",
-      "description": "Discover the details of {name}, located in {area}. Perfect for your next meal!",
-      "keywords": "CROUS, restaurant, menu, {name}, {area}",
+      "title": "{name} in {city}: today's menu and opening hours",
+      "titleNoCity": "{name}: today's menu and opening hours",
+      "description": "Today's menu, opening hours, address and payment methods for {name} in {city}. CROUS menus updated several times a day, for free.",
+      "descriptionWithDishes": "Today's menu at {name} ({city}): {dishes}… Opening hours, address and payment.",
+      "keywords": "{name}, {name} {city}, {name} menu, {name} opening hours, CROUS {city}, CROUS {area}, university restaurant {city}",
+      "summary": "{name} is a CROUS {area} university restaurant. Address: {address}.",
+      "summaryDays": "Open on {days} ({meals}).",
+      "summaryHours": "Published opening hours: {hours}.",
+      "summaryPayment": "Accepted payment: {payment}.",
+      "summaryMenu": "Today's menu is published here as soon as the CROUS releases it, along with the menus for the following days.",
       "notFound": {
         "title": "Restaurant not found",
         "description": "The restaurant you are looking for does not exist or has been moved."
