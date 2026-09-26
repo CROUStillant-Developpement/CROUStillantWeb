@@ -94,7 +94,7 @@ export default function RestaurantsPage({
         <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
           {showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
@@ -106,7 +106,7 @@ export default function RestaurantsPage({
               <CelebrationBanner onDismiss={dismissCelebration} />
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
       <div className="w-full z-10 relative">
         <RestaurantsFilters
