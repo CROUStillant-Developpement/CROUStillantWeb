@@ -46,7 +46,7 @@
     "next-umami": "github:PaulBayfield/next-umami",
     "qrcode": "^1.5.4",
     "radix-ui": "^1.6.7",
-    "react": "^19.2.8",
+    "react": "^19.3.0",
     "react-country-flag": "^3.1.0",
     "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
@@ -65,7 +65,7 @@
     "@types/leaflet": "^1.9.21",
     "@types/node": "^26",
     "@types/qrcode": "^1.5.6",
-    "@types/react": "19.2.16",
+    "@types/react": "19.3.0",
     "@types/react-dom": "19.2.5",
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^5.0.1",
@@ -78,7 +78,7 @@
     "vitest": "^5.0.0"
   },
   "overrides": {
-    "@types/react": "19.2.16",
+    "@types/react": "19.3.0",
     "@types/react-dom": "19.2.5"
   }
 }
