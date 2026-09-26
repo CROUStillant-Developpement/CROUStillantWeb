@@ -312,6 +312,9 @@
     "viewQrCode": "Afficher le QR Code",
     "addToCalendar": "Ajouter le menu à mon agenda"
   },
+  "MealCard": {
+    "findRecipe": "Rechercher la recette de {dish} sur Marmiton"
+  },
   "AboutPage": {
     "presentation": {
       "title": "Créé par des étudiants, pour des étudiants...",
