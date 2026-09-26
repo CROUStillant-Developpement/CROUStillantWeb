@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  getCityKey,
   getRestaurantCity,
   getRestaurantPostcode,
   nameContainsCity,
@@ -17,6 +18,30 @@ describe("getRestaurantCity", () => {
     expect(getRestaurantCity(restaurant("4 chemin des Rouliers, 51100 Reims"))).toBe("Reims");
     expect(getRestaurantCity(restaurant("94 bd Mansart - 21 000 DIJON"))).toBe("Dijon");
     expect(getRestaurantCity(restaurant("62 rue Michel Ange - 44600, Saint Nazaire"))).toBe("Saint Nazaire");
+  });
+
+  it("drops the separator after the postcode and capitalises", () => {
+    expect(getRestaurantCity(restaurant("Domaine universitaire, 38400 - Saint-Martin-d'Hères"))).toBe("Saint-Martin-d'Hères");
+    expect(getRestaurantCity(restaurant("Savoie Technolac, 73370 le Bourget du Lac"))).toBe("Le Bourget du Lac");
+  });
+
+  it("gives spelling variants the same key", () => {
+    const key = getCityKey("Saint-Martin-d'Hères");
+    for (const variant of [
+      "Saint Martin d’Heres",
+      "Saint martin d'heres",
+      "St Martin d'Hères",
+      "St Martin Hères",
+      "ST. MARTIN D'HERES",
+    ]) {
+      expect(getCityKey(variant)).toBe(key);
+    }
+    expect(getCityKey("Le Bourget du Lac")).toBe(getCityKey("le Bourget-du-Lac"));
+  });
+
+  it("writes out \"St\" as \"Saint\"", () => {
+    expect(getRestaurantCity(restaurant("38400 St Martin d'Hères"))).toBe("Saint Martin d'Hères");
+    expect(getRestaurantCity(restaurant("42100 ST ETIENNE"))).toBe("Saint Etienne");
   });
 
   it("reads a trailing \"à <ville>\"", () => {

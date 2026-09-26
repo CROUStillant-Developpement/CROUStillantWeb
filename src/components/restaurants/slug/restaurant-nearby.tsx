@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { Restaurant } from "@/services/types";
 import { buildRestaurantSlug } from "@/lib/restaurant-slug";
 import { buildRegionSlug } from "@/lib/region-slug";
-import { getRestaurantCity } from "@/lib/restaurant-seo";
+import { getCityKey, getRestaurantCity } from "@/lib/restaurant-seo";
 import { ListCollapseIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -25,10 +25,10 @@ export default async function RestaurantNearby({
   regionRestaurants: Restaurant[];
 }) {
   const t = await getTranslations("RestaurantPage.seo");
-  const city = getRestaurantCity(restaurant);
+  const city = getCityKey(getRestaurantCity(restaurant));
 
   const others = regionRestaurants.filter((r) => r.code !== restaurant.code);
-  const sameCity = others.filter((r) => getRestaurantCity(r) === city);
+  const sameCity = others.filter((r) => getCityKey(getRestaurantCity(r)) === city);
   // A city with a single restaurant still gets neighbours from its region.
   const nearby = (sameCity.length > 0 ? sameCity : others)
     .sort((a, b) => a.nom.localeCompare(b.nom, "fr"))

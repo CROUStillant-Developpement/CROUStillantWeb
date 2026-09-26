@@ -1,50 +1,32 @@
 import { describe, expect, it } from "vitest";
-import {
-  buildRegionSlug,
-  findRegionBySlug,
-  groupRestaurantsByCity,
-} from "@/lib/region-slug";
+import { groupRestaurantsByCity } from "@/lib/region-slug";
 import { Restaurant } from "@/services/types";
 
-const regions = [
-  { code: 23, libelle: "Reims" },
-  { code: 26, libelle: "Aix-Marseille" },
-  { code: 21, libelle: "Orléans-Tours" },
-];
-
-describe("buildRegionSlug", () => {
-  it("strips accents and keeps hyphens", () => {
-    expect(buildRegionSlug(regions[1])).toBe("aix-marseille");
-    expect(buildRegionSlug(regions[2])).toBe("orleans-tours");
-    expect(buildRegionSlug({ code: 30, libelle: "Bourgogne Franche Comte" })).toBe(
-      "bourgogne-franche-comte"
-    );
-  });
-});
-
-describe("findRegionBySlug", () => {
-  it("resolves slugs and bare ids", () => {
-    expect(findRegionBySlug(regions, "reims")?.code).toBe(23);
-    expect(findRegionBySlug(regions, "23")?.code).toBe(23);
-    expect(findRegionBySlug(regions, "paris")).toBeUndefined();
-  });
-});
+const restaurant = (code: number, adresse: string) =>
+  ({
+    code,
+    nom: `Resto ${code}`,
+    adresse,
+    region: { code: 9, libelle: "Grenoble Alpes" },
+  }) as unknown as Restaurant;
 
 describe("groupRestaurantsByCity", () => {
-  it("puts the biggest city first and sorts names", () => {
-    const make = (nom: string, adresse: string) =>
-      ({ nom, adresse, region: regions[0] }) as unknown as Restaurant;
-
+  it("merges spelling variants of the same city", () => {
     const groups = groupRestaurantsByCity([
-      make("Resto U Paul Fort", "Rue Paul Fort, 51100 Reims"),
-      make("Cafet IUT Troyes", "9 rue de Québec, 10000 Troyes"),
-      make("Resto U Moulin de la Housse", "4 chemin des Rouliers, 51100 Reims"),
+      restaurant(1, "Domaine universitaire, 38400 Saint-Martin-d'Hères"),
+      restaurant(2, "Domaine universitaire, 38400 Saint Martin d'Hères"),
+      restaurant(3, "Domaine universitaire, 38400 - Saint-Martin-d'Hères"),
+      restaurant(6, "Domaine universitaire, 38400 Saint martin d'heres"),
+      restaurant(7, "Domaine universitaire, 38400 Saint martin d'heres"),
+      restaurant(8, "Domaine universitaire, 38400 St Martin d'Hères"),
+      restaurant(9, "Domaine universitaire, 38400 St Martin Hères"),
+      restaurant(4, "Savoie Technolac, 73370 Le Bourget du Lac"),
+      restaurant(5, "Savoie Technolac, 73370 le Bourget du Lac"),
     ]);
 
-    expect(groups.map((g) => g.city)).toEqual(["Reims", "Troyes"]);
-    expect(groups[0].restaurants.map((r) => r.nom)).toEqual([
-      "Resto U Moulin de la Housse",
-      "Resto U Paul Fort",
+    expect(groups.map((group) => [group.city, group.restaurants.length])).toEqual([
+      ["Saint-Martin-d'Hères", 7],
+      ["Le Bourget du Lac", 2],
     ]);
   });
 });

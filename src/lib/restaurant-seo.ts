@@ -6,10 +6,10 @@ import { Menu, Restaurant } from "@/services/types";
  * opening hours and today's dishes.
  */
 
-// "51100 Reims", "21 000 DIJON", "44600, Saint Nazaire"
-const POSTCODE_CITY = /\b\d{2}\s?\d{3},?\s+([A-Za-zÀ-ÿ' -]+?)\s*(?:cedex.*)?$/i;
+const POSTCODE_CITY =
+  /\b\d{2}\s?\d{3}[\s,-]+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’ -]*?)\s*(?:cedex.*)?$/i;
 // "18 avenue de Bardanac à Pessac", "2 avenue Poplawski à PAU"
-const A_CITY = /\sà\s+([A-Za-zÀ-ÿ' -]+)$/i;
+const A_CITY = /\sà\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’ -]*)$/i;
 
 function toTitleCase(value: string): string {
   if (value !== value.toUpperCase()) {
@@ -30,9 +30,34 @@ function toTitleCase(value: string): string {
 export function getRestaurantCity(restaurant: Restaurant): string {
   const address = restaurant.adresse?.trim();
   const match = address?.match(POSTCODE_CITY) ?? address?.match(A_CITY);
-  const city = match?.[1]?.trim();
+  const city = match?.[1]?.replace(/’/g, "'").replace(/\s+/g, " ").trim();
 
-  return city ? toTitleCase(city) : restaurant.region.libelle;
+  if (!city) {
+    return restaurant.region.libelle;
+  }
+
+  const titled = toTitleCase(city)
+    .replace(/\bSte\b\.?/g, "Sainte")
+    .replace(/\bSt\b\.?/g, "Saint");
+  return titled.charAt(0).toUpperCase() + titled.slice(1);
+}
+
+// Dropped from city keys: typed or left out at random.
+const CITY_PARTICLES = new Set(["d", "l", "de", "du", "des", "la", "le", "les"]);
+
+/**
+ * A spelling-insensitive key for a city name: accents, case, hyphens,
+ * "St"/"Saint" and particles do not count.
+ */
+export function getCityKey(city: string): string {
+  return city
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word && !CITY_PARTICLES.has(word))
+    .map((word) => (word === "st" ? "saint" : word === "ste" ? "sainte" : word))
+    .join(" ");
 }
 
 /** The postcode in a restaurant's address, if there is one. */
@@ -42,7 +67,7 @@ export function getRestaurantPostcode(restaurant: Restaurant): string | null {
 }
 
 /**
- * True when the name already says where the restaurant is ("Cafet IUT Reims"),
+ * True when the name already says where the restaurant is,
  * so titles do not repeat the city.
  */
 export function nameContainsCity(name: string, city: string): boolean {
