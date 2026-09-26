@@ -38,8 +38,10 @@ FROM base AS run
 # Set production environment
 ENV NODE_ENV="production"
 
-# Install node.js
-RUN apk add --no-cache nodejs
+# Install node.js. Alpine's nodejs only ships English ICU data by default, so
+# every date rendered on the server ("Menu du Friday, Sep 25") came out in
+# English on /fr pages; icu-data-full gives Intl the French locale.
+RUN apk add --no-cache nodejs icu-data-full
 
 # The standalone server needs no write access to its own files, so run it as an
 # unprivileged user rather than root.

@@ -33,7 +33,7 @@ jobs:
           raw-data: ./notifications/dev-discord-notification-start.json
 
       - name: Log in to the Container registry
-        uses: docker/login-action@0a596b2e7a325f0cedf8e9bd21ab002cbd3c9241
+        uses: docker/login-action@783ae9cac559640a24c9212dfa6cd9e998252f9a
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@703896b4f30f62d53f5530a80bcdc589a3f702bc
+        uses: docker/metadata-action@8e671d84a3bd81afdfc4fdbb96a42b07c2a80934
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -74,7 +74,7 @@ jobs:
 
       - name: Build and push Docker image
         id: push
-        uses: docker/build-push-action@104b27ceb2d85774eec663b6724fd267b363adb3
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
