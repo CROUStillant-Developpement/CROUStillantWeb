@@ -16,8 +16,11 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { cn, slugify } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
+import { useHydrated } from "@/hooks/useHydrated";
+import { findFollowedDishes } from "@/lib/followed-dishes";
+import { getNormalizedISODate, normalizeToDate } from "@/lib/utils";
 import { useMenuEvents } from "@/hooks/useMenuEvents";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
@@ -70,6 +73,7 @@ export default function RestaurantPage({
     noMenuAtAll,
     refresh,
     lastUpdated,
+    menu,
   } = useRestaurantMenu({
     restaurantCode: restaurant.code,
     mode: "all",
@@ -94,9 +98,18 @@ export default function RestaurantPage({
   const t = useTranslations("RestaurantPage");
   const tCard = useTranslations("RestaurantCard");
   const umami = useUmami();
-  const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
+  const { addOrRemoveFromfavourites, favourites, followedDishes } = useUserPreferences();
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
 
+  // Followed dishes live in localStorage: unknown until hydrated.
+  const hydrated = useHydrated();
+  const followedMatches = useMemo(() => {
+    if (!hydrated) return [];
+    const today = normalizeToDate(new Date()).getTime();
+    return findFollowedDishes(menu, followedDishes).filter(
+      (match) => getNormalizedISODate(match.date).getTime() >= today
+    );
+  }, [hydrated, menu, followedDishes]);
   const searchParams = useSearchParams();
   const [showFavoriteHint, setShowFavoriteHint] = useState(false);
   const [imgSrc, setImgSrc] = useState(restaurant.image_url || "/default_ru.png");
@@ -415,6 +428,7 @@ export default function RestaurantPage({
                       selectedDateDinner={selectedDateDinner}
                       noMenuAtAll={noMenuAtAll}
                       restaurant={restaurant}
+                      followedMatches={followedMatches}
                       live={live}
                       lastUpdated={lastUpdated}
                     />

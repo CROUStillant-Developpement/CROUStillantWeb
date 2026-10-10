@@ -12,6 +12,7 @@ import DatePicker from "./date-picker";
 import DateScroller from "./date-scroller";
 import MealsDisplay from "./meals-display";
 import MenuLiveStatus from "./menu-live-status";
+import { FollowedDishMatch } from "@/lib/followed-dishes";
 
 interface MenuDisplaySectionProps {
   menuLoading: boolean;
@@ -30,7 +31,11 @@ interface MenuDisplaySectionProps {
   live?: boolean;
   /** When a real-time update last refreshed the menu, if one did. */
   lastUpdated?: Date | null;
+  /** Upcoming dishes the user follows at this restaurant: starred on their day. */
+  followedMatches?: FollowedDishMatch[];
 }
+
+const EMPTY_MATCHES: FollowedDishMatch[] = [];
 
 const MenuAlert = ({
   title,
@@ -69,9 +74,15 @@ export default function MenuDisplaySection({
   restaurant,
   live = false,
   lastUpdated = null,
+  followedMatches = EMPTY_MATCHES,
 }: MenuDisplaySectionProps) {
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
+
+  const starredDates = useMemo(
+    () => new Set(followedMatches.map((match) => match.date)),
+    [followedMatches]
+  );
 
   const filteredDates = useMemo(() => {
     const today = normalizeToDate(new Date()).getTime();
@@ -142,6 +153,7 @@ export default function MenuDisplaySection({
                   availableDates={filteredDates}
                   selectedDate={selectedDate}
                   onDateChange={onDateChange}
+                  starredDates={starredDates}
                 />
               </div>
             </div>

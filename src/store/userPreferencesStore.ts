@@ -1,6 +1,7 @@
 import { DisplayType, Region } from "@/services/types";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { FollowedDish } from "@/lib/followed-dishes";
 
 export interface LocalStoragefavourite {
   code: number;
@@ -25,6 +26,11 @@ interface StoreState {
    * The favourite item that is starred.
    */
   starredFav: LocalStoragefavourite | null;
+
+  /**
+   * Dishes the user follows, to be told when a favourite restaurant serves them.
+   */
+  followedDishes: FollowedDish[];
 
   /**
    * The display type setting.
@@ -118,6 +124,14 @@ interface StoreState {
   setStarredFav: (favourite: LocalStoragefavourite) => void;
 
   /**
+   * Follows a dish, or stops following it if it already is.
+   *
+   * @param code - The code of the dish.
+   * @param libelle - The label of the dish.
+   */
+  toggleFollowedDish: (code: string | number, libelle: string) => void;
+
+  /**
    * Sets the favourite region.
    *
    * @param region - The region to be set as favourite.
@@ -161,6 +175,7 @@ export const useUserPreferences = create<StoreState>()(
       display: "list",
       favourites: [],
       starredFav: null,
+      followedDishes: [],
       favouriteRegion: { code: -1, libelle: "All Regions" },
       dislexicFont: false,
       seasonalParticles: true,
@@ -251,6 +266,19 @@ export const useUserPreferences = create<StoreState>()(
           starredFav: favourite,
         })),
 
+      toggleFollowedDish: (code: string | number, libelle: string) =>
+        set((state) => {
+          // The API serialises dish codes as numbers: normalise them once here.
+          const dishCode = String(code);
+          const isFollowed = state.followedDishes.some((dish) => dish.code === dishCode);
+
+          return {
+            followedDishes: isFollowed
+              ? state.followedDishes.filter((dish) => dish.code !== dishCode)
+              : [...state.followedDishes, { code: dishCode, libelle: libelle.trim() }],
+          };
+        }),
+
       setfavouriteRegion: (region: Region) =>
         set(() => ({
           favouriteRegion: region,
@@ -260,6 +288,7 @@ export const useUserPreferences = create<StoreState>()(
         set(() => ({
           favourites: [],
           starredFav: null,
+          followedDishes: [],
           display: "list",
           favouriteRegion: { code: -1, libelle: "All Regions" },
           seasonalParticles: true,

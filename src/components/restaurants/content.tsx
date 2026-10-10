@@ -4,7 +4,8 @@ import RestaurantCard from "./restaurant-card";
 import { motion, AnimatePresence } from "@/lib/motion";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useFollowedDishesWeek } from "@/hooks/useFollowedDishesWeek";
 import { useUmami } from "next-umami";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -30,6 +31,18 @@ export default function Content({
   const umami = useUmami();
   const [autoCollapsedfavourites, setAutoCollapsedfavourites] = useState(true);
   const [userCollapsedfavourites, setUserCollapsedfavourites] = useState(false);
+
+  // Followed dishes served this week, by restaurant: shown on the cards.
+  const { matches } = useFollowedDishesWeek();
+  const followedDishesByRestaurant = useMemo(() => {
+    const byRestaurant = new Map<number, string[]>();
+    for (const match of matches ?? []) {
+      const dishes = byRestaurant.get(match.restaurant.code) ?? [];
+      if (!dishes.includes(match.dish.libelle)) dishes.push(match.dish.libelle);
+      byRestaurant.set(match.restaurant.code, dishes);
+    }
+    return byRestaurant;
+  }, [matches]);
 
   useEffect(() => {
     if (autoCollapsedfavourites && favouritesRestaurants.length > 3) {
@@ -84,6 +97,7 @@ export default function Content({
                 <RestaurantCard
                   key={`fav-${restaurant.code}`}
                   restaurant={restaurant}
+                  followedDishes={followedDishesByRestaurant.get(restaurant.code)}
                 />
               ))}
             </div>
@@ -118,7 +132,11 @@ export default function Content({
                   }}
                 >
                   {/* The first photos are the page's largest paint. */}
-                  <RestaurantCard restaurant={restaurant} priority={i < 2} />
+                  <RestaurantCard
+                    restaurant={restaurant}
+                    priority={i < 2}
+                    followedDishes={followedDishesByRestaurant.get(restaurant.code)}
+                  />
                 </motion.div>
               ))
             ) : (

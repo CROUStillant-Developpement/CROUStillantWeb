@@ -1,4 +1,15 @@
 {
+  "FollowedDishes": {
+    "title": "This week for you",
+    "description": "Your followed dishes on the menu of your favourite restaurants.",
+    "onMenu": "Followed dish on the menu",
+    "loading": "Looking for your followed dishes...",
+    "empty": "None of your followed dishes is on the menu of your favourite restaurants this week.",
+    "noFavourites": "Add a <restaurants>restaurant</restaurants> to your favourites to know when it serves your followed dishes.",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner"
+  },
   "HomePage": {
     "badge": {
       "title": "The project is 100% open-source!"
@@ -322,6 +333,8 @@
   },
   "RestaurantCard": {
     "cta": "View the menu",
+    "followedDishes": "{count} followed dishes",
+    "followedDishesTitle": "Followed dish on the menu this week",
     "closed": "Closed",
     "open": "Open",
     "izly": "Izly payment accepted",
@@ -334,7 +347,9 @@
     "addToCalendar": "Add the menu to my calendar"
   },
   "MealCard": {
-    "findRecipe": "Find the recipe for {dish} on Marmiton"
+    "findRecipe": "Find the recipe for {dish} on Marmiton",
+    "followDish": "Follow {dish}",
+    "unfollowDish": "Unfollow {dish}"
   },
   "AboutPage": {
     "presentation": {
@@ -700,6 +715,12 @@
     "appearanceTitle": "Appearance",
     "accessibilityTitle": "Accessibility",
     "behaviorTitle": "Behaviour",
+    "followedDishes": {
+      "title": "Followed dishes",
+      "description": "A star on a restaurant's calendar marks the days it serves them.",
+      "empty": "No followed dishes. Click the star next to a dish in a menu to follow it.",
+      "remove": "Unfollow {dish}"
+    },
     "appTitle": "App",
     "personalTitle": "Personal data",
     "install": {
@@ -1007,7 +1028,7 @@
       "part2": {
         "title": "Local storage",
         "content": [
-          "Your preferences (theme, favourite restaurants, favourite region, display and accessibility options) and the banners you have dismissed are saved in your browser's local storage. This information stays on your device.",
+          "Your preferences (theme, favourite restaurants, followed dishes, favourite region, display and accessibility options) and the banners you have dismissed are saved in your browser's local storage. This information stays on your device.",
           "You can clear it from the site's Settings page, or by deleting the site's data in your browser."
         ]
       },

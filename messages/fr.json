@@ -1,4 +1,15 @@
 {
+  "FollowedDishes": {
+    "title": "Cette semaine pour vous",
+    "description": "Vos plats suivis au menu de vos restaurants favoris.",
+    "onMenu": "Plat suivi au menu",
+    "loading": "Recherche de vos plats suivis...",
+    "empty": "Aucun de vos plats suivis n'est au menu de vos restaurants favoris cette semaine.",
+    "noFavourites": "Ajoutez un <restaurants>restaurant</restaurants> à vos favoris pour savoir quand il sert vos plats suivis.",
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "dinner": "Dîner"
+  },
   "HomePage": {
     "badge": {
       "title": "Le projet est 100% open-source !"
@@ -322,6 +333,8 @@
   },
   "RestaurantCard": {
     "cta": "Voir le menu",
+    "followedDishes": "{count} plats suivis",
+    "followedDishesTitle": "Plat suivi au menu cette semaine",
     "closed": "Fermé",
     "open": "Ouvert",
     "izly": "Paiement Izly accepté",
@@ -334,7 +347,9 @@
     "addToCalendar": "Ajouter le menu à mon agenda"
   },
   "MealCard": {
-    "findRecipe": "Rechercher la recette de {dish} sur Marmiton"
+    "findRecipe": "Rechercher la recette de {dish} sur Marmiton",
+    "followDish": "Suivre {dish}",
+    "unfollowDish": "Ne plus suivre {dish}"
   },
   "AboutPage": {
     "presentation": {
@@ -700,6 +715,12 @@
     "appearanceTitle": "Apparence",
     "accessibilityTitle": "Accessibilité",
     "behaviorTitle": "Comportement",
+    "followedDishes": {
+      "title": "Plats suivis",
+      "description": "Une étoile sur le calendrier d'un restaurant signale les jours où il les sert.",
+      "empty": "Aucun plat suivi. Cliquez sur l'étoile à côté d'un plat dans un menu pour le suivre.",
+      "remove": "Ne plus suivre {dish}"
+    },
     "appTitle": "Application",
     "personalTitle": "Informations personnelles",
     "install": {
@@ -1008,7 +1029,7 @@
       "part2": {
         "title": "Stockage local",
         "content": [
-          "Vos préférences (thème, restaurants favoris, région favorite, options d'affichage et d'accessibilité) et les bandeaux que vous avez fermés sont enregistrés dans le stockage local de votre navigateur. Ces informations restent sur votre appareil.",
+          "Vos préférences (thème, restaurants favoris, plats suivis, région favorite, options d'affichage et d'accessibilité) et les bandeaux que vous avez fermés sont enregistrés dans le stockage local de votre navigateur. Ces informations restent sur votre appareil.",
           "Vous pouvez les effacer depuis la page Paramètres du site, ou en supprimant les données du site dans votre navigateur."
         ]
       },

@@ -23,6 +23,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { motion } from "@/lib/motion";
 import { Search, Trophy, History } from "lucide-react";
+import FollowedDishesWeek from "./followed-dishes-week";
 
 interface DishesPageProps {
   top100Dishes: Plat[];
@@ -48,6 +49,8 @@ export default function DishesPage({
 
   return (
     <div className="space-y-8">
+      <FollowedDishesWeek />
+
       <div className="flex flex-wrap gap-3 justify-center md:hidden">
         <Button asChild variant="secondary" className="rounded-full shadow-xs border-primary/10">
           <Link href="#top100">{t("top100")}</Link>

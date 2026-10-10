@@ -235,3 +235,44 @@ describe("userPreferencesStore — edge cases", () => {
     });
   });
 });
+
+// ---------------------------------------------------------------------------
+// Followed dishes
+// ---------------------------------------------------------------------------
+describe("userPreferencesStore — followed dishes", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    useUserPreferences.setState({ followedDishes: [] });
+  });
+
+  it("follows a dish", () => {
+    useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+    expect(useUserPreferences.getState().followedDishes).toEqual([
+      { code: "12", libelle: "Tartiflette" },
+    ]);
+  });
+
+  it("stops following a dish that is already followed", () => {
+    useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+    useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+    expect(useUserPreferences.getState().followedDishes).toEqual([]);
+  });
+
+  it("stores numeric codes as strings, so both forms name the same dish", () => {
+    useUserPreferences.getState().toggleFollowedDish(12, " Tartiflette ");
+    expect(useUserPreferences.getState().followedDishes).toEqual([
+      { code: "12", libelle: "Tartiflette" },
+    ]);
+
+    useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+    expect(useUserPreferences.getState().followedDishes).toEqual([]);
+  });
+
+  it("clearUserPreferences removes followed dishes", () => {
+    useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+
+    useUserPreferences.getState().clearUserPreferences();
+
+    expect(useUserPreferences.getState().followedDishes).toEqual([]);
+  });
+});
