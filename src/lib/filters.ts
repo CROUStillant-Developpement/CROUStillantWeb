@@ -13,6 +13,39 @@ export interface Filters {
   nearMe: boolean;
 }
 
+export const DEFAULT_FILTERS: Filters = {
+  search: "",
+  isPmr: false,
+  isOpen: false,
+  crous: -1,
+  restaurantCityAsc: false,
+  restaurantCityDesc: false,
+  restaurantNameAsc: false,
+  restaurantNameDesc: false,
+  restaurantType: -1,
+  nearMe: false,
+};
+
+/**
+ * Reads the filters out of the URL's query string (the inverse of
+ * `buildQueryString`). Works on the server as well as in the browser, so the
+ * list can be rendered already filtered.
+ */
+export const filtersFromSearchParams = (searchParams: {
+  get(name: string): string | null;
+}): Filters => ({
+  search: searchParams.get("search") || "",
+  isPmr: searchParams.get("ispmr") === "true",
+  isOpen: searchParams.get("open") === "true",
+  crous: parseInt(searchParams.get("region") || "-1", 10),
+  restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",
+  restaurantCityDesc: searchParams.get("restaurantCityDesc") === "true",
+  restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
+  restaurantNameDesc: searchParams.get("restaurantNameDesc") === "true",
+  restaurantType: parseInt(searchParams.get("restaurantType") || "-1", 10),
+  nearMe: false,
+});
+
 function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371;
   const toRad = (d: number) => (d * Math.PI) / 180;

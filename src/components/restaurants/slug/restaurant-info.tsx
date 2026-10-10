@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/accordion";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useIntersectionObserver } from "usehooks-ts";
 
 const RestaurantMiniMap = dynamic(() => import("./restaurant-mini-map"), { ssr: false });
 
@@ -44,6 +45,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
   const umami = useUmami();
   const router = useRouter();
   const locale = useLocale();
+  // On mobile this panel sits below the menu: maplibre-gl (about 1 MB) is
+  // only fetched once the map is about to be seen.
+  const { ref: miniMapRef, isIntersecting: miniMapVisible } =
+    useIntersectionObserver({ rootMargin: "300px", freezeOnceVisible: true });
 
   return (
     <div className="flex flex-col gap-6 p-1 h-full">
@@ -64,7 +69,11 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
         </div>
 
         {restaurant.latitude && restaurant.longitude && (
-          <RestaurantMiniMap latitude={restaurant.latitude} longitude={restaurant.longitude} />
+          <div ref={miniMapRef} className="min-h-44">
+            {miniMapVisible && (
+              <RestaurantMiniMap latitude={restaurant.latitude} longitude={restaurant.longitude} />
+            )}
+          </div>
         )}
 
         <Button asChild className="w-full rounded-2xl h-10 font-bold group text-sm border-border/50" variant="outline" onClick={() => {

@@ -35,7 +35,7 @@ describe("getTaches", () => {
     mockApiRequest.mockResolvedValueOnce(ok([]));
     await getTaches();
     expect(mockApiRequest).toHaveBeenCalledWith({
-      endpoint: "taches",
+      endpoint: "taches?jours=30",
       method: "GET",
     });
   });

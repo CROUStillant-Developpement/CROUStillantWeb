@@ -7,6 +7,8 @@ import {
   buildQueryString,
   Filters,
   sortRestaurants,
+  DEFAULT_FILTERS,
+  filtersFromSearchParams,
 } from "@/lib/filters";
 import { Restaurant } from "@/services/types";
 import { getGeoLocation } from "@/lib/utils";
@@ -18,66 +20,23 @@ export function useRestaurantFilters(
   setFilteredRestaurants: (restaurants: Restaurant[]) => void,
   setLoading: (loading: boolean) => void
 ) {
-  const initialFilters: Filters = {
-    search: "",
-    isPmr: false,
-    isOpen: false,
-    crous: -1,
-    restaurantCityAsc: false,
-    restaurantCityDesc: false,
-    restaurantNameAsc: false,
-    restaurantNameDesc: false,
-    restaurantType: -1,
-    nearMe: false,
-  };
+  const initialFilters = DEFAULT_FILTERS;
 
-  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const searchParams = useSearchParams();
+  // Read from the URL straight away, not in an effect: the caller renders the
+  // list filtered the same way from its first render (server included), so
+  // there is nothing to wait for and no loading state on arrival.
+  const [filters, setFilters] = useState<Filters>(() =>
+    filtersFromSearchParams(searchParams)
+  );
   const [geoLocError, setGeoLocError] = useState<string | null>(null);
   const userPositionRef = useRef<{ latitude: number; longitude: number } | null>(null);
   const { favouriteRegion } = useUserPreferences();
+  const isFirstRender = useRef(true);
 
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
-
-  /**
-   * Initializes the filters for the restaurant search based on URL search parameters.
-   *
-   * This function uses the `searchParams` to extract filter values from the URL and sets the filters accordingly.
-   *
-   * @remarks
-   * The filters include:
-   * - `search`: A string representing the search query.
-   * - `isPmr`: A boolean indicating if the restaurant is PMR accessible.
-   * - `isOpen`: A boolean indicating if the restaurant is currently open.
-   * - `region`: A number representing the region ID.
-   *
-   * @param searchParams - The URLSearchParams object containing the search parameters.
-   *
-   * @returns void
-   */
-  const initializeFilters = useCallback(() => {
-    if (process.env.NODE_ENV === "development")
-      log.info(["initializeFilters"], "dev");
-    setLoading(true);
-    const tempFilters: Filters = {
-      search: searchParams.get("search") || "",
-      isPmr: searchParams.get("ispmr") === "true",
-      isOpen: searchParams.get("open") === "true",
-      crous: parseInt(
-        searchParams.get("region") || favouriteRegion?.code.toString() || "-1",
-        10
-      ),
-      restaurantCityAsc: searchParams.get("restaurantCityAsc") === "true",
-      restaurantCityDesc: searchParams.get("restaurantCityDesc") === "true",
-      restaurantNameAsc: searchParams.get("restaurantNameAsc") === "true",
-      restaurantNameDesc: searchParams.get("restaurantNameDesc") === "true",
-      restaurantType: parseInt(searchParams.get("restaurantType") || "-1", 10),
-      nearMe: false,
-    };
-    setFilters(tempFilters);
-  }, []);
 
   /**
    * Handles the request to get the user's current geolocation and find nearby restaurants.
@@ -170,6 +129,8 @@ export function useRestaurantFilters(
   // filter change (e.g. clicking a region on the map), which on the map view
   // pushes the sticky map back down under the page header.
   useEffect(() => {
+    // The initial filters come from the URL, so it is already up to date.
+    if (isFirstRender.current) return;
     log.info(["useEffect change query string"], "dev");
     const queryString = buildQueryString(filters);
     router.push(`${pathname}?${queryString}`, { scroll: false });
@@ -177,6 +138,8 @@ export function useRestaurantFilters(
 
   // Trigger debounced filtering when filters change
   useEffect(() => {
+    // The list is rendered with the initial filters already applied.
+    if (isFirstRender.current) return;
     log.info(["useEffect debouncedFilterRestaurants"], "dev");
     setLoading(true);
 
@@ -184,10 +147,14 @@ export function useRestaurantFilters(
     return () => debouncedFilterRestaurants.cancel();
   }, [filters]);
 
-  // Fetch regions and initialize filters on mount
+  // The favourite region lives in localStorage, so unlike the URL it can only
+  // be applied once in the browser. An explicit region in the URL wins.
   useEffect(() => {
-    initializeFilters();
-  }, [initializeFilters]);
+    isFirstRender.current = false;
+    if (favouriteRegion && !searchParams.get("region")) {
+      setFilters((prev) => ({ ...prev, crous: favouriteRegion.code }));
+    }
+  }, []);
 
   const activeFilterCount = useMemo(() => {
     return Object.keys(filters).reduce((count, key) => {

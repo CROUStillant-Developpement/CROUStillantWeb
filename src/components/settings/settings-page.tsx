@@ -1,6 +1,7 @@
 "use client";
 
 import SettingCard from "@/components/settings/setting-card";
+import InstallAppCard from "@/components/settings/install-app-card";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -28,7 +29,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles, Contrast, ZapOff, Rows3, Type, BookOpen } from "lucide-react";
+import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles, Contrast, ZapOff, Rows3, Type, BookOpen, Utensils, Bell, X } from "lucide-react";
+import { notificationsSupported } from "@/lib/dish-notifications";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useIframeBuilderStore } from "@/store/iframeBuilderStore";
 import { getRegions } from "@/services/region-service";
@@ -71,13 +73,18 @@ export default function SettingsPage() {
     toggleReadingSpacing,
     textSize,
     setTextSize,
+    followedDishes,
+    toggleFollowedDish,
+    dishNotifications,
+    setDishNotifications,
   } = useUserPreferences();
 
   const builderStore = useIframeBuilderStore();
 
   const localData = useMemo(() => ({
     preferences: {
-      favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles,
+      favourites, starredFav, followedDishes, dishNotifications, favouriteRegion, display,
+      dislexicFont, seasonalParticles,
       highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
     },
     widgetBuilder: {
@@ -91,10 +98,54 @@ export default function SettingsPage() {
       height: builderStore.height,
       blocks: builderStore.blocks.filter((b) => b.enabled).map((b) => b.id),
     },
-  }), [favourites, starredFav, favouriteRegion, display, dislexicFont, seasonalParticles,
+  }), [favourites, starredFav, followedDishes, dishNotifications, favouriteRegion, display, dislexicFont, seasonalParticles,
        highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
        builderStore.restaurantCode, builderStore.theme, builderStore.color, builderStore.font,
        builderStore.lang, builderStore.meals, builderStore.width, builderStore.height, builderStore.blocks]);
+
+  const handleDishNotificationsChange = async (checked: boolean) => {
+    if (!checked) {
+      setDishNotifications(false);
+      umami.event("Settings.Behavior.DishNotifications", { enabled: "false" });
+      toast({
+        title: t("dishNotifications.successTitle"),
+        description: t("dishNotifications.successDisabled"),
+      });
+      return;
+    }
+
+    if (!notificationsSupported()) {
+      toast({
+        title: t("dishNotifications.unsupportedTitle"),
+        description: t("dishNotifications.unsupportedDescription"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Asked here, on the user's own click: browsers ignore or penalise
+    // permission prompts that appear out of nowhere.
+    const permission =
+      Notification.permission === "granted"
+        ? "granted"
+        : await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      toast({
+        title: t("dishNotifications.deniedTitle"),
+        description: t("dishNotifications.deniedDescription"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setDishNotifications(true);
+    umami.event("Settings.Behavior.DishNotifications", { enabled: "true" });
+    toast({
+      title: t("dishNotifications.successTitle"),
+      description: t("dishNotifications.successEnabled"),
+    });
+  };
 
   const handleSeasonalParticlesChange = (checked: boolean) => {
     if (checked !== seasonalParticles) toggleSeasonalParticles();
@@ -526,6 +577,78 @@ export default function SettingsPage() {
               </SelectContent>
             </Select>
           </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Utensils className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">
+                  {t("followedDishes.title")}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t("followedDishes.description")}
+                </p>
+              </div>
+            </div>
+            {followedDishes.length === 0 ? (
+              <p className="text-sm text-muted-foreground italic">
+                {t("followedDishes.empty")}
+              </p>
+            ) : (
+              <ul className="flex flex-wrap gap-2">
+                {followedDishes.map((dish) => (
+                  <li
+                    key={dish.code}
+                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary text-sm font-semibold pl-3 pr-1 py-1 capitalize"
+                  >
+                    <span className="wrap-break-word">{dish.libelle}</span>
+                    <button
+                      type="button"
+                      aria-label={t("followedDishes.remove", { dish: dish.libelle })}
+                      title={t("followedDishes.remove", { dish: dish.libelle })}
+                      className="rounded-full p-1 hover:bg-primary/20 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+                      onClick={() => {
+                        toggleFollowedDish(dish.code, dish.libelle);
+                        umami.event("Dish.Unfollow", { source: "settings" });
+                      }}
+                    >
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Bell className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">
+                  {t("dishNotifications.title")}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t("dishNotifications.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={dishNotifications}
+                onCheckedChange={handleDishNotificationsChange}
+                aria-label={t("dishNotifications.title")}
+                className="scale-110"
+              />
+            </div>
+          </div>
+        </SettingCard>
+
+        <SettingCard title={t("appTitle")}>
+          <InstallAppCard />
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>

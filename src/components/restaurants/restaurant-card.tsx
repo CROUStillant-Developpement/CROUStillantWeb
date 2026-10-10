@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { Accessibility, Heart, MapPin } from "lucide-react";
+import { Accessibility, Heart, MapPin, Star } from "lucide-react";
 import { slugify } from "@/lib/utils";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { Restaurant } from "@/services/types";
@@ -19,9 +19,17 @@ import { useUmami } from "next-umami";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
+  /** Loads the photo eagerly. For the cards visible without scrolling. */
+  priority?: boolean;
+  /** Dishes the user follows that this restaurant serves in the coming week. */
+  followedDishes?: string[];
 }
 
-export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export default function RestaurantCard({
+  restaurant,
+  priority = false,
+  followedDishes = [],
+}: RestaurantCardProps) {
   const [imageSrc, setImageSrc] = useState(
     restaurant.image_url ?? "/default_ru.png",
   );
@@ -48,6 +56,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               alt={restaurant.nom}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={priority}
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               onError={handleImageError}
             />
@@ -97,6 +106,20 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               >
                 {restaurant.ouvert ? t("open") : t("closed")}
               </Badge>
+              {followedDishes.length > 0 && (
+                <Badge
+                  title={t("followedDishesTitle")}
+                  className="ml-2 min-w-0 gap-1 shadow-md font-semibold bg-amber-500/95 text-white hover:bg-amber-500/95"
+                >
+                  <Star className="h-3 w-3 shrink-0 fill-current" aria-hidden="true" />
+                  <span className="truncate capitalize">
+                    {followedDishes.length === 1
+                      ? followedDishes[0]
+                      : t("followedDishes", { count: followedDishes.length })}
+                  </span>
+                  <span className="sr-only">{t("followedDishesTitle")}</span>
+                </Badge>
+              )}
             </div>
           </div>
 

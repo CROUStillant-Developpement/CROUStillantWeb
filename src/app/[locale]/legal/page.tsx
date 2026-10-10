@@ -22,9 +22,9 @@ export default async function LegalPage() {
   const t = await getTranslations("LegalPage");
 
   const sections = [
-    { id: "legal", key: "legal", parts: ["part1", "part2", "part3", "part4", "part5"] },
-    { id: "privacy", key: "privacy", parts: ["part1", "part2", "part3"] },
-    { id: "cookies", key: "cookies", parts: ["part1", "part2"] },
+    { id: "legal", key: "legal", parts: ["part1", "part2", "part3", "part4", "part5", "part6"] },
+    { id: "privacy", key: "privacy", parts: ["part1", "part2", "part3", "part4", "part5", "part6", "part7"] },
+    { id: "cookies", key: "cookies", parts: ["part1", "part2", "part3"] },
     { id: "terms", key: "terms", parts: ["part1", "part2", "part3", "part4", "part5"] },
   ];
 
@@ -86,8 +86,11 @@ export default async function LegalPage() {
                     {t(`${section.key}.${partKey}.title`)}
                   </h3>
                   <div className="flex flex-col gap-3 text-muted-foreground leading-relaxed pl-0 sm:pl-11">
-                    <p>{t(`${section.key}.${partKey}.content1`)}</p>
-                    <p>{t(`${section.key}.${partKey}.content2`)}</p>
+                    {(t.raw(`${section.key}.${partKey}.content`) as string[]).map(
+                      (paragraph, paragraphIndex) => (
+                        <p key={paragraphIndex}>{paragraph}</p>
+                      )
+                    )}
                   </div>
                   {index < section.parts.length - 1 && (
                     <Separator className="mt-10 opacity-50" />

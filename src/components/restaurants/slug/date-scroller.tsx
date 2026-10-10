@@ -5,22 +5,26 @@ import { DateMenu } from "@/services/types";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DateScrollerProps {
   availableDates: DateMenu[];
   selectedDate: Date;
   onDateChange: (date: Date) => void;
+  /** Dates ("DD-MM-YYYY") on which a dish the user follows is served. */
+  starredDates?: Set<string>;
 }
 
 export default function DateScroller({
   availableDates,
   selectedDate,
   onDateChange,
+  starredDates,
 }: DateScrollerProps) {
   const locale = useLocale();
   const t = useTranslations("Common");
+  const tFollowed = useTranslations("FollowedDishes");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
@@ -134,19 +138,33 @@ export default function DateScroller({
           const weekday = date.toLocaleDateString(locale, { weekday: "short" });
           const day = date.toLocaleDateString(locale, { day: "numeric" });
           const month = date.toLocaleDateString(locale, { month: "short" });
+          const isStarred = starredDates?.has(dateObj.date) ?? false;
 
           return (
             <button
               key={dateObj.code}
               data-selected={isSelected}
               onClick={() => onDateChange(date)}
+              title={isStarred ? tFollowed("onMenu") : undefined}
               className={cn(
-                "flex flex-col items-center justify-center min-w-[60px] sm:min-w-[65px] h-[75px] sm:h-[80px] rounded-2xl border transition-all duration-300 scroll-snap-align-center shrink-0",
+                "relative flex flex-col items-center justify-center min-w-[60px] sm:min-w-[65px] h-[75px] sm:h-[80px] rounded-2xl border transition-all duration-300 scroll-snap-align-center shrink-0",
                 isSelected
                   ? "bg-primary text-primary-foreground border-primary scale-105 z-10 scale-110"
                   : "bg-card text-card-foreground border-border/50 hover:border-primary/30 hover:bg-accent/50"
               )}
             >
+              {isStarred && (
+                <>
+                  <Star
+                    className={cn(
+                      "absolute top-1 right-1 h-2.5 w-2.5 fill-current",
+                      isSelected ? "text-primary-foreground" : "text-amber-500"
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">{tFollowed("onMenu")}</span>
+                </>
+              )}
               <span className={cn(
                 "text-[10px] uppercase font-bold tracking-widest opacity-60",
                 isSelected && "opacity-90"

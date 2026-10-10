@@ -1,11 +1,10 @@
 import { getTranslations } from "next-intl/server";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Restaurant } from "@/services/types";
-import { buildRestaurantSlug } from "@/lib/restaurant-slug";
 import { buildRegionSlug } from "@/lib/region-slug";
 import { getCityKey, getRestaurantCity } from "@/lib/restaurant-seo";
-import { ListCollapseIcon } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import RestaurantLinkCard from "@/components/restaurants/restaurant-link-card";
 
 const MAX_NEARBY = 6;
 
@@ -34,39 +33,41 @@ export default async function RestaurantNearby({
     .sort((a, b) => a.nom.localeCompare(b.nom, "fr"))
     .slice(0, MAX_NEARBY);
 
+  const regionLink = (
+    <Link
+      href={`/crous/${buildRegionSlug(restaurant.region)}`}
+      className="group/region inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20 hover:bg-primary/20"
+    >
+      {t("regionLink", { region: restaurant.region.libelle })}
+      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/region:translate-x-1" />
+    </Link>
+  );
+
   return (
     <nav className="mt-12 flex flex-col gap-4 border-t border-border/40 pt-8">
-      {nearby.length > 0 && (
+      {/* With no neighbour to list, the region link stands alone. */}
+      {nearby.length === 0 ? (
+        <div>{regionLink}</div>
+      ) : (
         <>
-          <h2 className="text-xl font-bold tracking-tight">
-            {sameCity.length > 0
-              ? t("nearby", { city })
-              : t("regionLink", { region: restaurant.region.libelle })}
-          </h2>
-          <ul className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+            <h2 className="text-xl font-bold tracking-tight">
+              {sameCity.length > 0
+                ? // The name as written, not the lowercased key used to compare.
+                  t("nearby", { city: getRestaurantCity(restaurant) })
+                : t("regionLink", { region: restaurant.region.libelle })}
+            </h2>
+            {regionLink}
+          </div>
+          <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {nearby.map((other) => (
               <li key={other.code}>
-                <Link
-                  href={`/restaurants/${buildRestaurantSlug(other)}`}
-                  className="flex h-full flex-col rounded-xl border border-border/60 px-4 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                >
-                  <span className="font-medium">{other.nom}</span>
-                  {other.adresse && (
-                    <span className="text-sm text-muted-foreground">{other.adresse}</span>
-                  )}
-                </Link>
+                <RestaurantLinkCard restaurant={other} />
               </li>
             ))}
           </ul>
         </>
       )}
-      <Link
-        href={`/crous/${buildRegionSlug(restaurant.region)}`}
-        className="self-start font-semibold hover:underline text-foreground/80"
-      >
-        <ListCollapseIcon className="mr-2 inline h-4 w-4" />
-        {t("regionLink", { region: restaurant.region.libelle })} →
-      </Link>
     </nav>
   );
 }

@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Restaurant, Menu, Repas, CategorieTriee } from "@/services/types";
 import { fetchTodayMenuForScreen } from "@/actions/screen-actions";
+import { useMenuEvents } from "@/hooks/useMenuEvents";
 import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, RefreshCw, Monitor } from "lucide-react";
 
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const EVENT_REFRESH_DELAY = 2000; // 2 seconds
 const SCROLL_SPEED = 0.5; // px per frame (~36px/s at 60fps)
 const SCROLL_PAUSE_MS = 2500; // pause at bottom before looping
 
@@ -143,11 +145,11 @@ export default function ScreenPage({
   }, []);
 
   // Refresh menu data every 5 minutes
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (fresh: boolean = false) => {
     setIsRefreshing(true);
     try {
-      const fresh = await fetchTodayMenuForScreen(restaurant.code);
-      setMenu(fresh);
+      const todayMenu = await fetchTodayMenuForScreen(restaurant.code, fresh);
+      setMenu(todayMenu);
       setLastUpdated(new Date());
     } finally {
       setIsRefreshing(false);
@@ -155,9 +157,24 @@ export default function ScreenPage({
   }, [restaurant.code]);
 
   useEffect(() => {
-    const interval = setInterval(refresh, REFRESH_INTERVAL);
+    const interval = setInterval(() => refresh(), REFRESH_INTERVAL);
     return () => clearInterval(interval);
   }, [refresh]);
+
+  // ...and as soon as the API reports a change. The interval above stays as a
+  // fallback (it is also what moves the screen on to the next day's menu).
+  // Changes arrive as a burst of events: wait for it to settle, refresh once.
+  const eventTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useMenuEvents({
+    codes: [restaurant.code],
+    onEvent: () => {
+      if (eventTimer.current) clearTimeout(eventTimer.current);
+      eventTimer.current = setTimeout(() => refresh(true), EVENT_REFRESH_DELAY);
+    },
+  });
+  useEffect(() => () => {
+    if (eventTimer.current) clearTimeout(eventTimer.current);
+  }, []);
 
   const breakfast = menu?.repas.find((r) => r.type === "matin") ?? null;
   const lunch = menu?.repas.find((r) => r.type === "midi") ?? null;

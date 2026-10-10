@@ -1,10 +1,12 @@
-"use server";
-
+// This file must never be marked "use server": that would turn `apiRequest`
+// into a server action, letting any browser call it with its own URL, method
+// and body (server-side request forgery). Only the narrow, argument-checked
+// functions of the service files are exposed to the browser.
 import { ApiResult } from "@/services/types";
 import log from "@/lib/log";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const cache = new Map<string, { data: any; expiry: number }>();
+const cache = new Map<string, { data: any; expiry: number; storedAt: number }>();
 
 /**
  * Makes an API request with caching and error handling.
@@ -17,6 +19,8 @@ const cache = new Map<string, { data: any; expiry: number }>();
  * @param {number} [params.cacheDuration=0] - The duration (in milliseconds) to cache the response.
  * @param {string} [params.api_url=process.env.API_URL] - The base URL for the API.
  * @param {boolean} [params.check_success=true] - Whether to check for a success flag in the response data.
+ * @param {number} [params.maxAge] - Ignores a cached response older than this many milliseconds: forces a refresh
+ * without letting every caller hit the API at once.
  * @returns {Promise<ApiResult<T>>} A promise that resolves to the API result.
  * @throws {Error} Throws an error if the request fails due to network issues or server errors.
  */
@@ -28,6 +32,7 @@ export async function apiRequest<T>({
   api_url = process.env.API_URL,
   check_success = true,
   token = null,
+  maxAge,
 }: {
   endpoint: string;
   method?: string;
@@ -37,13 +42,17 @@ export async function apiRequest<T>({
   api_url?: string;
   check_success?: boolean;
   token?: string | null;
+  maxAge?: number;
 }): Promise<ApiResult<T>> {
   const cacheKey = `${method}:${api_url}/${endpoint}:${JSON.stringify(body)}`;
 
   // Check if response exists in cache and is valid
   if (cache.has(cacheKey)) {
     const cached = cache.get(cacheKey)!;
-    if (Date.now() < cached.expiry) {
+    const tooOld = maxAge !== undefined && Date.now() - cached.storedAt > maxAge;
+    if (tooOld) {
+      log.debug([`Cache too old for ${method} ${endpoint}`], "all");
+    } else if (Date.now() < cached.expiry) {
       log.debug([`Cache hit for ${method} ${endpoint}`], "all");
 
       return {
@@ -141,11 +150,13 @@ export async function apiRequest<T>({
             cache.set(cacheKey, {
               data: data.data,
               expiry: Date.now() + cacheDuration,
+              storedAt: Date.now(),
             });
           } else {
             cache.set(cacheKey, {
               data: data,
               expiry: Date.now() + cacheDuration,
+              storedAt: Date.now(),
             });
           }
 
