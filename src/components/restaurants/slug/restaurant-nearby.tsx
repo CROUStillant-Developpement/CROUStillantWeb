@@ -53,7 +53,8 @@ export default async function RestaurantNearby({
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <h2 className="text-xl font-bold tracking-tight">
               {sameCity.length > 0
-                ? t("nearby", { city })
+                ? // The name as written, not the lowercased key used to compare.
+                  t("nearby", { city: getRestaurantCity(restaurant) })
                 : t("regionLink", { region: restaurant.region.libelle })}
             </h2>
             {regionLink}
