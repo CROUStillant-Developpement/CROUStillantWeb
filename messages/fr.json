@@ -873,99 +873,178 @@
   },
   "LegalPage": {
     "title": "Notice légale",
-    "subtitle": "Mis à jour le 31 décembre 2024",
-    "description": "Vous trouverez ci-dessous les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant.",
+    "subtitle": "Mis à jour le 10 octobre 2026",
+    "description": "Vous trouverez ci-dessous les mentions légales, la politique de confidentialité, la gestion des cookies et les conditions d'utilisation de CROUStillant.",
     "legal": {
       "title": "Mentions légales",
       "part1": {
-        "title": "Identité du site",
-        "content1": "Le site : https://croustillant.menu/ est le site officiel de CROUstillant.",
-        "content2": "CROUStillant est un projet open-source développé qui a pour but de fournir des informations sur les menus des restaurants universitaires en France et en Outre-Mer."
+        "title": "Notre site",
+        "content": [
+          "Le site https://croustillant.menu est le site officiel de CROUStillant, un projet open-source et gratuit qui permet de consulter les menus des restaurants universitaires en France et en Outre-mer.",
+          "CROUStillant est un projet indépendant : il n'est affilié ni aux CROUS, ni au Cnous, ni à aucun organisme public.",
+          "Les informations présentées sur le site sont données à titre indicatif et n'ont aucune valeur contractuelle."
+        ]
       },
       "part2": {
         "title": "Éditeur du site",
-        "content1": "Le site est édité par CROUStillant Développement.",
-        "content2": "CROUStillant Développement est une association à but non lucratif qui n'est pas affiliée au \"CROUS\" ou à une autre entité similaire."
+        "content": [
+          "Le site est édité par Paul Bayfield, particulier agissant à titre non professionnel, pour le compte de CROUStillant Développement.",
+          "CROUStillant Développement est un collectif de bénévoles. Il ne s'agit ni d'une association déclarée ni d'une société : il ne dispose pas de la personnalité juridique.",
+          "Directeur de la publication : Paul Bayfield.",
+          "Contact : croustillant@bayfield.dev"
+        ]
       },
       "part3": {
-        "title": "Propriété intellectuelle",
-        "content1": "Le site est la propriété exclusive de CROUStillant Développement.",
-        "content2": "Cependant, tout le contenu du site est la propriété du \"CROUS\" et des restaurants universitaires en France et en Outre-Mer."
+        "title": "Conception",
+        "content": [
+          "Le site est conçu et développé par les bénévoles de CROUStillant Développement et par les contributeurs du projet open-source, dont la liste est disponible sur GitHub.",
+          "Le site a été conçu pour être simple, intuitif et accessible à tous."
+        ]
       },
       "part4": {
-        "title": "Conception",
-        "content1": "Le site a été conçu et développé par l'équipe de CROUStillant Développement. L'équipe est composée de bénévoles passionnés : Paul Bayfield (fondateur et développeur principal), Adlen Cherif (développeur web) et Lucas Debeve (concepteur de la base de données).",
-        "content2": "Le site a été conçu pour être simple, intuitif et accessible à tous. Il est entièrement open-source et gratuit."
+        "title": "Hébergement",
+        "content": [
+          "Le site est hébergé sur des serveurs administrés par Paul Bayfield, situés en France (Paris et Lille).",
+          "Le trafic transite par le réseau de Cloudflare, Inc. (101 Townsend Street, San Francisco, CA 94107, États-Unis), qui assure la diffusion et la protection du site."
+        ]
       },
       "part5": {
-        "title": "Hébergement",
-        "content1": "Le site est hébergé par l'équipe de CROUStillant Développement, sur le serveur personnel de Paul Bayfield.",
-        "content2": "Le site est hébergé en France, sur un serveur sécurisé et fiable. Aucune donnée personnelle n'est collectée ou stockée sur le serveur."
+        "title": "Propriété intellectuelle",
+        "content": [
+          "Le code source du site est publié sous licence Apache 2.0 et disponible sur GitHub.",
+          "Les données relatives aux restaurants et aux menus proviennent des CROUS. Les noms, marques et logos des CROUS restent la propriété de leurs titulaires."
+        ]
+      },
+      "part6": {
+        "title": "Responsabilité",
+        "content": [
+          "Les menus, horaires et informations pratiques sont repris tels que publiés par les CROUS et peuvent être modifiés sans préavis par les restaurants. En cas de doute, notamment en cas d'allergie ou de régime particulier, renseignez-vous directement auprès du restaurant.",
+          "CROUStillant Développement ne peut être tenu responsable des inexactitudes, ni des dommages liés à l'utilisation du site ou à son indisponibilité.",
+          "Le site est soumis au droit français."
+        ]
       }
     },
     "privacy": {
       "title": "Politique de confidentialité",
       "part1": {
-        "title": "Données personnelles",
-        "content1": "Le site ne collecte aucune donnée personnelle.",
-        "content2": "CROUStillant Développement ne collecte pas de données personnelles sur les utilisateurs du site. Aucune donnée n'est stockée ou partagée avec des tiers."
+        "title": "Responsable du traitement",
+        "content": [
+          "Le responsable du traitement est Paul Bayfield, pour CROUStillant Développement. Pour toute question : croustillant@bayfield.dev",
+          "Le site fonctionne sans compte, sans formulaire et sans publicité. Vos données ne sont ni vendues, ni louées, ni utilisées à des fins de profilage."
+        ]
       },
       "part2": {
-        "title": "Données traitées",
-        "content1": "Le site traite uniquement les données nécessaires au bon fonctionnement du service.",
-        "content2": "Les données personnelles pouvant être collectés sur le site le cas échéant par : les formulaires, la connexion au site (adresse IP, navigateur, système d'exploitation). Lorsque certaines informations sont obligatoires pour accéder à des fonctionnalités spécifiques du site, ce caractère obligatoire est indiqué au moment de la saisie des données. En cas de refus de votre part de fournir des informations obligatoires, vous pourriez ne pas avoir accès à certains services, fonctionnalités de site."
+        "title": "Données collectées",
+        "content": [
+          "Mesure d'audience : nous utilisons Umami, un outil hébergé sur nos propres serveurs, qui ne dépose aucun cookie et ne vous suit pas d'un site à l'autre. Il enregistre les pages consultées, la provenance de la visite, le type d'appareil, le navigateur, le système d'exploitation, la langue et le pays, ainsi que certaines actions (un clic sur un bouton, par exemple). Votre adresse IP n'est pas conservée par cet outil.",
+          "Journaux techniques : les requêtes adressées à notre API sont enregistrées avec leur date, l'adresse demandée, les en-têtes techniques transmis par votre navigateur (dont l'adresse IP et le User-Agent) et une empreinte hachée de l'adresse IP.",
+          "Aucune autre donnée personnelle n'est collectée."
+        ]
       },
       "part3": {
-        "title": "Transfert des données hors Union Européenne",
-        "content1": "CROUStillant Développement ne transfère pas de données en dehors de l'Union Européenne.",
-        "content2": "Toutes les données sont stockées en France, sur un serveur sécurisé et fiable."
+        "title": "Finalités et base légale",
+        "content": [
+          "Ces données servent à détecter et bloquer les abus, à assurer la sécurité et la disponibilité du service, et à connaître l'usage qui en est fait afin de l'améliorer.",
+          "Ces traitements reposent sur notre intérêt légitime (article 6.1.f du RGPD) à sécuriser le service et à en mesurer l'audience."
+        ]
+      },
+      "part4": {
+        "title": "Durée de conservation",
+        "content": [
+          "Les journaux techniques sont conservés trois mois sur la base de données principale, puis archivés sur une base de données distante, également située en France."
+        ]
+      },
+      "part5": {
+        "title": "Destinataires et localisation des données",
+        "content": [
+          "Toutes les données sont stockées en France (Paris et Lille). Seuls les membres de l'équipe chargés de l'administration du service y ont accès.",
+          "Cloudflare, qui achemine et protège le trafic, traite votre adresse IP et des données techniques de connexion. Ce traitement peut impliquer un transfert hors de l'Union européenne, encadré par les clauses contractuelles types et le Data Privacy Framework.",
+          "Lorsque vous affichez une carte, votre navigateur télécharge les fonds de carte directement auprès de CARTO et d'OpenStreetMap, qui reçoivent alors votre adresse IP.",
+          "Les liens vers des services externes (Google Maps, Marmiton, agendas en ligne…) ne transmettent aucune donnée tant que vous ne cliquez pas dessus."
+        ]
+      },
+      "part6": {
+        "title": "Vos droits",
+        "content": [
+          "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur les données qui vous concernent.",
+          "Pour les exercer, écrivez à croustillant@bayfield.dev. Le site fonctionnant sans compte, nous pourrons vous demander des éléments permettant de retrouver vos données (adresse IP et période concernée, par exemple).",
+          "Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (www.cnil.fr)."
+        ]
+      },
+      "part7": {
+        "title": "Sécurisation de vos données",
+        "content": [
+          "Les échanges avec le site sont chiffrés (HTTPS), la base de données principale est sauvegardée tous les jours et l'accès aux serveurs est limité à leur administrateur, Paul Bayfield.",
+          "En cas de violation de données présentant un risque pour vos droits et libertés, la CNIL en est informée dans les 72 heures."
+        ]
       }
     },
     "cookies": {
-      "title": "Cookies",
+      "title": "Cookies et stockage local",
       "part1": {
-        "title": "Utilisation des cookies",
-        "content1": "Le site utilise des uniquement des cookies nécessaires au bon fonctionnement du service.",
-        "content2": "Le site utilise des cookies pour améliorer l'expérience utilisateur et garantir le bon fonctionnement du service. Aucun cookie publicitaire ou de suivi n'est utilisé sur le site."
+        "title": "Cookies",
+        "content": [
+          "Le site ne dépose aucun cookie publicitaire ni de suivi. C'est pourquoi aucun bandeau de consentement ne vous est présenté.",
+          "Un seul cookie peut être déposé : NEXT_LOCALE, qui mémorise la langue choisie lorsque vous en changez. Il est supprimé à la fermeture du navigateur."
+        ]
       },
       "part2": {
-        "title": "Gestion des cookies",
-        "content1": "Vous pouvez gérer les cookies en modifiant les paramètres de votre navigateur.",
-        "content2": "Vous pouvez également supprimer les cookies à tout moment en utilisant les paramètres du site."
+        "title": "Stockage local",
+        "content": [
+          "Vos préférences (thème, restaurants favoris, région favorite, options d'affichage et d'accessibilité) et les bandeaux que vous avez fermés sont enregistrés dans le stockage local de votre navigateur. Ces informations restent sur votre appareil.",
+          "Vous pouvez les effacer depuis la page Paramètres du site, ou en supprimant les données du site dans votre navigateur."
+        ]
+      },
+      "part3": {
+        "title": "Géolocalisation",
+        "content": [
+          "La recherche de restaurants autour de vous n'utilise votre position que si vous l'autorisez dans votre navigateur.",
+          "Le calcul est effectué sur votre appareil : votre position n'est ni transmise à nos serveurs, ni enregistrée."
+        ]
       }
     },
     "terms": {
       "title": "Conditions d'utilisation",
       "part1": {
         "title": "Acceptation des conditions",
-        "content1": "En accédant au site, vous acceptez les conditions d'utilisation.",
-        "content2": "Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser le site."
+        "content": [
+          "En accédant au site, vous acceptez les présentes conditions d'utilisation.",
+          "Si vous ne les acceptez pas, veuillez ne pas utiliser le site."
+        ]
       },
       "part2": {
         "title": "Modification des conditions",
-        "content1": "Les conditions d'utilisation peuvent être modifiées à tout moment.",
-        "content2": "Les utilisateurs seront informés des modifications apportées aux conditions d'utilisation."
+        "content": [
+          "Les conditions d'utilisation peuvent être modifiées à tout moment. La date de dernière mise à jour figure en haut de cette page.",
+          "La poursuite de la navigation après une modification vaut acceptation des nouvelles conditions."
+        ]
       },
       "part3": {
-        "title": "Propriété intellectuelle",
-        "content1": "Le contenu de ce site ne peut être reproduit ou utilisé à des fins commerciales ou publicitaires.",
-        "content2": "Les informations utilisées ne doivent l’être qu’à des fins personnelles, associatives ou professionnelles. Toute diffusion ou utilisation à des fins commerciales ou publicitaires est exclue."
+        "title": "Utilisation du service",
+        "content": [
+          "Le site est gratuit et destiné à la consultation. L'extraction automatisée de son contenu (scraping) et les accès automatisés massifs ne sont pas autorisés et peuvent être bloqués.",
+          "Une API publique est mise à disposition à la place : utilisez-la pour réutiliser les données dans votre propre projet, dans le respect de ses conditions d'utilisation."
+        ]
       },
       "part4": {
-        "title": "Provenance",
-        "content1": "Aucune page ne peut être présentée comme provenant de ce site si des transformations en modifiant le sens y ont été apportées.",
-        "content2": "Les photos provenant des offres de logement émanant des propriétaires ne sont pas contractuelles et n’engagent en aucune façon la responsabilité de CROUStillant Développement."
+        "title": "Réutilisation du contenu",
+        "content": [
+          "Le code source peut être réutilisé selon les termes de la licence Apache 2.0.",
+          "Aucune page ne peut être présentée comme provenant de ce site si son sens a été modifié."
+        ]
       },
       "part5": {
         "title": "Liens",
-        "content1": "Le site peut contenir des liens vers d'autres sites.",
-        "content2": "CROUStillant Développement n'est pas responsable du contenu des sites externes. CROUStillant Développement ne peut être tenu responsable des dommages causés par l'utilisation de ces sites."
+        "content": [
+          "Le site contient des liens vers d'autres sites.",
+          "CROUStillant Développement n'est pas responsable du contenu de ces sites, ni des dommages liés à leur utilisation."
+        ]
       }
     },
     "seo": {
       "title": "Notice légale",
-      "description": "Consultez les mentions légales, la politique de confidentialité, les cookies et les conditions d'utilisation de CROUStillant. Nous sommes là pour vous aider !",
-      "keywords": "CROUS, restaurant, menu, mentions légales, politique de confidentialité"
+      "description": "Consultez les mentions légales, la politique de confidentialité, la gestion des cookies et les conditions d'utilisation de CROUStillant.",
+      "keywords": "CROUS, restaurant, menu, mentions légales, politique de confidentialité, cookies, RGPD"
     }
   },
   "ContactPage": {

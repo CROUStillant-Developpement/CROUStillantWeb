@@ -872,99 +872,178 @@
   },
   "LegalPage": {
     "title": "Legal notices",
-    "subtitle": "Updated the 31st of December 2024",
-    "description": "Find all the legal information about CROUStillant and its operation.",
+    "subtitle": "Updated on 10 October 2026",
+    "description": "Below you will find the legal information, privacy policy, cookie policy and terms of use of CROUStillant.",
     "legal": {
       "title": "Legal information",
       "part1": {
-        "title": "Site identification",
-        "content1": "The site: https://croustillant.menu is the official site of CROUStillant.",
-        "content2": "CROUStillant is an open-source project that aims to provide information on the menus of university restaurants in France and overseas."
+        "title": "Our site",
+        "content": [
+          "The site https://croustillant.menu is the official site of CROUStillant, a free and open-source project for browsing the menus of university restaurants in France and its overseas territories.",
+          "CROUStillant is an independent project: it is not affiliated with the CROUS, the Cnous or any public body.",
+          "The information shown on the site is provided for guidance only and has no contractual value."
+        ]
       },
       "part2": {
-        "title": "Editor",
-        "content1": "The site is edited by CROUStillant Développement.",
-        "content2": "CROUStillant is a non profit project and is not affiliated with the \"CROUS\" or any other similar organization."
+        "title": "Publisher",
+        "content": [
+          "The site is published by Paul Bayfield, a private individual acting in a non-professional capacity, on behalf of CROUStillant Développement.",
+          "CROUStillant Développement is a group of volunteers. It is neither a registered association nor a company, and has no legal personality.",
+          "Publication director: Paul Bayfield.",
+          "Contact: croustillant@bayfield.dev"
+        ]
       },
       "part3": {
-        "title": "Property",
-        "content1": "The site is the property of CROUStillant Développement.",
-        "content2": "However, the data displayed on the site belongs to the \"CROUS\" and the respective restaurants."
+        "title": "Development",
+        "content": [
+          "The site is designed and developed by the volunteers of CROUStillant Développement and by the contributors to the open-source project, who are listed on GitHub.",
+          "The site was designed to be simple, intuitive and accessible to all."
+        ]
       },
       "part4": {
-        "title": "Development",
-        "content1": "The site was designed and developed by the CROUStillant Développement team. The team is made up of passionate volunteers: Paul Bayfield (founder and lead developer), Adlen Cherif (UI designer and web developer) and Lucas Debeve (database designer).",
-        "content2": "The site was designed to be simple, intuitive and accessible to all. It is entirely open-source and free."
+        "title": "Hosting",
+        "content": [
+          "The site is hosted on servers administered by Paul Bayfield, located in France (Paris and Lille).",
+          "Traffic passes through the network of Cloudflare, Inc. (101 Townsend Street, San Francisco, CA 94107, United States), which delivers and protects the site."
+        ]
       },
       "part5": {
-        "title": "Hosting",
-        "content1": "The site is hosted by the CROUStillant Développement team, on Paul Bayfield's personal server.",
-        "content2": "The site is hosted in France, on a secure and reliable server. No personal data is collected or stored on the server."
+        "title": "Intellectual property",
+        "content": [
+          "The site's source code is published under the Apache 2.0 licence and available on GitHub.",
+          "Restaurant and menu data comes from the CROUS. The names, trademarks and logos of the CROUS remain the property of their owners."
+        ]
+      },
+      "part6": {
+        "title": "Liability",
+        "content": [
+          "Menus, opening hours and practical information are shown as published by the CROUS and may be changed by the restaurants without notice. If in doubt, particularly if you have an allergy or a specific diet, check directly with the restaurant.",
+          "CROUStillant Développement cannot be held liable for inaccuracies, or for damage resulting from the use of the site or its unavailability.",
+          "The site is governed by French law."
+        ]
       }
     },
     "privacy": {
       "title": "Privacy policy",
       "part1": {
-        "title": "Personal data",
-        "content1": "This site does not collect any personal data about users.",
-        "content2": "CROUStillant Développement does not collect any personal data about users of the site. No data is stored or shared with third parties."
+        "title": "Data controller",
+        "content": [
+          "The data controller is Paul Bayfield, for CROUStillant Développement. For any question: croustillant@bayfield.dev",
+          "The site works without accounts, forms or advertising. Your data is never sold, rented or used for profiling."
+        ]
       },
       "part2": {
-        "title": "Data processed",
-        "content1": "This site processes only the data necessary for the proper functioning of the service.",
-        "content2": "The personal data that may be collected on the site, if any, by: the forms, the connection to the site (IP address, browser, operating system). When certain information is mandatory to access specific features of the site, this mandatory nature is indicated at the time of data entry. If you refuse to provide mandatory information, you may not have access to certain services or features of the site."
+        "title": "Data collected",
+        "content": [
+          "Audience measurement: we use Umami, a tool hosted on our own servers, which sets no cookies and does not track you across sites. It records the pages viewed, where the visit came from, the device type, browser, operating system, language and country, as well as some actions (a click on a button, for example). Your IP address is not kept by this tool.",
+          "Technical logs: requests sent to our API are recorded with their date, the address requested, the technical headers sent by your browser (including the IP address and User-Agent) and a hashed fingerprint of the IP address.",
+          "No other personal data is collected."
+        ]
       },
       "part3": {
+        "title": "Purposes and legal basis",
+        "content": [
+          "This data is used to detect and block abuse, to keep the service secure and available, and to understand how it is used in order to improve it.",
+          "This processing is based on our legitimate interest (Article 6(1)(f) GDPR) in securing the service and measuring its audience."
+        ]
+      },
+      "part4": {
         "title": "Data retention",
-        "content1": "CROUStillant Développement does not transfer data outside the European Union.",
-        "content2": "All data is stored in France, on a secure and reliable server."
+        "content": [
+          "Technical logs are kept for three months on the main database, then archived on a remote database, also located in France."
+        ]
+      },
+      "part5": {
+        "title": "Recipients and data location",
+        "content": [
+          "All data is stored in France (Paris and Lille). Only the team members who administer the service have access to it.",
+          "Cloudflare, which routes and protects traffic, processes your IP address and technical connection data. This processing may involve a transfer outside the European Union, governed by standard contractual clauses and the Data Privacy Framework.",
+          "When you display a map, your browser downloads the map tiles directly from CARTO and OpenStreetMap, which then receive your IP address.",
+          "Links to external services (Google Maps, Marmiton, online calendars…) send no data until you click on them."
+        ]
+      },
+      "part6": {
+        "title": "Your rights",
+        "content": [
+          "You have the right to access, rectify, erase, restrict and object to the processing of data concerning you.",
+          "To exercise these rights, write to croustillant@bayfield.dev. As the site works without accounts, we may ask you for details that let us find your data (the IP address and period concerned, for example).",
+          "If you believe your rights are not being respected, you can lodge a complaint with the CNIL (www.cnil.fr)."
+        ]
+      },
+      "part7": {
+        "title": "Securing your data",
+        "content": [
+          "Exchanges with the site are encrypted (HTTPS), the main database is backed up every day and access to the servers is limited to their administrator, Paul Bayfield.",
+          "In the event of a data breach posing a risk to your rights and freedoms, the CNIL is informed within 72 hours."
+        ]
       }
     },
     "cookies": {
-      "title": "Cookies",
+      "title": "Cookies and local storage",
       "part1": {
-        "title": "Cookie usage",
-        "content1": "The site uses only cookies necessary for the proper functioning of the service.",
-        "content2": "The site uses cookies to improve the user experience and ensure the proper functioning of the service. No advertising or tracking cookies are used on the site."
+        "title": "Cookies",
+        "content": [
+          "The site sets no advertising or tracking cookies. That is why you are not shown a consent banner.",
+          "A single cookie may be set: NEXT_LOCALE, which remembers the language you chose when you switch. It is deleted when you close your browser."
+        ]
       },
       "part2": {
-        "title": "Cookie management",
-        "content1": "You can manage cookies by changing your browser settings.",
-        "content2": "You can also delete cookies at any time using the site settings."
+        "title": "Local storage",
+        "content": [
+          "Your preferences (theme, favourite restaurants, favourite region, display and accessibility options) and the banners you have dismissed are saved in your browser's local storage. This information stays on your device.",
+          "You can clear it from the site's Settings page, or by deleting the site's data in your browser."
+        ]
+      },
+      "part3": {
+        "title": "Geolocation",
+        "content": [
+          "The search for restaurants near you only uses your position if you allow it in your browser.",
+          "The calculation is done on your device: your position is neither sent to our servers nor stored."
+        ]
       }
     },
     "terms": {
       "title": "Terms of use",
       "part1": {
         "title": "Acceptance of the terms",
-        "content1": "By accessing the site, you agree to the terms of use.",
-        "content2": "If you do not agree to these terms, please do not use the site."
+        "content": [
+          "By accessing the site, you agree to these terms of use.",
+          "If you do not agree to them, please do not use the site."
+        ]
       },
       "part2": {
-        "title": "Modification of the terms",
-        "content1": "The terms of use may be modified at any time.",
-        "content2": "Users will be informed of any changes to the terms of use."
+        "title": "Changes to the terms",
+        "content": [
+          "The terms of use may be changed at any time. The date of the last update is shown at the top of this page.",
+          "Continuing to browse the site after a change means you accept the new terms."
+        ]
       },
       "part3": {
-        "title": "Intellectual property",
-        "content1": "The content of this site may not be reproduced or used for commercial or advertising purposes.",
-        "content2": "The information used should only be used for personal, associative or professional purposes. Any dissemination or use for commercial or advertising purposes is excluded."
+        "title": "Use of the service",
+        "content": [
+          "The site is free and intended for browsing. Automated extraction of its content (scraping) and large-scale automated access are not permitted and may be blocked.",
+          "A public API is provided instead: use it to reuse the data in your own project, in accordance with its terms of use."
+        ]
       },
       "part4": {
-        "title": "Provenance",
-        "content1": "No page may be presented as originating from this site if transformations have been made to change its meaning.",
-        "content2": "The photos from the housing offers from the owners are not contractual and in no way engage the responsibility of CROUStillant Développement."
+        "title": "Reuse of content",
+        "content": [
+          "The source code may be reused under the terms of the Apache 2.0 licence.",
+          "No page may be presented as originating from this site if its meaning has been altered."
+        ]
       },
       "part5": {
         "title": "Links",
-        "content1": "The site may contain links to other sites.",
-        "content2": "CROUStillant Développement is not responsible for the content of external sites. CROUStillant Développement cannot be held responsible for any damage caused by the use of these sites."
+        "content": [
+          "The site contains links to other sites.",
+          "CROUStillant Développement is not responsible for the content of those sites, or for any damage resulting from their use."
+        ]
       }
     },
     "seo": {
       "title": "Legal notices",
-      "description": "Find all the legal information about CROUStillant and its operation. Discover the terms of use, privacy policy and cookie policy.",
-      "keywords": "CROUS, restaurant, menu, legal"
+      "description": "Read the legal information, privacy policy, cookie policy and terms of use of CROUStillant.",
+      "keywords": "CROUS, restaurant, menu, legal, privacy policy, cookies, GDPR"
     }
   },
   "ContactPage": {
