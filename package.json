@@ -1,6 +1,6 @@
 {
   "name": "croustillant",
-  "version": "2.0.0",
+  "version": "2.5.0",
   "private": true,
   "scripts": {
     "predev": "node scripts/copy-maplibre-worker.mjs",
