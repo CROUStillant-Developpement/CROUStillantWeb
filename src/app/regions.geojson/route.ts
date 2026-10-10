@@ -1,5 +1,8 @@
-import { NextResponse } from "next/server";
-import { getRegionsGeoJSON } from "@/services/region-service";
+import { NextRequest, NextResponse } from "next/server";
+import {
+  getRegionsGeoJSON,
+  getRegionsGeoJSONOptimised,
+} from "@/services/region-service";
 
 export const dynamic = "force-dynamic";
 
@@ -10,9 +13,15 @@ export const dynamic = "force-dynamic";
  * prop, which inlined it in the HTML of the home and restaurants pages for
  * every visitor, whether or not they ever looked at a map. The maps now fetch
  * it from here when they are displayed (see `useRegionsGeoJson`).
+ *
+ * `?optimised=true` returns the simplified outlines (about 80 kB), which is
+ * all the home page's overview needs.
  */
-export async function GET() {
-  const result = await getRegionsGeoJSON();
+export async function GET(request: NextRequest) {
+  const optimised = request.nextUrl.searchParams.get("optimised") === "true";
+  const result = await (optimised
+    ? getRegionsGeoJSONOptimised()
+    : getRegionsGeoJSON());
 
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 502 });

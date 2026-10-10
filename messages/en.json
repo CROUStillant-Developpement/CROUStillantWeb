@@ -60,7 +60,15 @@
     "regionsMap": {
       "title": "Find your region",
       "description": "Click on a region to see the CROUS restaurants located there.",
-      "cta": "See all restaurants"
+      "cta": "See all restaurants",
+      "territories": {
+        "mainland": "Mainland France",
+        "guadeloupe": "Guadeloupe",
+        "martinique": "Martinique",
+        "guyane": "French Guiana",
+        "reunion": "Réunion",
+        "mayotte": "Mayotte"
+      }
     },
     "seo": {
       "title": "Menus of French university restaurants",

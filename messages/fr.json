@@ -60,7 +60,15 @@
     "regionsMap": {
       "title": "Trouvez votre région",
       "description": "Cliquez sur une région pour voir les restaurants CROUS qui s'y trouvent.",
-      "cta": "Voir tous les restaurants"
+      "cta": "Voir tous les restaurants",
+      "territories": {
+        "mainland": "France métropolitaine",
+        "guadeloupe": "Guadeloupe",
+        "martinique": "Martinique",
+        "guyane": "Guyane",
+        "reunion": "La Réunion",
+        "mayotte": "Mayotte"
+      }
     },
     "seo": {
       "title": "Les menus des restaurants universitaires CROUS",
