@@ -29,7 +29,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles, Contrast, ZapOff, Rows3, Type, BookOpen, Utensils, X } from "lucide-react";
+import { TriangleAlert, Trash2, Palette, Languages, Cog, Star, MapPin, Eye, ScrollText, Sparkles, Contrast, ZapOff, Rows3, Type, BookOpen, Utensils, Bell, X } from "lucide-react";
+import { notificationsSupported } from "@/lib/dish-notifications";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { useIframeBuilderStore } from "@/store/iframeBuilderStore";
 import { getRegions } from "@/services/region-service";
@@ -74,13 +75,15 @@ export default function SettingsPage() {
     setTextSize,
     followedDishes,
     toggleFollowedDish,
+    dishNotifications,
+    setDishNotifications,
   } = useUserPreferences();
 
   const builderStore = useIframeBuilderStore();
 
   const localData = useMemo(() => ({
     preferences: {
-      favourites, starredFav, followedDishes, favouriteRegion, display,
+      favourites, starredFav, followedDishes, dishNotifications, favouriteRegion, display,
       dislexicFont, seasonalParticles,
       highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
     },
@@ -95,10 +98,54 @@ export default function SettingsPage() {
       height: builderStore.height,
       blocks: builderStore.blocks.filter((b) => b.enabled).map((b) => b.id),
     },
-  }), [favourites, starredFav, followedDishes, favouriteRegion, display, dislexicFont, seasonalParticles,
+  }), [favourites, starredFav, followedDishes, dishNotifications, favouriteRegion, display, dislexicFont, seasonalParticles,
        highContrast, reducedMotion, readingSpacing, textSize, theme, locale,
        builderStore.restaurantCode, builderStore.theme, builderStore.color, builderStore.font,
        builderStore.lang, builderStore.meals, builderStore.width, builderStore.height, builderStore.blocks]);
+
+  const handleDishNotificationsChange = async (checked: boolean) => {
+    if (!checked) {
+      setDishNotifications(false);
+      umami.event("Settings.Behavior.DishNotifications", { enabled: "false" });
+      toast({
+        title: t("dishNotifications.successTitle"),
+        description: t("dishNotifications.successDisabled"),
+      });
+      return;
+    }
+
+    if (!notificationsSupported()) {
+      toast({
+        title: t("dishNotifications.unsupportedTitle"),
+        description: t("dishNotifications.unsupportedDescription"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Asked here, on the user's own click: browsers ignore or penalise
+    // permission prompts that appear out of nowhere.
+    const permission =
+      Notification.permission === "granted"
+        ? "granted"
+        : await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      toast({
+        title: t("dishNotifications.deniedTitle"),
+        description: t("dishNotifications.deniedDescription"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setDishNotifications(true);
+    umami.event("Settings.Behavior.DishNotifications", { enabled: "true" });
+    toast({
+      title: t("dishNotifications.successTitle"),
+      description: t("dishNotifications.successEnabled"),
+    });
+  };
 
   const handleSeasonalParticlesChange = (checked: boolean) => {
     if (checked !== seasonalParticles) toggleSeasonalParticles();
@@ -575,6 +622,29 @@ export default function SettingsPage() {
             )}
           </div>
 
+          <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+                <Bell className="h-5 w-5 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-lg leading-none">
+                  {t("dishNotifications.title")}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t("dishNotifications.description")}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Switch
+                checked={dishNotifications}
+                onCheckedChange={handleDishNotificationsChange}
+                aria-label={t("dishNotifications.title")}
+                className="scale-110"
+              />
+            </div>
+          </div>
         </SettingCard>
 
         <SettingCard title={t("appTitle")}>

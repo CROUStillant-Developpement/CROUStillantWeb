@@ -9,6 +9,7 @@ import SeasonalThemeProvider from "@/components/seasonal-theme-provider";
 import SeasonalParticlesBanner from "@/components/seasonal-particles-banner";
 import AccessibilityProvider from "@/components/accessibility-provider";
 import PwaProvider from "@/components/pwa-provider";
+import DishNotificationsProvider from "@/components/dish-notifications-provider";
 
 
 export default function LayoutShell({
@@ -51,6 +52,7 @@ export default function LayoutShell({
       <SeasonalThemeProvider />
       <AccessibilityProvider />
       <PwaProvider />
+      <DishNotificationsProvider />
     </>
   );
 }

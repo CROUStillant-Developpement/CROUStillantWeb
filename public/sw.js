@@ -168,3 +168,29 @@ self.addEventListener("message", (event) => {
     })()
   );
 });
+
+// A followed-dish notification (src/lib/dish-notifications.ts) was clicked:
+// bring an open tab to the restaurant's page, or open one.
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  const url = event.notification.data?.url;
+  if (typeof url !== "string") return;
+
+  const target = new URL(url, self.location.origin);
+  if (target.origin !== self.location.origin) return;
+
+  event.waitUntil(
+    (async () => {
+      const windows = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+      const client = windows[0];
+
+      if (client) {
+        await client.focus();
+        await client.navigate(target.href).catch(() => self.clients.openWindow(target.href));
+      } else {
+        await self.clients.openWindow(target.href);
+      }
+    })()
+  );
+});

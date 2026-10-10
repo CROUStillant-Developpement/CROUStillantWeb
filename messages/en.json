@@ -721,6 +721,17 @@
       "empty": "No followed dishes. Click the star next to a dish in a menu to follow it.",
       "remove": "Unfollow {dish}"
     },
+    "dishNotifications": {
+      "title": "Dish notifications",
+      "description": "Get a notification when a favourite restaurant adds a followed dish to its menu. Only works while the site is open in a tab.",
+      "successTitle": "Notifications updated",
+      "successEnabled": "You will be told when a followed dish appears on the menu.",
+      "successDisabled": "Dish notifications are turned off.",
+      "deniedTitle": "Notifications blocked",
+      "deniedDescription": "Allow notifications for this site in your browser settings, then try again.",
+      "unsupportedTitle": "Notifications unavailable",
+      "unsupportedDescription": "Your browser does not support notifications. On iPhone, add the site to your home screen first."
+    },
     "appTitle": "App",
     "personalTitle": "Personal data",
     "install": {
@@ -1028,7 +1039,7 @@
       "part2": {
         "title": "Local storage",
         "content": [
-          "Your preferences (theme, favourite restaurants, followed dishes, favourite region, display and accessibility options) and the banners you have dismissed are saved in your browser's local storage. This information stays on your device.",
+          "Your preferences (theme, favourite restaurants, followed dishes, favourite region, display and accessibility options), the dish notifications already sent and the banners you have dismissed are saved in your browser's local storage. This information stays on your device.",
           "You can clear it from the site's Settings page, or by deleting the site's data in your browser."
         ]
       },
@@ -1146,6 +1157,9 @@
       "description": "Discover the latest changes and updates made to CROUStillant. Stay informed of the latest features and improvements.",
       "keywords": "CROUS, restaurant, menu, changelog"
     }
+  },
+  "DishNotifications": {
+    "body": "{dishes} on the menu on {date}."
   },
   "BetaBanner": {
     "title": "Beta version",

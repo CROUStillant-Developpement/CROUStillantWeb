@@ -721,6 +721,17 @@
       "empty": "Aucun plat suivi. Cliquez sur l'étoile à côté d'un plat dans un menu pour le suivre.",
       "remove": "Ne plus suivre {dish}"
     },
+    "dishNotifications": {
+      "title": "Notifications de plats",
+      "description": "Recevez une notification quand un restaurant favori met un plat suivi à son menu. Fonctionne uniquement tant que le site est ouvert dans un onglet.",
+      "successTitle": "Notifications mises à jour",
+      "successEnabled": "Vous serez prévenu quand un plat suivi arrive au menu.",
+      "successDisabled": "Les notifications de plats sont désactivées.",
+      "deniedTitle": "Notifications bloquées",
+      "deniedDescription": "Autorisez les notifications pour ce site dans les réglages de votre navigateur, puis réessayez.",
+      "unsupportedTitle": "Notifications indisponibles",
+      "unsupportedDescription": "Votre navigateur ne permet pas les notifications. Sur iPhone, installez d'abord le site sur l'écran d'accueil."
+    },
     "appTitle": "Application",
     "personalTitle": "Informations personnelles",
     "install": {
@@ -1029,7 +1040,7 @@
       "part2": {
         "title": "Stockage local",
         "content": [
-          "Vos préférences (thème, restaurants favoris, plats suivis, région favorite, options d'affichage et d'accessibilité) et les bandeaux que vous avez fermés sont enregistrés dans le stockage local de votre navigateur. Ces informations restent sur votre appareil.",
+          "Vos préférences (thème, restaurants favoris, plats suivis, région favorite, options d'affichage et d'accessibilité), les notifications de plats déjà envoyées et les bandeaux que vous avez fermés sont enregistrés dans le stockage local de votre navigateur. Ces informations restent sur votre appareil.",
           "Vous pouvez les effacer depuis la page Paramètres du site, ou en supprimant les données du site dans votre navigateur."
         ]
       },
@@ -1147,6 +1158,9 @@
       "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées. Restez informé des nouveautés !",
       "keywords": "CROUS, restaurant, menu, mises à jour"
     }
+  },
+  "DishNotifications": {
+    "body": "{dishes} au menu {date}."
   },
   "BetaBanner": {
     "title": "Version bêta",

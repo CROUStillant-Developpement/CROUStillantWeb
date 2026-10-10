@@ -242,7 +242,7 @@ describe("userPreferencesStore — edge cases", () => {
 describe("userPreferencesStore — followed dishes", () => {
   beforeEach(() => {
     localStorage.clear();
-    useUserPreferences.setState({ followedDishes: [] });
+    useUserPreferences.setState({ followedDishes: [], dishNotifications: false });
   });
 
   it("follows a dish", () => {
@@ -268,11 +268,13 @@ describe("userPreferencesStore — followed dishes", () => {
     expect(useUserPreferences.getState().followedDishes).toEqual([]);
   });
 
-  it("clearUserPreferences removes followed dishes", () => {
+  it("clearUserPreferences removes followed dishes and turns notifications off", () => {
     useUserPreferences.getState().toggleFollowedDish("12", "Tartiflette");
+    useUserPreferences.getState().setDishNotifications(true);
 
     useUserPreferences.getState().clearUserPreferences();
 
     expect(useUserPreferences.getState().followedDishes).toEqual([]);
+    expect(useUserPreferences.getState().dishNotifications).toBe(false);
   });
 });

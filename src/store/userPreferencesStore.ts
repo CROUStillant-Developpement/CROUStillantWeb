@@ -33,6 +33,12 @@ interface StoreState {
   followedDishes: FollowedDish[];
 
   /**
+   * Whether browser notifications are sent when a followed dish appears on a
+   * favourite restaurant's menu.
+   */
+  dishNotifications: boolean;
+
+  /**
    * The display type setting.
    */
   display: DisplayType;
@@ -132,6 +138,11 @@ interface StoreState {
   toggleFollowedDish: (code: string | number, libelle: string) => void;
 
   /**
+   * Enables or disables followed dish notifications.
+   */
+  setDishNotifications: (enabled: boolean) => void;
+
+  /**
    * Sets the favourite region.
    *
    * @param region - The region to be set as favourite.
@@ -176,6 +187,7 @@ export const useUserPreferences = create<StoreState>()(
       favourites: [],
       starredFav: null,
       followedDishes: [],
+      dishNotifications: false,
       favouriteRegion: { code: -1, libelle: "All Regions" },
       dislexicFont: false,
       seasonalParticles: true,
@@ -279,6 +291,11 @@ export const useUserPreferences = create<StoreState>()(
           };
         }),
 
+      setDishNotifications: (enabled: boolean) =>
+        set(() => ({
+          dishNotifications: enabled,
+        })),
+
       setfavouriteRegion: (region: Region) =>
         set(() => ({
           favouriteRegion: region,
@@ -289,6 +306,7 @@ export const useUserPreferences = create<StoreState>()(
           favourites: [],
           starredFav: null,
           followedDishes: [],
+          dishNotifications: false,
           display: "list",
           favouriteRegion: { code: -1, libelle: "All Regions" },
           seasonalParticles: true,
