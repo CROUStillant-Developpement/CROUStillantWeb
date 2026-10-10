@@ -27,7 +27,9 @@ export default function Header() {
   return (
     <motion.header
       className="grid grid-cols-3 items-center w-full mt-4 px-4"
-      initial={{ opacity: 0, y: -16 }}
+      // Not animated in: `initial` is what the server renders, and the header
+      // would stay invisible until hydration.
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
     >

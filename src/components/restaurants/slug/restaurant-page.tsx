@@ -7,8 +7,6 @@ import QrCodeDialog from "@/components/qr-code-dialog";
 import CalendarSubscribeDialog, { useCalendarHint } from "./calendar-subscribe-dialog";
 import RestaurantInfo from "./restaurant-info";
 import MenuDisplaySection from "@/components/restaurants/slug/menu-display-section";
-import RestaurantInsights from "@/components/restaurants/slug/restaurant-insights";
-import RestaurantActivity from "@/components/restaurants/slug/restaurant-activity";
 import RestaurantPageSkeleton from "./restaurant-page-skeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CalendarDays, LineChart, History } from "lucide-react";
@@ -27,6 +25,18 @@ import { X as CloseIcon } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import CelebrationBanner, { useCelebrationBanner } from "./celebration-banner";
 import EasterEggLauncher from "@/components/easter-egg/easter-egg-launcher";
+import dynamic from "next/dynamic";
+
+// Only rendered once their tab is opened, so their code (recharts for the
+// insights) stays out of the bundle every visitor downloads to read a menu.
+const RestaurantInsights = dynamic(
+  () => import("@/components/restaurants/slug/restaurant-insights"),
+  { ssr: false }
+);
+const RestaurantActivity = dynamic(
+  () => import("@/components/restaurants/slug/restaurant-activity"),
+  { ssr: false }
+);
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -101,9 +111,12 @@ export default function RestaurantPage({
 
   return (
     <AnimatePresence mode="wait">
+      {/* No entrance animation: `initial` is what the server renders, and an
+          invisible first frame kept the photo, the name and the menu hidden
+          until the whole page had hydrated. */}
       <motion.div
         key={restaurant.code}
-        initial={{ opacity: 0, y: 32 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -32 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -116,6 +129,8 @@ export default function RestaurantPage({
             alt={restaurant.nom}
             fill
             sizes="(max-width: 768px) 100vw, 1920px"
+            // The page's largest paint: fetch it ahead of the scripts.
+            priority
             className="object-cover z-0 transition-transform duration-700 group-hover:scale-105"
             onError={() => setImgSrc("/default_ru.png")}
           />
@@ -345,7 +360,7 @@ export default function RestaurantPage({
 
             <div className="flex-1 w-full min-w-0 mt-1">
               <motion.div
-                initial={{ opacity: 0, y: 32 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -32 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}

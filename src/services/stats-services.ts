@@ -8,7 +8,7 @@ import { apiRequest } from "./api-request";
  */
 export async function getTaches(): Promise<ApiResult<Tache[]>> {
   return await apiRequest<Tache[]>({
-    endpoint: "taches",
+    endpoint: "taches?jours=30",
     method: "GET",
   });
 }

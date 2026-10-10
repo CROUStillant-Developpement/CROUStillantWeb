@@ -11,7 +11,8 @@ import {
   useMap,
 } from "@/components/ui/map";
 import useMarkerStore from "@/store/markerStore";
-import { Restaurant, RegionGeoJSON, RegionGeoJSONProperties } from "@/services/types";
+import { Restaurant, RegionGeoJSONProperties } from "@/services/types";
+import { useRegionsGeoJson } from "@/hooks/useRegionsGeoJson";
 import { motion, AnimatePresence } from "@/lib/motion";
 import {
   X,
@@ -308,7 +309,6 @@ interface MapProps {
   center?: [number, number];
   zoom?: number;
   loading?: boolean;
-  regionsGeoJson?: RegionGeoJSON | null;
 }
 
 const FitBoundsToMarkers = () => {
@@ -355,8 +355,10 @@ const MapComponent = ({
   center = DEFAULT_CENTER,
   zoom = DEFAULT_ZOOM,
   loading = false,
-  regionsGeoJson = null,
 }: MapProps) => {
+  // Fetched here rather than received as a prop: this component only mounts
+  // in map view, so list-view visitors never download the boundaries.
+  const regionsGeoJson = useRegionsGeoJson();
   const tMap = useTranslations("RestaurantsPage");
   const { markers, selectedCrous, onRegionClick } = useMarkerStore();
   // A group holds all restaurants at a shared coordinate.

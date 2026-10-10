@@ -18,7 +18,6 @@ import HomeRegionsMap from "./home-regions-map";
 import { Link } from "@/i18n/routing";
 import { useUmami } from "next-umami";
 import { motion } from "@/lib/motion";
-import { RegionGeoJSON } from "@/services/types";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -79,11 +78,7 @@ const BasicCard = ({
   );
 };
 
-export default function HomePage({
-  regionsGeoJson,
-}: {
-  regionsGeoJson: RegionGeoJSON | null;
-}) {
+export default function HomePage() {
   const t = useTranslations("HomePage");
 
   return (
@@ -176,7 +171,7 @@ export default function HomePage({
         </motion.div>
       </section>
 
-      <HomeRegionsMap regionsGeoJson={regionsGeoJson} />
+      <HomeRegionsMap />
 
       <motion.section
         className=""
