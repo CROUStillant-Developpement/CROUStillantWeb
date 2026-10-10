@@ -8,6 +8,7 @@ import UpdateBanner from "@/components/update-banner";
 import SeasonalThemeProvider from "@/components/seasonal-theme-provider";
 import SeasonalParticlesBanner from "@/components/seasonal-particles-banner";
 import AccessibilityProvider from "@/components/accessibility-provider";
+import PwaProvider from "@/components/pwa-provider";
 
 
 export default function LayoutShell({
@@ -49,6 +50,7 @@ export default function LayoutShell({
       <SeasonalParticlesBanner />
       <SeasonalThemeProvider />
       <AccessibilityProvider />
+      <PwaProvider />
     </>
   );
 }
