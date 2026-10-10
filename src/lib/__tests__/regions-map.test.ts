@@ -76,6 +76,33 @@ describe("buildTerritoryMaps", () => {
     expect(map.regions[0].path.endsWith("Z")).toBe(true);
   });
 
+  it("frames a single region and positions places on its territory's map", () => {
+    const maps = buildTerritoryMaps(
+      geojson(
+        feature(1, "Lyon", [[square(4, 45, 1)]]),
+        feature(2, "Lille", [[square(2, 50, 1)]]),
+        feature(8, "Antilles-Guyane", [[square(-54, 3, 2)]])
+      ),
+      {
+        regionId: 1,
+        places: [
+          // North-west corner of Lyon's square.
+          { id: 10, name: "RU Lyon", href: "/lyon", latitude: 46, longitude: 4 },
+          // In Guyane, which is not drawn when only Lyon is.
+          { id: 11, name: "RU Cayenne", latitude: 4, longitude: -53 },
+        ],
+      }
+    );
+
+    expect(maps).toHaveLength(1);
+    expect(maps[0].regions.map((region) => region.id)).toEqual([1]);
+    // Lyon alone fills the map instead of sharing it with Lille.
+    expect(maps[0].height).toBe(400);
+    expect(maps[0].points).toEqual([
+      { id: 10, name: "RU Lyon", href: "/lyon", x: 0, y: 0 },
+    ]);
+  });
+
   it("keeps holes as extra subpaths and skips territories without polygons", () => {
     const maps = buildTerritoryMaps(
       geojson(feature(1, "Lyon", [[square(2, 46, 2), square(2.5, 46.5, 1)]]))

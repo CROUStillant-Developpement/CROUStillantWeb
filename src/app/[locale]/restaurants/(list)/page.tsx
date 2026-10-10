@@ -5,8 +5,7 @@ import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import ErrorPage from "@/components/error";
 import { buildPageMetadata } from "@/lib/metadata";
-import { Link } from "@/i18n/routing";
-import { buildRegionSlug } from "@/lib/region-slug";
+import RegionsPagesMap from "@/components/crous/regions-pages-map";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("RestaurantsPage");
@@ -42,16 +41,6 @@ export default async function Restaurants() {
   );
 
   const t = await getTranslations("RestaurantsPage");
-  const tRegion = await getTranslations("RegionPage");
-
-  // Plain links to every region page: the list above is filtered client-side,
-  // so without these a crawler has no path from here to the region pages.
-  const regionsWithRestaurants = new Set(
-    restaurants.data.map((restaurant) => restaurant.region.code)
-  );
-  const regionLinks = regions.data
-    .filter((region) => regionsWithRestaurants.has(region.code))
-    .sort((a, b) => a.libelle.localeCompare(b.libelle, "fr"));
 
   // Everything passed to the client component below is serialised into the
   // HTML. The list, its filters and the map never read these fields, and they
@@ -68,21 +57,12 @@ export default async function Restaurants() {
         regions={regions.data}
         typesRestaurants={typesRestaurants}
       />
-      <nav className="w-full px-4 mt-12 flex flex-col gap-4 border-t border-border/40 pt-8">
-        <h2 className="text-xl font-bold tracking-tight">{t("seo.byRegion")}</h2>
-        <ul className="flex flex-wrap gap-2">
-          {regionLinks.map((region) => (
-            <li key={region.code}>
-              <Link
-                href={`/crous/${buildRegionSlug(region)}`}
-                className="inline-flex rounded-full border border-border/60 px-3 py-1 text-sm hover:border-primary/40 hover:text-primary"
-              >
-                {tRegion("breadcrumb", { region: region.libelle })}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {/* A way to each region's page. The map is drawn in the browser, so it
+          gives crawlers no links: they reach the region pages through the
+          sitemap and through every restaurant page. */}
+      <div className="w-full px-4 mt-12">
+        <RegionsPagesMap title={t("seo.byRegion")} />
+      </div>
     </>
   );
 }

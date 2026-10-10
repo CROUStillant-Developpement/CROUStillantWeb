@@ -50,6 +50,24 @@ export default function RestaurantsPage({
   const { visible: showCelebration, dismiss: dismissCelebration } = useCelebrationBanner();
   
   const { display, favourites } = useUserPreferences();
+
+  // Links can ask for a view ("See the restaurants on the map" on the region
+  // pages links to ?display=map). It is applied once, on arrival, and from
+  // then on the toggle is the only thing that changes it.
+  useEffect(() => {
+    const requested = searchParams.get("display");
+    if (requested !== "map" && requested !== "list") return;
+
+    const apply = () => {
+      const { display: current, toggleDisplay } = useUserPreferences.getState();
+      if (current !== requested) toggleDisplay();
+    };
+
+    // The saved preference is restored from localStorage after the first
+    // render; applied any earlier, the request would be overwritten by it.
+    if (useUserPreferences.persist.hasHydrated()) apply();
+    else return useUserPreferences.persist.onFinishHydration(apply);
+  }, []);
   const { setMarkers } = useMarkerStore();
 
   const t = useTranslations("RestaurantsPage");

@@ -37,12 +37,33 @@ export interface TerritoryRegion {
   path: string;
 }
 
+/** A place to mark on the maps, e.g. a restaurant. */
+export interface MapPlace {
+  id: number;
+  name: string;
+  href?: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface TerritoryPoint {
+  id: number;
+  name: string;
+  href?: string;
+  x: number;
+  y: number;
+}
+
 export interface TerritoryMap {
   key: TerritoryKey;
   width: number;
   height: number;
   regions: TerritoryRegion[];
+  points: TerritoryPoint[];
 }
+
+/** DOM id of a restaurant's entry in a list shown next to a map of places. */
+export const restaurantCardId = (code: number) => `restaurant-${code}`;
 
 type Polygon = GeoJSON.Position[][];
 
@@ -54,10 +75,24 @@ const round = (value: number) => Math.round(value * 10) / 10;
  * Each map is projected on its own (equirectangular, corrected for its
  * latitude) and scaled to fill `MAP_SIZE`, so Mayotte ends up as legible as the
  * mainland. Territories with no polygon are left out.
+ *
+ * @param options.regionId - Only draw this region, each map framed on it instead of on its whole territory.
+ * @param options.places - Places to position on the maps. Each lands on the map of the territory it is in; those outside every map drawn are dropped.
  */
-export function buildTerritoryMaps(geojson: RegionGeoJSON): TerritoryMap[] {
+export function buildTerritoryMaps(
+  geojson: RegionGeoJSON,
+  { regionId, places = [] }: { regionId?: number; places?: MapPlace[] } = {}
+): TerritoryMap[] {
+  const features =
+    regionId === undefined
+      ? geojson.features
+      : geojson.features.filter((f) => f.properties.crous_id === regionId);
+
   return TERRITORIES.flatMap(({ key, bounds: [west, south, east, north] }) => {
-    const regions = geojson.features.flatMap((feature) => {
+    const isInside = (lng: number, lat: number) =>
+      lng >= west && lng <= east && lat >= south && lat <= north;
+
+    const regions = features.flatMap((feature) => {
       const polygons: Polygon[] =
         feature.geometry.type === "Polygon"
           ? [feature.geometry.coordinates]
@@ -65,7 +100,7 @@ export function buildTerritoryMaps(geojson: RegionGeoJSON): TerritoryMap[] {
 
       const inside = polygons.filter((polygon) => {
         const [lng, lat] = polygon[0][0];
-        return lng >= west && lng <= east && lat >= south && lat <= north;
+        return isInside(lng, lat);
       });
 
       return inside.length > 0 ? [{ feature, polygons: inside }] : [];
@@ -95,8 +130,10 @@ export function buildTerritoryMaps(geojson: RegionGeoJSON): TerritoryMap[] {
     const spanY = maxLat - minLat;
     const scale = MAP_SIZE / Math.max(spanX, spanY);
 
+    const projectX = (lng: number) => round((lng - minLng) * lngRatio * scale);
+    const projectY = (lat: number) => round((maxLat - lat) * scale);
     const project = ([lng, lat]: GeoJSON.Position) =>
-      `${round((lng - minLng) * lngRatio * scale)},${round((maxLat - lat) * scale)}`;
+      `${projectX(lng)},${projectY(lat)}`;
 
     return [
       {
@@ -112,6 +149,15 @@ export function buildTerritoryMaps(geojson: RegionGeoJSON): TerritoryMap[] {
             )
             .join(""),
         })),
+        points: places
+          .filter((place) => isInside(place.longitude, place.latitude))
+          .map(({ id, name, href, latitude, longitude }) => ({
+            id,
+            name,
+            href,
+            x: projectX(longitude),
+            y: projectY(latitude),
+          })),
       },
     ];
   });

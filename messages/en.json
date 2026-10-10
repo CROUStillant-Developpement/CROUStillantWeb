@@ -118,7 +118,7 @@
     },
     "seo": {
       "title": "Restaurants",
-      "byRegion": "Restaurants by CROUS region",
+      "byRegion": "Other CROUS regions",
       "description": "Discover the list of CROUS restaurants in France and overseas. Find the perfect restaurant for your next meal!",
       "keywords": "CROUS, university restaurant, CROUS menu, student canteen, France, overseas"
     }
@@ -140,7 +140,14 @@
     "openNow": "Open",
     "closedNow": "Closed",
     "otherRegions": "Other CROUS regions",
-    "map": "See the restaurants on the map"
+    "map": "See the restaurants on the map",
+    "mapLabel": "Map of the CROUS {region} restaurants",
+    "cityNav": "Cities",
+    "stats": {
+      "restaurants": "{count, plural, one {restaurant} other {restaurants}}",
+      "cities": "{count, plural, one {city} other {cities}}",
+      "open": "open right now"
+    }
   },
   "ScreenPage": {
     "seo": {

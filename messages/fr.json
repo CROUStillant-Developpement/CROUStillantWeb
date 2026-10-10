@@ -118,7 +118,7 @@
     },
     "seo": {
       "title": "Restaurants",
-      "byRegion": "Restaurants par CROUS",
+      "byRegion": "Les autres CROUS",
       "description": "Découvrez les restaurants CROUS de France et d'outre-mer. Trouvez le restaurant parfait pour votre prochain repas !",
       "keywords": "CROUS, restaurant universitaire, menu CROUS, RU, resto U, restauration universitaire, France"
     }
@@ -140,7 +140,14 @@
     "openNow": "Ouvert",
     "closedNow": "Fermé",
     "otherRegions": "Les autres CROUS",
-    "map": "Voir les restaurants sur la carte"
+    "map": "Voir les restaurants sur la carte",
+    "mapLabel": "Carte des restaurants du CROUS {region}",
+    "cityNav": "Villes",
+    "stats": {
+      "restaurants": "{count, plural, one {restaurant} other {restaurants}}",
+      "cities": "{count, plural, one {ville} other {villes}}",
+      "open": "{count, plural, one {ouvert} other {ouverts}}"
+    }
   },
   "ScreenPage": {
     "seo": {
