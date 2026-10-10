@@ -226,6 +226,43 @@ describe("apiRequest — caching", () => {
     expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 
+  it("ignores a cached result older than maxAge and refreshes the cache", async () => {
+    const endpoint = ep();
+    const now = vi.spyOn(Date, "now");
+    vi.mocked(global.fetch)
+      .mockResolvedValueOnce(jsonResponse({ success: true, data: { v: 1 } }))
+      .mockResolvedValueOnce(jsonResponse({ success: true, data: { v: 2 } }));
+
+    now.mockReturnValue(1_000_000);
+    await apiRequest({ endpoint, cacheDuration: 60_000 });
+
+    now.mockReturnValue(1_020_000); // 20 seconds later
+    const refreshed = await apiRequest({ endpoint, cacheDuration: 60_000, maxAge: 10_000 });
+    const cached = await apiRequest({ endpoint, cacheDuration: 60_000 });
+    now.mockRestore();
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(refreshed).toEqual({ success: true, data: { v: 2 } });
+    expect(cached).toEqual({ success: true, data: { v: 2 } });
+  });
+
+  it("uses a cached result younger than maxAge", async () => {
+    const endpoint = ep();
+    const now = vi.spyOn(Date, "now");
+    vi.mocked(global.fetch).mockResolvedValue(
+      jsonResponse({ success: true, data: { v: 1 } })
+    );
+
+    now.mockReturnValue(1_000_000);
+    await apiRequest({ endpoint, cacheDuration: 60_000 });
+
+    now.mockReturnValue(1_005_000); // 5 seconds later
+    await apiRequest({ endpoint, cacheDuration: 60_000, maxAge: 10_000 });
+    now.mockRestore();
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
   it("cached data is unwrapped (data.data) when check_success=true", async () => {
     const endpoint = ep();
     vi.mocked(global.fetch).mockResolvedValue(

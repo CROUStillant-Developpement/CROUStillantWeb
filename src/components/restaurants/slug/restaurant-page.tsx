@@ -16,7 +16,8 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { cn, slugify } from "@/lib/utils";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { ReactNode, useEffect, useState } from "react";
+import { useMenuEvents } from "@/hooks/useMenuEvents";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "@/lib/motion";
 import { useSearchParams } from "next/navigation";
@@ -37,6 +38,8 @@ const RestaurantActivity = dynamic(
   () => import("@/components/restaurants/slug/restaurant-activity"),
   { ssr: false }
 );
+
+const MENU_REFRESH_DELAY = 2000; // 2 seconds in milliseconds
 
 interface RestaurantPageProps {
   restaurant: Restaurant;
@@ -65,6 +68,8 @@ export default function RestaurantPage({
     selectedDateLunch,
     selectedDateDinner,
     noMenuAtAll,
+    refresh,
+    lastUpdated,
   } = useRestaurantMenu({
     restaurantCode: restaurant.code,
     mode: "all",
@@ -72,11 +77,26 @@ export default function RestaurantPage({
     initialDates,
   });
 
+  // The API reports each changed day as its own event, so a single update of
+  // the week's menus arrives as a burst: wait for it to settle, refresh once.
+  const refreshTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { connected: live } = useMenuEvents({
+    codes: [restaurant.code],
+    onEvent: () => {
+      if (refreshTimer.current) clearTimeout(refreshTimer.current);
+      refreshTimer.current = setTimeout(refresh, MENU_REFRESH_DELAY);
+    },
+  });
+  useEffect(() => () => {
+    if (refreshTimer.current) clearTimeout(refreshTimer.current);
+  }, []);
+
   const t = useTranslations("RestaurantPage");
   const tCard = useTranslations("RestaurantCard");
   const umami = useUmami();
   const { addOrRemoveFromfavourites, favourites } = useUserPreferences();
   const isFavourite = favourites.some((f) => f.code === restaurant.code);
+
   const searchParams = useSearchParams();
   const [showFavoriteHint, setShowFavoriteHint] = useState(false);
   const [imgSrc, setImgSrc] = useState(restaurant.image_url || "/default_ru.png");
@@ -395,6 +415,8 @@ export default function RestaurantPage({
                       selectedDateDinner={selectedDateDinner}
                       noMenuAtAll={noMenuAtAll}
                       restaurant={restaurant}
+                      live={live}
+                      lastUpdated={lastUpdated}
                     />
                   </TabsContent>
 

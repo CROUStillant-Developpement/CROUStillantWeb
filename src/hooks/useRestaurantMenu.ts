@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Menu, Repas, DateMenu } from "@/services/types";
 import {
   getMenuByRestaurantId,
@@ -9,6 +9,10 @@ import {
   getDatesMenuAvailable,
 } from "@/services/menu-service";
 import { formatToISODate, normalizeToDate } from "@/lib/utils";
+
+// A refresh follows an event every open page receives at the same moment:
+// accepting a response cached a few seconds ago lets them share one API call.
+const REFRESH_MAX_AGE = 10 * 1000; // 10 seconds in milliseconds
 
 interface UseRestaurantMenuOptions {
   restaurantCode: number;
@@ -60,6 +64,7 @@ export function useRestaurantMenu({
   const [blacklistedDates, setBlacklistedDates] = useState<Date[]>([]);
   const [noMenuAtAll, setNoMenuAtAll] = useState<boolean>(false);
   const [noHistoryAtAll, setNoHistoryAtAll] = useState<boolean>(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   useEffect(() => {
     setMenuLoading(true);
@@ -181,6 +186,50 @@ export function useRestaurantMenu({
     }
   };
 
+  /**
+   * Reloads the upcoming menus and the available dates, bypassing the cache.
+   *
+   * Called when the API reports a change: the menus being displayed are swapped
+   * in place, without a loading state, so the page does not flicker.
+   */
+  const refresh = useCallback(async () => {
+    const [menuResult, datesResult] = await Promise.all([
+      getMenuByRestaurantId(restaurantCode, { maxAge: REFRESH_MAX_AGE }),
+      getDatesMenuAvailable(restaurantCode, { maxAge: REFRESH_MAX_AGE }),
+    ]);
+
+    // A 404 is how the API says there is no upcoming menu any more.
+    const upcoming = menuResult.success ? menuResult.data : menuResult.status === 404 ? [] : null;
+
+    if (upcoming) {
+      const today = normalizeToDate(new Date()).getTime();
+      // Past menus cannot change; upcoming ones are replaced wholesale, which
+      // also drops the ones that were deleted.
+      setMenu((previous) => [
+        ...upcoming,
+        ...previous.filter(
+          (m) => normalizeToDate(formatToISODate(m.date)).getTime() < today
+        ),
+      ]);
+      setNoMenuAtAll((previous) => (upcoming.length > 0 ? false : previous));
+      // A date that had no menu may have one now.
+      setBlacklistedDates([]);
+      setLastUpdated(new Date());
+    }
+
+    if (datesResult.success && datesResult.data) {
+      const uniqueDates = datesResult.data.filter(
+        (date, index, self) => index === self.findIndex((d) => d.date === date.date)
+      );
+      uniqueDates.sort(
+        (a, b) =>
+          normalizeToDate(formatToISODate(a.date)).getTime() -
+          normalizeToDate(formatToISODate(b.date)).getTime()
+      );
+      setDates(uniqueDates);
+    }
+  }, [restaurantCode]);
+
   // The selected date's meals are *derived* from `menu` rather than held in
   // state fed by an effect. That is what lets the server render contain the menu
   // when `initialMenu` is provided: an effect never runs during SSR, a `useMemo`
@@ -249,5 +298,7 @@ export function useRestaurantMenu({
     selectedDateDinner,
     noMenuAtAll,
     noHistoryAtAll,
+    refresh,
+    lastUpdated,
   };
 }

@@ -170,6 +170,12 @@
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
+    "live": {
+      "live": "Live",
+      "liveDescription": "The menu updates by itself as soon as it changes.",
+      "updatedJustNow": "Menu updated just now",
+      "updated": "Menu updated {time}"
+    },
     "noMenuAvailable": "No menu available for this date 😢",
     "nextDaysMenu": "Menu of the next days",
     "qrCodeDescription": "Scan this QR Code to directly access the restaurant's menu.",
