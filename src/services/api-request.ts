@@ -1,5 +1,7 @@
-"use server";
-
+// This file must never be marked "use server": that would turn `apiRequest`
+// into a server action, letting any browser call it with its own URL, method
+// and body (server-side request forgery). Only the narrow, argument-checked
+// functions of the service files are exposed to the browser.
 import { ApiResult } from "@/services/types";
 import log from "@/lib/log";
 

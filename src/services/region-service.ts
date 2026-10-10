@@ -1,3 +1,5 @@
+"use server";
+
 import { Region, RegionGeoJSON, ApiResult } from "./types";
 import { apiRequest } from "./api-request";
 

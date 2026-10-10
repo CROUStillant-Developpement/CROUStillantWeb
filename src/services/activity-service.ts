@@ -1,5 +1,8 @@
+"use server";
+
 import { RestaurantActivity, ApiResult } from "./types";
 import { apiRequest } from "./api-request";
+import { invalidArgument, isRestaurantId } from "./validation";
 
 /**
  * Gets activity (last updated, ingestion history) for a restaurant
@@ -10,6 +13,8 @@ import { apiRequest } from "./api-request";
 export async function getRestaurantActivity(
   restaurantId: number
 ): Promise<ApiResult<RestaurantActivity>> {
+  if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
+
   return apiRequest<RestaurantActivity>({
     endpoint: `restaurants/${restaurantId}/activity`,
     method: "GET",

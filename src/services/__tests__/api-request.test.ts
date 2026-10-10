@@ -659,3 +659,17 @@ describe("apiRequest — headers (additional)", () => {
     expect(opts.next).toBeUndefined();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Exposure to the browser
+// ---------------------------------------------------------------------------
+describe("apiRequest — exposure", () => {
+  // A "use server" directive would make `apiRequest` a server action that any
+  // browser can call with its own URL, method and body (request forgery).
+  it("is not a server action", async () => {
+    const { readFileSync } = await import("node:fs");
+    const source = readFileSync("src/services/api-request.ts", "utf8");
+
+    expect(source).not.toMatch(/^\s*(["'])use server\1/m);
+  });
+});

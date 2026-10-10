@@ -10,10 +10,6 @@ import {
 } from "@/services/menu-service";
 import { formatToISODate, normalizeToDate } from "@/lib/utils";
 
-// A refresh follows an event every open page receives at the same moment:
-// accepting a response cached a few seconds ago lets them share one API call.
-const REFRESH_MAX_AGE = 10 * 1000; // 10 seconds in milliseconds
-
 interface UseRestaurantMenuOptions {
   restaurantCode: number;
   mode: "future" | "history" | "all";
@@ -194,8 +190,8 @@ export function useRestaurantMenu({
    */
   const refresh = useCallback(async () => {
     const [menuResult, datesResult] = await Promise.all([
-      getMenuByRestaurantId(restaurantCode, { maxAge: REFRESH_MAX_AGE }),
-      getDatesMenuAvailable(restaurantCode, { maxAge: REFRESH_MAX_AGE }),
+      getMenuByRestaurantId(restaurantCode, { fresh: true }),
+      getDatesMenuAvailable(restaurantCode, { fresh: true }),
     ]);
 
     // A 404 is how the API says there is no upcoming menu any more.

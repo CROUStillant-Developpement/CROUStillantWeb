@@ -1,5 +1,8 @@
+"use server";
+
 import { RestaurantInsights, ApiResult } from "./types";
 import { apiRequest } from "./api-request";
+import { invalidArgument, isRestaurantId } from "./validation";
 
 /**
  * Gets insights (menu coverage and most frequent dishes) for a restaurant
@@ -10,6 +13,8 @@ import { apiRequest } from "./api-request";
 export async function getRestaurantInsights(
   restaurantId: number
 ): Promise<ApiResult<RestaurantInsights>> {
+  if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
+
   return apiRequest<RestaurantInsights>({
     endpoint: `restaurants/${restaurantId}/insights`,
     method: "GET",

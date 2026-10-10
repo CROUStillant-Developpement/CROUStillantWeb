@@ -1,3 +1,5 @@
+"use server";
+
 import { Tache, GlobalStats, ApiResult, Plat, RegionStats } from "./types";
 import { apiRequest } from "./api-request";
 
@@ -42,24 +44,24 @@ export async function getRegionStats(): Promise<ApiResult<RegionStats[]>> {
  *
  * @returns {Promise<ApiResult<Plat[]>>} A promise that resolves to an ApiResult containing an array of Plat objects.
  */
-export const getTop100Dishes = async (): Promise<ApiResult<Plat[]>> => {
+export async function getTop100Dishes(): Promise<ApiResult<Plat[]>> {
   return await apiRequest<Plat[]>({
     endpoint: "plats/top",
     method: "GET",
   });
-};
+}
 
 /**
  * Fetches the last 100 dishes from the API.
  *
  * @returns {Promise<ApiResult<Plat[]>>} A promise that resolves to an ApiResult containing an array of Plat objects.
  */
-export const getLast100Dishes = async (): Promise<ApiResult<Plat[]>> => {
+export async function getLast100Dishes(): Promise<ApiResult<Plat[]>> {
   return await apiRequest<Plat[]>({
     endpoint: "plats",
     method: "GET",
   });
-};
+}
 
 
 

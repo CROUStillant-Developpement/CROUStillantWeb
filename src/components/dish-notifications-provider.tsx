@@ -18,9 +18,6 @@ import { getNormalizedISODate, normalizeToDate, toLocalISODateString } from "@/l
 
 const NOTIFIED_EVENT_TYPES = ["menu.created", "menu.updated"] as const;
 
-// See REFRESH_MAX_AGE in useRestaurantMenu.
-const FRESH_MAX_AGE = 10 * 1000; // 10 seconds in milliseconds
-
 /**
  * Sends a browser notification when a favourite restaurant publishes a menu
  * containing a dish the user follows.
@@ -53,7 +50,7 @@ export default function DishNotificationsProvider() {
       if (date.getTime() < normalizeToDate(new Date()).getTime()) return;
 
       const menu = await getMenuByRestaurantIdAndDate(event.code, event.date, {
-        maxAge: FRESH_MAX_AGE,
+        fresh: true,
       });
       if (!menu.success || !menu.data) return;
 
