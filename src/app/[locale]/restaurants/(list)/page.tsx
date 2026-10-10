@@ -1,6 +1,6 @@
 import RestaurantsPage from "@/components/restaurants/restaurants-page";
 import { getRestaurants } from "@/services/restaurant-service";
-import { getRegions, getRegionsGeoJSON } from "@/services/region-service";
+import { getRegions } from "@/services/region-service";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import ErrorPage from "@/components/error";
@@ -22,10 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Restaurants() {
-  const restaurants = await getRestaurants();
-  const regions = await getRegions();
-  // Overlay/filter on the map only — degrade gracefully instead of failing the whole page.
-  const regionsGeoJson = await getRegionsGeoJSON();
+  const [restaurants, regions] = await Promise.all([
+    getRestaurants(),
+    getRegions(),
+  ]);
 
   if (!restaurants.success || !regions.success) {
     return <ErrorPage statusCode={500} />;
@@ -53,13 +53,20 @@ export default async function Restaurants() {
     .filter((region) => regionsWithRestaurants.has(region.code))
     .sort((a, b) => a.libelle.localeCompare(b.libelle, "fr"));
 
+  // Everything passed to the client component below is serialised into the
+  // HTML. The list, its filters and the map never read these fields, and they
+  // made up most of the megabyte the 900 restaurants weighed.
+  const listRestaurants = restaurants.data.map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ({ jours_ouvert, acces, email, telephone, ...restaurant }) => restaurant
+  );
+
   return (
     <>
       <RestaurantsPage
-        restaurants={restaurants.data}
+        restaurants={listRestaurants}
         regions={regions.data}
         typesRestaurants={typesRestaurants}
-        regionsGeoJson={regionsGeoJson.success ? regionsGeoJson.data : null}
       />
       <nav className="w-full px-4 mt-12 flex flex-col gap-4 border-t border-border/40 pt-8">
         <h2 className="text-xl font-bold tracking-tight">{t("seo.byRegion")}</h2>

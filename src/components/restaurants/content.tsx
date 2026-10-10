@@ -1,4 +1,4 @@
-import { DisplayType, Restaurant, RegionGeoJSON } from "@/services/types";
+import { DisplayType, Restaurant } from "@/services/types";
 import RestaurantCardSkeleton from "./restaurant-card-skeleton";
 import RestaurantCard from "./restaurant-card";
 import { motion, AnimatePresence } from "@/lib/motion";
@@ -17,7 +17,6 @@ interface ContentProps {
   paginatedRestaurants: Restaurant[];
   favouritesRestaurants: Restaurant[];
   loading: boolean;
-  regionsGeoJson: RegionGeoJSON | null;
 }
 
 export default function Content({
@@ -26,7 +25,6 @@ export default function Content({
   paginatedRestaurants,
   favouritesRestaurants,
   loading,
-  regionsGeoJson,
 }: ContentProps) {
   const t = useTranslations("RestaurantsPage");
   const umami = useUmami();
@@ -40,7 +38,7 @@ export default function Content({
   }, [favouritesRestaurants]);
 
   if (display === "map") {
-    return <MapComponent loading={loading} regionsGeoJson={regionsGeoJson} />;
+    return <MapComponent loading={loading} />;
   } else {
     return (
       <div className="flex flex-col gap-6 p-4">
@@ -91,7 +89,9 @@ export default function Content({
             </div>
           </div>
         )}
-        <AnimatePresence mode="wait">
+        {/* initial={false}: the cards the server rendered must be visible
+            without waiting for hydration; later changes still animate. */}
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={loading ? "loading" : "restaurants"}
             className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 2xl:grid-cols-4"
@@ -117,7 +117,8 @@ export default function Content({
                     ease: "easeOut",
                   }}
                 >
-                  <RestaurantCard restaurant={restaurant} />
+                  {/* The first photos are the page's largest paint. */}
+                  <RestaurantCard restaurant={restaurant} priority={i < 2} />
                 </motion.div>
               ))
             ) : (

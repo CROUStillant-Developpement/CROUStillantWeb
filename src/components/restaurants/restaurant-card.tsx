@@ -19,9 +19,11 @@ import { useUmami } from "next-umami";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
+  /** Loads the photo eagerly. For the cards visible without scrolling. */
+  priority?: boolean;
 }
 
-export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export default function RestaurantCard({ restaurant, priority = false }: RestaurantCardProps) {
   const [imageSrc, setImageSrc] = useState(
     restaurant.image_url ?? "/default_ru.png",
   );
@@ -48,6 +50,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
               alt={restaurant.nom}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={priority}
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               onError={handleImageError}
             />

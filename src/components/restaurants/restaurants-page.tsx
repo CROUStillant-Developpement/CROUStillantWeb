@@ -1,12 +1,18 @@
 "use client";
 
-import { Restaurant, Region, TypeRestaurant, RegionGeoJSON } from "@/services/types";
+import { Restaurant, Region, TypeRestaurant } from "@/services/types";
 import { useEffect, useMemo, useState } from "react";
 import log from "@/lib/log";
 import Loading from "@/components/page-loading";
 import RestaurantsFilters from "./filters";
 import { useUserPreferences } from "@/store/userPreferencesStore";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import {
+  filterRestaurants,
+  filtersFromSearchParams,
+  sortRestaurants,
+} from "@/lib/filters";
 import Pagination from "@/components/pagination";
 import useMarkerStore from "@/store/markerStore";
 import Content from "./content";
@@ -18,16 +24,27 @@ export default function RestaurantsPage({
   restaurants,
   regions,
   typesRestaurants,
-  regionsGeoJson,
 }: {
   restaurants: Restaurant[];
   regions: Region[];
   typesRestaurants: TypeRestaurant[];
-  regionsGeoJson: RegionGeoJSON | null;
 }) {
-  const [loading, setLoading] = useState(true);
-  const [filteredRestaurants, setFilteredRestaurants] =
-    useState<Restaurant[]>(restaurants);
+  const searchParams = useSearchParams();
+  const locale = useLocale();
+  // Filtered and sorted from the first render, so the server sends the actual
+  // restaurants instead of skeletons that only clear once the page hydrates.
+  // Must match what `useRestaurantFilters` starts from.
+  const [loading, setLoading] = useState(false);
+  const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
+    () => {
+      const filters = filtersFromSearchParams(searchParams);
+      return sortRestaurants(
+        filterRestaurants(restaurants, filters),
+        filters,
+        locale
+      );
+    }
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(21); // Default records per page
   const { visible: showCelebration, dismiss: dismissCelebration } = useCelebrationBanner();
@@ -124,7 +141,6 @@ export default function RestaurantsPage({
             paginatedRestaurants={paginatedRestaurants}
             favouritesRestaurants={favouritesRestaurants}
             loading={loading}
-            regionsGeoJson={regionsGeoJson}
           />
           {display === "list" && filteredRestaurants.length > 0 && (
             <div className="mx-4">
