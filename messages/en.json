@@ -679,7 +679,18 @@
     "appearanceTitle": "Appearance",
     "accessibilityTitle": "Accessibility",
     "behaviorTitle": "Behaviour",
+    "appTitle": "App",
     "personalTitle": "Personal data",
+    "install": {
+      "title": "Install CROUStillant",
+      "description": "Add CROUStillant to your home screen to open it like an app. Menus you have already viewed stay available offline.",
+      "button": "Install the app",
+      "installed": "The app is installed on this device.",
+      "iosHint": "In Safari, tap Share, then \"Add to Home Screen\".",
+      "manualHint": "Open your browser's menu, then choose \"Install\" or \"Add to Home Screen\".",
+      "successTitle": "App installed!",
+      "successDescription": "CROUStillant has been added to your device."
+    },
     "language": {
       "title": "Language",
       "description": "Choose the language in which you want to use the website.",

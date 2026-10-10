@@ -1,6 +1,7 @@
 "use client";
 
 import SettingCard from "@/components/settings/setting-card";
+import InstallAppCard from "@/components/settings/install-app-card";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -526,6 +527,10 @@ export default function SettingsPage() {
               </SelectContent>
             </Select>
           </div>
+        </SettingCard>
+
+        <SettingCard title={t("appTitle")}>
+          <InstallAppCard />
         </SettingCard>
 
         <SettingCard title={t("personalTitle")}>

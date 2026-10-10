@@ -679,7 +679,18 @@
     "appearanceTitle": "Apparence",
     "accessibilityTitle": "Accessibilité",
     "behaviorTitle": "Comportement",
+    "appTitle": "Application",
     "personalTitle": "Informations personnelles",
+    "install": {
+      "title": "Installer CROUStillant",
+      "description": "Ajoutez CROUStillant à votre écran d'accueil pour l'ouvrir comme une application. Les menus déjà consultés restent disponibles hors ligne.",
+      "button": "Installer l'application",
+      "installed": "L'application est installée sur cet appareil.",
+      "iosHint": "Dans Safari, touchez Partager puis « Sur l'écran d'accueil ».",
+      "manualHint": "Ouvrez le menu de votre navigateur puis choisissez « Installer » ou « Ajouter à l'écran d'accueil ».",
+      "successTitle": "Application installée !",
+      "successDescription": "CROUStillant a été ajouté à votre appareil."
+    },
     "language": {
       "title": "Langue",
       "description": "Choisissez la langue que vous souhaitez utiliser sur le site.",
