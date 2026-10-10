@@ -1079,9 +1079,31 @@
   "ChangelogPage": {
     "title": "Mises à jour",
     "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées.",
-    "noUpdates": "Aucune mise à jour n'a été publiée pour le moment. Revenez plus tard pour découvrir les dernières fonctionnalités ajoutées à CROUStillant !",
-    "buildInProgress": "Construction en cours...",
-    "buildInProgressDescription": "Cette page est en cours de construction. Elle peut présenter des problèmes d'affichage.",
+    "noUpdates": "Aucune mise à jour récente.",
+    "viewAll": "GitHub",
+    "categories": {
+      "public": "Services publics",
+      "internal": "Services internes",
+      "libraries": "Librairies"
+    },
+    "services": {
+      "CROUStillantWeb": "Site web officiel (croustillant.menu)",
+      "CROUStillantAPI": "API publique (api.croustillant.menu)",
+      "CROUStillantBot": "Bot Discord pour consulter les menus",
+      "CROUStillantApp": "Application mobile",
+      "CROUStillant": "Tâche de fond principale : récupère et stocke les menus",
+      "CROUStillantData": "Met à jour les vues PostgreSQL et le tableau de bord Grafana",
+      "CROUStillantListener": "Détecte l'ajout de nouveaux restaurants dans la base de données",
+      "CROUStillantBackup": "Sauvegarde automatique quotidienne de la base de données",
+      "CROUStillantDatasets": "Publie automatiquement les datasets sur data.gouv.fr",
+      "CrousPy": "Librairie Python pour interagir avec l'API du CROUS",
+      "DataGouvPy": "Librairie Python pour interagir avec l'API de data.gouv.fr"
+    },
+    "types": {
+      "feat": "Nouveauté",
+      "fix": "Correction",
+      "perf": "Performance"
+    },
     "seo": {
       "title": "Mises à jour",
       "description": "Découvrez les dernières mises à jour de CROUStillant et les fonctionnalités ajoutées. Restez informé des nouveautés !",

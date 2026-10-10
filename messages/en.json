@@ -1078,9 +1078,31 @@
   "ChangelogPage": {
     "title": "Changelog",
     "description": "Discover the latest changes and updates made to CROUStillant.",
-    "noChanges": "No changes have been made to the platform yet.",
-    "buildInProgress": "The build is in progress...",
-    "buildInProgressDescription": "This page is currently being built. It may have some display issues.",
+    "noUpdates": "No recent updates.",
+    "viewAll": "GitHub",
+    "categories": {
+      "public": "Public services",
+      "internal": "Internal services",
+      "libraries": "Libraries"
+    },
+    "services": {
+      "CROUStillantWeb": "Official website (croustillant.menu)",
+      "CROUStillantAPI": "Public API (api.croustillant.menu)",
+      "CROUStillantBot": "Discord bot for browsing menus",
+      "CROUStillantApp": "Mobile app",
+      "CROUStillant": "Main background task: fetches and stores the menus",
+      "CROUStillantData": "Updates the PostgreSQL views and the Grafana dashboard",
+      "CROUStillantListener": "Detects new restaurants added to the database",
+      "CROUStillantBackup": "Automatic daily backup of the database",
+      "CROUStillantDatasets": "Automatically publishes the datasets on data.gouv.fr",
+      "CrousPy": "Python library for interacting with the CROUS API",
+      "DataGouvPy": "Python library for interacting with the data.gouv.fr API"
+    },
+    "types": {
+      "feat": "New",
+      "fix": "Fix",
+      "perf": "Performance"
+    },
     "seo": {
       "title": "Changelog",
       "description": "Discover the latest changes and updates made to CROUStillant. Stay informed of the latest features and improvements.",
