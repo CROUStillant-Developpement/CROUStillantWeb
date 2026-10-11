@@ -96,6 +96,14 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // A service worker held by the browser's or the CDN's cache would pin
+        // visitors to outdated caching logic with no way to push them a fix.
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      {
         // The screen view is built to run on third-party digital signage, so it
         // is the one page that may be embedded from anywhere. It is read-only
         // and unauthenticated, so there is no clickjacking target on it.

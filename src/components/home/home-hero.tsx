@@ -26,7 +26,10 @@ export default function HomeHero() {
       <motion.div
         className="relative z-10 flex flex-col items-center text-center gap-8 max-w-4xl mx-auto"
         variants={containerVariants}
-        initial="hidden"
+        // Not animated in: `initial` is what the server renders, and the
+        // headline (the page's largest paint) would stay invisible until
+        // hydration.
+        initial={false}
         animate="visible"
       >
         <motion.div variants={itemVariants}>

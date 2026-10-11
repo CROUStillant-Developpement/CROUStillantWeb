@@ -11,6 +11,8 @@ import { DateMenu, Repas } from "@/services/types";
 import DatePicker from "./date-picker";
 import DateScroller from "./date-scroller";
 import MealsDisplay from "./meals-display";
+import MenuLiveStatus from "./menu-live-status";
+import { FollowedDishMatch } from "@/lib/followed-dishes";
 
 interface MenuDisplaySectionProps {
   menuLoading: boolean;
@@ -25,7 +27,15 @@ interface MenuDisplaySectionProps {
   noMenuAtAll?: boolean;
   /** Enables the "add to calendar" shortcut on each meal card. */
   restaurant?: { code: number; nom: string };
+  /** Whether the menu is being kept up to date in real time. */
+  live?: boolean;
+  /** When a real-time update last refreshed the menu, if one did. */
+  lastUpdated?: Date | null;
+  /** Upcoming dishes the user follows at this restaurant: starred on their day. */
+  followedMatches?: FollowedDishMatch[];
 }
+
+const EMPTY_MATCHES: FollowedDishMatch[] = [];
 
 const MenuAlert = ({
   title,
@@ -62,9 +72,17 @@ export default function MenuDisplaySection({
   selectedDateDinner,
   noMenuAtAll = false,
   restaurant,
+  live = false,
+  lastUpdated = null,
+  followedMatches = EMPTY_MATCHES,
 }: MenuDisplaySectionProps) {
   const t = useTranslations("RestaurantPage");
   const locale = useLocale();
+
+  const starredDates = useMemo(
+    () => new Set(followedMatches.map((match) => match.date)),
+    [followedMatches]
+  );
 
   const filteredDates = useMemo(() => {
     const today = normalizeToDate(new Date()).getTime();
@@ -99,22 +117,25 @@ export default function MenuDisplaySection({
           <div className="sticky top-0 z-30 pt-2 bg-background/80 backdrop-blur-xl mb-2 overflow-x-hidden w-full max-w-full p-4 pt-4 border-b border-border/30">
             <div className="flex flex-col gap-3 max-w-full min-w-0 w-full">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0 w-full">
-                <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight px-1 flex items-center gap-2 sm:gap-3 min-w-0">
-                  <span className="bg-primary/10 text-primary p-1.5 sm:p-2 rounded-xl">
-                    <CalendarCheck className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </span>
-                  <span className="truncate">
-                    {t("menuOfTheDay", {
-                      date: !isNaN(selectedDate.getTime())
-                        ? selectedDate.toLocaleDateString(locale, {
-                          weekday: "long",
-                          day: "numeric",
-                          month: "short",
-                        })
-                        : "..."
-                    })}
-                  </span>
-                </h2>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight px-1 flex items-center gap-2 sm:gap-3 min-w-0">
+                    <span className="bg-primary/10 text-primary p-1.5 sm:p-2 rounded-xl">
+                      <CalendarCheck className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </span>
+                    <span className="truncate">
+                      {t("menuOfTheDay", {
+                        date: !isNaN(selectedDate.getTime())
+                          ? selectedDate.toLocaleDateString(locale, {
+                            weekday: "long",
+                            day: "numeric",
+                            month: "short",
+                          })
+                          : "..."
+                      })}
+                    </span>
+                  </h2>
+                  <MenuLiveStatus live={live} lastUpdated={lastUpdated} />
+                </div>
 
                 <div className="flex items-center gap-2 shrink-0 max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
                   <DatePicker
@@ -132,6 +153,7 @@ export default function MenuDisplaySection({
                   availableDates={filteredDates}
                   selectedDate={selectedDate}
                   onDateChange={onDateChange}
+                  starredDates={starredDates}
                 />
               </div>
             </div>

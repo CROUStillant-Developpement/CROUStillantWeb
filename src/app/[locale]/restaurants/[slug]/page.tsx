@@ -138,8 +138,10 @@ async function fetchMenuServer(
 
 export default async function Restaurant({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { slug } = await params;
   const restaurant = await fetchRestaurantDetailsServer(slug);
@@ -156,7 +158,19 @@ export default async function Restaurant({
   // Redirecting permanently leaves exactly one indexable URL per locale.
   const canonicalSlug = buildRestaurantSlug(restaurant);
   if (slug !== canonicalSlug) {
-    permanentRedirect(`/${locale}/restaurants/${canonicalSlug}`);
+    // The query string travels along: links to a given day (`?date=`) are built
+    // from the name stored with a favourite, which may be an outdated alias.
+    const query = new URLSearchParams();
+    for (const [key, value] of Object.entries(await searchParams)) {
+      for (const item of Array.isArray(value) ? value : [value]) {
+        if (item !== undefined) query.append(key, item);
+      }
+    }
+    const queryString = query.toString();
+
+    permanentRedirect(
+      `/${locale}/restaurants/${canonicalSlug}${queryString ? `?${queryString}` : ""}`
+    );
   }
 
   const { menu, dates } = await fetchMenuServer(restaurant.code);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  Served by the service worker (public/sw.js) when a page is requested offline
+  and no cached copy exists. It must stay self-contained: nothing here can rely
+  on the app's bundles, which may not be cached.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Hors ligne - CROUStillant</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --background: hsl(356 0% 95%);
+        --foreground: hsl(356 0% 0%);
+        --muted: hsl(356 0% 40%);
+        --primary: hsl(356 95.7% 45.7%);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background: hsl(0 2.44% 8.04%);
+          --foreground: hsl(356 0% 90%);
+          --muted: hsl(356 0% 65%);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem;
+        text-align: center;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: var(--background);
+        color: var(--foreground);
+      }
+      h1 {
+        margin: 0.5rem 0 0;
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+      p {
+        margin: 0;
+        max-width: 28rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      button {
+        margin-top: 0.75rem;
+        padding: 0.875rem 1.75rem;
+        border: 0;
+        border-radius: 1rem;
+        font: inherit;
+        font-weight: 700;
+        color: #fff;
+        background: var(--primary);
+        cursor: pointer;
+      }
+      button:focus-visible {
+        outline: 3px solid var(--foreground);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="/icons/icon-192.png" width="96" height="96" alt="" />
+    <h1 id="title">Vous êtes hors ligne</h1>
+    <p id="message">
+      Cette page n'a pas encore été consultée sur cet appareil. Reconnectez-vous
+      à Internet pour l'afficher.
+    </p>
+    <button id="retry" type="button">Réessayer</button>
+    <script>
+      if (!/^fr\b/i.test(navigator.language || "fr")) {
+        document.documentElement.lang = "en";
+        document.title = "Offline - CROUStillant";
+        document.getElementById("title").textContent = "You are offline";
+        document.getElementById("message").textContent =
+          "This page has not been opened on this device yet. Reconnect to the Internet to view it.";
+        document.getElementById("retry").textContent = "Try again";
+      }
+      // This document is served in place of the requested page, so reloading
+      // retries that page.
+      document.getElementById("retry").addEventListener("click", function () {
+        location.reload();
+      });
+      window.addEventListener("online", function () {
+        location.reload();
+      });
+    </script>
+  </body>
+</html>

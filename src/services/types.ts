@@ -169,29 +169,30 @@ export interface GlobalStats {
 }
 
 export interface Changelog {
-  [key: string]: ChangelogItem[];
+  [service: string]: ChangelogEntry[];
 }
 
-export interface ChangelogItem {
-  contributors: Contributor[];
+export type ChangelogEntryType = "feat" | "fix" | "perf";
+
+export interface ChangelogEntry {
+  sha: string;
+  type: ChangelogEntryType;
+  message: string;
   date: string;
-  en: ChangelogItemLanguage;
-  fr: ChangelogItemLanguage;
-  version: string;
+  url: string;
 }
 
-export interface Contributor {
-  name: string;
-  role: {
-    fr: string;
-    en: string;
+// Subset of the GitHub "list commits" response used by the changelog.
+export interface GitHubCommit {
+  sha: string;
+  html_url: string;
+  commit: {
+    message: string;
+    committer: {
+      date: string;
+    };
   };
-}
-
-export interface ChangelogItemLanguage {
-  title: string;
-  shortDescription: string;
-  fullDescription: string;
+  parents: { sha: string }[];
 }
 
 export interface UmamiGetToken {

@@ -1,54 +1,46 @@
+import { Sparkles, Wrench, Zap, LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ChangelogEntry, ChangelogEntryType } from "@/services/types";
+
+const TYPE_STYLES: Record<ChangelogEntryType, { icon: LucideIcon; className: string }> = {
+  feat: { icon: Sparkles, className: "bg-primary/10 text-primary" },
+  fix: { icon: Wrench, className: "bg-amber-500/10 text-amber-600 dark:text-amber-400" },
+  perf: { icon: Zap, className: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" },
+};
+
 interface ChangelogItemProps {
+  entry: ChangelogEntry;
   date: string;
-  version: string;
-  shortDescription: string;
-  fullDescription: string;
+  typeLabel: string;
 }
 
-export default function ChangelogItem({
-  date,
-  version,
-  shortDescription,
-  fullDescription,
-}: ChangelogItemProps) {
+export default function ChangelogItem({ entry, date, typeLabel }: ChangelogItemProps) {
+  const { icon: Icon, className } = TYPE_STYLES[entry.type];
+
   return (
-    <div className="relative pl-8 sm:pl-32 py-10 group">
-      {/* Timeline Vertical Line */}
-      <div className="absolute left-2 sm:left-14 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/20 via-primary/5 to-transparent sm:ml-[1.5px]" />
-
-      {/* Version Floating Label (Caveat font) */}
-      <div className="sm:absolute left-0 top-10 sm:w-28 text-right pr-12 hidden sm:block">
-        <span className="font-caveat font-bold text-3xl text-primary/40 block -rotate-6">
-          {version}
+    <li>
+      <a
+        href={entry.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group/item flex items-start gap-3 rounded-xl p-2 -mx-2 hover:bg-primary/5 transition-colors"
+      >
+        <span
+          title={typeLabel}
+          className={cn("flex items-center justify-center w-8 h-8 rounded-lg shrink-0", className)}
+        >
+          <Icon className="h-4 w-4" aria-hidden="true" />
+          <span className="sr-only">{typeLabel}</span>
         </span>
-      </div>
-
-      {/* Marker & Content Section */}
-      <div className="relative">
-        {/* Circle Marker */}
-        <div className="absolute -left-[27px] sm:-left-[75px] top-1.5 w-4 h-4 rounded-full border-4 border-background bg-primary shadow-xs ring-4 ring-primary/10 transition-transform group-hover:scale-125 duration-300" />
-
-        {/* Date Badge */}
-        <div className="mb-3">
-          <time className="inline-flex items-center justify-center text-[10px] font-black uppercase tracking-widest px-3 py-1 text-primary bg-primary/10 rounded-full">
+        <span className="flex-1 min-w-0">
+          <span className="block font-medium text-foreground leading-snug group-hover/item:text-primary transition-colors wrap-break-word">
+            {entry.message}
+          </span>
+          <time dateTime={entry.date} className="block mt-0.5 text-xs text-muted-foreground">
             {date}
           </time>
-          {/* Version for mobile */}
-          <span className="ml-3 font-caveat text-xl text-primary/60 sm:hidden">
-            {version}
-          </span>
-        </div>
-
-        {/* Text Content */}
-        <div className="space-y-4">
-          <h3 className="font-black text-lg sm:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300 wrap-break-word">
-            {shortDescription}
-          </h3>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl wrap-break-word">
-            {fullDescription}
-          </p>
-        </div>
-      </div>
-    </div>
+        </span>
+      </a>
+    </li>
   );
 }

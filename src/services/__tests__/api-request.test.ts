@@ -226,6 +226,43 @@ describe("apiRequest — caching", () => {
     expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 
+  it("ignores a cached result older than maxAge and refreshes the cache", async () => {
+    const endpoint = ep();
+    const now = vi.spyOn(Date, "now");
+    vi.mocked(global.fetch)
+      .mockResolvedValueOnce(jsonResponse({ success: true, data: { v: 1 } }))
+      .mockResolvedValueOnce(jsonResponse({ success: true, data: { v: 2 } }));
+
+    now.mockReturnValue(1_000_000);
+    await apiRequest({ endpoint, cacheDuration: 60_000 });
+
+    now.mockReturnValue(1_020_000); // 20 seconds later
+    const refreshed = await apiRequest({ endpoint, cacheDuration: 60_000, maxAge: 10_000 });
+    const cached = await apiRequest({ endpoint, cacheDuration: 60_000 });
+    now.mockRestore();
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(refreshed).toEqual({ success: true, data: { v: 2 } });
+    expect(cached).toEqual({ success: true, data: { v: 2 } });
+  });
+
+  it("uses a cached result younger than maxAge", async () => {
+    const endpoint = ep();
+    const now = vi.spyOn(Date, "now");
+    vi.mocked(global.fetch).mockResolvedValue(
+      jsonResponse({ success: true, data: { v: 1 } })
+    );
+
+    now.mockReturnValue(1_000_000);
+    await apiRequest({ endpoint, cacheDuration: 60_000 });
+
+    now.mockReturnValue(1_005_000); // 5 seconds later
+    await apiRequest({ endpoint, cacheDuration: 60_000, maxAge: 10_000 });
+    now.mockRestore();
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
   it("cached data is unwrapped (data.data) when check_success=true", async () => {
     const endpoint = ep();
     vi.mocked(global.fetch).mockResolvedValue(
@@ -620,5 +657,19 @@ describe("apiRequest — headers (additional)", () => {
       next?: { revalidate?: number };
     };
     expect(opts.next).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Exposure to the browser
+// ---------------------------------------------------------------------------
+describe("apiRequest — exposure", () => {
+  // A "use server" directive would make `apiRequest` a server action that any
+  // browser can call with its own URL, method and body (request forgery).
+  it("is not a server action", async () => {
+    const { readFileSync } = await import("node:fs");
+    const source = readFileSync("src/services/api-request.ts", "utf8");
+
+    expect(source).not.toMatch(/^\s*(["'])use server\1/m);
   });
 });

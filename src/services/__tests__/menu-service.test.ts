@@ -162,3 +162,51 @@ describe("getMenuByRestaurantIdAndDate", () => {
     if (!result.success) expect(result.status).toBe(404);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Arguments sent by the browser
+// ---------------------------------------------------------------------------
+// These functions are server actions: a browser can call them with anything.
+describe("menu-service — untrusted arguments", () => {
+  const badIds = ["123", "1/../../stats", 1.5, -1, 0, NaN, null, undefined, {}];
+
+  it.each(badIds)("rejects restaurant id %j without calling the API", async (id) => {
+    const results = await Promise.all([
+      getMenuByRestaurantId(id as number),
+      getDatesMenuAvailable(id as number),
+      getFutureDatesMenuAvailable(id as number),
+      getMenuByRestaurantIdAndDate(id as number, "21-04-2026"),
+    ]);
+
+    expect(mockApiRequest).not.toHaveBeenCalled();
+    results.forEach((result) => {
+      expect(result).toEqual({ success: false, error: "Invalid restaurantId", status: 400 });
+    });
+  });
+
+  it.each(["2026-04-21", "21-04-2026/../../stats", "", 21042026, null])(
+    "rejects date %j without calling the API",
+    async (date) => {
+      const result = await getMenuByRestaurantIdAndDate(10, date as string);
+
+      expect(mockApiRequest).not.toHaveBeenCalled();
+      expect(result).toEqual({ success: false, error: "Invalid date", status: 400 });
+    }
+  );
+
+  it("asks for a response at most 10 seconds old when fresh is requested", async () => {
+    mockApiRequest.mockResolvedValue(ok([]));
+    await getMenuByRestaurantId(123, { fresh: true });
+
+    expect(mockApiRequest.mock.calls[0][0].maxAge).toBe(10000);
+  });
+
+  it("does not let the caller choose the cache age", async () => {
+    mockApiRequest.mockResolvedValue(ok([]));
+    await getMenuByRestaurantId(123, { maxAge: 0 } as object);
+    await getMenuByRestaurantId(123, { fresh: "yes" } as object);
+    await getMenuByRestaurantId(123, null as unknown as object);
+
+    mockApiRequest.mock.calls.forEach(([call]) => expect(call.maxAge).toBeUndefined());
+  });
+});
