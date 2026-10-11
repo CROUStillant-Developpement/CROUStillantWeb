@@ -35,7 +35,7 @@ export async function getMenuByRestaurantId(
   if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
 
   return apiRequest<Menu[]>({
-    endpoint: `restaurants/${restaurantId}/menu`,
+    endpoint: `restaurants/${encodeURIComponent(restaurantId)}/menu`,
     method: "GET",
     cacheDuration: 300000, // 5 minutes in milliseconds
     maxAge: maxAge(options),
@@ -56,7 +56,7 @@ export async function getDatesMenuAvailable(
   if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
 
   return apiRequest<DateMenu[]>({
-    endpoint: `restaurants/${restaurantId}/menu/dates/all`,
+    endpoint: `restaurants/${encodeURIComponent(restaurantId)}/menu/dates/all`,
     method: "GET",
     cacheDuration: 1800000, // 30 minutes in milliseconds
     maxAge: maxAge(options),
@@ -75,7 +75,7 @@ export async function getFutureDatesMenuAvailable(
   if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
 
   return apiRequest<DateMenu[]>({
-    endpoint: `restaurants/${restaurantId}/menu/dates`,
+    endpoint: `restaurants/${encodeURIComponent(restaurantId)}/menu/dates`,
     method: "GET",
     cacheDuration: 300000, // 5 minutes in milliseconds
   });
@@ -97,7 +97,7 @@ export async function getMenuByRestaurantIdAndDate(
   if (!isApiDate(date)) return invalidArgument("date");
 
   return apiRequest<Menu | null>({
-    endpoint: `restaurants/${restaurantId}/menu/${date}`,
+    endpoint: `restaurants/${encodeURIComponent(restaurantId)}/menu/${encodeURIComponent(date)}`,
     method: "GET",
     cacheDuration: 1800000, // 30 minutes in milliseconds
     maxAge: maxAge(options),

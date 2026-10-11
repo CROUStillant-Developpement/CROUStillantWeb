@@ -16,7 +16,7 @@ export async function getRestaurantActivity(
   if (!isRestaurantId(restaurantId)) return invalidArgument("restaurantId");
 
   return apiRequest<RestaurantActivity>({
-    endpoint: `restaurants/${restaurantId}/activity`,
+    endpoint: `restaurants/${encodeURIComponent(restaurantId)}/activity`,
     method: "GET",
     cacheDuration: 900000, // 15 minutes in milliseconds, matches the API's cache TTL
   });
