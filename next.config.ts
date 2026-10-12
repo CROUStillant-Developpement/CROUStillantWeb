@@ -85,6 +85,10 @@ const cspHeader = (frameAncestors: string) =>
 const SCREEN_SOURCE = "/:path*/screen";
 const NON_SCREEN_SOURCE = "/((?!.*/screen$).*)";
 
+// Localized page routes only: route handlers (/llms.txt, /regions.geojson, …)
+// and static assets set their own Cache-Control.
+const PAGE_SOURCE = "/:locale(fr|en)/:path*";
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: imageOrigins.map((origin) => {
@@ -101,6 +105,22 @@ const nextConfig: NextConfig = {
         source: "/sw.js",
         headers: [
           { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      {
+        // Pages are rendered per request, for which Next defaults to
+        // "private, no-cache, no-store, max-age=0, must-revalidate". `no-store`
+        // keeps a page out of the browser's back/forward cache, so going back
+        // re-renders it from scratch. Nothing in the HTML is per-visitor
+        // (preferences live in localStorage), so it is dropped; `private,
+        // no-cache` still keeps the CDN from storing it and makes the browser
+        // revalidate on every normal navigation.
+        source: PAGE_SOURCE,
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "private, no-cache, max-age=0, must-revalidate",
+          },
         ],
       },
       {
