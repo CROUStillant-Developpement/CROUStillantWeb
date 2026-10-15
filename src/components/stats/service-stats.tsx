@@ -73,10 +73,15 @@ function useApiDateTime() {
   return (value: string) => {
     const [datePart, timePart] = value.split(" ");
 
-    // A bare day has no time zone to convert.
+    // A bare day has no time zone to convert. It is a start date ("since…"),
+    // possibly years back, so it keeps its year.
     if (!timePart) {
       return {
-        date: formatToISODate(datePart).toLocaleDateString(locale, { day: "numeric", month: "long" }),
+        date: formatToISODate(datePart).toLocaleDateString(locale, {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
         time: "",
       };
     }
