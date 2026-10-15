@@ -18,6 +18,10 @@ import { useUmami } from "next-umami";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 
+// Self-hosted (public/flags) because the CSP's img-src doesn't allow the
+// library's default jsDelivr CDN.
+const FLAGS_URL = "/flags/";
+
 export default function LocaleToggle() {
   const pathname = usePathname();
   const router = useRouter();
@@ -61,8 +65,9 @@ export default function LocaleToggle() {
           <ReactCountryFlag 
             countryCode="FR"
             title="Français"
-            aria-label="Français" 
+            aria-label="Français"
             svg
+            cdnUrl={FLAGS_URL}
             style={{ fontSize: '1.2em' }}
           />
           <span className="ml-2">Français</span>
@@ -79,6 +84,7 @@ export default function LocaleToggle() {
             title="English"
             aria-label="English"
             svg
+            cdnUrl={FLAGS_URL}
             style={{ fontSize: '1.2em' }}
           />
           <span className="ml-2">English</span>
