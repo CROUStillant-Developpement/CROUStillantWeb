@@ -152,29 +152,7 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
 
   return (
     <PageContainer>
-      <PageHeader
-        title={t("title")}
-        badge={t("subtitle")}
-        actions={
-          <QrCodeDialog
-            dialogTrigger={
-              <Button
-                type="button"
-                variant="outline"
-                size="lg"
-                className="rounded-2xl px-8 font-bold bg-background/60 backdrop-blur-xs"
-                onClick={() => umami.event("IframeBuilder.Share")}
-              >
-                <Share2 className="w-4 h-4" />
-                {t("share.button")}
-              </Button>
-            }
-            title={t("share.title")}
-            description={t("share.description")}
-            url={shareUrl}
-          />
-        }
-      />
+      <PageHeader title={t("title")} badge={t("subtitle")} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <motion.div className="space-y-4" variants={containerVariants} initial="hidden" animate="visible">
@@ -223,7 +201,32 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
         </motion.div>
 
         <motion.div className="lg:sticky lg:top-6" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.25 }}>
-          <PreviewPanel iframeUrl={iframeUrl} width={state.width} height={state.height} restaurantCode={state.restaurantCode} t={t} />
+          <PreviewPanel
+            iframeUrl={iframeUrl}
+            width={state.width}
+            height={state.height}
+            restaurantCode={state.restaurantCode}
+            t={t}
+            headerAction={
+              <QrCodeDialog
+                dialogTrigger={
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="rounded-xl font-bold"
+                    onClick={() => umami.event("IframeBuilder.Share")}
+                  >
+                    <Share2 className="w-4 h-4" />
+                    {t("share.button")}
+                  </Button>
+                }
+                title={t("share.title")}
+                description={t("share.description")}
+                url={shareUrl}
+              />
+            }
+          />
         </motion.div>
       </div>
     </PageContainer>
