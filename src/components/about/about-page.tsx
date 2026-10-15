@@ -25,6 +25,7 @@ import { FaGithub, FaAndroid, FaApple, FaGooglePlay } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 
 function Checkmark() {
   return (
@@ -38,34 +39,19 @@ export default function AboutPage() {
   const t = useTranslations("AboutPage");
 
   return (
-    <div className="w-full mt-4 px-4 overflow-x-hidden">
+    <PageContainer>
       {/* Header Section */}
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
-            {t("seo.title")}
-          </h1>
-          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-              {t("presentation.title")}
-            </span>
-          </div>
-        </div>
+      <PageHeader title={t("seo.title")} badge={t("presentation.title")} />
 
-        {/* Decorative elements */}
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
-
-      <div className="space-y-12 mx-auto pb-20">
+      <div className="space-y-12">
         {/* Presentation & Updates Card */}
         <div className="flex flex-col lg:flex-row gap-6 w-full">
           <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                 <GraduationCap className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground wrap-break-word">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
                 {t("presentation.title")}
               </h2>
             </div>
@@ -76,10 +62,10 @@ export default function AboutPage() {
 
           <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                 <Soup className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground wrap-break-word">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
                 {t("updates.title")}
               </h2>
             </div>
@@ -92,10 +78,10 @@ export default function AboutPage() {
         {/* Open Source Card */}
         <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex items-center gap-4 mb-8">
-            <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs">
+            <div className="p-3 rounded-2xl bg-primary/10 text-primary">
               <FileCode2 className="h-6 w-6 text-primary" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground wrap-break-word">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
               {t("open-source.title")}
             </h2>
           </div>
@@ -152,12 +138,12 @@ export default function AboutPage() {
               <div className="flex flex-col">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 wrap-break-word">{t("job.title")}</h2>
                 <p className="text-lg text-muted-foreground mb-8">{t("job.description")}</p>
-                <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
-                  <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 hover:border-primary/50 group">
+                <Button asChild variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 hover:border-primary/50 group">
+                  <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
                     {t("job.button")}
                     <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
             <div className="lg:w-1/2 grid grid-cols-1 gap-4">
@@ -194,12 +180,12 @@ export default function AboutPage() {
             <p className="text-lg text-muted-foreground mb-8">
               {t("sources.description")}
             </p>
-            <Link href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/" rel="noopener noreferrer" target="_blank">
-              <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 group">
+            <Button asChild variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 group">
+              <Link href="https://www.data.gouv.fr/fr/dataservices/api-croustillant/" rel="noopener noreferrer" target="_blank">
                 {t("sources.button")}
                 <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <div className="flex-1 w-full flex items-center justify-center">
             <Image
@@ -218,12 +204,12 @@ export default function AboutPage() {
             <div className="flex-1 mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-4 wrap-break-word">{t("discord.title")}</h2>
               <p className="text-lg text-muted-foreground mb-8">{t("discord.description")}</p>
-              <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867" target="_blank">
-                <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+              <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                <Link href="https://discord.com/oauth2/authorize?client_id=1024564077068025867" target="_blank">
                   <Bot className="mr-3 h-5 w-5" />
                   {t("discord.button")}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
             <div className="mt-auto flex items-center justify-center">
               <Image
@@ -262,12 +248,12 @@ export default function AboutPage() {
             <p className="text-lg text-muted-foreground mb-8">
               {t("integrated.description")}
             </p>
-            <Link href="https://api.croustillant.menu" target="_blank">
-              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+            <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+              <Link href="https://api.croustillant.menu" target="_blank">
                 <Globe className="mr-3 h-5 w-5" />
                 {t("integrated.button")}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <div className="flex-1 w-full flex items-center justify-center">
             <Image
@@ -281,11 +267,11 @@ export default function AboutPage() {
         </div>
 
         {/* Iframe Section */}
-        <div className="p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden overflow-hidden">
+        <div className="p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 flex items-center gap-3 wrap-break-word">
-                <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+                <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                   <FileCode2 className="h-6 w-6 text-primary" />
                 </div>
                 {t("integrated.iframe_title")}
@@ -360,7 +346,7 @@ export default function AboutPage() {
         <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                 <CalendarPlus className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
@@ -375,12 +361,12 @@ export default function AboutPage() {
               <li>{t("calendar.steps.step2")}</li>
               <li>{t("calendar.steps.step3")}</li>
             </ol>
-            <Link href="/restaurants">
-              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+            <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+              <Link href="/restaurants">
                 {t("calendar.cta")}
                 <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <div className="flex-1 w-full min-w-0 space-y-3">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-primary/70">{t("calendar.url_title")}</p>
@@ -397,7 +383,7 @@ export default function AboutPage() {
         <div className="flex flex-col xl:flex-row gap-8 items-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                 <LayoutTemplate className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
@@ -407,12 +393,12 @@ export default function AboutPage() {
             <p className="text-lg text-muted-foreground mb-8">
               {t("widget.description")}
             </p>
-            <Link href="/iframe-builder">
-              <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+            <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+              <Link href="/iframe-builder">
                 {t("widget.cta")}
                 <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <div className="flex-1 w-full flex items-center justify-center">
             <div className="w-full max-w-sm rounded-2xl border border-border/50 bg-background/50 p-6 shadow-lg">
@@ -441,18 +427,18 @@ export default function AboutPage() {
               {t("mobile.description")}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/mobile/android">
-                <Button size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+              <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                <Link href="/mobile/android">
                   <FaGooglePlay className="mr-3 h-4 w-4" />
                   {t("mobile.androidButton")}
-                </Button>
-              </Link>
-              <Link href="/mobile/ios">
-                <Button size="lg" variant="outline" className="rounded-2xl px-8 font-bold hover:scale-[1.02] transition-transform">
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-2xl px-8 font-bold hover:scale-[1.02] transition-transform">
+                <Link href="/mobile/ios">
                   <FaApple className="mr-3 h-5 w-5" />
                   {t("mobile.iosButton")}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
           <div className="flex-1 w-full flex items-center justify-center">
@@ -477,10 +463,10 @@ export default function AboutPage() {
 
         {/* Conclusion Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="flex flex-col justify-center rounded-2xl bg-card/50 border border-primary/5 p-4 sm:p-8 transition-all hover:bg-card hover:border-primary/20 overflow-hidden">
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
+          <div className="flex flex-col justify-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6 wrap-break-word">
               {t("convinced.title")}
-            </h3>
+            </h2>
             <p className="text-lg text-muted-foreground mb-8">{t("convinced.description")}</p>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg" className="rounded-2xl px-6 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
@@ -498,27 +484,27 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center rounded-2xl bg-card/50 border border-primary/5 p-4 sm:p-8 transition-all hover:bg-card hover:border-primary/20 overflow-hidden">
+          <div className="flex flex-col justify-center p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
             <div className="flex items-center gap-4 mb-6 min-w-0">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
                 <HeartHandshake className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">
                 {t("more-convinced.title")}
-              </h3>
+              </h2>
             </div>
             <p className="text-lg text-muted-foreground mb-8">{t("more-convinced.description")}</p>
             <div className="relative mt-auto flex">
-              <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
-                <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 group">
+              <Button asChild variant="outline" size="lg" className="rounded-2xl px-8 font-bold shadow-xs transition-all hover:bg-primary/5 group">
+                <Link href="https://discord.gg/yG6FjqbWtk" rel="noopener noreferrer" target="_blank">
                   {t("more-convinced.button")}
                   <ExternalLinkIcon className="ml-3 h-4 w-4 opacity-50 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 }

@@ -169,7 +169,7 @@ export default function CommunityAppsSection({ platform }: { platform?: Platform
   return (
     <div className="p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden">
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs shrink-0">
+        <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0">
           <Star className="h-6 w-6 text-primary" />
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground wrap-break-word">

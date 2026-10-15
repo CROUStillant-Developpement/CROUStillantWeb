@@ -66,7 +66,7 @@ export default function InstallAppCard() {
   return (
     <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
       <div className="flex items-start gap-4">
-        <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+        <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
           <Smartphone className="h-5 w-5 text-primary" />
         </div>
         <div className="space-y-1">

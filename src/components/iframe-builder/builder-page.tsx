@@ -23,6 +23,7 @@ import RestaurantSearch from "./restaurant-search";
 import BlocksPanel from "./blocks-panel";
 import StylePanel from "./style-panel";
 import PreviewPanel from "./preview-panel";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 
 export type { BlockConfig };
 
@@ -150,21 +151,18 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
   const dimStep = menuEnabled ? "5" : "4";
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-8 px-4 mt-4 pb-16">
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">{t("title")}</h1>
-            <div className="mt-4 flex items-center">
-              <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">{t("subtitle")}</span>
-            </div>
-          </div>
+    <PageContainer>
+      <PageHeader
+        title={t("title")}
+        badge={t("subtitle")}
+        actions={
           <QrCodeDialog
             dialogTrigger={
               <Button
                 type="button"
                 variant="outline"
-                className="shrink-0 gap-2 rounded-xl bg-background/60 backdrop-blur-xs"
+                size="lg"
+                className="rounded-2xl px-8 font-bold bg-background/60 backdrop-blur-xs"
                 onClick={() => umami.event("IframeBuilder.Share")}
               >
                 <Share2 className="w-4 h-4" />
@@ -175,10 +173,8 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
             description={t("share.description")}
             url={shareUrl}
           />
-        </div>
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <motion.div className="space-y-4" variants={containerVariants} initial="hidden" animate="visible">
@@ -230,7 +226,7 @@ export default function BuilderPage({ restaurants, apiUrl }: Props) {
           <PreviewPanel iframeUrl={iframeUrl} width={state.width} height={state.height} restaurantCode={state.restaurantCode} t={t} />
         </motion.div>
       </div>
-    </motion.div>
+    </PageContainer>
   );
 }
 

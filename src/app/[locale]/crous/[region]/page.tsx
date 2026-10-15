@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import JsonLd from "@/components/json-ld";
 import ErrorPage from "@/components/error";
+import { PageContainer, PageHeader } from "@/components/page-layout";
+import { Button } from "@/components/ui/button";
 import RegionMap from "@/components/crous/region-map";
 import RestaurantLinkCard from "@/components/restaurants/restaurant-link-card";
 import RegionsPagesMap from "@/components/crous/regions-pages-map";
@@ -186,66 +188,58 @@ export default async function RegionPage({
   };
 
   return (
-    <div className="w-full mt-4 px-4 flex flex-col gap-8">
+    <PageContainer>
       <JsonLd data={breadcrumb} />
       <JsonLd data={itemList} />
 
-      <header className="relative overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
-          <div>
-            <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
-              {t("title", { region: region.libelle })}
-            </h1>
-            <p className="mt-4 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-              {t("intro", {
-                region: region.libelle,
-                count: restaurants.length,
-                cityCount: groups.length,
-              })}
-            </p>
-
-            <dl className="mt-6 flex flex-wrap gap-3">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col-reverse rounded-2xl border border-primary/10 bg-background/60 px-5 py-3"
-                >
-                  <dt className="text-xs font-medium text-muted-foreground">{stat.label}</dt>
-                  <dd className="text-2xl font-extrabold tracking-tight text-foreground">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-
-            <Link
-              href={`/restaurants?region=${region.code}&display=map`}
-              className="group/map mt-6 inline-flex font-semibold items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20 hover:bg-primary/20"
-            >
+      <PageHeader
+        title={t("title", { region: region.libelle })}
+        description={t("intro", {
+          region: region.libelle,
+          count: restaurants.length,
+          cityCount: groups.length,
+        })}
+        actions={
+          <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20 group/cta">
+            <Link href={`/restaurants?region=${region.code}&display=map`}>
               {t("map")}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/map:translate-x-1" />
+              <ArrowRight className="transition-transform group-hover/cta:translate-x-1" />
             </Link>
-          </div>
-
-          {regionMaps.length > 0 && (
-            <RegionMap
-              maps={regionMaps}
-              label={t("mapLabel", { region: region.libelle })}
-              territoryNames={{
-                mainland: tTerritories("mainland"),
-                guadeloupe: tTerritories("guadeloupe"),
-                martinique: tTerritories("martinique"),
-                guyane: tTerritories("guyane"),
-                reunion: tTerritories("reunion"),
-                mayotte: tTerritories("mayotte"),
-              }}
-            />
-          )}
-        </div>
-
-        {/* Decorative elements */}
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-      </header>
+          </Button>
+        }
+        aside={
+          regionMaps.length > 0 && (
+            <div className="w-full lg:w-88">
+              <RegionMap
+                maps={regionMaps}
+                label={t("mapLabel", { region: region.libelle })}
+                territoryNames={{
+                  mainland: tTerritories("mainland"),
+                  guadeloupe: tTerritories("guadeloupe"),
+                  martinique: tTerritories("martinique"),
+                  guyane: tTerritories("guyane"),
+                  reunion: tTerritories("reunion"),
+                  mayotte: tTerritories("mayotte"),
+                }}
+              />
+            </div>
+          )
+        }
+      >
+        <dl className="mt-6 flex flex-wrap gap-3">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-col-reverse rounded-2xl border border-primary/10 bg-background/60 px-5 py-3"
+            >
+              <dt className="text-xs font-medium text-muted-foreground">{stat.label}</dt>
+              <dd className="text-2xl font-extrabold tracking-tight text-foreground">
+                {stat.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </PageHeader>
 
       {sections.length > 1 && (
         <nav aria-label={t("cityNav")}>
@@ -273,7 +267,7 @@ export default async function RegionPage({
           id={section.id}
           className="flex flex-col gap-4 scroll-mt-24"
         >
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
+          <h2 className="text-xl font-bold tracking-tight">
             {t("cityHeading", { city: section.city })}
           </h2>
           <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -290,6 +284,6 @@ export default async function RegionPage({
       ))}
 
       <RegionsPagesMap title={t("otherRegions")} activeRegionId={region.code} />
-    </div>
+    </PageContainer>
   );
 }

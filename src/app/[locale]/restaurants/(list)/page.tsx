@@ -51,18 +51,15 @@ export default async function Restaurants() {
   );
 
   return (
-    <>
-      <RestaurantsPage
-        restaurants={listRestaurants}
-        regions={regions.data}
-        typesRestaurants={typesRestaurants}
-      />
+    <RestaurantsPage
+      restaurants={listRestaurants}
+      regions={regions.data}
+      typesRestaurants={typesRestaurants}
+    >
       {/* A way to each region's page. The map is drawn in the browser, so it
           gives crawlers no links: they reach the region pages through the
           sitemap and through every restaurant page. */}
-      <div className="w-full px-4 mt-12">
-        <RegionsPagesMap title={t("seo.byRegion")} />
-      </div>
-    </>
+      <RegionsPagesMap title={t("seo.byRegion")} />
+    </RestaurantsPage>
   );
 }

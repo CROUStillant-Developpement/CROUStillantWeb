@@ -140,6 +140,7 @@ docs: add installation guide to README
 
 - **TypeScript** — use strict types; avoid `any`.
 - **Tailwind CSS** — use utility classes directly; avoid custom CSS unless necessary.
+- **Design** — new pages and sections must follow [DESIGN.md](DESIGN.md) (page skeleton, colours, building blocks, checklist).
 - **Components** — prefer small, focused components. Client components (`"use client"`) only where interactivity is needed.
 - **Naming** — `kebab-case` for files, `PascalCase` for components, `camelCase` for variables and functions.
 - **Linting** — run `npm run lint` before committing. PRs that fail lint will not be merged.

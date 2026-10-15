@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import CommunityAppsSection from "@/components/community-apps/community-apps-section";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 
 export default function MobilePage() {
   const t = useTranslations("MobilePage");
@@ -18,43 +19,36 @@ export default function MobilePage() {
   ];
 
   return (
-    <div className="w-full mt-4 px-4 overflow-x-hidden">
-      {/* Hero */}
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-3xl">
-          <div className="mb-4">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-              <Smartphone className="w-3.5 h-3.5 mr-2" />
-              {t("hero.badge")}
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
-            {t("hero.title")}
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground leading-relaxed max-w-xl">
-            {t("hero.description")}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/mobile/android">
-              <Button size="lg" className="rounded-2xl px-6 font-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
-                <FaAndroid className="mr-2 h-5 w-5" />
+    <PageContainer>
+      <PageHeader
+        title={t("hero.title")}
+        badge={
+          <>
+            <Smartphone className="w-3.5 h-3.5" />
+            {t("hero.badge")}
+          </>
+        }
+        description={t("hero.description")}
+        icon={Smartphone}
+        actions={
+          <>
+            <Button asChild size="lg" className="rounded-2xl px-8 font-black shadow-lg shadow-primary/20">
+              <Link href="/mobile/android">
+                <FaAndroid className="h-5 w-5" />
                 {t("hero.androidCta")}
-              </Button>
-            </Link>
-            <Link href="/mobile/ios">
-              <Button size="lg" variant="outline" className="rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group">
-                <FaApple className="mr-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-2xl px-8 font-bold">
+              <Link href="/mobile/ios">
+                <FaApple className="h-5 w-5" />
                 {t("hero.iosCta")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-        <Smartphone className="absolute right-8 bottom-4 h-48 w-48 text-primary/10 pointer-events-none hidden sm:block" />
-      </div>
+              </Link>
+            </Button>
+          </>
+        }
+      />
 
-      <div className="space-y-12 mx-auto pb-20">
+      <div className="space-y-12">
         {/* Platform Cards */}
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6">
@@ -62,7 +56,7 @@ export default function MobilePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Android */}
-            <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-green-500/10 bg-card/50 hover:bg-card hover:border-green-500/30 transition-all duration-300 shadow-xs overflow-hidden group">
+            <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden group">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 rounded-2xl bg-green-500/10 border border-green-500/20 shadow-xs shrink-0">
                   <FaAndroid className="h-6 w-6 text-green-500" />
@@ -75,17 +69,17 @@ export default function MobilePage() {
                 </div>
               </div>
               <p className="text-muted-foreground mb-8 flex-1 leading-relaxed">{t("platforms.android.description")}</p>
-              <Link href="/mobile/android">
-                <Button size="lg" variant="outline" className="w-full rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group border-green-500/20 hover:border-green-500/50 transition-transform">
-                  <FaGooglePlay className="mr-2 h-4 w-4" />
+              <Button asChild size="lg" variant="outline" className="w-full rounded-2xl px-8 font-bold group/cta">
+                <Link href="/mobile/android">
+                  <FaGooglePlay className="h-4 w-4" />
                   {t("platforms.android.cta")}
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-1" />
+                </Link>
+              </Button>
             </div>
 
             {/* iOS */}
-            <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-blue-500/10 bg-card/50 hover:bg-card hover:border-blue-500/30 transition-all duration-300 shadow-xs overflow-hidden group">
+            <div className="flex flex-col p-4 sm:p-8 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs overflow-hidden group">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 shadow-xs shrink-0">
                   <FaApple className="h-6 w-6 text-blue-500 dark:text-blue-400" />
@@ -98,13 +92,13 @@ export default function MobilePage() {
                 </div>
               </div>
               <p className="text-muted-foreground mb-8 flex-1 leading-relaxed">{t("platforms.ios.description")}</p>
-              <Link href="/mobile/ios">
-                <Button size="lg" variant="outline" className="w-full rounded-2xl px-6 font-bold hover:bg-primary/5 hover:border-primary/50 group border-blue-500/20 hover:border-blue-500/50 transition-transform">
-                  <FaApple className="mr-2 h-4 w-4" />
+              <Button asChild size="lg" variant="outline" className="w-full rounded-2xl px-8 font-bold group/cta">
+                <Link href="/mobile/ios">
+                  <FaApple className="h-4 w-4" />
                   {t("platforms.ios.cta")}
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-1" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -133,6 +127,6 @@ export default function MobilePage() {
         {/* Community Apps */}
         <CommunityAppsSection />
       </div>
-    </div>
+    </PageContainer>
   );
 }
