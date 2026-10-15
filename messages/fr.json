@@ -68,6 +68,10 @@
       "iosCta": "iOS",
       "learnMore": "En savoir plus"
     },
+    "sections": {
+      "info": "Tout ce qu’il faut savoir avant d’aller manger, réuni au même endroit.",
+      "team": "CROUStillant est open-source et porté par des étudiants bénévoles : chaque contribution compte."
+    },
     "regionsMap": {
       "title": "Trouvez votre région",
       "description": "Cliquez sur une région pour voir les restaurants CROUS qui s'y trouvent.",
@@ -96,9 +100,10 @@
     "GitCard": {
       "title": "Rejoignez l'équipe !",
       "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
-      "cta": "Nous rejoindre",
+      "cta": "Nous rejoindre sur Discord",
       "Card": {
-        "name": "Membres de l'équipe"
+        "name": "Membres de l'équipe",
+        "contributors": "Contributeurs GitHub"
       }
     },
     "ApiCard": {

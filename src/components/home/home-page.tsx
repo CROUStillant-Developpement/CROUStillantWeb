@@ -10,171 +10,129 @@ import {
   Smartphone,
   LayoutTemplate,
   CalendarPlus,
+  type LucideIcon,
 } from "lucide-react";
 import { FaAndroid, FaApple } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import HomeCard from "./home-card";
+import HomeCommunity from "./home-community";
 import HomeRegionsMap from "./home-regions-map";
+import {
+  HomeCta,
+  HomeGlow,
+  HomeIconBadge,
+  HomeSectionTitle,
+  fadeUp,
+  homeCardClassName,
+  staggerGrid,
+} from "./home-ui";
 import { Link } from "@/i18n/routing";
 import { useUmami } from "next-umami";
 import { motion } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
-};
+const FEATURES: { key: string; Icon: LucideIcon }[] = [
+  { key: "card1", Icon: MapPin },
+  { key: "card2", Icon: Clock },
+  { key: "card3", Icon: CreditCard },
+  { key: "card4", Icon: ForkKnifeCrossed },
+];
 
-const staggerGrid = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-interface CardProps {
-  title: string;
-  description: string;
-  cta: string;
-  ctaLink: string;
-  eventName?: string;
-  style?: string;
-  children: React.ReactNode;
-}
-
-const BasicCard = ({
-  title,
-  description,
-  cta,
-  ctaLink,
-  eventName = "Home.About",
-  children,
-}: CardProps) => {
-  const umami = useUmami();
-
-  return (
-    <div className="relative flex items-center min-h-[180px] w-full overflow-hidden rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
-      <div className="flex flex-col w-full max-w-[75%] gap-4 relative z-10 font-bold">
-        <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
-            {title}
-          </h3>
-          <p className="text-base text-muted-foreground leading-relaxed font-medium">
-            {description}
-          </p>
-        </div>
-        <Link
-          href={`/${ctaLink}`}
-          className="text-sm font-bold underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all flex items-center gap-2 group/link"
-          onClick={() => {
-            umami.event(eventName);
-          }}
-        >
-          {cta}
-          <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
-        </Link>
-      </div>
-      <div className="absolute -right-8 opacity-10 group-hover:opacity-20 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500">
-        {children}
-      </div>
-    </div>
-  );
-};
+const TOOLS: {
+  key: string;
+  Icon: LucideIcon;
+  href: string;
+  event: string;
+  variant: "primary" | "secondary";
+}[] = [
+  { key: "cardCalendar", Icon: CalendarPlus, href: "/restaurants", event: "Home.Calendar", variant: "primary" },
+  { key: "cardWidget", Icon: LayoutTemplate, href: "/iframe-builder", event: "Home.Widget", variant: "secondary" },
+];
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
+  const umami = useUmami();
 
   return (
     <div className="w-full space-y-24 md:space-y-32">
       <section id="info" className="scroll-mt-32">
+        <HomeSectionTitle title={t("title.second")} description={t("sections.info")} />
+
+        {/* What the site shows about each restaurant, as one block */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
+          className={cn(homeCardClassName, "p-8 md:p-12")}
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "-50px" }}
         >
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
-            {t("title.second")}
-          </h2>
-          <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
+          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+            {FEATURES.map(({ key, Icon }, index) => (
+              <div key={key} className="flex flex-col items-center text-center gap-5">
+                <HomeIconBadge Icon={Icon} tilt={index % 2 === 0 ? "right" : "left"} />
+                <div className="space-y-2">
+                  <h3 className="text-xl font-black tracking-tight text-foreground">
+                    {t(`${key}.title`)}
+                  </h3>
+                  <p className="text-muted-foreground font-medium leading-relaxed">
+                    {t(`${key}.description`)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <HomeGlow />
         </motion.div>
 
+        {/* Tools built on top of the menus */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"
           variants={staggerGrid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("card1.title")}
-              description={t("card1.description")}
-              cta={t("card1.cta")}
-              ctaLink="about"
+          {TOOLS.map(({ key, Icon, href, event, variant }, index) => (
+            <motion.div
+              key={key}
+              variants={fadeUp}
+              className={cn(homeCardClassName, "h-full p-8 md:p-10")}
             >
-              <MapPin size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("card2.title")}
-              description={t("card2.description")}
-              cta={t("card2.cta")}
-              ctaLink="about"
-            >
-              <Clock size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("card3.title")}
-              description={t("card3.description")}
-              cta={t("card3.cta")}
-              ctaLink="about"
-            >
-              <CreditCard size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("card4.title")}
-              description={t("card4.description")}
-              cta={t("card4.cta")}
-              ctaLink="about"
-            >
-              <ForkKnifeCrossed size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
-
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("cardCalendar.title")}
-              description={t("cardCalendar.description")}
-              cta={t("cardCalendar.cta")}
-              ctaLink="restaurants"
-              eventName="Home.Calendar"
-            >
-              <CalendarPlus size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
-
-          <motion.div variants={fadeUp}>
-            <BasicCard
-              title={t("cardWidget.title")}
-              description={t("cardWidget.description")}
-              cta={t("cardWidget.cta")}
-              ctaLink="iframe-builder"
-              eventName="Home.Widget"
-            >
-              <LayoutTemplate size={180} className="text-primary" />
-            </BasicCard>
-          </motion.div>
+              <div className="relative z-10 flex flex-col items-center text-center gap-6 h-full">
+                <HomeIconBadge Icon={Icon} size="lg" tilt={index % 2 === 0 ? "right" : "left"} />
+                <div className="space-y-3">
+                  <h3 className="text-2xl md:text-4xl font-black tracking-tight text-foreground wrap-break-word">
+                    {t(`${key}.title`)}
+                  </h3>
+                  <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+                    {t(`${key}.description`)}
+                  </p>
+                </div>
+                <div className="mt-auto">
+                  <HomeCta href={href} variant={variant} onClick={() => umami.event(event)}>
+                    {t(`${key}.cta`)}
+                  </HomeCta>
+                </div>
+              </div>
+              <HomeGlow />
+            </motion.div>
+          ))}
         </motion.div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/about"
+            className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all group/link"
+            onClick={() => umami.event("Home.About")}
+          >
+            {t("card1.cta")}
+            <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
+          </Link>
+        </div>
       </section>
 
       <HomeRegionsMap />
 
       <motion.section
-        className=""
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -234,32 +192,20 @@ export default function HomePage() {
       </motion.section>
 
       <section id="team" className="scroll-mt-32">
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6">
-            {t("title.third")}
-          </h2>
-          <div className="h-1.5 w-24 bg-primary rounded-full mx-auto" />
-        </motion.div>
+        <HomeSectionTitle title={t("title.third")} description={t("sections.team")} />
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           variants={staggerGrid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <HomeCard />
+          <HomeCommunity />
         </motion.div>
       </section>
 
       <motion.section
-        className=""
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"

@@ -68,6 +68,10 @@
       "iosCta": "iOS",
       "learnMore": "Learn more"
     },
+    "sections": {
+      "info": "Everything you need to know before heading to lunch, all in one place.",
+      "team": "CROUStillant is open source and run by student volunteers: every contribution counts."
+    },
     "regionsMap": {
       "title": "Find your region",
       "description": "Click on a region to see the CROUS restaurants located there.",
@@ -96,9 +100,10 @@
     "GitCard": {
       "title": "Join the team!",
       "subtitle": "CROUStillant is a constantly evolving project. We are always looking for new talents to join the team and help us improve the service.",
-      "cta": "Join us",
+      "cta": "Join us on Discord",
       "Card": {
-        "name": "Team members"
+        "name": "Team members",
+        "contributors": "GitHub contributors"
       }
     },
     "ApiCard": {

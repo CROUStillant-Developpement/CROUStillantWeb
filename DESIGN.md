@@ -40,7 +40,7 @@ export default async function MyPage() {
 
 | Page | Why |
 |---|---|
-| Home (`/`) | It's the landing page, so it gets the larger hero and `rounded-[3rem]` blocks. Don't copy them elsewhere. |
+| Home (`/`) | It's the landing page, so it has its own bolder vocabulary: large `rounded-[2rem]` blocks, centred layouts, `font-black` titles, solid primary icon badges and chunky CTAs. Build home sections from [`home-ui.tsx`](src/components/home/home-ui.tsx) (`HomeSectionTitle`, `homeCardClassName`, `HomeIconBadge`, `HomeCta`, `HomeGlow`), and don't use them on other pages. |
 | Restaurant (`/restaurants/[slug]`) | The header is the restaurant photo. |
 | Screen mode (`…/screen`) | Kiosk display with no site chrome. |
 | `too-many-requests`, root `not-found` | They render outside the normal layout and must stay self-contained. |
