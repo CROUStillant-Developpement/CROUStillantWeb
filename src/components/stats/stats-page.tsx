@@ -29,19 +29,36 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { Tache, GlobalStats, RegionStats } from "@/services/types";
+import {
+  Tache,
+  GlobalStats,
+  RegionStats,
+  ApiUsageDay,
+  ApiUsageStats,
+  BotStats,
+  BotStatsDay,
+  DataFreshness,
+  GeoStats,
+} from "@/services/types";
+import { ApiSection, BotSection, FreshnessSection, GeoSection, StatsSection } from "./service-stats";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
 import { PageContainer, PageHeader } from "@/components/page-layout";
-import { Activity, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid, Search } from "lucide-react";
+import { Activity, Database, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid, Search } from "lucide-react";
 import { useState } from "react";
 
 interface StatsPageProps {
   taches: Tache[];
   stats: GlobalStats;
   regionStats: RegionStats[];
+  freshness: DataFreshness | null;
+  apiUsage: ApiUsageStats | null;
+  apiHistory: ApiUsageDay[];
+  bot: BotStats | null;
+  botHistory: BotStatsDay[];
+  geo: GeoStats | null;
 }
 
 interface ProcessedTache {
@@ -141,7 +158,17 @@ const CustomDot = (props: DotProps) => {
   );
 };
 
-export default function StatsPage({ taches, stats, regionStats }: StatsPageProps) {
+export default function StatsPage({
+  taches,
+  stats,
+  regionStats,
+  freshness,
+  apiUsage,
+  apiHistory,
+  bot,
+  botHistory,
+  geo,
+}: StatsPageProps) {
   const t = useTranslations("StatsPage");
 
   const locale = useLocale();
@@ -154,70 +181,86 @@ export default function StatsPage({ taches, stats, regionStats }: StatsPageProps
     <PageContainer>
       <PageHeader title={t("title")} badge={t("description")} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <StatCard
-          icon={<Menu className="w-5 h-5" />}
-          title={t("stats.menus")}
-          value={stats?.menus ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<LayoutGrid className="w-5 h-5" />}
-          title={t("stats.compositions")}
-          value={stats?.compositions ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Hash className="w-5 h-5" />}
-          title={t("stats.categories")}
-          value={stats?.categories ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Utensils className="w-5 h-5" />}
-          title={t("stats.repas")}
-          value={stats?.repas ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Activity className="w-5 h-5" />}
-          title={t("stats.plats")}
-          value={stats?.plats ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<LayoutGrid className="w-5 h-5" />}
-          title={t("stats.restaurants")}
-          value={stats?.restaurants_actifs ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<MapPin className="w-5 h-5" />}
-          title={t("stats.regions")}
-          value={stats?.regions ?? 0}
-          locale={localeString}
-        />
-        {stats?.visites && (
-          <StatCard
-            icon={<MousePointer2 className="w-5 h-5" />}
-            title={t("stats.visits")}
-            value={stats?.visites}
-            locale={localeString}
-          />
-        )}
-        {stats?.pagesVues && (
-          <StatCard
-            icon={<Eye className="w-5 h-5" />}
-            title={t("stats.views")}
-            value={stats?.pagesVues}
-            locale={localeString}
-          />
-        )}
+      <div className="space-y-16">
+        <StatsSection
+          icon={<Database className="w-5 h-5" />}
+          title={t("sections.data.title")}
+          description={t("sections.data.description")}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <StatCard
+              icon={<Menu className="w-5 h-5" />}
+              title={t("stats.menus")}
+              value={stats?.menus ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<LayoutGrid className="w-5 h-5" />}
+              title={t("stats.compositions")}
+              value={stats?.compositions ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Hash className="w-5 h-5" />}
+              title={t("stats.categories")}
+              value={stats?.categories ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Utensils className="w-5 h-5" />}
+              title={t("stats.repas")}
+              value={stats?.repas ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Activity className="w-5 h-5" />}
+              title={t("stats.plats")}
+              value={stats?.plats ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<LayoutGrid className="w-5 h-5" />}
+              title={t("stats.restaurants")}
+              value={stats?.restaurants_actifs ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<MapPin className="w-5 h-5" />}
+              title={t("stats.regions")}
+              value={stats?.regions ?? 0}
+              locale={localeString}
+            />
+            {stats?.visites && (
+              <StatCard
+                icon={<MousePointer2 className="w-5 h-5" />}
+                title={t("stats.visits")}
+                value={stats?.visites}
+                locale={localeString}
+              />
+            )}
+            {stats?.pagesVues && (
+              <StatCard
+                icon={<Eye className="w-5 h-5" />}
+                title={t("stats.views")}
+                value={stats?.pagesVues}
+                locale={localeString}
+              />
+            )}
+          </div>
+
+          <RegionStatsTable data={regionStats} locale={localeString} />
+        </StatsSection>
+
+        <FreshnessSection data={freshness}>
+          <TacheCharts data={taches} />
+        </FreshnessSection>
+
+        {(apiUsage || apiHistory.length > 0) && <ApiSection usage={apiUsage} history={apiHistory} />}
+
+        {(bot || botHistory.length > 0) && <BotSection bot={bot} history={botHistory} />}
+
+        {geo && geo.top.length > 0 && <GeoSection data={geo} />}
       </div>
-
-      <TacheCharts data={taches} />
-
-      <RegionStatsTable data={regionStats} locale={localeString} />
     </PageContainer>
   );
 }

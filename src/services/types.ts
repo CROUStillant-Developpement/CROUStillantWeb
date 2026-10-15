@@ -168,6 +168,83 @@ export interface GlobalStats {
   pagesVues?: number; // Number of page views on the site
 }
 
+// Types for the service statistics (/stats/api, /stats/bot, /stats/geo, /stats/taches)
+export interface ApiRouteStats {
+  route: string; // Route pattern, e.g. "/v1/restaurants/<code>"
+  requetes: number; // Requests since tracking started
+  temps_moyen_ms: number; // Average response time
+}
+
+export interface ApiUsageStats {
+  requetes: number; // Requests since tracking started
+  visiteurs_uniques: number; // Unique visitors since tracking started
+  depuis: string; // Tracking start date (DD-MM-YYYY)
+  routes: ApiRouteStats[]; // Most requested routes
+}
+
+export interface ApiUsageDay {
+  jour: string; // DD-MM-YYYY
+  requetes: number;
+  visiteurs_uniques: number;
+  erreurs_serveur: number;
+  temps_reponse_p50_ms: number;
+  temps_reponse_p95_ms: number;
+}
+
+export interface BotStats {
+  statut: string; // "online" when the bot is up
+  date: string; // Reading time (DD-MM-YYYY HH:MM:SS)
+  latence_ms: number;
+  serveurs: number;
+  utilisateurs: number;
+  salons: number;
+  shards: number;
+  disponibilite_24h: number; // Uptime percentage
+  disponibilite_30j: number; // Uptime percentage
+}
+
+export interface BotStatsDay {
+  jour: string; // DD-MM-YYYY
+  serveurs: number;
+  utilisateurs: number;
+  salons: number;
+  shards: number;
+  latence_ms: number;
+  disponibilite: number; // Uptime percentage
+  releves: number; // Readings taken that day
+}
+
+export interface GeoCity {
+  ville: string;
+  region: string;
+  pays: string; // ISO country code
+  latitude: number;
+  longitude: number;
+  sessions: number;
+}
+
+export interface GeoStats {
+  sessions: number; // Total sessions
+  villes: number; // Distinct cities
+  top: GeoCity[]; // Most frequent cities, by sessions
+}
+
+export interface DataFreshness {
+  derniere: { id: number; debut: string; fin: string | null };
+  derniere_terminee: {
+    id: number;
+    debut: string;
+    fin: string;
+    duree: number; // Seconds
+    requetes: number;
+    nouveaux_menus: number;
+    nouveaux_repas: number;
+    nouveaux_plats: number;
+  } | null;
+  taches_24h: number; // Tasks run in the last 24 hours
+  duree_moyenne_7j: number; // Average task duration over 7 days, in seconds
+}
+
 export interface Changelog {
   [service: string]: ChangelogEntry[];
 }

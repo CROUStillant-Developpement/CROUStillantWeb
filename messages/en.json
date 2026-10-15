@@ -903,6 +903,70 @@
       "title": "Statistics",
       "description": "Discover the statistics of CROUStillant. Stay informed of the number of menus, compositions, categories, meals and dishes added per day.",
       "keywords": "CROUS, restaurant, menu, statistics"
+    },
+    "units": {
+      "ms": "{value} ms",
+      "seconds": "{value} s",
+      "percent": "{value}%"
+    },
+    "freshness": {
+      "title": "Data freshness",
+      "description": "Menus are fetched from the CROUS several times an hour.",
+      "lastUpdate": "Last update",
+      "lastUpdateValue": "{date} at {time}",
+      "newMenus": "New menus",
+      "newMeals": "New meals",
+      "newDishes": "New dishes",
+      "lastTask": "in the last update",
+      "tasks24h": "Updates (24 h)",
+      "avgDuration": "Average duration (7 d)"
+    },
+    "api": {
+      "title": "Public API",
+      "description": "Usage of the CROUStillant open API by the website, the app and developers.",
+      "requests": "Requests",
+      "since": "since {date}",
+      "visitors": "Unique visitors",
+      "p95": "Response time (p95)",
+      "p95Hint": "95% of yesterday's requests",
+      "errors": "Server errors (30 d)",
+      "chartTitle": "Requests per day",
+      "chartDescription": "Number of requests received by the API over the last 30 days.",
+      "routes": {
+        "title": "Most requested routes",
+        "description": "Since tracking started.",
+        "route": "Route",
+        "requests": "Requests",
+        "avgTime": "Average time"
+      }
+    },
+    "bot": {
+      "title": "Discord bot",
+      "description": "The CROUStillant bot posts menus straight into Discord servers.",
+      "online": "Online",
+      "offline": "Offline",
+      "checkedAt": "Checked on {date} at {time}",
+      "servers": "Servers",
+      "users": "Users",
+      "channels": "Channels",
+      "latency": "Latency",
+      "uptime24h": "Uptime (24 h)",
+      "uptime30d": "Uptime (30 d)",
+      "uptimeDescription": "Day-by-day bot uptime over the last 30 days."
+    },
+    "geo": {
+      "title": "Where is CROUStillant used?",
+      "description": "The cities the website is visited from the most.",
+      "sessions": "Sessions",
+      "cities": "Cities",
+      "share": "{value}% of sessions",
+      "topTitle": "Top {count} cities"
+    },
+    "sections": {
+      "data": {
+        "title": "Collected data",
+        "description": "Everything CROUStillant has collected from the CROUS, overall and by region."
+      }
     }
   },
   "DishesPage": {
