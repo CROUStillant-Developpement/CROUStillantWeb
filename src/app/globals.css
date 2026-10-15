@@ -345,16 +345,19 @@
     --accent:  0   70% 55%;
   }
 
-  /* Halloween - pumpkin orange primary, deep purple accent */
+  /* Halloween - pumpkin orange primary (#FF7518), purple accent from the
+     "witchy purple" hue (#6A0DAD). The accent sits behind dark text in light
+     mode, so it is a soft lavender there (#C4A3DC, 8:1 with the text) and a
+     muted purple behind the light text of dark mode (6.8:1). */
   [data-seasonal="halloween"] {
     --primary: 25  95% 48%;
     --ring:    25  95% 48%;
-    --accent:  270 55% 38%;
+    --accent:  275 45% 75%;
   }
   .dark[data-seasonal="halloween"] {
     --primary: 25  95% 54%;
     --ring:    25  95% 54%;
-    --accent:  270 55% 45%;
+    --accent:  275 45% 38%;
   }
 
   /* Valentine's Day - deep rose primary */

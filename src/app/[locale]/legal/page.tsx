@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { buildPageMetadata } from "@/lib/metadata";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("LegalPage");
@@ -29,25 +30,10 @@ export default async function LegalPage() {
   ];
 
   return (
-    <div className="w-full mt-4 px-4 flex flex-col gap-8 overflow-x-hidden">
-      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
-            {t("title")}
-          </h1>
-          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-              {t("subtitle")}
-            </span>
-          </div>
-        </div>
+    <PageContainer>
+      <PageHeader title={t("title")} badge={t("subtitle")} />
 
-        {/* Decorative elements */}
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
-
-      <div className="mb-8 flex flex-col gap-10">
+      <div className="flex flex-col gap-10">
         <Card className="rounded-2xl border-primary/5 bg-card/50 backdrop-blur-xs hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
           <CardContent className="p-4 sm:p-8 lg:p-12 space-y-6">
             <p className="text-muted-foreground leading-relaxed">{t("description")}</p>
@@ -101,6 +87,6 @@ export default async function LegalPage() {
           </Card>
         ))}
       </div>
-    </div>
+    </PageContainer>
   );
 }

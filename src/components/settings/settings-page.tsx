@@ -2,6 +2,7 @@
 
 import SettingCard from "@/components/settings/setting-card";
 import InstallAppCard from "@/components/settings/install-app-card";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -252,29 +253,14 @@ export default function SettingsPage() {
   }, []);
 
   return (
-    <div className="w-full mt-4 px-4 overflow-x-hidden">
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight text-foreground wrap-break-word">
-            {t("title")}
-          </h1>
-          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-              {t("subtitle", { fallback: "Preferences & Personalization" })}
-            </span>
-          </div>
-        </div>
+    <PageContainer>
+      <PageHeader title={t("title")} badge={t("subtitle", { fallback: "Preferences & Personalization" })} />
 
-        {/* Decorative elements */}
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
-
-      <div className="space-y-12 mx-auto pb-20">
+      <div className="space-y-12">
         <SettingCard title={t("appearanceTitle")}>
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Palette className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -297,7 +283,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -318,7 +304,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Languages className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -346,7 +332,7 @@ export default function SettingsPage() {
         <SettingCard title={t("accessibilityTitle")}>
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -367,7 +353,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Contrast className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -388,7 +374,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <ZapOff className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -409,7 +395,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Rows3 className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -430,7 +416,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Type className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -478,7 +464,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Star className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -530,7 +516,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <MapPin className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -580,7 +566,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Utensils className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -624,7 +610,7 @@ export default function SettingsPage() {
 
           <div className="flex flex-col justify-between gap-4 h-full rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Bell className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
@@ -654,7 +640,7 @@ export default function SettingsPage() {
         <SettingCard title={t("personalTitle")}>
           <div className="col-span-full space-y-6 flex flex-col rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs p-6 w-full">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-background border border-border/50 shadow-xs group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 <Cog className="h-6 w-6 text-primary" />
               </div>
               <div className="space-y-1 text-left">
@@ -755,6 +741,6 @@ export default function SettingsPage() {
           </div>
         </SettingCard>
       </div>
-    </div>
+    </PageContainer>
   );
 }

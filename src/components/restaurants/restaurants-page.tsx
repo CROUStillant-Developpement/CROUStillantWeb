@@ -19,15 +19,19 @@ import Content from "./content";
 import { AnimatePresence, motion } from "@/lib/motion";
 import CelebrationBanner, { useCelebrationBanner } from "./slug/celebration-banner";
 import EasterEggLauncher from "@/components/easter-egg/easter-egg-launcher";
+import { PageContainer, PageHeader } from "@/components/page-layout";
 
 export default function RestaurantsPage({
   restaurants,
   regions,
   typesRestaurants,
+  children,
 }: {
   restaurants: Restaurant[];
   regions: Region[];
   typesRestaurants: TypeRestaurant[];
+  /** Sections shown under the list. */
+  children?: React.ReactNode;
 }) {
   const searchParams = useSearchParams();
   const locale = useLocale();
@@ -104,30 +108,18 @@ export default function RestaurantsPage({
   }, [filteredRestaurants]);
 
   return (
-    <div className="w-full mt-4 px-4">
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1
-            data-easter-egg
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground select-none"
-          >
-            Restaurants
-          </h1>
-          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
-            {loading ? (
-              <Loading className="justify-start!" />
-            ) : (
-              <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-                {t("results", { count: filteredRestaurants.length })}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Decorative elements */}
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
+    <PageContainer>
+      <PageHeader
+        title="Restaurants"
+        titleProps={{ "data-easter-egg": true, className: "select-none" }}
+        badge={
+          loading ? (
+            <Loading className="justify-start!" />
+          ) : (
+            t("results", { count: filteredRestaurants.length })
+          )
+        }
+      />
 
       {/* <AnimatePresence>
           {showCelebration && (
@@ -174,7 +166,9 @@ export default function RestaurantsPage({
         </RestaurantsFilters>
       </div>
 
+      {children}
+
       <EasterEggLauncher />
-    </div>
+    </PageContainer>
   );
 }

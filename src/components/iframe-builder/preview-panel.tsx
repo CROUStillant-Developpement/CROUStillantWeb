@@ -16,9 +16,11 @@ interface Props {
   restaurantCode: number | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   t: any;
+  /** Shown at the right of the preview header (the share button). */
+  headerAction?: React.ReactNode;
 }
 
-export default function PreviewPanel({ iframeUrl, width, height, restaurantCode, t }: Props) {
+export default function PreviewPanel({ iframeUrl, width, height, restaurantCode, t, headerAction }: Props) {
   const [copied, setCopied] = useState<"embed" | "url" | null>(null);
   const [status, setStatus] = useState<PreviewStatus>("idle");
   const [errorCode, setErrorCode] = useState<number | null>(null);
@@ -121,7 +123,7 @@ export default function PreviewPanel({ iframeUrl, width, height, restaurantCode,
       <div className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">
 
         {/* Header */}
-        <div className="px-5 py-4 border-b border-border/50 flex items-center justify-between">
+        <div className="px-5 py-4 border-b border-border/50 flex flex-wrap items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 text-sm font-semibold text-muted-foreground uppercase tracking-tight">
             <span className="p-1.5 rounded-lg bg-primary/5 text-primary">
               <LayoutTemplate className="w-4 h-4" />
@@ -176,17 +178,20 @@ export default function PreviewPanel({ iframeUrl, width, height, restaurantCode,
               )}
             </AnimatePresence>
           </h2>
-          {iframeUrl && isLive && (
-            <a
-              href={iframeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
-            >
-              {t("preview.openRaw")}
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          )}
+          <div className="flex items-center gap-4">
+            {iframeUrl && isLive && (
+              <a
+                href={iframeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                {t("preview.openRaw")}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+            {headerAction}
+          </div>
         </div>
 
         {/* Content area */}

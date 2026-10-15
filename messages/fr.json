@@ -68,6 +68,10 @@
       "iosCta": "iOS",
       "learnMore": "En savoir plus"
     },
+    "sections": {
+      "info": "Tout ce qu’il faut savoir avant d’aller manger, réuni au même endroit.",
+      "team": "CROUStillant est open-source et porté par des étudiants bénévoles : chaque contribution compte."
+    },
     "regionsMap": {
       "title": "Trouvez votre région",
       "description": "Cliquez sur une région pour voir les restaurants CROUS qui s'y trouvent.",
@@ -96,9 +100,10 @@
     "GitCard": {
       "title": "Rejoignez l'équipe !",
       "subtitle": "CROUStillant est un projet en constante évolution. Nous sommes toujours à la recherche de nouveaux talents pour rejoindre l'équipe et nous aider à améliorer le service.",
-      "cta": "Nous rejoindre",
+      "cta": "Nous rejoindre sur Discord",
       "Card": {
-        "name": "Membres de l'équipe"
+        "name": "Membres de l'équipe",
+        "contributors": "Contributeurs GitHub"
       }
     },
     "ApiCard": {
@@ -899,6 +904,69 @@
       "title": "Statistiques",
       "description": "Découvrez les statistiques de CROUStillant. Nombre de menus, compositions, catégories, repas et plats ajoutés par jour.",
       "keywords": "CROUS, restaurant, menu, statistiques"
+    },
+    "units": {
+      "ms": "{value} ms",
+      "seconds": "{value} s",
+      "percent": "{value} %"
+    },
+    "freshness": {
+      "title": "Fraîcheur des données",
+      "description": "Les menus sont récupérés auprès du CROUS plusieurs fois par heure.",
+      "lastUpdate": "Dernière mise à jour",
+      "lastUpdateValue": "{date} à {time}",
+      "newMenus": "Nouveaux menus",
+      "newMeals": "Nouveaux repas",
+      "newDishes": "Nouveaux plats",
+      "lastTask": "lors de la dernière mise à jour",
+      "tasks24h": "Mises à jour (24 h)",
+      "avgDuration": "Durée moyenne (7 j)"
+    },
+    "api": {
+      "title": "API publique",
+      "description": "Utilisation de l'API ouverte de CROUStillant par le site, l'application et les développeurs.",
+      "requests": "Requêtes",
+      "since": "depuis le {date}",
+      "visitors": "Visiteurs uniques",
+      "p95": "Temps de réponse (p95)",
+      "p95Hint": "95 % des requêtes d'hier",
+      "errors": "Erreurs serveur (30 j)",
+      "chartTitle": "Requêtes par jour",
+      "chartDescription": "Nombre de requêtes reçues par l'API sur les 30 derniers jours.",
+      "routes": {
+        "title": "Routes les plus appelées",
+        "description": "Depuis le début du suivi.",
+        "route": "Route",
+        "requests": "Requêtes",
+        "avgTime": "Temps moyen"
+      }
+    },
+    "bot": {
+      "title": "Bot Discord",
+      "description": "Le bot CROUStillant envoie les menus directement dans les serveurs Discord.",
+      "online": "En ligne",
+      "offline": "Hors ligne",
+      "checkedAt": "Relevé le {date} à {time}",
+      "servers": "Serveurs",
+      "users": "Utilisateurs",
+      "channels": "Salons",
+      "latency": "Latence",
+      "uptime24h": "Disponibilité (24 h)",
+      "uptime30d": "Disponibilité (30 j)",
+      "uptimeDescription": "Disponibilité du bot jour par jour, sur les 30 derniers jours."
+    },
+    "geo": {
+      "title": "D'où consulte-t-on CROUStillant ?",
+      "description": "Les villes d'où le site est le plus consulté.",
+      "cities": "Villes",
+      "share": "{value} % des sessions",
+      "topTitle": "Top {count} des villes"
+    },
+    "sections": {
+      "data": {
+        "title": "Données collectées",
+        "description": "Tout ce que CROUStillant a récupéré auprès des CROUS, au total et par région."
+      }
     }
   },
   "DishesPage": {

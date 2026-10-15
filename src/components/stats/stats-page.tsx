@@ -29,19 +29,36 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { Tache, GlobalStats, RegionStats } from "@/services/types";
+import {
+  Tache,
+  GlobalStats,
+  RegionStats,
+  ApiUsageDay,
+  ApiUsageStats,
+  BotStats,
+  BotStatsDay,
+  DataFreshness,
+  GeoStats,
+} from "@/services/types";
+import { ApiSection, BotSection, FreshnessSection, GeoSection, StatsSection } from "./service-stats";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
-import { motion } from "@/lib/motion";
-import { Activity, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid, Search } from "lucide-react";
+import { PageContainer, PageHeader } from "@/components/page-layout";
+import { Activity, Database, Menu, Utensils, Hash, MapPin, LayoutGrid, Search } from "lucide-react";
 import { useState } from "react";
 
 interface StatsPageProps {
   taches: Tache[];
   stats: GlobalStats;
   regionStats: RegionStats[];
+  freshness: DataFreshness | null;
+  apiUsage: ApiUsageStats | null;
+  apiHistory: ApiUsageDay[];
+  bot: BotStats | null;
+  botHistory: BotStatsDay[];
+  geo: GeoStats | null;
 }
 
 interface ProcessedTache {
@@ -141,7 +158,17 @@ const CustomDot = (props: DotProps) => {
   );
 };
 
-export default function StatsPage({ taches, stats, regionStats }: StatsPageProps) {
+export default function StatsPage({
+  taches,
+  stats,
+  regionStats,
+  freshness,
+  apiUsage,
+  apiHistory,
+  bot,
+  botHistory,
+  geo,
+}: StatsPageProps) {
   const t = useTranslations("StatsPage");
 
   const locale = useLocale();
@@ -151,93 +178,76 @@ export default function StatsPage({ taches, stats, regionStats }: StatsPageProps
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-8 px-4 mt-4"
-    >
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 via-background to-background p-6 sm:p-10 shadow-xs border border-primary/10">
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-            {t("title")}
-          </h1>
-          <div className="mt-4 text-lg text-muted-foreground flex items-center h-8">
-            <span className="inline-flex font-semibold items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary ring-1 ring-inset ring-primary/20">
-              {t("description")}
-            </span>
+    <PageContainer>
+      <PageHeader title={t("title")} badge={t("description")} />
+
+      <div className="space-y-16">
+        <StatsSection
+          icon={<Database className="w-5 h-5" />}
+          title={t("sections.data.title")}
+          description={t("sections.data.description")}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <StatCard
+              icon={<Menu className="w-5 h-5" />}
+              title={t("stats.menus")}
+              value={stats?.menus ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<LayoutGrid className="w-5 h-5" />}
+              title={t("stats.compositions")}
+              value={stats?.compositions ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Hash className="w-5 h-5" />}
+              title={t("stats.categories")}
+              value={stats?.categories ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Utensils className="w-5 h-5" />}
+              title={t("stats.repas")}
+              value={stats?.repas ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<Activity className="w-5 h-5" />}
+              title={t("stats.plats")}
+              value={stats?.plats ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<LayoutGrid className="w-5 h-5" />}
+              title={t("stats.restaurants")}
+              value={stats?.restaurants_actifs ?? 0}
+              locale={localeString}
+            />
+            <StatCard
+              icon={<MapPin className="w-5 h-5" />}
+              title={t("stats.regions")}
+              value={stats?.regions ?? 0}
+              locale={localeString}
+            />
           </div>
-        </div>
 
-        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute right-40 -bottom-20 h-40 w-40 rounded-full bg-primary/20 blur-2xl pointer-events-none" />
-      </div>
+          <RegionStatsTable data={regionStats} locale={localeString} />
+        </StatsSection>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <StatCard
-          icon={<Menu className="w-5 h-5" />}
-          title={t("stats.menus")}
-          value={stats?.menus ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<LayoutGrid className="w-5 h-5" />}
-          title={t("stats.compositions")}
-          value={stats?.compositions ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Hash className="w-5 h-5" />}
-          title={t("stats.categories")}
-          value={stats?.categories ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Utensils className="w-5 h-5" />}
-          title={t("stats.repas")}
-          value={stats?.repas ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<Activity className="w-5 h-5" />}
-          title={t("stats.plats")}
-          value={stats?.plats ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<LayoutGrid className="w-5 h-5" />}
-          title={t("stats.restaurants")}
-          value={stats?.restaurants_actifs ?? 0}
-          locale={localeString}
-        />
-        <StatCard
-          icon={<MapPin className="w-5 h-5" />}
-          title={t("stats.regions")}
-          value={stats?.regions ?? 0}
-          locale={localeString}
-        />
-        {stats?.visites && (
-          <StatCard
-            icon={<MousePointer2 className="w-5 h-5" />}
-            title={t("stats.visits")}
-            value={stats?.visites}
-            locale={localeString}
-          />
-        )}
-        {stats?.pagesVues && (
-          <StatCard
-            icon={<Eye className="w-5 h-5" />}
-            title={t("stats.views")}
-            value={stats?.pagesVues}
-            locale={localeString}
-          />
+        <FreshnessSection data={freshness}>
+          <TacheCharts data={taches} />
+        </FreshnessSection>
+
+        {(apiUsage || apiHistory.length > 0) && <ApiSection usage={apiUsage} history={apiHistory} />}
+
+        {(bot || botHistory.length > 0) && <BotSection bot={bot} history={botHistory} />}
+
+        {geo && geo.top.length > 0 && (
+          <GeoSection data={geo} visits={stats?.visites} views={stats?.pagesVues} />
         )}
       </div>
-
-      <TacheCharts data={taches} />
-
-      <RegionStatsTable data={regionStats} locale={localeString} />
-    </motion.div>
+    </PageContainer>
   );
 }
 
@@ -551,7 +561,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 <Line
                   type="monotone"
                   dataKey="deltaCompositions"
-                  stroke="#10b981"
+                  stroke="hsl(var(--chart-2))"
                   strokeWidth={3}
                   name={t("charts.labels.compositions")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
@@ -560,7 +570,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 <Line
                   type="monotone"
                   dataKey="deltaCategories"
-                  stroke="#f59e0b"
+                  stroke="hsl(var(--chart-4))"
                   strokeWidth={3}
                   name={t("charts.labels.categories")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
@@ -569,7 +579,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 <Line
                   type="monotone"
                   dataKey="deltaRepas"
-                  stroke="#ef4444"
+                  stroke="hsl(var(--chart-1))"
                   strokeWidth={3}
                   name={t("charts.labels.repas")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
@@ -578,7 +588,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 <Line
                   type="monotone"
                   dataKey="deltaPlats"
-                  stroke="#6366f1"
+                  stroke="hsl(var(--chart-3))"
                   strokeWidth={3}
                   name={t("charts.labels.plats")}
                   dot={(props: DotProps) => <CustomDot {...props} />}
@@ -618,8 +628,8 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
               >
                 <defs>
                   <linearGradient id="colorRequests" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#d946ef" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#d946ef" stopOpacity={0} />
+                    <stop offset="5%" stopColor="hsl(var(--chart-5))" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="hsl(var(--chart-5))" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground) / 0.1)" />
@@ -640,7 +650,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 />
                 <YAxis hide />
                 <Tooltip
-                  cursor={{ stroke: "#d946ef", strokeWidth: 2 }}
+                  cursor={{ stroke: "hsl(var(--chart-5))", strokeWidth: 2 }}
                   content={
                     <CustomTooltip
                       locale={locale as "en" | "fr"}
@@ -655,7 +665,7 @@ const TacheCharts = ({ data }: { data: Tache[] }) => {
                 <Area
                   type="monotone"
                   dataKey="requetes"
-                  stroke="#d946ef"
+                  stroke="hsl(var(--chart-5))"
                   strokeWidth={3}
                   fillOpacity={1}
                   fill="url(#colorRequests)"

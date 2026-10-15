@@ -1,6 +1,18 @@
 "use server";
 
-import { Tache, GlobalStats, ApiResult, Plat, RegionStats } from "./types";
+import {
+  Tache,
+  GlobalStats,
+  ApiResult,
+  Plat,
+  RegionStats,
+  ApiUsageStats,
+  ApiUsageDay,
+  BotStats,
+  BotStatsDay,
+  GeoStats,
+  DataFreshness,
+} from "./types";
 import { apiRequest } from "./api-request";
 
 /**
@@ -63,5 +75,62 @@ export async function getLast100Dishes(): Promise<ApiResult<Plat[]>> {
   });
 }
 
+/**
+ * Fetches how fresh the menus are: the last update task and recent activity.
+ */
+export async function getDataFreshness(): Promise<ApiResult<DataFreshness>> {
+  return await apiRequest<DataFreshness>({
+    endpoint: "stats/taches",
+    method: "GET",
+  });
+}
 
+/**
+ * Fetches the public API usage since tracking started, with its busiest routes.
+ */
+export async function getApiUsage(): Promise<ApiResult<ApiUsageStats>> {
+  return await apiRequest<ApiUsageStats>({
+    endpoint: "stats/api",
+    method: "GET",
+  });
+}
 
+/**
+ * Fetches the daily public API usage over the last 30 days.
+ */
+export async function getApiUsageHistory(): Promise<ApiResult<ApiUsageDay[]>> {
+  return await apiRequest<ApiUsageDay[]>({
+    endpoint: "stats/api/history?jours=30",
+    method: "GET",
+  });
+}
+
+/**
+ * Fetches the Discord bot's status and current figures.
+ */
+export async function getBotStats(): Promise<ApiResult<BotStats>> {
+  return await apiRequest<BotStats>({
+    endpoint: "stats/bot",
+    method: "GET",
+  });
+}
+
+/**
+ * Fetches the Discord bot's daily figures over the last 30 days.
+ */
+export async function getBotStatsHistory(): Promise<ApiResult<BotStatsDay[]>> {
+  return await apiRequest<BotStatsDay[]>({
+    endpoint: "stats/bot/history?jours=30",
+    method: "GET",
+  });
+}
+
+/**
+ * Fetches the cities the site is most visited from.
+ */
+export async function getGeoStats(): Promise<ApiResult<GeoStats>> {
+  return await apiRequest<GeoStats>({
+    endpoint: "stats/geo",
+    method: "GET",
+  });
+}
