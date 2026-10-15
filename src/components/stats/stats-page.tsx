@@ -46,7 +46,7 @@ import { formatToISODate } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { Stat, StatDescription, StatTitle } from "@/components/ui/stat";
 import { PageContainer, PageHeader } from "@/components/page-layout";
-import { Activity, Database, Menu, Utensils, Hash, MapPin, MousePointer2, Eye, LayoutGrid, Search } from "lucide-react";
+import { Activity, Database, Menu, Utensils, Hash, MapPin, LayoutGrid, Search } from "lucide-react";
 import { useState } from "react";
 
 interface StatsPageProps {
@@ -230,22 +230,6 @@ export default function StatsPage({
               value={stats?.regions ?? 0}
               locale={localeString}
             />
-            {stats?.visites && (
-              <StatCard
-                icon={<MousePointer2 className="w-5 h-5" />}
-                title={t("stats.visits")}
-                value={stats?.visites}
-                locale={localeString}
-              />
-            )}
-            {stats?.pagesVues && (
-              <StatCard
-                icon={<Eye className="w-5 h-5" />}
-                title={t("stats.views")}
-                value={stats?.pagesVues}
-                locale={localeString}
-              />
-            )}
           </div>
 
           <RegionStatsTable data={regionStats} locale={localeString} />
@@ -259,7 +243,9 @@ export default function StatsPage({
 
         {(bot || botHistory.length > 0) && <BotSection bot={bot} history={botHistory} />}
 
-        {geo && geo.top.length > 0 && <GeoSection data={geo} />}
+        {geo && geo.top.length > 0 && (
+          <GeoSection data={geo} visits={stats?.visites} views={stats?.pagesVues} />
+        )}
       </div>
     </PageContainer>
   );

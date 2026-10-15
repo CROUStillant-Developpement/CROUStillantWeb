@@ -958,7 +958,6 @@
     "geo": {
       "title": "D'où consulte-t-on CROUStillant ?",
       "description": "Les villes d'où le site est le plus consulté.",
-      "sessions": "Sessions",
       "cities": "Villes",
       "share": "{value} % des sessions",
       "topTitle": "Top {count} des villes"

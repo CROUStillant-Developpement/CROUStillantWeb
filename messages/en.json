@@ -957,7 +957,6 @@
     "geo": {
       "title": "Where is CROUStillant used?",
       "description": "The cities the website is visited from the most.",
-      "sessions": "Sessions",
       "cities": "Cities",
       "share": "{value}% of sessions",
       "topTitle": "Top {count} cities"

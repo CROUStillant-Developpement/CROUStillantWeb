@@ -18,12 +18,14 @@ import {
   CalendarClock,
   CheckCircle2,
   Clock,
+  Eye,
   Gauge,
   Globe2,
   Hash,
   Layers,
   MapPin,
   MessageSquare,
+  MousePointer2,
   RefreshCw,
   Server,
   Timer,
@@ -544,7 +546,16 @@ export function BotSection({ bot, history }: { bot: BotStats | null; history: Bo
 
 const GEO_TOP = 10;
 
-export function GeoSection({ data }: { data: GeoStats }) {
+export function GeoSection({
+  data,
+  visits,
+  views,
+}: {
+  data: GeoStats;
+  /** Site visits and page views (Umami), shown beside the cities. */
+  visits?: number;
+  views?: number;
+}) {
   const t = useTranslations("StatsPage");
   const locale = useNumberLocale();
   const top = data.top.slice(0, GEO_TOP);
@@ -554,8 +565,13 @@ export function GeoSection({ data }: { data: GeoStats }) {
     <StatsSection icon={<Globe2 className="w-5 h-5" />} title={t("geo.title")} description={t("geo.description")}>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-          <StatTile icon={<Globe2 className="w-5 h-5" />} title={t("geo.sessions")} value={data.sessions.toLocaleString(locale)} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+          {visits ? (
+            <StatTile icon={<MousePointer2 className="w-5 h-5" />} title={t("stats.visits")} value={visits.toLocaleString(locale)} />
+          ) : null}
+          {views ? (
+            <StatTile icon={<Eye className="w-5 h-5" />} title={t("stats.views")} value={views.toLocaleString(locale)} />
+          ) : null}
           <StatTile icon={<MapPin className="w-5 h-5" />} title={t("geo.cities")} value={data.villes.toLocaleString(locale)} />
         </div>
 
