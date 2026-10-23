@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM alpine:3.22 AS base
+FROM node:24-alpine AS base
 
 # Next.js app lives here
 WORKDIR /app
@@ -14,7 +14,7 @@ ENV API_URL=${API_URL}
 FROM base AS build
 
 # Install packages needed to build node modules
-RUN apk -U add --no-cache build-base gyp pkgconfig python3 nodejs npm
+RUN apk add --no-cache build-base pkgconfig python3
 
 # Install node modules
 COPY --link package-lock.json package.json ./
@@ -38,10 +38,9 @@ FROM base AS run
 # Set production environment
 ENV NODE_ENV="production"
 
-# Install node.js. Alpine's nodejs only ships English ICU data by default, so
-# every date rendered on the server ("Menu du Friday, Sep 25") came out in
-# English on /fr pages; icu-data-full gives Intl the French locale.
-RUN apk add --no-cache nodejs icu-data-full
+# The official node image is built with full ICU, so Intl has the French
+# locale and dates on /fr pages render in French (Alpine's own nodejs package
+# needed icu-data-full for that).
 
 # The standalone server needs no write access to its own files, so run it as an
 # unprivileged user rather than root.
