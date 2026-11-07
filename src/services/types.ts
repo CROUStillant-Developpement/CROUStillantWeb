@@ -76,12 +76,59 @@ export interface Ouverture {
   soir: boolean; // Open in the evening
 }
 
+// Dish type, as classified by croustillant-classifier
+export type TypePlat =
+  | "ENTREE"
+  | "PLAT"
+  | "ACCOMPAGNEMENT"
+  | "DESSERT"
+  | "FROMAGE"
+  | "BOISSON"
+  | "FORMULE"
+  | "AUTRE";
+
+// Nature of a raw label: a dish, an information line ("Fermé"), or noise
+export type NaturePlat = "DISH" | "INFO" | "JUNK" | "ALLERGENS" | "PRICE";
+
+// Types for AllergeneDeclare
+export interface AllergeneDeclare {
+  code: string; // Allergen code (EU regulation 1169/2011), e.g. "GLUTEN"
+  libelle: string; // Allergen label (French, from the API)
+  source: string; // Origin of the information ("CROUS": declared in the label)
+  verifie: boolean; // Whether the information is verified
+}
+
+// Types for ComposantPlat
+export interface ComposantPlat {
+  code: number; // Canonical dish identifier
+  libelle: string; // Canonical dish label
+  type: TypePlat; // Type where it is served
+  type_defaut: TypePlat; // Default type of the canonical dish
+  vegetarien: boolean; // Announced as vegetarian
+}
+
+// Types for AnalysePlat (null/absent when the dish has not been analysed yet)
+export interface AnalysePlat {
+  nature: NaturePlat; // Nature of the label
+  type_info: string | null; // Kind of information when nature = INFO
+  libelle: string | null; // Clean label (without points, prices, allergen codes...)
+  type: TypePlat | null; // Type of the main component where it is served
+  points: number | null; // Cost in points
+  prix: number[]; // Prices written in the label (€)
+  allergenes_declares: AllergeneDeclare[]; // Allergens declared in the label
+  vegetarien: boolean; // Announced as vegetarian
+  origines: string[]; // Announced origins (raw, not displayed)
+  labels: string[]; // Announced labels (bio, maison, label rouge...)
+  composants: ComposantPlat[]; // Canonical dishes in the label
+}
+
 // Types for Plat
 export interface Plat {
   code: string; // Dish identifier
   libelle: string; // Dish label
   ordre?: number; // Position of the dish within the category
   total?: number; // Total number of occurrences of the dish
+  analyse?: AnalysePlat | null; // Label analysis (menus only)
 }
 
 // Types for Categorie

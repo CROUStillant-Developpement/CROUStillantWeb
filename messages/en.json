@@ -356,6 +356,51 @@
     "followDish": "Follow {dish}",
     "unfollowDish": "Unfollow {dish}"
   },
+  "DishTags": {
+    "types": {
+      "ENTREE": "Starter",
+      "PLAT": "Main course",
+      "ACCOMPAGNEMENT": "Side",
+      "DESSERT": "Dessert",
+      "FROMAGE": "Cheese",
+      "BOISSON": "Drink",
+      "FORMULE": "Set menu"
+    },
+    "vegetarian": "Vegetarian",
+    "labels": {
+      "bio": "Organic",
+      "maison": "Homemade",
+      "labelRouge": "Label Rouge",
+      "bleuBlancCoeur": "Bleu-Blanc-Cœur",
+      "msc": "MSC",
+      "asc": "ASC",
+      "aop": "PDO",
+      "igp": "PGI",
+      "halal": "Halal",
+      "sansPorc": "Pork-free"
+    },
+    "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "allergensLabel": "Declared allergens: {allergens}",
+    "allergens": {
+      "title": "{count, plural, one {# allergen} other {# allergens}}",
+      "declared": "Allergens declared by the restaurant",
+      "disclaimer": "For guidance only: if you have an allergy, ask the restaurant staff to confirm.",
+      "GLUTEN": "Cereals containing gluten",
+      "CRUSTACES": "Crustaceans",
+      "OEUFS": "Eggs",
+      "POISSONS": "Fish",
+      "ARACHIDES": "Peanuts",
+      "SOJA": "Soybeans",
+      "LAIT": "Milk",
+      "FRUITS_A_COQUE": "Tree nuts",
+      "CELERI": "Celery",
+      "MOUTARDE": "Mustard",
+      "SESAME": "Sesame seeds",
+      "SULFITES": "Sulphur dioxide and sulphites",
+      "LUPIN": "Lupin",
+      "MOLLUSQUES": "Molluscs"
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Made by students, for students...",

@@ -356,6 +356,51 @@
     "followDish": "Suivre {dish}",
     "unfollowDish": "Ne plus suivre {dish}"
   },
+  "DishTags": {
+    "types": {
+      "ENTREE": "Entrée",
+      "PLAT": "Plat",
+      "ACCOMPAGNEMENT": "Accompagnement",
+      "DESSERT": "Dessert",
+      "FROMAGE": "Fromage",
+      "BOISSON": "Boisson",
+      "FORMULE": "Formule"
+    },
+    "vegetarian": "Végétarien",
+    "labels": {
+      "bio": "Bio",
+      "maison": "Fait maison",
+      "labelRouge": "Label Rouge",
+      "bleuBlancCoeur": "Bleu-Blanc-Cœur",
+      "msc": "MSC",
+      "asc": "ASC",
+      "aop": "AOP",
+      "igp": "IGP",
+      "halal": "Halal",
+      "sansPorc": "Sans porc"
+    },
+    "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "allergensLabel": "Allergènes déclarés : {allergens}",
+    "allergens": {
+      "title": "{count, plural, one {# allergène} other {# allergènes}}",
+      "declared": "Allergènes déclarés par le restaurant",
+      "disclaimer": "Liste indicative : en cas d'allergie, demandez confirmation au personnel du restaurant.",
+      "GLUTEN": "Céréales contenant du gluten",
+      "CRUSTACES": "Crustacés",
+      "OEUFS": "Œufs",
+      "POISSONS": "Poissons",
+      "ARACHIDES": "Arachides",
+      "SOJA": "Soja",
+      "LAIT": "Lait",
+      "FRUITS_A_COQUE": "Fruits à coque",
+      "CELERI": "Céleri",
+      "MOUTARDE": "Moutarde",
+      "SESAME": "Graines de sésame",
+      "SULFITES": "Dioxyde de soufre et sulfites",
+      "LUPIN": "Lupin",
+      "MOLLUSQUES": "Mollusques"
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Créé par des étudiants, pour des étudiants...",
