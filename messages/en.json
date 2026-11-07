@@ -356,6 +356,52 @@
     "followDish": "Follow {dish}",
     "unfollowDish": "Unfollow {dish}"
   },
+  "DishTags": {
+    "types": {
+      "ENTREE": "Starter",
+      "PLAT": "Main course",
+      "ACCOMPAGNEMENT": "Side",
+      "DESSERT": "Dessert",
+      "FROMAGE": "Cheese",
+      "BOISSON": "Drink",
+      "FORMULE": "Set menu"
+    },
+    "vegetarian": "Vegetarian",
+    "labels": {
+      "bio": "Organic",
+      "maison": "Homemade",
+      "labelRouge": "Label Rouge",
+      "bleuBlancCoeur": "Bleu-Blanc-Cœur",
+      "msc": "MSC",
+      "asc": "ASC",
+      "aop": "PDO",
+      "igp": "PGI",
+      "halal": "Halal",
+      "sansPorc": "Pork-free"
+    },
+    "originLabel": "Origin: {origins}",
+    "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "allergensLabel": "Declared allergens: {allergens}",
+    "allergens": {
+      "title": "{count, plural, one {# allergen} other {# allergens}}",
+      "declared": "Allergens declared by the restaurant",
+      "disclaimer": "For guidance only: if you have an allergy, ask the restaurant staff to confirm.",
+      "GLUTEN": "Cereals containing gluten",
+      "CRUSTACES": "Crustaceans",
+      "OEUFS": "Eggs",
+      "POISSONS": "Fish",
+      "ARACHIDES": "Peanuts",
+      "SOJA": "Soybeans",
+      "LAIT": "Milk",
+      "FRUITS_A_COQUE": "Tree nuts",
+      "CELERI": "Celery",
+      "MOUTARDE": "Mustard",
+      "SESAME": "Sesame seeds",
+      "SULFITES": "Sulphur dioxide and sulphites",
+      "LUPIN": "Lupin",
+      "MOLLUSQUES": "Molluscs"
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Made by students, for students...",
@@ -978,14 +1024,16 @@
     },
     "noResults": "No dish found for this search 😢",
     "top100": "Top dishes",
-    "top100Description": "Discover the top 100 dishes added to the platform.",
+    "top100Description": "The 100 dishes served most often in CROUS restaurants, whatever the spelling.",
     "last100": "Last dishes added",
-    "last100Description": "Discover the last 100 dishes added to the platform.",
+    "last100Description": "The 100 dishes most recently found in the menus.",
     "ranking": "Ranking",
     "code": "Code",
     "label": "Label",
     "occurrences": "Occurrences",
-    "search": "Search for a dish..."
+    "search": "Search for a dish...",
+    "filterByType": "Filter by dish type",
+    "allTypes": "All"
   },
   "LegalPage": {
     "title": "Legal notices",
