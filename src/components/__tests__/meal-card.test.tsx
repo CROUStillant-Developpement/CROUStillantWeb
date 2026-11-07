@@ -39,6 +39,7 @@ const meal: Categorie = {
         type: "PLAT",
         vegetarien: true,
         labels: ["bio"],
+        origines: ["Union Europeenne & Royaume Uni", "Ine"],
         points: 4,
         allergenes_declares: [
           { code: "GLUTEN", libelle: "Céréales contenant du gluten", source: "CROUS", verifie: true },
@@ -77,6 +78,7 @@ describe("MealCard dish tags", () => {
       "Plat",
       "Végétarien",
       "Bio",
+      "Union européenne et Royaume-Uni",
       "2 allergènes",
       "4 pts",
     ]);

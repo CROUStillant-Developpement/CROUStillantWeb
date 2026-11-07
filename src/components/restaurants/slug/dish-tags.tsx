@@ -4,8 +4,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { getDishTags, type DishTag } from "@/lib/dish-tags";
 import { cn } from "@/lib/utils";
 import type { Plat } from "@/services/types";
-import { Leaf, TriangleAlert } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { Leaf, MapPin, TriangleAlert } from "lucide-react";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 
 const TAG_CLASS =
   "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold leading-4 normal-case";
@@ -47,9 +47,25 @@ function tagKey(tag: DishTag): string {
   }
 }
 
+// One Intl.DisplayNames per locale (country names in the user's language)
+const regionNamesCache = new Map<string, Intl.DisplayNames | null>();
+function regionNames(locale: string): Intl.DisplayNames | null {
+  if (!regionNamesCache.has(locale)) {
+    let names: Intl.DisplayNames | null = null;
+    try {
+      names = new Intl.DisplayNames([locale], { type: "region" });
+    } catch {
+      // very old browsers: fall back to the region codes
+    }
+    regionNamesCache.set(locale, names);
+  }
+  return regionNamesCache.get(locale) ?? null;
+}
+
 function Tag({ tag }: { tag: DishTag }) {
   const t = useTranslations("DishTags");
   const format = useFormatter();
+  const locale = useLocale();
 
   switch (tag.kind) {
     case "type":
@@ -65,6 +81,17 @@ function Tag({ tag }: { tag: DishTag }) {
 
     case "label":
       return <span className={NEUTRAL_TAG_CLASS}>{t(`labels.${tag.label}`)}</span>;
+
+    case "origin": {
+      const names = tag.origins.map((code) => regionNames(locale)?.of(code) ?? code);
+      const list = format.list(names);
+      return (
+        <span className={NEUTRAL_TAG_CLASS} aria-label={t("originLabel", { origins: list })}>
+          <MapPin className="h-3 w-3" aria-hidden="true" />
+          {list}
+        </span>
+      );
+    }
 
     case "points":
       return (

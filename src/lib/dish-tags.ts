@@ -22,10 +22,75 @@ const QUALITY_LABELS = {
 
 export type QualityLabel = (typeof QUALITY_LABELS)[keyof typeof QUALITY_LABELS];
 
+/**
+ * Origins shown as tags, as region codes (CLDR: ISO 3166 plus "EU"), so that
+ * `Intl.DisplayNames` names them in the user's language. The API returns the
+ * origins as extracted from the menus, with noise ("Ine", "An", "S France",
+ * "Polgne"): only the values below are shown, the rest is ignored.
+ * Keys are folded (lower case, no accents).
+ */
+const ORIGINS: Record<string, string> = {
+  france: "FR",
+  reunion: "RE",
+  "la reunion": "RE",
+  "union europeenne": "EU",
+  ue: "EU",
+  europe: "EU",
+  pologne: "PL",
+  espagne: "ES",
+  irlande: "IE",
+  allemagne: "DE",
+  italie: "IT",
+  hongrie: "HU",
+  chine: "CN",
+  ukraine: "UA",
+  "republique tcheque": "CZ",
+  belgique: "BE",
+  portugal: "PT",
+  bulgarie: "BG",
+  "pays-bas": "NL",
+  "pays bas": "NL",
+  "royaume uni": "GB",
+  "royaume-uni": "GB",
+  argentine: "AR",
+  chili: "CL",
+  "nouvelle zelande": "NZ",
+  "nouvelle-zelande": "NZ",
+};
+
+function fold(value: string): string {
+  return value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().trim();
+}
+
+/**
+ * The origins of a dish as region codes, without duplicates and in the order
+ * they were announced. "Union Europeenne & Royaume Uni" gives EU and GB; a
+ * leading "Du porc", "Du poulet" or "Ou provenance" (extraction leftovers) is
+ * dropped; unknown values are ignored.
+ *
+ * @param origines - The origins returned by the API.
+ * @returns The region codes.
+ */
+export function getOriginCodes(origines: string[] | undefined | null): string[] {
+  const codes = new Set<string>();
+  for (const raw of origines ?? []) {
+    for (const part of fold(raw).split(/\s*(?:&|\/|,|\bet\b)\s*/)) {
+      const name = part
+        .replace(/^[:\s-]+/, "")
+        .replace(/^(?:ou\s+provenance|du\s+(?:porc|poulet|boeuf|veau|canard))\s+/, "")
+        .trim();
+      const code = ORIGINS[name];
+      if (code) codes.add(code);
+    }
+  }
+  return [...codes];
+}
+
 export type DishTag =
   | { kind: "type"; type: Exclude<TypePlat, "AUTRE"> }
   | { kind: "vegetarian" }
   | { kind: "label"; label: QualityLabel }
+  | { kind: "origin"; origins: string[] }
   | { kind: "allergens"; allergens: AllergeneDeclare[] }
   | { kind: "points"; points: number };
 
@@ -77,7 +142,7 @@ export function getDishType(plat: Plat): TypePlat | null {
 
 /**
  * The tags of a dish, in display order: type first, then vegetarian, quality
- * labels, declared allergens and points.
+ * labels, origin, declared allergens and points.
  *
  * A canonical dish (/plats, /plats/top) only carries its type and whether it is
  * vegetarian; a dish served in a menu carries the full analysis.
@@ -112,6 +177,11 @@ export function getDishTags(plat: Plat): DishTag[] {
   }
   for (const label of labels) {
     tags.push({ kind: "label", label });
+  }
+
+  const origins = getOriginCodes(analyse.origines);
+  if (origins.length) {
+    tags.push({ kind: "origin", origins });
   }
 
   if (analyse.allergenes_declares?.length) {

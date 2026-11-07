@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getDishName, getDishTags, getDishType, isInfoLine, isNoise } from "@/lib/dish-tags";
+import { getDishName, getDishTags, getDishType, getOriginCodes, isInfoLine, isNoise } from "@/lib/dish-tags";
 import type { AnalysePlat, Plat } from "@/services/types";
 
 function makeAnalyse(overrides: Partial<AnalysePlat> = {}): AnalysePlat {
@@ -51,6 +51,26 @@ describe("isInfoLine / isNoise", () => {
   });
 });
 
+describe("getOriginCodes", () => {
+  it("maps the announced origins to region codes", () => {
+    expect(getOriginCodes(["France"])).toEqual(["FR"]);
+    expect(getOriginCodes(["Reunion", ":Reunion"])).toEqual(["RE"]);
+    expect(getOriginCodes(["Union européenne", "Ue", "Europe"])).toEqual(["EU"]);
+    expect(getOriginCodes(["Republique Tcheque", "Nouvelle Zelande"])).toEqual(["CZ", "NZ"]);
+  });
+
+  it("splits combined origins and drops extraction leftovers", () => {
+    expect(getOriginCodes(["Union Europeenne & Royaume Uni"])).toEqual(["EU", "GB"]);
+    expect(getOriginCodes(["Espagne & Italie"])).toEqual(["ES", "IT"]);
+    expect(getOriginCodes(["Du Porc France", "Ou Provenance France"])).toEqual(["FR"]);
+  });
+
+  it("ignores noise", () => {
+    expect(getOriginCodes(["Ine", "An", "S France", "Polgne", "Tarn", "Du Boeuf"])).toEqual([]);
+    expect(getOriginCodes(undefined)).toEqual([]);
+  });
+});
+
 describe("getDishType", () => {
   it("uses the analysis in menus and the canonical type elsewhere", () => {
     expect(getDishType(makePlat(makeAnalyse({ type: "ENTREE" })))).toBe("ENTREE");
@@ -61,13 +81,14 @@ describe("getDishType", () => {
 });
 
 describe("getDishTags", () => {
-  it("returns the tags in display order: type, vegetarian, labels, allergens, points", () => {
+  it("returns the tags in display order: type, vegetarian, labels, origin, allergens, points", () => {
     const allergen = { code: "LAIT", libelle: "Lait", source: "CROUS", verifie: true };
     const tags = getDishTags(
       makePlat(
         makeAnalyse({
           vegetarien: true,
           labels: ["bio", "Maison"],
+          origines: ["France", "Ine"],
           allergenes_declares: [allergen],
           points: 4,
         })
@@ -79,6 +100,7 @@ describe("getDishTags", () => {
       { kind: "vegetarian" },
       { kind: "label", label: "bio" },
       { kind: "label", label: "maison" },
+      { kind: "origin", origins: ["FR"] },
       { kind: "allergens", allergens: [allergen] },
       { kind: "points", points: 4 },
     ]);

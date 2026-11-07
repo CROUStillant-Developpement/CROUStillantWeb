@@ -379,6 +379,7 @@
       "halal": "Halal",
       "sansPorc": "Pork-free"
     },
+    "originLabel": "Origin: {origins}",
     "points": "{formatted} {points, plural, one {pt} other {pts}}",
     "allergensLabel": "Declared allergens: {allergens}",
     "allergens": {
