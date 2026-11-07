@@ -129,6 +129,10 @@ export interface Plat {
   ordre?: number; // Position of the dish within the category
   total?: number; // Total number of occurrences of the dish
   analyse?: AnalysePlat | null; // Label analysis (menus only)
+  // Canonical dishes (/plats, /plats/top): `code` is then the canonical dish identifier
+  type?: TypePlat; // Default type of the canonical dish
+  vegetarien?: boolean; // Announced as vegetarian
+  verifie?: boolean; // Type checked by hand
 }
 
 // Types for Categorie

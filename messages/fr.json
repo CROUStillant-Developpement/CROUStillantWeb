@@ -1023,15 +1023,17 @@
       "keywords": "CROUS, restaurant, menu, plat, plats"
     },
     "noResults": "Aucun plat trouvé pour cette recherche 😢",
-    "top100": "Top des plats ajoutés",
-    "top100Description": "Découvrez les 100 plats les plus ajoutés à la plateforme.",
+    "top100": "Top des plats",
+    "top100Description": "Les 100 plats les plus servis dans les restaurants CROUS, toutes écritures confondues.",
     "last100": "Derniers plats ajoutés",
-    "last100Description": "Découvrez les 100 derniers plats ajoutés à la plateforme.",
+    "last100Description": "Les 100 derniers plats découverts dans les menus.",
     "ranking": "Classement",
     "code": "Code",
     "label": "Libellé",
     "occurrences": "Occurrences",
-    "search": "Rechercher un plat..."
+    "search": "Rechercher un plat...",
+    "filterByType": "Filtrer par type de plat",
+    "allTypes": "Tous"
   },
   "LegalPage": {
     "title": "Notice légale",

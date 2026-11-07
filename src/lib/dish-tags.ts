@@ -64,15 +64,36 @@ export function isNoise(plat: Plat): boolean {
 }
 
 /**
+ * The type to filter or tag a dish with: the type where it is served (menus) or
+ * the default type of the canonical dish (/plats, /plats/top).
+ *
+ * @param plat - The dish.
+ * @returns The type, or `null` when unknown.
+ */
+export function getDishType(plat: Plat): TypePlat | null {
+  if (plat.analyse) return plat.analyse.nature === "DISH" ? plat.analyse.type : null;
+  return plat.type ?? null;
+}
+
+/**
  * The tags of a dish, in display order: type first, then vegetarian, quality
  * labels, declared allergens and points.
+ *
+ * A canonical dish (/plats, /plats/top) only carries its type and whether it is
+ * vegetarian; a dish served in a menu carries the full analysis.
  *
  * @param plat - The dish.
  * @returns The tags (empty when the dish has not been analysed or is not a dish).
  */
 export function getDishTags(plat: Plat): DishTag[] {
   const analyse = plat.analyse;
-  if (!analyse || analyse.nature !== "DISH") return [];
+  if (!analyse) {
+    const tags: DishTag[] = [];
+    if (plat.type && plat.type !== "AUTRE") tags.push({ kind: "type", type: plat.type });
+    if (plat.vegetarien) tags.push({ kind: "vegetarian" });
+    return tags;
+  }
+  if (analyse.nature !== "DISH") return [];
 
   const tags: DishTag[] = [];
 

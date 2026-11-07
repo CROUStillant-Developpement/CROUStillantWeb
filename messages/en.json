@@ -1023,14 +1023,16 @@
     },
     "noResults": "No dish found for this search 😢",
     "top100": "Top dishes",
-    "top100Description": "Discover the top 100 dishes added to the platform.",
+    "top100Description": "The 100 dishes served most often in CROUS restaurants, whatever the spelling.",
     "last100": "Last dishes added",
-    "last100Description": "Discover the last 100 dishes added to the platform.",
+    "last100Description": "The 100 dishes most recently found in the menus.",
     "ranking": "Ranking",
     "code": "Code",
     "label": "Label",
     "occurrences": "Occurrences",
-    "search": "Search for a dish..."
+    "search": "Search for a dish...",
+    "filterByType": "Filter by dish type",
+    "allTypes": "All"
   },
   "LegalPage": {
     "title": "Legal notices",

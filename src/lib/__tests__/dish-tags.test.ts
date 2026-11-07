@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getDishName, getDishTags, isInfoLine, isNoise } from "@/lib/dish-tags";
+import { getDishName, getDishTags, getDishType, isInfoLine, isNoise } from "@/lib/dish-tags";
 import type { AnalysePlat, Plat } from "@/services/types";
 
 function makeAnalyse(overrides: Partial<AnalysePlat> = {}): AnalysePlat {
@@ -51,6 +51,15 @@ describe("isInfoLine / isNoise", () => {
   });
 });
 
+describe("getDishType", () => {
+  it("uses the analysis in menus and the canonical type elsewhere", () => {
+    expect(getDishType(makePlat(makeAnalyse({ type: "ENTREE" })))).toBe("ENTREE");
+    expect(getDishType(makePlat(makeAnalyse({ nature: "INFO", type: "PLAT" })))).toBeNull();
+    expect(getDishType({ code: "2", libelle: "Fruits", type: "DESSERT" })).toBe("DESSERT");
+    expect(getDishType({ code: "2", libelle: "Fruits" })).toBeNull();
+  });
+});
+
 describe("getDishTags", () => {
   it("returns the tags in display order: type, vegetarian, labels, allergens, points", () => {
     const allergen = { code: "LAIT", libelle: "Lait", source: "CROUS", verifie: true };
@@ -86,6 +95,15 @@ describe("getDishTags", () => {
     expect(getDishTags(makePlat(makeAnalyse({ nature: "INFO", vegetarien: true })))).toEqual([]);
     expect(getDishTags(makePlat(undefined))).toEqual([]);
     expect(getDishTags(makePlat(null))).toEqual([]);
+  });
+
+  it("tags canonical dishes (/plats, /plats/top) with their type and vegetarian flag", () => {
+    expect(getDishTags({ code: "2", libelle: "Fruits", type: "DESSERT", vegetarien: false })).toEqual([
+      { kind: "type", type: "DESSERT" },
+    ]);
+    expect(getDishTags({ code: "3", libelle: "Galette", type: "AUTRE", vegetarien: true })).toEqual([
+      { kind: "vegetarian" },
+    ]);
   });
 
   it("keeps half points", () => {
