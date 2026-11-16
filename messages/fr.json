@@ -356,6 +356,52 @@
     "followDish": "Suivre {dish}",
     "unfollowDish": "Ne plus suivre {dish}"
   },
+  "DishTags": {
+    "types": {
+      "ENTREE": "Entrée",
+      "PLAT": "Plat",
+      "ACCOMPAGNEMENT": "Accompagnement",
+      "DESSERT": "Dessert",
+      "FROMAGE": "Fromage",
+      "BOISSON": "Boisson",
+      "FORMULE": "Formule"
+    },
+    "vegetarian": "Végétarien",
+    "labels": {
+      "bio": "Bio",
+      "maison": "Fait maison",
+      "labelRouge": "Label Rouge",
+      "bleuBlancCoeur": "Bleu-Blanc-Cœur",
+      "msc": "MSC",
+      "asc": "ASC",
+      "aop": "AOP",
+      "igp": "IGP",
+      "halal": "Halal",
+      "sansPorc": "Sans porc"
+    },
+    "originLabel": "Origine : {origins}",
+    "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "allergensLabel": "Allergènes déclarés : {allergens}",
+    "allergens": {
+      "title": "{count, plural, one {# allergène} other {# allergènes}}",
+      "declared": "Allergènes déclarés par le restaurant",
+      "disclaimer": "Liste indicative : en cas d'allergie, demandez confirmation au personnel du restaurant.",
+      "GLUTEN": "Céréales contenant du gluten",
+      "CRUSTACES": "Crustacés",
+      "OEUFS": "Œufs",
+      "POISSONS": "Poissons",
+      "ARACHIDES": "Arachides",
+      "SOJA": "Soja",
+      "LAIT": "Lait",
+      "FRUITS_A_COQUE": "Fruits à coque",
+      "CELERI": "Céleri",
+      "MOUTARDE": "Moutarde",
+      "SESAME": "Graines de sésame",
+      "SULFITES": "Dioxyde de soufre et sulfites",
+      "LUPIN": "Lupin",
+      "MOLLUSQUES": "Mollusques"
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Créé par des étudiants, pour des étudiants...",
@@ -978,15 +1024,17 @@
       "keywords": "CROUS, restaurant, menu, plat, plats"
     },
     "noResults": "Aucun plat trouvé pour cette recherche 😢",
-    "top100": "Top des plats ajoutés",
-    "top100Description": "Découvrez les 100 plats les plus ajoutés à la plateforme.",
+    "top100": "Top des plats",
+    "top100Description": "Les 100 plats les plus servis dans les restaurants CROUS, toutes écritures confondues.",
     "last100": "Derniers plats ajoutés",
-    "last100Description": "Découvrez les 100 derniers plats ajoutés à la plateforme.",
+    "last100Description": "Les 100 derniers plats découverts dans les menus.",
     "ranking": "Classement",
     "code": "Code",
     "label": "Libellé",
     "occurrences": "Occurrences",
-    "search": "Rechercher un plat..."
+    "search": "Rechercher un plat...",
+    "filterByType": "Filtrer par type de plat",
+    "allTypes": "Tous"
   },
   "LegalPage": {
     "title": "Notice légale",

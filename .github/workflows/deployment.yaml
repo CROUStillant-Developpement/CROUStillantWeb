@@ -33,7 +33,7 @@ jobs:
           raw-data: ./notifications/prd-discord-notification-start.json
 
       - name: Log in to the Container registry
-        uses: docker/login-action@d3b9cdfa580156c018ca5e745c1bf653d8ea46b5
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
