@@ -33,7 +33,7 @@ jobs:
           raw-data: ./notifications/dev-discord-notification-start.json
 
       - name: Log in to the Container registry
-        uses: docker/login-action@d3b9cdfa580156c018ca5e745c1bf653d8ea46b5
+        uses: docker/login-action@d0b8297dd55199249f38268efae35fcb03f75aab
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
