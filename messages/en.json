@@ -249,7 +249,7 @@
     "errorDescription": "An error occurred while fetching this restaurant's activity. Please try again later."
   },
   "RestaurantInsights": {
-    "period": "Stats from {debut} to {fin} (current school year)",
+    "period": "School year · {periode}",
     "daysWithMenu": "Days with menu",
     "daysWithoutMenu": "Days without menu",
     "coverageRate": "Coverage rate",

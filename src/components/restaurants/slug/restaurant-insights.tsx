@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import {
   Card,
   CardContent,
@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import {
   CalendarCheck,
+  CalendarRange,
   CalendarX,
   TrendingUp,
   ChefHat,
@@ -43,7 +44,7 @@ interface RestaurantInsightsProps {
 export default function RestaurantInsights({ restaurantCode }: RestaurantInsightsProps) {
   const t = useTranslations("RestaurantInsights");
   const tDays = useTranslations("RestaurantInformation");
-  const locale = useLocale();
+  const format = useFormatter();
 
   const { insights, loading, error } = useRestaurantInsights(restaurantCode);
 
@@ -90,11 +91,17 @@ export default function RestaurantInsights({ restaurantCode }: RestaurantInsight
 
   return (
     <div className="flex flex-col gap-8 min-w-0 w-full">
-      <p className="text-sm font-medium text-muted-foreground px-1">
-        {t("period", {
-          debut: formatToISODate(periode.debut).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
-          fin: formatToISODate(periode.fin).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" }),
-        })}
+      <p className="inline-flex w-fit max-w-full items-center gap-2 self-center sm:self-start rounded-2xl bg-primary/5 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-primary ring-1 ring-inset ring-primary/10">
+        <CalendarRange className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span className="min-w-0">
+          {t("period", {
+            periode: format.dateTimeRange(formatToISODate(periode.debut), formatToISODate(periode.fin), {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            }),
+          })}
+        </span>
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -249,7 +249,7 @@
     "errorDescription": "Une erreur est survenue lors de la récupération de l'activité de ce restaurant. Veuillez réessayer plus tard."
   },
   "RestaurantInsights": {
-    "period": "Statistiques du {debut} au {fin} (année scolaire en cours)",
+    "period": "Année scolaire · {periode}",
     "daysWithMenu": "Jours avec menu",
     "daysWithoutMenu": "Jours sans menu",
     "coverageRate": "Taux de couverture",
