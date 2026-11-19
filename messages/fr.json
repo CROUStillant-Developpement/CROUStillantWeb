@@ -402,6 +402,33 @@
       "MOLLUSQUES": "Mollusques"
     }
   },
+  "DishFeedback": {
+    "info": {
+      "label": "À propos des tags des plats",
+      "title": "Tags donnés à titre indicatif",
+      "generated": "Les tags des plats (type, végétarien, labels, origine, allergènes, points) sont générés automatiquement à partir des libellés publiés par le CROUS. Ils peuvent contenir des erreurs.",
+      "allergies": "En cas d'allergie ou de régime alimentaire particulier, demandez toujours confirmation au personnel du restaurant.",
+      "report": "Une erreur ? Signalez-la avec le drapeau à côté du plat."
+    },
+    "menu": {
+      "label": "Plus d’actions pour {dish}"
+    },
+    "report": {
+      "label": "Signaler une erreur sur {dish}",
+      "title": "Signaler une erreur",
+      "question": "Qu'est-ce qui est faux pour « {dish} » ?",
+      "reasons": {
+        "type": "Le type de plat",
+        "vegetarian": "La mention végétarien",
+        "allergens": "Les allergènes",
+        "origin": "L'origine ou les labels",
+        "name": "Le nom du plat",
+        "other": "Autre chose"
+      },
+      "anonymous": "Le signalement est anonyme et nous aide à améliorer les tags.",
+      "thanks": "Merci ! Votre signalement a bien été envoyé."
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Créé par des étudiants, pour des étudiants...",

@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { getDishType } from "@/lib/dish-tags";
 import { Search, Trophy, History } from "lucide-react";
 import DishTags from "@/components/restaurants/slug/dish-tags";
+import { DishReportButton, DishTagsInfo } from "@/components/restaurants/slug/dish-feedback";
 import FollowedDishesWeek from "./followed-dishes-week";
 
 interface DishesPageProps {
@@ -135,12 +136,13 @@ export function DishesTable({ id, icon: Icon, title, description, dishes, column
           <div className="p-2.5 rounded-2xl bg-primary/10 text-primary shrink-0">
             <Icon className="w-6 h-6" />
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <CardTitle className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary wrap-break-word">
               {title}
             </CardTitle>
             <CardDescription className="text-sm sm:text-base font-medium">{description}</CardDescription>
           </div>
+          <DishTagsInfo className="shrink-0 self-start p-2 rounded-full bg-secondary/50 hover:bg-secondary transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring" />
         </div>
       </CardHeader>
       <CardContent className="p-6 space-y-6">
@@ -206,8 +208,16 @@ export function DishesTable({ id, icon: Icon, title, description, dishes, column
                     <TableCell className="text-center font-mono text-xs text-muted-foreground">{dish.code}</TableCell>
                   )}
                   <TableCell className="font-medium">
-                    <span className="wrap-break-word">{dish.libelle}</span>
-                    <DishTags plat={dish} className="mt-1.5" />
+                    <div className="flex items-start gap-2">
+                      <div className="min-w-0 flex-1">
+                        <span className="wrap-break-word">{dish.libelle}</span>
+                        <DishTags plat={dish} className="mt-1.5" />
+                      </div>
+                      <DishReportButton
+                        plat={dish}
+                        className="shrink-0 rounded-full p-1 text-muted-foreground/60 transition-colors hover:bg-secondary hover:text-foreground group-hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+                      />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

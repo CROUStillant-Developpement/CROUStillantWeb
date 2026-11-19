@@ -13,6 +13,7 @@ import { useHydrated } from "@/hooks/useHydrated";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { getDishName, isInfoLine, isNoise } from "@/lib/dish-tags";
 import DishTags from "@/components/restaurants/slug/dish-tags";
+import { DishActionsMenu, DishReportButton } from "@/components/restaurants/slug/dish-feedback";
 
 type MealCardProps = {
   meal: Categorie | CategorieTriee | null;
@@ -20,6 +21,8 @@ type MealCardProps = {
 
 const DISH_ACTION_CLASS =
   "mt-1 shrink-0 rounded-full p-1 transition-colors hover:bg-secondary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring";
+const SECONDARY_ACTION_CLASS =
+  "ml-1 text-muted-foreground/60 hover:text-foreground group-hover:text-foreground";
 
 export default function MealCard({ meal }: MealCardProps) {
   const t = useTranslations("MealCard");
@@ -71,6 +74,12 @@ export default function MealCard({ meal }: MealCardProps) {
               const followLabel = t(isFollowed ? "unfollowDish" : "followDish", {
                 dish: name,
               });
+              const recipeUrl = `https://www.marmiton.org/recettes/recherche.aspx?aqt=${encodeURIComponent(name.trim())}`;
+              const recipeLabel = t("findRecipe", { dish: name });
+              const toggleFollow = () => {
+                toggleFollowedDish(foodItem.code, name);
+                umami.event(isFollowed ? "Dish.Unfollow" : "Dish.Follow");
+              };
 
               return (
                 <li
@@ -93,31 +102,43 @@ export default function MealCard({ meal }: MealCardProps) {
                     title={followLabel}
                     className={cn(
                       DISH_ACTION_CLASS,
-                      "ml-2",
+                      "ml-2 hidden sm:inline-flex",
                       isFollowed
                         ? "text-amber-500"
                         : "text-muted-foreground/60 hover:text-foreground group-hover:text-foreground"
                     )}
-                    onClick={() => {
-                      toggleFollowedDish(foodItem.code, name);
-                      umami.event(isFollowed ? "Dish.Unfollow" : "Dish.Follow");
-                    }}
+                    onClick={toggleFollow}
                   >
                     <Star className={cn("h-4 w-4", isFollowed && "fill-current")} aria-hidden="true" />
                   </button>
+                  {/* Phones: follow, recipe and report grouped behind one button to leave room for the name */}
+                  {isFollowed && (
+                    <Star
+                      className="ml-2 mt-2 h-3.5 w-3.5 shrink-0 fill-current text-amber-500 sm:hidden"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <DishActionsMenu
+                    plat={foodItem}
+                    follow={{ label: followLabel, active: isFollowed, onToggle: toggleFollow }}
+                    recipeUrl={recipeUrl}
+                    recipeLabel={recipeLabel}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "sm:hidden")}
+                  />
                   <a
-                    href={`https://www.marmiton.org/recettes/recherche.aspx?aqt=${encodeURIComponent(name.trim())}`}
+                    href={recipeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={t("findRecipe", { dish: name })}
-                    title={t("findRecipe", { dish: name })}
-                    className={cn(
-                      DISH_ACTION_CLASS,
-                      "ml-1 text-muted-foreground/60 hover:text-foreground group-hover:text-foreground"
-                    )}
+                    aria-label={recipeLabel}
+                    title={recipeLabel}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "hidden sm:inline-flex")}
                   >
                     <CookingPot className="h-4 w-4" aria-hidden="true" />
                   </a>
+                  <DishReportButton
+                    plat={foodItem}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "hidden sm:inline-flex")}
+                  />
                 </li>
               );
             })}

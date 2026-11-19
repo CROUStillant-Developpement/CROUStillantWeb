@@ -402,6 +402,33 @@
       "MOLLUSQUES": "Molluscs"
     }
   },
+  "DishFeedback": {
+    "info": {
+      "label": "About dish tags",
+      "title": "Tags are for guidance only",
+      "generated": "Dish tags (type, vegetarian, labels, origin, allergens, points) are generated automatically from the labels published by the CROUS. They may contain mistakes.",
+      "allergies": "If you have an allergy or a special diet, always check with the restaurant staff.",
+      "report": "Spotted a mistake? Report it with the flag next to the dish."
+    },
+    "menu": {
+      "label": "More actions for {dish}"
+    },
+    "report": {
+      "label": "Report a mistake on {dish}",
+      "title": "Report a mistake",
+      "question": "What is wrong with “{dish}”?",
+      "reasons": {
+        "type": "The dish type",
+        "vegetarian": "The vegetarian tag",
+        "allergens": "The allergens",
+        "origin": "The origin or labels",
+        "name": "The dish name",
+        "other": "Something else"
+      },
+      "anonymous": "Reports are anonymous and help us improve the tags.",
+      "thanks": "Thank you! Your report has been sent."
+    }
+  },
   "AboutPage": {
     "presentation": {
       "title": "Made by students, for students...",

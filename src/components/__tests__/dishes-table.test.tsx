@@ -10,6 +10,9 @@ vi.mock("@/i18n/routing", () => ({
   Link: ({ children, href }: { children: React.ReactNode; href: string }) => <a href={href}>{children}</a>,
 }));
 vi.mock("@/components/dishes/followed-dishes-week", () => ({ default: () => null }));
+vi.mock("next-umami", () => ({
+  useUmami: () => ({ event: vi.fn() }),
+}));
 
 const dishes: Plat[] = [
   { code: "2", libelle: "Fruits", type: "DESSERT", vegetarien: false, total: 24051 },

@@ -1,6 +1,7 @@
 import QrCodeDialog from "@/components/qr-code-dialog";
 import CalendarSubscribeDialog from "@/components/restaurants/slug/calendar-subscribe-dialog";
 import MealCard from "@/components/restaurants/slug/meal-card";
+import { DishTagsInfo } from "@/components/restaurants/slug/dish-feedback";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Repas } from "@/services/types";
 import { CalendarPlus, Share2 } from "lucide-react";
@@ -51,6 +52,7 @@ function MealSection({
     <Card className="relative overflow-hidden border-border/50 shadow-md hover:shadow-xl transition-all duration-300 group rounded-3xl bg-transparent">
       <div className="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors" />
       <div className="absolute top-6 right-6 flex items-center gap-2">
+        <DishTagsInfo className={HOVER_ACTION_CLASS} />
         {restaurant && (
           <CalendarSubscribeDialog
             restaurantCode={restaurant.code}
