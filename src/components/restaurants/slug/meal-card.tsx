@@ -44,8 +44,8 @@ export default function MealCard({ meal }: MealCardProps) {
       className="w-full"
     >
       <AccordionItem value={`meal-${meal.code}`} className="border-b-0">
-        <AccordionTrigger className="capitalize text-lg font-semibold py-4 px-4 rounded-2xl transition-all hover:no-underline data-[state=open]:bg-secondary/50 data-[state=open]:rounded-b-none">
-          {meal.libelle}
+        <AccordionTrigger className="text-lg font-semibold py-4 px-4 rounded-2xl transition-all hover:no-underline data-[state=open]:bg-secondary/50 data-[state=open]:rounded-b-none">
+          <span className="first-letter:uppercase">{meal.libelle}</span>
         </AccordionTrigger>
         <AccordionContent className="pt-2 pb-4 px-6 rounded-b-2xl border-x border-b border-border/10">
           <ul className="grid gap-3">
@@ -84,13 +84,13 @@ export default function MealCard({ meal }: MealCardProps) {
               return (
                 <li
                   key={index}
-                  className="flex items-start capitalize text-sm font-medium group min-w-0"
+                  className="flex items-start text-sm font-medium group min-w-0"
                 >
                   <div className="mt-1 mr-3 shrink-0 p-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <ArrowRight className="h-3 w-3" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="wrap-break-word opacity-80 group-hover:opacity-100 transition-opacity">
+                    <span className="block wrap-break-word first-letter:uppercase opacity-80 group-hover:opacity-100 transition-opacity">
                       {name}
                     </span>
                     <DishTags plat={foodItem} className="mt-1.5" />

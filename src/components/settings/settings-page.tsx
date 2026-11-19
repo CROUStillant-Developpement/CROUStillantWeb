@@ -587,9 +587,9 @@ export default function SettingsPage() {
                 {followedDishes.map((dish) => (
                   <li
                     key={dish.code}
-                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary text-sm font-semibold pl-3 pr-1 py-1 capitalize"
+                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary text-sm font-semibold pl-3 pr-1 py-1"
                   >
-                    <span className="wrap-break-word">{dish.libelle}</span>
+                    <span className="wrap-break-word first-letter:uppercase">{dish.libelle}</span>
                     <button
                       type="button"
                       aria-label={t("followedDishes.remove", { dish: dish.libelle })}
