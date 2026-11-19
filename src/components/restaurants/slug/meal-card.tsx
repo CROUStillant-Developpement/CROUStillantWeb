@@ -13,6 +13,7 @@ import { useHydrated } from "@/hooks/useHydrated";
 import { useUserPreferences } from "@/store/userPreferencesStore";
 import { getDishName, isInfoLine, isNoise } from "@/lib/dish-tags";
 import DishTags from "@/components/restaurants/slug/dish-tags";
+import { DishActionsMenu, DishReportButton } from "@/components/restaurants/slug/dish-feedback";
 
 type MealCardProps = {
   meal: Categorie | CategorieTriee | null;
@@ -20,6 +21,8 @@ type MealCardProps = {
 
 const DISH_ACTION_CLASS =
   "mt-1 shrink-0 rounded-full p-1 transition-colors hover:bg-secondary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring";
+const SECONDARY_ACTION_CLASS =
+  "ml-1 text-muted-foreground/60 hover:text-foreground group-hover:text-foreground";
 
 export default function MealCard({ meal }: MealCardProps) {
   const t = useTranslations("MealCard");
@@ -40,12 +43,15 @@ export default function MealCard({ meal }: MealCardProps) {
       defaultValue={`meal-${meal.code}`}
       className="w-full"
     >
-      <AccordionItem value={`meal-${meal.code}`} className="border-b-0">
-        <AccordionTrigger className="capitalize text-lg font-semibold py-4 px-4 rounded-2xl transition-all hover:no-underline data-[state=open]:bg-secondary/50 data-[state=open]:rounded-b-none">
-          {meal.libelle}
+      <AccordionItem
+        value={`meal-${meal.code}`}
+        className="rounded-xl border border-border/20 bg-background/50 border-b-border/20"
+      >
+        <AccordionTrigger className="text-base sm:text-lg font-bold py-2.5 px-3 sm:py-3 sm:px-4 rounded-xl transition-colors hover:no-underline hover:bg-background">
+          <span className="first-letter:uppercase">{meal.libelle}</span>
         </AccordionTrigger>
-        <AccordionContent className="pt-2 pb-4 px-6 rounded-b-2xl border-x border-b border-border/10">
-          <ul className="grid gap-3">
+        <AccordionContent className="pt-1 pb-3 px-3 sm:px-4">
+          <ul className="grid gap-2.5 sm:gap-3">
             {meal.plats?.map((foodItem: Plat, index: number) => {
               if (isNoise(foodItem)) return null;
 
@@ -71,17 +77,23 @@ export default function MealCard({ meal }: MealCardProps) {
               const followLabel = t(isFollowed ? "unfollowDish" : "followDish", {
                 dish: name,
               });
+              const recipeUrl = `https://www.marmiton.org/recettes/recherche.aspx?aqt=${encodeURIComponent(name.trim())}`;
+              const recipeLabel = t("findRecipe", { dish: name });
+              const toggleFollow = () => {
+                toggleFollowedDish(foodItem.code, name);
+                umami.event(isFollowed ? "Dish.Unfollow" : "Dish.Follow");
+              };
 
               return (
                 <li
                   key={index}
-                  className="flex items-start capitalize text-sm font-medium group min-w-0"
+                  className="flex items-start text-sm font-medium group min-w-0"
                 >
-                  <div className="mt-1 mr-3 shrink-0 p-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <div className="mt-1 mr-2 sm:mr-3 shrink-0 p-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <ArrowRight className="h-3 w-3" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="wrap-break-word opacity-80 group-hover:opacity-100 transition-opacity">
+                    <span className="block wrap-break-word first-letter:uppercase opacity-80 group-hover:opacity-100 transition-opacity">
                       {name}
                     </span>
                     <DishTags plat={foodItem} className="mt-1.5" />
@@ -93,31 +105,43 @@ export default function MealCard({ meal }: MealCardProps) {
                     title={followLabel}
                     className={cn(
                       DISH_ACTION_CLASS,
-                      "ml-2",
+                      "ml-2 hidden sm:inline-flex",
                       isFollowed
                         ? "text-amber-500"
                         : "text-muted-foreground/60 hover:text-foreground group-hover:text-foreground"
                     )}
-                    onClick={() => {
-                      toggleFollowedDish(foodItem.code, name);
-                      umami.event(isFollowed ? "Dish.Unfollow" : "Dish.Follow");
-                    }}
+                    onClick={toggleFollow}
                   >
                     <Star className={cn("h-4 w-4", isFollowed && "fill-current")} aria-hidden="true" />
                   </button>
+                  {/* Phones: follow, recipe and report grouped behind one button to leave room for the name */}
+                  {isFollowed && (
+                    <Star
+                      className="ml-2 mt-2 h-3.5 w-3.5 shrink-0 fill-current text-amber-500 sm:hidden"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <DishActionsMenu
+                    plat={foodItem}
+                    follow={{ label: followLabel, active: isFollowed, onToggle: toggleFollow }}
+                    recipeUrl={recipeUrl}
+                    recipeLabel={recipeLabel}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "sm:hidden")}
+                  />
                   <a
-                    href={`https://www.marmiton.org/recettes/recherche.aspx?aqt=${encodeURIComponent(name.trim())}`}
+                    href={recipeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={t("findRecipe", { dish: name })}
-                    title={t("findRecipe", { dish: name })}
-                    className={cn(
-                      DISH_ACTION_CLASS,
-                      "ml-1 text-muted-foreground/60 hover:text-foreground group-hover:text-foreground"
-                    )}
+                    aria-label={recipeLabel}
+                    title={recipeLabel}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "hidden sm:inline-flex")}
                   >
                     <CookingPot className="h-4 w-4" aria-hidden="true" />
                   </a>
+                  <DishReportButton
+                    plat={foodItem}
+                    className={cn(DISH_ACTION_CLASS, SECONDARY_ACTION_CLASS, "hidden sm:inline-flex")}
+                  />
                 </li>
               );
             })}

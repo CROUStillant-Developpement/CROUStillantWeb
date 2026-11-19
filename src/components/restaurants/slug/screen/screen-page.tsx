@@ -103,11 +103,11 @@ function MealColumn({
                         className={
                           isInfoLine(plat)
                             ? "flex items-start gap-3 text-2xl italic leading-snug text-zinc-500"
-                            : "flex items-start gap-3 text-2xl capitalize leading-snug text-zinc-700"
+                            : "flex items-start gap-3 text-2xl leading-snug text-zinc-700"
                         }
                       >
                         <ArrowRight className="h-6 w-6 mt-1 shrink-0 text-zinc-400" />
-                        <span>{getDishName(plat)}</span>
+                        <span className="first-letter:uppercase">{getDishName(plat)}</span>
                       </li>
                     ))}
                   </ul>
@@ -242,7 +242,7 @@ export default function ScreenPage({
           <div className="text-7xl font-mono font-bold tabular-nums leading-none text-zinc-900">
             {timeStr}
           </div>
-          <div className="text-xl text-zinc-400 capitalize mt-2">{dateStr}</div>
+          <div className="text-xl text-zinc-400 first-letter:uppercase mt-2">{dateStr}</div>
           <div className="flex items-center gap-2 mt-2">
             <span
               className={`h-3 w-3 rounded-full shrink-0 ${

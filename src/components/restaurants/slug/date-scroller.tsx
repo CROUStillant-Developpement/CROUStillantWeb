@@ -120,7 +120,7 @@ export default function DateScroller({
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-2 sm:gap-3 overflow-x-auto overflow-y-hidden custom-scrollbar p-1 touch-pan-x max-w-full w-full"
+        className="flex gap-2 sm:gap-3 overflow-x-auto overflow-y-hidden custom-scrollbar px-1 py-2 sm:pb-3 touch-pan-x max-w-full w-full max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden"
         style={{
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch"

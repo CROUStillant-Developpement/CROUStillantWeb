@@ -153,9 +153,9 @@ export default function RestaurantPage({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -32 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full mt-4 px-4"
+        className="w-full min-w-0 mt-4 px-4"
       >
-        <div className="relative overflow-hidden rounded-3xl bg-secondary/20 dark:bg-card/50 border border-primary/10 shadow-lg mb-8 h-56 md:h-72 flex items-end group">
+        <div className="relative overflow-hidden rounded-3xl bg-secondary/20 dark:bg-card/50 border border-primary/10 shadow-lg mb-4 md:mb-8 min-h-48 md:h-72 flex items-end group">
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
           <Image
             src={imgSrc}
@@ -168,9 +168,9 @@ export default function RestaurantPage({
             onError={() => setImgSrc("/default_ru.png")}
           />
 
-          <div className="relative z-20 w-full p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">
+          <div className="relative z-20 w-full p-4 md:p-8 flex flex-col md:flex-row md:items-end justify-between items-start min-w-0">
             <div className="max-w-3xl min-w-0">
-              <h1 data-easter-egg className="font-extrabold text-3xl md:text-5xl text-white drop-shadow-lg tracking-tight wrap-break-word select-none">{restaurant.nom}</h1>
+              <h1 data-easter-egg className="font-extrabold text-2xl md:text-5xl text-white drop-shadow-lg tracking-tight wrap-break-word select-none">{restaurant.nom}</h1>
               <div className="mt-2 md:mt-3 flex flex-wrap items-center gap-3 text-white/90 font-medium">
                 <span className="flex items-center text-sm md:text-base drop-shadow-md bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                   {restaurant.zone}
@@ -190,11 +190,11 @@ export default function RestaurantPage({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 mt-4 md:mt-0 drop-shadow-md">
+            <div className="flex items-center gap-2 md:gap-3 mt-3 md:mt-0 drop-shadow-md">
               <Button
                 size="icon"
                 aria-label={isFavourite ? tCard("removeFromFavourites") : tCard("addToFavourites")}
-                className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-10 w-10 md:h-12 md:w-12"
                 onClick={() => {
                   addOrRemoveFromfavourites(restaurant.code, restaurant.nom);
                   umami.event("Restaurant.Favorite", {
@@ -207,7 +207,7 @@ export default function RestaurantPage({
               <Button
                 size="icon"
                 aria-label={tCard("viewOnScreen")}
-                className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-10 w-10 md:h-12 md:w-12"
                 onClick={() => {
                   umami.event("Restaurant.Screen", {
                     restaurant: restaurant.code,
@@ -226,7 +226,7 @@ export default function RestaurantPage({
                     size="icon"
                     aria-label={tCard("addToCalendar")}
                     title={tCard("addToCalendar")}
-                    className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                    className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-10 w-10 md:h-12 md:w-12"
                     onClick={() =>
                       umami.event("Restaurant.Calendar", {
                         restaurant: restaurant.code,
@@ -242,7 +242,7 @@ export default function RestaurantPage({
                   <Button
                     size="icon"
                     aria-label={tCard("viewQrCode")}
-                    className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-12 w-12"
+                    className="rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 text-white transition-all hover:scale-110 hover:-translate-y-1 shadow-lg h-10 w-10 md:h-12 md:w-12"
                     onClick={() =>
                       umami.event("Restaurant.QRCode", {
                         restaurant: restaurant.code,
@@ -270,7 +270,7 @@ export default function RestaurantPage({
           {showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 16 }}
               exit={{ opacity: 0, height: 0, marginBottom: 0 }}
               transition={{ duration: 0.4, ease: "circOut" }}
               className="overflow-hidden"
@@ -284,7 +284,7 @@ export default function RestaurantPage({
           {showFavoriteHint && !isFavourite && !showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 16 }}
               exit={{ opacity: 0, height: 0, marginBottom: 0 }}
               transition={{ duration: 0.4, ease: "circOut" }}
               className="overflow-hidden"
@@ -334,7 +334,7 @@ export default function RestaurantPage({
           {showCalendarHint && isFavourite && !showCelebration && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-              animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 16 }}
               exit={{ opacity: 0, height: 0, marginBottom: 0 }}
               transition={{ duration: 0.4, ease: "circOut" }}
               className="overflow-hidden"
@@ -399,19 +399,19 @@ export default function RestaurantPage({
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <Tabs defaultValue="menu">
-                  <div className="flex justify-center sm:justify-start mb-6">
-                    <TabsList>
-                      <TabsTrigger value="menu" className="px-3" onClick={() => umami.event("Restaurant.Menu", { restaurant: restaurant.code })}>
-                        <CalendarDays className="w-4 h-4 shrink-0" />
-                        <span className="sr-only sm:not-sr-only">{t("tabs.menu")}</span>
+                  <div className="flex sm:justify-start mb-4 sm:mb-6">
+                    <TabsList className="flex w-full sm:inline-flex sm:w-auto">
+                      <TabsTrigger value="menu" className="group min-w-0 gap-2 px-4 sm:px-3 data-[state=active]:flex-1 sm:data-[state=active]:flex-none" onClick={() => umami.event("Restaurant.Menu", { restaurant: restaurant.code })}>
+                        <CalendarDays className="w-4 h-4 shrink-0" aria-hidden="true" />
+                        <span className="truncate sr-only group-data-[state=active]:not-sr-only sm:not-sr-only">{t("tabs.menu")}</span>
                       </TabsTrigger>
-                      <TabsTrigger value="insights" className="px-3" onClick={() => umami.event("Restaurant.Insights", { restaurant: restaurant.code })}>
-                        <LineChart className="w-4 h-4 shrink-0" />
-                        <span className="sr-only sm:not-sr-only">{t("tabs.insights")}</span>
+                      <TabsTrigger value="insights" className="group min-w-0 gap-2 px-4 sm:px-3 data-[state=active]:flex-1 sm:data-[state=active]:flex-none" onClick={() => umami.event("Restaurant.Insights", { restaurant: restaurant.code })}>
+                        <LineChart className="w-4 h-4 shrink-0" aria-hidden="true" />
+                        <span className="truncate sr-only group-data-[state=active]:not-sr-only sm:not-sr-only">{t("tabs.insights")}</span>
                       </TabsTrigger>
-                      <TabsTrigger value="activity" className="px-3" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
-                        <History className="w-4 h-4 shrink-0" />
-                        <span className="sr-only sm:not-sr-only">{t("tabs.activity")}</span>
+                      <TabsTrigger value="activity" className="group min-w-0 gap-2 px-4 sm:px-3 data-[state=active]:flex-1 sm:data-[state=active]:flex-none" onClick={() => umami.event("Restaurant.Activity", { restaurant: restaurant.code })}>
+                        <History className="w-4 h-4 shrink-0" aria-hidden="true" />
+                        <span className="truncate sr-only group-data-[state=active]:not-sr-only sm:not-sr-only">{t("tabs.activity")}</span>
                       </TabsTrigger>
                     </TabsList>
                   </div>

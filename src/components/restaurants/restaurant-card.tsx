@@ -112,7 +112,7 @@ export default function RestaurantCard({
                   className="ml-2 min-w-0 gap-1 shadow-md font-semibold bg-amber-500/95 text-white hover:bg-amber-500/95"
                 >
                   <Star className="h-3 w-3 shrink-0 fill-current" aria-hidden="true" />
-                  <span className="truncate capitalize">
+                  <span className="truncate first-letter:uppercase">
                     {followedDishes.length === 1
                       ? followedDishes[0]
                       : t("followedDishes", { count: followedDishes.length })}
