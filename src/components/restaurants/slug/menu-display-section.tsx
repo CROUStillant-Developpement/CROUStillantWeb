@@ -111,16 +111,16 @@ export default function MenuDisplaySection({
   }, [availableDates]);
 
   return (
-    <div className="flex flex-col gap-8 w-full min-w-0">
-      <div className="flex flex-col gap-6 font-medium min-w-0 w-full max-w-full">
+    <div className="flex flex-col w-full min-w-0">
+      <div className="flex flex-col gap-4 sm:gap-6 font-medium min-w-0 w-full max-w-full">
         {!noMenuAtAll && (
-          <div className="sticky top-0 z-30 pt-2 bg-background/80 backdrop-blur-xl mb-2 overflow-x-hidden w-full max-w-full p-4 pt-4 border-b border-border/30">
-            <div className="flex flex-col gap-3 max-w-full min-w-0 w-full">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0 w-full">
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 min-w-0">
-                  <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight px-1 flex items-center gap-2 sm:gap-3 min-w-0">
-                    <span className="bg-primary/10 text-primary p-1.5 sm:p-2 rounded-xl">
-                      <CalendarCheck className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="sticky top-[10px] z-30 overflow-hidden min-w-0 bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">
+            <div className="flex flex-col gap-2 sm:gap-3 max-w-full min-w-0 w-full">
+              <div className="flex items-center justify-between gap-2 sm:gap-3 min-w-0 w-full">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 min-w-0">
+                  <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight flex items-center gap-2 sm:gap-3 min-w-0">
+                    <span className="hidden sm:inline-flex bg-primary/10 text-primary p-2 rounded-xl">
+                      <CalendarCheck className="w-6 h-6" />
                     </span>
                     <span className="truncate">
                       {t("menuOfTheDay", {
@@ -137,7 +137,7 @@ export default function MenuDisplaySection({
                   <MenuLiveStatus live={live} lastUpdated={lastUpdated} />
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0 max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
+                <div className="flex items-center gap-2 shrink-0">
                   <DatePicker
                     onDateChange={onDateChange}
                     minDate={datePickerMinMax.min}
@@ -148,7 +148,7 @@ export default function MenuDisplaySection({
                 </div>
               </div>
 
-              <div className="relative w-full max-w-[80svw] md:max-w-[80svw] lg:max-w-[45svw] xl:max-w-[50svw] 2xl:max-w-[65svw] group m-auto">
+              <div className="relative w-full min-w-0 group">
                 <DateScroller
                   availableDates={filteredDates}
                   selectedDate={selectedDate}
@@ -167,7 +167,7 @@ export default function MenuDisplaySection({
             <Skeleton className="w-full h-40 rounded-3xl" />
           </div>
         ) : (
-          <div className="flex flex-col gap-6 min-w-0 w-full p-4 pb-0">
+          <div className="flex flex-col gap-4 sm:gap-6 min-w-0 w-full px-2 sm:p-4 sm:pb-0">
             {noMenuAtAll ? (
               <MenuAlert
                 title={t("noMealAvailable")}
@@ -184,7 +184,7 @@ export default function MenuDisplaySection({
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98, y: -10 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="flex flex-col gap-6"
+                  className="flex flex-col gap-4 sm:gap-6"
                 >
                   <MealsDisplay
                     selectedDateBreakfast={selectedDateBreakfast}

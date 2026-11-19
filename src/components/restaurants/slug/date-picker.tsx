@@ -60,23 +60,28 @@ export default function DatePicker({
   const tRes = useTranslations("RestaurantPage");
   const umami = useUmami();
 
+  // Same trigger in both variants: the server renders the mobile one, so any
+  // difference would be a hydration mismatch on desktop.
+  const trigger = (
+    <Button
+      variant="outline"
+      size="sm"
+      aria-label={tRes("calendar")}
+      className="rounded-xl h-9 w-9 sm:w-auto p-0 sm:px-3 flex items-center justify-center gap-2 font-semibold transition-all shrink-0"
+      onClick={() => {
+        umami.event("DatePicker.Open");
+      }}
+    >
+      <CalendarDays className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+      <span className="text-xs hidden sm:inline">{tRes("calendar")}</span>
+    </Button>
+  );
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
-            onClick={() => {
-              umami.event("DatePicker.Open");
-            }}
-          >
-            <CalendarDays className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs hidden min-[400px]:inline">
-              {tRes("calendar")}
-            </span>
-          </Button>
+          {trigger}
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -99,19 +104,7 @@ export default function DatePicker({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
-          onClick={() => {
-            umami.event("DatePicker.Open");
-          }}
-        >
-          <CalendarDays className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs min-[400px]:inline">
-            {tRes("calendar")}
-          </span>
-        </Button>
+        {trigger}
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
