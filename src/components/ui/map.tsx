@@ -20,6 +20,7 @@ import { createPortal } from "react-dom";
 import { X, Minus, Plus, Locate, Maximize, Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import log from "@/lib/log";
 
 // The bundled maplibre-gl can't locate its worker module, so point it at the
 // copy served from /public (see scripts/copy-maplibre-worker.mjs)
@@ -863,7 +864,7 @@ function MapControls({
     setWaitingForLocation(true);
 
     if (!("geolocation" in navigator)) {
-      console.error("Geolocation is not supported by this browser/environment.");
+      log.error(["Geolocation is not supported by this browser/environment."]);
       setWaitingForLocation(false);
       return;
     }
@@ -883,7 +884,7 @@ function MapControls({
         setWaitingForLocation(false);
       },
       (error) => {
-        console.error("Error getting location:", error);
+        log.error(["Error getting location:", error]);
         setWaitingForLocation(false);
       },
     );
