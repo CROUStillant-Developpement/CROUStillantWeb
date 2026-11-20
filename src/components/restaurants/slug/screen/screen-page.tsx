@@ -6,6 +6,7 @@ import { fetchTodayMenuForScreen } from "@/actions/screen-actions";
 import { useMenuEvents } from "@/hooks/useMenuEvents";
 import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, RefreshCw, Monitor } from "lucide-react";
+import { getDishName, isInfoLine, isNoise } from "@/lib/dish-tags";
 
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 const EVENT_REFRESH_DELAY = 2000; // 2 seconds
@@ -87,9 +88,9 @@ function MealColumn({
         >
           <div className="space-y-6">
             {sortedCategories.map((category) => {
-              const sortedPlats = [...category.plats].sort(
-                (a, b) => (a.ordre ?? 0) - (b.ordre ?? 0)
-              );
+              const sortedPlats = [...category.plats]
+                .filter((plat) => !isNoise(plat))
+                .sort((a, b) => (a.ordre ?? 0) - (b.ordre ?? 0));
               return (
                 <div key={category.code}>
                   <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-400 mb-3 px-1">
@@ -99,10 +100,14 @@ function MealColumn({
                     {sortedPlats.map((plat, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-3 text-2xl capitalize leading-snug text-zinc-700"
+                        className={
+                          isInfoLine(plat)
+                            ? "flex items-start gap-3 text-2xl italic leading-snug text-zinc-500"
+                            : "flex items-start gap-3 text-2xl leading-snug text-zinc-700"
+                        }
                       >
                         <ArrowRight className="h-6 w-6 mt-1 shrink-0 text-zinc-400" />
-                        <span>{plat.libelle}</span>
+                        <span className="first-letter:uppercase">{getDishName(plat)}</span>
                       </li>
                     ))}
                   </ul>
@@ -237,7 +242,7 @@ export default function ScreenPage({
           <div className="text-7xl font-mono font-bold tabular-nums leading-none text-zinc-900">
             {timeStr}
           </div>
-          <div className="text-xl text-zinc-400 capitalize mt-2">{dateStr}</div>
+          <div className="text-xl text-zinc-400 first-letter:uppercase mt-2">{dateStr}</div>
           <div className="flex items-center gap-2 mt-2">
             <span
               className={`h-3 w-3 rounded-full shrink-0 ${

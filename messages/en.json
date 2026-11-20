@@ -249,7 +249,7 @@
     "errorDescription": "An error occurred while fetching this restaurant's activity. Please try again later."
   },
   "RestaurantInsights": {
-    "period": "Stats from {debut} to {fin} (current school year)",
+    "period": "School year · {periode}",
     "daysWithMenu": "Days with menu",
     "daysWithoutMenu": "Days without menu",
     "coverageRate": "Coverage rate",
@@ -355,6 +355,79 @@
     "findRecipe": "Find the recipe for {dish} on Marmiton",
     "followDish": "Follow {dish}",
     "unfollowDish": "Unfollow {dish}"
+  },
+  "DishTags": {
+    "types": {
+      "ENTREE": "Starter",
+      "PLAT": "Main course",
+      "ACCOMPAGNEMENT": "Side",
+      "DESSERT": "Dessert",
+      "FROMAGE": "Cheese",
+      "BOISSON": "Drink",
+      "FORMULE": "Set menu"
+    },
+    "vegetarian": "Vegetarian",
+    "labels": {
+      "bio": "Organic",
+      "maison": "Homemade",
+      "labelRouge": "Label Rouge",
+      "bleuBlancCoeur": "Bleu-Blanc-Cœur",
+      "msc": "MSC",
+      "asc": "ASC",
+      "aop": "PDO",
+      "igp": "PGI",
+      "halal": "Halal",
+      "sansPorc": "Pork-free"
+    },
+    "originLabel": "Origin: {origins}",
+    "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "allergensLabel": "Declared allergens: {allergens}",
+    "allergens": {
+      "title": "{count, plural, one {# allergen} other {# allergens}}",
+      "declared": "Allergens declared by the restaurant",
+      "disclaimer": "For guidance only: if you have an allergy, ask the restaurant staff to confirm.",
+      "GLUTEN": "Cereals containing gluten",
+      "CRUSTACES": "Crustaceans",
+      "OEUFS": "Eggs",
+      "POISSONS": "Fish",
+      "ARACHIDES": "Peanuts",
+      "SOJA": "Soybeans",
+      "LAIT": "Milk",
+      "FRUITS_A_COQUE": "Tree nuts",
+      "CELERI": "Celery",
+      "MOUTARDE": "Mustard",
+      "SESAME": "Sesame seeds",
+      "SULFITES": "Sulphur dioxide and sulphites",
+      "LUPIN": "Lupin",
+      "MOLLUSQUES": "Molluscs"
+    }
+  },
+  "DishFeedback": {
+    "info": {
+      "label": "About dish tags",
+      "title": "Tags are for guidance only",
+      "generated": "Dish tags (type, vegetarian, labels, origin, allergens, points) are generated automatically from the labels published by the CROUS. They may contain mistakes.",
+      "allergies": "If you have an allergy or a special diet, always check with the restaurant staff.",
+      "report": "Spotted a mistake? Report it with the flag next to the dish."
+    },
+    "menu": {
+      "label": "More actions for {dish}"
+    },
+    "report": {
+      "label": "Report a mistake on {dish}",
+      "title": "Report a mistake",
+      "question": "What is wrong with “{dish}”?",
+      "reasons": {
+        "type": "The dish type",
+        "vegetarian": "The vegetarian tag",
+        "allergens": "The allergens",
+        "origin": "The origin or labels",
+        "name": "The dish name",
+        "other": "Something else"
+      },
+      "anonymous": "Reports are anonymous and help us improve the tags.",
+      "thanks": "Thank you! Your report has been sent."
+    }
   },
   "AboutPage": {
     "presentation": {
@@ -978,14 +1051,16 @@
     },
     "noResults": "No dish found for this search 😢",
     "top100": "Top dishes",
-    "top100Description": "Discover the top 100 dishes added to the platform.",
+    "top100Description": "The 100 dishes served most often in CROUS restaurants, whatever the spelling.",
     "last100": "Last dishes added",
-    "last100Description": "Discover the last 100 dishes added to the platform.",
+    "last100Description": "The 100 dishes most recently found in the menus.",
     "ranking": "Ranking",
     "code": "Code",
     "label": "Label",
     "occurrences": "Occurrences",
-    "search": "Search for a dish..."
+    "search": "Search for a dish...",
+    "filterByType": "Filter by dish type",
+    "allTypes": "All"
   },
   "LegalPage": {
     "title": "Legal notices",

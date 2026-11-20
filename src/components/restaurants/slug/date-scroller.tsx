@@ -4,7 +4,7 @@ import { cn, formatToISODate } from "@/lib/utils";
 import { DateMenu } from "@/services/types";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "@/lib/motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -120,7 +120,7 @@ export default function DateScroller({
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-2 sm:gap-3 overflow-x-auto overflow-y-hidden custom-scrollbar p-1 touch-pan-x max-w-full w-full"
+        className="flex gap-2 sm:gap-3 overflow-x-auto overflow-y-hidden custom-scrollbar px-1 py-2 sm:pb-3 touch-pan-x max-w-full w-full max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden"
         style={{
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch"

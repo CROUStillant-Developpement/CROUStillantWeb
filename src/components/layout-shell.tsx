@@ -39,7 +39,7 @@ export default function LayoutShell({
       >
         {t("skipToMainContent")}
       </a>
-      <main id="main-content" className="md:p-4 pb-20 lg:p-20 grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen max-w-[1920px] mx-auto w-full">
+      <main id="main-content" className="md:p-4 pb-20 lg:p-20 grid grid-cols-1 auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 min-h-screen max-w-[1920px] mx-auto w-full">
         {header}
         {children}
         {backToTop}

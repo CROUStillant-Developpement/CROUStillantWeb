@@ -22,7 +22,7 @@ describe("log", () => {
   // -------------------------------------------------------------------------
   // env='all' — bypasses shouldLogEnv, always logs
   // -------------------------------------------------------------------------
-  describe("env='all' (always logs regardless of NODE_ENV)", () => {
+  describe("env='all' (always logs outside production)", () => {
     it("log.error calls console.error", () => {
       log.error(["oops"], "all");
       expect(errorSpy).toHaveBeenCalledOnce();
@@ -65,16 +65,18 @@ describe("log", () => {
       expect(errorSpy).toHaveBeenCalledOnce();
     });
 
-    it("logs when env='prod' and NODE_ENV='production'", () => {
+    it("never logs in production, whatever env says", () => {
       vi.stubEnv("NODE_ENV", "production");
-      log.error(["x"], "prod");
-      expect(errorSpy).toHaveBeenCalledOnce();
-    });
-
-    it("logs when env='all' even in 'production'", () => {
-      vi.stubEnv("NODE_ENV", "production");
-      log.info(["msg"], "all");
-      expect(infoSpy).toHaveBeenCalledOnce();
+      for (const env of ["dev", "prod", "all"] as const) {
+        log.error(["x"], env);
+        log.warn(["x"], env);
+        log.info(["x"], env);
+        log.debug(["x"], env);
+      }
+      expect(errorSpy).not.toHaveBeenCalled();
+      expect(warnSpy).not.toHaveBeenCalled();
+      expect(infoSpy).not.toHaveBeenCalled();
+      expect(debugSpy).not.toHaveBeenCalled();
     });
   });
 
@@ -124,18 +126,11 @@ describe("log", () => {
       expect(debugSpy).toHaveBeenCalledOnce();
     });
 
-    it("defaults to 'info' level in production (suppresses debug)", () => {
+    it("ignores LOG_LEVEL in production (nothing is logged)", () => {
       vi.stubEnv("NODE_ENV", "production");
-      vi.stubEnv("LOG_LEVEL", ""); // clear override — use env default
-      log.debug(["trace"], "all");
-      expect(debugSpy).not.toHaveBeenCalled();
-    });
-
-    it("defaults to 'info' level in production (info still logs)", () => {
-      vi.stubEnv("NODE_ENV", "production");
-      vi.stubEnv("LOG_LEVEL", "");
-      log.info(["msg"], "all");
-      expect(infoSpy).toHaveBeenCalledOnce();
+      vi.stubEnv("LOG_LEVEL", "debug");
+      log.error(["boom"], "all");
+      expect(errorSpy).not.toHaveBeenCalled();
     });
 
     it("ignores an invalid LOG_LEVEL value and falls back to env default", () => {

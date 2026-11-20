@@ -54,7 +54,7 @@ export default function Content({
     return <MapComponent loading={loading} />;
   } else {
     return (
-      <div className="flex flex-col gap-6 p-4">
+      <div className="flex flex-col gap-6 px-2 py-4 sm:p-4">
         {/* favourites */}
         {favouritesRestaurants.length > 0 && (
           <div className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">

@@ -1,34 +1,14 @@
 import * as React from "react";
 
-import { useMediaQuery } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import { CalendarDays } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { useTranslations } from "next-intl";
 import { useUmami } from "next-umami";
 import dynamic from "next/dynamic";
 
-// The calendar (react-day-picker and the date-fns locales, about 140 kB) is
-// only needed once the picker is opened, so it is kept out of the bundle
-// downloaded to display a menu.
-const DatePickerSection = dynamic(() => import("./date-picker-section"), {
+// The dialog / drawer (vaul, radix dialog) and the calendar are loaded on the
+// first click: the button is all a menu page needs to render.
+const DatePickerOverlay = dynamic(() => import("./date-picker-overlay"), {
   ssr: false,
 });
 
@@ -48,91 +28,50 @@ export default function DatePicker({
   availableDates,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
-  const [, setDate] = React.useState<Date | undefined>(new Date());
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  // Mounted on the first open, then kept so the closing animation can play
+  const [mounted, setMounted] = React.useState(false);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const wasOpen = React.useRef(false);
 
-  const handleDateChange = (date: Date) => {
-    setDate(date); // to trigger re-render
-    onDateChange?.(date);
-  };
-
-  const t = useTranslations("DatePickers");
   const tRes = useTranslations("RestaurantPage");
   const umami = useUmami();
 
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
-            onClick={() => {
-              umami.event("DatePicker.Open");
-            }}
-          >
-            <CalendarDays className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs hidden min-[400px]:inline">
-              {tRes("calendar")}
-            </span>
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>{t("chooseDate")}</DialogTitle>
-            <DialogDescription>{t("chooseDateDescription")}</DialogDescription>
-          </DialogHeader>
-          <DatePickerSection
-            setDate={handleDateChange}
-            onClose={() => setOpen(false)}
-            minDate={minDate}
-            maxDate={maxDate}
-            currentDate={current}
-            availableDates={availableDates}
-          />
-        </DialogContent>
-      </Dialog>
-    );
-  }
+  // Without a Radix trigger, focus has to be given back to the button on close
+  React.useEffect(() => {
+    if (wasOpen.current && !open) triggerRef.current?.focus();
+    wasOpen.current = open;
+  }, [open]);
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="rounded-xl h-9 px-3 flex items-center gap-2 font-semibold transition-all shrink-0"
-          onClick={() => {
-            umami.event("DatePicker.Open");
-          }}
-        >
-          <CalendarDays className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs min-[400px]:inline">
-            {tRes("calendar")}
-          </span>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>{t("chooseDate")}</DrawerTitle>
-          <DrawerDescription>{t("chooseDateDescription")}</DrawerDescription>
-        </DrawerHeader>
-        <DatePickerSection
-          className="px-4"
-          setDate={handleDateChange}
-          onClose={() => setOpen(false)}
+    <>
+      <Button
+        ref={triggerRef}
+        variant="outline"
+        size="sm"
+        aria-label={tRes("calendar")}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        className="rounded-xl h-9 w-9 sm:w-auto p-0 sm:px-3 flex items-center justify-center gap-2 font-semibold transition-all shrink-0"
+        onClick={() => {
+          setMounted(true);
+          setOpen(true);
+          umami.event("DatePicker.Open");
+        }}
+      >
+        <CalendarDays className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+        <span className="text-xs hidden sm:inline">{tRes("calendar")}</span>
+      </Button>
+      {mounted && (
+        <DatePickerOverlay
+          open={open}
+          onOpenChange={setOpen}
+          onDateChange={(date) => onDateChange?.(date)}
           minDate={minDate}
           maxDate={maxDate}
-          currentDate={current}
+          current={current}
           availableDates={availableDates}
         />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">{t("cancel")}</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+      )}
+    </>
   );
 }

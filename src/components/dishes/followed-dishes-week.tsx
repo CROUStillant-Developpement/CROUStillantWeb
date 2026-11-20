@@ -83,7 +83,7 @@ export default function FollowedDishesWeek() {
                       {" · "}
                       {mealLabels[match.meal]}
                     </span>
-                    <span className="font-bold text-lg text-foreground capitalize wrap-break-word">
+                    <span className="font-bold text-lg text-foreground first-letter:uppercase wrap-break-word">
                       {match.dish.libelle}
                     </span>
                     <span className="text-sm text-muted-foreground wrap-break-word">

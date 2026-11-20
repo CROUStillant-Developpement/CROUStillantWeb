@@ -33,7 +33,7 @@ jobs:
           raw-data: ./notifications/prd-discord-notification-start.json
 
       - name: Log in to the Container registry
-        uses: docker/login-action@d3b9cdfa580156c018ca5e745c1bf653d8ea46b5
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@8e671d84a3bd81afdfc4fdbb96a42b07c2a80934
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
