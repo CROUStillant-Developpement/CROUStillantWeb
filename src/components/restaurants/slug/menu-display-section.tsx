@@ -114,7 +114,8 @@ export default function MenuDisplaySection({
     <div className="flex flex-col w-full min-w-0">
       <div className="flex flex-col gap-4 sm:gap-6 font-medium min-w-0 w-full max-w-full">
         {!noMenuAtAll && (
-          <div className="sticky top-[10px] z-30 overflow-hidden min-w-0 bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">
+          <div className="sticky top-0 z-30 -mt-4 pt-4 sm:-mt-6 sm:pt-6 min-w-0 before:absolute before:inset-x-0 before:top-0 before:h-8 sm:before:h-10 before:bg-background">
+          <div className="relative overflow-hidden min-w-0 bg-background/60 backdrop-blur-xl p-3 md:p-4 ring-1 ring-primary/5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 shadow-xs">
             <div className="flex flex-col gap-2 sm:gap-3 max-w-full min-w-0 w-full">
               <div className="flex items-center justify-between gap-2 sm:gap-3 min-w-0 w-full">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 min-w-0">
@@ -157,6 +158,7 @@ export default function MenuDisplaySection({
                 />
               </div>
             </div>
+          </div>
           </div>
         )}
 

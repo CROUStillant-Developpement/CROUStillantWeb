@@ -53,10 +53,18 @@ const format = (level: LogLevel, ...args: unknown[]) => {
 
 type LogEnv = 'dev' | 'prod' | 'all';
 
+/**
+ * Whether a message for `env` should be logged in the current environment.
+ *
+ * Nothing is ever logged in production, whatever `env` says: logs are a
+ * development tool and must not reach users' consoles or the server output.
+ * Outside production, `'all'` always logs and `'dev'` only logs in development
+ * (`'prod'` messages are therefore never shown).
+ */
 function shouldLogEnv(env: LogEnv): boolean {
+  if (process.env.NODE_ENV === 'production') return false;
   if (env === 'all') return true;
   if (env === 'dev') return process.env.NODE_ENV === 'development';
-  if (env === 'prod') return process.env.NODE_ENV === 'production';
   return false;
 }
 
