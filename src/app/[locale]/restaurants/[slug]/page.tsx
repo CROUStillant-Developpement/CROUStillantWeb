@@ -173,7 +173,15 @@ export default async function Restaurant({
     );
   }
 
-  const { menu, dates } = await fetchMenuServer(restaurant.code);
+  // Independent requests, in parallel: on a cold cache each one is a round trip
+  // to the API, and the page cannot start streaming before all of them.
+  const [{ menu, dates }, allRestaurants, tRestaurants, tRegion] = await Promise.all([
+    fetchMenuServer(restaurant.code),
+    // The full list is already cached for the sitemap and the list page.
+    getRestaurants(),
+    getTranslations("RestaurantsPage"),
+    getTranslations("RegionPage"),
+  ]);
 
   const jsonLd = buildRestaurantJsonLd(
     restaurant,
@@ -181,8 +189,6 @@ export default async function Restaurant({
     `${SITE_URL}/${locale}/restaurants/${canonicalSlug}`
   );
 
-  const tRestaurants = await getTranslations("RestaurantsPage");
-  const tRegion = await getTranslations("RegionPage");
   const regionSlug = buildRegionSlug(restaurant.region);
   const breadcrumbJsonLd = buildBreadcrumb(locale, [
     { name: tRestaurants("seo.title"), path: "/restaurants" },
@@ -193,9 +199,6 @@ export default async function Restaurant({
     { name: restaurant.nom, path: `/restaurants/${canonicalSlug}` },
   ]);
 
-  // The full list is already cached for the sitemap and the list page; reading
-  // the region out of it costs nothing extra.
-  const allRestaurants = await getRestaurants();
   const regionRestaurants = allRestaurants.success
     ? allRestaurants.data.filter((r) => r.region.code === restaurant.region.code)
     : [];
