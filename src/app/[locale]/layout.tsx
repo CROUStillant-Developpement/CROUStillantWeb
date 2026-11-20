@@ -130,6 +130,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Message namespaces only read on the server, never sent to the client.
+const SERVER_ONLY_MESSAGES = new Set(["RegionPage", "TooManyRequestsPage", "LegalPage", "Metadata"]);
+
 export default async function RootLayout({
   children,
   params,
@@ -145,7 +148,11 @@ export default async function RootLayout({
     notFound();
   }
 
-  const messages = await getMessages();
+  // Namespaces only read on the server (getTranslations: metadata, the legal
+  // page, the region pages...) are not sent to the browser with every page.
+  const messages = Object.fromEntries(
+    Object.entries(await getMessages()).filter(([namespace]) => !SERVER_ONLY_MESSAGES.has(namespace))
+  );
 
   const t = await getTranslations("Metadata");
   const siteJsonLd = buildSiteJsonLd(locale, t("siteDescription"));
