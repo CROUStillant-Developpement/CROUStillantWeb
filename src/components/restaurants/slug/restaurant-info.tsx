@@ -51,10 +51,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
     useIntersectionObserver({ rootMargin: "300px", freezeOnceVisible: true });
 
   return (
-    <div className="flex flex-col gap-6 p-1 h-full">
+    <div className="flex flex-col gap-4 sm:gap-6 h-full px-2 sm:px-4 lg:px-0">
       {/* Location */}
-      <section className="p-5 flex flex-col gap-4 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
-        <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
+      <section className="flex flex-col gap-4 p-4 sm:p-5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+        <h2 className="text-lg font-bold flex items-center gap-2">
           <MapPinHouse className="w-5 h-5 text-primary" />
           {t("location")}
         </h2>
@@ -97,26 +97,23 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Opening Hours Section */}
-      <section className="rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs mt-2">
-        <Accordion type="single" collapsible className="w-full">
+      <section className="flex flex-col gap-4 p-4 sm:p-5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+        <h2 className="text-lg font-bold flex items-center gap-2">
+          <Clock className="w-5 h-5 text-primary" />
+          {t("openingHours")}
+        </h2>
+        {restaurant?.horaires && restaurant?.horaires.length > 0 && (
+          <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 wrap-break-word">
+            {restaurant?.horaires?.join(", ")}
+          </div>
+        )}
+        <Accordion type="single" collapsible className="w-full -mt-1">
           <AccordionItem value="opening-hours" className="border-none">
-            <div className="flex items-center justify-between px-5 pt-5 pb-4">
-              <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-primary" />
-                <h2 className="text-lg font-bold">{t("openingHours")}</h2>
-              </div>
-            </div>
-            {restaurant?.horaires && restaurant?.horaires.length > 0 && (
-              <div className="text-[13px] font-medium leading-relaxed bg-secondary/5 p-3 rounded-2xl border border-border/50 mx-5 wrap-break-word">
-                {restaurant?.horaires?.join(", ")}
-              </div>
-            )}
-
-            <AccordionTrigger className="px-5 py-2 hover:no-underline hover:bg-secondary/20 transition-colors text-[11px] font-medium opacity-60 mt-4 rounded-b-2xl">
+            <AccordionTrigger className="px-3 py-2 rounded-xl hover:no-underline hover:bg-secondary/20 transition-colors text-[11px] font-medium opacity-60">
               {t("clickToSeeAll")}
             </AccordionTrigger>
 
-            <AccordionContent className="px-5 pb-5 pt-4">
+            <AccordionContent className="pt-2 pb-0">
               <div className="flex flex-col gap-2">
                 {restaurant?.jours_ouvert?.map((jour, index) => (
                   <div key={index} className="flex flex-col gap-1.5 p-3 rounded-2xl bg-secondary/10 border border-transparent hover:border-border/10 transition-colors">
@@ -137,15 +134,14 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
       </section>
 
       {/* Contact & Services */}
-      <section className="p-5 flex flex-col gap-4 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
-        <h2 className="text-lg font-bold flex items-center gap-2 mb-1">
+      <section className="flex flex-col gap-4 p-4 sm:p-5 rounded-2xl border border-primary/5 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-300 group shadow-xs">
+        <h2 className="text-lg font-bold flex items-center gap-2">
           <Info className="w-5 h-5 text-primary" />
           {t("contactAndServices")}
         </h2>
 
         {(restaurant.email || restaurant.telephone) && (
-          <>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               {restaurant.email && (
                 <a
                   href={`mailto:${restaurant.email}`}
@@ -177,12 +173,10 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
                 </a>
               )}
             </div>
-
-            <div className="pt-4 border-t border-border/10"></div>
-          </>
         )}
 
-        <div className="flex flex-wrap gap-2">
+        {(restaurant.paiement?.includes("IZLY") || restaurant.ispmr) && (
+        <div className={`flex flex-wrap gap-2${restaurant.email || restaurant.telephone ? " pt-4 border-t border-border/10" : ""}`}>
           <TooltipProvider>
             {restaurant.paiement?.includes("IZLY") && (
               <ServiceIcon
@@ -195,6 +189,7 @@ export default function RestaurantInfo({ restaurant }: RestaurantInfoProps) {
             )}
           </TooltipProvider>
         </div>
+        )}
 
         <div className="flex flex-row flex-wrap items-center gap-2">
           {restaurant.type && (

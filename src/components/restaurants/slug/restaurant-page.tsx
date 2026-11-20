@@ -386,12 +386,12 @@ export default function RestaurantPage({
         {menuLoading && datesLoading ? (
           <RestaurantPageSkeleton />
         ) : (
-          <div className="flex flex-col lg:flex-row gap-8 items-start relative flex-col-reverse lg:flex-row">
-            <aside className="w-full lg:w-80 lg:sticky lg:top-4 h-fit shrink-0">
+          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start relative flex-col-reverse lg:flex-row">
+            <aside className="w-full lg:w-80 lg:sticky lg:top-5 h-fit shrink-0">
               <RestaurantInfo restaurant={restaurant} />
             </aside>
 
-            <div className="flex-1 w-full min-w-0 mt-1">
+            <div className="flex-1 w-full min-w-0">
               <motion.div
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
