@@ -4,7 +4,7 @@ import { cn, formatToISODate } from "@/lib/utils";
 import { DateMenu } from "@/services/types";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "@/lib/motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
