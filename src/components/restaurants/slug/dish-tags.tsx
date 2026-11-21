@@ -26,9 +26,9 @@ export default function DishTags({ plat, className }: DishTagsProps) {
   if (tags.length === 0) return null;
 
   return (
-    <ul className={cn("flex flex-wrap gap-1.5", className)}>
+    <ul className={cn("flex flex-wrap items-center gap-1.5", className)}>
       {tags.map((tag) => (
-        <li key={tagKey(tag)}>
+        <li key={tagKey(tag)} className="flex">
           <Tag tag={tag} />
         </li>
       ))}
