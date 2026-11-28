@@ -186,6 +186,10 @@
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu du {date}",
+    "vegetarianFilter": {
+      "label": "Végétarien",
+      "hint": "Seuls les entrées et plats annoncés végétariens par le restaurant sont affichés."
+    },
     "live": {
       "live": "En direct",
       "liveDescription": "Le menu se met à jour tout seul dès qu'il change.",
@@ -354,7 +358,8 @@
   "MealCard": {
     "findRecipe": "Rechercher la recette de {dish} sur Marmiton",
     "followDish": "Suivre {dish}",
-    "unfollowDish": "Ne plus suivre {dish}"
+    "unfollowDish": "Ne plus suivre {dish}",
+    "hiddenByVegetarianFilter": "{count, plural, one {# plat non végétarien masqué} other {# plats non végétariens masqués}}"
   },
   "DishTags": {
     "types": {
@@ -1062,7 +1067,38 @@
     "occurrences": "Occurrences",
     "search": "Rechercher un plat...",
     "filterByType": "Filtrer par type de plat",
-    "allTypes": "Tous"
+    "allTypes": "Tous",
+    "vegetarianOnly": "Végétarien",
+    "openDish": "Voir où et quand {name} est servi"
+  },
+  "DishPage": {
+    "badge": "Plat",
+    "seo": {
+      "title": "{name} au CROUS : où et quand ?",
+      "description": "Où et quand {name} est servi dans les restaurants CROUS : restaurants, jours habituels et prochains services.",
+      "keywords": "{name}, CROUS, restaurant universitaire, menu, plat",
+      "notFound": "Plat introuvable"
+    },
+    "neverServed": "Ce plat n'a encore jamais été servi.",
+    "total": "Fois servi",
+    "restaurants": "Restaurants",
+    "first": "Premier service",
+    "last": "Dernier service",
+    "weekdays": "Jours de service",
+    "usualDay": "Le plus souvent servi le {day}.",
+    "noUsualDay": "Servi sans jour de prédilection.",
+    "meals": "Repas",
+    "meal": {
+      "matin": "Petit-déjeuner",
+      "midi": "Déjeuner",
+      "soir": "Dîner"
+    },
+    "upcoming": "Prochains services",
+    "noUpcoming": "Aucun service prévu dans les menus déjà publiés.",
+    "topRestaurants": "Restaurants qui le servent le plus",
+    "noRestaurants": "Aucun restaurant pour le moment.",
+    "servings": "{count, plural, one {# fois} other {# fois}}",
+    "spellings": "{count, plural, one {# écriture} other {# écritures}} dans les menus"
   },
   "LegalPage": {
     "title": "Notice légale",

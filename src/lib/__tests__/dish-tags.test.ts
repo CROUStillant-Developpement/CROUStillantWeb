@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getDishName, getDishTags, getDishType, getOriginCodes, getPrices, isInfoLine, isNoise } from "@/lib/dish-tags";
+import { getDishName, getDishTags, getDishType, getOriginCodes, getPrices, isHiddenByVegetarianFilter, isInfoLine, isNoise } from "@/lib/dish-tags";
 import type { AnalysePlat, Plat } from "@/services/types";
 
 function makeAnalyse(overrides: Partial<AnalysePlat> = {}): AnalysePlat {
@@ -156,5 +156,21 @@ describe("getPrices", () => {
   it("handles a missing list", () => {
     expect(getPrices(undefined)).toEqual([]);
     expect(getPrices(null)).toEqual([]);
+  });
+});
+
+describe("isHiddenByVegetarianFilter", () => {
+  it("hides starters and mains not announced vegetarian", () => {
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: "PLAT" })))).toBe(true);
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: "ENTREE" })))).toBe(true);
+  });
+
+  it("keeps vegetarian dishes, other types, information lines and unanalysed rows", () => {
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: "PLAT", vegetarien: true })))).toBe(false);
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: "ACCOMPAGNEMENT" })))).toBe(false);
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: "DESSERT" })))).toBe(false);
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ type: null })))).toBe(false);
+    expect(isHiddenByVegetarianFilter(makePlat(makeAnalyse({ nature: "INFO", type: null })))).toBe(false);
+    expect(isHiddenByVegetarianFilter(makePlat(null))).toBe(false);
   });
 });

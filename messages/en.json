@@ -186,6 +186,10 @@
   },
   "RestaurantPage": {
     "menuOfTheDay": "Menu of {date}",
+    "vegetarianFilter": {
+      "label": "Vegetarian",
+      "hint": "Only starters and mains announced vegetarian by the restaurant are shown."
+    },
     "live": {
       "live": "Live",
       "liveDescription": "The menu updates by itself as soon as it changes.",
@@ -354,7 +358,8 @@
   "MealCard": {
     "findRecipe": "Find the recipe for {dish} on Marmiton",
     "followDish": "Follow {dish}",
-    "unfollowDish": "Unfollow {dish}"
+    "unfollowDish": "Unfollow {dish}",
+    "hiddenByVegetarianFilter": "{count, plural, one {# non-vegetarian dish hidden} other {# non-vegetarian dishes hidden}}"
   },
   "DishTags": {
     "types": {
@@ -1061,7 +1066,38 @@
     "occurrences": "Occurrences",
     "search": "Search for a dish...",
     "filterByType": "Filter by dish type",
-    "allTypes": "All"
+    "allTypes": "All",
+    "vegetarianOnly": "Vegetarian",
+    "openDish": "See where and when {name} is served"
+  },
+  "DishPage": {
+    "badge": "Dish",
+    "seo": {
+      "title": "{name} at the CROUS: where and when?",
+      "description": "Where and when {name} is served in CROUS restaurants: restaurants, usual days and next servings.",
+      "keywords": "{name}, CROUS, university restaurant, menu, dish",
+      "notFound": "Dish not found"
+    },
+    "neverServed": "This dish has never been served yet.",
+    "total": "Times served",
+    "restaurants": "Restaurants",
+    "first": "First served",
+    "last": "Last served",
+    "weekdays": "Days served",
+    "usualDay": "Most often served on {day}.",
+    "noUsualDay": "No particular day.",
+    "meals": "Meals",
+    "meal": {
+      "matin": "Breakfast",
+      "midi": "Lunch",
+      "soir": "Dinner"
+    },
+    "upcoming": "Next servings",
+    "noUpcoming": "Not on any menu published so far.",
+    "topRestaurants": "Restaurants serving it most",
+    "noRestaurants": "No restaurant yet.",
+    "servings": "{count, plural, one {# time} other {# times}}",
+    "spellings": "{count, plural, one {# spelling} other {# spellings}} in the menus"
   },
   "LegalPage": {
     "title": "Legal notices",

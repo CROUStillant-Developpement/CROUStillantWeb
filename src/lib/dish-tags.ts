@@ -155,6 +155,21 @@ export function isNoise(plat: Plat): boolean {
 }
 
 /**
+ * Whether the vegetarian filter hides this row. Only starters and mains not
+ * announced vegetarian are hidden: sides, desserts, cheese and drinks are
+ * almost never marked "VG" though most are vegetarian, and hiding them would
+ * empty the menu. Information lines and unanalysed rows are always kept.
+ *
+ * @param plat - The row returned in a menu category.
+ * @returns `true` when the row is hidden by the vegetarian filter.
+ */
+export function isHiddenByVegetarianFilter(plat: Plat): boolean {
+  const analyse = plat.analyse;
+  if (!analyse || analyse.nature !== "DISH" || analyse.vegetarien) return false;
+  return analyse.type === "ENTREE" || analyse.type === "PLAT";
+}
+
+/**
  * The type to filter or tag a dish with: the type where it is served (menus) or
  * the default type of the canonical dish (/plats, /plats/top).
  *

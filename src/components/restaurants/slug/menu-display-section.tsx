@@ -12,6 +12,7 @@ import DatePicker from "./date-picker";
 import DateScroller from "./date-scroller";
 import MealsDisplay from "./meals-display";
 import MenuLiveStatus from "./menu-live-status";
+import VegetarianFilter from "./vegetarian-filter";
 import { FollowedDishMatch } from "@/lib/followed-dishes";
 
 interface MenuDisplaySectionProps {
@@ -179,6 +180,8 @@ export default function MenuDisplaySection({
             ) : selectedDateMeals.length === 0 ? (
               <MenuAlert title={t("noMenuAvailable")} />
             ) : (
+              <>
+              <VegetarianFilter />
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={selectedDate?.toISOString?.() || "no-date"}
@@ -197,6 +200,7 @@ export default function MenuDisplaySection({
                   />
                 </motion.div>
               </AnimatePresence>
+              </>
             )}
           </div>
         )}

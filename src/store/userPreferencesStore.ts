@@ -39,6 +39,11 @@ interface StoreState {
   dishNotifications: boolean;
 
   /**
+   * Whether menus only show starters and mains announced vegetarian.
+   */
+  vegetarianOnly: boolean;
+
+  /**
    * The display type setting.
    */
   display: DisplayType;
@@ -143,6 +148,11 @@ interface StoreState {
   setDishNotifications: (enabled: boolean) => void;
 
   /**
+   * Turns the vegetarian menu filter on or off.
+   */
+  toggleVegetarianOnly: () => void;
+
+  /**
    * Sets the favourite region.
    *
    * @param region - The region to be set as favourite.
@@ -188,6 +198,7 @@ export const useUserPreferences = create<StoreState>()(
       starredFav: null,
       followedDishes: [],
       dishNotifications: false,
+      vegetarianOnly: false,
       favouriteRegion: { code: -1, libelle: "All Regions" },
       dislexicFont: false,
       seasonalParticles: true,
@@ -296,6 +307,11 @@ export const useUserPreferences = create<StoreState>()(
           dishNotifications: enabled,
         })),
 
+      toggleVegetarianOnly: () =>
+        set((state) => ({
+          vegetarianOnly: !state.vegetarianOnly,
+        })),
+
       setfavouriteRegion: (region: Region) =>
         set(() => ({
           favouriteRegion: region,
@@ -307,6 +323,7 @@ export const useUserPreferences = create<StoreState>()(
           starredFav: null,
           followedDishes: [],
           dishNotifications: false,
+          vegetarianOnly: false,
           display: "list",
           favouriteRegion: { code: -1, libelle: "All Regions" },
           seasonalParticles: true,
