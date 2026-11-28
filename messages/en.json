@@ -381,6 +381,7 @@
     },
     "originLabel": "Origin: {origins}",
     "points": "{formatted} {points, plural, one {pt} other {pts}}",
+    "priceLabel": "Price: {prices}",
     "allergensLabel": "Declared allergens: {allergens}",
     "allergens": {
       "title": "{count, plural, one {# allergen} other {# allergens}}",

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getDishName, getDishTags, getDishType, getOriginCodes, isInfoLine, isNoise } from "@/lib/dish-tags";
+import { getDishName, getDishTags, getDishType, getOriginCodes, getPrices, isInfoLine, isNoise } from "@/lib/dish-tags";
 import type { AnalysePlat, Plat } from "@/services/types";
 
 function makeAnalyse(overrides: Partial<AnalysePlat> = {}): AnalysePlat {
@@ -130,5 +130,31 @@ describe("getDishTags", () => {
 
   it("keeps half points", () => {
     expect(getDishTags(makePlat(makeAnalyse({ type: null, points: 1.5 })))).toEqual([{ kind: "points", points: 1.5 }]);
+  });
+
+  it("shows the prices last, as written", () => {
+    expect(getDishTags(makePlat(makeAnalyse({ type: null, points: 4, prix: [3.3, 1] })))).toEqual([
+      { kind: "points", points: 4 },
+      { kind: "price", prices: [3.3, 1] },
+    ]);
+  });
+
+  it("has no price tag without a price", () => {
+    expect(getDishTags(makePlat(makeAnalyse({ type: null, prix: [] })))).toEqual([]);
+  });
+});
+
+describe("getPrices", () => {
+  it("keeps the prices in order, without duplicates", () => {
+    expect(getPrices([3.3, 1, 3.3])).toEqual([3.3, 1]);
+  });
+
+  it("drops implausible amounts (extraction errors)", () => {
+    expect(getPrices([3.3, 310, 3.1, 0, Number.NaN])).toEqual([3.3, 3.1]);
+  });
+
+  it("handles a missing list", () => {
+    expect(getPrices(undefined)).toEqual([]);
+    expect(getPrices(null)).toEqual([]);
   });
 });
