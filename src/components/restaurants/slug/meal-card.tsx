@@ -11,7 +11,7 @@ import { useUmami } from "next-umami";
 import { cn } from "@/lib/utils";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useUserPreferences } from "@/store/userPreferencesStore";
-import { getDishName, isInfoLine, isNoise } from "@/lib/dish-tags";
+import { getDishName, isHiddenByVegetarianFilter, isInfoLine, isNoise } from "@/lib/dish-tags";
 import DishTags from "@/components/restaurants/slug/dish-tags";
 import { DishActionsMenu, DishReportButton } from "@/components/restaurants/slug/dish-feedback";
 
@@ -30,11 +30,16 @@ export default function MealCard({ meal }: MealCardProps) {
   const hydrated = useHydrated();
   const followedDishes = useUserPreferences((state) => state.followedDishes);
   const toggleFollowedDish = useUserPreferences((state) => state.toggleFollowedDish);
+  // A stored preference: unknown until hydrated, so the server render shows everything
+  const vegetarianOnly = useUserPreferences((state) => state.vegetarianOnly) && hydrated;
 
   if (!meal) return;
 
   // sort meal by order
   meal?.plats.sort((a, b) => (a.ordre ?? 0) - (b.ordre ?? 0));
+
+  const plats = vegetarianOnly ? meal.plats.filter((plat) => !isHiddenByVegetarianFilter(plat)) : meal.plats;
+  const hiddenCount = meal.plats.length - plats.length;
 
   return (
     <Accordion
@@ -52,7 +57,7 @@ export default function MealCard({ meal }: MealCardProps) {
         </AccordionTrigger>
         <AccordionContent className="pt-1 pb-3 px-3 sm:px-4">
           <ul className="grid gap-2.5 sm:gap-3">
-            {meal.plats?.map((foodItem: Plat, index: number) => {
+            {plats.map((foodItem: Plat, index: number) => {
               if (isNoise(foodItem)) return null;
 
               const name = getDishName(foodItem);
@@ -145,6 +150,11 @@ export default function MealCard({ meal }: MealCardProps) {
                 </li>
               );
             })}
+            {hiddenCount > 0 && (
+              <li className="text-xs text-muted-foreground italic">
+                {t("hiddenByVegetarianFilter", { count: hiddenCount })}
+              </li>
+            )}
           </ul>
         </AccordionContent>
       </AccordionItem>

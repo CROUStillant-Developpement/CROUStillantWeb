@@ -92,7 +92,33 @@ export type DishTag =
   | { kind: "label"; label: QualityLabel }
   | { kind: "origin"; origins: string[] }
   | { kind: "allergens"; allergens: AllergeneDeclare[] }
-  | { kind: "points"; points: number };
+  | { kind: "points"; points: number }
+  | { kind: "price"; prices: number[] };
+
+/**
+ * Prices above this are extraction errors ("friand à 310€" for 3,10 €), not
+ * dishes: a CROUS meal costs a few euros.
+ */
+const MAX_PRICE = 30;
+
+/**
+ * The prices written in the label, without duplicates and in the order they
+ * were written. Two prices can mean an alternative ("3,30 € ou 1 € boursier"),
+ * a range ("de 3,60 € à 4,10 €") or HT/TTC: they are shown as written, without
+ * guessing which is which. Implausible amounts are dropped.
+ *
+ * @param prix - The prices returned by the API.
+ * @returns The prices to show.
+ */
+export function getPrices(prix: number[] | undefined | null): number[] {
+  const prices: number[] = [];
+  for (const p of prix ?? []) {
+    if (typeof p === "number" && Number.isFinite(p) && p > 0 && p <= MAX_PRICE && !prices.includes(p)) {
+      prices.push(p);
+    }
+  }
+  return prices;
+}
 
 /**
  * The label to display: the clean label from the analysis (without points,
@@ -129,6 +155,21 @@ export function isNoise(plat: Plat): boolean {
 }
 
 /**
+ * Whether the vegetarian filter hides this row. Only starters and mains not
+ * announced vegetarian are hidden: sides, desserts, cheese and drinks are
+ * almost never marked "VG" though most are vegetarian, and hiding them would
+ * empty the menu. Information lines and unanalysed rows are always kept.
+ *
+ * @param plat - The row returned in a menu category.
+ * @returns `true` when the row is hidden by the vegetarian filter.
+ */
+export function isHiddenByVegetarianFilter(plat: Plat): boolean {
+  const analyse = plat.analyse;
+  if (!analyse || analyse.nature !== "DISH" || analyse.vegetarien) return false;
+  return analyse.type === "ENTREE" || analyse.type === "PLAT";
+}
+
+/**
  * The type to filter or tag a dish with: the type where it is served (menus) or
  * the default type of the canonical dish (/plats, /plats/top).
  *
@@ -142,7 +183,7 @@ export function getDishType(plat: Plat): TypePlat | null {
 
 /**
  * The tags of a dish, in display order: type first, then vegetarian, quality
- * labels, origin, declared allergens and points.
+ * labels, origin, declared allergens, points and prices.
  *
  * A canonical dish (/plats, /plats/top) only carries its type and whether it is
  * vegetarian; a dish served in a menu carries the full analysis.
@@ -190,6 +231,11 @@ export function getDishTags(plat: Plat): DishTag[] {
 
   if (typeof analyse.points === "number" && Number.isFinite(analyse.points)) {
     tags.push({ kind: "points", points: analyse.points });
+  }
+
+  const prices = getPrices(analyse.prix);
+  if (prices.length) {
+    tags.push({ kind: "price", prices });
   }
 
   return tags;

@@ -24,7 +24,8 @@ import { useFormatter, useTranslations } from "next-intl";
 import { motion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { getDishType } from "@/lib/dish-tags";
-import { Search, Trophy, History } from "lucide-react";
+import { buildDishSlug } from "@/lib/dish-slug";
+import { Search, Trophy, History, Leaf } from "lucide-react";
 import DishTags from "@/components/restaurants/slug/dish-tags";
 import { DishReportButton, DishTagsInfo } from "@/components/restaurants/slug/dish-feedback";
 import FollowedDishesWeek from "./followed-dishes-week";
@@ -113,18 +114,21 @@ export function DishesTable({ id, icon: Icon, title, description, dishes, column
   const format = useFormatter();
   const [search, setSearch] = useState("");
   const [type, setType] = useState<TypePlat | null>(null);
+  const [vegetarianOnly, setVegetarianOnly] = useState(false);
 
   // Only offer the types present in the list (none before the API returns them)
   const types = useMemo(() => {
     const present = new Set(dishes.map(getDishType));
     return TYPE_ORDER.filter((value) => present.has(value));
   }, [dishes]);
+  const hasVegetarian = dishes.some((dish) => dish.vegetarien === true);
 
   const query = search.trim().toLowerCase();
   const rows = dishes
     .map((dish, index) => ({ dish, rank: index + 1 }))
     .filter(({ dish }) => dish.libelle.toLowerCase().includes(query))
-    .filter(({ dish }) => type === null || getDishType(dish) === type);
+    .filter(({ dish }) => type === null || getDishType(dish) === type)
+    .filter(({ dish }) => !vegetarianOnly || dish.vegetarien === true);
 
   return (
     <Card
@@ -181,6 +185,24 @@ export function DishesTable({ id, icon: Icon, title, description, dishes, column
               })}
             </div>
           )}
+
+          {hasVegetarian && (
+            <button
+              type="button"
+              aria-pressed={vegetarianOnly}
+              onClick={() => setVegetarianOnly((value) => !value)}
+              className={cn(
+                CHIP_CLASS,
+                "inline-flex items-center gap-1.5",
+                vegetarianOnly
+                  ? "bg-primary text-primary-foreground ring-primary"
+                  : "bg-primary/5 text-primary ring-primary/10 hover:bg-primary/10"
+              )}
+            >
+              <Leaf className="h-3.5 w-3.5" aria-hidden="true" />
+              {t("vegetarianOnly")}
+            </button>
+          )}
         </div>
 
         <div className="rounded-2xl border border-primary/5 overflow-x-auto">
@@ -210,7 +232,13 @@ export function DishesTable({ id, icon: Icon, title, description, dishes, column
                   <TableCell className="font-medium">
                     <div className="flex items-start gap-2">
                       <div className="min-w-0 flex-1">
-                        <span className="wrap-break-word">{dish.libelle}</span>
+                        <Link
+                          href={`/dishes/${buildDishSlug(dish)}`}
+                          className="wrap-break-word rounded-sm hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+                          aria-label={t("openDish", { name: dish.libelle })}
+                        >
+                          {dish.libelle}
+                        </Link>
                         <DishTags plat={dish} className="mt-1.5" />
                       </div>
                       <DishReportButton

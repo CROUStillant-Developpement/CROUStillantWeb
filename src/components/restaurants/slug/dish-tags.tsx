@@ -18,7 +18,7 @@ type DishTagsProps = {
 
 /**
  * The tags of a dish (type, vegetarian, quality labels, declared allergens,
- * points). Renders nothing when the dish has no tags, e.g. before the API
+ * points, prices). Renders nothing when the dish has no tags, e.g. before the API
  * returns the analysis.
  */
 export default function DishTags({ plat, className }: DishTagsProps) {
@@ -99,6 +99,17 @@ function Tag({ tag }: { tag: DishTag }) {
           {t("points", { points: tag.points, formatted: format.number(tag.points) })}
         </span>
       );
+
+    case "price": {
+      const prices = tag.prices.map((p) =>
+        format.number(p, { style: "currency", currency: "EUR", minimumFractionDigits: Number.isInteger(p) ? 0 : 2 })
+      );
+      return (
+        <span className={NEUTRAL_TAG_CLASS} aria-label={t("priceLabel", { prices: prices.join(" / ") })}>
+          {prices.join(" / ")}
+        </span>
+      );
+    }
 
     case "allergens": {
       const names = tag.allergens.map((a) =>

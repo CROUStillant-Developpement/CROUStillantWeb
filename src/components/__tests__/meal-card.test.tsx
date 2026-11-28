@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import MealCard from "@/components/restaurants/slug/meal-card";
 import messages from "../../../messages/fr.json";
 import type { AnalysePlat, Categorie } from "@/services/types";
+import { useUserPreferences } from "@/store/userPreferencesStore";
 
 vi.mock("next-umami", () => ({
   useUmami: () => ({ event: vi.fn() }),
@@ -106,5 +107,42 @@ describe("MealCard dish tags", () => {
     expect(screen.queryByText("-----")).not.toBeInTheDocument();
     expect(screen.getByText("Frites")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Suivre Frites" })).toBeInTheDocument();
+  });
+});
+
+describe("MealCard vegetarian filter", () => {
+  const withMeat: Categorie = {
+    ...meal,
+    plats: [
+      ...meal.plats,
+      { code: "5", libelle: "Sauté de porc", ordre: 5, analyse: analyse({ libelle: "Sauté de porc", type: "PLAT" }) },
+      { code: "6", libelle: "Yaourt", ordre: 6, analyse: analyse({ libelle: "Yaourt", type: "DESSERT" }) },
+    ],
+  };
+
+  function renderMeat() {
+    return render(
+      <NextIntlClientProvider locale="fr" messages={messages}>
+        <MealCard meal={withMeat} />
+      </NextIntlClientProvider>
+    );
+  }
+
+  it("shows every dish when the filter is off", () => {
+    useUserPreferences.setState({ vegetarianOnly: false });
+    renderMeat();
+    expect(screen.getByText("Sauté de porc")).toBeInTheDocument();
+  });
+
+  it("hides mains not announced vegetarian, keeps the rest", () => {
+    useUserPreferences.setState({ vegetarianOnly: true });
+    renderMeat();
+    expect(screen.queryByText("Sauté de porc")).not.toBeInTheDocument();
+    expect(screen.getByText("Curry de légumes")).toBeInTheDocument();
+    expect(screen.getByText("Yaourt")).toBeInTheDocument();
+    expect(screen.getByText("Frites")).toBeInTheDocument();
+    expect(screen.getByText("Restaurant fermé ce soir")).toBeInTheDocument();
+    expect(screen.getByText("1 plat non végétarien masqué")).toBeInTheDocument();
+    useUserPreferences.setState({ vegetarianOnly: false });
   });
 });

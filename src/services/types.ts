@@ -135,6 +135,33 @@ export interface Plat {
   verifie?: boolean; // Type checked by hand
 }
 
+// Types for PlatCanonique (/plats/canoniques/{code})
+export interface PlatCanonique {
+  code: number; // Canonical dish identifier
+  libelle: string; // Canonical dish label
+  type: TypePlat; // Default type
+  vegetarien: boolean; // Announced as vegetarian
+  verifie: boolean; // Type checked by hand
+  nb_libelles: number; // Number of raw labels naming this dish
+  libelles: { code: number; libelle: string }[]; // A few raw labels (most recent first)
+}
+
+// Types for PlatCanoniqueStats (/plats/canoniques/{code}/stats)
+export type TypeRepas = "matin" | "midi" | "soir";
+
+export interface PlatCanoniqueStats {
+  plat: Plat; // Canonical dish (code, libelle, type, vegetarien, verifie)
+  total: number; // Past servings (one restaurant, one date, one meal)
+  nb_restaurants: number; // Restaurants that served it
+  premier: string | null; // First known serving (DD-MM-YYYY)
+  dernier: string | null; // Last serving (DD-MM-YYYY)
+  jours: Record<"1" | "2" | "3" | "4" | "5" | "6" | "7", number>; // Servings per ISO weekday (1 = Monday)
+  jour_habituel: number | null; // Weekday it stands out on, if any
+  repas: Record<TypeRepas, number>; // Servings per meal
+  restaurants: { code: number; nom: string; total: number; dernier: string | null }[]; // Restaurants serving it most
+  prochains: { date: string; repas: TypeRepas; restaurant: { code: number; nom: string } }[]; // Upcoming published servings
+}
+
 // Types for Categorie
 export interface Categorie {
   code: string; // Category identifier
